@@ -1,0 +1,44 @@
+@import "../../scss/colors.scss";
+@import "../../scss/elements.scss";
+
+.wrapper {
+	.form {
+		position: relative;
+		display: grid;
+		justify-content: flex-start;
+		flex-direction: column;
+
+		margin-top: 192px;
+		margin-left: 210px;
+		height: 299px;
+		width: 256px;
+		margin-bottom: 16px;
+		.header {
+			@apply text-5xl text-['$main'];
+			margin-bottom: 32px;
+			width: 297px;
+			height: 63px;
+		}
+
+		.textField {
+			display: grid;
+
+			.btnCode {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 13px;
+				color: #e6e6e6;
+				text-decoration: none;
+				background: $bg;
+				border-radius: 8px;
+				height: 36px;
+				width: 256px;
+				font-family: inherit;
+				margin-bottom: 16px;
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				opacity: 0.5;
+			}
+		}
+	}
+}
