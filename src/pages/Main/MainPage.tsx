@@ -5,4 +5,4 @@ const MainPage: FC = () => {
         <div>Main</div>
     )
 }
-export default MainPage
+export default MainPage;

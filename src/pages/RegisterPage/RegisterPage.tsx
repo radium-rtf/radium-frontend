@@ -4,6 +4,8 @@ import { IUser } from '../../types/user.interface';
 import styles from './RegisterPage.module.scss';
 import { FC } from 'react';
 import art from '../../images/art.png';
+import Input from '../../components/Input/Input';
+import Button from '../../components/Button/Button';
 
 const RegisterPage: FC = () => {
     const navigate = useNavigate();
@@ -16,41 +18,42 @@ const RegisterPage: FC = () => {
 
     return (
         <div className={styles.wrapper}>
-            {/* <img src={art} /> */}
             <div className={styles.form}>
                 <form onSubmit={handleSubmit(onRegisterHandler)}>
                     <p className={styles.header}>Регистрация</p>
                     <div className={styles.textField}>
-                        <input
-                            {...register('username')}
+                        <Input
+                            register={register}
+                            controlName='username'
                             type="text"
                             placeholder='Имя'
                             style={{ marginBottom: '16px' }}
-                            className={styles.name}
+                            className='name'
                         />
                         <p className={styles.info}>
                             Необязательно писать ФИО,
                             просто как хотите, чтобы мы вас называли.
                         </p>
-                        <input
-                            {...register('email')}
+                        <Input
+                            register={register}
+                            controlName='email'
                             type="text"
                             placeholder='Почта'
                             style={{ marginBottom: '16px' }}
-                            className={styles.email}
+                            className='email'
                         />
-                        <input
-                            {...register('password')}
+                        <Input
+                            register={register}
+                            controlName='password'
                             type="text"
                             placeholder='Пароль'
                             style={{ marginBottom: '16px' }}
-                            className={styles.password}
+                            className='password'
                         />
-                        <button
-                            className={styles.btn}
-                        >
-                            Зарегистрироваться
-                        </button>
+                        <Button
+                            nameBtn='Зарегистрироваться'
+                            className='btn'
+                        />
                         <Link to={'/auth'}>
                             Вспомнили пароль?
                         </Link>
