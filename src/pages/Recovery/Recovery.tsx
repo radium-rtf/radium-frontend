@@ -21,7 +21,7 @@ const Recovery: FC = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={styles.textField}>
                         <Input
-                            register={register}
+                            register={() => register('email')}
                             controlName='email'
                             type='text'
                             placeholder='Почта'
@@ -29,11 +29,11 @@ const Recovery: FC = () => {
                             className='email'
                         />
                         <Button
-                            nameBtn='Отправить код'
+                            label='Отправить код'
                             className='btn'
                         />
                         <Input
-                            register={register}
+                            register={() => register('confirmationСode')}
                             controlName='confirmationСode'
                             type='text'
                             placeholder='Код подтверждения'
@@ -41,7 +41,7 @@ const Recovery: FC = () => {
                             className='code'
                         />
                         <Button
-                            nameBtn='Войти'
+                            label='Войти'
                             type='submit'
                             className='btnCode'
                         />

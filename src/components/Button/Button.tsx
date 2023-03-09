@@ -4,13 +4,13 @@ import styles from './Button.module.scss';
 
 interface IButtonProps {
     callback?: () => void;
-    nameBtn: string;
-    type?: "button" | "submit" | "reset" | undefined;
+    label: string;
+    type?: "button" | "submit" | "reset";
     className?: string;
-    style?: CSSProperties | undefined
+    style?: CSSProperties;
 }
 
-const Button: FC<IButtonProps> = ({ type, className = '', style, callback, nameBtn }) => {
+const Button: FC<IButtonProps> = ({ type, className = '', style, callback, label }) => {
     return (
         <div>
             <button
@@ -19,7 +19,7 @@ const Button: FC<IButtonProps> = ({ type, className = '', style, callback, nameB
                 className={styles[className]}
                 style={style}
             >
-                {nameBtn}
+                {label}
             </button>
         </div>
     )

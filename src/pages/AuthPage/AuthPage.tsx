@@ -25,7 +25,7 @@ const AuthPage: FC = () => {
                         <p className={styles.header}>Вход</p>
                         <div className={styles.textField}>
                             <Input
-                                register={register}
+                                register={() => register('email')}
                                 controlName='email'
                                 type='text'
                                 placeholder='Почта'
@@ -33,7 +33,7 @@ const AuthPage: FC = () => {
                                 style={{ marginBottom: '16px' }}
                             />
                             <Input
-                                register={register}
+                                register={() => register('password')}
                                 controlName='password'
                                 type='text'
                                 placeholder='Пароль'
@@ -41,7 +41,7 @@ const AuthPage: FC = () => {
                                 style={{ marginBottom: '16px' }}
                             />
                             <Button
-                                nameBtn='Войти'
+                                label='Войти'
                                 type='submit'
                                 className='btn'
                             />

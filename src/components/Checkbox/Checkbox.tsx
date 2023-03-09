@@ -5,4 +5,4 @@ const Checkbox: FC = () => {
         <div>Checkbox</div>
     )
 }
-export default Checkbox
+export default Checkbox;

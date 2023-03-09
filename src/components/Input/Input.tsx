@@ -1,23 +1,24 @@
 import { CSSProperties, FC } from "react"
-import { UseFormRegister } from "react-hook-form";
+import { FieldValues, RegisterOptions, useForm, UseFormRegister, UseFormRegisterReturn, UseFormReturn } from "react-hook-form";
 import { IUser } from "../../types/user.interface"
 import styles from './Input.module.scss';
 
+
 interface IInputProps {
-    register: UseFormRegister<IUser>;
-    controlName: keyof IUser;
+    register?: (name: string, options?: RegisterOptions) => UseFormRegisterReturn;
+    controlName?: string;
+    className?: string;
     type?: string;
     placeholder?: string;
-    style?: CSSProperties | undefined
-    className?: string;
+    style?: CSSProperties;
 }
 
 const Input: FC<IInputProps> = ({
-    register,
-    controlName,
+    register = () => undefined,
+    controlName = '',
+    className = '',
     type,
     placeholder,
-    className = '',
     style
 }) => {
     return (

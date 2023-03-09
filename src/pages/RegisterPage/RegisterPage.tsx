@@ -23,7 +23,7 @@ const RegisterPage: FC = () => {
                     <p className={styles.header}>Регистрация</p>
                     <div className={styles.textField}>
                         <Input
-                            register={register}
+                            register={() => register('username')}
                             controlName='username'
                             type="text"
                             placeholder='Имя'
@@ -35,7 +35,7 @@ const RegisterPage: FC = () => {
                             просто как хотите, чтобы мы вас называли.
                         </p>
                         <Input
-                            register={register}
+                            register={() => register('email')}
                             controlName='email'
                             type="text"
                             placeholder='Почта'
@@ -43,7 +43,7 @@ const RegisterPage: FC = () => {
                             className='email'
                         />
                         <Input
-                            register={register}
+                            register={() => register('password')}
                             controlName='password'
                             type="text"
                             placeholder='Пароль'
@@ -51,7 +51,7 @@ const RegisterPage: FC = () => {
                             className='password'
                         />
                         <Button
-                            nameBtn='Зарегистрироваться'
+                            label='Зарегистрироваться'
                             className='btn'
                         />
                         <Link to={'/auth'}>
