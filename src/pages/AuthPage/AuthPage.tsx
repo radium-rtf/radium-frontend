@@ -6,6 +6,7 @@ import styles from './AuthPage.module.scss';
 import invisible from '../../images/invisible.svg';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
+import Checkbox from "../../components/Checkbox/Checkbox";
 
 const AuthPage: FC = () => {
     const navigate = useNavigate();
@@ -51,6 +52,11 @@ const AuthPage: FC = () => {
                             <Link to={'/register'}>
                                 Зарегистрироваться
                             </Link>
+                            <Checkbox
+                                className='customCheckbox'
+                                type='checkbox'
+                                text='Чекбокс'
+                            />
                         </div>
                     </form>
                 </div>
