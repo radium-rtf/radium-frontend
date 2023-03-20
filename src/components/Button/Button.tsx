@@ -4,7 +4,7 @@ import styles from './Button.module.scss';
 
 interface IButtonProps {
     callback?: () => void;
-    label: string;
+    label?: string;
     type?: "button" | "submit" | "reset";
     className?: string;
     style?: CSSProperties;

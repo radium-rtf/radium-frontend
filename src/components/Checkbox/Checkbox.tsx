@@ -1,20 +1,18 @@
-import {FC} from "react"
+import { FC } from "react"
 import styles from './Checkbox.module.scss'
 
 interface ICheckBoxProps {
     className: string;
     type: 'checkbox'
-    text: string;
 }
 
-const Checkbox: FC<ICheckBoxProps> = ({type, className, text}) => {
+const Checkbox: FC<ICheckBoxProps> = ({ type, className }) => {
     return (
         <div>
             <input
                 type={type}
                 className={styles[className]}
             />
-            {text}
         </div>
     )
 }

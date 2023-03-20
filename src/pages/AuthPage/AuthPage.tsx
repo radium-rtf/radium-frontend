@@ -1,12 +1,11 @@
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import { IUser } from '../../types/user.interface';
-import styles from './AuthPage.module.scss';
-import invisible from '../../images/invisible.svg';
-import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import Checkbox from "../../components/Checkbox/Checkbox";
+import Input from '../../components/Input/Input';
+import { IUser } from '../../types/user.interface';
+import styles from './AuthPage.module.scss';
 
 const AuthPage: FC = () => {
     const navigate = useNavigate();
@@ -55,7 +54,6 @@ const AuthPage: FC = () => {
                             <Checkbox
                                 className='customCheckbox'
                                 type='checkbox'
-                                text='Чекбокс'
                             />
                         </div>
                     </form>
