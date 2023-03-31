@@ -6,6 +6,7 @@ import Checkbox from "../../components/Checkbox/Checkbox";
 import Input from '../../components/Input/Input';
 import { IUser } from '../../types/user.interface';
 import styles from './AuthPage.module.scss';
+import RadioButton from "../../components/RadioButton/RadioButton";
 
 const AuthPage: FC = () => {
     const navigate = useNavigate();
@@ -54,6 +55,10 @@ const AuthPage: FC = () => {
                             <Checkbox
                                 className='customCheckbox'
                                 type='checkbox'
+                            />
+                            <RadioButton
+                                className='customRadioButton'
+                                type='radio'
                             />
                         </div>
                     </form>

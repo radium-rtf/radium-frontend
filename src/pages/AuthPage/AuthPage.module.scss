@@ -2,11 +2,6 @@
 @import "../../scss/elements.scss";
 
 .wrapper {
-	> img {
-		display: flex;
-		width: 371px;
-		height: 250px;
-	}
 	.form {
 		position: relative;
 		display: grid;
@@ -30,3 +25,4 @@
 		}
 	}
 }
+

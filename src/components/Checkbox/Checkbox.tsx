@@ -9,6 +9,7 @@ interface ICheckBoxProps {
 const Checkbox: FC<ICheckBoxProps> = ({ type, className }) => {
     return (
         <div>
+            <label>Чекбокс</label>
             <input
                 type={type}
                 className={styles[className]}

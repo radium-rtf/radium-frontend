@@ -11,13 +11,15 @@ interface IRadioButtonProps {
 const RadioButton: FC<IRadioButtonProps> = ({ type, name, value, style, className = '' }) => {
     return (
         <div>
-            <input
+            <label>Радио-кнопка<input
                 type={type}
                 name={name}
                 value={value}
                 className={styles[className]}
                 style={style}
             />
+
+            </label>
         </div>
     )
 }
