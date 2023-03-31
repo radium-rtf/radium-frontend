@@ -4,14 +4,14 @@ import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import {useNavigate} from "react-router-dom";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {IUser} from "../../types/user.interface";
+import {IProfile, IUser} from "../../types/user.interface";
 import logo from "../../images/кач.jpg"
 
 const Profile: FC = () => {
     const navigate = useNavigate();
-    const { handleSubmit, reset } = useForm<IUser>();
+    const { handleSubmit, reset,register } = useForm<IProfile>();
 
-    const saveHandler: SubmitHandler<IUser> = (data: IUser) => {
+    const saveHandler: SubmitHandler<IProfile> = (data: IProfile) => {
         console.log(data);
         navigate('/');
         reset();
@@ -26,13 +26,15 @@ const Profile: FC = () => {
                         <img src={logo} alt='ава'></img>
                         <div className={styles.textField}>
                             <Input
-                                controlName='name'
+                                register={() => register('username')}
+                                controlName='username'
                                 type='text'
                                 placeholder='Имя'
                                 className='name'
                                 style={{ marginBottom: '16px' }}
                             />
                             <Input
+                                register={() => register('email')}
                                 controlName='email'
                                 type='text'
                                 placeholder='Почта'
@@ -40,6 +42,7 @@ const Profile: FC = () => {
                                 style={{ marginBottom: '16px' }}
                             />
                             <Input
+                                register={() => register('password')}
                                 controlName='password'
                                 type='text'
                                 placeholder='Пароль'
@@ -47,7 +50,8 @@ const Profile: FC = () => {
                                 style={{ marginBottom: '16px' }}
                             />
                             <Input
-                                controlName='password'
+                                register={() => register('confirmPassword')}
+                                controlName='confirmPassword'
                                 type='text'
                                 placeholder='Подтверждение пароля'
                                 className='password'
