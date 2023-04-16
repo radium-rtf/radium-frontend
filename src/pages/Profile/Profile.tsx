@@ -9,7 +9,7 @@ import logo from "../../images/кач.jpg"
 
 const Profile: FC = () => {
     const navigate = useNavigate();
-    const { handleSubmit, reset,register } = useForm<IProfile>();
+    const { handleSubmit, reset, register } = useForm<IProfile>();
 
     const saveHandler: SubmitHandler<IProfile> = (data: IProfile) => {
         console.log(data);
@@ -23,7 +23,7 @@ const Profile: FC = () => {
                 <div className={styles.form}>
                     <form onSubmit={handleSubmit(saveHandler)}>
                         <p className={styles.header}>Профиль</p>
-                        <img src={logo} alt='ава'></img>
+                        <img src={logo} alt='ава' className={styles.profileImg}></img>
                         <div className={styles.textField}>
                             <Input
                                 register={() => register('username')}
