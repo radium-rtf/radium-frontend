@@ -1,6 +1,5 @@
 import { CSSProperties, FC } from "react"
-import { FieldValues, RegisterOptions, useForm, UseFormRegister, UseFormRegisterReturn, UseFormReturn } from "react-hook-form";
-import { IUser } from "../../types/user.interface"
+import { RegisterOptions, UseFormRegisterReturn } from "react-hook-form";
 import styles from './Input.module.scss';
 
 
@@ -11,6 +10,7 @@ interface IInputProps {
     type?: string;
     placeholder?: string;
     style?: CSSProperties;
+    options?: any;
 }
 
 const Input: FC<IInputProps> = ({
@@ -19,12 +19,12 @@ const Input: FC<IInputProps> = ({
     className = '',
     type,
     placeholder,
-    style
+    style, options
 }) => {
     return (
         <div>
             <input
-                {...register(controlName)}
+                {...register(controlName, options)}
                 type={type}
                 placeholder={placeholder}
                 className={styles[className]}

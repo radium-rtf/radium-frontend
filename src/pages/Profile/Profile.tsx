@@ -1,10 +1,10 @@
-import { FC } from "react"
+import { FC, useEffect } from "react"
 import styles from './Profile.module.scss';
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
-import {useNavigate} from "react-router-dom";
-import {SubmitHandler, useForm} from "react-hook-form";
-import {IProfile, IUser} from "../../types/user.interface";
+import { useNavigate } from "react-router-dom";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { IProfile, IUser } from "../../types/user.interface";
 import logo from "../../images/кач.jpg"
 
 const Profile: FC = () => {
@@ -12,11 +12,10 @@ const Profile: FC = () => {
     const { handleSubmit, reset, register } = useForm<IProfile>();
 
     const saveHandler: SubmitHandler<IProfile> = (data: IProfile) => {
-        console.log(data);
         navigate('/');
         reset();
     }
-
+    
     return (
         <>
             <div className={styles.wrapper}>
@@ -29,7 +28,7 @@ const Profile: FC = () => {
                                 register={() => register('username')}
                                 controlName='username'
                                 type='text'
-                                placeholder='Имя'
+                                placeholder='имя'
                                 className='name'
                                 style={{ marginBottom: '16px' }}
                             />

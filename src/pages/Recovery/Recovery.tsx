@@ -32,14 +32,6 @@ const Recovery: FC = () => {
                             label='Отправить код'
                             className='btn'
                         />
-                        <Input
-                            register={() => register('confirmationСode')}
-                            controlName='confirmationСode'
-                            type='text'
-                            placeholder='Код подтверждения'
-                            style={{ marginBottom: '16px' }}
-                            className='code'
-                        />
                         <Button
                             label='Войти'
                             type='submit'

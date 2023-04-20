@@ -1,5 +1,6 @@
 import { CSSProperties, FC } from "react"
 import styles from './RadioButton.module.scss';
+
 interface IRadioButtonProps {
     type?: string;
     name?: string;
@@ -11,7 +12,8 @@ interface IRadioButtonProps {
 const RadioButton: FC<IRadioButtonProps> = ({ type, name, value, style, className = '' }) => {
     return (
         <div>
-            <label>Радио-кнопка<input
+            <label>Радио-кнопка
+                <input
                 type={type}
                 name={name}
                 value={value}

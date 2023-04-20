@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
@@ -17,7 +17,7 @@ const AuthPage: FC = () => {
         navigate('/');
         reset();
     }
-
+    
     return (
         <>
             <div className={styles.wrapper}>
@@ -26,7 +26,10 @@ const AuthPage: FC = () => {
                         <p className={styles.header}>Вход</p>
                         <div className={styles.textField}>
                             <Input
-                                register={() => register('email')}
+                                register={() => register('email', {
+                                    required: "Email обязательное поле",
+                                })}
+                                // error = error, errormessage
                                 controlName='email'
                                 type='text'
                                 placeholder='Почта'
