@@ -5,10 +5,11 @@ import styles from './RegisterPage.module.scss';
 import { FC, useEffect } from 'react';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
+import Error from "../../components/Error/Error";
 
 const RegisterPage: FC = () => {
     const navigate = useNavigate();
-    const { register, handleSubmit, reset } = useForm<IUser>();
+    const { register, handleSubmit, reset, formState: {errors} } = useForm<IUser>();
 
     const onRegisterHandler: SubmitHandler<IUser> = (data: IUser) => {
         navigate('/');
@@ -29,6 +30,7 @@ const RegisterPage: FC = () => {
                             style={{ marginBottom: '16px' }}
                             className='name'
                         />
+                        <Error error={errors?.name} errorMessage={errors.name?.message}/>
                         <p className={styles.info}>
                             Необязательно писать ФИО,
                             просто как хотите, чтобы мы вас называли.
@@ -41,6 +43,7 @@ const RegisterPage: FC = () => {
                             style={{ marginBottom: '16px' }}
                             className='email'
                         />
+                        <Error error={errors?.email} errorMessage={errors.email?.message}/>
                         <Input
                             register={() => register('password')}
                             controlName='password'
@@ -49,6 +52,7 @@ const RegisterPage: FC = () => {
                             style={{ marginBottom: '16px' }}
                             className='password'
                         />
+                        <Error error={errors?.password} errorMessage={errors.password?.message}/>
                         <Button
                             label='Зарегистрироваться'
                             className='btn'

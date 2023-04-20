@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
@@ -6,11 +6,12 @@ import Checkbox from "../../components/Checkbox/Checkbox";
 import Input from '../../components/Input/Input';
 import { IUser } from '../../types/user.interface';
 import styles from './AuthPage.module.scss';
-import RadioButton from "../../components/RadioButton/RadioButton";
+import Error from "../../components/Error/Error";
+import { emailValidator } from "../../constData";
 
 const AuthPage: FC = () => {
     const navigate = useNavigate();
-    const { register, handleSubmit, reset } = useForm<IUser>();
+    const { register, handleSubmit, reset, formState: {errors} } = useForm<IUser>();
 
     const onLoginHandler: SubmitHandler<IUser> = (data: IUser) => {
         console.log(data);
@@ -28,22 +29,29 @@ const AuthPage: FC = () => {
                             <Input
                                 register={() => register('email', {
                                     required: "Email обязательное поле",
+                                    pattern: {
+                                        value: emailValidator,
+                                        message: "Вы ввели не корректный email"
+                                    }
                                 })}
-                                // error = error, errormessage
                                 controlName='email'
                                 type='text'
                                 placeholder='Почта'
                                 className='email'
                                 style={{ marginBottom: '16px' }}
                             />
+                            <Error error={errors?.email} errorMessage={errors.email?.message}/>
                             <Input
-                                register={() => register('password')}
+                                register={() => register('password', {
+                                    required: "Пароль обязательное поле"
+                                })}
                                 controlName='password'
                                 type='text'
                                 placeholder='Пароль'
                                 className='password'
                                 style={{ marginBottom: '16px' }}
                             />
+                            <Error error={errors?.password} errorMessage={errors.password?.message}/>
                             <Button
                                 label='Войти'
                                 type='submit'
@@ -58,10 +66,6 @@ const AuthPage: FC = () => {
                             <Checkbox
                                 className='customCheckbox'
                                 type='checkbox'
-                            />
-                            <RadioButton
-                                className='customRadioButton'
-                                type='radio'
                             />
                         </div>
                     </form>
