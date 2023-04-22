@@ -1,26 +1,50 @@
 import { AppDispatch } from "."
 import axios from "../axios"
+import { accessTokenType } from "../types/tokenType"
 import { IUser } from "../types/user.interface"
-import { IAuthState, authSlice } from "./slices/authSlice"
+import { authSlice } from "./slices/authSlice"
 
-export const login = (data: IUser) => {
+
+export const login = (user: IUser) => {
     return async (dispatch: AppDispatch) => {
-        const response = await axios.get<IAuthState>('');
         try {
-            dispatch(authSlice.actions.loginSuccess(response.data));
+            const token: accessTokenType = (await axios.post<accessTokenType>('auth/signIn', user)).data;
+
+            dispatch(authSlice.actions.loginSuccess({
+                accessToken: token.access_token,
+                isAuth: !!token,
+                ...user
+            }));
+
         } catch (error) {
             console.log((error as Error).message);
         }
     }
 }
 
-export const register = (data: IUser) => {
+export const registration = (user: IUser) => {
     return async (dispatch: AppDispatch) => {
-        const response = await axios.get<IAuthState>('');
         try {
-            dispatch(authSlice.actions.loginSuccess(response.data));
+            const token: accessTokenType = (await axios.post<accessTokenType>('auth/signUp', user)).data;
+
+            dispatch(authSlice.actions.loginSuccess({
+                accessToken: token.access_token,
+                isAuth: !!token,
+                ...user
+            }));
+
         } catch (error) {
             console.log((error as Error).message);
         }
     }
 }
+
+// export const fetchUserAccount = (token: string) => {
+//     return async (dispatch: AppDispatch) => {
+//         try {
+
+//         } catch {
+
+//         }
+//     }
+// }

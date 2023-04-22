@@ -8,17 +8,21 @@ import { IUser } from '../../types/user.interface';
 import styles from './AuthPage.module.scss';
 import Error from "../../components/Error/Error";
 import { emailValidator } from "../../constData";
+import { login } from '../../store/actionCreators';
+import { useAppDispatch } from '../../hooks/redux';
+
 
 const AuthPage: FC = () => {
     const navigate = useNavigate();
-    const { register, handleSubmit, reset, formState: {errors} } = useForm<IUser>();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<IUser>();
+    const dispatch = useAppDispatch();
 
     const onLoginHandler: SubmitHandler<IUser> = (data: IUser) => {
-        console.log(data);
+        dispatch(login(data));
         navigate('/');
         reset();
     }
-    
+
     return (
         <>
             <div className={styles.wrapper}>
@@ -40,7 +44,7 @@ const AuthPage: FC = () => {
                                 className='email'
                                 style={{ marginBottom: '16px' }}
                             />
-                            <Error error={errors?.email} errorMessage={errors.email?.message}/>
+                            <Error error={errors?.email} errorMessage={errors.email?.message} />
                             <Input
                                 register={() => register('password', {
                                     required: "Пароль обязательное поле"
@@ -51,7 +55,7 @@ const AuthPage: FC = () => {
                                 className='password'
                                 style={{ marginBottom: '16px' }}
                             />
-                            <Error error={errors?.password} errorMessage={errors.password?.message}/>
+                            <Error error={errors?.password} errorMessage={errors.password?.message} />
                             <Button
                                 label='Войти'
                                 type='submit'
