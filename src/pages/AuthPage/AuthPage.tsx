@@ -67,13 +67,6 @@ const AuthPage: FC = () => {
                             <Link to={'/register'}>
                                 Зарегистрироваться
                             </Link>
-<<<<<<< HEAD
-=======
-                            <Checkbox
-                                className='customCheckbox'
-                                type='checkbox'
-                            />
->>>>>>> 42655556f2d6626e6259811125fead969078ec9a
                         </div>
                     </form>
                 </div>
