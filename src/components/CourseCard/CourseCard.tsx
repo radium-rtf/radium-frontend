@@ -1,4 +1,4 @@
-import {CSSProperties, FC} from "react";
+import { CSSProperties, FC } from "react";
 import styles from "../CourseCard/CourseCard.module.scss";
 import Button from "../Button/Button";
 import logo from "../../images/kotlin_logo.png"
@@ -14,27 +14,22 @@ interface ICourseCardProps {
 }
 
 const CourseCard: FC<ICourseCardProps> = ({
-    title='Основы программирования на Kotlin',
-    grades='123 / 246 баллов',
-    group='УрФУ_Осень 2024',
+    title = 'Основы программирования на Kotlin',
+    grades = '123 / 246 баллов',
+    group = 'УрФУ_Осень 2024',
     className = 'courseCard',
-    completionRate=50,
+    completionRate = 50,
     style,
 }) => {
     return (
         <div className={className}>
-        <p>{title}</p>
-        <p>{grades}</p>
-        <p>Группа: {group}</p>
-        <img
-            src={logo}
-            alt=""
-            className={styles[className]}/>
-        <Button
-            label='Продолжить'
-            type='submit'
-            className='btn'
-        />
+            <p>{title}</p>
+            <p>{grades}</p>
+            <p>Группа: {group}</p>
+            <img
+                src={logo}
+                alt=""
+                className={styles[className]} />
         </div>
 
     )

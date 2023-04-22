@@ -5,13 +5,13 @@ import { FieldError } from "react-hook-form";
 
 interface IErrorProp {
     error?: FieldError;
-    options?: any;
+    errorMessage?: string;
 }
 
-const Error: FC<IErrorProp> = ({ error, options }) => {
+const Error: FC<IErrorProp> = ({ error, errorMessage }) => {
     return <div>
         {error && (<Space>
-            <Alert message={options.errorMessage} type='error' />
+            <Alert message={errorMessage} type='error' />
         </Space>)}
     </div>;
 };
