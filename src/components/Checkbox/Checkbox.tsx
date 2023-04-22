@@ -1,19 +1,24 @@
-import { FC } from "react"
+import {FC} from "react"
 import styles from './Checkbox.module.scss'
 
 interface ICheckBoxProps {
     className: string;
-    type: 'checkbox'
+    type: 'checkbox';
+    disabled?: boolean;
+    label?: string;
 }
 
-const Checkbox: FC<ICheckBoxProps> = ({ type, className }) => {
+const Checkbox: FC<ICheckBoxProps> = ({type, className, disabled, label}) => {
     return (
         <div>
-            <label>Чекбокс</label>
-            <input
-                type={type}
-                className={styles[className]}
-            />
+            <label className={styles[className]}>
+                <input
+                    type={type}
+                    className={styles[className]}
+                    disabled={disabled}
+                />
+                <span>{label}</span>
+            </label>
         </div>
     )
 }
