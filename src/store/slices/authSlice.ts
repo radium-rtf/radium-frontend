@@ -1,14 +1,15 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IUser } from "../../types/user.interface";
 
 export interface IAuthState {
-    user: IUser;
+    email: string;
     isAuth?: boolean;
+    accessToken: string;
 }
 
 const initialState: IAuthState = {
-    user: {} as IUser,
-    isAuth: false
+    email: localStorage.getItem('email') ?? '',
+    isAuth: !!localStorage.getItem('token'),
+    accessToken: localStorage.getItem('token') ?? ''
 }
 
 export const authSlice = createSlice({
@@ -16,20 +17,18 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         loginSuccess(state, action: PayloadAction<IAuthState>) {
-            state.user.email = action.payload.user.email;
-            state.user.password = action.payload.user.password;
-            state.user.username = action.payload.user.username;
-            state.user.name = action.payload.user.name;
-            state.isAuth = true;
-            localStorage.setItem('username', state.user.username);
+            state.email = action.payload.email;
+            state.isAuth = !!action.payload.accessToken;
+            state.accessToken = action.payload.accessToken;
+            localStorage.setItem('username', action.payload.email);
+            localStorage.setItem('token', action.payload.accessToken);
         },
         logout(state) {
-            state.user.email = '';
-            state.user.password = '';
-            state.user.username = '';
-            state.user.name = '';
+            state.email = '';
+            state.accessToken = '';
             state.isAuth = false;
-            localStorage.clear();
+            localStorage.removeItem('username');
+            localStorage.removeItem('token');
         }
     }
 })

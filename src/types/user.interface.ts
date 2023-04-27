@@ -1,8 +1,7 @@
 export interface IUser {
     email: string;
     password: string;
-    name: string;
-    username: string;
+    username?: string;
 }
 
 export interface IProfile {
