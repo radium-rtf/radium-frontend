@@ -44,7 +44,7 @@ const AuthPage: FC = () => {
                                 className='email'
                                 style={{ marginBottom: '16px' }}
                             />
-                            <Error error={errors?.email} errorMessage={errors.email?.message} />
+                            <Error className={'error'} error={errors?.email} errorMessage={errors.email?.message} />
                             <Input
                                 register={() => register('password', {
                                     required: "Пароль обязательное поле"
@@ -55,7 +55,7 @@ const AuthPage: FC = () => {
                                 className='password'
                                 style={{ marginBottom: '16px' }}
                             />
-                            <Error error={errors?.password} errorMessage={errors.password?.message} />
+                            <Error className={'error'} error={errors?.password} errorMessage={errors.password?.message} />
                             <Button
                                 label='Войти'
                                 type='submit'
