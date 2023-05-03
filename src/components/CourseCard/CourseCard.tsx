@@ -1,35 +1,52 @@
-import { CSSProperties, FC } from "react";
+import {CSSProperties, FC} from "react";
 import styles from "../CourseCard/CourseCard.module.scss";
 import Button from "../Button/Button";
-import logo from "../../images/kotlin_logo.png"
+import logo from "../../images/kotlin.svg"
 
 interface ICourseCardProps {
-    // some props
     title?: string;
     grades?: string;
     group?: string;
     className?: string;
     completionRate?: number;
     style?: CSSProperties;
+    classNameImg?: string;
+    contentStyle?: string;
 }
 
 const CourseCard: FC<ICourseCardProps> = ({
-    title = 'Основы программирования на Kotlin',
-    grades = '123 / 246 баллов',
-    group = 'УрФУ_Осень 2024',
-    className = 'courseCard',
-    completionRate = 50,
-    style,
-}) => {
+      title = 'Основы программирования на Kotlin',
+      grades = '123 / 246 баллов',
+      group = 'УрФУ_Осень 2024',
+      className = '',
+      completionRate = 50,
+      style,
+      classNameImg='',
+      contentStyle='',
+  }) => {
     return (
-        <div className={className}>
-            <p>{title}</p>
-            <p>{grades}</p>
-            <p>Группа: {group}</p>
-            <img
-                src={logo}
-                alt=""
-                className={styles[className]} />
+        <div className={styles[className]}>
+            <div className={styles[contentStyle]}>
+                <div style={{ display:"flex", margin:'24px'}}>
+                    <h3>{title}</h3>
+                    <img
+                        src={logo}
+                        alt=""
+                        className={styles[classNameImg]}/>
+                </div>
+                {/*<div className={styles[contentStyle]}>*/}
+                {/*    {completionRate}*/}
+                {/*</div>*/}
+                <div style={{ display:"flex", margin:'24px'}}>
+                    <div style={{ display: 'grid'}}>
+                        <p>{grades}</p>
+                        <p>Группа: {group}</p>
+                    </div>
+                    <Button
+                        label='Продолжить'
+                        className='btnCourceCard'/>
+                </div>
+            </div>
         </div>
 
     )
