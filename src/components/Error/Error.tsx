@@ -1,18 +1,21 @@
 import { Alert, Space } from "antd";
-import React, { FC } from "react";
+import React, { CSSProperties, FC } from "react";
 import { FieldError } from "react-hook-form";
-
+import styles from './Error.module.scss';
 
 interface IErrorProp {
     error?: FieldError;
     errorMessage?: string;
+    className?: string;
 }
 
-const Error: FC<IErrorProp> = ({ error, errorMessage }) => {
+const Error: FC<IErrorProp> = ({ error, errorMessage, className = '' }) => {
     return <div>
-        {error && (<Space>
-            <Alert message={errorMessage} type='error' />
-        </Space>)}
+        {error && <div>
+            <p className={styles[className]}>
+                {errorMessage}
+            </p>
+        </div>}
     </div>;
 };
 
