@@ -4,6 +4,7 @@ import Checkbox from "../../components/Checkbox/Checkbox";
 import RadioButton from "../../components/RadioButton/RadioButton";
 import Slider from "../../components/Slider/Slider";
 import Header from "../../components/Header/Header";
+import TextField from "../../components/TextField/TextField";
 
 const TestUIKit: FC = () => {
     return (
@@ -33,6 +34,9 @@ const TestUIKit: FC = () => {
             <Slider
                 className='switch'
                 type='checkbox'
+            />
+            <TextField
+                className='textArea'
             />
         </div>
 

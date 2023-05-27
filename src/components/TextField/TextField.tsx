@@ -1,4 +1,6 @@
-import React, {CSSProperties} from 'react';
+import React, {CSSProperties, FC} from 'react';
+import styles from "../TextField/TextField.module.scss";
+
 
 interface ITextFieldProps {
     className?: string;
@@ -8,12 +10,17 @@ interface ITextFieldProps {
     style?: CSSProperties;
 }
 
-const TextField = ({ type='', className = '', style='', disabled=false,  styles=''}) => {
-    // return (
-    //     <div className={styles[className]}>
-    //         <textarea cols={10} rows={10} ></textarea>
-    //     </div>
-    // );
+const TextField: FC<ITextFieldProps> = ({
+        type='',
+        className = '',
+        style='',
+        disabled=false
+    }) => {
+    return (
+        <div className={styles[className]}>
+            <textarea cols={10} rows={10} ></textarea>
+        </div>
+    );
 };
 
 export default TextField;
