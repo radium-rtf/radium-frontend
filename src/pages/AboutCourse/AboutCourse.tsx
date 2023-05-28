@@ -10,17 +10,11 @@ const AboutCourse: FC = () => {
     return (
         <>
             <div className={styles.wrapper}>
-                <div className={styles['headerData']}>
-                    <b>Курс</b>
-                    {/*<div className={styles['right']}>*/}
-                    {/*    <p>*имя пользователя*</p>*/}
-                    {/*    <img src={ava} alt=""/>*/}
-                    {/*</div>*/}
-                </div>
-
                 <Header
                     className='header'
                     title='Kotlin'
+                    caption='Курс'
+                    userLogin='андрей'
                 />
                 <div className={styles['courseTitle']}>
                     <b>Основы программирования на Kotlin</b>
