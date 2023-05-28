@@ -8,6 +8,7 @@ interface IButtonProps {
     type?: "button" | "submit" | "reset";
     className?: string;
     style?: CSSProperties;
+    
 }
 
 const Button: FC<IButtonProps> = ({ type, className = '', style, callback, label }) => {

@@ -6,7 +6,7 @@ import Error from "../../components/Error/Error";
 import Input from '../../components/Input/Input';
 import { emailValidator } from "../../constData";
 import { useAppDispatch } from '../../hooks/redux';
-import { login } from '../../store/actionCreators';
+import { login } from '../../store/actionCreators/actionCreatorsAuth';
 import { IUser } from '../../interfaces/user.interface';
 import styles from './AuthPage.module.scss';
 

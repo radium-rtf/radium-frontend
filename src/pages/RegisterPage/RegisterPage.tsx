@@ -5,7 +5,7 @@ import Button from '../../components/Button/Button';
 import Error from "../../components/Error/Error";
 import Input from '../../components/Input/Input';
 import { useAppDispatch } from '../../hooks/redux';
-import { registration } from '../../store/actionCreators';
+import { registration } from '../../store/actionCreators/actionCreatorsAuth';
 import { IUser } from '../../interfaces/user.interface';
 import styles from './RegisterPage.module.scss';
 import { emailValidator } from '../../constData';

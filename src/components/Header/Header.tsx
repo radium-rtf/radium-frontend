@@ -1,6 +1,5 @@
-import {CSSProperties, FC} from "react"
+import { CSSProperties, FC } from "react"
 import styles from './Header.module.scss';
-import logo from "../../images/kotlin.svg"
 import muscleman from "../../images/кач.jpg"
 
 interface IHeaderProps {
@@ -9,29 +8,31 @@ interface IHeaderProps {
     style?: CSSProperties;
     caption?: string;
     userLogin?: string;
+    logoPath?: string;
 }
 
 const Header: FC<IHeaderProps> = ({
-      title = 'Title',
-      className = '',
-      style,
-      caption = '',
-      userLogin = '',
-  }) => {
+    title = 'Title',
+    className = '',
+    style,
+    caption = '',
+    userLogin = '',
+    logoPath
+}) => {
     return (
         <div className={styles[className]}>
             <div className={styles["caption"]}>
                 <b>{caption}</b>
             </div>
             <div className={styles["title"]}>
-                <img src={logo} alt="картинка курса"/>
+                {logoPath ? (<img src={logoPath} alt="картинка курса" />) : ''}
                 <b>{title}</b>
             </div>
             <div className={styles["profile"]}>
                 <p>{userLogin}</p>
-                <img src={muscleman} alt=""/>
+                <img src={muscleman} alt="" />
             </div>
         </div>
-)
+    )
 }
 export default Header;

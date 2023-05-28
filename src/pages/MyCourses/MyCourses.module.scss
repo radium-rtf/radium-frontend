@@ -6,7 +6,13 @@
 
     .wrapperCourse {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        grid-gap: 30px;
+        grid-template-columns: auto auto auto;
+        grid-gap: 32px;
+    }
+
+    .emptyPageError {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
