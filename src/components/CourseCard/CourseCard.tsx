@@ -1,9 +1,8 @@
 import { CSSProperties, FC } from "react";
-import styles from "../CourseCard/CourseCard.module.scss";
+import { useNavigate } from "react-router-dom";
+import logo from "../../images/kotlin.svg";
 import Button from "../Button/Button";
-import logo from "../../images/kotlin.svg"
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { useAppSelector } from "../../hooks/redux";
+import styles from "../CourseCard/CourseCard.module.scss";
 
 interface ICourseCardProps {
     name?: string,
@@ -15,6 +14,7 @@ interface ICourseCardProps {
     completionRate?: number;
     contentStyle?: string;
     style?: CSSProperties;
+    id?: number
 }
 
 const CourseCard: FC<ICourseCardProps> = ({
@@ -26,14 +26,10 @@ const CourseCard: FC<ICourseCardProps> = ({
     style,
     classNameLogo = '',
     contentStyle = '',
+    id
 }) => {
-
+    
     const navigate = useNavigate();
-    const params = useParams();
-
-    const navigateAboutCourseHandler = () => {
-
-    }
 
     return (
         <div className={styles[className]}>
@@ -53,7 +49,7 @@ const CourseCard: FC<ICourseCardProps> = ({
                         </div>
                         <Button
                             label='Продолжить'
-                            callback={() => navigate(`/about-course/:${params['id']}}`)}
+                            callback={() => navigate(`/about-course/${id}`)}
                             className='btnCourceCard' />
                     </div>
                 </div>
