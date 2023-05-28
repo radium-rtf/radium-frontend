@@ -20,9 +20,8 @@ const Navigator: FC = () => {
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/reduction" element={<Recovery />} />
                 <Route path="/profile" element={<RouterGuard><Profile /></RouterGuard>} />
-                <Route path="/mycourses" element={<RouterGuard><MyCourses /></RouterGuard>} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/mycourses" element={<MyCourses />} />
+                <Route path="/my-courses" element={<RouterGuard><MyCourses /></RouterGuard>} />
+                <Route path="/profile" element={<RouterGuard><Profile /></RouterGuard>} />
                 <Route path='/testuikit' element={<TestUIKit />} />
                 <Route path='/about-course/:id' element={<AboutCourse />} />
             </Routes>

@@ -14,6 +14,8 @@ const MyCourses: FC = () => {
     const token = useAppSelector(state => state.auth.accessToken);
 
     useEffect(() => {
+        console.log(token);
+
         dispatch(getCourses(token));
     }, [dispatch]);
 

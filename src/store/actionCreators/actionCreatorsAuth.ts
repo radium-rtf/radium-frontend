@@ -53,6 +53,8 @@ export const registration = (user: IUser) => {
 // }
 
 export const getCourses = (token: string) => {
+    console.log(token);
+
     return async (dispatch: AppDispatch) => {
         try {
             const courses: ICardCourse[] = (await axios.get<ICardCourse[]>('course', {
