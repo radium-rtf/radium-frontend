@@ -1,12 +1,14 @@
 import {PayloadAction, createSlice} from "@reduxjs/toolkit";
-import { ICardCourse } from "../../interfaces/course.interface";
+import { ICardCourse, ICourse } from "../../interfaces/course.interface";
 
 export interface ICardCourseState {
-    courses: ICardCourse[]
+    courses: ICardCourse[],
+    course: ICourse
 }
 
 const initialState: ICardCourseState = {
-    courses: []
+    courses: [],
+    course: {} as ICourse
 }
 
 export const courseSlice = createSlice({
@@ -15,6 +17,9 @@ export const courseSlice = createSlice({
     reducers: {
         setCourses(state, action: PayloadAction<ICardCourse[]>) {
             state.courses = action.payload;
+        },
+        setCourse(state, action: PayloadAction<ICourse>) {
+            state.course = action.payload;
         }
     }
 })

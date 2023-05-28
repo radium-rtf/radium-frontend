@@ -1,12 +1,12 @@
-import {AppDispatch} from "."
+import { AxiosError } from "axios"
+import { AppDispatch } from "."
 import axios from "../axios"
-import {accessTokenType} from "../types/tokenType"
-import {IUser} from "../interfaces/user.interface"
-import {authSlice} from "./slices/authSlice"
-import {AxiosError} from "axios";
-import {ErrorService} from "../services/error.service";
-import { ICardCourse } from "../interfaces/course.interface"
-import {ICardCourseState, courseSlice} from "./slices/courseSlice"
+import { ICardCourse, ICourse } from "../interfaces/course.interface"
+import { IUser } from "../interfaces/user.interface"
+import { ErrorService } from "../services/error.service"
+import { accessTokenType } from "../types/tokenType"
+import { authSlice } from "./slices/authSlice"
+import { courseSlice } from "./slices/courseSlice"
 
 
 export const login = (user: IUser) => {
@@ -45,12 +45,10 @@ export const registration = (user: IUser) => {
 
 export const getCourses = () => {
     return async (dispatch: AppDispatch) => {
-        try {   
+        try {
             const courses: ICardCourse[] = (await axios.get<ICardCourse[]>('course')).data;
-            
+
             dispatch(courseSlice.actions.setCourses(courses))
-
-
         } catch (error) {
             ErrorService.getErrorMessage(error as AxiosError);
         }
@@ -59,12 +57,10 @@ export const getCourses = () => {
 
 export const getCourse = (id: number) => {
     return async (dispatch: AppDispatch) => {
-        try { 
-            
-            const course: ICardCourse = (await axios.get<ICardCourse>(`course/${id}`)).data;
-            
-            console.log(course);
+        try {
+            const course: ICourse = (await axios.get<ICourse>(`course/${id}`)).data;
 
+            dispatch(courseSlice.actions.setCourse(course));
         } catch (error) {
             ErrorService.getErrorMessage(error as AxiosError);
         }

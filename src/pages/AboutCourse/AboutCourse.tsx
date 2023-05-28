@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
-import styles from "../CourseLanding/CourseLanding.module.scss";
+import styles from "../AboutCourse/AboutCourse.module.scss";
 import CourseCard from "../../components/CourseCard/CourseCard";
 import Button from "../../components/Button/Button";
 import Header from "../../components/Header/Header";
 import ava from "../../images/kotlin.svg"
 
-const CourseLanding: FC = () => {
+const AboutCourse: FC = () => {
 
     return (
         <>
@@ -62,4 +62,4 @@ const CourseLanding: FC = () => {
     )
 };
 
-export default CourseLanding;
+export default AboutCourse;

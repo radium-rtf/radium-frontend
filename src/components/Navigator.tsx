@@ -9,7 +9,7 @@ import Profile from "../pages/Profile/Profile";
 import MyCourses from "../pages/MyCourses/MyCourses";
 import RouterGuard from "./RouterGuard"
 import TestUIKit from "../pages/TestUIKit/TestUIKit";
-import CourseLanding from "../pages/CourseLanding/CourseLanding";
+import AboutCourse from "../pages/AboutCourse/AboutCourse"
 
 const Navigator: FC = () => {
     return (
@@ -24,7 +24,7 @@ const Navigator: FC = () => {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/mycourses" element={<MyCourses />} />
                 <Route path='/testuikit' element={<TestUIKit />} />
-                <Route path='/course-landing' element={<CourseLanding />} />
+                <Route path='/about-course' element={<AboutCourse />} />
             </Routes>
         </BrowserRouter>
     )
