@@ -9,7 +9,7 @@ export interface IAuthState {
 const initialState: IAuthState = {
     email: localStorage.getItem('email') ?? '',
     isAuth: !!localStorage.getItem('token'),
-    accessToken: localStorage.getItem('token') ?? ''
+    accessToken: localStorage.getItem('token') ?? '',
 }
 
 export const authSlice = createSlice({

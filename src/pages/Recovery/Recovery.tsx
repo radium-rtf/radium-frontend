@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
-import { IUser } from '../../types/user.interface';
+import { IUser } from '../../interfaces/user.interface';
 import styles from './Recovery.module.scss';
 
 const Recovery: FC = () => {

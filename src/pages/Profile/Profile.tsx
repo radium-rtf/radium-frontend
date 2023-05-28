@@ -4,7 +4,7 @@ import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { IProfile, IUser } from "../../types/user.interface";
+import { IProfile, IUser } from "../../interfaces/user.interface";
 import logo from "../../images/кач.jpg"
 
 const Profile: FC = () => {

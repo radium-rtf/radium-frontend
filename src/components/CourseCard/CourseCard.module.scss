@@ -3,9 +3,11 @@
     box-shadow: inset 0px -2px 0px #292d2e;
     border: 1px solid rgba(0, 0, 0, 0.1);
     background-color: #2e3233;
-    width: 400px;
+    width: 432px;
+    min-width: 360px;
     height: 197px;
     color: #e4e4e4;
+
     p {
         font-size: 13px;
     }
@@ -13,6 +15,7 @@
 }
 
 .Image {
+    float: right;
     height: 72px;
     border-radius: 8px;
 

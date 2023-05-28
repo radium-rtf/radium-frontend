@@ -8,7 +8,7 @@ const TestUIKit: FC = () => {
         <div>
             <CourseCard
                 className='courseCard'
-                classNameImg='Image'
+                classNameLogo='Image'
             />
             <Checkbox
                 className='customCheckbox'
