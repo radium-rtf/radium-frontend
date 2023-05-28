@@ -6,6 +6,7 @@ import Slider from "../../components/Slider/Slider";
 import Header from "../../components/Header/Header";
 import TextField from "../../components/TextField/TextField";
 import EmptyPage from "../../components/EmptyPage/EmptyPage";
+import Menu from "../../components/Menu/Menu";
 
 const TestUIKit: FC = () => {
     return (
