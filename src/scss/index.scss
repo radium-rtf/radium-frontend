@@ -1,6 +1,42 @@
 @import "./colors.scss";
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
+@font-face {
+	font-family: 'NT-Somic';
+	src: url('../fonts/NT-Somic-VF.ttf') format('truetype');
+}
+
+@mixin h1-font {
+	font-family: 'NT-Somic';
+	font-weight: bold;
+	font-size: 48px;
+	line-height: 1.25;
+}
+
+@mixin h2-font {
+	font-family: 'NT-Somic';
+	font-weight: 500;
+	font-size: 32px;
+}
+
+@mixin h3-font {
+	font-family: 'NT-Somic';
+	font-weight: 500;
+	font-size: 20px;
+}
+
+@mixin h4-font {
+	font-family: 'NT-Somic';
+	font-weight: 500;
+	font-size: 16px;
+}
+
+@mixin control-font {
+	font-family: 'NT-Somic';
+	font-size: 13px;
+	line-height: 1.26; // чзх
+}
+
 body {
 	background-color: $bg;
 	padding: 0;
