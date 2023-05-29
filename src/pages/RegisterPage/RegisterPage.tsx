@@ -18,7 +18,7 @@ const RegisterPage: FC = () => {
     const onRegisterHandler: SubmitHandler<IUser> = (data: IUser) => {
         if (data) {
             dispatch(registration(data));
-            navigate('/');
+            navigate('/my-courses');
             reset();
         }
     }
@@ -30,7 +30,7 @@ const RegisterPage: FC = () => {
                     <p className={styles.header}>Регистрация</p>
                     <div className={styles.textField}>
                         <Input
-                            register={() => register('username', {
+                            register={() => register('name', {
                                 required: "Имя обязательное поле",
                                 minLength: {
                                     value: 4,
@@ -43,7 +43,7 @@ const RegisterPage: FC = () => {
                             style={{ marginBottom: '16px' }}
                             className='name'
                         />
-                        <Error className={'error'} error={errors?.username} errorMessage={errors.username?.message} />
+                        <Error className={'error'} error={errors?.name} errorMessage={errors.name?.message} />
                         <p className={styles.info}>
                             Необязательно писать ФИО,
                             просто как хотите, чтобы мы вас называли.

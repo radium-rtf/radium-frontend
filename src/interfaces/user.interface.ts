@@ -1,7 +1,8 @@
 export interface IUser {
     email: string;
-    password: string;
-    username?: string;
+    password?: string;
+    name: string;
+    id?: string;
 }
 
 export interface IProfile {

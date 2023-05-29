@@ -7,6 +7,9 @@ import { ErrorService } from "../../services/error.service"
 import { accessTokenType } from "../../types/tokenType"
 import { authSlice } from "../slices/authSlice"
 import { courseSlice } from "../slices/courseSlice"
+import { profileSlice } from "../slices/profileSlice"
+import { IModule, IModuleCourse } from "../../interfaces/module.interface"
+import { moduleSlice } from "../slices/moduleSlice"
 
 
 export const login = (user: IUser) => {
@@ -44,13 +47,23 @@ export const registration = (user: IUser) => {
 }
 
 // TODO - получать user
-// export const fetchUser = (token: string) => {
-//     return async (dispatch: AppDispatch) => {
-//         try {
-//             const user: IUser = await 
-//         }
-//     }
-// }
+export const fetchUser = (token: string) => {
+    return async (dispatch: AppDispatch) => {
+        try {
+            const user: IUser = (await axios.get<IUser>('account', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })).data;
+
+            console.log(user.email);
+            dispatch(profileSlice.actions.setTopProfileLink(user));
+
+        } catch (error) {
+            ErrorService.getErrorMessage(error as AxiosError);
+        }
+    }
+}
 
 export const getCourses = (token: string) => {
     console.log(token);
@@ -80,6 +93,23 @@ export const getCourse = (id: number, token: string) => {
             })).data;
 
             dispatch(courseSlice.actions.setCourse(course));
+        } catch (error) {
+            ErrorService.getErrorMessage(error as AxiosError);
+        }
+    }
+}
+
+export const getCourseModule = (token: string, id: number = 2) => {
+    return async (dispath: AppDispatch) => {
+        try {
+            const moduleByCourse: IModuleCourse = (await axios.get<IModuleCourse>(`module/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })).data;
+
+            dispath(moduleSlice.actions.setModuleCourse({ moduleCourse: { ...moduleByCourse } }));
+
         } catch (error) {
             ErrorService.getErrorMessage(error as AxiosError);
         }

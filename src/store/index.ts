@@ -1,10 +1,14 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from './slices/authSlice';
 import courseReducer from './slices/courseSlice';
+import profileReducer from './slices/profileSlice';
+import moduleReducer from './slices/moduleSlice';
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    course: courseReducer
+    course: courseReducer,
+    profile: profileReducer,
+    module: moduleReducer
 })
 
 export const storeConfig = configureStore({

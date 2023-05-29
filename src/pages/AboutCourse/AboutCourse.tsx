@@ -9,7 +9,7 @@ import authorAva1 from "../../images/image-logo-1.svg"
 import authorAva2 from "../../images/image-logo-2.svg"
 import telegramLogo from "../../images/telegram-logo.svg"
 import discordLogo from "../../images/discord-logo.svg"
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getCourse } from '../../store/actionCreators/actionCreatorsAuth';
 
@@ -18,6 +18,7 @@ const AboutCourse: FC = () => {
     const course = useAppSelector(state => state.course.course);
     const token = useAppSelector(state => state.auth.accessToken);
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(getCourse(Number(params.id), token));
@@ -36,6 +37,7 @@ const AboutCourse: FC = () => {
                 <div className={styles['courseTitle']}>
                     <b>{course.name}</b>
                     <Button
+                        callback={() => navigate(`/module/${params.id}`)}
                         style={{ margin: '36px 36px 0 0' }}
                         label='Продолжить/Начать'
                         type='submit'

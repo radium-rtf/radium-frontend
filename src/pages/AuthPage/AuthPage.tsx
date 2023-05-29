@@ -5,8 +5,8 @@ import Button from '../../components/Button/Button';
 import Error from "../../components/Error/Error";
 import Input from '../../components/Input/Input';
 import { emailValidator } from "../../constData";
-import { useAppDispatch } from '../../hooks/redux';
-import { login } from '../../store/actionCreators/actionCreatorsAuth';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { fetchUser, login } from '../../store/actionCreators/actionCreatorsAuth';
 import { IUser } from '../../interfaces/user.interface';
 import styles from './AuthPage.module.scss';
 
@@ -15,11 +15,15 @@ const AuthPage: FC = () => {
     const navigate = useNavigate();
     const {register, handleSubmit, reset, formState: {errors}} = useForm<IUser>();
     const dispatch = useAppDispatch();
+    const token = useAppSelector(state => state.auth.accessToken);
 
     const onLoginHandler: SubmitHandler<IUser> = (data: IUser) => {
-        dispatch(login(data));
-        navigate('/');
-        reset();
+        if (data) {
+            dispatch(login(data));
+            dispatch(fetchUser(token));
+            navigate('/my-courses');
+            reset();
+        }
     }
 
     return (
