@@ -1,3 +1,36 @@
+.authors {
+    margin-bottom: 48px;
+    img {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+    }
+    .singleAuthor {
+        display: flex;
+        width: 256px;
+        height: 48px;
+        align-items: center;
+        margin: 16px 0 16px 24px;
+        font-size: 13px;
+    }
+}
+
+.contacts {
+    font-size: 13px;
+    img {
+        width: 24px;
+        height: 24px;
+    }
+    .singleContact {
+        width: 256px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        margin: 16px 0 16px 24px;
+
+    }
+}
+
 .row {
     display: flex;
     b {

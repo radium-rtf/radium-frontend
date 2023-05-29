@@ -5,6 +5,10 @@ import Button from "../../components/Button/Button";
 import Header from "../../components/Header/Header";
 import ava from "../../images/kotlin.svg"
 import logo from "../../images/kotlin.svg"
+import authorAva1 from "../../images/image-logo-1.svg"
+import authorAva2 from "../../images/image-logo-2.svg"
+import telegramLogo from "../../images/telegram-logo.svg"
+import discordLogo from "../../images/discord-logo.svg"
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getCourse } from '../../store/actionCreators/actionCreatorsAuth';
@@ -43,15 +47,27 @@ const AboutCourse: FC = () => {
                             <p>{course.description}</p>
                         </div>
                         <div className={styles['info']}>
-                            <div>
+                            <div className={styles['authors']}>
                                 <b>Авторы</b>
-                                <p>Зоя бабабуевна</p>
-                                <p>Галя Амогусовна</p>
+                                <div className={styles['singleAuthor']}>
+                                    <img src={authorAva1} alt=""/>
+                                    <p>Зоя Бабабуевна</p>
+                                </div>
+                                <div className={styles['singleAuthor']}>
+                                    <img src={authorAva2} alt=""/>
+                                    <p>Галя Амогусовна</p>
+                                </div>
                             </div>
-                            <div>
+                            <div className={styles['contacts']}>
                                 <b>Контакты</b>
-                                <p>Telegram</p>
-                                <p>Discord</p>
+                                <div className={styles['singleContact']}>
+                                    <img src={telegramLogo} alt=""/>
+                                    <p>Telegram</p>
+                                </div>
+                                <div className={styles['singleContact']}>
+                                    <img src={discordLogo} alt=""/>
+                                    <p>Discord</p>
+                                </div>
                             </div>
                         </div>
                     </div>
