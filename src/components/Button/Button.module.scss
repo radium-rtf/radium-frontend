@@ -52,3 +52,35 @@
 		content: "../../images/arrow-right-btn.svg";
 	  }
 }
+
+.btnReset {
+	background-color: #2e3233;
+	color: #e4e4e4;
+	border-radius: 8px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	width: 144px;
+	font-size: 13px;
+	height: 36px;
+}
+
+.btnAnswer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 13px;
+	color: #222526;
+	text-decoration: none;
+	padding: 0.8em 1em calc(0.8em + 3px);
+	//border-radius: 3px;
+	background: #cef2ce;
+	//box-shadow: 0 -3px #cef2ce inset;
+	transition: 0.2s;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	height: 36px;
+	width: 140px;
+	cursor: pointer;
+	margin-bottom: 16px;
+	//box-shadow: inset 0px -2px 0px #a8c5a8;
+	box-shadow: inset 0px -2px 0px #badaba;
+}

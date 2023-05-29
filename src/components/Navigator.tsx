@@ -10,6 +10,7 @@ import MyCourses from "../pages/MyCourses/MyCourses";
 import RouterGuard from "./RouterGuard"
 import TestUIKit from "../pages/TestUIKit/TestUIKit";
 import AboutCourse from "../pages/AboutCourse/AboutCourse"
+import CoursePage from "../pages/CoursePage/CoursePage";
 
 const Navigator: FC = () => {
     return (
@@ -24,6 +25,7 @@ const Navigator: FC = () => {
                 <Route path="/profile" element={<RouterGuard><Profile /></RouterGuard>} />
                 <Route path='/testuikit' element={<TestUIKit />} />
                 <Route path='/about-course/:id' element={<AboutCourse />} />
+                <Route path='/course' element={<CoursePage />} />
             </Routes>
         </BrowserRouter>
     )

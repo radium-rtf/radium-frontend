@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { Link } from "react-router-dom";
 import { IMenu } from '../../interfaces/menu.interface';
-import {inspect} from "util";
 import styles from "../Menu/Menu.module.scss";
 
 interface IMenuProps {
