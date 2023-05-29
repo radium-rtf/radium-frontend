@@ -11,7 +11,7 @@ import telegramLogo from "../../images/telegram-logo.svg"
 import discordLogo from "../../images/discord-logo.svg"
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getCourse } from '../../store/actionCreators/actionCreatorsAuth';
+import { fetchUser, getCourse } from '../../store/actionCreators/actionCreatorsAuth';
 
 const AboutCourse: FC = () => {
     const params = useParams<'id'>();
@@ -19,9 +19,12 @@ const AboutCourse: FC = () => {
     const token = useAppSelector(state => state.auth.accessToken);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const name = useAppSelector(state => state.profile.name);
+
 
     useEffect(() => {
         dispatch(getCourse(Number(params.id), token));
+        dispatch(fetchUser(token));
     },[dispatch, token]);
 
     return (
@@ -29,9 +32,8 @@ const AboutCourse: FC = () => {
             <div className={styles.wrapper}>
                 <Header
                     className='header'
-                    title='Kotlin'
                     caption='Курс'
-                    userLogin='андрей ✌️'
+                    userLogin={name}
                     logoPath={logo}
                 />
                 <div className={styles['courseTitle']}>

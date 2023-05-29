@@ -14,7 +14,7 @@ interface IHeaderProps {
 }
 
 const Header: FC<IHeaderProps> = ({
-    title = 'Title',
+    title = '',
     className = '',
     style,
     caption = '',
