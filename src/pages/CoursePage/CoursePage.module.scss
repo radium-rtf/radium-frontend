@@ -6,60 +6,6 @@
   align-items: center;
 }
 
-.tasks {
-  width: 720px;
-  align-items: center;
-  .title {
-    @include h1-font;
-    display: flex;
-    text-align: left;
-    margin: 0 24px 36px 24px;
-  }
-
-  .questionsBlock {
-    color: #e4e4e4;
-    background-color: #2e3233;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-
-    .description {
-      margin: 24px 24px 32px 24px;
-    }
-
-    .question {
-      display: flex;
-      margin: 24px 24px 16px 24px;
-      h4 {
-        margin-left: 16px;
-        color: #bdd3fd;
-      }
-
-      .questionMark {
-        position: absolute;
-        margin-left: 5px;
-        margin-top: 7px;
-      }
-    }
-
-    .text {
-      margin: 0 24px 16px 24px;
-    }
-  }
-
-  .bottomBlock {
-    height: 36px;
-    display: flex;
-    gap: 16px;
-    margin-left: 195px;
-    margin-bottom: 24px;
-  }
-
-  .bottomBlock p {
-    margin-top: auto;
-    margin-bottom: auto;
-  }
-}
-
 .navBar {
   float: left;
   margin-left: 24px;

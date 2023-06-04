@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
@@ -13,18 +13,17 @@ import styles from './AuthPage.module.scss';
 
 const AuthPage: FC = () => {
     const navigate = useNavigate();
-    const {register, handleSubmit, reset, formState: {errors}} = useForm<IUser>();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<IUser>();
     const dispatch = useAppDispatch();
     const token = useAppSelector(state => state.auth.accessToken);
 
     const onLoginHandler: SubmitHandler<IUser> = (data: IUser) => {
-        if (data) {
-            dispatch(login(data));
-            dispatch(fetchUser(token));
-            navigate('/my-courses');
-            reset();
-        }
+        dispatch(login(data));
+        dispatch(fetchUser(token));
+        navigate('/my-courses');
+        reset();
     }
+
 
     return (
         <>
@@ -45,9 +44,9 @@ const AuthPage: FC = () => {
                                 type='text'
                                 placeholder='Почта'
                                 className='email'
-                                style={{marginBottom: '16px'}}
+                                style={{ marginBottom: '16px' }}
                             />
-                            <Error className={'error'} error={errors?.email} errorMessage={errors.email?.message}/>
+                            <Error className={'error'} error={errors?.email} errorMessage={errors.email?.message} />
                             <Input
                                 register={() => register('password', {
                                     required: "Пароль обязательное поле"
@@ -56,10 +55,10 @@ const AuthPage: FC = () => {
                                 type='text'
                                 placeholder='Пароль'
                                 className='password'
-                                style={{marginBottom: '16px'}}
+                                style={{ marginBottom: '16px' }}
                             />
                             <Error className={'error'} error={errors?.password}
-                                   errorMessage={errors.password?.message}/>
+                                errorMessage={errors.password?.message} />
                             <Button
                                 label='Войти'
                                 type='submit'

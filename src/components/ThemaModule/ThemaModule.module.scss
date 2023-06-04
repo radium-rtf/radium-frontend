@@ -1,0 +1,32 @@
+@import '../../scss/colors.scss';
+
+.menuItem {
+    display: flex;
+    img {
+      margin: 23px 16px 23px 24px;
+      width: 18px;
+      height: 18px;
+    }
+    .topicTitle {
+      width: 174px;
+      margin-right: 24px;
+      margin-top: 12px;
+      font-size: 13px;
+      color: #e4e4e4;
+    }
+    .grades {
+      width: 174px;
+      font-size: 10px;
+      color: #b2b2b2;
+      margin-bottom: 12px;
+    }
+  }
+  
+  .menuItem:hover {
+    background-color: #2d3031;
+    border-radius: 8px;
+  }
+
+  .activeCardItem {
+    color: $main;
+  }

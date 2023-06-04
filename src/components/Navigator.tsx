@@ -16,7 +16,6 @@ const Navigator: FC = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<RouterGuard><MainPage /></RouterGuard>} />
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/reduction" element={<Recovery />} />

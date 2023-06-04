@@ -1,15 +1,13 @@
-import { CSSProperties, FC, useState } from "react"
+import { CSSProperties, FC, useEffect } from "react";
+import muscleman from "../../images/кач.jpg";
 import styles from './Header.module.scss';
-import muscleman from "../../images/кач.jpg"
-import Menu from "../Menu/Menu";
-import { menus } from "../../interfaces/menu.interface";
+import { useAppSelector } from "../../hooks/redux";
 
 interface IHeaderProps {
     title?: string;
     className?: string;
     style?: CSSProperties;
     caption?: string;
-    userLogin?: string;
     logoPath?: string;
 }
 
@@ -18,15 +16,16 @@ const Header: FC<IHeaderProps> = ({
     className = '',
     style,
     caption = '',
-    userLogin = '',
     logoPath,
-
 }) => {
     // const [showComponent, setShowComponent] = useState(false);
     // const handleClick = () => {
     //     console.log('hello')
     //     setShowComponent(true);
     // };
+
+    const userName = useAppSelector(state => state.profile.name);
+
     return (
         <div className={styles[className]}>
             <div className={styles["caption"]}>
@@ -40,7 +39,7 @@ const Header: FC<IHeaderProps> = ({
                 <b>{title}</b>
             </div>
             <div className={styles["profile"]}>
-                <p>{userLogin}</p>
+                <p>{userName}</p>
                 <img src={muscleman} alt="" />
             </div>
         </div>

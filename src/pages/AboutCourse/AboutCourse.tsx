@@ -1,9 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import styles from "../AboutCourse/AboutCourse.module.scss";
-import CourseCard from "../../components/CourseCard/CourseCard";
 import Button from "../../components/Button/Button";
 import Header from "../../components/Header/Header";
-import ava from "../../images/kotlin.svg"
 import logo from "../../images/kotlin.svg"
 import authorAva1 from "../../images/image-logo-1.svg"
 import authorAva2 from "../../images/image-logo-2.svg"
@@ -11,7 +9,8 @@ import telegramLogo from "../../images/telegram-logo.svg"
 import discordLogo from "../../images/discord-logo.svg"
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchUser, getCourse } from '../../store/actionCreators/actionCreatorsAuth';
+import { fetchUser } from '../../store/actionCreators/actionCreatorsAuth';
+import { getCourse } from '../../store/actionCreators/actionCreatorsCourse';
 
 const AboutCourse: FC = () => {
     const params = useParams<'id'>();
@@ -19,13 +18,11 @@ const AboutCourse: FC = () => {
     const token = useAppSelector(state => state.auth.accessToken);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const name = useAppSelector(state => state.profile.name);
-
 
     useEffect(() => {
         dispatch(getCourse(Number(params.id), token));
         dispatch(fetchUser(token));
-    },[dispatch, token]);
+    }, [dispatch, token]);
 
     return (
         <>
@@ -33,14 +30,13 @@ const AboutCourse: FC = () => {
                 <Header
                     className='header'
                     caption='Курс'
-                    userLogin={name}
                     logoPath={logo}
                 />
                 <div className={styles['courseTitle']}>
                     <b>{course.name}</b>
                     <Button
                         callback={() => navigate(`/module/${params.id}`)}
-                        style={{ margin: '36px 36px 0 0' }}
+                        style={{margin: '36px 36px 0 0'}}
                         label='Продолжить/Начать'
                         type='submit'
                         className='btn'

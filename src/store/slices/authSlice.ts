@@ -31,6 +31,6 @@ export const authSlice = createSlice({
             localStorage.removeItem('token');
         }
     }
-})
+});
 
 export default authSlice.reducer;

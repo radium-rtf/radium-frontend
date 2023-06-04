@@ -6,6 +6,7 @@ interface ICheckBoxProps {
     type: 'checkbox';
     disabled?: boolean;
     label?: string;
+    isSelected?: boolean;
 }
 
 const Checkbox: FC<ICheckBoxProps> = ({type, className, disabled, label}) => {
