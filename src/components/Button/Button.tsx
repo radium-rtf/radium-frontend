@@ -5,25 +5,28 @@ interface ButtonProps {
     label?: string,
     icon?: JSX.Element,
     style: "accent" | "destructive" | "outlined",
+    type?: "button" | "submit" | "reset"
     width?: string | number,
     disabled?: boolean,
-    onClick?: MouseEventHandler<HTMLDivElement>,
+    onClick?: MouseEventHandler<HTMLButtonElement>,
 }
 
 const Button: FC<ButtonProps> = ({
     label,
     icon,
     style = "outlined",
+    type,
     width,
     disabled,
     onClick,
-}) => <div
+}) => <button
     className={styles[`${style}-button`]}
     onClick={onClick}
+    type={type}
     style={{width: width}}
 >
     {icon}
     {label && <label>{label}</label>}
-</div>
+</button>
 
-export default Button
+export default Button;

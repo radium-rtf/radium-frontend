@@ -1,10 +1,8 @@
 import {FC, MouseEventHandler, ReactNode} from "react"
-import Card from "../Card/Card"
 import styles from "./CourseCard.module.scss"
+import { Button, Card } from "antd"
 import LinearProgress from "../LinerProgress/LinearProgress"
-import Button from "../Button/Button";
 import * as Icons from "../../icons/icons"
-import Comment from '../Comment/Comment'
 
 interface CourseCardProps {
     name: string,
@@ -20,14 +18,14 @@ interface CourseCardProps {
     comment?: string,
     width?: number | string,
     onClick?: MouseEventHandler<HTMLDivElement>,
-    onButtonClick?: MouseEventHandler<HTMLDivElement>,
+    onButtonClick?: MouseEventHandler<HTMLButtonElement>,
 }
 
 interface BottomProps {
     icon: ReactNode,
     text: string,
     color: "accent" | "outlined",
-    onClick?: MouseEventHandler<HTMLDivElement>,
+    onClick?: MouseEventHandler<HTMLButtonElement>,
 }
 
 const Bottom: FC<BottomProps> = ({
