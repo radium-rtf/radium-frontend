@@ -1,0 +1,10 @@
+@import "../../../scss/index.scss";
+
+.radial-progress {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+
+  mask: radial-gradient(closest-side, transparent 85%, white 90%);
+  transition: all 0.3s ease-out;
+}

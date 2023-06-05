@@ -7,42 +7,53 @@
 }
 
 @mixin h1-font {
-	font-family: 'NT-Somic';
+	font-family: 'NT-Somic', sans-serif;
+	font-feature-settings: "aalt";
 	font-weight: bold;
 	font-size: 48px;
 	line-height: 1.25;
 }
 
 @mixin h2-font {
-	font-family: 'NT-Somic';
+	font-family: 'NT-Somic', sans-serif;
+	font-feature-settings: "aalt";
 	font-weight: 500;
 	font-size: 32px;
 }
 
 @mixin h3-font {
-	font-family: 'NT-Somic';
+	font-family: 'NT-Somic', sans-serif;
+	font-feature-settings: "aalt";
 	font-weight: 500;
 	font-size: 20px;
 }
 
 @mixin h4-font {
-	font-family: 'NT-Somic';
+	font-family: 'NT-Somic', sans-serif;
+	font-feature-settings: "aalt";
 	font-weight: 500;
 	font-size: 16px;
 }
 
 @mixin control-font {
-	font-family: 'NT-Somic';
+	font-family: 'NT-Somic', sans-serif;
+	font-feature-settings: "aalt";
 	font-size: 13px;
 	line-height: 1.26; // чзх
+}
+
+@mixin p-font {
+	font-family: Inter, sans-serif;
+	font-size: 13px;
+	line-height: 1.5;
 }
 
 body {
 	background-color: $bg;
 	padding: 0;
 	margin: 0;
-	color: $main;
-	font-family: Inter;
+	color: $accent-primary;
+	font-family: Inter, sans-serif;
 }
 
 * {

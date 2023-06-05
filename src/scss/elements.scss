@@ -1,6 +1,6 @@
 a {
 	position: inline-block;
-	color: $main;
+	color: $accent-primary;
 	cursor: pointer;
 	text-decoration: none;
 	text-underline-offset: auto;
@@ -12,7 +12,7 @@ a:after {
 	left: 0;
 	width: 0;
 	height: 2px;
-	background-color: $main;
+	background-color: $accent-primary;
 	content: "";
 	transition: width 0.3s ease-out;
 }

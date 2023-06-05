@@ -1,48 +1,91 @@
-import { FC } from "react";
-import CourseCard from '../../components/CourseCard/CourseCard';
-import Checkbox from "../../components/Checkbox/Checkbox";
-import RadioButton from "../../components/RadioButton/RadioButton";
-import Slider from "../../components/Slider/Slider";
+import {FC, useState} from "react";
+import Checkbox from "../../components/a/checkbox/Checkbox";
+import RadioButton from "../../components/a/radio/RadioButton";
 import Header from "../../components/Header/Header";
-import TextField from "../../components/TextField/TextField";
-import EmptyPage from "../../components/EmptyPage/EmptyPage";
-import Menu from "../../components/Menu/Menu";
-import { menus } from "../../interfaces/menu.interface";
+import TextField from "../../components/a/text-field/TextField";
+import Button from "../../components/a/button/Button";
+import * as Icons from "../../icons/icons";
+import Switch from "../../components/a/switch/Switch";
+import LinearProgress from "../../components/a/linear-progress/LinearProgress";
+import RadialProgress from "../../components/a/radial-progress/RadialProgress";
 
 const TestUIKit: FC = () => {
+    const [visible, setVisible] = useState(false)
+
     return (
         <div>
             <Header
                 className='header'
                 title='Kotlin'
             />
-            <CourseCard
-                className='courseCard'
-                classNameLogo='Image'
+            <Button
+                style="accent"
+                icon={Icons.Visible}
+                label={"ABCDEFabcdef"}
+                onClick={() => console.log("huy")}
             />
+            <Button
+                style="destructive"
+                width="256px"
+                icon={() => <RadialProgress progress={0.6} />}
+                label="ABCDEFabcdef"
+                onClick={() => console.log("huy")}
+            />
+            <Button
+                style="outlined"
+                icon={Icons.Invisible}
+                label={"ABCDEFabcdef"}
+                onClick={() => console.log("huy")}
+            />
+
             <Checkbox
-                className='customCheckbox'
-                type='checkbox'
+                label="hhohohohoh"
+                onInput={console.log}
             />
-            <div>
+
+            <Switch
+                label="bibibi dododo yjakjdkja"
+            />
+
+            <form>
                 <RadioButton
-                    className='customRadioButton'
-                    type='radio'
+                    label="haha yes"
+                    name="thing"
+                    value="yes"
                 />
                 <RadioButton
-                    className='customRadioButton'
-                    type='radio'
+                    label="haha no"
+                    name="thing"
+                    value="no"
                 />
-            </div>
-            <Slider
-                className='switch'
-                type='checkbox'
-            />
+                <RadioButton
+                    label="haha maybe"
+                    name="thing"
+                    value="maybe"
+                />
+            </form>
+
             <TextField
-                className='textArea'
+                label="OMg omg omg"
+                type="email"
+                postfix="@urfu.me"
+                width="256px"
             />
-            <EmptyPage />
-            <Menu menus={menus}></Menu>
+
+            <TextField
+                label="PASSWORD!!!!!"
+                type="password"
+                icon={visible ? Icons.Visible : Icons.Invisible}
+                width={256}
+                onIconClick={() => setVisible(!visible)}
+            />
+
+            <LinearProgress
+                color="primary"
+                progress={0.5}
+                showPercentage={true} />
+
+            <RadialProgress progress={0.75} />
         </div>
 
     )

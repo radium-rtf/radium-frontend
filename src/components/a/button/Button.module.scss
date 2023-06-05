@@ -1,0 +1,97 @@
+@import "../../../scss/index.scss";
+@import "../../../scss/colors.scss";
+
+%button {
+  @include control-font;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  user-select: none;
+  cursor: pointer;
+
+  height: 36px;
+  padding: 10px 24px 10px 24px;
+  border-radius: 8px;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  label {
+    cursor: pointer;
+  }
+
+  transition: all 0.1s ease-in-out;
+}
+
+%button > *:not(:last-child) {
+  margin-right: 8px;
+}
+
+
+
+.accent-button {
+  @extend %button;
+
+  background: $accent-secondary;
+  border: solid 1px $black-01;
+
+  svg, label {
+    color: $on-secondary;
+  }
+}
+
+.accent-button:hover {
+  background: $accent-secondary + white * 0.1;
+  border-color: $black-02;
+}
+
+.accent-button:active {
+  background: $accent-secondary - white * 0.1;
+  border-color: $black-02;
+}
+
+
+
+.destructive-button {
+  @extend .accent-button;
+
+  background: $accent-destructive;
+
+  svg, label {
+    color: $on-destructive;
+  }
+}
+
+.destructive-button:hover {
+  background: $accent-destructive + white * 0.1;
+}
+
+.destructive-button:active {
+  background: $accent-destructive - white * 0.1;
+}
+
+
+
+.outlined-button {
+  @extend %button;
+
+  border: solid 1px $white-01;
+
+  svg, label {
+    color: $p-regular;
+  }
+}
+
+.outlined-button:hover {
+  background: $white-01;
+  border-color: $white-03;
+}
+
+.outlined-button:active {
+  background: $black-01;
+  border-color: $white-01;
+}
