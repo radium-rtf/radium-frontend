@@ -1,0 +1,34 @@
+@import "../../../scss/index.scss";
+
+.list-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 0 12px 24px;
+  border-radius: 8px;
+  transition: all 0.1s ease-in-out;
+
+  *:first-child {
+    margin-right: 16px;
+  }
+
+  *:not(:last-child) {
+    pointer-events: none;
+  }
+
+  input {
+    appearance: none;
+  }
+
+  &:hover {
+    background: $white-005;
+  }
+
+  &:has(> input:checked) {
+    background: $white-005;
+  }
+
+  p {
+    @include p-small-font;
+    color: $p-secondary;
+  }
+}

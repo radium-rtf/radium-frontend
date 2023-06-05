@@ -2,8 +2,6 @@
 @import "../../../scss/colors.scss";
 
 %button {
-  @include control-font;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -15,7 +13,7 @@
   padding: 10px 24px 10px 24px;
   border-radius: 8px;
 
-  svg {
+  svg, img {
     width: 18px;
     height: 18px;
   }
@@ -25,10 +23,10 @@
   }
 
   transition: all 0.1s ease-in-out;
-}
 
-%button > *:not(:last-child) {
-  margin-right: 8px;
+  >:not(:last-child) {
+    margin-right: 8px;
+  }
 }
 
 

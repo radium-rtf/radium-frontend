@@ -1,0 +1,40 @@
+@import "../../../scss/index.scss";
+
+.menu-item-small {
+  display: flex;
+  align-items: center;
+
+  padding: 9px 24px 9px 24px;
+  border-radius: 8px;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+  height: 36px;
+
+  &>* {
+    cursor: pointer;
+  }
+
+  svg, img {
+    width: 18px;
+    height: 18px;
+    margin-right: 16px;
+  }
+
+  label {
+    user-select: none;
+  }
+
+  &:hover {
+    background: $white-01;
+  }
+}
+
+.menu-item-large {
+  @extend .menu-item-small;
+  height: 64px;
+
+  svg, img {
+    width: 48px;
+    height: 48px;
+  }
+}

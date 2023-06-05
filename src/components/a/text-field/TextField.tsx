@@ -5,7 +5,7 @@ interface TextFieldProps {
     label?: string,
     name?: string,
     postfix?: string,
-    icon?: FC,
+    icon?: JSX.Element,
     onIconClick?: () => void,
     onInput?: (value?: string) => void,
     width?: number | string,
@@ -22,7 +22,7 @@ const TextField: FC<TextFieldProps> = ({
     width,
     type,
 }) => {
-    const Icon = icon ? icon : () => <></>
+    const Icon = () => icon || <></>
     return <label className={styles["text-field"]}>
         <input
             style={{width: width}}

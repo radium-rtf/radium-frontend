@@ -1,13 +1,13 @@
-import {FC} from "react"
+import {FC, MouseEventHandler} from "react"
 import styles from "./Button.module.scss"
 
 interface ButtonProps {
     label?: string,
-    icon?: FC,
+    icon?: JSX.Element,
     style: "accent" | "destructive" | "outlined",
     width?: string | number,
     disabled?: boolean,
-    onClick?: () => void,
+    onClick?: MouseEventHandler<HTMLDivElement>,
 }
 
 const Button: FC<ButtonProps> = ({
@@ -17,16 +17,13 @@ const Button: FC<ButtonProps> = ({
     width,
     disabled,
     onClick,
-}) => {
-    const Icon = icon ? icon : () => <></>
-    return <div
-        className={styles[`${style}-button`]}
-        onClick={onClick}
-        style={{width: width}}
-    >
-        <Icon />
-        <label>{label}</label>
-    </div>
-}
+}) => <div
+    className={styles[`${style}-button`]}
+    onClick={onClick}
+    style={{width: width}}
+>
+    {icon}
+    {label && <label>{label}</label>}
+</div>
 
 export default Button

@@ -8,7 +8,7 @@
 
 @mixin h1-font {
 	font-family: 'NT-Somic', sans-serif;
-	font-feature-settings: "aalt";
+	font-feature-settings: "salt";
 	font-weight: bold;
 	font-size: 48px;
 	line-height: 1.25;
@@ -16,28 +16,28 @@
 
 @mixin h2-font {
 	font-family: 'NT-Somic', sans-serif;
-	font-feature-settings: "aalt";
+	font-feature-settings: "salt";
 	font-weight: 500;
 	font-size: 32px;
 }
 
 @mixin h3-font {
 	font-family: 'NT-Somic', sans-serif;
-	font-feature-settings: "aalt";
+	font-feature-settings: "salt";
 	font-weight: 500;
 	font-size: 20px;
 }
 
 @mixin h4-font {
 	font-family: 'NT-Somic', sans-serif;
-	font-feature-settings: "aalt";
+	font-feature-settings: "salt";
 	font-weight: 500;
 	font-size: 16px;
 }
 
 @mixin control-font {
 	font-family: 'NT-Somic', sans-serif;
-	font-feature-settings: "aalt";
+	font-feature-settings: "salt";
 	font-size: 13px;
 	line-height: 1.26; // чзх
 }
@@ -46,6 +46,11 @@
 	font-family: Inter, sans-serif;
 	font-size: 13px;
 	line-height: 1.5;
+}
+
+@mixin p-small-font {
+	font-family: Inter, sans-serif;
+	font-size: 10px;
 }
 
 body {
@@ -64,4 +69,35 @@ body {
 	&:focus {
 		outline: none;
 	}
+}
+
+
+h1 {
+	@include h1-font;
+	color: $accent-primary;
+}
+
+h2 {
+	@include h2-font;
+	color: $accent-primary;
+}
+
+h3 {
+	@include h3-font;
+	color: $accent-primary;
+}
+
+h4 {
+	@include h4-font;
+	color: $accent-primary;
+}
+
+label {
+	@include control-font;
+	color: $p-regular;
+}
+
+p {
+	@include p-font;
+	color: $p-regular;
 }

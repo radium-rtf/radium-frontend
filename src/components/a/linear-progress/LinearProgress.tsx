@@ -12,7 +12,7 @@ const LinearProgress: FC<LinearProgressProps> = ({
     progress,
     showPercentage,
 }) => {
-    const percent = `${progress * 100}%`
+    const percent = `${(progress * 100).toFixed(0)}%`
     return <div className={styles["progress"]}>
         <div className={styles["bg"]}>
             <div className={styles[`fg-${color}`]} style={{width: percent}}/>
