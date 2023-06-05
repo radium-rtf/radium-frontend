@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import Button from '../Button/Button';
 import Checkbox from '../Checkbox/Checkbox';
 import questionMark from "../../images/_.svg";
@@ -17,10 +17,10 @@ const SectionAnswer: FC<ISectionAnswerProps> = ({
     description = 'Задача организации, в особенности же повышение уровня гражданского сознания играет важную роль в формировании системы массового участия.'
     + ' Противоположная точка зрения подразумевает, что явные признаки победы институционализации описаны максимально подробно.'
     + ' А ещё реплицированные с зарубежных источников, современные исследования формируют глобальную экономическую сеть и при этом — ограничены исключительно образом мышления.',
-    question = 'Объекты каких типов можно положить в List CharSequence?'
+    question
 }) => {
 
-
+   
     return (
         <div className={styles["tasksWrapper"]}>
             <div className={styles["tasks"]}>

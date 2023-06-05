@@ -1,17 +1,21 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ISection } from "../../interfaces/slide.interface";
 
+
+// TODO - приходит массив массивов после запроса -> sections[0] -> sections[0] -> section.question
+// править бэк либо стейт фронта
+
 interface ISlideState {
     id?: number;
     name: string;
     nameEng: string;
-    section: ISection[]
+    sections: ISection[]
 }
 
 const initialState: ISlideState = {
     name: '',
     nameEng: '',
-    section: []
+    sections: []
 }
 
 export const slideSlice = createSlice({
@@ -21,7 +25,7 @@ export const slideSlice = createSlice({
         setSlide(state, action: PayloadAction<ISlideState>) {
             state.name = action.payload.name;
             state.nameEng = action.payload.nameEng;
-            state.section = action.payload.section;
+            state.sections = action.payload.sections;
         }
     }
 })

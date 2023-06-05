@@ -1,8 +1,10 @@
 import {FC, MouseEventHandler, ReactNode} from "react"
+import Card from "../Card/Card"
 import styles from "./CourseCard.module.scss"
-import { Button, Card } from "antd"
 import LinearProgress from "../LinerProgress/LinearProgress"
+import Button from "../Button/Button";
 import * as Icons from "../../icons/icons"
+import Comment from "../Comment/Comment";
 
 interface CourseCardProps {
     name: string,
@@ -38,8 +40,7 @@ const Bottom: FC<BottomProps> = ({
     <p>{text}</p>
     <Button
         icon={Icons.Start}
-        style={color}
-        onClick={onClick}
+        style="accent"
     />
 </div>
 

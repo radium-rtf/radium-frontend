@@ -9,7 +9,7 @@ interface IThemaModuleProps {
     activeIndex?: number;
 }
 
-const ThemaModule: FC<IThemaModuleProps> = ({ name, activeIndex, isActive = false }) => {
+const ThemeModule: FC<IThemaModuleProps> = ({ name, activeIndex, isActive = false }) => {
 
     useEffect(() => {
         console.log(activeIndex);
@@ -30,4 +30,4 @@ const ThemaModule: FC<IThemaModuleProps> = ({ name, activeIndex, isActive = fals
     )
 }
 
-export default ThemaModule;
+export default ThemeModule;

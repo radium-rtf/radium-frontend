@@ -2,7 +2,7 @@ export interface ISlide {
     id?: number;
     name: string;
     nameEng: string;
-    section: ISection[]
+    sections: ISection[]
 };
 
 export interface ISection {
