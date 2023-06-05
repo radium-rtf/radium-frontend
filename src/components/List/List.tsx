@@ -1,5 +1,5 @@
 import {FC} from "react"
-import ListItem, {ListItemProps} from "../list-item/ListItem"
+import ListItem, {ListItemProps} from "../ListItem/ListItem"
 import styles from "./List.module.scss"
 
 interface ListProps {

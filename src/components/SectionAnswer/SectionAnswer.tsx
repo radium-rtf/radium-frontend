@@ -20,7 +20,7 @@ const SectionAnswer: FC<ISectionAnswerProps> = ({
     question = 'Объекты каких типов можно положить в List CharSequence?'
 }) => {
 
-    
+
     return (
         <div className={styles["tasksWrapper"]}>
             <div className={styles["tasks"]}>
@@ -47,23 +47,20 @@ const SectionAnswer: FC<ISectionAnswerProps> = ({
                         <ul>
                             <li>
                                 <Checkbox
-                                    type="checkbox"
-                                    className="customCheckbox"
-                                    label="String"
+                                    label="hhohohohoh"
+                                    onInput={console.log}
                                 />
                             </li>
                             <li>
                                 <Checkbox
-                                    type="checkbox"
-                                    className="customCheckbox"
-                                    label="CharSequence"
+                                    label="hhohohohoh"
+                                    onInput={console.log}
                                 />
                             </li>
                             <li>
                                 <Checkbox
-                                    type="checkbox"
-                                    className="customCheckbox"
-                                    label="List Char"
+                                    label="hhohohohoh"
+                                    onInput={console.log}
                                 />
                             </li>
                         </ul>
@@ -71,8 +68,8 @@ const SectionAnswer: FC<ISectionAnswerProps> = ({
                     <div className={styles["bottomBlock"]}>
                         <p>123 попытки</p>
                         <p>123 балла</p>
-                        <Button label="Сбросить" type="reset" className="btnReset"/>
-                        <Button label="Ответить" type="submit" className="btnAnswer" />
+                        <Button label="Сбросить" style='destructive' />
+                        <Button label="Ответить" style='accent' />
                     </div>
                 </div>
             </div>

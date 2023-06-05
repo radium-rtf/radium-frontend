@@ -1,11 +1,11 @@
-import { FC, useEffect } from "react"
-import styles from './Profile.module.scss';
-import Input from "../../components/Input/Input";
-import Button from "../../components/Button/Button";
-import { useNavigate } from "react-router-dom";
+import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { IProfile, IUser } from "../../interfaces/user.interface";
-import logo from "../../images/кач.jpg"
+import { useNavigate } from "react-router-dom";
+import Button from "../../components/Button/Button";
+import Input from "../../components/Input/Input";
+import logo from "../../images/кач.jpg";
+import { IProfile } from "../../interfaces/user.interface";
+import styles from './Profile.module.scss';
 
 const Profile: FC = () => {
     const navigate = useNavigate();
@@ -15,7 +15,7 @@ const Profile: FC = () => {
         navigate('/');
         reset();
     }
-    
+
     return (
         <>
             <div className={styles.wrapper}>
@@ -26,40 +26,31 @@ const Profile: FC = () => {
                         <div className={styles.textField}>
                             <Input
                                 register={() => register('username')}
-                                controlName='username'
+                                name='username'
                                 type='text'
-                                placeholder='имя'
-                                className='name'
-                                style={{ marginBottom: '16px' }}
+                                label='имя'
                             />
                             <Input
                                 register={() => register('email')}
-                                controlName='email'
+                                name='email'
                                 type='text'
-                                placeholder='Почта'
-                                className='email'
-                                style={{ marginBottom: '16px' }}
+                                label='Почта'
                             />
                             <Input
                                 register={() => register('password')}
-                                controlName='password'
+                                name='password'
                                 type='text'
-                                placeholder='Пароль'
-                                className='password'
-                                style={{ marginBottom: '16px' }}
+                                label='Пароль'
                             />
                             <Input
                                 register={() => register('confirmPassword')}
-                                controlName='confirmPassword'
+                                name='confirmPassword'
                                 type='text'
-                                placeholder='Подтверждение пароля'
-                                className='password'
-                                style={{ marginBottom: '16px' }}
+                                label='Подтверждение пароля'
                             />
                             <Button
                                 label='Сохранить'
-                                type='submit'
-                                className='btn'
+                                style="accent"
                             />
                         </div>
                     </form>

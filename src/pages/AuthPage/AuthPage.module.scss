@@ -7,7 +7,6 @@
 		display: grid;
 		justify-content: flex-start;
 		flex-direction: column;
-
 		margin-top: 192px;
 		margin-left: 210px;
 		height: 299px;
@@ -22,6 +21,9 @@
 
 		.textField {
 			display: grid;
+			> label {
+				margin-bottom: 16px;
+			}
 		}
 	}
 }

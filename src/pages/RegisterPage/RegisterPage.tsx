@@ -1,16 +1,19 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Error from "../../components/Error/Error";
-import Input from '../../components/Input/Input';
 import { useAppDispatch } from '../../hooks/redux';
 import { registration } from '../../store/actionCreators/actionCreatorsAuth';
 import { IUser } from '../../interfaces/user.interface';
 import styles from './RegisterPage.module.scss';
 import { emailValidator } from '../../constData';
+import Input from '../../components/Input/Input';
+import * as Icons from '../../icons/icons'
 
 const RegisterPage: FC = () => {
+
+    const [visible, setVisible] = useState(false);
     const navigate = useNavigate();
     const { register, handleSubmit, reset, formState: { errors } } = useForm<IUser>();
     const dispatch = useAppDispatch();
@@ -37,17 +40,16 @@ const RegisterPage: FC = () => {
                                     message: "Минимальная длина имени 4 символа"
                                 }
                             })}
-                            controlName='username'
-                            type="text"
-                            placeholder='Имя'
-                            style={{ marginBottom: '16px' }}
-                            className='name'
+                            name='name'
+                            type='text'
+                            label='Имя'
+                            width='256px'
                         />
                         <Error className={'error'} error={errors?.name} errorMessage={errors.name?.message} />
-                        <p className={styles.info}>
+                        {/* <p className={styles.info}>
                             Необязательно писать ФИО,
                             просто как хотите, чтобы мы вас называли.
-                        </p>
+                        </p> */}
                         <Input
                             register={() => register('email', {
                                 required: "Email обязательное поле",
@@ -56,11 +58,11 @@ const RegisterPage: FC = () => {
                                     message: "Вы ввели не корректный email"
                                 }
                             })}
-                            controlName='email'
-                            type="text"
-                            placeholder='Почта'
-                            style={{ marginBottom: '16px' }}
-                            className='email'
+                            name='email'
+                            type='email'
+                            label='Почта'
+                            postfix='@urfu.me'
+                            width='256px'
                         />
                         <Error className={'error'} error={errors?.email} errorMessage={errors.email?.message} />
                         <Input
@@ -71,16 +73,19 @@ const RegisterPage: FC = () => {
                                     message: "Минимальная длина пароля 6 символов"
                                 }
                             })}
-                            controlName='password'
-                            type="text"
-                            placeholder='Пароль'
-                            style={{ marginBottom: '16px' }}
-                            className='password'
+                            name='password'
+                            type={visible ? 'text' : 'password'}
+                            label='Пароль'
+                            icon={visible ? Icons.Visible : Icons.Invisible}
+                            onIconClick={() => setVisible(!visible)}
+                            width='256px'
                         />
                         <Error className={'error'} error={errors?.password} errorMessage={errors.password?.message} />
                         <Button
+                            style="accent"
                             label='Зарегистрироваться'
-                            className='btn'
+                            onClick={() => console.log('')}
+                            width='256px'
                         />
                         <Link to={'/auth'}>
                             Вспомнили пароль?

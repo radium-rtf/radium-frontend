@@ -1,17 +1,20 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Error from "../../components/Error/Error";
-import Input from '../../components/Input/Input';
 import { emailValidator } from "../../constData";
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchUser, login } from '../../store/actionCreators/actionCreatorsAuth';
 import { IUser } from '../../interfaces/user.interface';
 import styles from './AuthPage.module.scss';
+import Input from '../../components/Input/Input';
+import * as Icons from '../../icons/icons'
+import { icons } from 'antd/es/image/PreviewGroup';
 
 
 const AuthPage: FC = () => {
+    const [visible, setVisible] = useState(false);
     const navigate = useNavigate();
     const { register, handleSubmit, reset, formState: { errors } } = useForm<IUser>();
     const dispatch = useAppDispatch();
@@ -40,29 +43,30 @@ const AuthPage: FC = () => {
                                         message: "Вы ввели не корректный email"
                                     }
                                 })}
-                                controlName='email'
-                                type='text'
-                                placeholder='Почта'
-                                className='email'
-                                style={{ marginBottom: '16px' }}
+                                name='email'
+                                type='email'
+                                label='Почта'
+                                postfix='@urfu.me'
+                                width='256px'
                             />
                             <Error className={'error'} error={errors?.email} errorMessage={errors.email?.message} />
                             <Input
                                 register={() => register('password', {
                                     required: "Пароль обязательное поле"
                                 })}
-                                controlName='password'
-                                type='text'
-                                placeholder='Пароль'
-                                className='password'
-                                style={{ marginBottom: '16px' }}
+                                name='password'
+                                type={visible ? 'text' : 'password'}
+                                label='Пароль'
+                                icon={visible ? Icons.Visible : Icons.Invisible}
+                                onIconClick={() => setVisible(!visible)}
+                                width='256px'
                             />
                             <Error className={'error'} error={errors?.password}
                                 errorMessage={errors.password?.message} />
                             <Button
+                                style='accent'
                                 label='Войти'
-                                type='submit'
-                                className='btn'
+                                width='256px'
                             />
                             <Link to={'/reduction'}>
                                 Забыли пароль?

@@ -1,6 +1,6 @@
 import {FC} from "react"
 import styles from "./Comment.module.scss"
-import ProfilePicture from "../profile-picture/ProfilePicture";
+import ProfilePicture from "../ProfilePicture/ProfilePicture";
 
 interface CommentProps {
     image: string,

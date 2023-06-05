@@ -1,36 +1,48 @@
-import { CSSProperties, FC } from "react"
+import { FC } from "react"
+import styles from "./Input.module.scss"
 import { RegisterOptions, UseFormRegisterReturn } from "react-hook-form";
-import styles from './Input.module.scss';
 
-
-interface IInputProps {
+interface TextFieldProps {
     register?: (name: string, options?: RegisterOptions) => UseFormRegisterReturn;
-    controlName?: string;
-    className?: string;
-    type?: string;
-    placeholder?: string;
-    style?: CSSProperties;
-    options?: any;
+    label?: string,
+    name?: string,
+    postfix?: string,
+    icon?: JSX.Element,
+    onIconClick?: () => void,
+    onInput?: (value?: string) => void,
+    width?: number | string,
+    type: "text" | "email" | "password"
 }
 
-const Input: FC<IInputProps> = ({
+const Input: FC<TextFieldProps> = ({
     register = () => undefined,
-    controlName = '',
-    className = '',
+    label,
+    name = '',
+    postfix,
+    icon,
+    onIconClick,
+    onInput,
+    width,
     type,
-    placeholder,
-    style, options
 }) => {
-    return (
-        <div>
-            <input
-                {...register(controlName, options)}
-                type={type}
-                placeholder={placeholder}
-                className={styles[className]}
-                style={style}
-            />
+    const Icon = () => icon || <></>
+    return <label className={styles["text-field"]}>
+        <input
+            {...register(name)}
+            style={{ width: width }}
+            placeholder={label}
+            name={name}
+            type={type}
+            onInput={(event) => onInput?.(event.currentTarget.value)}
+        />
+        <div
+            onClick={onIconClick}
+
+        >
+            <p>{postfix}</p>
+            <Icon />
         </div>
-    )
+    </label>
 }
+
 export default Input;

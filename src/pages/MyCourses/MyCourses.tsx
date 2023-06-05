@@ -1,5 +1,4 @@
 import { FC, useEffect } from 'react';
-import CourseCard from "../../components/CourseCard/CourseCard";
 import EmptyPage from '../../components/EmptyPage/EmptyPage';
 import Header from '../../components/Header/Header';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -7,7 +6,8 @@ import { ICardCourse } from '../../interfaces/course.interface';
 import { fetchUser } from '../../store/actionCreators/actionCreatorsAuth';
 import styles from './MyCourses.module.scss';
 import { getCourses } from '../../store/actionCreators/actionCreatorsCourse';
-
+import CourseCard from '../../components/CourseCard/CourseCard';
+import courseImg from "../../images/kotlin.svg";
 
 const MyCourses: FC = () => {
 
@@ -32,13 +32,16 @@ const MyCourses: FC = () => {
                     (<div className={styles.wrapperCourse}>
                         {courses.map((course: ICardCourse) => (
                             <CourseCard
-                                style={{ marginRight: '30px' }}
-                                key={course.id}
-                                name={course.name}
-                                logo={course.logo}
-                                className='courseCard'
-                                classNameLogo='Image'
-                                id={course.id}
+                                name="Основы программирования на Kotlin"
+                                image={courseImg}
+                                state="continue"
+                                description="Курс предназначен для студентов, намеренных изучить основы Android-, backend-
+                                        и кроссплатформенной разработки на Kotlin - мультипарадигменном языке программирования,
+                                        созданном компанией JetBrains."
+                                topic="24 темы, 5 месяцев"
+                                width="480px"
+                                onClick={() => console.log("clicked card")}
+                                onButtonClick={() => console.log("clicked button")}
                             />
                         ))}
                     </div>)

@@ -35,11 +35,9 @@ const AboutCourse: FC = () => {
                 <div className={styles['courseTitle']}>
                     <b>{course.name}</b>
                     <Button
-                        callback={() => navigate(`/module/${params.id}`)}
-                        style={{margin: '36px 36px 0 0'}}
+                        onClick={() => navigate(`/module/${params.id}`)}
                         label='Продолжить/Начать'
-                        type='submit'
-                        className='btn'
+                        style='accent'
                     />
                     <div className={styles['row']}>
                         <div className={styles['courseDescription']}>

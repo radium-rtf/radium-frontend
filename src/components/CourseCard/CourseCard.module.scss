@@ -1,22 +1,52 @@
-.courseCard {
-    border-radius: 8px;
-    box-shadow: inset 0px -2px 0px #292d2e;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    background-color: #2e3233;
-    width: 432px;
-    min-width: 360px;
-    height: 197px;
-    color: #e4e4e4;
+@import "../../scss/index.scss";
 
-    p {
-        font-size: 13px;
-    }
+.title-regular {
+  display: flex;
+  margin-bottom: 16px;
 
-}
-
-.Image {
-    float: right;
+  img {
+    width: 72px;
     height: 72px;
     border-radius: 8px;
+    margin-right: 16px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    object-position: center;
+  }
 
+  label {
+    @include control-font;
+    color: $p-regular;
+  }
+
+  h3 {
+    overflow: hidden;
+  }
+
+  > div {
+    display: grid;
+  }
+}
+
+.title-notification {
+  p {
+    color: $p-secondary;
+  }
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+
+  >:first-child {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+  }
+
+  >:last-child {
+    margin-left: auto;
+  }
 }

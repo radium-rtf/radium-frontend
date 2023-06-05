@@ -28,6 +28,10 @@
 		.textField {
 			display: grid;
 
+			> label {
+				margin-bottom: 16px;
+			}
+
 			.info {
 				margin-bottom: 16px;
 				font-size: 11px;

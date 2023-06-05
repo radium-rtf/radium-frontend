@@ -1,6 +1,6 @@
 import {FC} from "react"
 import styles from "./ProfilePicture.module.scss"
-import empty from "../../../images/empty-profile.png"
+import empty from "../../images/empty-profile.png";
 
 interface ProfilePictureProps {
     image?: string,
@@ -19,4 +19,4 @@ const ProfilePicture: FC<ProfilePictureProps> = ({
     }}
 />
 
-export default ProfilePicture
+export default ProfilePicture;

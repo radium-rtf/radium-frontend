@@ -14,4 +14,4 @@ const Card: FC<CardProps> = ({children, onClick, style}) => <div
     children={children}
 />
 
-export default Card
+export default Card;

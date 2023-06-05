@@ -1,26 +1,66 @@
-//@import "../../scss/colors.scss";
-//
-//input {
-//	display: block;
-//	width: 256px;
-//	height: 36px;
-//	padding-left: 16px;
-//	font-family: inherit;
-//	font-size: 13px;
-//	font-weight: 400;
-//	line-height: 1.5;
-//	color: #e6e6e6;
-//	background-color: $bg;
-//	background-clip: padding-box;
-//	border: 1px solid rgba(255, 255, 255, 0.1);
-//	border-radius: 8px;
-//	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-//}
-//
-//.email {
-//	background: url("../../images/@urfu.me.svg") no-repeat center right 16px;
-//}
-//
-//.password {
-//	background: url("../../images/invisible.svg") no-repeat center right 16px;
-//}
+@import '../../scss/index.scss';
+
+.text-field {
+  display: block;
+  height: 36px;
+  width: fit-content;
+  position: relative;
+
+  div {
+    display: flex;
+    align-items: center;
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 16px;
+    margin: auto;
+
+    p {
+      @include p-font;
+      color: $p-secondary;
+      user-select: none;
+    }
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+    margin-left: 16px;
+    color: $p-secondary;
+  }
+
+  input {
+    @include p-font;
+
+    padding: 8px 16px 8px 16px;
+    height: 36px;
+
+    appearance: none;
+    background: transparent;
+    border: solid 1px $white-01;
+    border-radius: 8px;
+    color: $p-regular;
+    transition: all 0.1s ease-in-out;
+
+    &::placeholder {
+      @include control-font;
+      user-select: none;
+      color: $p-secondary;
+    }
+
+    &:hover {
+      border-color: $white-02;
+      background-color: $white-01;
+    }
+
+    &:active {
+      border-color: $white-02;
+      background-color: $black-01;
+    }
+
+    &:focus {
+      border-color: $accent-primary;
+    }
+  }
+}

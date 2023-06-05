@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
-import Input from '../../components/Input/Input';
 import { IUser } from '../../interfaces/user.interface';
 import styles from './Recovery.module.scss';
+import Input from '../../components/Input/Input';
 
 const Recovery: FC = () => {
     const navigate = useNavigate();
@@ -22,20 +22,17 @@ const Recovery: FC = () => {
                     <div className={styles.textField}>
                         <Input
                             register={() => register('email')}
-                            controlName='email'
+                            name='email'
                             type='text'
-                            placeholder='Почта'
-                            style={{ marginBottom: '16px' }}
-                            className='email'
+                            label='Почта'
                         />
                         <Button
                             label='Отправить код'
-                            className='btn'
+                            style='accent'
                         />
                         <Button
                             label='Войти'
-                            type='submit'
-                            className='btnCode'
+                            style='destructive'
                         />
                     </div>
                 </form>
