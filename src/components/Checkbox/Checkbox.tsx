@@ -4,6 +4,7 @@ import styles from "./Checkbox.module.scss"
 interface CheckboxProps {
     label?: string,
     name?: string,
+    value?: string,
     disabled?: boolean,
     defaultChecked?: boolean,
     onInput?: (value?: boolean) => void,
@@ -12,6 +13,7 @@ interface CheckboxProps {
 const Checkbox: FC<CheckboxProps> = ({
     label,
     name,
+    value,
     disabled,
     defaultChecked,
     onInput,
@@ -19,6 +21,7 @@ const Checkbox: FC<CheckboxProps> = ({
         <input
             type="checkbox"
             name={name}
+            value={value}
             disabled={disabled}
             defaultChecked={defaultChecked}
             onInput={(event) => onInput?.(event.currentTarget.checked)}

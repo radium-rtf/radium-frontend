@@ -24,6 +24,7 @@ const Button: FC<ButtonProps> = ({
     onClick={onClick}
     type={type}
     style={{width: width}}
+    disabled={disabled}
 >
     {icon}
     {label && <label>{label}</label>}

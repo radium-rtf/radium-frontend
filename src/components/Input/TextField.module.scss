@@ -1,9 +1,8 @@
 @import '../../scss/index.scss';
 
 .text-field {
-  display: block;
+  display: flex;
   height: 36px;
-  width: fit-content;
   position: relative;
 
   div {
@@ -32,6 +31,8 @@
 
   input {
     @include p-font;
+    display: flex;
+    width: 100%;
 
     padding: 8px 16px 8px 16px;
     height: 36px;

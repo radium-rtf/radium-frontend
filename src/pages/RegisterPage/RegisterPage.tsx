@@ -8,7 +8,7 @@ import { registration } from '../../store/actionCreators/actionCreatorsAuth';
 import { IUser } from '../../interfaces/user.interface';
 import styles from './RegisterPage.module.scss';
 import { emailValidator } from '../../constData';
-import Input from '../../components/Input/Input';
+import TextField from '../../components/Input/TextField';
 import * as Icons from '../../icons/icons'
 
 const RegisterPage: FC = () => {
@@ -32,7 +32,7 @@ const RegisterPage: FC = () => {
                 <form onSubmit={handleSubmit(onRegisterHandler)}>
                     <p className={styles.header}>Регистрация</p>
                     <div className={styles.textField}>
-                        <Input
+                        <TextField
                             register={() => register('name', {
                                 required: "Имя обязательное поле",
                                 minLength: {
@@ -50,7 +50,7 @@ const RegisterPage: FC = () => {
                             Необязательно писать ФИО,
                             просто как хотите, чтобы мы вас называли.
                         </p> */}
-                        <Input
+                        <TextField
                             register={() => register('email', {
                                 required: "Email обязательное поле",
                                 pattern: {
@@ -65,7 +65,7 @@ const RegisterPage: FC = () => {
                             width='256px'
                         />
                         {/*<Error className={'error'} error={errors?.email} errorMessage={errors.email?.message} />*/}
-                        <Input
+                        <TextField
                             register={() => register('password', {
                                 required: "Поле password обязательное поле",
                                 minLength: {

@@ -1,253 +1,104 @@
 import {FC, useState} from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkPlugins = ReactMarkdown.propTypes.remarkPlugins;
 import Checkbox from "../../components/Checkbox/Checkbox";
-import RadioButton from "../../components/Radio/RadioButton";
-// import Header from "../../components/Header/Header";
-import Button from "../../components/Button/Button";
-import * as Icons from "../../icons/icons";
-// import Switch from "../../components/Switch/Switch";
-// import LinearProgress from "../../components/LinerProgress/LinearProgress";
-// import RadialProgress from "../../components/RadialProgress/RadialProgress";
-// import ProfilePicture from "../../components/ProfilePicture/ProfilePicture";
-// import profile from "../../images/кач.jpg"
-// import MenuItem from "../../components/MenuItem/MenuItem";
-// import List from "../../components/List/List";
-// import Card from "../../components/Card/Card";
-// import CourseCard from "../../components/CourseCard/CourseCard";
-// import course from "../../images/kotlin.svg";
-// import TextField from "../../components/text-field/TextField";
+import TextSection from "../../components/TextSection/TextSection";
+import QuestionBottom from "../../components/QuestionSectionBottom/QuestionBottom";
+import ShortAnswerSection from "../../components/ShortAnswerSection/ShortAnswerSection";
+import SingleChoiceSection from "../../components/SingleChoiceSection/SingleChoiceSection";
+import MultiChoiceSection from "../../components/MultiChoiceSection/MultiChoiceSection";
+import TopPanel from "../../components/TopPanel/TopPanel";
+import courseImage from "../../images/kotlin.svg";
+import profile from "../../images/кач.jpg";
 
 const TestUIKit: FC = () => {
-    const [visible, setVisible] = useState(false)
 
+    const text = `# hello h1
+## hello h2
+### hello h3
+#### hello h4
+##### hello h5
+###### hello h6
+\`\`\`
+hello code
+hi
+\`\`\`
+hello p **bold** *italic* __underline__
+* list
+* list
+* list
+  * more list
 
-    return (
-        <div>
-            
-        </div>
-    )
-    // const list = [
-    //     {
-    //         title: "Первые шаги",
-    //         value: "first-steps",
-    //         items: [
-    //             {
-    //                 title: "Знакомство с Kotlin. Первая программа",
-    //                 description: "123 / 256 баллов",
-    //                 value: "first-program",
-    //                 icon: <RadialProgress progress={0.5} />,
-    //             },
-    //             {
-    //                 title: "Переменные. Мутабельность",
-    //                 description: "123 / 256 баллов",
-    //                 value: "variables",
-    //                 icon: <RadialProgress progress={0.5} />,
-    //             },
-    //             {
-    //                 title: "Примитивные типы данных",
-    //                 description: "0 / 123 баллов",
-    //                 value: "primitives",
-    //                 icon: <RadialProgress progress={0} />,
-    //             },
-    //         ],
-    //     },
-    //     {
-    //         title: "Функции",
-    //         value: "functions",
-    //         items: [
-    //             {
-    //                 title: "Знакомство с функциями",
-    //                 description: "0 / 123 баллов",
-    //                 value: "functions",
-    //                 icon: <RadialProgress progress={0} />,
-    //             },
-    //             {
-    //                 title: "Ключевое слово vararg",
-    //                 description: "0 / 123 баллов",
-    //                 value: "vararg",
-    //                 icon: <RadialProgress progress={0} />,
-    //             },
-    //             {
-    //                 title: "Inline-функции",
-    //                 description: "123 / 256 баллов",
-    //                 value: "inline-functions",
-    //                 icon: <RadialProgress progress={0.5} />,
-    //             },
-    //             {
-    //                 title: "Функции-расширения",
-    //                 description: "123 / 256 баллов",
-    //                 value: "extension-functions",
-    //                 icon: <RadialProgress progress={0.5} />,
-    //             },
-    //         ],
-    //     },
-    //     {
-    //         title: "Классы",
-    //         value: "classes",
-    //         items: [
-    //             {
-    //                 title: "Что такое класс",
-    //                 description: "123 / 256 баллов",
-    //                 value: "class",
-    //                 icon: <RadialProgress progress={0.5} />,
-    //             },
-    //             {
-    //                 title: "Конструкторы",
-    //                 description: "123 / 256 баллов",
-    //                 value: "constructors",
-    //                 icon: <RadialProgress progress={0.5} />,
-    //             },
-    //             {
-    //                 title: "Свойства",
-    //                 description: "123 / 256 баллов",
-    //                 value: "properties",
-    //                 icon: <RadialProgress progress={0.5} />,
-    //             },
-    //         ],
-    //     },
-    // ];
+hello
 
-    // return (
-    //     <div>
-    //         <Header
-    //             className='header'
-    //             title='Kotlin'
-    //         />
-    //         <Button
-    //             style="accent"
-    //             icon={Icons.Visible}
-    //             label="ABCDEFabcdef"
-    //             onClick={() => console.log("huy")}
-    //         />
-    //         <Button
-    //             style="destructive"
-    //             width="256px"
-    //             icon={<RadialProgress progress={0.6} />}
-    //             label="ABCDEFabcdef"
-    //             onClick={() => console.log("huy")}
-    //         />
-    //         <Button
-    //             style="outlined"
-    //             icon={Icons.Invisible}
-    //             label="ABCDEFabcdef"
-    //             onClick={() => console.log("huy")}
-    //         />
+---
 
-    //         <Checkbox
-    //             label="hhohohohoh"
-    //             onInput={console.log}
-    //         />
+world
 
-    //         <Switch
-    //             label="bibibi dododo yjakjdkja"
-    //         />
+haha
 
-    //         <form>
-    //             <RadioButton
-    //                 label="haha yes"
-    //                 name="thing"
-    //                 value="yes"
-    //             />
-    //             <RadioButton
-    //                 label="haha no"
-    //                 name="thing"
-    //                 value="no"
-    //             />
-    //             <RadioButton
-    //                 label="haha maybe"
-    //                 name="thing"
-    //                 value="maybe"
-    //             />
-    //         </form>
+> blockqoute
 
-    //         <TextField
-    //             label="OMg omg omg"
-    //             type="email"
-    //             postfix="@urfu.me"
-    //             width="256px"
-    //         />
+* [ ] todo
+* [x] done
 
-    //         <TextField
-    //             label="PASSWORD!!!!!"
-    //             type="password"
-    //             icon={visible ? Icons.Visible : Icons.Invisible}
-    //             width={256}
-    //             onIconClick={() => setVisible(!visible)}
-    //         />
+| header 1 | header 2 |
+| - | - |
+| body 1 | body 2 |
+| body 3 | body 4 |
 
-    //         <LinearProgress
-    //             color="primary"
-    //             progress={0.5}
-    //             showPercentage={true} />
+[Custom foo description](#foo)
 
-    //         <RadialProgress progress={0.75} />
+`
+    const question = `Какое число выведет следующий код:
+\`\`\`
+fun main() {
+    var a = 2
+    var b = 3
+    println(a---b)
+}
+\`\`\`
+`
+    const a = [""]
 
-    //         <ProfilePicture image={profile} />
+    return <>
+        <TopPanel
+            image={courseImage}
+            title="Основы программирования на Kotlin"
+            username="андрей"
+            profile={profile}
+        />
 
-    //         <MenuItem
-    //             icon={<ProfilePicture image={profile} />}
-    //             iconSize="large"
-    //             label="omg omg omg"
-    //             onClick={() => console.log("omfodsfj")}
-    //         />
+        <ShortAnswerSection
+            question={question}
+            attempts={1}
+            maxScore={100}
+            state="initial"
+        />
 
-    //         <CourseCard
-    //             name="Основы программирования на Kotlin"
-    //             image={course}
-    //             state="discover"
-    //             description="Курс предназначен для студентов, намеренных изучить основы Android-, backend-
-    //             и кроссплатформенной разработки на Kotlin - мультипарадигменном языке программирования,
-    //             созданном компанией JetBrains."
-    //             topic="24 темы, 5 месяцев"
-    //             width="480px"
-    //             onClick={() => console.log("clicked card")}
-    //             onButtonClick={() => console.log("clicked button")}
-    //         />
+        <SingleChoiceSection
+            question={question}
+            choices={["2", "3", "4"]}
+            attempts={1}
+            maxScore={100}
+            state="initial"
+        />
 
-    //         <CourseCard
-    //             name="Основы программирования на Kotlin"
-    //             image={course}
-    //             state="continue"
-    //             progress={0.53490852}
-    //             topic="Следующая тема: Классы данных"
-    //             width="480px"
-    //             onClick={() => console.log("clicked card")}
-    //             onButtonClick={() => console.log("clicked button")}
-    //         />
+        <MultiChoiceSection
+            question={question}
+            choices={["2", "3", "4"]}
+            attempts={0}
+            score={0}
+            maxScore={100}
+            state="incorrect"
+        />
 
-    //         <CourseCard
-    //             name="Основы программирования на Kotlin"
-    //             image={course}
-    //             state="checked"
-    //             title="Классы данных - 7 / 10 баллов"
-    //             subtitle="Классы и наследование"
-    //             checkerName="Иван Иванов"
-    //             profileImage={profile}
-    //             comment="Неплохая работа, но непонятно, откуда взялось число 69420 на 3 строке.
-    //             Также слишком много лишних комментариев."
-    //             width="480px"
-    //             onClick={() => console.log("clicked card")}
-    //             onButtonClick={() => console.log("clicked button")}
-    //         />
-
-    //         <CourseCard
-    //             name="Основы программирования на Kotlin"
-    //             image={course}
-    //             state="deadline"
-    //             title="Свойства - 9 июня"
-    //             subtitle="Классы и наследование"
-    //             width="480px"
-    //             onClick={() => console.log("clicked card")}
-    //             onButtonClick={() => console.log("clicked button")}
-    //         />
-
-    //         <List
-    //             items={list}
-    //             width="256px"
-    //             onSelected={console.log}
-    //         />
-    //     </div>
-
-    // )
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {text}
+        </ReactMarkdown>
+        <TextSection>{text}</TextSection>
+    </>
 }
 
 export default TestUIKit;

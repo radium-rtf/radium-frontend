@@ -26,27 +26,27 @@ const MyCourses: FC = () => {
                 {/*<Header title='Мои курсы' className='myCourseHeader' />*/}
             </div>
             <div className={styles.wrapper}>
-                <div>{isLoading ? (<div>
-                    <span>Loading...</span>
-                </div>) : courses.length ?
-                    (<div className={styles.wrapperCourse}>
-                        {courses.map((course: ICardCourse) => (
-                            <CourseCard
-                                name="Основы программирования на Kotlin"
-                                image={courseImg}
-                                state="continue"
-                                description="Курс предназначен для студентов, намеренных изучить основы Android-, backend-
-                                        и кроссплатформенной разработки на Kotlin - мультипарадигменном языке программирования,
-                                        созданном компанией JetBrains."
-                                topic="24 темы, 5 месяцев"
-                                width="480px"
-                                onClick={() => console.log("clicked card")}
-                                onButtonClick={() => console.log("clicked button")}
-                            />
-                        ))}
-                    </div>)
-                    // : (<div className={styles.emptyPageError}><EmptyPage /></div>)}
-                </div>
+                {/*<div>{isLoading ? (<div>*/}
+                {/*    <span>Loading...</span>*/}
+                {/*</div>) : courses.length ?*/}
+                {/*    (<div className={styles.wrapperCourse}>*/}
+                {/*        {courses.map((course: ICardCourse) => (*/}
+                {/*            <CourseCard*/}
+                {/*                name="Основы программирования на Kotlin"*/}
+                {/*                image={courseImg}*/}
+                {/*                state="continue"*/}
+                {/*                description="Курс предназначен для студентов, намеренных изучить основы Android-, backend-*/}
+                {/*                        и кроссплатформенной разработки на Kotlin - мультипарадигменном языке программирования,*/}
+                {/*                        созданном компанией JetBrains."*/}
+                {/*                topic="24 темы, 5 месяцев"*/}
+                {/*                width="480px"*/}
+                {/*                onClick={() => console.log("clicked card")}*/}
+                {/*                onButtonClick={() => console.log("clicked button")}*/}
+                {/*            />*/}
+                {/*        ))}*/}
+                {/*    </div>)*/}
+                {/*    : (<div className={styles.emptyPageError}><EmptyPage /></div>)}*/}
+                {/*</div>*/}
             </div>
         </>
     )

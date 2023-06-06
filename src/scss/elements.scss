@@ -1,24 +1,126 @@
-a {
-	position: inline-block;
-	color: $accent-primary;
-	cursor: pointer;
-	text-decoration: none;
-	text-underline-offset: auto;
-	font-size: 13px;
-}
-a:after {
-	display: block;
-	position: absolute;
-	left: 0;
-	width: 0;
-	height: 2px;
-	background-color: $accent-primary;
-	content: "";
-	transition: width 0.3s ease-out;
+@import "index";
+@import "colors";
+
+body {
+	background-color: $bg;
 }
 
-a:hover:after,
-a:focus:after,
+h1 {
+	@include h1-font;
+	color: $accent-primary;
+}
+
+h2 {
+	@include h2-font;
+	color: $accent-primary;
+}
+
+h3 {
+	@include h3-font;
+	color: $accent-primary;
+}
+
+h4 {
+	@include h4-font;
+	color: $accent-primary;
+}
+
+h5 {
+	@include h5-font;
+	color: $p-regular;
+}
+
+h6 {
+	@include h6-font;
+	color: $p-secondary;
+}
+
+label {
+	@include control-font;
+	color: $p-regular;
+}
+
+p {
+	@include p-font;
+	color: $p-regular;
+}
+
+code {
+	@include code-font;
+	color: $p-regular;
+}
+
 a {
-	width: 100%;
+	@include p-font;
+	color: $accent-primary;
+	transition: all 0.1s ease-in-out;
+
+	&:hover {
+		text-decoration: underline solid 1px $accent-primary;
+	}
+}
+
+pre {
+	margin: 24px 0 24px 0;
+	padding: 16px;
+	border-radius: 8px;
+	background: $black-005;
+}
+
+blockquote {
+	margin: 24px 0 24px 0;
+	padding: 16px;
+	border-radius: 8px;
+	border: solid 1px $white-01;
+}
+
+li {
+	@include p-font;
+	color: $p-regular;
+	list-style-type: circle;
+	margin-left: 16px;
+}
+
+table {
+	border-radius: 8px;
+	outline: solid 1px $white-01;
+
+	thead {
+		@include control-font;
+		color: $p-regular;
+		background: $black-01;
+	}
+
+	tbody {
+		@include p-font;
+		color: $p-regular;
+		tr {
+			border: 1px $white-01;
+			&:not(:last-child) {
+				border-bottom-style: solid;
+			}
+		}
+	}
+
+	th {
+		padding: 16px;
+		border: 1px $white-01;
+		border-bottom-style: solid;
+		&:not(:last-child) {
+			border-right-style: solid;
+		}
+	}
+
+	td {
+		padding: 16px;
+		border: 1px $white-01;
+		&:not(:last-child) {
+			border-right-style: solid;
+		}
+	}
+}
+
+hr {
+	margin: 24px;
+	border: solid 0.5px $white-01;
 }

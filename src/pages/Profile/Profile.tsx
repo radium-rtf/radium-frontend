@@ -2,7 +2,7 @@ import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
-import Input from "../../components/Input/Input";
+import TextField from "../../components/Input/TextField";
 import logo from "../../images/кач.jpg";
 import { IProfile } from "../../interfaces/user.interface";
 import styles from './Profile.module.scss';
@@ -24,25 +24,25 @@ const Profile: FC = () => {
                         <p className={styles.header}>Профиль</p>
                         <img src={logo} alt='ава' className={styles.profileImg}></img>
                         <div className={styles.textField}>
-                            <Input
+                            <TextField
                                 register={() => register('username')}
                                 name='username'
                                 type='text'
                                 label='имя'
                             />
-                            <Input
+                            <TextField
                                 register={() => register('email')}
                                 name='email'
                                 type='text'
                                 label='Почта'
                             />
-                            <Input
+                            <TextField
                                 register={() => register('password')}
                                 name='password'
                                 type='text'
                                 label='Пароль'
                             />
-                            <Input
+                            <TextField
                                 register={() => register('confirmPassword')}
                                 name='confirmPassword'
                                 type='text'

@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchUser, login } from '../../store/actionCreators/actionCreatorsAuth';
 import { IUser } from '../../interfaces/user.interface';
 import styles from './AuthPage.module.scss';
-import Input from '../../components/Input/Input';
+import TextField from '../../components/Input/TextField';
 import * as Icons from '../../icons/icons'
 import { icons } from 'antd/es/image/PreviewGroup';
 
@@ -35,7 +35,7 @@ const AuthPage: FC = () => {
                     <form onSubmit={handleSubmit(onLoginHandler)}>
                         <p className={styles.header}>Вход</p>
                         <div className={styles.textField}>
-                            <Input
+                            <TextField
                                 register={() => register('email', {
                                     required: "Email обязательное поле",
                                     pattern: {
@@ -50,7 +50,7 @@ const AuthPage: FC = () => {
                                 width='256px'
                             />
                             {/*<Error className={'error'} error={errors?.email} errorMessage={errors.email?.message} />*/}
-                            <Input
+                            <TextField
                                 register={() => register('password', {
                                     required: "Пароль обязательное поле"
                                 })}

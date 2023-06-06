@@ -1,10 +1,9 @@
-@import "../../../scss/index.scss";
+@import "../../scss/index.scss";
 
 .radio {
   @include p-font;
 
   display: flex;
-  margin: 0 24px 0 24px;
   height: 36px;
   align-items: center;
 
@@ -36,19 +35,19 @@
     }
   }
 
-  input:disabled {
+  &:disabled {
     opacity: 0.5;
   }
 
-  input:enabled:hover {
+  &:enabled:hover {
     background: $white-01;
   }
 
-  input:enabled:active {
+  &:enabled:active {
     background: $black-01;
   }
 
-  input:checked {
+  &:checked {
     border-color: $accent-primary;
     &:before {
       width: 10px;
@@ -56,7 +55,7 @@
     }
   }
 
-  input:enabled:checked:hover {
+  &:enabled:checked:hover {
     border-color: $accent-primary + white * 0.1;
     &:before {
       width: 12px;
@@ -65,7 +64,7 @@
     }
   }
 
-  input:enabled:checked:active {
+  &:enabled:checked:active {
     border-color: $accent-primary - white * 0.1;
     &:before {
       width: 8px;

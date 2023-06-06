@@ -1,0 +1,27 @@
+@import "../../scss/index.scss";
+
+.question-bottom {
+  display: flex;
+  align-items: center;
+  text-align: right;
+  margin-top: 16px;
+
+  >:first-child {
+    margin-left: auto;
+  }
+  >:not(:first-child) {
+    margin-left: 16px;
+  }
+}
+
+.state-correct {
+  color: $accent-secondary;
+}
+
+.state-partial {
+  color: $accent-primary;
+}
+
+.state-incorrect {
+  color: $accent-destructive;
+}

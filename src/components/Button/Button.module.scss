@@ -27,6 +27,13 @@
   >:not(:last-child) {
     margin-right: 8px;
   }
+
+  &:disabled {
+    opacity: 50%;
+    &, label {
+      cursor: default;
+    }
+  }
 }
 
 
@@ -40,17 +47,18 @@
   svg, label {
     color: $on-secondary;
   }
+
+  &:enabled:hover {
+    background: $accent-secondary + white * 0.1;
+    border-color: $black-02;
+  }
+
+  &:enabled:active {
+    background: $accent-secondary - white * 0.1;
+    border-color: $black-02;
+  }
 }
 
-.accent-button:hover {
-  background: $accent-secondary + white * 0.1;
-  border-color: $black-02;
-}
-
-.accent-button:active {
-  background: $accent-secondary - white * 0.1;
-  border-color: $black-02;
-}
 
 
 
@@ -62,14 +70,14 @@
   svg, label {
     color: $on-destructive;
   }
-}
 
-.destructive-button:hover {
-  background: $accent-destructive + white * 0.1;
-}
+  &:enabled:hover {
+    background: $accent-destructive + white * 0.1;
+  }
 
-.destructive-button:active {
-  background: $accent-destructive - white * 0.1;
+  &:enabled:active {
+    background: $accent-destructive - white * 0.1;
+  }
 }
 
 
@@ -82,14 +90,14 @@
   svg, label {
     color: $p-regular;
   }
-}
 
-.outlined-button:hover {
-  background: $white-01;
-  border-color: $white-03;
-}
+  &:enabled:hover {
+    background: $white-01;
+    border-color: $white-03;
+  }
 
-.outlined-button:active {
-  background: $black-01;
-  border-color: $white-01;
+  &:enabled:active {
+    background: $black-01;
+    border-color: $white-01;
+  }
 }

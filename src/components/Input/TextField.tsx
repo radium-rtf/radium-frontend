@@ -1,5 +1,5 @@
 import { FC } from "react"
-import styles from "./Input.module.scss"
+import styles from "./TextField.module.scss"
 import { RegisterOptions, UseFormRegisterReturn } from "react-hook-form";
 
 interface TextFieldProps {
@@ -14,7 +14,7 @@ interface TextFieldProps {
     type: "text" | "email" | "password"
 }
 
-const Input: FC<TextFieldProps> = ({
+const TextField: FC<TextFieldProps> = ({
     register = () => undefined,
     label,
     name = '',
@@ -23,7 +23,7 @@ const Input: FC<TextFieldProps> = ({
     onIconClick,
     onInput,
     width,
-    type,
+    type = "text",
 }) => {
     const Icon = () => icon || <></>
     return <label className={styles["text-field"]}>
@@ -45,4 +45,4 @@ const Input: FC<TextFieldProps> = ({
     </label>
 }
 
-export default Input;
+export default TextField
