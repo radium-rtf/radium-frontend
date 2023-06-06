@@ -1,0 +1,46 @@
+.wrapper {
+  position: relative;
+
+  .banner {
+    max-width: 1280px;
+    height: 256px;
+    border-radius: 16px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    object-position: center;
+    margin-left: auto; // Допилить, чтобы при уменьшении было 48px
+    margin-right: auto;
+    //align-self: center;
+  }
+
+  .content {
+    margin-left: 404px;
+    margin-right: 404px;
+  }
+
+  .title {
+    display: block;
+    text-align: center;
+    margin-top: 64px;
+    margin-bottom: 48px;
+  }
+
+  .aboutCourse {
+    align-items: center;
+    width: 720px;
+    padding-right: 32px;
+    background-color: #2E3233;
+    border-radius: 16px;
+    p {
+      margin: 24px;
+    }
+  }
+
+  .extraInfo {
+    background-color: #2E3233;
+    width: 360px;
+  }
+}
+
+
