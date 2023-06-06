@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
-import Error from "../../components/Error/Error";
+// import Error from "../../components/Error/Error";
 import { useAppDispatch } from '../../hooks/redux';
 import { registration } from '../../store/actionCreators/actionCreatorsAuth';
 import { IUser } from '../../interfaces/user.interface';
@@ -45,7 +45,7 @@ const RegisterPage: FC = () => {
                             label='Имя'
                             width='256px'
                         />
-                        <Error className={'error'} error={errors?.name} errorMessage={errors.name?.message} />
+                        {/*<Error className={'error'} error={errors?.name} errorMessage={errors.name?.message} />*/}
                         {/* <p className={styles.info}>
                             Необязательно писать ФИО,
                             просто как хотите, чтобы мы вас называли.
@@ -64,7 +64,7 @@ const RegisterPage: FC = () => {
                             postfix='@urfu.me'
                             width='256px'
                         />
-                        <Error className={'error'} error={errors?.email} errorMessage={errors.email?.message} />
+                        {/*<Error className={'error'} error={errors?.email} errorMessage={errors.email?.message} />*/}
                         <Input
                             register={() => register('password', {
                                 required: "Поле password обязательное поле",
@@ -80,7 +80,7 @@ const RegisterPage: FC = () => {
                             onIconClick={() => setVisible(!visible)}
                             width='256px'
                         />
-                        <Error className={'error'} error={errors?.password} errorMessage={errors.password?.message} />
+                        {/*<Error className={'error'} error={errors?.password} errorMessage={errors.password?.message} />*/}
                         <Button
                             style="accent"
                             label='Зарегистрироваться'

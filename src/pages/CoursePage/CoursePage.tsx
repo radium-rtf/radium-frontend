@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import TopPanel from "../../components/TopPanel/TopPanel";
+// import TopPanel from "../../components/TopPanel/TopPanel";
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import SectionAnswer from '../../components/SectionAnswer/SectionAnswer';
+// import SectionAnswer from '../../components/SectionAnswer/SectionAnswer';
 import styles from "./CoursePage.module.scss";
-import ThemeModule from '../../components/ThemeModule/ThemaModule';
+// import ThemeModule from '../../components/ThemeModule/ThemaModule';
 import { getCourseModule, getSlideById } from '../../store/actionCreators/actionCreatorsCourse';
 import { IModule } from '../../interfaces/module.interface';
 import { ISection } from '../../interfaces/slide.interface';
@@ -29,7 +29,7 @@ const CoursePage = () => {
     return (
         <>
             <div className={styles["main"]}>
-                <TopPanel />
+                {/*<TopPanel />*/}
                 <div className={styles["wrapper"]}>
                     <nav className={styles["navBar"]}>
                         <div>
@@ -38,10 +38,10 @@ const CoursePage = () => {
                                 ? (moduleCourse.modules.map((module: IModule, index: number) => (<div
                                     onClick={() => activeCourseHandler(index)}
                                     key={index}>
-                                    <ThemeModule
-                                        name={module.name}
-                                        activeIndex={activeIndex}
-                                        isActive={activeIndex === index} />
+                                    {/*<ThemeModule*/}
+                                    {/*    name={module.name}*/}
+                                    {/*    activeIndex={activeIndex}*/}
+                                    {/*    isActive={activeIndex === index} />*/}
                                 </div>)))
                                 : <p>Темы не найдены</p>}
                         </div>
@@ -49,7 +49,7 @@ const CoursePage = () => {
                     <div>
                         {sections.map((section: ISection, index: number) => (
                             <div key={index}>
-                                {section ? <SectionAnswer question={section.question} /> : ''}
+                                {/*{section ? <SectionAnswer question={section.question} /> : ''}*/}
                             </div>
                         ))}
                     </div>

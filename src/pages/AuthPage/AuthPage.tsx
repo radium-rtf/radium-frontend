@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
-import Error from "../../components/Error/Error";
+// import Error from "../../components/Error/Error";
 import { emailValidator } from "../../constData";
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchUser, login } from '../../store/actionCreators/actionCreatorsAuth';
@@ -49,7 +49,7 @@ const AuthPage: FC = () => {
                                 postfix='@urfu.me'
                                 width='256px'
                             />
-                            <Error className={'error'} error={errors?.email} errorMessage={errors.email?.message} />
+                            {/*<Error className={'error'} error={errors?.email} errorMessage={errors.email?.message} />*/}
                             <Input
                                 register={() => register('password', {
                                     required: "Пароль обязательное поле"
@@ -61,8 +61,8 @@ const AuthPage: FC = () => {
                                 onIconClick={() => setVisible(!visible)}
                                 width='256px'
                             />
-                            <Error className={'error'} error={errors?.password}
-                                errorMessage={errors.password?.message} />
+                            {/*<Error className={'error'} error={errors?.password}*/}
+                            {/*    errorMessage={errors.password?.message} />*/}
                             <Button
                                 style='accent'
                                 label='Войти'

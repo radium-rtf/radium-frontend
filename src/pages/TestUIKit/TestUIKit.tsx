@@ -1,7 +1,7 @@
 import {FC, useState} from "react";
 import Checkbox from "../../components/Checkbox/Checkbox";
 import RadioButton from "../../components/Radio/RadioButton";
-import Header from "../../components/Header/Header";
+// import Header from "../../components/Header/Header";
 import Button from "../../components/Button/Button";
 import * as Icons from "../../icons/icons";
 // import Switch from "../../components/Switch/Switch";

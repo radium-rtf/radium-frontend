@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
-import EmptyPage from '../../components/EmptyPage/EmptyPage';
-import Header from '../../components/Header/Header';
+// import EmptyPage from '../../components/EmptyPage/EmptyPage';
+// import Header from '../../components/Header/Header';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { ICardCourse } from '../../interfaces/course.interface';
 import { fetchUser } from '../../store/actionCreators/actionCreatorsAuth';
@@ -23,7 +23,7 @@ const MyCourses: FC = () => {
     return (
         <>
             <div>
-                <Header title='Мои курсы' className='myCourseHeader' />
+                {/*<Header title='Мои курсы' className='myCourseHeader' />*/}
             </div>
             <div className={styles.wrapper}>
                 <div>{isLoading ? (<div>
@@ -45,7 +45,7 @@ const MyCourses: FC = () => {
                             />
                         ))}
                     </div>)
-                    : (<div className={styles.emptyPageError}><EmptyPage /></div>)}
+                    // : (<div className={styles.emptyPageError}><EmptyPage /></div>)}
                 </div>
             </div>
         </>

@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import styles from "../AboutCourse/AboutCourse.module.scss";
 import Button from "../../components/Button/Button";
-import Header from "../../components/Header/Header";
+// import Header from "../../components/Header/Header";
 import logo from "../../images/kotlin.svg"
 import authorAva1 from "../../images/image-logo-1.svg"
 import authorAva2 from "../../images/image-logo-2.svg"
@@ -27,11 +27,11 @@ const AboutCourse: FC = () => {
     return (
         <>
             <div className={styles.wrapper}>
-                <Header
-                    className='header'
-                    caption='Курс'
-                    logoPath={logo}
-                />
+                {/*<Header*/}
+                {/*    className='header'*/}
+                {/*    caption='Курс'*/}
+                {/*    logoPath={logo}*/}
+                {/*/>*/}
                 <div className={styles['courseTitle']}>
                     <b>{course.name}</b>
                     <Button
