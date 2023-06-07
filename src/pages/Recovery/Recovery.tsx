@@ -12,6 +12,7 @@ const Recovery: FC = () => {
 
     const onSubmit: SubmitHandler<IUser> = (data: IUser) => {
         navigate('/auth');
+        reset();
     }
 
     return (
