@@ -1,46 +1,54 @@
 .wrapper {
-  position: relative;
+    position: relative;
 
-  .banner {
-    max-width: 1280px;
-    height: 256px;
-    border-radius: 16px;
-    background-position: center center;
-    background-repeat: no-repeat;
-    object-fit: cover;
-    object-position: center;
-    margin-left: auto; // Допилить, чтобы при уменьшении было 48px
-    margin-right: auto;
-    //align-self: center;
-  }
+    .bannerWrapper {
+        padding-left: 48px;
+        padding-right: 48px;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+        display: flex;
 
-  .content {
-    margin-left: 404px;
-    margin-right: 404px;
-  }
-
-  .title {
-    display: block;
-    text-align: center;
-    margin-top: 64px;
-    margin-bottom: 48px;
-  }
-
-  .aboutCourse {
-    align-items: center;
-    width: 720px;
-    padding-right: 32px;
-    background-color: #2E3233;
-    border-radius: 16px;
-    p {
-      margin: 24px;
+        .banner {
+            width: 100%;
+            max-width: 1280px;
+            height: 256px;
+            border-radius: 16px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            object-fit: cover;
+            object-position: center;
+        }
     }
-  }
 
-  .extraInfo {
-    background-color: #2E3233;
-    width: 360px;
-  }
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        .title {
+            width: 100%;
+            display: block;
+            margin-top: 64px;
+            margin-bottom: 48px;
+            h1 {
+                margin-left: auto;
+                margin-right: auto;
+                max-width: 1072px;
+            }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 720px 320px;
+            gap: 32px;
+
+            .column {
+                > * {
+                    margin-bottom: 32px;
+                }
+            }
+        }
+    }
 }
 
 
