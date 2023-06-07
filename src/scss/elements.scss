@@ -50,6 +50,10 @@ code {
 	color: $p-regular;
 }
 
+svg {
+	color: $p-regular;
+}
+
 a {
 	@include p-font;
 	color: $accent-primary;
@@ -84,6 +88,7 @@ li {
 table {
 	border-radius: 8px;
 	outline: solid 1px $white-01;
+	margin: 24px 0 24px 0;
 
 	thead {
 		@include control-font;

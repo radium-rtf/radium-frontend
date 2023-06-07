@@ -1,46 +1,46 @@
 @import "../../scss/index.scss";
 
-.tasksWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.root {
+  inset: 0;
 }
 
-.navBar {
+.panel {
   float: left;
   margin-left: 24px;
   width: 256px;
-  h3 {
-    width: 256px;
-    font-size: 20px;
-    margin: 24px;
-    color: #ccf0cc;
-  }
 }
 
-.menuItem {
+.info {
+  padding: 0 24px 0 24px;
+}
+
+.page {
   display: flex;
-  img {
-    margin: 23px 16px 23px 24px;
-    width: 18px;
-    height: 18px;
-  }
-  .topicTitle {
-    width: 174px;
-    margin-right: 24px;
-    margin-top: 12px;
-    font-size: 13px;
-    color: #e4e4e4;
-  }
-  .grades {
-    width: 174px;
-    font-size: 10px;
-    color: #b2b2b2;
-    margin-bottom: 12px;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 48px 0 48px;
+
+  > div {
+    max-width: 720px;
+    width: 100%;
+    margin: 0 0 32px 0;
   }
 }
 
-.menuItem:hover {
-  background-color: #2d3031;
-  border-radius: 8px;
+.footer {
+  display: flex;
+  align-items: center;
+  padding: 0 24px 0 24px;
+
+  >:first-child {
+    width: 100%;
+  }
+
+  >:not(:first-child) {
+    margin-left: 16px;
+  }
+
+  p {
+    min-width: max-content;
+  }
 }

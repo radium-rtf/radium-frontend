@@ -1,16 +1,17 @@
 import {FC, useState} from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import remarkPlugins = ReactMarkdown.propTypes.remarkPlugins;
-import Checkbox from "../../components/Checkbox/Checkbox";
 import TextSection from "../../components/TextSection/TextSection";
-import QuestionBottom from "../../components/QuestionSectionBottom/QuestionBottom";
 import ShortAnswerSection from "../../components/ShortAnswerSection/ShortAnswerSection";
 import SingleChoiceSection from "../../components/SingleChoiceSection/SingleChoiceSection";
 import MultiChoiceSection from "../../components/MultiChoiceSection/MultiChoiceSection";
 import TopPanel from "../../components/TopPanel/TopPanel";
 import courseImage from "../../images/kotlin.svg";
 import profile from "../../images/кач.jpg";
+import Background from "../../components/Background/Background";
+import RadioButton from "../../components/RadioButton/RadioButton";
+import Checkbox from "../../components/Checkbox/Checkbox";
+import CourseCard from "../../components/CourseCard/CourseCard";
 
 const TestUIKit: FC = () => {
 
@@ -52,23 +53,36 @@ haha
 
 `
     const question = `Какое число выведет следующий код:
-\`\`\`
-fun main() {
-    var a = 2
-    var b = 3
-    println(a---b)
-}
-\`\`\`
 `
-    const a = [""]
 
     return <>
+        <Background />
+
         <TopPanel
             image={courseImage}
             title="Основы программирования на Kotlin"
             username="андрей"
             profile={profile}
         />
+
+        <CourseCard
+            description="КРУТЕЙШИЙ КУРС ПРОСТО СОСКА АВЗАЛФВАЖЛФВЖАФЛВ"
+            button="full"
+            title="woo"
+            subtitle="im gay"
+            state="deadline"
+        />
+
+        <form>
+            <RadioButton
+                label="hi modus"
+                name="1"
+                value="hi modus"
+            />
+            <RadioButton />
+            <RadioButton />
+            <Checkbox />
+        </form>
 
         <ShortAnswerSection
             question={question}

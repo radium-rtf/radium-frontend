@@ -24,7 +24,7 @@ const Navigator: FC = () => {
                 <Route path="/profile" element={<RouterGuard><Profile /></RouterGuard>} />
                 <Route path='/testuikit' element={<TestUIKit />} />
                 <Route path='/about-course/:id' element={<RouterGuard><AboutCourse /></RouterGuard>} />
-                <Route path='/module/:id' element={<RouterGuard><CoursePage /></RouterGuard>} />
+                <Route path='/module/:id' element={<CoursePage />} />
             </Routes>
         </BrowserRouter>
     )

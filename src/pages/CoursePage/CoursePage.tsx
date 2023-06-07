@@ -1,15 +1,97 @@
 import { useEffect, useState } from 'react';
-// import TopPanel from "../../components/TopPanel/TopPanel";
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-// import SectionAnswer from '../../components/SectionAnswer/SectionAnswer';
 import styles from "./CoursePage.module.scss";
-// import ThemeModule from '../../components/ThemeModule/ThemaModule';
 import { getCourseModule, getSlideById } from '../../store/actionCreators/actionCreatorsCourse';
-import { IModule } from '../../interfaces/module.interface';
-import { ISection } from '../../interfaces/slide.interface';
+import Background from "../../components/Background/Background";
+import TopPanel from "../../components/TopPanel/TopPanel";
+import * as Icons from "../../icons/icons"
+
+// FIXME: подменные данные / моки, заменить реальными
+import courseImage from "../../images/kotlin.svg"
+import profileImage from "../../images/кач.jpg"
+import LinearProgress from "../../components/LinearProgress/LinearProgress";
+import MenuItem from "../../components/MenuItem/MenuItem";
+import List from "../../components/List/List";
+import RadialProgress from "../../components/RadialProgress/RadialProgress";
+import {getPluralScore} from "../../utils/utils";
+import Button from "../../components/Button/Button";
+import MultiChoiceSection from "../../components/MultiChoiceSection/MultiChoiceSection";
+import ShortAnswerSection from "../../components/ShortAnswerSection/ShortAnswerSection";
+import SingleChoiceSection from "../../components/SingleChoiceSection/SingleChoiceSection";
 
 
 const CoursePage = () => {
+    // FIXME: подменные данные / моки, заменить реальными
+    const courseProgress = 0.5;
+    const pageScore = 20;
+    const pageTotalScore = 100;
+    const group = "УрФУ_Осень_2024"
+    const contents = [
+        {
+            title: "Знакомство с Kotlin",
+            value: "first-steps",
+            items: [
+                {
+                    title: "Установка ПО и создание проекта",
+                    description: "20 / 100 баллов",
+                    value: "soft-installation",
+                    icon: <RadialProgress progress={0.2} />,
+                },
+                {
+                    title: "Вопросы для повторения",
+                    description: "30 / 100 баллов",
+                    value: "questions",
+                    icon: <RadialProgress progress={0.3} />,
+                },
+            ],
+        },
+        {
+            title: "Основные концепты Kotlin",
+            value: "basics",
+            items: [
+                {
+                    title: "Переменные",
+                    description: "25 / 100 баллов",
+                    value: "variables",
+                    icon: <RadialProgress progress={0.25} />,
+                },
+                {
+                    title: "Примитивные типы данных",
+                    description: "100 / 100 баллов",
+                    value: "primitives",
+                    icon: <RadialProgress progress={1} />,
+                },
+                {
+                    title: "Функции",
+                    description: "60 / 100 баллов",
+                    value: "functions",
+                    icon: <RadialProgress progress={0.6} />,
+                },
+            ],
+        },
+        {
+            title: "Классы",
+            value: "classes",
+            items: [
+                {
+                    title: "Строение класса",
+                    description: "0 / 100 баллов",
+                    value: "classes",
+                    icon: <RadialProgress progress={0} />,
+                },
+                {
+                    title: "Классы данных",
+                    description: "30 / 100 баллов",
+                    value: "data-classes",
+                    icon: <RadialProgress progress={0.3} />,
+                },
+            ],
+        },
+    ]
+
+    const toPage = (page: string) => {  };
+    const nextPage = () => {  };
+    // конец подменных данных
 
     const moduleCourse = useAppSelector(state => state.module.moduleCourse);
     const dispatch = useAppDispatch();
@@ -26,37 +108,84 @@ const CoursePage = () => {
         setActiveIndex(index);
     }
 
-    return (
-        <>
-            <div className={styles["main"]}>
-                {/*<TopPanel />*/}
-                <div className={styles["wrapper"]}>
-                    <nav className={styles["navBar"]}>
-                        <div>
-                            <h3 className={styles['title']}>Первые шаги</h3>
-                            {moduleCourse.modules?.length
-                                ? (moduleCourse.modules.map((module: IModule, index: number) => (<div
-                                    onClick={() => activeCourseHandler(index)}
-                                    key={index}>
-                                    {/*<ThemeModule*/}
-                                    {/*    name={module.name}*/}
-                                    {/*    activeIndex={activeIndex}*/}
-                                    {/*    isActive={activeIndex === index} />*/}
-                                </div>)))
-                                : <p>Темы не найдены</p>}
-                        </div>
-                    </nav>
-                    <div>
-                        {sections.map((section: ISection, index: number) => (
-                            <div key={index}>
-                                {/*{section ? <SectionAnswer question={section.question} /> : ''}*/}
-                            </div>
-                        ))}
-                    </div>
+    return <>
+        <Background />
+        <TopPanel
+            image={courseImage}
+            title="Основы программирования на Kotlin"
+            username="андрей"
+            profile={profileImage}
+        />
+
+        <div className={styles.root}>
+            <div className={styles.panel}>
+                <div className={styles.info}>
+                    <LinearProgress
+                        color="primary"
+                        progress={courseProgress}
+                        showPercentage={true}
+                    />
+                    <div style={{height: 10}} />
+                </div>
+                <MenuItem
+                    icon={Icons.Group}
+                    iconSize="small"
+                    label={group}
+                />
+                <List
+                    items={contents}
+                    defaultSelected="classes/classes"
+                    onSelected={toPage}
+                />
+            </div>
+            <div className={styles.page}>
+                <MultiChoiceSection
+                    question="Сколько будет **2 + 2**?"
+                    choices={["1", "3", "5", "69"]}
+                    attempts={1}
+                    maxScore={10}
+                    state="initial"
+                />
+                <ShortAnswerSection
+                    question="Сколько будет **2 + 2**?"
+                    attempts={1}
+                    maxScore={10}
+                    state="initial"
+                />
+                <SingleChoiceSection
+                    question="Сколько будет **2 + 2**?"
+                    choices={["1", "3", "5", "69"]}
+                    attempts={1}
+                    maxScore={10}
+                    state="initial"
+                />
+                <MultiChoiceSection
+                    question="Сколько будет **2 + 2**?"
+                    choices={["1", "3", "5", "69"]}
+                    attempts={1}
+                    maxScore={10}
+                    state="initial"
+                />
+                <MultiChoiceSection
+                    question="Сколько будет **2 + 2**?"
+                    choices={["1", "3", "5", "69"]}
+                    attempts={1}
+                    maxScore={10}
+                    state="initial"
+                />
+                <div className={styles.footer}>
+                    <LinearProgress color="primary" progress={pageScore / pageTotalScore} />
+                    <p>{`${pageScore} / ${pageTotalScore} ${getPluralScore(pageTotalScore)}`}</p>
+                    <Button
+                        label="Далее"
+                        icon={Icons.Start}
+                        style="accent"
+                        onClick={nextPage}
+                    />
                 </div>
             </div>
-        </>
-    );
+        </div>
+    </>
 };
 
 export default CoursePage;

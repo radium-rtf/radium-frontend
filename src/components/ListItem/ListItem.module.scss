@@ -19,12 +19,15 @@
     appearance: none;
   }
 
-  &:hover {
-    background: $white-005;
-  }
-
   &:has(> input:checked) {
     background: $white-005;
+    &:hover {
+      background: $white-01;
+    }
+  }
+
+  &:hover {
+    background: $white-01;
   }
 
   p {

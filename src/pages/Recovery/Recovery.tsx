@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import { IUser } from '../../interfaces/user.interface';
 import styles from './Recovery.module.scss';
-import TextField from '../../components/Input/TextField';
+import TextField from '../../components/TextField/TextField';
 
 const Recovery: FC = () => {
     const navigate = useNavigate();

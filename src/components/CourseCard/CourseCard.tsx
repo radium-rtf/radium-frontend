@@ -1,15 +1,16 @@
 import {FC, MouseEventHandler, ReactNode} from "react"
 import Card from "../Card/Card"
 import styles from "./CourseCard.module.scss"
-import LinearProgress from "../LinerProgress/LinearProgress"
+import LinearProgress from "../LinearProgress/LinearProgress"
 import Button from "../Button/Button";
 import * as Icons from "../../icons/icons"
 import Comment from "../Comment/Comment";
 
 interface CourseCardProps {
-    name: string,
-    image: string,
+    name?: string,
+    image?: string,
     state: "discover" | "continue" | "checked" | "deadline",
+    button: "short" | "full",
     description?: string,
     progress?: number,
     topic?: string,
@@ -25,7 +26,8 @@ interface CourseCardProps {
 
 interface BottomProps {
     icon: ReactNode,
-    text: string,
+    text?: string,
+    label?: string,
     color: "accent" | "outlined",
     onClick?: MouseEventHandler<HTMLButtonElement>,
 }
@@ -33,6 +35,7 @@ interface BottomProps {
 const Bottom: FC<BottomProps> = ({
     icon,
     text,
+    label,
     color,
     onClick,
 }) => <div className={styles["bottom"]}>
@@ -40,7 +43,9 @@ const Bottom: FC<BottomProps> = ({
     <p>{text}</p>
     <Button
         icon={Icons.Start}
-        style="accent"
+        label={label}
+        style={color}
+        onClick={onClick}
     />
 </div>
 
@@ -51,6 +56,7 @@ const CourseCard: FC<CourseCardProps> = ({
     name,
     image,
     state,
+    button,
     description,
     progress,
     topic,
@@ -63,7 +69,7 @@ const CourseCard: FC<CourseCardProps> = ({
     onClick,
     onButtonClick,
 }) => {
-    const titleRegular = <div className={styles["title-regular"]}>
+    const titleRegular = name && image && <div className={styles["title-regular"]}>
         <img src={image} />
         <div>
             <label>Курс</label>
@@ -81,14 +87,26 @@ const CourseCard: FC<CourseCardProps> = ({
             content = <>
                 {titleRegular}
                 <p>{description}</p>
-                <Bottom icon={Icons.Course} text={topic || ""} color="outlined" onClick={onButtonClick} />
+                <Bottom
+                    icon={Icons.Course}
+                    text={topic || ""}
+                    label={button == "full" ? "Начать" : undefined}
+                    color="outlined"
+                    onClick={onButtonClick}
+                />
             </>
             break
         case "continue":
             content = <>
                 {titleRegular}
                 <LinearProgress color="primary" progress={progress || 0.0} showPercentage={true} />
-                <Bottom icon={Icons.Course} text={topic || ""} color="outlined" onClick={onButtonClick} />
+                <Bottom
+                    icon={Icons.Course}
+                    text={topic || ""}
+                    label={button == "full" ? "Продолжить" : undefined}
+                    color="outlined"
+                    onClick={onButtonClick}
+                />
             </>
             break
         case "checked":
@@ -98,8 +116,9 @@ const CourseCard: FC<CourseCardProps> = ({
                 {checkerName && profileImage && comment &&
                     <Comment image={profileImage} name={checkerName} comment={comment} />}
                 <Bottom
-                    icon={<img src={image} style={{borderRadius: 4}} />}
+                    icon={image && <img src={image} style={{borderRadius: 4}} />}
                     text={name}
+                    label={button == "full" ? "Продолжить" : undefined}
                     color="accent"
                     onClick={onButtonClick} />
             </>
@@ -109,8 +128,9 @@ const CourseCard: FC<CourseCardProps> = ({
                 <label style={{color: "#F29191"}}>🚨 Скоро дедлайн!</label>
                 {titleNotification}
                 <Bottom
-                    icon={<img src={image} style={{borderRadius: 4}} />}
+                    icon={image && <img src={image} style={{borderRadius: 4}} />}
                     text={name}
+                    label={button == "full" ? "Продолжить" : undefined}
                     color="accent"
                     onClick={onButtonClick} />
             </>

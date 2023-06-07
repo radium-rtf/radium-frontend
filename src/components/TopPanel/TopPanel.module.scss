@@ -1,3 +1,5 @@
+@import "../../scss/index.scss";
+
 .panel {
   position: fixed;
   width: 100%;
@@ -28,4 +30,15 @@
   > label {
     margin-right: 16px;
   }
+}
+
+.menu {
+  position: absolute;
+  right: 24px;
+  width: 256px;
+
+  padding: 8px 0 8px 0;
+  border: 1px solid $white-01;
+  border-radius: 8px;
+  background: $bg-overlay;
 }
