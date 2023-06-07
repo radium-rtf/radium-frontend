@@ -3,7 +3,7 @@ import Card from "../Card/Card"
 import QuestionHeader from "../QuestionHeader/QuestionHeader"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
-import TextField from "../Input/TextField";
+import TextField from "../TextField/TextField";
 import QuestionBottom from "../QuestionSectionBottom/QuestionBottom";
 
 interface ShortAnswerSectionProps {

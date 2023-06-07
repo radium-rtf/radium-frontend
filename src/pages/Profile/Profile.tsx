@@ -2,7 +2,7 @@ import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
-import TextField from "../../components/Input/TextField";
+import TextField from "../../components/TextField/TextField";
 import logo from "../../images/кач.jpg";
 import { IProfile } from "../../interfaces/user.interface";
 import styles from './Profile.module.scss';

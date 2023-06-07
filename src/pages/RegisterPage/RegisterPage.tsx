@@ -8,7 +8,7 @@ import { registration } from '../../store/actionCreators/actionCreatorsAuth';
 import { IUser } from '../../interfaces/user.interface';
 import styles from './RegisterPage.module.scss';
 import { emailValidator } from '../../constData';
-import TextField from '../../components/Input/TextField';
+import TextField from '../../components/TextField/TextField';
 import * as Icons from '../../icons/icons'
 
 const RegisterPage: FC = () => {

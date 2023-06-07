@@ -26,10 +26,12 @@ const TextField: FC<TextFieldProps> = ({
     type = "text",
 }) => {
     const Icon = () => icon || <></>
-    return <label className={styles["text-field"]}>
+    return <label
+        className={styles["text-field"]}
+        style={{ width: width }}
+    >
         <input
             {...register(name)}
-            style={{ width: width }}
             placeholder={label}
             name={name}
             type={type}
