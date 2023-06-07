@@ -10,6 +10,7 @@ import styles from './RegisterPage.module.scss';
 import { emailValidator } from '../../constData';
 import TextField from '../../components/TextField/TextField';
 import * as Icons from '../../icons/icons'
+import Background from "../../components/Background/Background";
 
 const RegisterPage: FC = () => {
 
@@ -20,80 +21,66 @@ const RegisterPage: FC = () => {
 
     const onRegisterHandler: SubmitHandler<IUser> = (data: IUser) => {
         if (data) {
+            if (!data.email.endsWith("@urfu.me")) data.email += "@urfu.me"
             dispatch(registration(data));
             navigate('/my-courses');
             reset();
         }
     }
 
-    return (
-        <div className={styles.wrapper}>
-            <div className={styles.form}>
-                <form onSubmit={handleSubmit(onRegisterHandler)}>
-                    <p className={styles.header}>Регистрация</p>
-                    <div className={styles.textField}>
-                        <TextField
-                            register={() => register('name', {
-                                required: "Имя обязательное поле",
-                                minLength: {
-                                    value: 4,
-                                    message: "Минимальная длина имени 4 символа"
-                                }
-                            })}
-                            name='name'
-                            type='text'
-                            label='Имя'
-                            width='256px'
-                        />
-                        {/*<Error className={'error'} error={errors?.name} errorMessage={errors.name?.message} />*/}
-                        {/* <p className={styles.info}>
-                            Необязательно писать ФИО,
-                            просто как хотите, чтобы мы вас называли.
-                        </p> */}
-                        <TextField
-                            register={() => register('email', {
-                                required: "Email обязательное поле",
-                                pattern: {
-                                    value: emailValidator,
-                                    message: "Вы ввели не корректный email"
-                                }
-                            })}
-                            name='email'
-                            type='email'
-                            label='Почта'
-                            postfix='@urfu.me'
-                            width='256px'
-                        />
-                        {/*<Error className={'error'} error={errors?.email} errorMessage={errors.email?.message} />*/}
-                        <TextField
-                            register={() => register('password', {
-                                required: "Поле password обязательное поле",
-                                minLength: {
-                                    value: 6,
-                                    message: "Минимальная длина пароля 6 символов"
-                                }
-                            })}
-                            name='password'
-                            type={visible ? 'text' : 'password'}
-                            label='Пароль'
-                            icon={visible ? Icons.Visible : Icons.Invisible}
-                            onIconClick={() => setVisible(!visible)}
-                            width='256px'
-                        />
-                        {/*<Error className={'error'} error={errors?.password} errorMessage={errors.password?.message} />*/}
-                        <Button
-                            style="accent"
-                            label='Зарегистрироваться'
-                            onClick={() => console.log('')}
-                            width='256px'
-                        />
-                        <Link to={'/auth'}>
-                            Вспомнили пароль?
-                        </Link>
-                    </div>
-                </form>
-            </div>
-        </div>
-    )
+    return <>
+        <Background />
+
+        <form className={styles.root} onSubmit={handleSubmit(onRegisterHandler)}>
+            <h1>Регистрация</h1>
+            <TextField
+                register={() => register('name', {
+                    required: "Введите имя",
+                    minLength: {
+                        value: 2,
+                        message: "Имя должно состоять хотя бы из двух символов"
+                    }
+                })}
+                name='name'
+                type='text'
+                label='Имя'
+                width='256px'
+            />
+            {errors?.name?.message && <p className={styles.error}>{errors.name.message}</p>}
+            <TextField
+                register={() => register('email', {
+                    required: "Введите почту",
+                    pattern: {
+                        value: emailValidator,
+                        message: "Неправильная почта или пароль"
+                    }
+                })}
+                type="text"
+                name='email'
+                label='Почта'
+                postfix='@urfu.me'
+                width='256px'
+            />
+            {errors?.email?.message && <p className={styles.error}>{errors.email.message}</p>}
+            <TextField
+                register={() => register('password', {
+                    required: "Введите пароль"
+                })}
+                name='password'
+                type={visible ? 'text' : 'password'}
+                label='Пароль'
+                icon={visible ? Icons.Visible : Icons.Invisible}
+                onIconClick={() => setVisible(!visible)}
+                width='256px'
+            />
+            {errors?.password?.message && <p className={styles.error}>{errors.password.message}</p>}
+            <Button
+                style='accent'
+                label='Зарегистрироваться'
+                width='256px'
+            />
+            <Link to={'/auth'}>Войти</Link>
+        </form>
+    </>
 }
 export default RegisterPage;

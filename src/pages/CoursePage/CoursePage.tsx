@@ -127,11 +127,11 @@ const CoursePage = () => {
                     />
                     <div style={{height: 10}} />
                 </div>
-                <MenuItem
+                {group && <MenuItem
                     icon={Icons.Group}
                     iconSize="small"
                     label={group}
-                />
+                />}
                 <List
                     items={contents}
                     defaultSelected="classes/classes"

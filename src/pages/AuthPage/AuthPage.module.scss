@@ -1,33 +1,22 @@
 @import "../../scss/colors.scss";
-@import "../../scss/elements.scss";
 
-.wrapper {
-	.form {
-		position: relative;
-		display: grid;
-		justify-content: flex-start;
-		flex-direction: column;
-		margin-top: 192px;
-		margin-left: 210px;
-		height: 299px;
+.root {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	>* {
 		width: 256px;
 		margin-bottom: 16px;
-		.header {
-			@apply text-5xl text-['$main'];
-			margin-bottom: 32px;
-			width: 116px;
-			height: 63px;
-		}
-
-		.textField {
-			display: grid;
-			> label {
-				margin-bottom: 16px;
-			}
-		}
+	}
+	> h1, a {
+		padding: 0 16px 0 16px;
 	}
 }
 
-.root {
-
+.error {
+	padding: 0 16px 0 16px;
+	color: $accent-destructive;
 }
