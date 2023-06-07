@@ -13,6 +13,10 @@ import CourseCard from "../../components/CourseCard/CourseCard";
 import Card from "../../components/Card/Card";
 import profilePicture from "../../components/ProfilePicture/ProfilePicture";
 import ProfilePicture from "../../components/ProfilePicture/ProfilePicture";
+import Background from "../../components/Background/Background";
+import TopPanel from "../../components/TopPanel/TopPanel";
+import courseImage from "../../images/kotlin.svg";
+import profileImage from "../../images/кач.jpg";
 
 const CourseLanding: FC = () => {
     const authors = [
@@ -40,7 +44,14 @@ const CourseLanding: FC = () => {
         'синтаксисом, способный компилироваться в байткод JVM, что делает его совместимым с Java. Этот курс поможет вам ' +
         'стать профессионалом в различных сферах, где применим Kotlin: бэкенд-разработка, мобильная разработка, ' +
         'веб-разработка. Если вы ранее изучали Java или Scala, изучить Kotlin вам будет очень просто.'
-    return (
+    return <>
+        <Background />
+        <TopPanel
+            image={courseImage}
+            title="Основы программирования на Kotlin"
+            username="андрей"
+            profile={profileImage}
+        />
         <div className={styles.wrapper}>
             <div className={styles.bannerWrapper}>
                 <img src={kotlinBanner} alt="" className={styles.banner}/>
@@ -74,7 +85,7 @@ const CourseLanding: FC = () => {
                 </div>
             </div>
         </div>
-    );
+    </>
 };
 
 export default CourseLanding;
