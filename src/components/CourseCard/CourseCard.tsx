@@ -136,7 +136,7 @@ const CourseCard: FC<CourseCardProps> = ({
             </>
             break
     }
-    return <Card onClick={onClick} style={{width: width, margin: "16px"}}>
+    return <Card onClick={onClick} style={{width: width}}>
         <div className={styles["course-card"]}>
             {content}
         </div>
