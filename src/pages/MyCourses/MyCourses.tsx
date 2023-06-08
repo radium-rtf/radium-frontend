@@ -1,18 +1,45 @@
-import { FC, useEffect } from 'react';
-// import EmptyPage from '../../components/EmptyPage/EmptyPage';
-// import Header from '../../components/Header/Header';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { ICardCourse } from '../../interfaces/course.interface';
-import { fetchUser } from '../../store/actionCreators/actionCreatorsAuth';
+import React, {FC, useEffect} from 'react';
+import {useAppDispatch, useAppSelector} from '../../hooks/redux';
+import {fetchUser} from '../../store/actionCreators/actionCreatorsAuth';
 import styles from './MyCourses.module.scss';
-import { getCourses } from '../../store/actionCreators/actionCreatorsCourse';
+import {getCourses} from '../../store/actionCreators/actionCreatorsCourse';
 import CourseCard from '../../components/CourseCard/CourseCard';
-import courseImg from "../../images/kotlin.svg";
+import Background from "../../components/Background/Background";
+import TopPanel from "../../components/TopPanel/TopPanel";
+import courseImage from "../../images/kotlin.svg";
+import profileImage from "../../images/кач.jpg";
+import radiumLogo from "../../images/радиум лого.svg";
 
 const MyCourses: FC = () => {
+    const userCourses = [
+        {
+            name: 'Основы программирования на Kotlin',
+            image: `${courseImage}`,
+            progress: 0.77,
+            topic: 'Следующая тема',
+        },
+        {
+            name: 'Основы программирования на Kotlin',
+            image: `${courseImage}`,
+            progress: 0.34,
+            topic: 'Следующая тема'
+        },
+        {
+            name: 'Основы программирования на Kotlin',
+            image: `${courseImage}`,
+            progress: 0.98,
+            topic: 'Следующая тема'
+        },
+        {
+            name: 'Основы программирования на Kotlin',
+            image: `${courseImage}`,
+            progress: 0.98,
+            topic: 'Следующая тема'
+        },
+    ]
 
     const dispatch = useAppDispatch();
-    const { courses, isLoading } = useAppSelector(state => state.course);
+    const {courses, isLoading} = useAppSelector(state => state.course);
     const token = useAppSelector(state => state.auth.accessToken);
 
     useEffect(() => {
@@ -22,31 +49,26 @@ const MyCourses: FC = () => {
 
     return (
         <>
-            <div>
-                {/*<Header title='Мои курсы' className='myCourseHeader' />*/}
-            </div>
+            <Background/>
+            <TopPanel
+                image={radiumLogo}
+                title="Радиум"
+                username="андрей"
+                profile={profileImage}
+            />
             <div className={styles.wrapper}>
-                {/*<div>{isLoading ? (<div>*/}
-                {/*    <span>Loading...</span>*/}
-                {/*</div>) : courses.length ?*/}
-                {/*    (<div className={styles.wrapperCourse}>*/}
-                {/*        {courses.map((course: ICardCourse) => (*/}
-                {/*            <CourseCard*/}
-                {/*                name="Основы программирования на Kotlin"*/}
-                {/*                image={courseImg}*/}
-                {/*                state="continue"*/}
-                {/*                description="Курс предназначен для студентов, намеренных изучить основы Android-, backend-*/}
-                {/*                        и кроссплатформенной разработки на Kotlin - мультипарадигменном языке программирования,*/}
-                {/*                        созданном компанией JetBrains."*/}
-                {/*                topic="24 темы, 5 месяцев"*/}
-                {/*                width="480px"*/}
-                {/*                onClick={() => console.log("clicked card")}*/}
-                {/*                onButtonClick={() => console.log("clicked button")}*/}
-                {/*            />*/}
-                {/*        ))}*/}
-                {/*    </div>)*/}
-                {/*    : (<div className={styles.emptyPageError}><EmptyPage /></div>)}*/}
-                {/*</div>*/}
+                <div className={styles.cards}>
+                    {userCourses.map((course) =>
+                        <CourseCard
+                            name={course.name}
+                            image={course.image}
+                            progress={course.progress}
+                            topic={course.topic}
+                            state='continue'
+                            button='short'
+                            width={480}
+                        />)}
+                </div>
             </div>
         </>
     )

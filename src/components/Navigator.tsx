@@ -21,7 +21,8 @@ const Navigator: FC = () => {
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/reduction" element={<Recovery />} />
                 <Route path="/profile" element={<RouterGuard><Profile /></RouterGuard>} />
-                <Route path="/my-courses" element={<RouterGuard><MyCourses /></RouterGuard>} />
+                {/*<Route path="/my-courses" element={<RouterGuard><MyCourses /></RouterGuard>} />*/}
+                <Route path="/my-courses" element={<MyCourses />} />
                 <Route path="/profile" element={<RouterGuard><Profile /></RouterGuard>} />
                 <Route path='/testuikit' element={<TestUIKit />} />
                 <Route path='/course-landing' element={<CourseLanding />} />

@@ -1,13 +1,13 @@
 .wrapper {
-    width: 25%;
-    padding-top: 2%;
-    flex-wrap: wrap;
-    padding-left: 20px;
+    display: flex;
+    justify-content: center;
+    padding-left: 208px;
+    padding-right: 208px;
 
-    .wrapperCourse {
-        display: grid;
-        grid-template-columns: auto auto auto;
-        grid-gap: 32px;
+    .cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 32px;
+        grid-template-columns: 480px repeat(auto-fit, 2fr);
     }
-
 }
