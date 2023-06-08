@@ -8,7 +8,6 @@ import Profile from "../pages/Profile/Profile";
 import MyCourses from "../pages/MyCourses/MyCourses";
 import RouterGuard from "./RouterGuard"
 import TestUIKit from "../pages/TestUIKit/TestUIKit";
-import AboutCourse from "../pages/AboutCourse/AboutCourse"
 import CoursePage from "../pages/CoursePage/CoursePage";
 import CourseLanding from "../pages/CourseLanding/CourseLanding";
 
@@ -16,18 +15,15 @@ const Navigator: FC = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<RouterGuard><MyCourses /></RouterGuard>} />
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/reduction" element={<Recovery />} />
-                <Route path="/profile" element={<RouterGuard><Profile /></RouterGuard>} />
-                {/*<Route path="/my-courses" element={<RouterGuard><MyCourses /></RouterGuard>} />*/}
-                <Route path="/my-courses" element={<MyCourses />} />
+                <Route path="/my-courses" element={<RouterGuard><MyCourses /></RouterGuard>} />
                 <Route path="/profile" element={<RouterGuard><Profile /></RouterGuard>} />
                 <Route path='/testuikit' element={<TestUIKit />} />
-                <Route path='/course-landing' element={<CourseLanding />} />
-                <Route path='/about-course/:id' element={<RouterGuard><AboutCourse /></RouterGuard>} />
-                <Route path='/module/:id' element={<CoursePage />} />
+                <Route path='/course/:id' element={<RouterGuard><CourseLanding /></RouterGuard>} />
+                <Route path='/module/:id' element={<RouterGuard><CoursePage /></RouterGuard>} />
+                <Route path='/module' element={<RouterGuard><CoursePage /></RouterGuard>} />
             </Routes>
         </BrowserRouter>
     )

@@ -35,7 +35,7 @@ export interface ICardCourse {
     description: string,
     authorId?: string,
     logo: string,
-    id?: number,
+    id?: string,
     type?: string
 }
 

@@ -9,7 +9,7 @@ import Checkbox from "../Checkbox/Checkbox";
 
 interface MultiChoiceSectionProps {
     question: string
-    choices: string[]
+    choices: string[] | null
     attempts?: number
     score?: number
     maxScore?: number
@@ -27,7 +27,7 @@ const MultiChoiceSection: FC<MultiChoiceSectionProps> = ({
     <form>
         <QuestionHeader type="question" />
         <ReactMarkdown remarkPlugins={[remarkGfm]}>{question}</ReactMarkdown>
-        {choices.map((choice) =>
+        {choices?.map((choice) =>
             <Checkbox
                 label={choice}
                 name="answer"

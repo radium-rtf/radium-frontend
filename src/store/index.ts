@@ -4,13 +4,15 @@ import courseReducer from './slices/courseSlice';
 import profileReducer from './slices/profileSlice';
 import moduleReducer from './slices/moduleSlice';
 import slideReducer from './slices/slideSlice';
+import pageReducer from './slices/pageSlice';
 
 const rootReducer = combineReducers({
     auth: authReducer,
     course: courseReducer,
     profile: profileReducer,
     module: moduleReducer,
-    slide: slideReducer
+    slide: slideReducer,
+    page: pageReducer
 })
 
 export const storeConfig = configureStore({

@@ -5,7 +5,7 @@ export interface Module {
 }
 
 export interface Page {
-    id: string
+    id?: string
     name: string
     slug: string
     sections: Section[]

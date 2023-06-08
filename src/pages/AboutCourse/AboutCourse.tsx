@@ -20,7 +20,7 @@ const AboutCourse: FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(getCourse(Number(params.id), token));
+        dispatch(getCourse(params.id ?? '', token));
         dispatch(fetchUser(token));
     }, [dispatch, token]);
 

@@ -4,6 +4,8 @@ import ProfilePicture from "../ProfilePicture/ProfilePicture";
 import MenuItem from "../MenuItem/MenuItem";
 import * as Icons from "../../icons/icons"
 import {useNavigate} from "react-router-dom";
+import { useAppDispatch } from "../../hooks/redux";
+import { authSlice } from "../../store/slices/authSlice";
 
 interface TopPanelProps {
     image?: string
@@ -18,16 +20,24 @@ const TopPanel: FC<TopPanelProps> = ({
     username,
     profile,
 }) => {
+
     const [scrollPosition, setScrollPosition] = useState(0);
     const [isMenuOpen, setMenuOpen] = useState(false);
     const navigate = useNavigate();
     const weight = Math.max(0, Math.min(scrollPosition / 64, 1));
     const size = 48 - (weight * 16);
+    const dispatch = useAppDispatch();
+
     useEffect(() => {
         const handleScroll = () => setScrollPosition(window.scrollY)
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, [])
+
+    const logoutHandler = () => {
+        dispatch(authSlice.actions.logout());
+    }
+
     return <>
         <div style={{width: "100%", height: 128}} />
         <div
@@ -88,6 +98,7 @@ const TopPanel: FC<TopPanelProps> = ({
                         icon={Icons.Exit}
                         iconSize="small"
                         label="Выйти"
+                        onClick={() => logoutHandler()}
                     />
                 </menu>
             </>}

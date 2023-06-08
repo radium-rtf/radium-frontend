@@ -13,9 +13,11 @@ export const login = (user: IUser) => {
         try {
             const token: accessTokenType = (await axios.post<accessTokenType>('auth/signIn', user)).data;
 
+            console.log(token);
+
             dispatch(authSlice.actions.loginSuccess({
-                accessToken: token.access_token,
-                isAuth: !!token,
+                accessToken: token.accessToken,
+                isAuth: !!token.accessToken,
                 ...user
             }));
 
@@ -31,7 +33,7 @@ export const registration = (user: IUser) => {
             const token: accessTokenType = (await axios.post<accessTokenType>('auth/signUp', user)).data;
 
             dispatch(authSlice.actions.loginSuccess({
-                accessToken: token.access_token,
+                accessToken: token.accessToken,
                 isAuth: !!token,
                 ...user
             }));

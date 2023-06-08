@@ -1,30 +1,34 @@
-import {FC} from "react"
-import ListItem, {ListItemProps} from "../ListItem/ListItem"
+import { FC, useState } from "react"
+import ListItem, { ListItemProps } from "../ListItem/ListItem"
 import styles from "./List.module.scss"
+import { Module, Page } from "../../interfaces/module.interface";
+import RadialProgress from "../RadialProgress/RadialProgress";
 
 interface ListProps {
-    items: { title: string, value?: string, items: ListItemProps[] }[],
+    items: Module[],
     width?: number | string,
     defaultSelected?: string,
     onSelected?: (value: string) => void,
 }
 
 const List: FC<ListProps> = ({
-    items,
-    width,
-    defaultSelected,
-    onSelected,
-}) => {
-    const menuItems = items.map(({title, value, items}) =>
+     items,
+     width,
+     defaultSelected,
+     onSelected,
+     }) => {
+
+    const menuItems = items?.map((item: Module) =>
         <div className={styles["list"]}>
-            <h3>{title}</h3>
-            {items.map((item) => {
-                const v = value ? `${value}/${item.value}` : item.value;
+            <h3>{item.name}</h3>
+            {item.pages.map((item: Page) => {
+                const v = item.name ? `${item.name}/${item.name}` : item.name;
+
                 return <ListItem
-                    title={item.title}
-                    description={item.description}
+                    title={item.name}
+                    description={"30 / 100 баллов"}
                     value={v}
-                    icon={item.icon}
+                    icon={<RadialProgress progress={0.3}/>}
                     defaultChecked={v === defaultSelected}
                     onInput={(event) => onSelected?.(event.currentTarget.value)}
                 />
