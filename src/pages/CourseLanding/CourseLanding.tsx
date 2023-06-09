@@ -14,6 +14,7 @@ import { Author, Link } from "../../interfaces/course.interface";
 import { getCourse } from "../../store/actionCreators/actionCreatorsCourse";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchUser } from "../../store/actionCreators/actionCreatorsAuth";
+import MenuItem from "../../components/MenuItem/MenuItem";
 
 const CourseLanding: FC = () => {
     const description_courseWrap1 = '24 темы, 5 месяцев';
@@ -59,17 +60,19 @@ const CourseLanding: FC = () => {
                         <Card>
                             <h3>Авторы курса</h3>
                             {authors?.map((author: Author) => (
-                                <ListItem
+                                <MenuItem
                                     key={author.id}
-                                    description={author.name}
+                                    label={author.name}
+                                    iconSize="large"
                                     icon={<ProfilePicture image={author.avatar}/>}/>))}
                         </Card>
                         <Card>
                             <h3>Контакты</h3>
                             {contacts?.map((contact: Link) =>
-                                <ListItem
+                                <MenuItem
                                     key={contact.id}
-                                    description={contact.name}
+                                    label={contact.name}
+                                    iconSize="small"
                                     icon={<ProfilePicture image={telegramLogo} size={18}/>}/>)}
                         </Card>
                     </div>

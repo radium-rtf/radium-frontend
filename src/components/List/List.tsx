@@ -16,13 +16,13 @@ const List: FC<ListProps> = ({
      width,
      defaultSelected,
      onSelected,
-     }) => {
+}) => {
 
     const menuItems = items?.map((item: Module) =>
         <div className={styles["list"]}>
             <h3>{item.name}</h3>
             {item.pages.map((item: Page) => {
-                const v = item.name ? `${item.name}/${item.name}` : item.name;
+                const v = item.id;
 
                 return <ListItem
                     title={item.name}

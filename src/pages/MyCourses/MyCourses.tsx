@@ -6,8 +6,6 @@ import { getCourse, getCourses } from '../../store/actionCreators/actionCreators
 import CourseCard from '../../components/CourseCard/CourseCard';
 import Background from "../../components/Background/Background";
 import TopPanel from "../../components/TopPanel/TopPanel";
-import courseImage from "../../images/kotlin.svg";
-import profileImage from "../../images/кач.jpg";
 import radiumLogo from "../../images/радиум лого.svg";
 import { useNavigate } from "react-router-dom";
 
@@ -15,7 +13,7 @@ const MyCourses: FC = () => {
     const dispatch = useAppDispatch();
     const {courses, isLoading} = useAppSelector(state => state.course);
     const token = useAppSelector(state => state.auth.accessToken);
-    const userName = useAppSelector(state => state.profile.name);
+    const { name, avatar } = useAppSelector(state => state.profile);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -34,8 +32,8 @@ const MyCourses: FC = () => {
             <TopPanel
                 image={radiumLogo}
                 title="Радиум"
-                username={userName}
-                profile={profileImage}
+                username={name}
+                profile={avatar}
             />
             <div className={styles.wrapper}>
                 <div className={styles.cards}>

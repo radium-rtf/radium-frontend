@@ -33,43 +33,43 @@
       background: $accent-primary;
       transition: all 0.15s ease-out;
     }
+
+    &:enabled:hover {
+      background: $white-01;
+    }
+
+    &:enabled:active {
+      background: $black-01;
+    }
+
+    &:checked {
+      border-color: $accent-primary;
+      &:before {
+        width: 10px;
+        height: 10px;
+      }
+    }
+
+    &:enabled:checked:hover {
+      border-color: $accent-primary + white * 0.1;
+      &:before {
+        width: 12px;
+        height: 12px;
+        background: $accent-primary + white * 0.1;
+      }
+    }
+
+    &:enabled:checked:active {
+      border-color: $accent-primary - white * 0.1;
+      &:before {
+        width: 8px;
+        height: 8px;
+        background: $accent-primary - white * 0.1;
+      }
+    }
   }
 
   &:disabled {
     opacity: 0.5;
-  }
-
-  &:enabled:hover {
-    background: $white-01;
-  }
-
-  &:enabled:active {
-    background: $black-01;
-  }
-
-  &:checked {
-    border-color: $accent-primary;
-    &:before {
-      width: 10px;
-      height: 10px;
-    }
-  }
-
-  &:enabled:checked:hover {
-    border-color: $accent-primary + white * 0.1;
-    &:before {
-      width: 12px;
-      height: 12px;
-      background: $accent-primary + white * 0.1;
-    }
-  }
-
-  &:enabled:checked:active {
-    border-color: $accent-primary - white * 0.1;
-    &:before {
-      width: 8px;
-      height: 8px;
-      background: $accent-primary - white * 0.1;
-    }
   }
 }
