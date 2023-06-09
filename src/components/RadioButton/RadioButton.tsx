@@ -26,7 +26,6 @@ const RadioButton: FC<RadioButtonProps> = ({
         value={value}
         disabled={disabled}
         defaultChecked={defaultChecked}
-        onInput={() => console.log("hi modus")}
     />
     {label}
 </label>

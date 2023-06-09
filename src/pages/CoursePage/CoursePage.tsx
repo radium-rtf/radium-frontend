@@ -44,7 +44,6 @@ const CoursePage = () => {
 
     const toPage = (pageId: string) => {
         navigate(`/module/${pageId}`);
-        console.log(pageId);
         dispatch(getPage(token, pageId))
     };
 

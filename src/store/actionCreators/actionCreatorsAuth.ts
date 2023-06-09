@@ -13,8 +13,6 @@ export const login = (user: IUser) => {
         try {
             const token: accessTokenType = (await axios.post<accessTokenType>('auth/signIn', user)).data;
 
-            console.log(token);
-
             dispatch(authSlice.actions.loginSuccess({
                 accessToken: token.accessToken,
                 isAuth: !!token.accessToken,
