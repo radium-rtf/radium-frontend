@@ -21,7 +21,7 @@ const CoursePage = () => {
     const courseProgress = 0.5;
     const pageScore = 20;
     const pageTotalScore = 100;
-    const group = "УрФУ_Осень_2024"
+    const group = ""
 
     const nextPage = () => {
     };
@@ -29,8 +29,8 @@ const CoursePage = () => {
     const dispatch = useAppDispatch();
     const token = useAppSelector(state => state.auth.accessToken);
     const {name: userName, avatar} = useAppSelector(state => state.profile);
+    const {name} = useAppSelector(state => state.page);
     const sections = [...useAppSelector(state => state.page.sections)];
-    const [pages, setPages] = useState<Page[]>([]);
     const course = useAppSelector(state => state.course.course);
     const params = useParams<'id'>();
     const navigate = useNavigate();
@@ -78,8 +78,9 @@ const CoursePage = () => {
                 />
             </div>
             <div className={styles.page}>
-                {sections.sort((s) => s.order).map((section: Section) => {
-                    return <SectionCard
+                <h1>{name}</h1>
+                {sections.sort((s) => s.order).map((section: Section) =>
+                    <SectionCard
                         id={section.id}
                         pageId={section.pageId}
                         order={section.order}
@@ -87,8 +88,7 @@ const CoursePage = () => {
                         shortanswer={section.shortanswer}
                         choice={section.choice}
                         multichoice={section.multichoice}
-                    />
-                })}
+                    />)}
                 <div className={styles.footer}>
                     <LinearProgress color="primary" progress={pageScore / pageTotalScore}/>
                     <p>{`${pageScore} / ${pageTotalScore} ${getPluralScore(pageTotalScore)}`}</p>
