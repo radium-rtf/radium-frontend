@@ -52,7 +52,7 @@ const CourseLanding: FC = () => {
                             state='continue'
                             button='full'
                             topic={description_courseWrap1}
-                            onClick={() => navigate(`/module/${params.id}`)}
+                            onClick={() => navigate(`/module/${course.modules[0].pages[0].id}`)}
                         />
                         <TextSection children={`## О курсе\n\n${course.shortDescription}`}/>
                     </div>

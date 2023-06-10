@@ -22,14 +22,13 @@ const List: FC<ListProps> = ({
         <div className={styles["list"]}>
             <h3>{item.name}</h3>
             {item.pages.map((item: Page) => {
-                const v = item.id;
-
+                console.log(`${item.id} - ${defaultSelected}`)
                 return <ListItem
                     title={item.name}
                     description={"30 / 100 баллов"}
-                    value={v}
+                    value={item.id}
                     icon={<RadialProgress progress={0.3}/>}
-                    defaultChecked={v === defaultSelected}
+                    defaultChecked={item.id === defaultSelected}
                     onInput={(event) => onSelected?.(event.currentTarget.value)}
                 />
             })}

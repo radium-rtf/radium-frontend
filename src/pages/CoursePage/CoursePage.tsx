@@ -40,7 +40,7 @@ const CoursePage = () => {
         dispatch(getCourseModule(token));
         dispatch(fetchUser(token));
         dispatch(getCourse(params.id || '', token));
-    }, [token, dispatch, course.slug]);
+    }, [token, dispatch, course.slug, params.id]);
 
     const toPage = (pageId: string) => {
         navigate(`/module/${pageId}`);
