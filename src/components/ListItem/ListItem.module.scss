@@ -9,10 +9,16 @@
 
   *:first-child {
     margin-right: 16px;
+    width: 18px;
+    height: 18px;
   }
 
   *:not(:last-child) {
     pointer-events: none;
+  }
+
+  div {
+    justify-content: center;
   }
 
   input {

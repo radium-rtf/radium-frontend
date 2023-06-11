@@ -21,7 +21,7 @@ const ListItem: FC<ListItemProps> = ({
     {icon}
     <div style={{display: "inline-grid"}}>
         <label>{title}</label>
-        <p>{description}</p>
+        {description && <p>{description}</p>}
     </div>
     <input
         type="radio"

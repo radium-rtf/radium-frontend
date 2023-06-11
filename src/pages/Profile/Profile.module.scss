@@ -1,8 +1,63 @@
 .wrapper {
+    position: relative;
+
+    .panel {
+        margin-left: 24px;
+        width: 256px;
+    }
+
     .form {
-        position: center;
-        margin-top: 192px;
-        margin-left: 43%;
+        display: inline-block;
+        margin-left: 40%;
+        width: 720px;
+        .title {
+            .header {
+                margin-left: 24px;
+                margin-bottom: 20px;
+                display: flex;
+                align-items: center;
+            }
+        }
+        .content {
+            padding: 24px;
+            border-radius: 8px;
+            background-color: #2e3233;
+            display: block;
+            width: 100%;
+            align-items: center;
+
+            .imgAndButton {
+                height: 48px;
+                display: flex;
+                margin-left: 196px;
+                margin-bottom: 16px;
+                button {
+                    margin-top: auto;
+                    margin-bottom: auto;
+                    margin-left: 16px;
+                    display: flex;
+                    justify-content: center;
+                }
+                .profileImg {
+                    display: flex;
+                    float: left;
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 100%;
+                    margin-bottom: 16px;
+                }
+            }
+            .textField {
+                label {
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+                button {
+                    margin-left: 208px;
+                }
+                justify-content: center;
+            }
+        }
     }
 
     label {
@@ -14,11 +69,7 @@
     }
 }
 
-.profileImg {
-    display: flex;
-    width: 128px;
-    height: 128px;
-    border-radius: 100%;
-    margin-bottom: 16px;
-    margin-left: 64px;
+.line {
+    width: 624px;
+    margin: 0 auto 16px auto;
 }

@@ -1,16 +1,40 @@
-import { FC } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import React, {FC} from "react";
+import {SubmitHandler, useForm} from "react-hook-form";
+import {useNavigate} from "react-router-dom";
 import Button from "../../components/Button/Button";
 import TextField from "../../components/TextField/TextField";
 import empty from "../../images/empty-profile.png";
-import { IProfile } from "../../interfaces/user.interface";
+import profileEditImage from "../../images/Vector 25.svg";
+import radiumLogo from "../../images/радиум лого.svg";
+import {IProfile} from "../../interfaces/user.interface";
 import styles from './Profile.module.scss';
-import { useAppSelector } from "../../hooks/redux";
+import {useAppSelector} from "../../hooks/redux";
+import Background from "../../components/Background/Background";
+import TopPanel from "../../components/TopPanel/TopPanel";
+import LinearProgress from "../../components/LinearProgress/LinearProgress";
+import MenuItem from "../../components/MenuItem/MenuItem";
+import * as Icons from "../../icons/icons";
+import List from "../../components/List/List";
+import ListItem from "../../components/ListItem/ListItem";
+import line from '../../images/Rectangle 11.svg'
 
 const Profile: FC = () => {
+    const userName = 'андрей'
+    const userImg = empty
+    const profileMenu = [
+        {
+            title: 'Профиль',
+            items: [
+                {
+                    title: 'Редактирование',
+                    icon: Icons.Edit,
+                }
+            ]
+        }
+    ]
+
     const navigate = useNavigate();
-    const { handleSubmit, reset, register } = useForm<IProfile>();
+    const {handleSubmit, reset, register} = useForm<IProfile>();
     const profile = useAppSelector(state => state.profile)
 
     const saveHandler: SubmitHandler<IProfile> = (data: IProfile) => {
@@ -20,45 +44,68 @@ const Profile: FC = () => {
 
     return (
         <>
+            <Background/>
+            <TopPanel
+                image={radiumLogo}
+                title='Радиум'
+                username={userName}
+                profile={userImg}
+            />
             <div className={styles.wrapper}>
+                <div className={styles.panel}>
+                    <List
+                        items={profileMenu}
+                    />
+                </div>
                 <div className={styles.form}>
                     <form onSubmit={handleSubmit(saveHandler)}>
-                        <p className={styles.header}>Профиль</p>
-                        <img src={profile.avatar || empty} alt='ава' className={styles.profileImg}></img>
-                        <div className={styles.textField}>
-                            <TextField
-                                register={() => register('username')}
-                                name='username'
-                                type='text'
-                                label='имя'
-                                width='256px'
-                            />
-                            <TextField
-                                register={() => register('email')}
-                                name='email'
-                                type='text'
-                                label='Почта'
-                                width='256px'
-                            />
-                            <TextField
-                                register={() => register('password')}
-                                name='password'
-                                type='text'
-                                label='Пароль'
-                                width='256px'
-                            />
-                            <TextField
-                                register={() => register('confirmPassword')}
-                                name='confirmPassword'
-                                type='text'
-                                label='Подтверждение пароля'
-                                width='256px'
-                            />
-                            <Button
-                                label='Сохранить'
-                                color="accent"
-
-                            />
+                        <div className={styles.title}>
+                            <h1 className={styles.header}>Редактирование</h1>
+                        </div>
+                        <div className={styles.content}>
+                            <div className={styles.imgAndButton}>
+                                <img src={profile.avatar || empty} alt='ава' className={styles.profileImg}></img>
+                                <Button
+                                    label='Загрузить новую картинку'
+                                    width={216}
+                                />
+                            </div>
+                            <div className={styles.textField}>
+                                <TextField
+                                    register={() => register('username')}
+                                    name='username'
+                                    type='text'
+                                    label='Имя'
+                                    width='256px'
+                                />
+                                <TextField
+                                    register={() => register('email')}
+                                    name='email'
+                                    type='text'
+                                    label='Почта'
+                                    width='256px'
+                                />
+                                <TextField
+                                    register={() => register('password')}
+                                    name='password'
+                                    type='text'
+                                    label='Новый пароль'
+                                    width='256px'
+                                />
+                                <img src={line} alt="" className={styles.line}></img>
+                                <TextField
+                                    register={() => register('confirmPassword')}
+                                    name='confirmPassword'
+                                    type='text'
+                                    label='Пароль'
+                                    width='256px'
+                                />
+                                <Button
+                                    label='Подтвердить'
+                                    color="accent"
+                                    width={256}
+                                />
+                            </div>
                         </div>
                     </form>
                 </div>
