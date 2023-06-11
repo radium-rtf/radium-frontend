@@ -15,8 +15,7 @@ export const login = (user: IUser) => {
 
             dispatch(authSlice.actions.loginSuccess({
                 accessToken: token.accessToken,
-                isAuth: !!token.accessToken,
-                ...user
+                isAuth: !!token.accessToken
             }));
 
         } catch (error) {
@@ -32,8 +31,7 @@ export const registration = (user: IUser) => {
 
             dispatch(authSlice.actions.loginSuccess({
                 accessToken: token.accessToken,
-                isAuth: !!token,
-                ...user
+                isAuth: !!token.accessToken
             }));
 
         } catch (error) {

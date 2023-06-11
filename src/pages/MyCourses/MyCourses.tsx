@@ -1,6 +1,6 @@
 import React, {FC, useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks/redux';
-import {fetchUser} from '../../store/actionCreators/actionCreatorsAuth';
+import {fetchUser, login} from '../../store/actionCreators/actionCreatorsAuth';
 import styles from './MyCourses.module.scss';
 import { getCourse, getCourses } from '../../store/actionCreators/actionCreatorsCourse';
 import CourseCard from '../../components/CourseCard/CourseCard';
@@ -13,6 +13,7 @@ const MyCourses: FC = () => {
     const dispatch = useAppDispatch();
     const {courses, isLoading} = useAppSelector(state => state.course);
     const token = useAppSelector(state => state.auth.accessToken);
+    const user = useAppSelector(state => state.profile);
     const { name, avatar } = useAppSelector(state => state.profile);
     const navigate = useNavigate();
 
@@ -39,6 +40,7 @@ const MyCourses: FC = () => {
                 <div className={styles.cards}>
                     {courses.map((course) =>
                         <CourseCard
+                            key={course.id}
                             name={course.name}
                             image={course.logo}
                             progress={0.34}

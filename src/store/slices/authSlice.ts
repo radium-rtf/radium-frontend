@@ -7,7 +7,7 @@ export interface IAuthState {
 
 const initialState: IAuthState = {
     isAuth: !!localStorage.getItem('token'),
-    accessToken: localStorage.getItem('token') ?? '',
+    accessToken: localStorage.getItem('token') ?? ''
 }
 
 export const authSlice = createSlice({
@@ -15,14 +15,13 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         loginSuccess(state, action: PayloadAction<IAuthState>) {
-            state.isAuth = !!action.payload.accessToken;
             state.accessToken = action.payload.accessToken;
-            localStorage.setItem('token', action.payload.accessToken);
+            state.isAuth = !!action.payload.accessToken;
+            localStorage.setItem('token', state.accessToken);
         },
         logout(state) {
             state.accessToken = '';
             state.isAuth = false;
-            localStorage.removeItem('username');
             localStorage.removeItem('token');
         }
     }
