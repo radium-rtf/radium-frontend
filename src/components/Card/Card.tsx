@@ -7,11 +7,14 @@ interface CardProps {
     style?: CSSProperties,
 }
 
-const Card: FC<CardProps> = ({children, onClick, style}) => <div
-    className={styles["card"]}
-    style={style}
-    onClick={onClick}
-    children={children}
-/>
+const Card: FC<CardProps> = ({children, onClick, style}) => {
+    const className = onClick ? "clickable-card" : "card"
+    return <div
+        className={styles[className]}
+        style={style}
+        onClick={onClick}
+        children={children}
+    />
+}
 
 export default Card;

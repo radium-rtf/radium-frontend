@@ -29,11 +29,11 @@ const Recovery: FC = () => {
                         />
                         <Button
                             label='Отправить код'
-                            style='accent'
+                            color='accent'
                         />
                         <Button
                             label='Войти'
-                            style='destructive'
+                            color='destructive'
                         />
                     </div>
                 </form>

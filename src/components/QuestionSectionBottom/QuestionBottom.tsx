@@ -51,12 +51,12 @@ const QuestionBottom: FC<QuestionBottomProps> = ({
     {hasReset && <Button
         label="Сбросить"
         icon={Icons.Reset}
-        style="outlined"
+        color="outlined"
         type="reset" />}
     <Button
         label={submitMode == "submit" ? "Ответить" : "Отправить"}
         icon={submitMode == "submit" ? Icons.Submit : Icons.Send}
-        style="accent"
+        color="accent"
         type="submit"
         disabled={attempts == 0}
     />

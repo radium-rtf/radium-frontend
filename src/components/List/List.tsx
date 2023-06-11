@@ -1,11 +1,9 @@
-import { FC, useState } from "react"
+import { FC } from "react"
 import ListItem, { ListItemProps } from "../ListItem/ListItem"
 import styles from "./List.module.scss"
-import { Module, Page } from "../../interfaces/module.interface";
-import RadialProgress from "../RadialProgress/RadialProgress";
 
 interface ListProps {
-    items: Module[],
+    items: { title: string, items: ListItemProps[] }[],
     width?: number | string,
     defaultSelected?: string,
     onSelected?: (value: string) => void,
@@ -17,27 +15,21 @@ const List: FC<ListProps> = ({
      defaultSelected,
      onSelected,
 }) => {
-
-    const menuItems = items?.map((item: Module) =>
+    const menuItems = items?.map(({ title, items }) =>
         <div className={styles["list"]}>
-            <h3>{item.name}</h3>
-            {item.pages.map((item: Page) => {
-                console.log(`${item.id} - ${defaultSelected}`)
+            <h3>{title}</h3>
+            {items.map(({ title, description, value, icon }) => {
                 return <ListItem
-                    title={item.name}
-                    description={"30 / 100 баллов"}
-                    value={item.id}
-                    icon={<RadialProgress progress={0.3}/>}
-                    defaultChecked={item.id === defaultSelected}
+                    title={title}
+                    description={description}
+                    value={value}
+                    icon={icon}
+                    defaultChecked={value === defaultSelected}
                     onInput={(event) => onSelected?.(event.currentTarget.value)}
                 />
             })}
         </div>)
-
-    return <form
-        className={styles["list"]}
-        style={{width: width}}
-    >
+    return <form className={styles["list"]} style={{width: width}}>
         {menuItems}
     </form>
 }

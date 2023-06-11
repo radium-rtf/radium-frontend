@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import styles from "./CoursePage.module.scss";
-import {getCourse, getCourseModule, getPage} from '../../store/actionCreators/actionCreatorsCourse';
+import {getCourse, getPage} from '../../store/actionCreators/actionCreatorsCourse';
 import Background from "../../components/Background/Background";
 import TopPanel from "../../components/TopPanel/TopPanel";
 import * as Icons from "../../icons/icons"
@@ -12,9 +12,9 @@ import { getPluralScore } from "../../utils/utils";
 import Button from "../../components/Button/Button";
 import { fetchUser } from "../../store/actionCreators/actionCreatorsAuth";
 import {useNavigate, useParams} from "react-router-dom";
-import { Module, Page, Section } from '../../interfaces/module.interface';
+import { Module, Section } from '../../interfaces/module.interface';
 import SectionCard from "../../components/Section/SectionCard";
-
+import RadialProgress from "../../components/RadialProgress/RadialProgress";
 
 const CoursePage = () => {
     // FIXME: подменные данные / моки, заменить реальными
@@ -22,9 +22,6 @@ const CoursePage = () => {
     const pageScore = 20;
     const pageTotalScore = 100;
     const group = ""
-
-    const nextPage = () => {
-    };
 
     const dispatch = useAppDispatch();
     const token = useAppSelector(state => state.auth.accessToken);
@@ -37,14 +34,16 @@ const CoursePage = () => {
 
     useEffect(() => {
         dispatch(getPage(token, params.id as string))
-        dispatch(getCourseModule(token));
         dispatch(fetchUser(token));
         dispatch(getCourse(params.id || '', token));
-    }, [token, dispatch, course.slug, params.id]);
+    }, [token, course.slug, params.id]);
 
     const toPage = (pageId: string) => {
         navigate(`/module/${pageId}`);
         dispatch(getPage(token, pageId))
+    };
+
+    const nextPage = () => {
     };
 
     return <>
@@ -72,7 +71,7 @@ const CoursePage = () => {
                     label={group}
                 />}
                 <List
-                    items={course.modules}
+                    items={mapItems(course.modules)}
                     defaultSelected={params.id}
                     onSelected={toPage}
                 />
@@ -95,7 +94,7 @@ const CoursePage = () => {
                     <Button
                         label="Далее"
                         icon={Icons.Start}
-                        style="accent"
+                        color="accent"
                         onClick={nextPage}
                     />
                 </div>
@@ -103,5 +102,19 @@ const CoursePage = () => {
         </div>
     </>
 };
+
+const mapItems = (modules: Module[]) => modules.map(module => {
+    return {
+        title: module.name,
+        items: module.pages.map(page => {
+            return {
+                title: page.name,
+                description: "30 / 100 баллов",
+                value: page.id,
+                icon: <RadialProgress progress={0.3}/>,
+            }
+        }),
+    }
+})
 
 export default CoursePage;

@@ -3,7 +3,6 @@ import styles from './CourseLanding.module.scss'
 import kotlinBanner from '../../images/Баннер.png'
 import telegramLogo from "../../images/telegram-logo.svg"
 import TextSection from "../../components/TextSection/TextSection";
-import ListItem from "../../components/ListItem/ListItem";
 import CourseCard from "../../components/CourseCard/CourseCard";
 import Card from "../../components/Card/Card";
 import ProfilePicture from "../../components/ProfilePicture/ProfilePicture";

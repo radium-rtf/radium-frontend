@@ -66,11 +66,14 @@ haha
         />
 
         <CourseCard
+            name="Курс мечты"
+            image={courseImage}
             description="КРУТЕЙШИЙ КУРС ПРОСТО СОСКА АВЗАЛФВАЖЛФВЖАФЛВ"
             button="full"
             title="woo"
             subtitle="im gay"
             state="deadline"
+            onClick={() => console.log("gaygaygaygaygay")}
         />
 
         <form>

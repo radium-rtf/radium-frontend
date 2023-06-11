@@ -75,7 +75,7 @@ const RegisterPage: FC = () => {
             />
             {errors?.password?.message && <p className={styles.error}>{errors.password.message}</p>}
             <Button
-                style='accent'
+                color='accent'
                 label='Зарегистрироваться'
                 width='256px'
             />

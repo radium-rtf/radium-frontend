@@ -56,7 +56,7 @@ const Profile: FC = () => {
                             />
                             <Button
                                 label='Сохранить'
-                                style="accent"
+                                color="accent"
 
                             />
                         </div>

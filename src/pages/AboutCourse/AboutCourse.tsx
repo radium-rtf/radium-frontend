@@ -37,7 +37,7 @@ const AboutCourse: FC = () => {
                     <Button
                         onClick={() => navigate(`/module/${params.id}`)}
                         label='Продолжить/Начать'
-                        style='accent'
+                        color='accent'
                     />
                     <div className={styles['row']}>
                         <div className={styles['courseDescription']}>

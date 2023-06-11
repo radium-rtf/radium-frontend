@@ -44,7 +44,7 @@ const Bottom: FC<BottomProps> = ({
     <Button
         icon={Icons.Start}
         label={label}
-        style={color}
+        color={color}
         onClick={onClick}
     />
 </div>
