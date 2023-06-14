@@ -9,6 +9,7 @@ import { moduleSlice } from '../slices/moduleSlice';
 import { ISlide } from '../../interfaces/slide.interface';
 import { slideSlice } from '../slices/slideSlice';
 import { pageSlice } from "../slices/pageSlice";
+import { IAnswer } from "../../interfaces/answer.interface";
 
 export const getCourses = (token: string) => {
     return async (dispatch: AppDispatch) => {
@@ -76,5 +77,15 @@ export const getPage = (token: string, pageId: string) => {
             ErrorService.getErrorMessage(error as AxiosError);
         }
     }
+}
 
+export const addAnswer = (answer: IAnswer) => {
+    return async (dispatch: AppDispatch) => {
+        try {
+
+
+        } catch (error) {
+            ErrorService.getErrorMessage(error as AxiosError);
+        }
+    }
 }

@@ -1,17 +1,20 @@
-// IChoiceAnswer - ответ на задание с вариантом ответа
-export interface IChoiceAnswer {
-    answer: string;
-    sectionId: string;
+export interface IAnswer {
+    choice: IChoice;
+    multiChoice: IMultiChoice;
+    shortAnswer: IShortAnswer;
 }
 
-// IMultiChoiceAnswer - ответ на задание с несколькими вариантами ответа
-export interface IMultiChoiceAnswer {
+interface IChoice {
+    answer: string;
+    id?: string;
+}
+
+interface IMultiChoice {
     answer: string[];
-    sectionId: string;
+    id?: string
 }
 
-// IQuestionAnswer - ответ на вопрос
-export interface IQuestionAnswer {
+interface IShortAnswer {
     answer: string;
-    sectionId: string;
+    id?: string;
 }
