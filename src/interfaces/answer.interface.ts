@@ -1,20 +1,20 @@
 export interface IAnswer {
-    choice: IChoice;
-    multiChoice: IMultiChoice;
-    shortAnswer: IShortAnswer;
+    choice?: IChoice;
+    multiChoice?: IMultiChoice;
+    shortAnswer?: IShortAnswer;
 }
 
-interface IChoice {
+export interface IChoice {
     answer: string;
     id?: string;
 }
 
-interface IMultiChoice {
+export interface IMultiChoice {
     answer: string[];
     id?: string
 }
 
-interface IShortAnswer {
+export interface IShortAnswer {
     answer: string;
     id?: string;
 }

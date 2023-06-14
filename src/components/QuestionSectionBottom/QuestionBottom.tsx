@@ -43,7 +43,7 @@ const QuestionBottom: FC<QuestionBottomProps> = ({
     </div>
     <p>{
         maxScore && (
-            score != undefined && state != "initial"
+            score != undefined
                 ? `${score} / ${maxScore} ${getPluralScore(maxScore)}`
                 : `${maxScore} ${getPluralScore(maxScore)}`
         )

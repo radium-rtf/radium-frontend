@@ -4,12 +4,13 @@ import { courseSlice } from '../slices/courseSlice';
 import { AppDispatch } from './../index';
 import { ErrorService } from '../../services/error.service';
 import axios from '../../axios';
-import { IModuleCourse, Page } from '../../interfaces/module.interface';
+import { IModuleCourse, Page, Section } from '../../interfaces/module.interface';
 import { moduleSlice } from '../slices/moduleSlice';
 import { ISlide } from '../../interfaces/slide.interface';
 import { slideSlice } from '../slices/slideSlice';
 import { pageSlice } from "../slices/pageSlice";
-import { IAnswer } from "../../interfaces/answer.interface";
+import { IAnswer, IChoice } from "../../interfaces/answer.interface";
+import { sectionSlice } from "../slices/sectionSlice";
 
 export const getCourses = (token: string) => {
     return async (dispatch: AppDispatch) => {
@@ -79,10 +80,15 @@ export const getPage = (token: string, pageId: string) => {
     }
 }
 
-export const addAnswer = (answer: IAnswer) => {
+export const addAnswer = (token: string, answer: IAnswer) => {
     return async (dispatch: AppDispatch) => {
         try {
-
+            const section: Section = await axios.post('answer', answer, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            dispatch(sectionSlice.actions.setSection(section));
 
         } catch (error) {
             ErrorService.getErrorMessage(error as AxiosError);

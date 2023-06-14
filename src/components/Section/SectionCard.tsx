@@ -1,27 +1,50 @@
 import { Section } from "../../interfaces/module.interface";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import TextSection from "../TextSection/TextSection";
 import ShortAnswerSection from "../ShortAnswerSection/ShortAnswerSection";
 import SingleChoiceSection from "../SingleChoiceSection/SingleChoiceSection";
 import MultiChoiceSection from "../MultiChoiceSection/MultiChoiceSection";
-import { TypeAnswer, getTypeAnswer } from "../../utils/utils";
+import { TypeAnswer } from "../../utils/utils";
+import { addAnswer, getPage } from "../../store/actionCreators/actionCreatorsCourse";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 
 
 const SectionCard: FC<Section> = ({
-    id,
-    pageId,
-    order,
-    text,
-    shortanswer,
-    choice,
-    multichoice,
-}) => {
+                                      id,
+                                      pageId,
+                                      order,
+                                      text,
+                                      shortanswer,
+                                      choice,
+                                      multichoice,
+                                  }) => {
     const [state, setState] = useState<TypeAnswer>('initial');
-    const { handleSubmit, register } = useForm<{ answer: string }>();
+    const {handleSubmit, register} = useForm<{ answer: string }>();
+    const token = useAppSelector(state => state.auth.accessToken);
+    const section = useAppSelector(state => state.section.section)
+    const dispatch = useAppDispatch();
 
-    const answerHandler: SubmitHandler<{ answer: string }> = ({ answer }) => {
-        setState(getTypeAnswer(answer));
+    useEffect(() => {
+        dispatch(getPage(token, pageId));
+    }, [dispatch, section]);
+
+    const answerHandler: SubmitHandler<{ answer: string }> = ({answer}) => {
+
+        // if (shortanswer) {
+        //     dispatch(addAnswer(token, {shortAnswer: {answer, id}}));
+        //     setState('correct');
+        // }
+
+        if (choice) {
+            dispatch(addAnswer(token, {choice: {answer, id}}));
+            dispatch(getPage(token, pageId));
+            setState(getState(choice.maxScore, choice.score));
+        }
+
+        // multichoice
+        // ? dispatch(addAnswer(token,{multiChoice: {answer, id}}))
+        // : console.log(1);
     }
 
     return text
@@ -59,3 +82,19 @@ const SectionCard: FC<Section> = ({
 }
 
 export default SectionCard
+
+function getState(maxScore: number, score?: number): 'correct' | 'incorrect' | 'partial' | 'initial' {
+    if (score === undefined) {
+        return 'initial';
+    }
+
+    if (score === maxScore) {
+        return 'correct';
+    }
+
+    if (score === 0) {
+        return 'incorrect';
+    }
+
+    return 'partial';
+}
