@@ -36,7 +36,8 @@ const CoursePage = () => {
         dispatch(getPage(token, params.id as string))
         dispatch(fetchUser(token));
         dispatch(getCourse(params.id || '', token));
-    }, [token, course.slug, params.id]);
+        document.title = `${name} - ${course.name} - Радиум`
+    }, [dispatch, token, course.slug, params.id, name, course.name]);
 
     const toPage = (pageId: string) => {
         navigate(`/module/${pageId}`);

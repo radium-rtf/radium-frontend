@@ -28,7 +28,8 @@ const CourseLanding: FC = () => {
     useEffect(() => {
         dispatch(getCourse(params.id || '', token));
         dispatch(fetchUser(token));
-    }, []);
+        document.title = `${course.name} - Радиум`
+    }, [dispatch, params.id, token, course.name]);
 
     return <>
         <Background/>
