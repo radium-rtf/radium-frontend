@@ -32,6 +32,7 @@ const SectionCard: FC<Section> = ({
                 onSubmit={handleSubmit(answerHandler)}
                 question={shortanswer.question}
                 maxScore={shortanswer.maxScore}
+                score={shortanswer.score}
                 state={state}
             />
             : choice
@@ -41,6 +42,7 @@ const SectionCard: FC<Section> = ({
                     question={choice.question}
                     choices={choice.variants}
                     maxScore={choice.maxScore}
+                    score={choice.score}
                     state={state}
                 />
                 : multichoice
@@ -50,6 +52,7 @@ const SectionCard: FC<Section> = ({
                         question={multichoice.question}
                         choices={multichoice.variants}
                         maxScore={multichoice.maxScore}
+                        score={multichoice.score}
                         state={state}
                     />
                     : <></>

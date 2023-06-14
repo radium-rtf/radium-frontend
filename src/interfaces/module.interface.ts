@@ -17,24 +17,23 @@ export interface Section {
     pageId: string
     order: number
     text?: {
-        id: string
         content: string
     }
     shortanswer?: {
-        id: string
         question: string
         maxScore: number
+        score: number
     }
     choice?: {
-        id: string
         question: string
         maxScore: number
+        score: number
         variants: string[]
     }
     multichoice?: {
-        id: string
         question: string
         maxScore: number
+        score: number
         variants: string[]
     }
 }
