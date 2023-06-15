@@ -5,7 +5,6 @@ import profileReducer from './slices/profileSlice';
 import moduleReducer from './slices/moduleSlice';
 import slideReducer from './slices/slideSlice';
 import pageReducer from './slices/pageSlice';
-import sectionReducer from './slices/sectionSlice';
 
 const rootReducer = combineReducers({
     auth: authReducer,
@@ -14,7 +13,6 @@ const rootReducer = combineReducers({
     module: moduleReducer,
     slide: slideReducer,
     page: pageReducer,
-    section: sectionReducer
 })
 
 export const storeConfig = configureStore({

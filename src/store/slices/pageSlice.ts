@@ -12,7 +12,7 @@ const initialState: IPageState = {
     id: '',
     name: '',
     slug: '',
-    sections: []
+    sections: [],
 }
 
 export const pageSlice = createSlice({
@@ -23,6 +23,10 @@ export const pageSlice = createSlice({
             state.name = action.payload.name;
             state.slug = action.payload.slug;
             state.sections = action.payload.sections;
+        },
+        setSection(state, action: PayloadAction<Section>) {
+            const index: number = state.sections.findIndex((section: Section) => section.id === action.payload.id);
+            state.sections[index] = action.payload;
         }
     }
 })

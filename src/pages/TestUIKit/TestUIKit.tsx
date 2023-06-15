@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import { FC, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import TextSection from "../../components/TextSection/TextSection";
@@ -12,6 +12,7 @@ import Background from "../../components/Background/Background";
 import RadioButton from "../../components/RadioButton/RadioButton";
 import Checkbox from "../../components/Checkbox/Checkbox";
 import CourseCard from "../../components/CourseCard/CourseCard";
+import SectionCard from "../../components/Section/SectionCard";
 
 const TestUIKit: FC = () => {
 
@@ -56,7 +57,7 @@ haha
 `
 
     return <>
-        <Background />
+        <Background/>
 
         <TopPanel
             image={courseImage}
@@ -82,9 +83,9 @@ haha
                 name="1"
                 value="hi modus"
             />
-            <RadioButton />
-            <RadioButton />
-            <Checkbox />
+            <RadioButton/>
+            <RadioButton/>
+            <Checkbox/>
         </form>
 
         <ShortAnswerSection
@@ -110,7 +111,8 @@ haha
             maxScore={100}
             state="incorrect"
         />
-
+        <SectionCard id={'dasdas'} pageId={'dadsada'} order={1}
+                     multichoice={{question: '123', variants: ['1', '2', '3'], maxScore: 10, score: 0}}/>
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {text}
         </ReactMarkdown>

@@ -10,7 +10,6 @@ import { ISlide } from '../../interfaces/slide.interface';
 import { slideSlice } from '../slices/slideSlice';
 import { pageSlice } from "../slices/pageSlice";
 import { IAnswer, IChoice } from "../../interfaces/answer.interface";
-import { sectionSlice } from "../slices/sectionSlice";
 
 export const getCourses = (token: string) => {
     return async (dispatch: AppDispatch) => {
@@ -88,7 +87,7 @@ export const addAnswer = (token: string, answer: IAnswer) => {
                     Authorization: `Bearer ${token}`
                 }
             })
-            dispatch(sectionSlice.actions.setSection(section));
+            dispatch(pageSlice.actions.setSection(section));
 
         } catch (error) {
             ErrorService.getErrorMessage(error as AxiosError);

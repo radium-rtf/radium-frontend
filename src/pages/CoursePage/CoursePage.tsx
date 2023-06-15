@@ -79,7 +79,7 @@ const CoursePage = () => {
             </div>
             <div className={styles.page}>
                 <h1>{name}</h1>
-                {sections.sort((s) => s.order).map((section: Section) =>
+                {sections.sort((s) => s.order)?.map((section: Section) =>
                     <SectionCard
                         id={section.id}
                         pageId={section.pageId}
@@ -104,10 +104,10 @@ const CoursePage = () => {
     </>
 };
 
-const mapItems = (modules: Module[]) => modules.map(module => {
+const mapItems = (modules: Module[]) => modules?.map(module => {
     return {
         title: module.name,
-        items: module.pages.map(page => {
+        items: module.pages?.map(page => {
             return {
                 title: page.name,
                 description: "30 / 100 баллов",
