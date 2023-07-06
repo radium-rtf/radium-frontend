@@ -40,13 +40,21 @@
   align-items: center;
   margin-top: 16px;
 
-  >:first-child {
+  > :first-child {
     width: 18px;
     height: 18px;
     margin-right: 8px;
   }
 
-  >:last-child {
+  > :last-child {
     margin-left: auto;
   }
+}
+
+.course-card {
+  //height: 300px;
+  //display: inline-block;
+  //position: absolute;
+  //width: 500px;
+  //display: flex;
 }
