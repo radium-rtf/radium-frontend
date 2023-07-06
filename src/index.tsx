@@ -3,6 +3,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Navigator from './components/Navigator';
 import './scss/index.scss';
+import './scss/elements.scss';
 import './scss/colors.scss';
 import { Provider } from 'react-redux';
 import { storeConfig } from './store';

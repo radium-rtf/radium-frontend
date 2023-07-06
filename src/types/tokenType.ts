@@ -1,4 +1,6 @@
 export type accessTokenType = {
-    access_token: string
+    accessToken: string;
+    refreshToken?: string;
+    expiresIn?: string
 }
 

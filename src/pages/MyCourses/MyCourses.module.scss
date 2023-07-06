@@ -1,58 +1,13 @@
 .wrapper {
-    width: 25%;
-    padding-top: 2%;
-    flex-wrap: wrap;
-    padding-left: 20px;
     display: flex;
+    justify-content: center;
+    padding-left: 208px;
+    padding-right: 208px;
 
-    .wrapperCourse {
-        display: grid;
-        grid-template-columns: auto auto auto;
-        grid-gap: 32px;
+    .cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 32px;
+        grid-template-columns: 480px repeat(auto-fit, 2fr);
     }
-
-}
-
-.courseCardsBlock {
-    position: relative;
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(auto-fill, 1fr);
-    background-color: #B3B3B3;
-    //flex-wrap: wrap;
-    //grid-auto-rows: auto;
-    //width: 250px;
-    //position: absolute;
-}
-
-.mainWrap {
-    display: flex;
-    grid-template-columns: repeat(auto-fill, 480px);
-    grid-gap: 20px;
-    flex-wrap: nowrap;
-    //display: grid;
-    //grid-template-columns: repeat(auto-fill, 1fr);
-    //grid-auto-rows: 200px;
-    //grid-gap: 20px;
-    //position: relative;
-
-    .secWrap {
-        display: grid;
-        //grid-template-rows: max-content 200px 1fr;
-        width: 200px;
-        height: 150px;
-        background-color: #b2b2b2;
-    }
-}
-
-
-
-.box3 {
-    grid-column-start: 2;
-    grid-column-end: 4;
-    grid-row-start: 1;
-    grid-row-end: 3;
-    position: absolute;
-    top: 40px;
-    left: 40px;
 }

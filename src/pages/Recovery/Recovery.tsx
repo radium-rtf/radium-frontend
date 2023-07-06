@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import { IUser } from '../../interfaces/user.interface';
 import styles from './Recovery.module.scss';
-import Input from '../../components/Input/Input';
+import TextField from '../../components/TextField/TextField';
 
 const Recovery: FC = () => {
     const navigate = useNavigate();
@@ -12,6 +12,7 @@ const Recovery: FC = () => {
 
     const onSubmit: SubmitHandler<IUser> = (data: IUser) => {
         navigate('/auth');
+        reset();
     }
 
     return (
@@ -20,7 +21,7 @@ const Recovery: FC = () => {
                 <p className={styles.header}>Восстановление</p>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={styles.textField}>
-                        <Input
+                        <TextField
                             register={() => register('email')}
                             name='email'
                             type='text'
@@ -28,11 +29,11 @@ const Recovery: FC = () => {
                         />
                         <Button
                             label='Отправить код'
-                            style='accent'
+                            color='accent'
                         />
                         <Button
                             label='Войти'
-                            style='destructive'
+                            color='destructive'
                         />
                     </div>
                 </form>

@@ -1,70 +1,56 @@
-import {FC, useEffect} from 'react';
-// import EmptyPage from '../../components/EmptyPage/EmptyPage';
-// import Header from '../../components/Header/Header';
+import React, {FC, useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks/redux';
-import {ICardCourse} from '../../interfaces/course.interface';
-import {fetchUser} from '../../store/actionCreators/actionCreatorsAuth';
+import {fetchUser, login} from '../../store/actionCreators/actionCreatorsAuth';
 import styles from './MyCourses.module.scss';
-import {getCourses} from '../../store/actionCreators/actionCreatorsCourse';
+import { getCourse, getCourses } from '../../store/actionCreators/actionCreatorsCourse';
 import CourseCard from '../../components/CourseCard/CourseCard';
-import courseImg from "../../images/kotlin.svg";
+import Background from "../../components/Background/Background";
+import TopPanel from "../../components/TopPanel/TopPanel";
+import radiumLogo from "../../images/радиум лого.svg";
+import { useNavigate } from "react-router-dom";
 
 const MyCourses: FC = () => {
-
     const dispatch = useAppDispatch();
     const {courses, isLoading} = useAppSelector(state => state.course);
     const token = useAppSelector(state => state.auth.accessToken);
+    const user = useAppSelector(state => state.profile);
+    const { name, avatar } = useAppSelector(state => state.profile);
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(getCourses(token));
         dispatch(fetchUser(token));
     }, [dispatch]);
 
+    const detailCourseHandler = (id: string) => {
+        navigate(`/course/${id}`)
+        dispatch(getCourse(id, token));
+    }
+
     return (
         <>
-            <div>
-                {/*<Header title='Мои курсы' className='myCourseHeader' />*/}
-            </div>
+            <Background/>
+            <TopPanel
+                image={radiumLogo}
+                title="Радиум"
+                username={name}
+                profile={avatar}
+            />
             <div className={styles.wrapper}>
-                <div className={styles.mainWrap}>
-                    <div className={styles.secWrap}>One</div>
-                    <div className={styles.secWrap}>Two</div>
-                    <div className={styles.secWrap}>
-                        Этот блок абсолютно позиционирован.
-                        В нашем примере грид-контейнер является контейнерным блоком, поэтому значения сдвига абсолютного
-                        позиционирования отсчитываются от внешнего края той области, в которой размещён элемент.
-                    </div>
-                    <div className={styles.secWrap}>Four</div>
+                <div className={styles.cards}>
+                    {courses.map((course) =>
+                        <CourseCard
+                            key={course.id}
+                            name={course.name}
+                            image={course.logo}
+                            progress={0.34}
+                            topic='Следующая тема'
+                            state='continue'
+                            button='short'
+                            width={480}
+                            onClick={() => detailCourseHandler(course.id ?? '')}
+                        />)}
                 </div>
-
-
-                {/*<div className={styles.wrapperCourse}>*/}
-                {/*    <CourseCard name='Основы программирования на Kotlin' image={courseImg} state='discover'/>*/}
-                {/*    <CourseCard name='Основы программирования на Kotlin' image={courseImg} state='continue'/>*/}
-                {/*    <CourseCard name='Основы программирования на Kotlin' image={courseImg} state='checked'/>*/}
-                {/*    <CourseCard name='Основы программирования на Kotlin' image={courseImg} state='deadline'/>*/}
-                {/*</div>*/}
-                {/*<div>{isLoading ? (<div>*/}
-                {/*    <span>Loading...</span>*/}
-                {/*</div>) : courses.length ?*/}
-                {/*    (<div className={styles.wrapperCourse}>*/}
-                {/*        {courses.map((course: ICardCourse) => (*/}
-                {/*            <CourseCard*/}
-                {/*                name="Основы программирования на Kotlin"*/}
-                {/*                image={courseImg}*/}
-                {/*                state="continue"*/}
-                {/*                description="Курс предназначен для студентов, намеренных изучить основы Android-, backend-*/}
-                {/*                        и кроссплатформенной разработки на Kotlin - мультипарадигменном языке программирования,*/}
-                {/*                        созданном компанией JetBrains."*/}
-                {/*                topic="24 темы, 5 месяцев"*/}
-                {/*                width="480px"*/}
-                {/*                onClick={() => console.log("clicked card")}*/}
-                {/*                onButtonClick={() => console.log("clicked button")}*/}
-                {/*            />*/}
-                {/*        ))}*/}
-                {/*    </div>)*/}
-                {/*    // : (<div className={styles.emptyPageError}></></div>)}*/}
-                {/*</div>*/}
             </div>
         </>
     )

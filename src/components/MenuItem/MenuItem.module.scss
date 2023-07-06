@@ -1,4 +1,4 @@
-@import "../../../scss/index.scss";
+@import "../../scss/index.scss";
 
 .menu-item-small {
   display: flex;
@@ -10,14 +10,14 @@
   cursor: pointer;
   height: 36px;
 
-  &>* {
+  >* {
     cursor: pointer;
   }
 
   svg, img {
+    color: $p-regular;
     width: 18px;
     height: 18px;
-    margin-right: 16px;
   }
 
   label {

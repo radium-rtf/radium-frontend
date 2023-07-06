@@ -1,3 +1,43 @@
+export interface Module {
+    id: string
+    name: string
+    slug: string
+    pages: Page[]
+}
+
+export interface Page {
+    id?: string
+    name: string
+    slug: string
+    sections: Section[]
+}
+
+export interface Section {
+    id: string
+    pageId: string
+    order: number
+    text?: {
+        content: string
+    }
+    shortanswer?: {
+        question: string
+        maxScore: number
+        score: number
+    }
+    choice?: {
+        question: string
+        maxScore: number
+        score: number
+        variants: string[]
+    }
+    multichoice?: {
+        question: string
+        maxScore: number
+        score: number
+        variants: string[]
+    }
+}
+
 export interface IModuleCourse {
     id: number;
     logo: string;

@@ -7,7 +7,6 @@ const RouterGuard: FC<any> = ({ children }) => {
     const accessToken = useAppSelector(state => state.auth.accessToken);
     const location = useLocation();
 
-
     return (
         <div>
             {!accessToken

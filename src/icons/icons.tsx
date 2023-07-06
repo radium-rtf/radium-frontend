@@ -40,6 +40,14 @@ export const Document = <Icon>
 
 export const Edit = <Icon>
     <path
+        d="M0.5 11.5V17.5H6.5M0.5 11.5L10.5858 1.41421C11.3668 0.633165 12.6332 0.633165 13.4142 1.41421L16.5858 4.58579C17.3668 5.36683 17.3668 6.63316 16.5858 7.41421L6.5 17.5M0.5 11.5L4.5 13.5L6.5 17.5"
+        stroke="currentColor"
+        strokeLinejoin="round"/>
+    <rect width="18" height="18" fill="currentColor"/>
+</Icon>
+
+export const Editor = <Icon>
+    <path
         d="M6.5 4.5H2.5C1.39543 4.5 0.5 5.39543 0.5 6.5V11.5C0.5 12.6046 1.39543 13.5 2.5 13.5H6.5M12.5 4.5H15.5C16.6046 4.5 17.5 5.39543 17.5 6.5V11.5C17.5 12.6046 16.6046 13.5 15.5 13.5H12.5M7.5 0.5H9.5M11.5 0.5H9.5M9.5 0.5V17.5M9.5 17.5H7.5M9.5 17.5H11.5"
         strokeLinecap="round"
         strokeLinejoin="round" />

@@ -1,17 +1,17 @@
 import {PayloadAction, createSlice} from "@reduxjs/toolkit";
-import { ICardCourse, ICourse } from "../../interfaces/course.interface";
+import { Course, ICardCourse, ICourse } from "../../interfaces/course.interface";
 import { AxiosError } from "axios";
 
 export interface ICardCourseState {
-    courses: ICardCourse[],
-    course: ICourse,
+    courses: Course[],
+    course: Course,
     isLoading?: boolean,
     error?: AxiosError
 }
 
 const initialState: ICardCourseState = {
     courses: [],
-    course: {} as ICourse,
+    course: {} as Course,
     error: {} as AxiosError,
     isLoading: false
 }
@@ -20,11 +20,11 @@ export const courseSlice = createSlice({
     name: 'course',
     initialState,
     reducers: {
-        setCourses(state, action: PayloadAction<ICardCourse[]>) {
+        setCourses(state, action: PayloadAction<Course[]>) {
             state.courses = action.payload;
             state.isLoading = false;
         },
-        setCourse(state, action: PayloadAction<ICourse>) {
+        setCourse(state, action: PayloadAction<Course>) {
             state.course = action.payload;
         },
         coursesFetching(state) {

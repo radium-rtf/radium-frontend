@@ -16,6 +16,10 @@ const ProfilePicture: FC<ProfilePictureProps> = ({
     style={{
         width: size,
         height: size,
+        minWidth: size,
+        minHeight: size,
+        maxWidth: size,
+        maxHeight: size,
     }}
 />
 
