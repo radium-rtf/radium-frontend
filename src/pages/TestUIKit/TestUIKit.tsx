@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import {FC, useState} from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import TextSection from "../../components/TextSection/TextSection";
@@ -13,6 +13,7 @@ import RadioButton from "../../components/RadioButton/RadioButton";
 import Checkbox from "../../components/Checkbox/Checkbox";
 import CourseCard from "../../components/CourseCard/CourseCard";
 import SectionCard from "../../components/Section/SectionCard";
+import LongAnswerSection from "../../components/LongAnswerSection/LongAnswerSection";
 
 const TestUIKit: FC = () => {
 
@@ -117,6 +118,12 @@ haha
             {text}
         </ReactMarkdown>
         <TextSection>{text}</TextSection>
+        <LongAnswerSection question={'как же быть?'}
+                           state={"initial"}
+                           attempts={0}
+                           score={0}
+                           maxScore={100}
+        />
     </>
 }
 
