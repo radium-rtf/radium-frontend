@@ -10,8 +10,14 @@ import RouterGuard from "./RouterGuard"
 import TestUIKit from "../pages/TestUIKit/TestUIKit";
 import CoursePage from "../pages/CoursePage/CoursePage";
 import CourseLanding from "../pages/CourseLanding/CourseLanding";
+import Statement from "../pages/Statement/Statement";
 
 const Navigator: FC = () => {
+
+    useEffect(() => {
+        localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTc1MmQzYS1jMzM2LTRlN2EtOGYzYy1kNDdiYzA1YmE3NzAiLCJleHAiOjE2OTA0ODM1ODd9.28aMobJBsMtZIqqkGYPYLa3IgkXC6S6D49bHZrTNrug')
+    },[])
+
     return (
         <BrowserRouter>
             <Routes>
@@ -25,6 +31,7 @@ const Navigator: FC = () => {
                 <Route path='/course/:id' element={<RouterGuard><CourseLanding /></RouterGuard>} />
                 <Route path='/module/:id' element={<RouterGuard><CoursePage /></RouterGuard>} />
                 <Route path='/module' element={<RouterGuard><CoursePage /></RouterGuard>} />
+                <Route path='/statement' element={<RouterGuard><Statement /></RouterGuard>} />
             </Routes>
         </BrowserRouter>
     )

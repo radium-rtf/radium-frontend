@@ -4,18 +4,14 @@ import {useNavigate} from "react-router-dom";
 import Button from "../../components/Button/Button";
 import TextField from "../../components/TextField/TextField";
 import empty from "../../images/empty-profile.png";
-import profileEditImage from "../../images/Vector 25.svg";
 import radiumLogo from "../../images/радиум лого.svg";
 import {IProfile} from "../../interfaces/user.interface";
 import styles from './Profile.module.scss';
 import {useAppSelector} from "../../hooks/redux";
 import Background from "../../components/Background/Background";
 import TopPanel from "../../components/TopPanel/TopPanel";
-import LinearProgress from "../../components/LinearProgress/LinearProgress";
-import MenuItem from "../../components/MenuItem/MenuItem";
 import * as Icons from "../../icons/icons";
 import List from "../../components/List/List";
-import ListItem from "../../components/ListItem/ListItem";
 import line from '../../images/Rectangle 11.svg'
 
 const Profile: FC = () => {

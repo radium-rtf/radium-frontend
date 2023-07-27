@@ -1,0 +1,47 @@
+@import "../../scss/colors.scss";
+
+.statementTable {
+    //color: $p-regular;
+    width: 75%;
+    border-radius: 14px;
+
+    .firstRowTitle {
+        background-color: #ffffff;
+        width: 215px;
+        height: 72px;
+        text-align: start;
+        padding-left: 16px;
+    }
+
+    .firstRow {
+        background-color: #ffffff;
+        width: 100px;
+        height: 10px;
+    }
+
+    .columnName {
+        text-align: start;
+        padding-left: 16px;
+        height: 56px;
+        width: 215px;
+    }
+
+    .rowScore {
+        width: 128px;
+        height: 56px;
+        text-align: center;
+    }
+
+    > tr {
+        font-size: 12px;
+        border: #ffffff 1px solid;
+
+        > th {
+            border: #ffffff 1px solid;
+        }
+
+        > td {
+            border: #ffffff 1px solid;
+        }
+    }
+}

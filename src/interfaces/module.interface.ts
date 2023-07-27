@@ -5,6 +5,14 @@ export interface Module {
     pages: Page[]
 }
 
+export interface IStatementUser {
+    id?: string;
+    title: string;
+    slug?: string;
+    avatar?: string;
+    description: string;
+}
+
 export interface Page {
     id?: string
     name: string

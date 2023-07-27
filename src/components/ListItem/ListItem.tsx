@@ -5,7 +5,7 @@ export interface ListItemProps {
     title?: string,
     description?: string,
     value?: string | number | readonly string[],
-    icon?: JSX.Element,
+    icon?: JSX.Element | string,
     defaultChecked?: boolean,
     onInput?: FormEventHandler<HTMLInputElement>,
 }

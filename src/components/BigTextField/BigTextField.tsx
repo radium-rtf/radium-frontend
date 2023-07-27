@@ -1,6 +1,5 @@
-import { FC } from "react"
-import styles from "./BigTextField.module.scss"
-import { RegisterOptions, UseFormRegisterReturn } from "react-hook-form";
+import { FC } from "react";
+import styles from "./BigTextField.module.scss";
 
 interface BigTextFieldProps {
     label?: string,

@@ -8,4 +8,4 @@ const QuestionHeader: FC<{type: "question" | "task"}> = ({type}) =>
         <h4>{type == "task" ? "Задание" : "Вопрос"}</h4>
     </div>
 
-export default QuestionHeader
+export default QuestionHeader;

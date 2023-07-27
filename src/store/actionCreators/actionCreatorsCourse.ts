@@ -1,15 +1,13 @@
 import { AxiosError } from 'axios';
-import { Course, ICardCourse, ICourse } from '../../interfaces/course.interface';
-import { courseSlice } from '../slices/courseSlice';
-import { AppDispatch } from './../index';
-import { ErrorService } from '../../services/error.service';
 import axios from '../../axios';
+import { IAnswer } from "../../interfaces/answer.interface";
+import { Course } from '../../interfaces/course.interface';
 import { IModuleCourse, Page, Section } from '../../interfaces/module.interface';
+import { ErrorService } from '../../services/error.service';
+import { courseSlice } from '../slices/courseSlice';
 import { moduleSlice } from '../slices/moduleSlice';
-import { ISlide } from '../../interfaces/slide.interface';
-import { slideSlice } from '../slices/slideSlice';
 import { pageSlice } from "../slices/pageSlice";
-import { IAnswer, IChoice } from "../../interfaces/answer.interface";
+import { AppDispatch } from './../index';
 
 export const getCourses = (token: string) => {
     return async (dispatch: AppDispatch) => {
