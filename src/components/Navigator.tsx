@@ -11,6 +11,7 @@ import TestUIKit from "../pages/TestUIKit/TestUIKit";
 import CoursePage from "../pages/CoursePage/CoursePage";
 import CourseLanding from "../pages/CourseLanding/CourseLanding";
 import Statement from "../pages/Statement/Statement";
+import TeacherMyCourses from "../pages/TeacherMyCourses/TeacherMyCourses"
 
 const Navigator: FC = () => {
 
@@ -32,6 +33,7 @@ const Navigator: FC = () => {
                 <Route path='/module/:id' element={<RouterGuard><CoursePage /></RouterGuard>} />
                 <Route path='/module' element={<RouterGuard><CoursePage /></RouterGuard>} />
                 <Route path='/statement' element={<RouterGuard><Statement /></RouterGuard>} />
+                <Route path='/teacher-my-courses' element={<TeacherMyCourses />} />
             </Routes>
         </BrowserRouter>
     )

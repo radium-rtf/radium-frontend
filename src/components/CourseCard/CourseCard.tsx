@@ -9,7 +9,7 @@ import Comment from "../Comment/Comment";
 interface CourseCardProps {
     name?: string,
     image?: string,
-    state: "discover" | "continue" | "checked" | "deadline",
+    state: "discover" | "continue" | "checked" | "deadline" | "done",
     button: "short" | "full",
     description?: string,
     progress?: number,
@@ -127,6 +127,20 @@ const CourseCard: FC<CourseCardProps> = ({
             content = <>
                 <label style={{color: "#F29191"}}>🚨 Скоро дедлайн!</label>
                 {titleNotification}
+                <Bottom
+                    icon={image && <img src={image} style={{borderRadius: 4}} />}
+                    text={name}
+                    label={button == "full" ? "Продолжить" : undefined}
+                    color="accent"
+                    onClick={onButtonClick} />
+            </>
+            break
+        case "done":
+            content = <>
+                <label style={{color: "#CEF2CE"}}>✅ Задание выполнено</label>
+                {titleNotification}
+                {checkerName && profileImage && comment &&
+                    <Comment image={profileImage} name={checkerName} comment={comment} />}
                 <Bottom
                     icon={image && <img src={image} style={{borderRadius: 4}} />}
                     text={name}
