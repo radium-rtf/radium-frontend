@@ -11,6 +11,8 @@ import TestUIKit from "../pages/TestUIKit/TestUIKit";
 import CoursePage from "../pages/CoursePage/CoursePage";
 import CourseLanding from "../pages/CourseLanding/CourseLanding";
 import Statement from "../pages/Statement/Statement";
+import TeacherMyCourses from "../pages/TeacherMyCourses/TeacherMyCourses"
+import TeacherTasks from "../pages/TeacherTasks/TeacherTasks"
 
 const Navigator: FC = () => {
 

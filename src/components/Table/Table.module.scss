@@ -1,26 +1,33 @@
 @import "../../scss/colors.scss";
 
 .statementTable {
-    //color: $p-regular;
+    color: $p-regular;
     width: 75%;
     border-radius: 14px;
     position: absolute;
+    font-size: 12px;
+    // background-color: $on-primary;
 
     .firstRowTitle {
-        background-color: #ffffff;
+        color: $p-regular;
         width: 215px;
         height: 72px;
         text-align: start;
         padding-left: 16px;
     }
 
+    table {
+        color: $bg-card;
+    }
+
     .firstRow {
-        background-color: #ffffff;
+        color: $p-regular;
         width: 128px;
         height: 72px;
     }
 
     .columnName {
+        color: $p-regular;
         text-align: start;
         padding-left: 16px;
         height: 56px;
@@ -31,18 +38,5 @@
         width: 128px;
         height: 56px;
         text-align: center;
-    }
-
-    > tr {
-        font-size: 12px;
-        border: #ffffff 1px solid;
-
-        > th {
-            border: #ffffff 1px solid;
-        }
-
-        > td {
-            border: #ffffff 1px solid;
-        }
     }
 }

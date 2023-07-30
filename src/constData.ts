@@ -1,7 +1,62 @@
 import { IStatementUser } from "./interfaces/module.interface";
 import { ITableStatement } from "./interfaces/table-statement.interface";
+import kotlinLogo from './images/kotlin.svg';
+import ava from "./images/кач.jpg";
 
 export const emailValidator: RegExp = /^([A-Za-z0-9_\-.])+(@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$)?/;
+
+export const checkedTasks = [
+    {
+        id: 1,
+        name: 'Основы программирования на Kotlin',
+        logo: kotlinLogo,
+        title: 'Классы данных',
+        subtitle: 'Классы и наследование',
+        profileImage: ava,
+        checkerName: 'Алехандро',
+        comment: '*комментарий*',
+    },
+    {
+        id: 2,
+        name: 'Основы программирования на Kotlin',
+        logo: kotlinLogo,
+        title: 'Классы данных',
+        subtitle: 'Классы и наследование',
+        profileImage: ava,
+        checkerName: 'Алехандро',
+        comment: '*комментарий*',
+    },
+]
+
+export const task = {
+    id: '1',
+    name: '',
+    description: 'Я провел лето просто прекрасно круто лалалалалаллалалалалал играл в комп с матерью не ругался гулял все прочее',
+    comment: ''
+}
+
+export const uncheckedTasks = [
+    {
+        id: 1,
+        name: 'Основы программирования на Kotlin',
+        logo: kotlinLogo,
+        title: 'Классы данных',
+        subtitle: 'Классы и наследование',
+        profileImage: ava,
+        checkerName: 'Алехандро',
+        comment: '*комментарий*',
+    },
+    {
+        id: 2,
+        name: 'Основы программирования на Kotlin',
+        logo: kotlinLogo,
+        title: 'Классы данных',
+        subtitle: 'Классы и наследование',
+        profileImage: ava,
+        checkerName: 'Алехандро',
+        comment: '*комментарий*',
+    },
+]
 
 export const courses: string[] = [
     'Основы программирования на котлин 1',

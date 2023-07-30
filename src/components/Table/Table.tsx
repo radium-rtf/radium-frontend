@@ -16,14 +16,14 @@ const Table: FC<ITableProps> = ({ title, courses, statement }) => {
                 <tr>
                     <th className={styles.firstRowTitle}>{title}</th>
                     {courses?.map((course: string, index: number) => (
-                        <td key={index + '__key__'} className={styles.firstRow}>{course}</td>
+                        <th key={index + '__key__'} className={styles.firstRow}>{course}</th>
                     ))}
                 </tr>
                 {statement?.map((item: ITableStatement, index: number) => (
                     <tr key={index + '__key__'}>
-                        <td className={styles.columnName}>{item.name}</td>
-                        {item.courses.map((course: IStatementCourse, index: number) => (<td key={index + '__key__'}
-                            className={styles.rowScore}>{course.score}</td>))}
+                        <th className={styles.columnName}>{item.name}</th>
+                        {item.courses.map((course: IStatementCourse, index: number) => (<th key={index + '__key__'}
+                            className={styles.rowScore}>{course.score}</th>))}
                     </tr>
                 ))}
             </table>

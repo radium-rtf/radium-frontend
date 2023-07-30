@@ -13,6 +13,8 @@ import { fetchUser } from "../../store/actionCreators/actionCreatorsAuth";
 import styles from './Statement.module.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getPage } from '../../store/actionCreators/actionCreatorsCourse';
+import TeacherTasks from '../TeacherTasks/TeacherTasks';
+import CourseCard from '../../components/CourseCard/CourseCard';
 
 let content: JSX.Element;
 
@@ -71,6 +73,9 @@ const Statement: FC = () => {
                         <div className={styles.panel}>
                             <List items={mapItems(statementUser)} defaultSelected={params.id} onSelected={toPage} />
                         </div>
+                        <div className={styles.table}>
+                            <TeacherTasks />
+                        </div>
                     </div>
                 </div>
             </>
@@ -90,6 +95,15 @@ const Statement: FC = () => {
                     <div className={styles.info}>
                         <div className={styles.panel}>
                             <List items={mapItems(statementUser)} defaultSelected={params.id} onSelected={toPage} />
+                        </div>
+                        <div className={styles.table}>
+                            <CourseCard
+                                title='Напишите сочинение на тему "Как я провел лето"'
+                                topic='Следующая тема'
+                                state='done'
+                                button='full'
+                                width={480}
+                            />
                         </div>
                     </div>
                 </div>
