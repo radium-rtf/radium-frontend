@@ -20,7 +20,7 @@ const tasks = [
         subtitle: 'Классы и наследование',
         profileImage: ava,
         checkerName: 'Алехандро',
-        comment: 'все фигня переделывай',
+        comment: '*комментарий*',
     },
     {
         id: 2,
@@ -30,7 +30,7 @@ const tasks = [
         subtitle: 'Классы и наследование',
         profileImage: ava,
         checkerName: 'Алехандро',
-        comment: 'тоже фигня переделывай',
+        comment: '*комментарий*',
     },
 ]
  

@@ -12,6 +12,7 @@ import CoursePage from "../pages/CoursePage/CoursePage";
 import CourseLanding from "../pages/CourseLanding/CourseLanding";
 import Statement from "../pages/Statement/Statement";
 import TeacherMyCourses from "../pages/TeacherMyCourses/TeacherMyCourses"
+import TeacherTasks from "../pages/TeacherTasks/TeacherTasks"
 
 const Navigator: FC = () => {
 
@@ -33,7 +34,8 @@ const Navigator: FC = () => {
                 <Route path='/module/:id' element={<RouterGuard><CoursePage /></RouterGuard>} />
                 <Route path='/module' element={<RouterGuard><CoursePage /></RouterGuard>} />
                 <Route path='/statement' element={<RouterGuard><Statement /></RouterGuard>} />
-                <Route path='/teacher-my-courses' element={<TeacherMyCourses />} />
+                <Route path='/teacher-my-courses' element={<RouterGuard><TeacherMyCourses /></RouterGuard>} />
+                <Route path='/teacher-tasks' element={<RouterGuard><TeacherTasks /></RouterGuard>} />
             </Routes>
         </BrowserRouter>
     )

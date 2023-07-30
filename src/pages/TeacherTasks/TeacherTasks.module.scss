@@ -1,24 +1,14 @@
 .wrapper {
     display: flex;
  
-    .tasks {
-        display: inline-flex;
-        margin-left: 48px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 32px;
-    }
- 
-    .teacherCoursesHeader {
-        margin-left: 200px;
-        margin-right: 200px;
+    .teacherTasksHeader {
  
         h2 {
             margin-left: 24px;
             margin-bottom: 48px;
         }
  
-        .teacherCourses {
+        .teacherTasks {
             display: flex;
             width: 100%;
             align-items: center;
