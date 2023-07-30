@@ -10,7 +10,7 @@ export interface IStatementUser {
     title: string;
     slug?: string;
     avatar?: string;
-    description: string;
+    description?: string;
 }
 
 export interface Page {

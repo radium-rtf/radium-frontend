@@ -12,15 +12,15 @@ import { storeConfig } from "../../store";
 
 
 const SectionCard: FC<Section> = ({
-                                      id,
-                                      pageId,
-                                      order,
-                                      text,
-                                      shortanswer,
-                                      choice,
-                                      multichoice,
-                                  }) => {
-    const {handleSubmit, register} = useForm<{ answer: string | string[] }>();
+    id,
+    pageId,
+    order,
+    text,
+    shortanswer,
+    choice,
+    multichoice,
+}) => {
+    const { handleSubmit, register } = useForm<{ answer: string | string[] }>();
     const token = useAppSelector(state => state.auth.accessToken);
     const dispatch = useAppDispatch();
 
@@ -28,17 +28,17 @@ const SectionCard: FC<Section> = ({
         dispatch(getPage(token, pageId));
     }, []);
 
-    const answerHandler: SubmitHandler<{ answer: string | string[] }> = ({answer}) => {
+    const answerHandler: SubmitHandler<{ answer: string | string[] }> = ({ answer }) => {
         if (shortanswer && typeof answer === 'string') {
-            dispatch(addAnswer(token, {shortAnswer: {answer, id}}));
+            dispatch(addAnswer(token, { shortAnswer: { answer, id } }));
         }
 
         if (choice && typeof answer === 'string') {
-            dispatch(addAnswer(token, {choice: {answer, id}}));
+            dispatch(addAnswer(token, { choice: { answer, id } }));
         }
 
         if (multichoice && Array.isArray(answer)) {
-            dispatch(addAnswer(token, {multiChoice: {answer, id}}));
+            dispatch(addAnswer(token, { multiChoice: { answer, id } }));
         }
 
         dispatch(getPage(token, pageId));

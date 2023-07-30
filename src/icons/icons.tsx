@@ -1,6 +1,6 @@
-import {FC, ReactNode} from "react";
+import { FC, ReactNode } from "react";
 
-const Icon: FC<{ children?: ReactNode }> = ({children}) => (
+const Icon: FC<{ children?: ReactNode }> = ({ children }) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -42,8 +42,8 @@ export const Edit = <Icon>
     <path
         d="M0.5 11.5V17.5H6.5M0.5 11.5L10.5858 1.41421C11.3668 0.633165 12.6332 0.633165 13.4142 1.41421L16.5858 4.58579C17.3668 5.36683 17.3668 6.63316 16.5858 7.41421L6.5 17.5M0.5 11.5L4.5 13.5L6.5 17.5"
         stroke="currentColor"
-        strokeLinejoin="round"/>
-    <rect width="18" height="18" fill="currentColor"/>
+        strokeLinejoin="round" />
+    <rect width="18" height="18" fill="currentColor" />
 </Icon>
 
 export const Editor = <Icon>
@@ -106,6 +106,18 @@ export const Profile = <Icon>
     <path
         d="M15.5 17.5C16.6046 17.5 17.5253 16.5895 17.2364 15.5233C17.1365 15.1544 17.0085 14.7918 16.853 14.4385C16.4258 13.4679 15.7997 12.586 15.0104 11.8431C14.2211 11.1003 13.2841 10.511 12.2528 10.109C11.2215 9.70693 10.1162 9.5 9 9.5C7.88376 9.5 6.77846 9.70693 5.74719 10.109C4.71592 10.511 3.77889 11.1003 2.98959 11.8431C2.20029 12.586 1.57419 13.4679 1.14702 14.4385C0.991529 14.7918 0.863503 15.1544 0.763553 15.5233C0.474708 16.5895 1.39543 17.5 2.5 17.5L15.5 17.5Z" />
     <circle cx="9" cy="4" r="3.5" />
+</Icon>
+
+export const EmptyProfile = <Icon>
+    <circle cx="9" cy="9" r="9" fill="#2E3233" />
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.37852 13.9647C2.82513 13.3386 2.89093 12.3933 3.51492 11.8375C4.97272 10.539 6.89428 9.75 9.00013 9.75C11.106 9.75 13.0276 10.539 14.4854 11.8375C15.1094 12.3933 15.1752 13.3386 14.6218 13.9648C13.2476 15.5196 11.2384 16.5 9.00016 16.5C6.76194 16.5 4.75271 15.5196 3.37852 13.9647Z" fill="#222526" />
+    <circle cx="9" cy="4.875" r="3" fill="#222526" />
+</Icon>
+
+export const Statement = <Icon>
+    <rect x="0.5" y="0.5" width="17" height="17" rx="1.5" stroke="#BFD5FF" />
+    <path d="M6.5 0.5V17.5" stroke="#BFD5FF" />
+    <path d="M0.5 6.5H17.5" stroke="#BFD5FF" />
 </Icon>
 
 // и эта тоже слегка поехала

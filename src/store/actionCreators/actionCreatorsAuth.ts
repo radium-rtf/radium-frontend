@@ -48,9 +48,25 @@ export const fetchUser = (token: string) => {
                     Authorization: `Bearer ${token}`
                 }
             })).data;
-           
+
             dispatch(profileSlice.actions.setTopProfileLink(user));
 
+        } catch (error) {
+            ErrorService.getErrorMessage(error as AxiosError);
+        }
+    }
+}
+
+export const updateProfileUser = (token: string, name: string, avatar: string) => {
+    return async (dispatch: AppDispatch) => {
+        try {
+            const user: IUser = (await axios.patch<IUser>('account', { name, avatar }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })).data;
+
+            dispatch(profileSlice.actions.setTopProfileLink(user));
         } catch (error) {
             ErrorService.getErrorMessage(error as AxiosError);
         }

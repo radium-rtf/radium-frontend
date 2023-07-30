@@ -32,6 +32,7 @@ const Navigator: FC = () => {
                 <Route path='/module/:id' element={<RouterGuard><CoursePage /></RouterGuard>} />
                 <Route path='/module' element={<RouterGuard><CoursePage /></RouterGuard>} />
                 <Route path='/statement' element={<RouterGuard><Statement /></RouterGuard>} />
+                <Route path='/statement/:id' element={<RouterGuard><Statement /></RouterGuard>} />
             </Routes>
         </BrowserRouter>
     )
