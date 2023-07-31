@@ -27,8 +27,6 @@ const TeacherTasks: FC = () => {
                             {checkedTasks.map((task) =>
                                 <CourseCard
                                     key={task.id}
-                                    name={task.name}
-                                    image={task.logo}
                                     title={task.title}
                                     subtitle={task.subtitle}
                                     checkerName={task.checkerName}
@@ -36,7 +34,7 @@ const TeacherTasks: FC = () => {
                                     comment={task.comment}
                                     progress={0.34}
                                     topic='Следующая тема'
-                                    state='done'
+                                    state='task-unchecked'
                                     button='full'
                                     width={480}
                                 />)}
@@ -50,8 +48,6 @@ const TeacherTasks: FC = () => {
                             {uncheckedTasks.map((task) =>
                                 <CourseCard
                                     key={task.id}
-                                    name={task.name}
-                                    image={task.logo}
                                     title={task.title}
                                     subtitle={task.subtitle}
                                     checkerName={task.checkerName}
@@ -59,7 +55,7 @@ const TeacherTasks: FC = () => {
                                     comment={task.comment}
                                     progress={0.34}
                                     topic='Следующая тема'
-                                    state='checked'
+                                    state='task-checked'
                                     button='full'
                                     width={480}
                                 />)}

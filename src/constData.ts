@@ -8,8 +8,6 @@ export const emailValidator: RegExp = /^([A-Za-z0-9_\-.])+(@([A-Za-z0-9_\-.])+\.
 export const checkedTasks = [
     {
         id: 1,
-        name: 'Основы программирования на Kotlin',
-        logo: kotlinLogo,
         title: 'Классы данных',
         subtitle: 'Классы и наследование',
         profileImage: ava,
@@ -18,8 +16,6 @@ export const checkedTasks = [
     },
     {
         id: 2,
-        name: 'Основы программирования на Kotlin',
-        logo: kotlinLogo,
         title: 'Классы данных',
         subtitle: 'Классы и наследование',
         profileImage: ava,
@@ -38,8 +34,6 @@ export const task = {
 export const uncheckedTasks = [
     {
         id: 1,
-        name: 'Основы программирования на Kotlin',
-        logo: kotlinLogo,
         title: 'Классы данных',
         subtitle: 'Классы и наследование',
         profileImage: ava,
@@ -48,8 +42,6 @@ export const uncheckedTasks = [
     },
     {
         id: 2,
-        name: 'Основы программирования на Kotlin',
-        logo: kotlinLogo,
         title: 'Классы данных',
         subtitle: 'Классы и наследование',
         profileImage: ava,

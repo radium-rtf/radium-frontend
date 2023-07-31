@@ -36,75 +36,42 @@ const Statement: FC = () => {
     switch (params.id) {
         case '1':
             content = <>
-                <Background />
-                <div className={styles.tableWrapper}>
-                    <div>
-                        <TopPanel
-                            image={kotlinLogo}
-                            title='Основы программирования на котлин'
-                            username={name}
-                            profile={avatar ? avatar : emptyAvatar}
-                        />
+                <div className={styles.info}>
+                    <div className={styles.panel}>
+                        <List items={mapItems(statementUser)} defaultSelected={params.id} onSelected={toPage} />
                     </div>
-                    <div className={styles.info}>
-                        <div className={styles.panel}>
-                            <List items={mapItems(statementUser)} defaultSelected={params.id} onSelected={toPage} />
-                        </div>
-                        <div className={styles.table}>
-                            <Table title='Имя' courses={courses} statement={statement} />
-                        </div>
+                    <div className={styles.table}>
+                        <Table title='Имя' courses={courses} statement={statement} />
                     </div>
                 </div>
             </>
             break;
         case '2':
             content = <>
-                <Background />
-                <div className={styles.tableWrapper}>
-                    <div>
-                        <TopPanel
-                            image={kotlinLogo}
-                            title='Основы программирования на котлин'
-                            username={name}
-                            profile={avatar ? avatar : emptyAvatar}
-                        />
+                <div className={styles.info}>
+                    <div className={styles.panel}>
+                        <List items={mapItems(statementUser)} defaultSelected={params.id} onSelected={toPage} />
                     </div>
-                    <div className={styles.info}>
-                        <div className={styles.panel}>
-                            <List items={mapItems(statementUser)} defaultSelected={params.id} onSelected={toPage} />
-                        </div>
-                        <div className={styles.table}>
-                            <TeacherTasks />
-                        </div>
+                    <div className={styles.table}>
+                        <TeacherTasks />
                     </div>
                 </div>
             </>
             break;
         case '3':
             content = <>
-                <Background />
-                <div className={styles.tableWrapper}>
-                    <div>
-                        <TopPanel
-                            image={kotlinLogo}
-                            title='Основы программирования на котлин'
-                            username={name}
-                            profile={avatar ? avatar : emptyAvatar}
-                        />
+                <div className={styles.info}>
+                    <div className={styles.panel}>
+                        <List items={mapItems(statementUser)} defaultSelected={params.id} onSelected={toPage} />
                     </div>
-                    <div className={styles.info}>
-                        <div className={styles.panel}>
-                            <List items={mapItems(statementUser)} defaultSelected={params.id} onSelected={toPage} />
-                        </div>
-                        <div className={styles.table}>
-                            <CourseCard
-                                title='Напишите сочинение на тему "Как я провел лето"'
-                                topic='Следующая тема'
-                                state='done'
-                                button='full'
-                                width={480}
-                            />
-                        </div>
+                    <div className={styles.table}>
+                        <CourseCard
+                            title='Напишите сочинение на тему "Как я провел лето"'
+                            topic='Следующая тема'
+                            state='done'
+                            button='full'
+                            width={480}
+                        />
                     </div>
                 </div>
             </>
@@ -112,8 +79,19 @@ const Statement: FC = () => {
     }
 
     return <div className={styles.stateStatement}>
-        {content}
-    </div>;
+        <Background />
+        <div className={styles.tableWrapper}>
+            <div>
+                <TopPanel
+                    image={kotlinLogo}
+                    title='Основы программирования на Kotlin'
+                    username={name}
+                    profile={avatar ? avatar : emptyAvatar}
+                />
+            </div>
+            {content}
+        </div>
+    </div>
 };
 
 const mapItems = (users: IStatementUser[]) => ['УрФУ.Осень2024'].map((item: string) => {
