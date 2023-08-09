@@ -3,9 +3,9 @@ import {useAppDispatch, useAppSelector} from '../../hooks/redux';
 import {fetchUser, login} from '../../store/actionCreators/actionCreatorsAuth';
 import styles from './MyCourses.module.scss';
 import { getCourse, getCourses } from '../../store/actionCreators/actionCreatorsCourse';
-import CourseCard from '../../components/CourseCard/CourseCard';
-import Background from "../../components/Background/Background";
-import TopPanel from "../../components/TopPanel/TopPanel";
+import CourseCard from '../../ui/CourseCard/CourseCard';
+import Background from "../../ui/Background/Background";
+import TopPanel from "../../ui/TopPanel/TopPanel";
 import radiumLogo from "../../images/радиум лого.svg";
 import { useNavigate } from "react-router-dom";
 

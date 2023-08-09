@@ -2,18 +2,18 @@ import React, { FC, useEffect } from 'react';
 import styles from './CourseLanding.module.scss'
 import kotlinBanner from '../../images/Баннер.png'
 import telegramLogo from "../../images/telegram-logo.svg"
-import TextSection from "../../components/TextSection/TextSection";
-import CourseCard from "../../components/CourseCard/CourseCard";
-import Card from "../../components/Card/Card";
-import ProfilePicture from "../../components/ProfilePicture/ProfilePicture";
-import Background from "../../components/Background/Background";
-import TopPanel from "../../components/TopPanel/TopPanel";
+import TextSection from "../../ui/TextSection/TextSection";
+import CourseCard from "../../ui/CourseCard/CourseCard";
+import Card from "../../ui/Card/Card";
+import ProfilePicture from "../../ui/ProfilePicture/ProfilePicture";
+import Background from "../../ui/Background/Background";
+import TopPanel from "../../ui/TopPanel/TopPanel";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { Author, Link } from "../../interfaces/course.interface";
 import { getCourse } from "../../store/actionCreators/actionCreatorsCourse";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchUser } from "../../store/actionCreators/actionCreatorsAuth";
-import MenuItem from "../../components/MenuItem/MenuItem";
+import MenuItem from "../../ui/MenuItem/MenuItem";
 
 const CourseLanding: FC = () => {
     const description_courseWrap1 = '24 темы, 5 месяцев';

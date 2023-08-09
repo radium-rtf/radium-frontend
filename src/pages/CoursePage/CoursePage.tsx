@@ -2,19 +2,19 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import styles from "./CoursePage.module.scss";
 import {getCourse, getPage} from '../../store/actionCreators/actionCreatorsCourse';
-import Background from "../../components/Background/Background";
-import TopPanel from "../../components/TopPanel/TopPanel";
+import Background from "../../ui/Background/Background";
+import TopPanel from "../../ui/TopPanel/TopPanel";
 import * as Icons from "../../icons/icons"
-import LinearProgress from "../../components/LinearProgress/LinearProgress";
-import MenuItem from "../../components/MenuItem/MenuItem";
-import List from "../../components/List/List";
+import LinearProgress from "../../ui/LinearProgress/LinearProgress";
+import MenuItem from "../../ui/MenuItem/MenuItem";
+import List from "../../ui/List/List";
 import { getPluralScore } from "../../utils/utils";
-import Button from "../../components/Button/Button";
+import Button from "../../ui/Button/Button";
 import { fetchUser } from "../../store/actionCreators/actionCreatorsAuth";
 import {useNavigate, useParams} from "react-router-dom";
 import { Module, Section } from '../../interfaces/module.interface';
-import SectionCard from "../../components/Section/SectionCard";
-import RadialProgress from "../../components/RadialProgress/RadialProgress";
+import SectionCard from "../../ui/Section/SectionCard";
+import RadialProgress from "../../ui/RadialProgress/RadialProgress";
 
 const CoursePage = () => {
     // FIXME: подменные данные / моки, заменить реальными

@@ -1,15 +1,15 @@
 import { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import Button from '../../components/Button/Button';
+import Button from '../../ui/Button/Button';
 import { emailValidator } from "../../constData";
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchUser, login } from '../../store/actionCreators/actionCreatorsAuth';
 import { IUser } from '../../interfaces/user.interface';
 import styles from './AuthPage.module.scss';
-import TextField from '../../components/TextField/TextField';
+import TextField from '../../ui/TextField/TextField';
 import * as Icons from '../../icons/icons'
-import Background from "../../components/Background/Background";
+import Background from "../../ui/Background/Background";
 
 const AuthPage: FC = () => {
     const [visible, setVisible] = useState(false);

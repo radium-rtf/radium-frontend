@@ -7,6 +7,7 @@ interface BigTextFieldProps {
     postfix?: string,
     icon?: JSX.Element,  
     width?: number | string,
+    text?: string,
 }
 
 const BigTextField: FC<BigTextFieldProps> = ({
@@ -15,11 +16,13 @@ const BigTextField: FC<BigTextFieldProps> = ({
     postfix,
     icon,
     width,
+    text
 }) => {
     return <label
         className={styles['text-area']}
     >
         <textarea>
+            {text}
         </textarea>
     </label>
 }

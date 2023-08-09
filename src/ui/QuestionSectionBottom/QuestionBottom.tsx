@@ -8,7 +8,7 @@ interface QuestionBottomProps {
     attempts?: number
     score?: number
     maxScore?: number
-    state: "initial" | "correct" | "partial" | "incorrect"
+    state?: "initial" | "correct" | "partial" | "incorrect"
     hasReset: boolean
     submitMode: "submit" | "send"
 }

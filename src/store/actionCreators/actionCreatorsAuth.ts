@@ -73,3 +73,13 @@ export const updateProfileUser = (token: string, name: string, avatar: string) =
     }
 }
 
+export const updatePassword = (currentPassword: string, newPassword: string) => {
+    return async (dispatch: AppDispatch) => {
+        try {
+            const token: string = (await axios.patch<string>('', {current: currentPassword, new: newPassword})).data;
+
+        } catch (error) {
+            ErrorService.getErrorMessage(error as AxiosError);
+        }
+    }
+}

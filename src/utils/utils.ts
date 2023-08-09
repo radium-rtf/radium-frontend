@@ -50,3 +50,19 @@ export const getTypeAnswer = (answer: string): TypeAnswer => {
     return state;
 
 }
+
+export function getState(maxScore: number = 10, score?: number): 'correct' | 'incorrect' | 'partial' | 'initial' {
+    if (score === undefined) {
+        return 'initial';
+    }
+
+    if (score === maxScore) {
+        return 'correct';
+    }
+
+    if (score === 0) {
+        return 'incorrect';
+    }
+
+    return 'partial';
+}

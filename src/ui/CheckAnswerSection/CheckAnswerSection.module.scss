@@ -1,0 +1,12 @@
+@import "../../scss/index.scss";
+
+.wrapper {
+    background-color: $bg;
+    
+}
+
+.card {
+  padding: 24px;
+  background: $bg-card;
+  border-radius: 16px;
+}

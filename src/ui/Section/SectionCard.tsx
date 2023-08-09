@@ -5,7 +5,7 @@ import TextSection from "../TextSection/TextSection";
 import ShortAnswerSection from "../ShortAnswerSection/ShortAnswerSection";
 import SingleChoiceSection from "../SingleChoiceSection/SingleChoiceSection";
 import MultiChoiceSection from "../MultiChoiceSection/MultiChoiceSection";
-import { TypeAnswer } from "../../utils/utils";
+import { TypeAnswer, getState } from "../../utils/utils";
 import { addAnswer, getPage } from "../../store/actionCreators/actionCreatorsCourse";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { storeConfig } from "../../store";
@@ -79,19 +79,3 @@ const SectionCard: FC<Section> = ({
 }
 
 export default SectionCard;
-
-function getState(maxScore: number = 10, score?: number): 'correct' | 'incorrect' | 'partial' | 'initial' {
-    if (score === undefined) {
-        return 'initial';
-    }
-
-    if (score === maxScore) {
-        return 'correct';
-    }
-
-    if (score === 0) {
-        return 'incorrect';
-    }
-
-    return 'partial';
-}

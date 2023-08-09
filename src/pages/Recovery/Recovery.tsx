@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import Button from '../../components/Button/Button';
+import Button from '../../ui/Button/Button';
 import { IUser } from '../../interfaces/user.interface';
 import styles from './Recovery.module.scss';
-import TextField from '../../components/TextField/TextField';
+import TextField from '../../ui/TextField/TextField';
 
 const Recovery: FC = () => {
     const navigate = useNavigate();

@@ -1,63 +1,16 @@
 import React, { FC, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchUser, login } from '../../store/actionCreators/actionCreatorsAuth';
+import { fetchUser } from '../../store/actionCreators/actionCreatorsAuth';
 import styles from './TeacherMyCourses.module.scss';
 import { getCourse, getCourses } from '../../store/actionCreators/actionCreatorsCourse';
-import CourseCard from '../../components/CourseCard/CourseCard';
-import Background from "../../components/Background/Background";
-import TopPanel from "../../components/TopPanel/TopPanel";
+import CourseCard from '../../ui/CourseCard/CourseCard';
+import Background from "../../ui/Background/Background";
+import TopPanel from "../../ui/TopPanel/TopPanel";
 import radiumLogo from "../../images/радиум лого.svg";
-import kotlinLogo from "../../images/kotlin_logo.png";
-import ava from "../../images/кач.jpg";
 import { useNavigate } from "react-router-dom";
- 
-const tasks = [
-    {
-        id: 1,
-        name: 'Основы программирования на Kotlin',
-        logo: kotlinLogo,
-        title: 'Классы данных',
-        subtitle: 'Классы и наследование',
-        profileImage: ava,
-        checkerName: 'Алехандро',
-        comment: '*комментарий*',
-    },
-    {
-        id: 2,
-        name: 'Основы программирования на Kotlin',
-        logo: kotlinLogo,
-        title: 'Классы данных',
-        subtitle: 'Классы и наследование',
-        profileImage: ava,
-        checkerName: 'Алехандро',
-        comment: '*комментарий*',
-    },
-]
- 
-const teacherCourses = [
-    {
-        id: 1,
-        name: 'Основы программирования на Kotlin',
-        logo: kotlinLogo,
-    },
-    {
-        id: 2,
-        name: 'Основы программирования на Kotlin',
-        logo: kotlinLogo,
-    },
-    {
-        id: 3,
-        name: 'Основы программирования на Kotlin',
-        logo: kotlinLogo,
-    },
-    {
-        id: 3,
-        name: 'Основы программирования на Kotlin',
-        logo: kotlinLogo,
-    },
-]
- 
- 
+import { tasks, teacherCourses } from '../../constData';
+
+
 const TeacherMyCourses: FC = () => {
     const dispatch = useAppDispatch();
     // const {courses, isLoading} = useAppSelector(state => state.course);

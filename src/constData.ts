@@ -50,6 +50,52 @@ export const uncheckedTasks = [
     },
 ]
 
+export const tasks = [
+    {
+        id: 1,
+        name: 'Основы программирования на Kotlin',
+        logo: kotlinLogo,
+        title: 'Классы данных',
+        subtitle: 'Классы и наследование',
+        profileImage: ava,
+        checkerName: 'Алехандро',
+        comment: '*комментарий*',
+    },
+    {
+        id: 2,
+        name: 'Основы программирования на Kotlin',
+        logo: kotlinLogo,
+        title: 'Классы данных',
+        subtitle: 'Классы и наследование',
+        profileImage: ava,
+        checkerName: 'Алехандро',
+        comment: '*комментарий*',
+    },
+]
+ 
+export const teacherCourses = [
+    {
+        id: 1,
+        name: 'Основы программирования на Kotlin',
+        logo: kotlinLogo,
+    },
+    {
+        id: 2,
+        name: 'Основы программирования на Kotlin',
+        logo: kotlinLogo,
+    },
+    {
+        id: 3,
+        name: 'Основы программирования на Kotlin',
+        logo: kotlinLogo,
+    },
+    {
+        id: 3,
+        name: 'Основы программирования на Kotlin',
+        logo: kotlinLogo,
+    },
+]
+
 export const courses: string[] = [
     'Основы программирования на котлин 1',
     'Основы программирования на котлин 2',

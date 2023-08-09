@@ -1,16 +1,18 @@
 import { FC, useEffect } from "react";
-import Background from "../../components/Background/Background";
-import TopPanel from "../../components/TopPanel/TopPanel";
+import Background from "../../ui/Background/Background";
+import TopPanel from "../../ui/TopPanel/TopPanel";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { fetchUser } from "../../store/actionCreators/actionCreatorsAuth";
 import styles from './TeacherTasks.module.scss';
-import CourseCard from "../../components/CourseCard/CourseCard";
+import CourseCard from "../../ui/CourseCard/CourseCard";
 import { checkedTasks, uncheckedTasks } from "../../constData";
+import { useNavigate } from "react-router-dom";
 
 const TeacherTasks: FC = () => {
     const { name, avatar } = useAppSelector(state => state.profile);
     const dispatch = useAppDispatch();
     const token = useAppSelector(state => state.auth.accessToken);
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(fetchUser(token));
@@ -32,6 +34,7 @@ const TeacherTasks: FC = () => {
                                     checkerName={task.checkerName}
                                     profileImage={task.profileImage}
                                     comment={task.comment}
+                                    onClick={() => navigate(`/tasks-check/${task.id}-check`)}
                                     progress={0.34}
                                     topic='Следующая тема'
                                     state='task-unchecked'

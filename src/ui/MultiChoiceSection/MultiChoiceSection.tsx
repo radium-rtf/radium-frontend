@@ -1,12 +1,11 @@
-import {FC, FormEventHandler} from "react"
-import Card from "../Card/Card"
+import { FC, FormEventHandler } from "react"
+import Card from "../Card/Card";
 import QuestionHeader from "../QuestionHeader/QuestionHeader"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import QuestionBottom from "../QuestionSectionBottom/QuestionBottom";
-import RadioButton from "../RadioButton/RadioButton";
 import Checkbox from "../Checkbox/Checkbox";
-import {RegisterOptions, UseFormRegisterReturn} from "react-hook-form";
+import { RegisterOptions, UseFormRegisterReturn } from "react-hook-form";
 
 interface MultiChoiceSectionProps {
     register?: (name: string, options?: RegisterOptions) => UseFormRegisterReturn
@@ -31,26 +30,26 @@ const MultiChoiceSection: FC<MultiChoiceSectionProps> = ({
     onSubmit,
     onReset,
 }) => <Card>
-    <form onSubmit={onSubmit} onReset={onReset}>
-        <QuestionHeader type="question" />
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{question}</ReactMarkdown>
-        {choices?.map((choice) =>
-            <Checkbox
-                register={register}
-                label={choice}
-                name="answer"
-                value={choice}
+        <form onSubmit={onSubmit} onReset={onReset}>
+            <QuestionHeader type="question" />
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{question}</ReactMarkdown>
+            {choices?.map((choice) =>
+                <Checkbox
+                    register={register}
+                    label={choice}
+                    name="answer"
+                    value={choice}
+                />
+            )}
+            <QuestionBottom
+                attempts={attempts}
+                score={score}
+                maxScore={maxScore}
+                state={state}
+                hasReset={true}
+                submitMode="submit"
             />
-        )}
-        <QuestionBottom
-            attempts={attempts}
-            score={score}
-            maxScore={maxScore}
-            state={state}
-            hasReset={true}
-            submitMode="submit"
-        />
-    </form>
-</Card>
+        </form>
+    </Card>
 
 export default MultiChoiceSection
