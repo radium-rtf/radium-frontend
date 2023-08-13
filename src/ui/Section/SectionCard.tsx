@@ -15,65 +15,68 @@ const SectionCard: FC<Section> = ({
     id,
     pageId,
     order,
-    text,
-    shortanswer,
-    choice,
-    multichoice,
+    type,
+    content,
+    maxScore,
+    score,
+    variants,
+    answer,
+    answers
 }) => {
     const { handleSubmit, register } = useForm<{ answer: string | string[] }>();
     const token = useAppSelector(state => state.auth.accessToken);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(getPage(token, pageId));
+        dispatch(getPage(token, pageId || ''));
     }, []);
 
     const answerHandler: SubmitHandler<{ answer: string | string[] }> = ({ answer }) => {
-        if (shortanswer && typeof answer === 'string') {
+        if (type === 'shortAnswer' && typeof answer === 'string') {
             dispatch(addAnswer(token, { shortAnswer: { answer, id } }));
         }
 
-        if (choice && typeof answer === 'string') {
+        if (type === 'choice' && typeof answer === 'string') {
             dispatch(addAnswer(token, { choice: { answer, id } }));
         }
 
-        if (multichoice && Array.isArray(answer)) {
+        if (type === 'multiChoice' && Array.isArray(answer)) {
             dispatch(addAnswer(token, { multiChoice: { answer, id } }));
         }
 
-        dispatch(getPage(token, pageId));
+        dispatch(getPage(token, pageId || ''));
     }
 
-    return text
-        ? <TextSection>{text.content}</TextSection>
-        : shortanswer
+    return content
+        ? <TextSection>{content}</TextSection>
+        : type === 'shortAnswer'
             ? <ShortAnswerSection
                 register={() => register('answer')}
                 onSubmit={handleSubmit(answerHandler)}
-                question={shortanswer.question}
-                maxScore={shortanswer.maxScore}
-                score={shortanswer.score}
-                state={getState(shortanswer.maxScore, shortanswer.score)}
+                question={content}
+                maxScore={maxScore}
+                score={score}
+                state={getState(maxScore, score)}
             />
-            : choice
+            : type === 'choice'
                 ? <SingleChoiceSection
                     register={() => register('answer')}
                     onSubmit={handleSubmit(answerHandler)}
-                    question={choice.question}
-                    choices={choice.variants}
-                    maxScore={choice.maxScore}
-                    score={choice.score}
-                    state={getState(choice.maxScore, choice.score)}
+                    question={content}
+                    choices={variants}
+                    maxScore={maxScore}
+                    score={score}
+                    state={getState(maxScore, score)}
                 />
-                : multichoice
+                : type === 'multiChoice'
                     ? <MultiChoiceSection
                         register={() => register('answer')}
                         onSubmit={handleSubmit(answerHandler)}
-                        question={multichoice.question}
-                        choices={multichoice.variants}
-                        maxScore={multichoice.maxScore}
-                        score={multichoice.score}
-                        state={getState(multichoice.maxScore, multichoice.score)}
+                        question={content}
+                        choices={variants}
+                        maxScore={maxScore}
+                        score={score}
+                        state={getState(maxScore, score)}
                     />
                     : <></>
 }

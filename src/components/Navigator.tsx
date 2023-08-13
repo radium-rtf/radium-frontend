@@ -14,10 +14,6 @@ import StatementTeatcher from "../pages/Statement/StatementTeatcher";
 
 const Navigator: FC = () => {
 
-    useEffect(() => {
-        localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTc1MmQzYS1jMzM2LTRlN2EtOGYzYy1kNDdiYzA1YmE3NzAiLCJleHAiOjE2OTA0ODM1ODd9.28aMobJBsMtZIqqkGYPYLa3IgkXC6S6D49bHZrTNrug')
-    },[])
-
     return (
         <BrowserRouter>
             <Routes>

@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../ui/Button/Button';
@@ -10,6 +10,7 @@ import styles from './AuthPage.module.scss';
 import TextField from '../../ui/TextField/TextField';
 import * as Icons from '../../icons/icons'
 import Background from "../../ui/Background/Background";
+import {authSlice} from '../../store/slices/authSlice';
 
 const AuthPage: FC = () => {
     const [visible, setVisible] = useState(false);
@@ -19,11 +20,14 @@ const AuthPage: FC = () => {
     const token = useAppSelector(state => state.auth.accessToken);
 
     const onLoginHandler: SubmitHandler<IUser> = (data: IUser) => {
-        if (!data.email.endsWith("@urfu.me")) data.email += "@urfu.me"
-        dispatch(login(data));
-        dispatch(fetchUser(token));
+        // if (!data.email.endsWith("@urfu.me")) data.email += "@urfu.me"
+        // dispatch(login(data));
+        // dispatch(fetchUser(token));
+        // navigate('/my-courses');
+        // reset();
+
+        localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhNmUxNzk5MS1lMDUzLTRlNWItODJiZC0zMDU5YjM4OTQyODYiLCJleHAiOjE2OTE2OTQwNjV9.tZdFOtus9-dapnxjC9OZHxh-Nao_sSUCiHJsB1ecpBU');
         navigate('/my-courses');
-        reset();
     }
 
     return <>

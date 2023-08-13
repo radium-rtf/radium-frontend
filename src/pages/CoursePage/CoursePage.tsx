@@ -71,23 +71,26 @@ const CoursePage = () => {
                     iconSize="small"
                     label={group}
                 />}
-                <List
+                {course.modules.length ? 
+                    (<List
                     items={mapItems(course.modules)}
                     defaultSelected={params.id}
-                    onSelected={toPage}
-                />
+                    onSelected={toPage}/>) : <></>}
             </div>
             <div className={styles.page}>
                 <h1>{name}</h1>
-                {sections.sort((s) => s.order)?.map((section: Section) =>
+                {sections.sort((s) => s.order!)?.map((section: Section) =>
                     <SectionCard
                         id={section.id}
                         pageId={section.pageId}
+                        content={section.content}
                         order={section.order}
-                        text={section.text}
-                        shortanswer={section.shortanswer}
-                        choice={section.choice}
-                        multichoice={section.multichoice}
+                        type={section.type}
+                        variants={section.variants}
+                        maxScore={section.maxScore}
+                        score={section.score}
+                        answer={section.answer}
+                        answers={section.answers}
                     />)}
                 <div className={styles.footer}>
                     <LinearProgress color="primary" progress={pageScore / pageTotalScore}/>

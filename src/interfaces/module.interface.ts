@@ -15,35 +15,26 @@ export interface IStatementUser {
 
 export interface Page {
     id?: string
+    maxScore?: number;
     name: string
     slug: string
     sections: Section[]
+    order?: number;
+    score?: number;
 }
 
 export interface Section {
-    id: string
-    pageId: string
-    order: number
-    text?: {
-        content: string
-    }
-    shortanswer?: {
-        question: string
-        maxScore: number
-        score: number
-    }
-    choice?: {
-        question: string
-        maxScore: number
-        score: number
-        variants: string[]
-    }
-    multichoice?: {
-        question: string
-        maxScore: number
-        score: number
-        variants: string[]
-    }
+    answer?: string;
+    answers?: string[];
+    content: string;
+    id?: string;
+    maxScore?: number;
+    order?: number;
+    pageId?: string;
+    score?: number;
+    type?: string;
+    variants: string[];
+    verdict?: string;
 }
 
 export interface IModuleCourse {

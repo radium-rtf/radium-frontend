@@ -89,6 +89,12 @@ const TopPanel: FC<TopPanelProps> = ({
                         label="Мои курсы"
                         onClick={() => navigate('/my-courses')}
                     />
+                     <MenuItem
+                        icon={Icons.Statement}
+                        iconSize="small"
+                        label="Ведомость"
+                        onClick={() => navigate('/statement')}
+                    />
                     <MenuItem
                         icon={Icons.Group}
                         iconSize="small"
