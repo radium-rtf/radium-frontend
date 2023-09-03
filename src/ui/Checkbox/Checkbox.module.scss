@@ -36,12 +36,12 @@
   }
 
   input:enabled:checked:hover {
-    background: url("../../images/checkmark.svg") no-repeat center, $accent-primary + white * 0.1;
+    background: url("../../images/checkmark.svg") no-repeat center, $accent-primary;
     border-color: $black-02;
   }
 
   input:enabled:checked:active {
-    background: url("../../images/checkmark.svg") no-repeat center, $accent-primary - white * 0.1;
+    background: url("../../images/checkmark.svg") no-repeat center, $accent-primary;
     border-color: $black-02;
   }
 }

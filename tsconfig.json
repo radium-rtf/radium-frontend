@@ -1,22 +1,25 @@
 {
 	"compilerOptions": {
-		"target": "es2020",
+		"target": "ESNext",
 		"lib": ["dom", "dom.iterable", "esnext"],
-		"allowJs": true,
+		"allowJs": false,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"strict": true,
-		"strictFunctionTypes": true,
 		"forceConsistentCasingInFileNames": true,
-		"noFallthroughCasesInSwitch": true,
 		"module": "esnext",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
-		"isolatedModules": false,
-		"noImplicitAny": false,
+		"isolatedModules": true,
 		"noEmit": true,
-		"jsx": "react-jsx"
+		"noFallthroughCasesInSwitch": true,
+		"jsx": "react-jsx",
+		"types": ["vite/client", "vite-plugin-svgr/client", "node"],
+		"paths": {
+			"@/*": ["./src/*"]
+		}
 	},
-	"include": ["src"]
+	"include": ["src"],
+	"references": [{ "path": "./tsconfig.node.json" }]
 }

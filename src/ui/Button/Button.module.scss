@@ -50,12 +50,12 @@
   }
 
   &:enabled:hover {
-    background: $accent-secondary + white * 0.1;
+    background: $accent-secondary;
     border-color: $black-02;
   }
 
   &:enabled:active {
-    background: $accent-secondary - white * 0.1;
+    background: $accent-secondary;
     border-color: $black-02;
   }
 }
@@ -73,11 +73,11 @@
   }
 
   &:enabled:hover {
-    background: $accent-destructive + white * 0.1;
+    background: $accent-destructive;
   }
 
   &:enabled:active {
-    background: $accent-destructive - white * 0.1;
+    background: $accent-destructive;
   }
 }
 

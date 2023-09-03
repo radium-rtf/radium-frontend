@@ -12,10 +12,10 @@
   cursor: pointer;
 
   &:hover {
-    background: $bg-card + white * 0.05;
+    background: $bg-card;
   }
 
   &:active {
-    background: $bg-card - white * 0.05;
+    background: $bg-card;
   }
 }
