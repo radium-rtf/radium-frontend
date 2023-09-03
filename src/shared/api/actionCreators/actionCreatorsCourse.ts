@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import axios from '../../../axios';
+import axios from '../axios';
 import { IAnswer } from "../../../interfaces/answer.interface";
 import { Course } from '../../../interfaces/course.interface';
 import { IModuleCourse, Page, Section } from '../../../interfaces/module.interface';

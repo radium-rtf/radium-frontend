@@ -1,5 +1,5 @@
 import { AxiosError } from "axios"
-import axios from "../../../axios"
+import axios from "../axios"
 import { IUser } from "../../../interfaces/user.interface"
 import { ErrorService } from "../../../services/error.service"
 import { accessTokenType } from "../../../types/tokenType"
