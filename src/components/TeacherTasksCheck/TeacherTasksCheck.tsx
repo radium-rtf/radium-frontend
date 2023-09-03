@@ -7,7 +7,7 @@ import Background from '../../ui/Background/Background';
 import CourseCard from '../../ui/CourseCard/CourseCard';
 import styles from './TeacherTasksCheck.module.scss';
 import ShortAnswerSection from '../../ui/ShortAnswerSection/ShortAnswerSection';
-import { getState } from '../../utils/utils';
+import { getState } from '@/shared/libs/utils';
 
 const TeacherTasksCheck: FC = () => {
     const { name, avatar } = useAppSelector(state => state.profile);

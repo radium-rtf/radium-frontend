@@ -8,7 +8,7 @@ import * as Icons from "../../shared/ui/icons"
 import LinearProgress from "../../ui/LinearProgress/LinearProgress";
 import MenuItem from "../../ui/MenuItem/MenuItem";
 import List from "../../ui/List/List";
-import { getPluralScore } from "../../utils/utils";
+import { getPluralScore } from "@/shared/libs/utils";
 import Button from "../../ui/Button/Button";
 import { fetchUser } from "../../store/actionCreators/actionCreatorsAuth";
 import {useNavigate, useParams} from "react-router-dom";

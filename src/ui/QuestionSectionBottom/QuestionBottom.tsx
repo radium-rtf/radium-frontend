@@ -2,7 +2,7 @@ import {FC} from "react"
 import styles from "./QuestionBottom.module.scss"
 import Button from "../Button/Button"
 import * as Icons from "../../shared/ui/icons"
-import {getPluralAttempts, getPluralLeft, getPluralScore} from "../../utils/utils"
+import {getPluralAttempts, getPluralLeft, getPluralScore} from "@/shared/libs/utils"
 
 interface QuestionBottomProps {
     attempts?: number

@@ -5,7 +5,7 @@ import TextSection from "../TextSection/TextSection";
 import ShortAnswerSection from "../ShortAnswerSection/ShortAnswerSection";
 import SingleChoiceSection from "../SingleChoiceSection/SingleChoiceSection";
 import MultiChoiceSection from "../MultiChoiceSection/MultiChoiceSection";
-import { TypeAnswer, getState } from "../../utils/utils";
+import { TypeAnswer, getState } from "@/shared/libs/utils";
 import { addAnswer, getPage } from "../../store/actionCreators/actionCreatorsCourse";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { storeConfig } from "../../store";
