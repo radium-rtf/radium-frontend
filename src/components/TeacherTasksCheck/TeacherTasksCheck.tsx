@@ -1,12 +1,12 @@
 import { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { checkedTasks, uncheckedTasks } from '../../constData';
-import { useAppDispatch, useAppSelector } from '@/shared/api/store';
+import { useAppSelector, useAppDispatch } from '@/shared/api/store'
 import { fetchUser } from '@/shared/api/actionCreators/actionCreatorsAuth';
-import Background from '../../ui/Background/Background';
-import CourseCard from '../../ui/CourseCard/CourseCard';
+import Background from '@/shared/ui/Background/Background';
+import CourseCard from '@/shared/ui/CourseCard/CourseCard';
 import styles from './TeacherTasksCheck.module.scss';
-import ShortAnswerSection from '../../ui/ShortAnswerSection/ShortAnswerSection';
+import ShortAnswerSection from '@/shared/ui/ShortAnswerSection/ShortAnswerSection';
 import { getState } from '@/shared/libs/utils';
 
 const TeacherTasksCheck: FC = () => {

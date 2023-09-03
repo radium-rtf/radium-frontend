@@ -1,19 +1,19 @@
 import { useEffect } from 'react';
 import styles from "./CoursePage.module.scss";
 import {getCourse, getPage} from '@/shared/api/actionCreators/actionCreatorsCourse';
-import Background from "../../ui/Background/Background";
-import TopPanel from "../../ui/TopPanel/TopPanel";
+import Background from "@/shared/ui/Background/Background";
+import TopPanel from "@/shared/ui/TopPanel/TopPanel";
 import * as Icons from "../../shared/ui/icons"
-import LinearProgress from "../../ui/LinearProgress/LinearProgress";
-import MenuItem from "../../ui/MenuItem/MenuItem";
-import List from "../../ui/List/List";
+import LinearProgress from "@/shared/ui/LinearProgress/LinearProgress";
+import MenuItem from "@/shared/ui/MenuItem/MenuItem";
+import List from "@/shared/ui/List/List";
 import { getPluralScore } from "@/shared/libs/utils";
-import Button from "../../ui/Button/Button";
+import Button from "@/shared/ui/Button/Button";
 import { fetchUser } from "@/shared/api/actionCreators/actionCreatorsAuth";
 import {useNavigate, useParams} from "react-router-dom";
 import { Module, Section } from '../../interfaces/module.interface';
-import SectionCard from "../../ui/Section/SectionCard";
-import RadialProgress from "../../ui/RadialProgress/RadialProgress";
+import SectionCard from "@/shared/ui/Section/SectionCard";
+import RadialProgress from "@/shared/ui/RadialProgress/RadialProgress";
 import {useAppDispatch, useAppSelector} from "@/shared/api/store";
 
 const CoursePage = () => {

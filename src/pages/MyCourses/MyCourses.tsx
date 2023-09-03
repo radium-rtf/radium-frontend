@@ -3,9 +3,9 @@ import {useAppDispatch, useAppSelector} from '@/shared/api/store';
 import {fetchUser, login} from '@/shared/api/actionCreators/actionCreatorsAuth';
 import styles from './MyCourses.module.scss';
 import { getCourse, getCourses } from '@/shared/api/actionCreators/actionCreatorsCourse';
-import CourseCard from '../../ui/CourseCard/CourseCard';
-import Background from "../../ui/Background/Background";
-import TopPanel from "../../ui/TopPanel/TopPanel";
+import CourseCard from '@/shared/ui/CourseCard/CourseCard';
+import Background from "@/shared/ui/Background/Background";
+import TopPanel from "@/shared/ui/TopPanel/TopPanel";
 import radiumLogo from "../../images/радиум лого.svg";
 import { useNavigate } from "react-router-dom";
 

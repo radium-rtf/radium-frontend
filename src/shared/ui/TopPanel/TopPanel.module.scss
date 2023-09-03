@@ -1,0 +1,44 @@
+@import "../../../scss/index";
+
+.panel {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  top: 0;
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent;
+  padding: 48px 48px 32px 48px;
+  min-height: 64px;
+  max-height: 128px;
+
+  > img {
+    width: 36px;
+    height: 36px;
+    margin-right: 16px;
+  }
+
+  > h2 {
+    margin-right: auto;
+    max-lines: 1;
+    max-height: 48px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  > label {
+    margin-right: 16px;
+  }
+}
+
+.menu {
+  position: absolute;
+  right: 24px;
+  width: 256px;
+
+  padding: 8px 0 8px 0;
+  border: 1px solid $white-01;
+  border-radius: 8px;
+  background: $bg-overlay;
+}

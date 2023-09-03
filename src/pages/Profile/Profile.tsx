@@ -1,17 +1,17 @@
 import React, { FC, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import Button from "../../ui/Button/Button";
-import TextField from "../../ui/TextField/TextField";
+import Button from "@/shared/ui/Button/Button";
+import TextField from "@/shared/ui/TextField/TextField";
 import empty from "../../images/empty-profile.png";
 import radiumLogo from "../../images/радиум лого.svg";
 import { IProfile } from "../../interfaces/user.interface";
 import styles from './Profile.module.scss';
 import { useAppDispatch, useAppSelector } from "@/shared/api/store";
-import Background from "../../ui/Background/Background";
-import TopPanel from "../../ui/TopPanel/TopPanel";
+import Background from "@/shared/ui/Background/Background";
+import TopPanel from "@/shared/ui/TopPanel/TopPanel";
 import * as Icons from "../../shared/ui/icons";
-import List from "../../ui/List/List";
+import List from "@/shared/ui/List/List";
 import line from '../../images/Rectangle 11.svg'
 import { useDispatch } from "react-redux";
 import { fetchUser, updateProfileUser } from "@/shared/api/actionCreators/actionCreatorsAuth";

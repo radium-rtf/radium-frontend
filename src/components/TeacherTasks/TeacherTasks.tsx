@@ -1,10 +1,10 @@
 import { FC, useEffect } from "react";
-import Background from "../../ui/Background/Background";
-import TopPanel from "../../ui/TopPanel/TopPanel";
+import Background from "@/shared/ui/Background/Background";
+import TopPanel from "@/shared/ui/TopPanel/TopPanel";
 import { useAppDispatch, useAppSelector } from "@/shared/api/store";
 import { fetchUser } from "@/shared/api/actionCreators/actionCreatorsAuth";
 import styles from './TeacherTasks.module.scss';
-import CourseCard from "../../ui/CourseCard/CourseCard";
+import CourseCard from "@/shared/ui/CourseCard/CourseCard";
 import { checkedTasks, uncheckedTasks } from "../../constData";
 import { useNavigate } from "react-router-dom";
 

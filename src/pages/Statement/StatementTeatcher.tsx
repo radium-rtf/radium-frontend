@@ -1,8 +1,8 @@
 import { FC, useEffect } from 'react';
-import Background from '../../ui/Background/Background';
-import List from '../../ui/List/List';
-import Table from '../../ui/Table/Table';
-import TopPanel from "../../ui/TopPanel/TopPanel";
+import Background from '@/shared/ui/Background/Background';
+import List from '@/shared/ui/List/List';
+import Table from '@/shared/ui/Table/Table';
+import TopPanel from "@/shared/ui/TopPanel/TopPanel";
 import { courses, statement, statementUser } from "../../constData";
 import * as Icons from "../../shared/ui/icons";
 import emptyAvatar from '../../images/empty-profile.png';
@@ -12,9 +12,9 @@ import { fetchUser } from "@/shared/api/actionCreators/actionCreatorsAuth";
 import styles from './StatementTeatcher.module.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import TeacherTasks from '../../components/TeacherTasks/TeacherTasks';
-import CourseCard from '../../ui/CourseCard/CourseCard';
+import CourseCard from '@/shared/ui/CourseCard/CourseCard';
 import TeacherTasksCheck from '../../components/TeacherTasksCheck/TeacherTasksCheck';
-import CheckAnswerSection from '../../ui/CheckAnswerSection/CheckAnswerSection';
+import CheckAnswerSection from '@/shared/ui/CheckAnswerSection/CheckAnswerSection';
 import {useAppDispatch, useAppSelector} from "@/shared/api/store";
 
 let content: JSX.Element;

@@ -1,16 +1,16 @@
 import { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import Button from '../../ui/Button/Button';
+import Button from '@/shared/ui/Button/Button';
 // import Error from "../../components/Error/Error";
 import { useAppDispatch } from '@/shared/api/store';
 import { registration } from '@/shared/api/actionCreators/actionCreatorsAuth';
 import { IUser } from '../../interfaces/user.interface';
 import styles from './RegisterPage.module.scss';
 import { emailValidator } from '../../constData';
-import TextField from '../../ui/TextField/TextField';
+import TextField from '@/shared/ui/TextField/TextField';
 import * as Icons from '../../shared/ui/icons'
-import Background from "../../ui/Background/Background";
+import Background from "@/shared/ui/Background/Background";
 
 const RegisterPage: FC = () => {
 

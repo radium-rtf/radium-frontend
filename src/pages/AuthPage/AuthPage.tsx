@@ -1,15 +1,15 @@
 import { FC, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import Button from '../../ui/Button/Button';
+import Button from '@/shared/ui/Button/Button';
 import { emailValidator } from "../../constData";
 import { useAppDispatch, useAppSelector } from '@/shared/api/store';
 import { fetchUser, login } from '@/shared/api/actionCreators/actionCreatorsAuth';
 import { IUser } from '../../interfaces/user.interface';
 import styles from './AuthPage.module.scss';
-import TextField from '../../ui/TextField/TextField';
+import TextField from '@/shared/ui/TextField/TextField';
 import * as Icons from '../../shared/ui/icons'
-import Background from "../../ui/Background/Background";
+import Background from "@/shared/ui/Background/Background";
 import {authSlice} from '@/shared/api/slices/authSlice';
 
 const AuthPage: FC = () => {

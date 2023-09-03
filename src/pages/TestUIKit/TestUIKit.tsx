@@ -1,7 +1,7 @@
 import { FC } from "react";
-import Table from "../../ui/Table/Table";
+import Table from "@/shared/ui/Table/Table";
 import { courses, statement } from "../../constData";
-import CheckAnswerSection from "../../ui/CheckAnswerSection/CheckAnswerSection";
+import CheckAnswerSection from "@/shared/ui/CheckAnswerSection/CheckAnswerSection";
 
 const TestUIKit: FC = () => {
 

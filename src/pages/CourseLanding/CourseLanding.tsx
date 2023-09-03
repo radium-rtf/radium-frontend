@@ -2,17 +2,17 @@ import React, { FC, useEffect } from 'react';
 import styles from './CourseLanding.module.scss'
 import kotlinBanner from '../../images/Баннер.png'
 import telegramLogo from "../../images/telegram-logo.svg"
-import TextSection from "../../ui/TextSection/TextSection";
-import CourseCard from "../../ui/CourseCard/CourseCard";
-import Card from "../../ui/Card/Card";
-import ProfilePicture from "../../ui/ProfilePicture/ProfilePicture";
-import Background from "../../ui/Background/Background";
-import TopPanel from "../../ui/TopPanel/TopPanel";
+import TextSection from "@/shared/ui/TextSection/TextSection";
+import CourseCard from "@/shared/ui/CourseCard/CourseCard";
+import Card from "@/shared/ui/Card/Card";
+import ProfilePicture from "@/shared/ui/ProfilePicture/ProfilePicture";
+import Background from "@/shared/ui/Background/Background";
+import TopPanel from "@/shared/ui/TopPanel/TopPanel";
 import { Author, Link } from "../../interfaces/course.interface";
 import { getCourse } from "@/shared/api/actionCreators/actionCreatorsCourse";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchUser } from "@/shared/api/actionCreators/actionCreatorsAuth";
-import MenuItem from "../../ui/MenuItem/MenuItem";
+import MenuItem from "@/shared/ui/MenuItem/MenuItem";
 import {useAppDispatch, useAppSelector} from "@/shared/api/store";
 
 const CourseLanding: FC = () => {
