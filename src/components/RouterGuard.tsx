@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useAppSelector } from "../hooks/redux"
+import { useAppSelector } from "@/shared/api/store"
 import { Navigate, useLocation, } from "react-router-dom";
 
 const RouterGuard: FC<any> = ({ children }) => {

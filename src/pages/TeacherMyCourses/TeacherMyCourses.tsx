@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchUser } from '../../store/actionCreators/actionCreatorsAuth';
+import { useAppDispatch, useAppSelector } from '@/shared/api/store';
+import { fetchUser } from '@/shared/api/actionCreators/actionCreatorsAuth';
 import styles from './TeacherMyCourses.module.scss';
-import { getCourse, getCourses } from '../../store/actionCreators/actionCreatorsCourse';
+import { getCourse, getCourses } from '@/shared/api/actionCreators/actionCreatorsCourse';
 import CourseCard from '../../ui/CourseCard/CourseCard';
 import Background from "../../ui/Background/Background";
 import TopPanel from "../../ui/TopPanel/TopPanel";
@@ -18,17 +18,17 @@ const TeacherMyCourses: FC = () => {
     const user = useAppSelector(state => state.profile);
     const { name, avatar } = useAppSelector(state => state.profile);
     const navigate = useNavigate();
- 
+
     useEffect(() => {
         dispatch(getCourses(token));
         dispatch(fetchUser(token));
     }, [dispatch]);
- 
+
     const detailCourseHandler = (id: string) => {
         navigate(`/course/${id}`)
         dispatch(getCourse(id, token));
     }
- 
+
     return (
         <>
             <Background />
@@ -61,7 +61,7 @@ const TeacherMyCourses: FC = () => {
                 <div className={styles.teacherCoursesHeader}>
                     <h2>Текущие курсы</h2>
                     <div className={styles.teacherCourses}>
- 
+
                         {teacherCourses.map((course) =>
                             <CourseCard
                                 key={course.id}

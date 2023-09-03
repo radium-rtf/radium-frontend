@@ -1,8 +1,8 @@
 import { FC, useEffect } from "react";
 import Background from "../../ui/Background/Background";
 import TopPanel from "../../ui/TopPanel/TopPanel";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { fetchUser } from "../../store/actionCreators/actionCreatorsAuth";
+import { useAppDispatch, useAppSelector } from "@/shared/api/store";
+import { fetchUser } from "@/shared/api/actionCreators/actionCreatorsAuth";
 import styles from './TeacherTasks.module.scss';
 import CourseCard from "../../ui/CourseCard/CourseCard";
 import { checkedTasks, uncheckedTasks } from "../../constData";

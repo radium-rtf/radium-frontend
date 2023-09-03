@@ -1,8 +1,8 @@
 import { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { checkedTasks, uncheckedTasks } from '../../constData';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchUser } from '../../store/actionCreators/actionCreatorsAuth';
+import { useAppDispatch, useAppSelector } from '@/shared/api/store';
+import { fetchUser } from '@/shared/api/actionCreators/actionCreatorsAuth';
 import Background from '../../ui/Background/Background';
 import CourseCard from '../../ui/CourseCard/CourseCard';
 import styles from './TeacherTasksCheck.module.scss';

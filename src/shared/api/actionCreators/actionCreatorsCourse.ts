@@ -1,13 +1,13 @@
 import { AxiosError } from 'axios';
-import axios from '../../axios';
-import { IAnswer } from "../../interfaces/answer.interface";
-import { Course } from '../../interfaces/course.interface';
-import { IModuleCourse, Page, Section } from '../../interfaces/module.interface';
-import { ErrorService } from '../../services/error.service';
-import { courseSlice } from '../slices/courseSlice';
-import { moduleSlice } from '../slices/moduleSlice';
-import { pageSlice } from "../slices/pageSlice";
-import { AppDispatch } from './../index';
+import axios from '../../../axios';
+import { IAnswer } from "../../../interfaces/answer.interface";
+import { Course } from '../../../interfaces/course.interface';
+import { IModuleCourse, Page, Section } from '../../../interfaces/module.interface';
+import { ErrorService } from '../../../services/error.service';
+import { courseSlice } from '@/shared/api/slices/courseSlice';
+import { moduleSlice } from '@/shared/api/slices/moduleSlice';
+import { pageSlice } from "@/shared/api/slices/pageSlice";
+import { AppDispatch } from '../store';
 
 export const getCourses = (token: string) => {
     return async (dispatch: AppDispatch) => {

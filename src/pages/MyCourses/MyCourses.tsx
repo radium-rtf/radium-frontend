@@ -1,8 +1,8 @@
 import React, {FC, useEffect} from 'react';
-import {useAppDispatch, useAppSelector} from '../../hooks/redux';
-import {fetchUser, login} from '../../store/actionCreators/actionCreatorsAuth';
+import {useAppDispatch, useAppSelector} from '@/shared/api/store';
+import {fetchUser, login} from '@/shared/api/actionCreators/actionCreatorsAuth';
 import styles from './MyCourses.module.scss';
-import { getCourse, getCourses } from '../../store/actionCreators/actionCreatorsCourse';
+import { getCourse, getCourses } from '@/shared/api/actionCreators/actionCreatorsCourse';
 import CourseCard from '../../ui/CourseCard/CourseCard';
 import Background from "../../ui/Background/Background";
 import TopPanel from "../../ui/TopPanel/TopPanel";

@@ -6,9 +6,9 @@ import ShortAnswerSection from "../ShortAnswerSection/ShortAnswerSection";
 import SingleChoiceSection from "../SingleChoiceSection/SingleChoiceSection";
 import MultiChoiceSection from "../MultiChoiceSection/MultiChoiceSection";
 import { TypeAnswer, getState } from "@/shared/libs/utils";
-import { addAnswer, getPage } from "../../store/actionCreators/actionCreatorsCourse";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { storeConfig } from "../../store";
+import { addAnswer, getPage } from "@/shared/api/actionCreators/actionCreatorsCourse";
+import { useAppDispatch, useAppSelector } from "@/shared/api/store";
+import { storeConfig } from "../../shared/api/store";
 
 
 const SectionCard: FC<Section> = ({

@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import styles from "./CoursePage.module.scss";
-import {getCourse, getPage} from '../../store/actionCreators/actionCreatorsCourse';
+import {getCourse, getPage} from '@/shared/api/actionCreators/actionCreatorsCourse';
 import Background from "../../ui/Background/Background";
 import TopPanel from "../../ui/TopPanel/TopPanel";
 import * as Icons from "../../shared/ui/icons"
@@ -10,11 +9,12 @@ import MenuItem from "../../ui/MenuItem/MenuItem";
 import List from "../../ui/List/List";
 import { getPluralScore } from "@/shared/libs/utils";
 import Button from "../../ui/Button/Button";
-import { fetchUser } from "../../store/actionCreators/actionCreatorsAuth";
+import { fetchUser } from "@/shared/api/actionCreators/actionCreatorsAuth";
 import {useNavigate, useParams} from "react-router-dom";
 import { Module, Section } from '../../interfaces/module.interface';
 import SectionCard from "../../ui/Section/SectionCard";
 import RadialProgress from "../../ui/RadialProgress/RadialProgress";
+import {useAppDispatch, useAppSelector} from "@/shared/api/store";
 
 const CoursePage = () => {
     // FIXME: подменные данные / моки, заменить реальными

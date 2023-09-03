@@ -3,14 +3,14 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../ui/Button/Button';
 import { emailValidator } from "../../constData";
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchUser, login } from '../../store/actionCreators/actionCreatorsAuth';
+import { useAppDispatch, useAppSelector } from '@/shared/api/store';
+import { fetchUser, login } from '@/shared/api/actionCreators/actionCreatorsAuth';
 import { IUser } from '../../interfaces/user.interface';
 import styles from './AuthPage.module.scss';
 import TextField from '../../ui/TextField/TextField';
 import * as Icons from '../../shared/ui/icons'
 import Background from "../../ui/Background/Background";
-import {authSlice} from '../../store/slices/authSlice';
+import {authSlice} from '@/shared/api/slices/authSlice';
 
 const AuthPage: FC = () => {
     const [visible, setVisible] = useState(false);

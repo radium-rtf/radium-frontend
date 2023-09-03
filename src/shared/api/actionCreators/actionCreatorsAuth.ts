@@ -1,11 +1,11 @@
 import { AxiosError } from "axios"
-import { AppDispatch } from ".."
-import axios from "../../axios"
-import { IUser } from "../../interfaces/user.interface"
-import { ErrorService } from "../../services/error.service"
-import { accessTokenType } from "../../types/tokenType"
-import { authSlice } from "../slices/authSlice"
-import { profileSlice } from "../slices/profileSlice"
+import axios from "../../../axios"
+import { IUser } from "../../../interfaces/user.interface"
+import { ErrorService } from "../../../services/error.service"
+import { accessTokenType } from "../../../types/tokenType"
+import { authSlice } from "@/shared/api/slices/authSlice"
+import { profileSlice } from "@/shared/api/slices/profileSlice"
+import {AppDispatch} from "@/shared/api/store";
 
 
 export const login = (user: IUser) => {

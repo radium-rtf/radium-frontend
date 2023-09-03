@@ -4,8 +4,8 @@ import ProfilePicture from "../ProfilePicture/ProfilePicture";
 import MenuItem from "../MenuItem/MenuItem";
 import * as Icons from "../../shared/ui/icons"
 import {useNavigate} from "react-router-dom";
-import { useAppDispatch } from "../../hooks/redux";
-import { authSlice } from "../../store/slices/authSlice";
+import { useAppDispatch } from "@/shared/api/store";
+import { authSlice } from "@/shared/api/slices/authSlice";
 
 interface TopPanelProps {
     image?: string

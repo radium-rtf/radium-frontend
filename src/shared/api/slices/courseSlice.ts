@@ -1,5 +1,5 @@
 import {PayloadAction, createSlice} from "@reduxjs/toolkit";
-import { Course, ICardCourse, ICourse } from "../../interfaces/course.interface";
+import { Course, ICardCourse, ICourse } from "../../../interfaces/course.interface";
 import { AxiosError } from "axios";
 
 export interface ICardCourseState {

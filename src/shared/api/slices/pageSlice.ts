@@ -1,4 +1,4 @@
-import { Section } from "../../interfaces/module.interface";
+import { Section } from "../../../interfaces/module.interface";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IPageState {

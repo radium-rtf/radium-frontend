@@ -4,18 +4,18 @@ import List from '../../ui/List/List';
 import Table from '../../ui/Table/Table';
 import TopPanel from "../../ui/TopPanel/TopPanel";
 import { courses, statement, statementUser } from "../../constData";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import * as Icons from "../../shared/ui/icons";
 import emptyAvatar from '../../images/empty-profile.png';
 import kotlinLogo from '../../images/kotlin.svg';
 import { IStatementUser } from '../../interfaces/module.interface';
-import { fetchUser } from "../../store/actionCreators/actionCreatorsAuth";
+import { fetchUser } from "@/shared/api/actionCreators/actionCreatorsAuth";
 import styles from './StatementTeatcher.module.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import TeacherTasks from '../../components/TeacherTasks/TeacherTasks';
 import CourseCard from '../../ui/CourseCard/CourseCard';
 import TeacherTasksCheck from '../../components/TeacherTasksCheck/TeacherTasksCheck';
 import CheckAnswerSection from '../../ui/CheckAnswerSection/CheckAnswerSection';
+import {useAppDispatch, useAppSelector} from "@/shared/api/store";
 
 let content: JSX.Element;
 

@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IModule, IModuleCourse } from "../../interfaces/module.interface";
+import { IModule, IModuleCourse } from "../../../interfaces/module.interface";
 
 interface IModuleState {
     moduleCourse: IModuleCourse,

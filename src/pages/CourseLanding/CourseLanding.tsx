@@ -8,12 +8,12 @@ import Card from "../../ui/Card/Card";
 import ProfilePicture from "../../ui/ProfilePicture/ProfilePicture";
 import Background from "../../ui/Background/Background";
 import TopPanel from "../../ui/TopPanel/TopPanel";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { Author, Link } from "../../interfaces/course.interface";
-import { getCourse } from "../../store/actionCreators/actionCreatorsCourse";
+import { getCourse } from "@/shared/api/actionCreators/actionCreatorsCourse";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchUser } from "../../store/actionCreators/actionCreatorsAuth";
+import { fetchUser } from "@/shared/api/actionCreators/actionCreatorsAuth";
 import MenuItem from "../../ui/MenuItem/MenuItem";
+import {useAppDispatch, useAppSelector} from "@/shared/api/store";
 
 const CourseLanding: FC = () => {
     const description_courseWrap1 = '24 темы, 5 месяцев';
