@@ -3,7 +3,7 @@ import { FC, FormEventHandler } from 'react'
 import { RegisterOptions, UseFormRegisterReturn } from 'react-hook-form'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import * as Icons from "../../icons/icons"
+import * as Icons from "../../shared/ui/icons"
 import BigTextField from '../BigTextField/BigTextField'
 import Button from '../Button/Button'
 import QuestionHeader from '../QuestionHeader/QuestionHeader'

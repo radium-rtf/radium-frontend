@@ -5,7 +5,7 @@ import Table from '../../ui/Table/Table';
 import TopPanel from "../../ui/TopPanel/TopPanel";
 import { courses, statement, statementUser } from "../../constData";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import * as Icons from "../../icons/icons";
+import * as Icons from "../../shared/ui/icons";
 import emptyAvatar from '../../images/empty-profile.png';
 import kotlinLogo from '../../images/kotlin.svg';
 import { IStatementUser } from '../../interfaces/module.interface';

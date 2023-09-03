@@ -2,7 +2,7 @@ import {FC, useState, useEffect} from "react"
 import styles from "./TopPanel.module.scss"
 import ProfilePicture from "../ProfilePicture/ProfilePicture";
 import MenuItem from "../MenuItem/MenuItem";
-import * as Icons from "../../icons/icons"
+import * as Icons from "../../shared/ui/icons"
 import {useNavigate} from "react-router-dom";
 import { useAppDispatch } from "../../hooks/redux";
 import { authSlice } from "../../store/slices/authSlice";

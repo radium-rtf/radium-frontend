@@ -4,7 +4,7 @@ import styles from "./CoursePage.module.scss";
 import {getCourse, getPage} from '../../store/actionCreators/actionCreatorsCourse';
 import Background from "../../ui/Background/Background";
 import TopPanel from "../../ui/TopPanel/TopPanel";
-import * as Icons from "../../icons/icons"
+import * as Icons from "../../shared/ui/icons"
 import LinearProgress from "../../ui/LinearProgress/LinearProgress";
 import MenuItem from "../../ui/MenuItem/MenuItem";
 import List from "../../ui/List/List";
@@ -71,7 +71,7 @@ const CoursePage = () => {
                     iconSize="small"
                     label={group}
                 />}
-                {course.modules.length ? 
+                {course.modules.length ?
                     (<List
                     items={mapItems(course.modules)}
                     defaultSelected={params.id}

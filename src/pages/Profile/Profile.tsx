@@ -10,7 +10,7 @@ import styles from './Profile.module.scss';
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import Background from "../../ui/Background/Background";
 import TopPanel from "../../ui/TopPanel/TopPanel";
-import * as Icons from "../../icons/icons";
+import * as Icons from "../../shared/ui/icons";
 import List from "../../ui/List/List";
 import line from '../../images/Rectangle 11.svg'
 import { useDispatch } from "react-redux";

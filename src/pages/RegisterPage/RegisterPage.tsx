@@ -9,7 +9,7 @@ import { IUser } from '../../interfaces/user.interface';
 import styles from './RegisterPage.module.scss';
 import { emailValidator } from '../../constData';
 import TextField from '../../ui/TextField/TextField';
-import * as Icons from '../../icons/icons'
+import * as Icons from '../../shared/ui/icons'
 import Background from "../../ui/Background/Background";
 
 const RegisterPage: FC = () => {

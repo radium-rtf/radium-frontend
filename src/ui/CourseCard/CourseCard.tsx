@@ -3,7 +3,7 @@ import Card from "../Card/Card"
 import styles from "./CourseCard.module.scss"
 import LinearProgress from "../LinearProgress/LinearProgress"
 import Button from "../Button/Button";
-import * as Icons from "../../icons/icons"
+import * as Icons from "../../shared/ui/icons"
 import Comment from "../Comment/Comment";
 
 interface CourseCardProps {
