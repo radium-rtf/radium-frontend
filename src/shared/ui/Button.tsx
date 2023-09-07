@@ -30,6 +30,17 @@ export const Button: FC<ButtonProps> = ({
         "active:bg-accent-secondary-200": color === "accent",
         "active:border-accent-secondary-500": color === "accent",
       },
+      {
+        "bg-accent-destructive-300": color === "destructive",
+        "border-accent-destructive-200": color === "destructive",
+        "text-accent-destructive-1000": color === "destructive",
+        "disabled:bg-accent-destructive-800": color === "destructive",
+        "disabled:border-accent-destructive-900": color === "destructive",
+        "hover:bg-accent-destructive-100": color === "destructive",
+        "hover:border-accent-destructive-500": color === "destructive",
+        "active:bg-accent-destructive-200": color === "destructive",
+        "active:border-accent-destructive-700": color === "destructive",
+      },
     )}
     onClick={onClick}
     type={type}
