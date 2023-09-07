@@ -20,6 +20,21 @@ export const Button: FC<ButtonProps> = ({
     className={cn(
       "text-sm px-6 py-2.5 text-center leading-tight border rounded-lg transition cursor-pointer disabled:cursor-not-allowed outline-none focus-visible:outline-1 focus-visible:outline-white outline-offset-0",
       {
+        "bg-transparent": color === "outlined",
+        "text-text-primary": color === "outlined",
+        "border-grey-300": color === "outlined",
+        "disabled:border-grey-400": color === "outlined",
+        "disabled:text-grey-100": color === "outlined",
+        "hover:bg-grey-500": color === "outlined",
+        "hover:border-grey-200": color === "outlined",
+        "active:bg-grey-700": color === "outlined",
+        "active:border-grey-400": color === "outlined",
+        "focus-visible:border-grey-600": color === "outlined",
+        "focus-visible:bg-grey-400": color === "outlined",
+        "focus-visible:active:border-grey-800": color === "outlined",
+        "focus-visible:active:bg-grey-700": color === "outlined",
+      },
+      {
         "bg-accent-secondary-300": color === "accent",
         "border-accent-secondary-400": color === "accent",
         "text-accent-secondary-1100": color === "accent",
