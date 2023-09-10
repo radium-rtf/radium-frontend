@@ -253,7 +253,7 @@ const icons: Record<Icon, ReactNode> = {
   remove: (
     <path
       d='M1 1L17 17M17 1L1 17'
-      stroke='white'
+      className='stroke-current'
       strokeLinecap='round'
       strokeLinejoin='round'
     />
@@ -261,7 +261,7 @@ const icons: Record<Icon, ReactNode> = {
   checkmark: (
     <path
       d='M1 6L3.66667 8.5L6.33333 11L17 1'
-      stroke='white'
+      className='stroke-current'
       strokeLinecap='round'
       strokeLinejoin='round'
     />
@@ -269,7 +269,7 @@ const icons: Record<Icon, ReactNode> = {
   'chevron-right': (
     <path
       d='M5.25 0.75L13.5 9L5.25 17.25'
-      stroke='white'
+      className='stroke-current'
       strokeLinecap='round'
       strokeLinejoin='round'
     />
@@ -277,7 +277,7 @@ const icons: Record<Icon, ReactNode> = {
   'chevron-left': (
     <path
       d='M13.125 17.25L4.875 9L13.125 0.75'
-      stroke='white'
+      className='stroke-current'
       strokeLinecap='round'
       strokeLinejoin='round'
     />
@@ -285,9 +285,9 @@ const icons: Record<Icon, ReactNode> = {
   'chevron-down': (
     <path
       d='M17.25 5.25L9 13.5L0.75 5.25'
-      stroke='white'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      className='stroke-current'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     />
   ),
 };
