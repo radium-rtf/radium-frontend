@@ -46,14 +46,14 @@ export const MenuItem: FC<IMenuItem> = ({
       >
         <Icon
           type={icon}
-          className='text-accent-primary-200 transition-colors group-disabled:text-accent-primary-400'
+          className='flex-shrink-0 text-accent-primary-200 transition-colors group-disabled:text-accent-primary-400'
         />
         <span className='flex-grow text-start text-sm transition-colors group-disabled:text-grey-200'>
           {children}
         </span>
         <Icon
           type='chevron-right'
-          className='h-3 text-accent-primary-200 transition-colors group-disabled:text-accent-primary-400'
+          className='h-3 flex-shrink-0 text-accent-primary-200 transition-colors group-disabled:text-accent-primary-400'
         />
       </button>
     </li>

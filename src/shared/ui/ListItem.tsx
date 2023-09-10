@@ -49,7 +49,7 @@ export const ListItem: FC<IListItem> = ({
       >
         <Icon
           type={icon}
-          className='text-accent-primary-200 group-disabled:text-accent-primary-400'
+          className='flex-shrink-0 text-accent-primary-200 group-disabled:text-accent-primary-400'
         />
         <div className='flex-grow text-start'>
           {title && (
@@ -65,7 +65,7 @@ export const ListItem: FC<IListItem> = ({
         </div>
         <Icon
           type='chevron-right'
-          className='text-accent-primary-200 group-disabled:text-accent-primary-400'
+          className='flex-shrink-0 text-accent-primary-200 group-disabled:text-accent-primary-400'
         />
       </button>
     </li>
