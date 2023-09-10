@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { cn } from '@/shared';
 
-type Icon =
+export type Icon =
   | 'null'
   | 'attach'
   | 'start'
@@ -291,12 +291,12 @@ const icons: Record<Icon, ReactNode> = {
     />
   ),
 };
-interface IProps {
+export interface IIcon {
   type: Icon;
   className?: string;
 }
 
-export const Icon: FC<IProps> = ({ type, className }) => {
+export const Icon: FC<IIcon> = ({ type, className }) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
