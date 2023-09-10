@@ -9,6 +9,8 @@ export { Icon } from './ui/Icon';
 export { IconButton } from './ui/IconButton';
 export { Progress } from './ui/Progress';
 export { Card } from './ui/Card';
+export { Menu } from './ui/Menu';
+export { MenuItem } from './ui/MenuItem';
 
 // Interfaces
 export type { IIcon } from './ui/Icon';
