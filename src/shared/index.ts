@@ -7,6 +7,7 @@ export { Toggle } from './ui/Toggle';
 export { Checkbox } from './ui/Checkbox';
 export { Icon } from './ui/Icon';
 export { IconButton } from './ui/IconButton';
+export { Progress } from './ui/Progress';
 
 // Interfaces
 export type { IIcon } from './ui/Icon';
