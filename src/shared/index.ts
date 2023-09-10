@@ -13,9 +13,11 @@ export { Menu } from './ui/Menu';
 export { MenuItem } from './ui/MenuItem';
 export { List } from './ui/List';
 export { ListItem } from './ui/ListItem';
+export { Tab } from './ui/Tab';
 
 // Interfaces
 export type { IIcon } from './ui/Icon';
+export type { ITab } from './ui/Tab';
 
 // Types
 export type { Icon as IconType } from './ui/Icon';
