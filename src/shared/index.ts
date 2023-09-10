@@ -8,6 +8,7 @@ export { Checkbox } from './ui/Checkbox';
 export { Icon } from './ui/Icon';
 export { IconButton } from './ui/IconButton';
 export { Progress } from './ui/Progress';
+export { Card } from './ui/Card';
 
 // Interfaces
 export type { IIcon } from './ui/Icon';
