@@ -1,4 +1,3 @@
-'use client';
 import React, { FC, MouseEventHandler, ReactNode } from 'react';
 import { cn, Icon, IconType } from '@/shared';
 

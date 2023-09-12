@@ -1,4 +1,3 @@
-'use client';
 import { ChangeEventHandler, FC } from 'react';
 import { cn } from '@/shared';
 
