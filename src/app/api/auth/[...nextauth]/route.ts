@@ -1,39 +1,5 @@
-import NextAuth, { NextAuthOptions } from 'next-auth';
-import Credentials from 'next-auth/providers/credentials';
-import { Login, LoginRequestDto } from '@/entities/Auth';
-
-const authOptions: NextAuthOptions = {
-  pages: {
-    signIn: '/login',
-  },
-
-  providers: [
-    Credentials({
-      name: 'credentials',
-      credentials: {
-        email: { type: 'email', placeholder: 'Email', label: 'Email' },
-        password: {
-          type: 'password',
-          placeholder: 'password',
-          label: 'password',
-        },
-      },
-      async authorize(credentials, req) {
-        if (!credentials) return null;
-        const response = await Login(credentials);
-
-        if (typeof response === 'string') return null;
-
-        return {
-          email: response.user.email,
-          name: response.user.name,
-          id: response.user.id,
-          image: response.user.avatar,
-        };
-      },
-    }),
-  ],
-};
+import NextAuth from 'next-auth';
+import { authOptions } from '@/entities/Auth';
 
 const handler = NextAuth(authOptions);
 

@@ -8,3 +8,6 @@ export type { ErrorAuthResponseDto } from './model/ErrorAuthResponseDto';
 // Methods
 export { Login } from './libs/Login';
 export { Register } from './libs/Register';
+
+// Configs
+export { authOptions } from './model/authOptions';
