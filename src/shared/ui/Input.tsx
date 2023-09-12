@@ -7,8 +7,9 @@ interface TextInputProps {
   onChange?: ChangeEventHandler<HTMLInputElement>;
   children?: string;
   className?: string;
-  type: 'text' | 'email' | 'number';
+  type: 'text' | 'email' | 'number' | 'password';
   placeholder?: string;
+  name: string;
 }
 
 export const Input: FC<TextInputProps> = ({
@@ -19,6 +20,7 @@ export const Input: FC<TextInputProps> = ({
   className,
   type,
   placeholder,
+  name,
 }: TextInputProps) => {
   return (
     <label
@@ -50,6 +52,7 @@ export const Input: FC<TextInputProps> = ({
       )}
     >
       <input
+        name={name}
         type={type}
         disabled={disabled}
         onChange={onChange}
@@ -58,6 +61,7 @@ export const Input: FC<TextInputProps> = ({
         className={cn([
           'peer',
           'flex-grow',
+          'w-full',
           'cursor-text',
           'bg-transparent',
           'outline-none',
