@@ -30,7 +30,7 @@ export const TextArea: FC<TextAreaProps> = ({
           'rounded',
           'border',
           'border-grey-500',
-          'outline-white',
+          'outline-none',
           '-outline-offset-1',
           'bg-transparent',
           'text-text-primary',
@@ -46,8 +46,8 @@ export const TextArea: FC<TextAreaProps> = ({
           'hover:bg-grey-600',
           'hover:placeholder:text-text-primary',
           'focus:bg-grey-800',
+          'focus:border-accent-primary-200',
           'focus:placeholder:text-text-secondary',
-          'focus-visible:outline',
         ],
         className
       )}
