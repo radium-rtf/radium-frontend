@@ -1,17 +1,16 @@
-import './globals.css';
+import '../globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import { cn } from '@/shared';
 import localFont from 'next/font/local';
 
 const ntSomic = localFont({
   src: [
     {
-      path: '../../public/fonts/NT-Somic/NTSomic-Bold.woff2',
+      path: '../../../public/fonts/NT-Somic/NTSomic-Bold.woff2',
       weight: '700',
     },
     {
-      path: '../../public/fonts/NT-Somic/NTSomic-Regular.woff2',
+      path: '../../../public/fonts/NT-Somic/NTSomic-Regular.woff2',
       weight: '400',
     },
   ],
