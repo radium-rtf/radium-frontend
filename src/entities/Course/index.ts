@@ -2,4 +2,5 @@
 export type { CourseResponseDto } from './model/courseResponseDto';
 
 // Methods
-export { GetCourses } from './lib/getCourses';
+export { getAllCourses } from './lib/getAllCourses';
+export { getUserCourses } from './lib/getUserCourses';
