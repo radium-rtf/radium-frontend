@@ -5,6 +5,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        bg: {
+          page: '#222526',
+        },
         accent: {
           primary: {
             100: '#C5D9FF',
