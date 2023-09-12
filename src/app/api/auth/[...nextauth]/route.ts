@@ -3,6 +3,10 @@ import Credentials from 'next-auth/providers/credentials';
 import { Login, LoginRequestDto } from '@/entities/Auth';
 
 const authOptions: NextAuthOptions = {
+  pages: {
+    signIn: '/login',
+  },
+
   providers: [
     Credentials({
       name: 'credentials',
