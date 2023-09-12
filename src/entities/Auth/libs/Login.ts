@@ -8,6 +8,7 @@ export const Login = async (
     {
       method: 'POST',
       cache: 'no-cache',
+      body: JSON.stringify(credentials),
     }
   );
   return response.json();
