@@ -1,11 +1,12 @@
 import React from 'react';
-import { GetCourses } from '@/entities/Course';
+import { getUserCourses } from '@/entities/Course';
 import { Header } from '@/widgets/Header';
 import Link from 'next/link';
 import Image from 'next/image';
+import { UserCourses } from '@/widgets/UserCourses';
 
 export default async function Home() {
-  const courses = await GetCourses();
+  const courses = await getUserCourses();
 
   return (
     <>
@@ -15,7 +16,9 @@ export default async function Home() {
           <h1 className='text-4xl font-bold text-accent-primary-200'>Радиум</h1>
         </Link>
       </Header>
-      <main>{courses.length}</main>
+      <main className='flex flex-col'>
+        <UserCourses courses={courses} />
+      </main>
     </>
   );
 }
