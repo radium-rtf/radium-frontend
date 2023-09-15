@@ -14,7 +14,7 @@ export const CourseCard: FC<IProps> = ({ course }) => {
   const { name, shortDescription, logo, modules, slug } = course;
   return (
     <Card className='flex flex-col gap-4 rounded-lg'>
-      <header className='flex w-full gap-4'>
+      <header className='flex w-full items-center gap-4'>
         <Image
           className='h-18 w-18 aspect-square flex-shrink-0 rounded object-cover'
           src={logo}
