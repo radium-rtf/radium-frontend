@@ -46,12 +46,19 @@ export const Progress: FC<IProps> = ({
         style={{ '--progress': 54 - 54 * (percentage / 100) } as CSSProperties}
       >
         <circle
+          className='fill-none stroke-grey-400 stroke-1'
+          cx={9}
+          cy={9}
+          r={8.5}
+        ></circle>
+        <circle
           className={cn(
             [
               'stroke-1',
               '[stroke-dasharray:54]',
               '[stroke-dashoffset:var(--progress)]',
               '[stroke-linecap:round]',
+              'fill-none',
             ],
             theme === 'secondary' && [
               'text-accent-secondary-300',
