@@ -1,4 +1,5 @@
 import { PageResponseDto } from '@/entities/Page';
+import { ChoiceSection } from '@/entities/Section';
 import { TextSection } from '@/entities/Section/ui/TextSection';
 import { FC } from 'react';
 
@@ -16,6 +17,8 @@ export const CoursePage: FC<IProps> = ({ page }) => {
         switch (section.type) {
           case 'text':
             return <TextSection data={section} />;
+          case 'choice':
+            return <ChoiceSection data={section} />;
           default:
             return null;
         }
