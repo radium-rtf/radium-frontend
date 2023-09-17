@@ -1,13 +1,9 @@
 export interface SectionResponseDto {
-  answer: string;
-  answers: string[];
-  content: string;
   id: string;
-  maxScore: number;
-  order: number;
   pageId: string;
+  order: number;
   score: number;
-  type: 'choice' | 'multiChoice' | 'text' | 'shortAnswer' | 'answer' | 'code ';
-  variants: string[];
-  verdict: 'WA' | 'OK' | 'WAIT';
+  maxScore: number;
+  type: 'choice' | 'multiChoice' | 'text' | 'shortAnswer' | 'answer' | 'code';
+  verdict: 'WA' | 'OK' | 'WAIT' | '';
 }
