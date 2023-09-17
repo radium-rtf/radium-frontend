@@ -1,7 +1,7 @@
 'use client';
 import React, { FC } from 'react';
 import { Button, Card, Icon } from '@/shared';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 interface IProps {
   shortDescription: string;
@@ -10,6 +10,7 @@ interface IProps {
 
 export const CourseBrief: FC<IProps> = ({ shortDescription, modulesCount }) => {
   const router = useRouter();
+  const params = useParams();
   return (
     <Card className='flex flex-col gap-4 rounded-lg'>
       <p>{shortDescription}</p>
@@ -19,7 +20,7 @@ export const CourseBrief: FC<IProps> = ({ shortDescription, modulesCount }) => {
         <Button
           className='flex items-center gap-2'
           type='button'
-          onClick={() => router.push('/')}
+          onClick={() => router.push(`/courses/${params.slug}/study`)}
           color='accent'
         >
           <Icon type='start' className='text-grey-800' />
