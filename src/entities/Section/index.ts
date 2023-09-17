@@ -1,5 +1,5 @@
 // interfaces
-export type { SectionResponseDto } from './model/SectionResponseDto';
+export type { SectionResponseDto } from './model/sectionResponseDto';
 
 // types
-export type { AllSectionsResponseDto } from './model/AllSectionsResponseDto';
+export type { AllSectionsResponseDto } from './model/allSectionsResponseDto';

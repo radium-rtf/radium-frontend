@@ -1,3 +1,3 @@
-import { TextSectionResponseDto } from './TextSectionResponseDto';
+import { TextSectionResponseDto } from './textSectionResponseDto';
 
 export type AllSectionsResponseDto = TextSectionResponseDto;
