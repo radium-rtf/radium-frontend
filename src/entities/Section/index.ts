@@ -12,3 +12,4 @@ export type { AllSectionsResponseDto } from './model/allSectionsResponseDto';
 export { TextSection } from './ui/TextSection';
 export { ChoiceSection } from './ui/ChoiceSection';
 export { MultiChoiceSection } from './ui/MultiChoiceSection';
+export { AnswerSection } from './ui/AnswerSection';
