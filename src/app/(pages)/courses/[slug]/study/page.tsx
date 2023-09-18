@@ -43,7 +43,7 @@ export default async function Page({ params, searchParams }: IProps) {
           </h1>
         </Link>
       </Header>
-      <div className='flex items-start gap-8 px-12'>
+      <div className='flex flex-grow items-start gap-8 px-12'>
         <CourseNavigation modules={course.modules} className='-ml-6' />
         <div className='flex flex-grow justify-center'>
           {typeof page !== 'string' && <CoursePage page={page} />}

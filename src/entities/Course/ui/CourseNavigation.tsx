@@ -19,7 +19,18 @@ export const CourseNavigation: FC<IProps> = ({ modules, className }) => {
         percentage={((maxScore ? score : 1) / (maxScore || 1)) * 100}
         showPercentage
       />
-      <ul>
+      <ul
+        className='
+      max-h-[calc(100vh-11.125rem)] 
+      overflow-y-scroll
+      [&::-webkit-scrollbar-thumb]:rounded
+      [&::-webkit-scrollbar-thumb]:bg-transparent
+      [&::-webkit-scrollbar-thumb]:transition-colors
+      [&::-webkit-scrollbar]:w-1
+      [&::-webkit-scrollbar]:opacity-0
+      [&:hover::-webkit-scrollbar-thumb]:bg-grey-300
+      '
+      >
         {modules.map((module) => {
           return (
             <div key={module.id}>
