@@ -1,5 +1,5 @@
 import { PageResponseDto } from '@/entities/Page';
-import { ChoiceSection } from '@/entities/Section';
+import { ChoiceSection, MultiChoiceSection } from '@/entities/Section';
 import { TextSection } from '@/entities/Section/ui/TextSection';
 import { FC } from 'react';
 
@@ -19,6 +19,8 @@ export const CoursePage: FC<IProps> = ({ page }) => {
             return <TextSection data={section} />;
           case 'choice':
             return <ChoiceSection data={section} />;
+          case 'multiChoice':
+            return <MultiChoiceSection data={section} />;
           default:
             return null;
         }
