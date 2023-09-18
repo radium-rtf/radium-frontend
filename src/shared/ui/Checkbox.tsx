@@ -4,14 +4,16 @@ interface IProps {
   children?: ReactNode;
   disabled?: boolean;
   name: string;
+  value: string;
 }
 
-export const Checkbox: FC<IProps> = ({ name, children, disabled }) => {
+export const Checkbox: FC<IProps> = ({ name, value, children, disabled }) => {
   return (
     <label className='group relative flex cursor-pointer items-center gap-4 [&:has(:disabled)]:cursor-not-allowed'>
       <input
         type='checkbox'
         name={name}
+        value={value}
         disabled={disabled}
         className='
         peer
@@ -26,12 +28,10 @@ export const Checkbox: FC<IProps> = ({ name, children, disabled }) => {
       />
       <div
         className='
-        peer-disabled:peer-checked:border-accent-primary-500
-        group-hover:peer-disabled:peer-checked:border-accent-primary-500
         group
-        flex aspect-square
-        h-[1.125rem]
-        items-center
+        flex
+        aspect-square
+        h-[1.125rem] items-center
         justify-center
         rounded
         border
@@ -60,7 +60,9 @@ export const Checkbox: FC<IProps> = ({ name, children, disabled }) => {
         peer-disabled:border-grey-300
         group-hover:peer-disabled:border-grey-300
         group-hover:peer-disabled:bg-transparent
+        peer-disabled:peer-checked:border-accent-primary-500
         peer-disabled:peer-checked:bg-accent-primary-400
+        group-hover:peer-disabled:peer-checked:border-accent-primary-500
         group-hover:peer-disabled:peer-checked:bg-accent-primary-400
         peer-checked:[&>svg]:opacity-100
         '
@@ -82,7 +84,9 @@ export const Checkbox: FC<IProps> = ({ name, children, disabled }) => {
         </svg>
       </div>
       {children && (
-        <span className='select-none text-text-primary'>{children}</span>
+        <span className='select-none text-sm text-text-primary'>
+          {children}
+        </span>
       )}
     </label>
   );
