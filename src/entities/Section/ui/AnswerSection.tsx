@@ -31,7 +31,11 @@ export const AnswerSection: FC<IProps> = ({ data }) => {
         </div>
         <header className='text-sm leading-normal'>{data.content}</header>
         <main>
-          <TextArea className='min-h-[8rem] w-full resize-y' name='answer' />
+          <TextArea
+            placeholder='Ответ'
+            className='min-h-[8rem] w-full resize-y'
+            name='answer'
+          />
         </main>
         <footer className='flex items-center gap-4 place-self-end'>
           <span className='text-sm'>{data.maxScore} баллов</span>
