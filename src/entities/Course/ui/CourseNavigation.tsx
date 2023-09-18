@@ -12,7 +12,7 @@ export const CourseNavigation: FC<IProps> = ({ modules, className }) => {
   const maxScore = modules.reduce((acc, module) => acc + module.maxScore, 0);
 
   return (
-    <nav className={cn('w-64', className)}>
+    <nav className={cn('sticky top-[8.625rem] w-64', className)}>
       <Progress
         className='px-6 py-2.5'
         theme='primary'
