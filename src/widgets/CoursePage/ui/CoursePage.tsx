@@ -3,6 +3,7 @@ import {
   AnswerSection,
   ChoiceSection,
   MultiChoiceSection,
+  ShortAnswerSection,
 } from '@/entities/Section';
 import { TextSection } from '@/entities/Section/ui/TextSection';
 import { FC } from 'react';
@@ -27,6 +28,8 @@ export const CoursePage: FC<IProps> = ({ page }) => {
             return <MultiChoiceSection data={section} />;
           case 'answer':
             return <AnswerSection data={section} />;
+          case 'shortAnswer':
+            return <ShortAnswerSection data={section} />;
           default:
             return null;
         }

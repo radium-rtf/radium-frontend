@@ -14,3 +14,4 @@ export { TextSection } from './ui/TextSection';
 export { ChoiceSection } from './ui/ChoiceSection';
 export { MultiChoiceSection } from './ui/MultiChoiceSection';
 export { AnswerSection } from './ui/AnswerSection';
+export { ShortAnswerSection } from './ui/ShortAnswerSection';
