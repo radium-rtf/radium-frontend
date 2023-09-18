@@ -5,9 +5,14 @@ import { Icon, List, ListItem, Progress, cn } from '@/shared';
 interface IProps {
   modules: CourseResponseDto['modules'];
   className?: string;
+  currentPage?: string;
 }
 
-export const CourseNavigation: FC<IProps> = ({ modules, className }) => {
+export const CourseNavigation: FC<IProps> = ({
+  modules,
+  className,
+  currentPage,
+}) => {
   const score = modules.reduce((acc, module) => acc + module.score, 0);
   const maxScore = modules.reduce((acc, module) => acc + module.maxScore, 0);
 
@@ -33,8 +38,14 @@ export const CourseNavigation: FC<IProps> = ({ modules, className }) => {
       >
         {modules.map((module) => {
           return (
-            <div key={module.id}>
-              <h2 className='px-6 py-4 text-xl font-bold text-accent-primary-200'>
+            <li key={module.id}>
+              <h2
+                className={cn(
+                  'px-6 py-4 text-xl font-bold text-accent-primary-200',
+                  module.pages.map((e) => e.id).includes(currentPage!) &&
+                    'text-accent-secondary-300'
+                )}
+              >
                 {module.name}
               </h2>
               <List>
@@ -42,7 +53,7 @@ export const CourseNavigation: FC<IProps> = ({ modules, className }) => {
                   return (
                     <ListItem
                       key={page.id}
-                      className=''
+                      className={currentPage === page.id ? 'bg-grey-600' : ''}
                       href={`?page=${page.id}`}
                     >
                       {page.maxScore ? (
@@ -65,7 +76,7 @@ export const CourseNavigation: FC<IProps> = ({ modules, className }) => {
                   );
                 })}
               </List>
-            </div>
+            </li>
           );
         })}
       </ul>

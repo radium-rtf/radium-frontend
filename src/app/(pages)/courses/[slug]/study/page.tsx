@@ -15,7 +15,6 @@ interface IProps {
 
 export default async function Page({ params, searchParams }: IProps) {
   const course = await getCourse(params.slug);
-
   if (typeof course === 'string') {
     if (course === 'Not authenticated') {
       redirect('/login');
@@ -25,7 +24,6 @@ export default async function Page({ params, searchParams }: IProps) {
 
   const selectedPage = searchParams.page || course.modules[0].pages[0].id;
   const page = await getPageById(selectedPage);
-  console.log(page);
 
   return (
     <>
@@ -44,7 +42,11 @@ export default async function Page({ params, searchParams }: IProps) {
         </Link>
       </Header>
       <div className='flex flex-grow items-start gap-8 px-12'>
-        <CourseNavigation modules={course.modules} className='-ml-6' />
+        <CourseNavigation
+          modules={course.modules}
+          className='-ml-6'
+          currentPage={typeof page !== 'string' ? page.id : undefined}
+        />
         <div className='flex flex-grow justify-center'>
           {typeof page !== 'string' && <CoursePage page={page} />}
         </div>
