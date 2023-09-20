@@ -25,9 +25,11 @@ export type { ITab } from './ui/Tab';
 // Types
 export type { Icon as IconType } from './ui/Icon';
 export type { IErrors } from './interfaces/IErrors';
+export type { AppDispatch, RootState } from './api/store';
 
-// Store
+// Store & Api
 export { store } from './api/store';
+export { emptyApi } from './api/api';
 
 // Hooks
 export { useAppDispatch, useAppSelector } from './api/store';
