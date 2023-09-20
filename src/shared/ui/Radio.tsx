@@ -1,4 +1,3 @@
-'use client';
 import React, { ChangeEventHandler, FC, ReactNode } from 'react';
 
 interface IProps {
@@ -7,6 +6,7 @@ interface IProps {
   value: string | ReadonlyArray<string> | number;
   disabled?: boolean;
   defaultChecked?: boolean;
+  checked?: boolean;
   onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -16,13 +16,17 @@ export const Radio: FC<IProps> = ({
   children,
   name,
   value,
+  defaultChecked,
+  checked,
 }) => {
   return (
     <label className='group relative flex cursor-pointer items-center gap-4 [&:has(:disabled)]:cursor-not-allowed'>
       <input
+        defaultChecked={defaultChecked}
         onChange={onChange}
         name={name}
         value={value}
+        checked={checked}
         type='radio'
         className='peer absolute left-0 top-0 h-0 w-0 appearance-none'
         disabled={disabled}
