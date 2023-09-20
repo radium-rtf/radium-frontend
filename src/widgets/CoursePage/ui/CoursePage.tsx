@@ -21,15 +21,15 @@ export const CoursePage: FC<IProps> = ({ page }) => {
       {page.sections.map((section) => {
         switch (section.type) {
           case 'text':
-            return <TextSection data={section} />;
+            return <TextSection key={section.id} data={section} />;
           case 'choice':
-            return <ChoiceSection data={section} />;
+            return <ChoiceSection key={section.id} data={section} />;
           case 'multiChoice':
-            return <MultiChoiceSection data={section} />;
+            return <MultiChoiceSection key={section.id} data={section} />;
           case 'answer':
-            return <AnswerSection data={section} />;
+            return <AnswerSection key={section.id} data={section} />;
           case 'shortAnswer':
-            return <ShortAnswerSection data={section} />;
+            return <ShortAnswerSection key={section.id} data={section} />;
           default:
             return null;
         }
