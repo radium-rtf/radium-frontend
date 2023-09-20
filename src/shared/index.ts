@@ -25,3 +25,9 @@ export type { ITab } from './ui/Tab';
 // Types
 export type { Icon as IconType } from './ui/Icon';
 export type { IErrors } from './interfaces/IErrors';
+
+// Store
+export { store } from './api/store';
+
+// Hooks
+export { useAppDispatch, useAppSelector } from './api/store';
