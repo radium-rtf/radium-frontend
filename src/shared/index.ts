@@ -17,6 +17,9 @@ export { MenuItem } from './ui/MenuItem';
 export { List } from './ui/List';
 export { ListItem } from './ui/ListItem';
 export { Tab } from './ui/Tab';
+export { InputFile } from './ui/InputFile';
+export { CloseButton } from './ui/CloseButton';
+export { DownloadButton } from './ui/DownloadButton';
 
 // Interfaces
 export type { IIcon } from './ui/Icon';
@@ -27,9 +30,12 @@ export type { Icon as IconType } from './ui/Icon';
 export type { IErrors } from './interfaces/IErrors';
 export type { AppDispatch, RootState } from './api/store';
 
+export { FileType } from './types/FileType';
+
 // Store & Api
 export { store } from './api/store';
 export { emptyApi } from './api/api';
 
 // Hooks
 export { useAppDispatch, useAppSelector } from './api/store';
+export { useDrop } from './hooks/useDrop';

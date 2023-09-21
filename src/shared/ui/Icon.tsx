@@ -32,7 +32,8 @@ export type Icon =
   | 'password'
   | 'enter'
   | 'loading'
-  | 'alert';
+  | 'alert'
+  | 'download';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -378,6 +379,15 @@ const icons: Record<Icon, ReactNode> = {
         className='fill-current'
       />
       <circle cx='8.5' cy='8.5' r='8' className='stroke-current' />
+    </g>
+  ),
+  download: (
+    <g className='text-inherit'>
+      <path d="M0.5 12.5V15C0.5 15.8284 1.17157 16.5 2 16.5H15C15.8284 16.5 16.5 15.8284 16.5 15V12.5M8.5 1.5V11.5M8.5 11.5L4.5 7.5M8.5 11.5L12.5 7.5" stroke="#E6E6E6" stroke-linecap="round" stroke-linejoin="round"
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
     </g>
   ),
 };
