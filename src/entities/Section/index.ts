@@ -19,3 +19,6 @@ export { ShortAnswerSection } from './ui/ShortAnswerSection';
 
 // methods
 export { Answer } from './api/answer';
+
+// Hooks
+export { useAnswerMutation } from './api/sectionApi';
