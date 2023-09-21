@@ -1,7 +1,7 @@
 'use client';
 
 import { Button, Card, Icon, Radio, cn } from '@/shared';
-import { FC, FormEventHandler, useRef, useState } from 'react';
+import { FC, FormEventHandler, useState } from 'react';
 import { ChoiceSectionResponseDto } from '..';
 import { useAnswerMutation } from '../api/sectionApi';
 
@@ -10,7 +10,6 @@ interface IProps {
 }
 
 export const ChoiceSection: FC<IProps> = ({ data }) => {
-  const form = useRef<HTMLFormElement>(null);
   const [verdict, setVerdict] = useState<ChoiceSectionResponseDto['verdict']>(
     data.verdict
   );
@@ -21,8 +20,9 @@ export const ChoiceSection: FC<IProps> = ({ data }) => {
     answer({
       id: data.id,
       choice: {
-        answer: (form.current?.elements.namedItem('test') as HTMLInputElement)
-          .value,
+        answer: (
+          event.currentTarget.elements.namedItem('test') as HTMLInputElement
+        ).value,
       },
     })
       .unwrap()
@@ -33,11 +33,7 @@ export const ChoiceSection: FC<IProps> = ({ data }) => {
 
   return (
     <Card>
-      <form
-        className='flex flex-col gap-4'
-        ref={form}
-        onSubmit={onSubmitHandler}
-      >
+      <form className='flex flex-col gap-4' onSubmit={onSubmitHandler}>
         <div className='flex items-center gap-4 text-accent-primary-200'>
           <Icon type='question' className='text-inherit' />
           <span className='font-bold text-inherit'>Вопрос</span>
