@@ -11,9 +11,9 @@ export default async function Home() {
 
   if (typeof courses === 'string') {
     if (courses === 'Not authenticated') {
-      redirect('/login')
+      redirect('/login');
     }
-    return
+    return;
   }
 
   return (
