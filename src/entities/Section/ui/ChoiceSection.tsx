@@ -1,8 +1,9 @@
 'use client';
 
-import { Button, Card, Icon, Radio } from '@/shared';
-import { FC, FormEventHandler, useRef } from 'react';
+import { Button, Card, Icon, Radio, cn } from '@/shared';
+import { FC, FormEventHandler, useRef, useState } from 'react';
 import { ChoiceSectionResponseDto } from '..';
+import { useAnswerMutation } from '../api/sectionApi';
 
 interface IProps {
   data: ChoiceSectionResponseDto;
@@ -10,12 +11,24 @@ interface IProps {
 
 export const ChoiceSection: FC<IProps> = ({ data }) => {
   const form = useRef<HTMLFormElement>(null);
+  const [verdict, setVerdict] = useState<ChoiceSectionResponseDto['verdict']>(
+    data.verdict
+  );
+  const [answer, { isLoading, isError }] = useAnswerMutation();
 
   const onSubmitHandler: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    console.log(
-      (form.current?.elements.namedItem('test') as HTMLInputElement).value
-    );
+    answer({
+      id: data.id,
+      choice: {
+        answer: (form.current?.elements.namedItem('test') as HTMLInputElement)
+          .value,
+      },
+    })
+      .unwrap()
+      .then((result) => {
+        result && setVerdict(result.verdict);
+      });
   };
 
   return (
@@ -46,9 +59,29 @@ export const ChoiceSection: FC<IProps> = ({ data }) => {
           </ul>
         </main>
         <footer className='flex items-center gap-4 place-self-end'>
-          <span className='text-sm'>{data.maxScore} баллов</span>
+          <div className={cn('flex flex-col gap-2')}>
+            {verdict === 'OK' && (
+              <span className='text-accent-secondary-300'>Верно!</span>
+            )}
+            {verdict === 'WA' && (
+              <span className='text-accent-destructive-300'>Не правильно!</span>
+            )}
+          </div>
+          {!isLoading && !isError && (
+            <span
+              className={cn(
+                'text-sm',
+                verdict === 'OK' && 'text-accent-secondary-300'
+              )}
+            >
+              {verdict === 'OK' && `${data.maxScore} / ${data.maxScore}`}
+              {verdict === 'WA' && `${0} / ${data.maxScore}`}
+              {verdict === '' && `${data.maxScore}`}
+              <span> баллов</span>
+            </span>
+          )}
           <Button type='reset'>Сбросить</Button>
-          <Button type='submit' color='accent'>
+          <Button disabled={isLoading} type='submit' color='accent'>
             Ответить
           </Button>
         </footer>
