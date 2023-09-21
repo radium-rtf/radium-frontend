@@ -1,11 +1,13 @@
 import React, { FC, ReactNode } from 'react';
+import { HeaderProfileClient } from '@/features/HeaderProfile/ui/HeaderProfileClient';
 import { HeaderProfile } from '@/features/HeaderProfile';
 
 interface IProps {
   children?: ReactNode;
+  isClient?: boolean;
 }
 
-export const Header: FC<IProps> = ({ children }) => {
+export const Header: FC<IProps> = ({ children, isClient }) => {
   return (
     <header
       className='
@@ -22,7 +24,7 @@ export const Header: FC<IProps> = ({ children }) => {
         '
     >
       {children}
-      <HeaderProfile />
+      {isClient ? <HeaderProfileClient /> : <HeaderProfile />}
     </header>
   );
 };

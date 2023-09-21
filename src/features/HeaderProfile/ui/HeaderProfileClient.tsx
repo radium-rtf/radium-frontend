@@ -1,10 +1,10 @@
+'use client';
 import React from 'react';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/entities/Auth';
 import { HeaderMenu } from '@/features/HeaderProfile/ui/HeaderMenu';
+import { useSession } from 'next-auth/react';
 
-export const HeaderProfile = async () => {
-  const session = await getServerSession(authOptions);
+export const HeaderProfileClient = () => {
+  const { data: session } = useSession();
   return (
     <div className='flex items-center gap-6'>
       {session?.user.name && (
