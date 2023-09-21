@@ -17,12 +17,11 @@ export const ChoiceSection: FC<IProps> = ({ data }) => {
 
   const onSubmitHandler: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
+    const formData = new FormData(event.currentTarget);
     answer({
       id: data.id,
       choice: {
-        answer: (
-          event.currentTarget.elements.namedItem('test') as HTMLInputElement
-        ).value,
+        answer: formData.get('answer') as string,
       },
     })
       .unwrap()
@@ -44,7 +43,7 @@ export const ChoiceSection: FC<IProps> = ({ data }) => {
             {data.variants.map((variant) => (
               <li key={variant} className='py-2'>
                 <Radio
-                  name='test'
+                  name='answer'
                   defaultChecked={data.answer === variant}
                   value={variant}
                 >
