@@ -16,3 +16,6 @@ export { CourseNavigation } from './ui/CourseNavigation';
 
 // Hooks
 export { useCourseQuery, useLazyCourseQuery } from './api/courseApi';
+
+// Skeletons
+export { CourseCardSkeleton } from './ui/CourseCardSkeleton';
