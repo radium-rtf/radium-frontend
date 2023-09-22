@@ -8,7 +8,7 @@ export const HeaderProfile = async () => {
   return (
     <div className='flex items-center gap-6'>
       {session?.user.name && (
-        <span className='text-sm text-accent-primary-200'>
+        <span className='font-mono text-[0.8125rem] leading-tight text-accent-primary-200'>
           {session.user.name}
         </span>
       )}

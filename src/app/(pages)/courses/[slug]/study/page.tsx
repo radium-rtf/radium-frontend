@@ -38,7 +38,7 @@ export default function Page({ params, searchParams }: IProps) {
               height={48}
               className='object-cover'
             />
-            <h1 className='text-4xl font-bold text-accent-primary-200'>
+            <h1 className='font-mono text-4xl font-bold text-accent-primary-200'>
               {course.name}
             </h1>
           </Link>
