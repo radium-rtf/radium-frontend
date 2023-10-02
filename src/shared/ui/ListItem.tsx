@@ -1,27 +1,20 @@
-import React, { FC, MouseEventHandler } from 'react';
-import { cn, Icon, IconType } from '@/shared';
+import React, { FC, MouseEventHandler, ReactNode } from 'react';
+import { cn } from '@/shared';
+import Link from 'next/link';
 
 export interface IListItem {
-  icon: IconType;
-  title?: string;
-  subtitle?: string;
+  children?: ReactNode;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
   className?: string;
+  href: string;
 }
 
-export const ListItem: FC<IListItem> = ({
-  icon,
-  title,
-  subtitle,
-  onClick,
-  disabled,
-  className,
-}) => {
+export const ListItem: FC<IListItem> = ({ className, children, href }) => {
   return (
     <li>
-      <button
-        onClick={onClick}
+      <Link
+        href={href}
         className={cn(
           [
             'group',
@@ -45,29 +38,9 @@ export const ListItem: FC<IListItem> = ({
           className
         )}
         type='button'
-        disabled={disabled}
       >
-        <Icon
-          type={icon}
-          className='flex-shrink-0 text-accent-primary-200 group-disabled:text-accent-primary-400'
-        />
-        <div className='flex-grow text-start'>
-          {title && (
-            <h1 className='text-[0.8125rem] text-text-primary group-disabled:text-grey-300'>
-              {title}
-            </h1>
-          )}
-          {subtitle && (
-            <p className='text-[0.625rem] text-text-secondary group-disabled:text-grey-400'>
-              {subtitle}
-            </p>
-          )}
-        </div>
-        <Icon
-          type='chevron-right'
-          className='flex-shrink-0 text-accent-primary-200 group-disabled:text-accent-primary-400'
-        />
-      </button>
+        {children}
+      </Link>
     </li>
   );
 };

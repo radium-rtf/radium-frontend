@@ -1,4 +1,3 @@
-'use client';
 import { FC, ReactElement } from 'react';
 import { IMenuItem } from './MenuItem';
 import { cn } from '@/shared';

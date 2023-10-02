@@ -7,16 +7,6 @@ interface IProps {
   className?: string;
 }
 
-export const List: FC<IProps> = ({ children }) => {
-  return (
-    <ul
-      className={cn([
-        '[&>li:first-child>button]:rounded-t',
-        '[&>li:last-child>button]:rounded-b',
-        '[&>li>button]:rounded-none',
-      ])}
-    >
-      {children}
-    </ul>
-  );
+export const List: FC<IProps> = ({ children, className }) => {
+  return <ul className={cn(className)}>{children}</ul>;
 };

@@ -8,12 +8,7 @@ interface IProps {
 
 export const Card: FC<IProps> = ({ children, className }) => {
   return (
-    <section
-      className={cn(
-        'rounded border border-grey-400 bg-grey-600 p-6',
-        className
-      )}
-    >
+    <section className={cn('rounded-2xl bg-grey-600 p-6', className)}>
       {children}
     </section>
   );
