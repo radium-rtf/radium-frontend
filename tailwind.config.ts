@@ -12,6 +12,33 @@ const config: Config = {
         bg: {
           page: '#222526',
         },
+        background: {
+          default: '#222526',
+          card: '#2E3233',
+          overlay: '#393E40',
+        },
+        foreground: {
+          default: '#E6E6E6',
+          secondary: '#B3B3B3',
+        },
+        primary: {
+          default: '#BFD5FF',
+          foreground: '#303A40',
+        },
+        secondary: {
+          default: '#CEF2CE',
+          disabled: '#788B7A',
+          hovered: '#D8F5D8',
+          pressed: '#B9DAB9',
+          foreground: '#364036',
+        },
+        destructive: {
+          default: '#F29191',
+          disabled: '#8A5B5C',
+          hovered: '#F5A7A7',
+          pressed: '#DA8282',
+          foreground: '#402626',
+        },
         accent: {
           primary: {
             100: '#C5D9FF',
