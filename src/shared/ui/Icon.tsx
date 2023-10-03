@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, SVGAttributes } from 'react';
 import { cn } from '@/shared';
 
 export type Icon =
@@ -27,7 +27,9 @@ export type Icon =
   | 'checkmark'
   | 'chevron-right'
   | 'chevron-left'
-  | 'chevron-down';
+  | 'chevron-down'
+  | 'mail'
+  | 'password';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -290,10 +292,38 @@ const icons: Record<Icon, ReactNode> = {
       strokeLinejoin='round'
     />
   ),
+  mail: (
+    <path
+      d='M9 17.5C4.30558 17.5 0.5 13.6944 0.5 9C0.5 4.30558 4.30558 0.5 9 0.5C13.6944 0.5 17.5 4.30558 17.5 9C17.5 10.1046 16.6046 11 15.5 11C14.3954 11 13.5 10.1046 13.5 9M15.0103 15.0104C11.6909 18.3299 6.30896 18.3299 2.9895 15.0104M13.5 9C13.5 11.4853 11.4853 13.5 9 13.5C6.51472 13.5 4.5 11.4853 4.5 9C4.5 6.51472 6.51472 4.5 9 4.5C11.4853 4.5 13.5 6.51472 13.5 9Z'
+      className='stroke-current'
+      strokeLinecap='round'
+    />
+  ),
+  password: (
+    <g className='text-inherit'>
+      <path
+        fill-rule='evenodd'
+        clip-rule='evenodd'
+        d='M16 6H2C1.44772 6 1 6.44772 1 7V11C1 11.5523 1.44772 12 2 12H16C16.5523 12 17 11.5523 17 11V7C17 6.44772 16.5523 6 16 6ZM2 5C0.895431 5 0 5.89543 0 7V11C0 12.1046 0.89543 13 2 13H16C17.1046 13 18 12.1046 18 11V7C18 5.89543 17.1046 5 16 5H2Z'
+        className='fill-current'
+      />
+      <path
+        d='M6 9C6 9.55228 5.55228 10 5 10C4.44772 10 4 9.55228 4 9C4 8.44772 4.44772 8 5 8C5.55228 8 6 8.44772 6 9Z'
+        className='fill-current'
+      />
+      <path
+        d='M10 9C10 9.55228 9.55229 10 9 10C8.44771 10 8 9.55228 8 9C8 8.44772 8.44771 8 9 8C9.55229 8 10 8.44772 10 9Z'
+        className='fill-current'
+      />
+      <path
+        d='M14 9C14 9.55228 13.5523 10 13 10C12.4477 10 12 9.55228 12 9C12 8.44772 12.4477 8 13 8C13.5523 8 14 8.44772 14 9Z'
+        className='fill-current'
+      />
+    </g>
+  ),
 };
-export interface IIcon {
+export interface IIcon extends SVGAttributes<SVGSVGElement> {
   type: Icon;
-  className?: string;
 }
 
 export const Icon: FC<IIcon> = ({ type, className }) => {
