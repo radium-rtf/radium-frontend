@@ -9,8 +9,10 @@ interface IProps {
 
 export const CourseAuthors: FC<IProps> = ({ authors }) => {
   return (
-    <Card className='rounded-lg'>
-      <h1 className='text-xl mb-6 text-accent-primary-200'>Авторы курса</h1>
+    <Card className='gap-0 rounded-lg'>
+      <h1 className='mb-6 font-mono text-xl font-bold leading-[normal] text-primary-default'>
+        Авторы курса
+      </h1>
       <ul className='flex flex-col gap-4'>
         {authors.map((author) => {
           return (
@@ -18,9 +20,9 @@ export const CourseAuthors: FC<IProps> = ({ authors }) => {
               <Image
                 src={author.avatar || '/defaultProfile.svg'}
                 alt={author.name}
-                height={24}
-                width={24}
-                className='aspect-square h-6 rounded-full'
+                height={48}
+                width={48}
+                className='aspect-square h-12 shrink-0 rounded-full object-cover'
               />
               <p>{author.name}</p>
             </li>

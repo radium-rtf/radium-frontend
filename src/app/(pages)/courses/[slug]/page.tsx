@@ -5,6 +5,27 @@ import React from 'react';
 import { getCourse } from '@/entities/Course';
 import { CourseInfo } from '@/widgets/CourseInfo';
 import { redirect } from 'next/navigation';
+import { Metadata } from 'next';
+
+interface IProps {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export async function generateMetadata({ params }: IProps): Promise<Metadata> {
+  // fetch data
+  const course = await getCourse(params.slug);
+
+  if (typeof course === 'string') {
+    return {
+      title: 'Курс не найден - Radium',
+    };
+  }
+
+  return {
+    title: `${course.name} - Radium`,
+  };
+}
 
 export default async function Page({
   params,

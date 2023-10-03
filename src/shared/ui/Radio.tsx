@@ -45,7 +45,7 @@ export const Radio: FC<IProps> = ({
        '
       ></div>
       {children && (
-        <span className='select-none text-sm leading-tight text-text-primary'>
+        <span className='select-none text-[0.8125rem] leading-tight text-text-primary'>
           {children}
         </span>
       )}

@@ -28,7 +28,7 @@ export const Progress: FC<IProps> = ({
           />
         </div>
         {showPercentage && (
-          <span className='text-sm text-text-primary'>
+          <span className='block w-[40px] text-[0.8125rem] text-text-primary'>
             {percentage.toFixed()}&nbsp;%
           </span>
         )}

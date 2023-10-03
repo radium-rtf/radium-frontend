@@ -1,14 +1,19 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, HTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/shared';
 
-interface IProps {
+interface IProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
-  className?: string;
 }
 
-export const Card: FC<IProps> = ({ children, className }) => {
+export const Card: FC<IProps> = ({ children, className, ...props }) => {
   return (
-    <section className={cn('rounded-2xl bg-grey-600 p-6', className)}>
+    <section
+      {...props}
+      className={cn(
+        'bg-grey-600 flex flex-col gap-4 rounded-2xl p-6',
+        className
+      )}
+    >
       {children}
     </section>
   );

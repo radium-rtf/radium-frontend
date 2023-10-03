@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, SVGAttributes } from 'react';
 import { cn } from '@/shared';
 
 export type Icon =
@@ -27,7 +27,12 @@ export type Icon =
   | 'checkmark'
   | 'chevron-right'
   | 'chevron-left'
-  | 'chevron-down';
+  | 'chevron-down'
+  | 'mail'
+  | 'password'
+  | 'enter'
+  | 'loading'
+  | 'alert';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -290,10 +295,94 @@ const icons: Record<Icon, ReactNode> = {
       strokeLinejoin='round'
     />
   ),
+  mail: (
+    <path
+      d='M9 17.5C4.30558 17.5 0.5 13.6944 0.5 9C0.5 4.30558 4.30558 0.5 9 0.5C13.6944 0.5 17.5 4.30558 17.5 9C17.5 10.1046 16.6046 11 15.5 11C14.3954 11 13.5 10.1046 13.5 9M15.0103 15.0104C11.6909 18.3299 6.30896 18.3299 2.9895 15.0104M13.5 9C13.5 11.4853 11.4853 13.5 9 13.5C6.51472 13.5 4.5 11.4853 4.5 9C4.5 6.51472 6.51472 4.5 9 4.5C11.4853 4.5 13.5 6.51472 13.5 9Z'
+      className='stroke-current'
+      strokeLinecap='round'
+    />
+  ),
+  password: (
+    <g className='text-inherit'>
+      <path
+        fillRule='evenodd'
+        clipRule='evenodd'
+        d='M16 6H2C1.44772 6 1 6.44772 1 7V11C1 11.5523 1.44772 12 2 12H16C16.5523 12 17 11.5523 17 11V7C17 6.44772 16.5523 6 16 6ZM2 5C0.895431 5 0 5.89543 0 7V11C0 12.1046 0.89543 13 2 13H16C17.1046 13 18 12.1046 18 11V7C18 5.89543 17.1046 5 16 5H2Z'
+        className='fill-current'
+      />
+      <path
+        d='M6 9C6 9.55228 5.55228 10 5 10C4.44772 10 4 9.55228 4 9C4 8.44772 4.44772 8 5 8C5.55228 8 6 8.44772 6 9Z'
+        className='fill-current'
+      />
+      <path
+        d='M10 9C10 9.55228 9.55229 10 9 10C8.44771 10 8 9.55228 8 9C8 8.44772 8.44771 8 9 8C9.55229 8 10 8.44772 10 9Z'
+        className='fill-current'
+      />
+      <path
+        d='M14 9C14 9.55228 13.5523 10 13 10C12.4477 10 12 9.55228 12 9C12 8.44772 12.4477 8 13 8C13.5523 8 14 8.44772 14 9Z'
+        className='fill-current'
+      />
+    </g>
+  ),
+  enter: (
+    <path
+      d='M0.5 8.5H11.5M11.5 8.5L8.5 11.5M11.5 8.5L8.5 5.5M3.5 15.5L3.5 16C3.5 16.8284 4.17157 17.5 5 17.5L13 17.5C13.8284 17.5 14.5 16.8284 14.5 16L14.5 2C14.5 1.17157 13.8284 0.500001 13 0.500001L5 0.5C4.17157 0.5 3.5 1.17157 3.5 2L3.5 3.5'
+      className='stroke-current'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
+  ),
+  loading: (
+    <g className='text-inherit'>
+      <path
+        d='M17.5 9C17.5 4.30558 13.6944 0.5 9 0.5C4.30558 0.5 0.5 4.30558 0.5 9'
+        className='stroke-current'
+        strokeLinecap='round'
+      >
+        <animateTransform
+          attributeName='transform'
+          attributeType='XML'
+          type='rotate'
+          from='0 9 9'
+          to='360 9 9'
+          dur='1s'
+          repeatCount='indefinite'
+        />
+      </path>
+      <path
+        d='M13.5 9C13.5 6.51472 11.4853 4.5 9 4.5C6.51472 4.5 4.5 6.51472 4.5 9'
+        className='stroke-current'
+        strokeLinecap='round'
+      >
+        <animateTransform
+          attributeName='transform'
+          attributeType='XML'
+          type='rotate'
+          from='360 9 9'
+          to='0 9 9'
+          dur='1.5s'
+          repeatCount='indefinite'
+        />
+      </path>
+      <circle cx='9' cy='9' r='1' className='fill-current' />
+    </g>
+  ),
+  alert: (
+    <g className='text-inherit'>
+      <path
+        d='M9 12.5C9 12.7761 8.77614 13 8.5 13C8.22386 13 8 12.7761 8 12.5C8 12.2239 8.22386 12 8.5 12C8.77614 12 9 12.2239 9 12.5Z'
+        className='fill-current'
+      />
+      <path
+        d='M8 4.5C8 4.22386 8.22386 4 8.5 4C8.77614 4 9 4.22386 9 4.5V10.5C9 10.7761 8.77614 11 8.5 11C8.22386 11 8 10.7761 8 10.5V4.5Z'
+        className='fill-current'
+      />
+      <circle cx='8.5' cy='8.5' r='8' className='stroke-current' />
+    </g>
+  ),
 };
-export interface IIcon {
+export interface IIcon extends SVGAttributes<SVGSVGElement> {
   type: Icon;
-  className?: string;
 }
 
 export const Icon: FC<IIcon> = ({ type, className }) => {

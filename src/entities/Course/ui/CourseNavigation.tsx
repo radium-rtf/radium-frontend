@@ -41,7 +41,7 @@ export const CourseNavigation: FC<IProps> = ({
             <li key={module.id}>
               <h2
                 className={cn(
-                  'px-6 py-4 text-xl font-bold text-accent-primary-200',
+                  'px-6 py-4 text-xl font-bold leading-[normal] text-accent-primary-200',
                   module.pages.map((e) => e.id).includes(currentPage!) &&
                     'text-accent-secondary-300'
                 )}
@@ -64,10 +64,12 @@ export const CourseNavigation: FC<IProps> = ({
                           className='text-transparent'
                         />
                       ) : (
-                        <Icon type='courses' />
+                        <Icon type='courses' className='text-primary-default' />
                       )}
                       <div className='flex flex-col gap-0.5 text-start'>
-                        <h2 className='text-sm leading-tight'>{page.name}</h2>
+                        <h2 className='text-[0.8125rem] leading-tight'>
+                          {page.name}
+                        </h2>
                         {!!page.maxScore && (
                           <p className='text-[0.625rem] leading-normal text-text-secondary'>{`${page.score}/${page.maxScore} баллов`}</p>
                         )}

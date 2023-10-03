@@ -1,20 +1,15 @@
-import React, { FC, MouseEventHandler, ReactNode } from 'react';
+import React, { ButtonHTMLAttributes, FC } from 'react';
 import { cn, Icon, IconType } from '@/shared';
 
-export interface IMenuItem {
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-  children?: ReactNode;
-  className?: string;
+export interface IMenuItem extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: IconType;
-  disabled?: boolean;
 }
 
 export const MenuItem: FC<IMenuItem> = ({
-  onClick,
   className,
   children,
-  disabled,
   icon,
+  ...props
 }) => {
   return (
     <li>
@@ -33,15 +28,16 @@ export const MenuItem: FC<IMenuItem> = ({
             '-outline-offset-1',
             'outline-white',
             'transition-colors',
-            'hover:bg-grey-600',
-            'focus-visible:bg-grey-600',
+            'hover:border-white/10',
+            'hover:bg-white/5',
+            'active:bg-black/5',
             'focus-visible:outline',
             'disabled:cursor-not-allowed',
+            'disabled:opacity-50',
           ],
           className
         )}
-        onClick={onClick}
-        disabled={disabled}
+        {...props}
       >
         <Icon
           type={icon}

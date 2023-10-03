@@ -1,26 +1,15 @@
-import React, { ChangeEventHandler, FC, ReactNode } from 'react';
-import { cn } from '@/shared';
+import React, { FC, InputHTMLAttributes } from 'react';
+import { Icon, cn } from '@/shared';
 
-interface TextInputProps {
-  defaultValue?: string;
-  disabled?: boolean;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
-  children?: string;
-  className?: string;
-  type: 'text' | 'email' | 'number' | 'password';
-  placeholder?: string;
-  name: string;
+interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  iconType?: Icon;
 }
 
 export const Input: FC<TextInputProps> = ({
-  defaultValue,
-  disabled,
-  onChange,
-  children,
   className,
-  type,
-  placeholder,
-  name,
+  children,
+  iconType,
+  ...props
 }: TextInputProps) => {
   return (
     <label
@@ -36,42 +25,40 @@ export const Input: FC<TextInputProps> = ({
           'transition',
           'cursor-text',
           'items-center',
+          'font-mono',
           'outline-white',
-          'border-grey-300',
+          'border-white/10',
           '-outline-offset-1',
-          'text-text-secondary',
-          'disabled:border-grey-600',
-          'hover:bg-grey-600',
-          '[&:has(:disabled)]:text-grey-200',
-          '[&:has(:disabled)]:border-grey-600',
+          'text-foreground-secondary',
+          'disabled:opacity-50',
+          '[&:not(:has(:disabled))]hover:bg-white/5',
           '[&:has(:disabled)]:cursor-not-allowed',
-          '[&:has(:focus)]:bg-grey-800',
-          '[&:has(:focus)]:border-accent-primary-200',
+          '[&:has(:focus)]:bg-black/10',
+          '[&:has(:focus)]:border-primary-default',
         ],
         className
       )}
     >
+      {!!iconType && (
+        <Icon className='shrink-0 text-foreground-secondary' type={iconType} />
+      )}
       <input
-        name={name}
-        type={type}
-        disabled={disabled}
-        onChange={onChange}
-        placeholder={placeholder}
-        defaultValue={defaultValue}
-        className={cn([
-          'peer',
-          'flex-grow',
-          'w-full',
-          'cursor-text',
-          'bg-transparent',
-          'outline-none',
-          'disabled:cursor-not-allowed',
-          'text-text-primary',
-          'text-sm',
-          'placeholder:text-text-secondary',
-        ])}
+        {...props}
+        className='
+        peer 
+        w-full
+        flex-grow
+        cursor-text
+        bg-transparent
+        font-mono
+        text-[0.8125rem]
+        leading-tight
+        text-foreground-default
+        outline-none
+        placeholder:text-foreground-secondary
+        disabled:cursor-not-allowed'
       />
-      {children && <span className='text-sm'>{children}</span>}
+      {children}
     </label>
   );
 };

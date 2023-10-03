@@ -7,11 +7,13 @@ interface IProps {
 
 export const CourseDescription: FC<IProps> = ({ description }) => {
   return (
-    <Card className='rounded-lg'>
-      <h1 className='mb-6 text-4xl font-bold text-accent-primary-200'>
+    <Card className='gap-6 rounded-lg'>
+      <h1 className='font-mono text-[2rem] font-bold leading-[normal] text-primary-default'>
         О курсе
       </h1>
-      <p className='whitespace-pre-wrap'>{description}</p>
+      <p className='whitespace-pre-wrap text-[0.815rem] leading-normal'>
+        {description}
+      </p>
     </Card>
   );
 };
