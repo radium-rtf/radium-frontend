@@ -24,7 +24,7 @@ export const CourseCard: FC<IProps> = ({ course }) => {
           {name}
         </h1>
       </header>
-      <p className='flex-grow text-sm'>{shortDescription}</p>
+      <p className='flex-grow text-[0.8125rem]'>{shortDescription}</p>
       <footer className='flex items-center gap-2'>
         <div className='flex flex-grow items-center gap-2'>
           <Icon className='h-[1.125rem]' type='courses' />
