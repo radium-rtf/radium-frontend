@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import {
   CourseAuthors,
   CourseBrief,
@@ -14,7 +14,7 @@ interface IProps {
 export const CourseInfo: FC<IProps> = ({ course }) => {
   return (
     <section className='grid gap-8 lg:grid-cols-3 2xl:grid-cols-4'>
-      <h1 className='mx-4 mb-4 break-all text-5xl font-bold text-accent-primary-200 lg:col-span-3 2xl:col-span-4'>
+      <h1 className='mx-4 break-all font-mono text-5xl font-bold leading-[normal] text-accent-primary-200 lg:col-span-3 2xl:col-span-4'>
         {course.name}
       </h1>
       <main className='flex flex-col gap-8 lg:col-span-2 2xl:col-span-3'>

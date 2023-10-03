@@ -13,10 +13,10 @@ export const CourseBrief: FC<IProps> = ({ shortDescription, modulesCount }) => {
   const params = useParams();
   return (
     <Card className='flex flex-col gap-4 rounded-lg'>
-      <p>{shortDescription}</p>
+      <p className='text-[0.8125rem] leading-normal'>{shortDescription}</p>
       <div className='flex items-center gap-2'>
         <Icon type='courses' />
-        <span className='flex-grow'>{modulesCount} темы</span>
+        <span className='flex-grow text-[0.8125rem]'>{modulesCount} темы</span>
         <Button
           className='flex items-center gap-2'
           type='button'
