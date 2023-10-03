@@ -26,6 +26,8 @@ export default function Page({ params, searchParams }: IProps) {
     return null;
   }
 
+  window.document.title = `${page.name} - ${course.name}`;
+
   return (
     <>
       <SessionProvider>
