@@ -11,7 +11,8 @@ export const TextArea: FC<TextAreaProps> = ({ className, ...props }) => {
         [
           'p-4',
           'font-mono',
-          'text-sm',
+          'text-[0.8125rem]',
+          'leading-normal',
           'rounded-lg',
           'border',
           'border-white/10',

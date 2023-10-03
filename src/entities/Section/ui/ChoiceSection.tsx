@@ -33,11 +33,15 @@ export const ChoiceSection: FC<IProps> = ({ data }) => {
   return (
     <Card>
       <form className='flex flex-col gap-4' onSubmit={onSubmitHandler}>
-        <div className='flex items-center gap-4 text-accent-primary-200'>
+        <div className='flex items-center gap-4 text-primary-default'>
           <Icon type='question' className='text-inherit' />
-          <span className='font-bold text-inherit'>Вопрос</span>
+          <span className='font-mono font-bold leading-[normal] text-inherit'>
+            Вопрос
+          </span>
         </div>
-        <header className='text-sm leading-normal'>{data.content}</header>
+        <header className='text-[0.8125rem] leading-normal'>
+          {data.content}
+        </header>
         <main>
           <ul>
             {data.variants.map((variant) => (
@@ -54,19 +58,19 @@ export const ChoiceSection: FC<IProps> = ({ data }) => {
           </ul>
         </main>
         <footer className='flex items-center gap-4 place-self-end'>
-          <div className={cn('flex flex-col gap-2')}>
+          <div className='flex flex-col gap-2 text-[0.8125rem]'>
             {verdict === 'OK' && (
-              <span className='text-accent-secondary-300'>Верно!</span>
+              <span className='text-secondary-default'>Верно!</span>
             )}
             {verdict === 'WA' && (
-              <span className='text-accent-destructive-300'>Не правильно!</span>
+              <span className='text-destructive-default'>Не правильно!</span>
             )}
           </div>
           {!isLoading && !isError && (
             <span
               className={cn(
-                'text-sm',
-                verdict === 'OK' && 'text-accent-secondary-300'
+                'text-[0.8125rem]',
+                verdict === 'OK' && 'text-secondary-default'
               )}
             >
               {verdict === 'OK' && `${data.maxScore} / ${data.maxScore}`}

@@ -36,11 +36,15 @@ export const AnswerSection: FC<IProps> = ({ data }) => {
   return (
     <Card>
       <form className='flex flex-col gap-4' onSubmit={onSubmitHandler}>
-        <div className='flex items-center gap-4 text-accent-primary-200'>
+        <div className='flex items-center gap-4 text-primary-default'>
           <Icon type='question' className='text-inherit' />
-          <span className='font-bold text-inherit'>Вопрос</span>
+          <span className='font-mono font-bold leading-[normal] text-inherit'>
+            Вопрос
+          </span>
         </div>
-        <header className='text-sm leading-normal'>{data.content}</header>
+        <header className='text-[0.8125rem] leading-normal'>
+          {data.content}
+        </header>
         <main>
           <TextArea
             placeholder='Ответ'
@@ -49,7 +53,7 @@ export const AnswerSection: FC<IProps> = ({ data }) => {
           />
         </main>
         <footer className='flex items-center gap-4 place-self-end'>
-          <div className={cn('flex flex-col gap-2')}>
+          <div className='flex flex-col gap-2 text-[0.8125rem]'>
             {verdict === 'OK' && (
               <span className='text-accent-secondary-300'>Верно!</span>
             )}
@@ -65,7 +69,7 @@ export const AnswerSection: FC<IProps> = ({ data }) => {
           {!isLoading && !isError && (
             <span
               className={cn(
-                'text-sm',
+                'text-[0.8125rem]',
                 verdict === 'OK' && 'text-accent-secondary-300'
               )}
             >

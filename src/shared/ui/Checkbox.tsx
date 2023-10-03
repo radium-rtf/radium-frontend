@@ -84,7 +84,7 @@ export const Checkbox: FC<IProps> = ({ name, value, children, disabled }) => {
         </svg>
       </div>
       {children && (
-        <span className='select-none text-sm text-text-primary'>
+        <span className='select-none text-[0.8125rem] text-text-primary'>
           {children}
         </span>
       )}
