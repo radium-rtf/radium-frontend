@@ -15,7 +15,7 @@ interface IProps {
 export const CoursePage: FC<IProps> = ({ page }) => {
   return (
     <main className='flex w-[45rem] flex-col gap-8'>
-      <h2 className='mx-6 text-5xl font-bold text-accent-primary-200'>
+      <h2 className='mx-6 font-mono text-5xl font-bold leading-[normal] text-accent-primary-200'>
         {page.name}
       </h2>
       {page.sections.map((section) => {
