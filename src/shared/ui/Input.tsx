@@ -1,11 +1,14 @@
 import React, { FC, InputHTMLAttributes } from 'react';
-import { cn } from '@/shared';
+import { Icon, cn } from '@/shared';
 
-interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {}
+interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  iconType?: Icon;
+}
 
 export const Input: FC<TextInputProps> = ({
   className,
   children,
+  iconType,
   ...props
 }: TextInputProps) => {
   return (
@@ -22,6 +25,7 @@ export const Input: FC<TextInputProps> = ({
           'transition',
           'cursor-text',
           'items-center',
+          'font-mono',
           'outline-white',
           'border-white/10',
           '-outline-offset-1',
@@ -35,6 +39,9 @@ export const Input: FC<TextInputProps> = ({
         className
       )}
     >
+      {!!iconType && (
+        <Icon className='shrink-0 text-foreground-secondary' type={iconType} />
+      )}
       <input
         {...props}
         className='
@@ -44,13 +51,14 @@ export const Input: FC<TextInputProps> = ({
         cursor-text
         bg-transparent
         font-mono
-        text-sm
-        text-text-primary
+        text-[0.8125rem]
+        leading-tight
+        text-foreground-default
         outline-none
-        placeholder:text-text-secondary
+        placeholder:text-foreground-secondary
         disabled:cursor-not-allowed'
       />
-      {children && <span className='text-sm'>{children}</span>}
+      {children}
     </label>
   );
 };
