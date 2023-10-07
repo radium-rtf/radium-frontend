@@ -1,6 +1,6 @@
 import '../globals.css';
 import type { Metadata } from 'next';
-import { cn } from '@/shared';
+import { AuthSessionProvider, ReduxStoreProvider, cn } from '@/shared';
 import localFont from 'next/font/local';
 import { Inter } from 'next/font/google';
 
@@ -37,12 +37,14 @@ export default function RootLayout({
     <html lang='en' className='h-full'>
       <body
         className={cn(
-          'h-full bg-bg-page font-sans text-text-primary',
+          'flex h-full flex-col bg-background-default font-sans text-foreground-default',
           inter.variable,
           ntSomic.variable
         )}
       >
-        {children}
+        <AuthSessionProvider>
+          <ReduxStoreProvider>{children}</ReduxStoreProvider>
+        </AuthSessionProvider>
       </body>
     </html>
   );
