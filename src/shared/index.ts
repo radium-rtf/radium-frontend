@@ -18,6 +18,7 @@ export { List } from './ui/List';
 export { ListItem } from './ui/ListItem';
 export { Tab } from './ui/Tab';
 export { AuthSessionProvider } from './ui/AuthSessionProvider';
+export { ReduxStoreProvider } from './ui/ReduxStoreProvider';
 
 // Interfaces
 export type { IIcon } from './ui/Icon';
