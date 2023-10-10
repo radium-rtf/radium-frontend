@@ -7,5 +7,9 @@ interface IProps {
 }
 
 export const TextSection: FC<IProps> = ({ data }) => {
-  return <Card className='text-[0.8125rem]'>{data.content}</Card>;
+  return (
+    <Card>
+      <p className='text-[0.8125rem]'>{data.content}</p>
+    </Card>
+  );
 };
