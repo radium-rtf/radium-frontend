@@ -23,6 +23,7 @@ export { ReduxStoreProvider } from './ui/ReduxStoreProvider';
 // Interfaces
 export type { IIcon } from './ui/Icon';
 export type { ITab } from './ui/Tab';
+export type { UploadFileResponseDto } from './model/uploadFileResponseDto';
 
 // Types
 export type { Icon as IconType } from './ui/Icon';
