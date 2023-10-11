@@ -32,7 +32,8 @@ export type Icon =
   | 'password'
   | 'enter'
   | 'loading'
-  | 'alert';
+  | 'alert'
+  | 'handle';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -378,6 +379,16 @@ const icons: Record<Icon, ReactNode> = {
         className='fill-current'
       />
       <circle cx='8.5' cy='8.5' r='8' className='stroke-current' />
+    </g>
+  ),
+  handle: (
+    <g className='text-inherit'>
+      <circle cx='7' cy='5' r='1' className='fill-current' />
+      <circle cx='7' cy='9' r='1' className='fill-current' />
+      <circle cx='7' cy='13' r='1' className='fill-current' />
+      <circle cx='11' cy='13' r='1' className='fill-current' />
+      <circle cx='11' cy='9' r='1' className='fill-current' />
+      <circle cx='11' cy='5' r='1' className='fill-current' />
     </g>
   ),
 };
