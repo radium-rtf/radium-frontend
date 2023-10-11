@@ -4,4 +4,5 @@ export interface PermutationSectionResponseDto extends SectionResponseDto {
   type: 'permutation';
   content: string;
   variants: string[];
+  answers: string[];
 }

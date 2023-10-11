@@ -1,7 +1,7 @@
 'use client';
 import { Button, Card, Icon, PermutationItem, cn } from '@/shared';
 import { FC, FormEventHandler, useState } from 'react';
-import { PermutationSectionResponseDto } from '../model/PermutationSectionResponseDto';
+import { PermutationSectionResponseDto } from '../model/permutationSectionResponseDto';
 import { useAnswerMutation } from '../api/sectionApi';
 import {
   DndContext,
@@ -31,7 +31,7 @@ export const PermutationSection: FC<IProps> = ({ data }) => {
   const [verdict, setVerdict] = useState<
     PermutationSectionResponseDto['verdict']
   >(data.verdict);
-  const [items, setItems] = useState<string[]>(data.variants);
+  const [items, setItems] = useState<string[]>(data.answers || data.variants);
   const [answer, { isLoading, isError }] = useAnswerMutation();
 
   const sensors = useSensors(
@@ -72,7 +72,7 @@ export const PermutationSection: FC<IProps> = ({ data }) => {
       <form
         className='flex flex-col gap-4'
         onSubmit={sumbitHander}
-        onReset={() => setItems(data.variants)}
+        onReset={() => setItems(data.answers || data.variants)}
       >
         <div className='flex items-center gap-4 text-primary-default'>
           <Icon type='question' className='text-inherit' />
