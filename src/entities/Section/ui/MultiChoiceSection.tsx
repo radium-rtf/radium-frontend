@@ -34,7 +34,7 @@ export const MultiChoiceSection: FC<IProps> = ({ data }) => {
   };
 
   return (
-    <Card>
+    <Card asChild>
       <form className='flex flex-col gap-4' onSubmit={onSubmitHandler}>
         <div className='flex items-center gap-4 text-primary-default'>
           <Icon type='question' className='text-inherit' />

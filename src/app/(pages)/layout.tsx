@@ -37,7 +37,7 @@ export default function RootLayout({
     <html lang='en' className='h-full'>
       <body
         className={cn(
-          'h-full bg-bg-page font-sans text-text-primary',
+          'bg-bg-page font-sans text-text-primary',
           inter.variable,
           ntSomic.variable
         )}

@@ -17,6 +17,7 @@ export { MenuItem } from './ui/MenuItem';
 export { List } from './ui/List';
 export { ListItem } from './ui/ListItem';
 export { Tab } from './ui/Tab';
+export { PermutationItem } from './ui/PermutationItem';
 export { InputFile } from './ui/InputFile';
 export { CloseButton } from './ui/CloseButton';
 export { DownloadButton } from './ui/DownloadButton';
