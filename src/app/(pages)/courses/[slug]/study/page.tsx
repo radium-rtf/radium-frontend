@@ -3,7 +3,6 @@ import { CourseNavigation, useCourseQuery } from '@/entities/Course';
 import { usePageQuery } from '@/entities/Page';
 import { CoursePage } from '@/widgets/CoursePage';
 import { Header } from '@/widgets/Header';
-import { SessionProvider } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -30,22 +29,20 @@ export default function Page({ params, searchParams }: IProps) {
 
   return (
     <>
-      <SessionProvider>
-        <Header isClient>
-          <Link href='/' className='flex items-center gap-6'>
-            <Image
-              src={course.logo}
-              alt={course.name}
-              width={48}
-              height={48}
-              className='object-cover'
-            />
-            <h1 className='font-mono text-4xl font-bold text-accent-primary-200'>
-              {course.name}
-            </h1>
-          </Link>
-        </Header>
-      </SessionProvider>
+      <Header>
+        <Link href='/' className='flex items-center gap-6'>
+          <Image
+            src={course.logo}
+            alt={course.name}
+            width={48}
+            height={48}
+            className='object-cover'
+          />
+          <h1 className='font-mono text-4xl font-bold text-accent-primary-200'>
+            {course.name}
+          </h1>
+        </Link>
+      </Header>
       <div className='flex flex-grow items-start gap-8 px-12'>
         <CourseNavigation
           modules={course.modules}

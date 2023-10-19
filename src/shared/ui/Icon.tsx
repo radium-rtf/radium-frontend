@@ -33,6 +33,7 @@ export type Icon =
   | 'enter'
   | 'loading'
   | 'alert'
+  | 'success';
   | 'handle';
   | 'download';
 
@@ -382,6 +383,13 @@ const icons: Record<Icon, ReactNode> = {
       <circle cx='8.5' cy='8.5' r='8' className='stroke-current' />
     </g>
   ),
+  success: (
+    <path
+      d='M0.5 10.5L5.5 15.5L17.5 3.5'
+      className='stroke-current'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
   handle: (
     <g className='text-inherit'>
       <circle cx='7' cy='5' r='1' className='fill-current' />

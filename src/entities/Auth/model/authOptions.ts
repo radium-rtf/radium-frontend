@@ -18,7 +18,7 @@ export const authOptions: NextAuthOptions = {
           label: 'password',
         },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         if (!credentials) return null;
         const response = await Login(credentials);
 
@@ -37,7 +37,14 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ user, token }) {
+    async jwt({ user, token, trigger, session }) {
+      if (trigger === 'update') {
+        if (!session) return token;
+        return {
+          ...token,
+          ...session,
+        };
+      }
       if (user) {
         token.accessToken = user.accessToken;
         token.refreshToken = user.refreshToken;
