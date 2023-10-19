@@ -4,6 +4,13 @@ export interface SectionResponseDto {
   order: number;
   score: number;
   maxScore: number;
-  type: 'choice' | 'multiChoice' | 'text' | 'shortAnswer' | 'answer' | 'code';
+  type:
+    | 'choice'
+    | 'multiChoice'
+    | 'text'
+    | 'shortAnswer'
+    | 'answer'
+    | 'code'
+    | 'permutation';
   verdict: 'WA' | 'OK' | 'WAIT' | '';
 }

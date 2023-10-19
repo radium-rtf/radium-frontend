@@ -1,20 +1,29 @@
 import React, { FC, HTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/shared';
+import { Slot } from '@radix-ui/react-slot';
 
 interface IProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
+  asChild?: boolean;
 }
 
-export const Card: FC<IProps> = ({ children, className, ...props }) => {
+export const Card: FC<IProps> = ({
+  children,
+  className,
+  asChild,
+  ...props
+}) => {
+  const Comp = asChild ? Slot : 'section';
+
   return (
-    <section
+    <Comp
       {...props}
       className={cn(
-        'bg-grey-600 flex flex-col gap-4 rounded-2xl p-6',
+        'flex flex-col gap-4 rounded-2xl bg-grey-600 p-6',
         className
       )}
     >
       {children}
-    </section>
+    </Comp>
   );
 };

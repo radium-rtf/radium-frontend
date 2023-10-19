@@ -16,4 +16,7 @@ export interface AnswerRequestDto {
   shortAnswer?: {
     answer: string;
   };
+  permutation?: {
+    answer: string[];
+  };
 }

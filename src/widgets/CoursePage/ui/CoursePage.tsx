@@ -5,6 +5,7 @@ import {
   MultiChoiceSection,
   ShortAnswerSection,
 } from '@/entities/Section';
+import { PermutationSection } from '@/entities/Section/ui/PermutationSection';
 import { TextSection } from '@/entities/Section/ui/TextSection';
 import { FC } from 'react';
 
@@ -30,6 +31,8 @@ export const CoursePage: FC<IProps> = ({ page }) => {
             return <AnswerSection key={section.id} data={section} />;
           case 'shortAnswer':
             return <ShortAnswerSection key={section.id} data={section} />;
+          case 'permutation':
+            return <PermutationSection key={section.id} data={section} />;
           default:
             return null;
         }
