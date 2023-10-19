@@ -1,4 +1,5 @@
-import { AuthResponseDto, LoginRequestDto } from '@/entities/Auth';
+import { AuthResponseDto } from '../model/AuthResponseDto';
+import { LoginRequestDto } from '../model/LoginRequestDto';
 
 export const Login = async (
   credentials: LoginRequestDto

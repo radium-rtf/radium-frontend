@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { CourseResponseDto } from '..';
+import { CourseResponseDto } from '../model/courseResponseDto';
 import { Icon, List, ListItem, Progress, cn } from '@/shared';
 
 interface IProps {

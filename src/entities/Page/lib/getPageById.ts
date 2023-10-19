@@ -1,5 +1,5 @@
 import { IErrors } from '@/shared';
-import { PageResponseDto } from '..';
+import { PageResponseDto } from '../model/PageResponseDto';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/entities/Auth';
 

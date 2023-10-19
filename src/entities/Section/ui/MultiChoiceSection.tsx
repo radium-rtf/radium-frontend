@@ -2,11 +2,9 @@
 
 import { Button, Card, Checkbox, Icon, cn } from '@/shared';
 import { FC, FormEventHandler, useState } from 'react';
-import {
-  ChoiceSectionResponseDto,
-  MultiChoiceSectionResponseDto,
-  useAnswerMutation,
-} from '..';
+import { MultiChoiceSectionResponseDto } from '../model/multiChoiceSectionResponseDto';
+import { ChoiceSectionResponseDto } from '../model/choiceSectionResponseDto';
+import { useAnswerMutation } from '../api/sectionApi';
 
 interface IProps {
   data: MultiChoiceSectionResponseDto;

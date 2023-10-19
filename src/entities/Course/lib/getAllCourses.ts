@@ -1,7 +1,4 @@
-import { CourseResponseDto } from '@/entities/Course';
-import { getSession } from 'next-auth/react';
-import { authOptions } from '@/entities/Auth';
-import { getServerSession } from 'next-auth';
+import { CourseResponseDto } from '../model/courseResponseDto';
 
 export const getAllCourses = async (): Promise<CourseResponseDto[]> => {
   const response = await fetch(

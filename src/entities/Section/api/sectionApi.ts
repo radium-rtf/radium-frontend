@@ -1,5 +1,5 @@
 import { emptyApi } from '@/shared';
-import { AnswerResponseDto } from '..';
+import { AnswerResponseDto } from '../model/answerResponseDto';
 import { AnswerRequestDto } from '../model/answerRequestDto';
 
 const sectionApi = emptyApi.injectEndpoints({

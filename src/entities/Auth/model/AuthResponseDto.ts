@@ -1,4 +1,4 @@
-import { SuccessAuthResponseDto } from '@/entities/Auth';
-import { ErrorAuthResponseDto } from '@/entities/Auth';
+import { ErrorAuthResponseDto } from './ErrorAuthResponseDto';
+import { SuccessAuthResponseDto } from './SuccessAuthResponseDto';
 
 export type AuthResponseDto = SuccessAuthResponseDto | ErrorAuthResponseDto;

@@ -1,5 +1,5 @@
 import { emptyApi } from '@/shared';
-import { PageResponseDto } from '..';
+import { PageResponseDto } from '../model/PageResponseDto';
 
 const pageApi = emptyApi.injectEndpoints({
   endpoints: (builder) => ({

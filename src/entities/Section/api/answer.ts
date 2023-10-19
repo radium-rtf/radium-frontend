@@ -1,7 +1,7 @@
 import { authOptions } from '@/entities/Auth';
 import { getServerSession } from 'next-auth';
 import { IErrors } from '@/shared';
-import { AnswerResponseDto } from '..';
+import { AnswerResponseDto } from '../model/answerResponseDto';
 import { AnswerRequestDto } from '../model/answerRequestDto';
 
 export const Answer = async (

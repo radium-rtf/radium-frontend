@@ -1,4 +1,5 @@
-import { AuthResponseDto, RegisterRequestDto } from '@/entities/Auth';
+import { AuthResponseDto } from '../model/AuthResponseDto';
+import { RegisterRequestDto } from '../model/RegisterRequestDto';
 
 export const Register = async (
   credentials: RegisterRequestDto

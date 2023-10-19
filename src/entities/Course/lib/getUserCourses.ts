@@ -1,9 +1,11 @@
-import { CourseResponseDto } from '@/entities/Course';
+import { CourseResponseDto } from '../model/courseResponseDto';
 import { authOptions } from '@/entities/Auth';
 import { getServerSession } from 'next-auth';
 import { IErrors } from '@/shared';
 
-export const getUserCourses = async (): Promise<CourseResponseDto[] | IErrors> => {
+export const getUserCourses = async (): Promise<
+  CourseResponseDto[] | IErrors
+> => {
   const session = await getServerSession(authOptions);
 
   if (!session) throw Error('Not authenticated');
@@ -17,11 +19,11 @@ export const getUserCourses = async (): Promise<CourseResponseDto[] | IErrors> =
         },
       }
     );
-  
+
     if (response.status !== 200) throw Error('Not authorized');
-  
+
     return response.json();
   } catch (error) {
-    return 'Fetch error'
+    return 'Fetch error';
   }
 };

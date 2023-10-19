@@ -1,4 +1,4 @@
-import { SectionResponseDto } from '..';
+import { SectionResponseDto } from './sectionResponseDto';
 
 export interface ChoiceSectionResponseDto extends SectionResponseDto {
   type: 'choice';

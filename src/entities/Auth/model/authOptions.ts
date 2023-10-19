@@ -1,6 +1,6 @@
 import { NextAuthOptions } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import { Login } from '@/entities/Auth';
+import { Login } from '../libs/Login';
 
 export const authOptions: NextAuthOptions = {
   pages: {
