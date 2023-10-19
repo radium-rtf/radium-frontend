@@ -1,6 +1,6 @@
 import React, { FC, HTMLAttributes, ReactNode } from 'react';
-import { cn } from '@/shared';
 import { Slot } from '@radix-ui/react-slot';
+import { cn } from '../utils/cn';
 
 interface IProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;

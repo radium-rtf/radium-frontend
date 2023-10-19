@@ -1,6 +1,6 @@
 import { FC, ReactElement } from 'react';
 import { IMenuItem } from './MenuItem';
-import { cn } from '@/shared';
+import { cn } from '../utils/cn';
 
 interface IProps {
   children?: ReactElement<IMenuItem> | ReactElement<IMenuItem>[];

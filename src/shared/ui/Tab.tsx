@@ -1,8 +1,9 @@
 import React, { FC, MouseEventHandler, ReactNode } from 'react';
-import { cn, Icon, IconType } from '@/shared';
+import { Icon } from './Icon';
+import { cn } from '../utils/cn';
 
 export interface ITab {
-  icon: IconType;
+  icon: Icon;
   children?: ReactNode;
   isSelected?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;

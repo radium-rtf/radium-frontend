@@ -1,8 +1,9 @@
 import React, { FC, MouseEventHandler } from 'react';
-import { cn, Icon, IconType } from '@/shared';
+import { Icon } from './Icon';
+import { cn } from '../utils/cn';
 
 interface IProps {
-  icon: IconType;
+  icon: Icon;
   className?: string;
   disabled?: boolean;
   type: 'button' | 'reset' | 'submit';

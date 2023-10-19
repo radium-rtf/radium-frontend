@@ -1,9 +1,8 @@
-import React, { FC, ReactElement } from 'react';
-import { IListItem } from '@/shared/ui/ListItem';
-import { cn } from '@/shared';
+import React, { FC, ReactNode } from 'react';
+import { cn } from '../utils/cn';
 
 interface IProps {
-  children?: ReactElement<IListItem> | ReactElement<IListItem>[];
+  children?: ReactNode;
   className?: string;
 }
 

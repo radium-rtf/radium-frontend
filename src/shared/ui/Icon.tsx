@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, SVGAttributes } from 'react';
-import { cn } from '@/shared';
+import { cn } from '../utils/cn';
 
 export type Icon =
   | 'null'

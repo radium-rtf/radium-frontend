@@ -1,8 +1,9 @@
 import React, { ButtonHTMLAttributes, FC } from 'react';
-import { cn, Icon, IconType } from '@/shared';
+import { Icon } from './Icon';
+import { cn } from '../utils/cn';
 
 export interface IMenuItem extends ButtonHTMLAttributes<HTMLButtonElement> {
-  icon: IconType;
+  icon: Icon;
 }
 
 export const MenuItem: FC<IMenuItem> = ({

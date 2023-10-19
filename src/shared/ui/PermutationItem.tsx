@@ -3,7 +3,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSSProperties, FC, HTMLAttributes } from 'react';
 import { CSS } from '@dnd-kit/utilities';
 import { Icon } from './Icon';
-import { cn } from '@/shared';
+import { cn } from '../utils/cn';
 
 interface IProps extends HTMLAttributes<HTMLDivElement> {
   value: string | number;

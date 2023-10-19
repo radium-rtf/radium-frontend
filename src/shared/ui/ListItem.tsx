@@ -1,5 +1,5 @@
 import React, { FC, MouseEventHandler, ReactNode } from 'react';
-import { cn } from '@/shared';
+import { cn } from '../utils/cn';
 import Link from 'next/link';
 
 export interface IListItem {
