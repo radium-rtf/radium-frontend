@@ -33,7 +33,9 @@ export const HeaderMenu: FC<IProps> = ({ photo }) => {
           <MenuItem onClick={() => router.push('/profile')} icon='profile'>
             Профиль
           </MenuItem>
-          <MenuItem icon='courses'>Мои курсы</MenuItem>
+          <MenuItem onClick={() => router.push('/')} icon='courses'>
+            Мои курсы
+          </MenuItem>
           <MenuItem onClick={() => signOut()} icon='exit'>
             Мои выйти
           </MenuItem>
