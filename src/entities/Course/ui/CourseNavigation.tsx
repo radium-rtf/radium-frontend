@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { CourseResponseDto } from '../model/courseResponseDto';
-import { Icon, List, ListItem, Progress, cn } from '@/shared';
+import { List, Progress, cn } from '@/shared';
+import Link from 'next/link';
 
 interface IProps {
   modules: CourseResponseDto['modules'];
@@ -51,30 +52,36 @@ export const CourseNavigation: FC<IProps> = ({
               <List>
                 {module.pages.map((page) => {
                   return (
-                    <ListItem
-                      key={page.id}
-                      className={currentPage === page.id ? 'bg-grey-600' : ''}
-                      href={`?page=${page.id}`}
-                    >
-                      {page.maxScore ? (
-                        <Progress
-                          type='radial'
-                          percentage={(page.score / page.maxScore) * 100}
-                          theme='primary'
-                          className='text-transparent'
-                        />
-                      ) : (
-                        <Icon type='courses' className='text-primary-default' />
-                      )}
-                      <div className='flex flex-col gap-0.5 text-start'>
-                        <h2 className='text-[0.8125rem] leading-tight'>
-                          {page.name}
-                        </h2>
-                        {!!page.maxScore && (
-                          <p className='text-[0.625rem] leading-normal text-text-secondary'>{`${page.score}/${page.maxScore} баллов`}</p>
+                    <List.Item key={page.id} asChild>
+                      <Link
+                        href={`?page=${page.id}`}
+                        className={cn(
+                          'rounded-lg border border-transparent transition-colors hover:border-white/10 hover:bg-white/5',
+                          currentPage === page.id &&
+                            'border-white/10 bg-white/5'
                         )}
-                      </div>
-                    </ListItem>
+                      >
+                        <List.Icon
+                          icon='courses'
+                          className='text-primary-default'
+                          asChild={page.maxScore !== 0}
+                        >
+                          <Progress
+                            type='radial'
+                            percentage={(page.score / page.maxScore) * 100}
+                            theme='primary'
+                            className='text-transparent'
+                          />
+                        </List.Icon>
+
+                        <List.Content>
+                          <List.Title>{page.name}</List.Title>
+                          {!!page.maxScore && (
+                            <List.Subtitle>{`${page.score}/${page.maxScore} баллов`}</List.Subtitle>
+                          )}
+                        </List.Content>
+                      </Link>
+                    </List.Item>
                   );
                 })}
               </List>
