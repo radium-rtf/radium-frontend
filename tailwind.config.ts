@@ -11,6 +11,7 @@ const config: Config = {
       colors: {
         bg: {
           page: '#222526',
+          overlay: '#393E40',
         },
         background: {
           default: '#222526',
