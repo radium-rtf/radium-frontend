@@ -10,19 +10,7 @@ interface IProps {
 export const Menu: FC<IProps> = ({ children, className }) => {
   return (
     <ul
-      className={cn(
-        [
-          'rounded',
-          'border',
-          'border-grey-300',
-          'bg-grey-500',
-          'text-text-primary',
-          '[&>li:first-child>button]:rounded-t',
-          '[&>li:last-child>button]:rounded-b',
-          '[&>li>button]:rounded-none',
-        ],
-        className
-      )}
+      className={cn('bg-bg-overlay overflow-hidden rounded-lg py-2', className)}
     >
       {children}
     </ul>

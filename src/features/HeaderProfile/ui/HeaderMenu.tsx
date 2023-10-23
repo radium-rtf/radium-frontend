@@ -29,12 +29,11 @@ export const HeaderMenu: FC<IProps> = ({ photo }) => {
         />
       </button>
       {isMenuOpen && (
-        <Menu className='absolute -bottom-4 right-0 z-10 w-[200px] translate-y-full'>
+        <Menu className='absolute -bottom-4 right-0 z-10 w-[216px] translate-y-full'>
           <MenuItem onClick={() => router.push('/profile')} icon='profile'>
             Профиль
           </MenuItem>
           <MenuItem icon='courses'>Мои курсы</MenuItem>
-          <MenuItem icon='group'>Мои группы</MenuItem>
           <MenuItem onClick={() => signOut()} icon='exit'>
             Мои выйти
           </MenuItem>

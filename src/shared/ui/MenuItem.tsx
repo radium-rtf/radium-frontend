@@ -23,9 +23,11 @@ export const MenuItem: FC<IMenuItem> = ({
             'cursor-pointer',
             'items-center',
             'gap-4',
-            'rounded',
             'px-6',
             'py-2',
+            'border',
+            'border-transparent',
+            'rounded-lg',
             '-outline-offset-1',
             'outline-white',
             'transition-colors',
@@ -44,7 +46,7 @@ export const MenuItem: FC<IMenuItem> = ({
           type={icon}
           className='flex-shrink-0 text-accent-primary-200 transition-colors group-disabled:text-accent-primary-400'
         />
-        <span className='flex-grow text-start text-sm transition-colors group-disabled:text-grey-200'>
+        <span className='flex-grow whitespace-nowrap text-start text-sm transition-colors group-disabled:text-grey-200'>
           {children}
         </span>
         <Icon
