@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, SVGAttributes } from 'react';
+import { ReactNode, SVGProps, forwardRef } from 'react';
 import { cn } from '../utils/cn';
 
 export type Icon =
@@ -415,19 +415,24 @@ const icons: Record<Icon, ReactNode> = {
     </g>
   ),
 };
-export interface IIcon extends SVGAttributes<SVGSVGElement> {
+export interface IIcon extends SVGProps<SVGSVGElement> {
   type: Icon;
 }
 
-export const Icon: FC<IIcon> = ({ type, className }) => {
-  return (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      className={cn('aspect-square h-[1.125rem] text-white', className)}
-      viewBox='0 0 18 18'
-      fill='none'
-    >
-      {icons[type]}
-    </svg>
-  );
-};
+export const Icon = forwardRef<SVGSVGElement, IIcon>(
+  ({ className, type }, ref) => {
+    return (
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        className={cn('aspect-square h-[1.125rem] text-white', className)}
+        viewBox='0 0 18 18'
+        fill='none'
+        ref={ref}
+      >
+        {icons[type]}
+      </svg>
+    );
+  }
+);
+
+Icon.displayName = 'Icon';
