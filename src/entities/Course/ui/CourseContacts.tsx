@@ -17,7 +17,11 @@ export const CourseContacts: FC<IProps> = ({ contacts }) => {
         {contacts.map((contact) => {
           return (
             <List.Item key={contact.name} asChild>
-              <Link href={contact.link}>
+              <Link
+                href={contact.link}
+                target='_blank'
+                rel='noreferrer noopener'
+              >
                 <List.Icon icon='link' />
                 <List.Content>
                   <List.Title>Какой-то заголовок</List.Title>
