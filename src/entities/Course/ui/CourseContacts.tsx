@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Card } from '@/shared';
+import { Card, List } from '@/shared';
 import { CourseResponseDto } from '../model/courseResponseDto';
 import Link from 'next/link';
 
@@ -10,20 +10,28 @@ interface IProps {
 export const CourseContacts: FC<IProps> = ({ contacts }) => {
   return (
     <Card className='gap-0 rounded-lg'>
-      <h1 className='mb-6 text-xl font-bold leading-[normal] text-primary-default'>
+      <h1 className='mb-4 text-xl font-bold leading-[normal] text-primary-default'>
         Контакты
       </h1>
-      <ul className='flex flex-col gap-4'>
+      <List className='-mx-6'>
         {contacts.map((contact) => {
           return (
-            <li key={contact.name} className='flex items-center gap-4'>
-              <Link href={contact.link} prefetch={false}>
-                {contact.name}
+            <List.Item key={contact.name} asChild>
+              <Link href={contact.link}>
+                <List.Icon icon='link' />
+                <List.Content>
+                  <List.Title>Какой-то заголовок</List.Title>
+                  <List.Subtitle>{contact.link}</List.Subtitle>
+                </List.Content>
+                <List.Icon
+                  className='h-[0.75rem] text-primary-default'
+                  icon='external-link'
+                />
               </Link>
-            </li>
+            </List.Item>
           );
         })}
-      </ul>
+      </List>
     </Card>
   );
 };

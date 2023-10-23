@@ -35,7 +35,9 @@ export type Icon =
   | 'alert'
   | 'success'
   | 'handle'
-  | 'download';
+  | 'download'
+  | 'link'
+  | 'external-link';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -408,6 +410,32 @@ const icons: Record<Icon, ReactNode> = {
         stroke='#E6E6E6'
         stroke-linecap='round'
         stroke-linejoin='round'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+    </g>
+  ),
+  link: (
+    <g className='text-inherit'>
+      <path
+        d='M5.5 8.5H12.5'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <path
+        fillRule='evenodd'
+        clipRule='evenodd'
+        d='M0 7C0 5.89543 0.895431 5 2 5H6C7.10457 5 8 5.89543 8 7H7C7 6.44772 6.55228 6 6 6H2C1.44772 6 1 6.44772 1 7V10C1 10.5523 1.44772 11 2 11H6C6.55228 11 7 10.5523 7 10H8C8 11.1046 7.10457 12 6 12H2C0.895431 12 0 11.1046 0 10V7ZM10 10C10 11.1046 10.8954 12 12 12H16C17.1046 12 18 11.1046 18 10V7C18 5.89543 17.1046 5 16 5H12C10.8954 5 10 5.89543 10 7H11C11 6.44772 11.4477 6 12 6H16C16.5523 6 17 6.44772 17 7V10C17 10.5523 16.5523 11 16 11H12C11.4477 11 11 10.5523 11 10H10Z'
+        className='fill-current'
+      />
+    </g>
+  ),
+  'external-link': (
+    <g className='text-inherit'>
+      <path
+        d='M6.75 0.75H2.25C1.42157 0.75 0.75 1.42157 0.75 2.25V15.75C0.75 16.5784 1.42157 17.25 2.25 17.25H15.75C16.5784 17.25 17.25 16.5784 17.25 15.75V11.25M11.25 0.75H17.25M17.25 0.75V6.75M17.25 0.75L6.75 11.25'
         className='stroke-current'
         strokeLinecap='round'
         strokeLinejoin='round'
