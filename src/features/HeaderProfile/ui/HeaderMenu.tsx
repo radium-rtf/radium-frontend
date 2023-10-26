@@ -1,9 +1,9 @@
 'use client';
+import Link from 'next/link';
 import Image from 'next/image';
-import { signOut } from 'next-auth/react';
+import { Menu } from '@/shared';
 import { FC, useState } from 'react';
-import { Menu, MenuItem } from '@/shared';
-import { useRouter } from 'next/navigation';
+import { signOut } from 'next-auth/react';
 
 interface IProps {
   photo?: string | null;
@@ -11,7 +11,6 @@ interface IProps {
 
 export const HeaderMenu: FC<IProps> = ({ photo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const router = useRouter();
 
   return (
     <div className='relative'>
@@ -30,15 +29,22 @@ export const HeaderMenu: FC<IProps> = ({ photo }) => {
       </button>
       {isMenuOpen && (
         <Menu className='absolute -bottom-4 right-0 z-10 w-[216px] translate-y-full'>
-          <MenuItem onClick={() => router.push('/profile')} icon='profile'>
-            Профиль
-          </MenuItem>
-          <MenuItem onClick={() => router.push('/')} icon='courses'>
-            Мои курсы
-          </MenuItem>
-          <MenuItem onClick={() => signOut()} icon='exit'>
-            Мои выйти
-          </MenuItem>
+          <Menu.Item asChild>
+            <Link href='/profile'>
+              <Menu.Icon icon='profile' />
+              <Menu.Text>Мой профиль</Menu.Text>
+            </Link>
+          </Menu.Item>
+          <Menu.Item asChild>
+            <Link href='/'>
+              <Menu.Icon icon='courses' />
+              <Menu.Text>Мои курсы</Menu.Text>
+            </Link>
+          </Menu.Item>
+          <Menu.Item onClick={() => signOut()}>
+            <Menu.Icon icon='exit' />
+            <Menu.Text>Выйти</Menu.Text>
+          </Menu.Item>
         </Menu>
       )}
     </div>
