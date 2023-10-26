@@ -13,7 +13,6 @@ export { IconButton } from './ui/IconButton';
 export { Progress } from './ui/Progress';
 export { Card } from './ui/Card';
 export { Menu } from './ui/Menu';
-export { MenuItem } from './ui/MenuItem';
 export { List } from './ui/List';
 export { Tab } from './ui/Tab';
 export { AuthSessionProvider } from './ui/AuthSessionProvider';
