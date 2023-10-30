@@ -15,6 +15,7 @@ export { Card } from './ui/Card';
 export { Menu } from './ui/Menu';
 export { List } from './ui/List';
 export { Tab } from './ui/Tab';
+export { Tabs } from './ui/Tabs';
 export { AuthSessionProvider } from './ui/AuthSessionProvider';
 export { ReduxStoreProvider } from './ui/ReduxStoreProvider';
 export { PermutationItem } from './ui/PermutationItem';

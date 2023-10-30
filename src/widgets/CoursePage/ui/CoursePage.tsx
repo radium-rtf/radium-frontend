@@ -2,6 +2,7 @@ import { PageResponseDto } from '@/entities/Page';
 import {
   AnswerSection,
   ChoiceSection,
+  CodeSection,
   MultiChoiceSection,
   ShortAnswerSection,
 } from '@/entities/Section';
@@ -33,6 +34,8 @@ export const CoursePage: FC<IProps> = ({ page }) => {
             return <ShortAnswerSection key={section.id} data={section} />;
           case 'permutation':
             return <PermutationSection key={section.id} data={section} />;
+          case 'code':
+            return <CodeSection key={section.id} data={section} />;
           default:
             return null;
         }
