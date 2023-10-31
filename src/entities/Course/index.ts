@@ -12,7 +12,6 @@ export { CourseBrief } from './ui/CourseBrief';
 export { CourseDescription } from './ui/CourseDescription';
 export { CourseAuthors } from './ui/CourseAuthors';
 export { CourseContacts } from './ui/CourseContacts';
-export { CourseNavigation } from './ui/CourseNavigation';
 
 // Hooks
 export { useCourseQuery, useLazyCourseQuery } from './api/courseApi';
