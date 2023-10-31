@@ -6,6 +6,7 @@ export type { MultiChoiceSectionResponseDto } from './model/multiChoiceSectionRe
 export type { AnswerSectionResponseDto } from './model/answerSectionResponseDto';
 export type { ShortAnswerSectionResponseDto } from './model/shortAnswerSectionResponseDto';
 export type { AnswerResponseDto } from './model/answerResponseDto';
+export type { CodeSectionResponseDto } from './model/codeSectionResponseDto';
 
 // types
 export type { AllSectionsResponseDto } from './model/allSectionsResponseDto';
@@ -16,6 +17,7 @@ export { ChoiceSection } from './ui/ChoiceSection';
 export { MultiChoiceSection } from './ui/MultiChoiceSection';
 export { AnswerSection } from './ui/AnswerSection';
 export { ShortAnswerSection } from './ui/ShortAnswerSection';
+export { CodeSection } from './ui/CodeSection';
 
 // methods
 export { Answer } from './api/answer';

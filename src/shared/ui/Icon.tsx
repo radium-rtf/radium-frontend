@@ -1,5 +1,5 @@
-import React, { FC, ReactNode, SVGAttributes } from 'react';
-import { cn } from '@/shared';
+import { ReactNode, SVGProps, forwardRef } from 'react';
+import { cn } from '../utils/cn';
 
 export type Icon =
   | 'null'
@@ -33,9 +33,11 @@ export type Icon =
   | 'enter'
   | 'loading'
   | 'alert'
-  | 'success';
-  | 'handle';
-  | 'download';
+  | 'success'
+  | 'handle'
+  | 'download'
+  | 'link'
+  | 'external-link';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -197,7 +199,7 @@ const icons: Record<Icon, ReactNode> = {
   ),
   exit: (
     <path
-      d='M11.5 2.5V2.5C11.5 1.39543 10.6046 0.5 9.5 0.5H2.5C1.39543 0.5 0.5 1.39543 0.5 2.5V15.5C0.5 16.6046 1.39543 17.5 2.5 17.5H9.5C10.6046 17.5 11.5 16.6046 11.5 15.5V14.5M3.5 8.5H14.5M14.5 8.5L11.5 11.5M14.5 8.5L11.5 5.5'
+      d='M14.5 2.5V2C14.5 1.17157 13.8284 0.5 13 0.5H5C4.17157 0.5 3.5 1.17157 3.5 2V16C3.5 16.8284 4.17157 17.5 5 17.5H13C13.8284 17.5 14.5 16.8284 14.5 16V14.5M6.5 8.5H17.5M17.5 8.5L14.5 11.5M17.5 8.5L14.5 5.5'
       className='stroke-current'
       strokeLinecap='round'
       strokeLinejoin='round'
@@ -390,6 +392,7 @@ const icons: Record<Icon, ReactNode> = {
       strokeLinecap='round'
       strokeLinejoin='round'
     />
+  ),
   handle: (
     <g className='text-inherit'>
       <circle cx='7' cy='5' r='1' className='fill-current' />
@@ -402,7 +405,37 @@ const icons: Record<Icon, ReactNode> = {
   ),
   download: (
     <g className='text-inherit'>
-      <path d="M0.5 12.5V15C0.5 15.8284 1.17157 16.5 2 16.5H15C15.8284 16.5 16.5 15.8284 16.5 15V12.5M8.5 1.5V11.5M8.5 11.5L4.5 7.5M8.5 11.5L12.5 7.5" stroke="#E6E6E6" stroke-linecap="round" stroke-linejoin="round"
+      <path
+        d='M0.5 12.5V15C0.5 15.8284 1.17157 16.5 2 16.5H15C15.8284 16.5 16.5 15.8284 16.5 15V12.5M8.5 1.5V11.5M8.5 11.5L4.5 7.5M8.5 11.5L12.5 7.5'
+        stroke='#E6E6E6'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+    </g>
+  ),
+  link: (
+    <g className='text-inherit'>
+      <path
+        d='M5.5 8.5H12.5'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <path
+        fillRule='evenodd'
+        clipRule='evenodd'
+        d='M0 7C0 5.89543 0.895431 5 2 5H6C7.10457 5 8 5.89543 8 7H7C7 6.44772 6.55228 6 6 6H2C1.44772 6 1 6.44772 1 7V10C1 10.5523 1.44772 11 2 11H6C6.55228 11 7 10.5523 7 10H8C8 11.1046 7.10457 12 6 12H2C0.895431 12 0 11.1046 0 10V7ZM10 10C10 11.1046 10.8954 12 12 12H16C17.1046 12 18 11.1046 18 10V7C18 5.89543 17.1046 5 16 5H12C10.8954 5 10 5.89543 10 7H11C11 6.44772 11.4477 6 12 6H16C16.5523 6 17 6.44772 17 7V10C17 10.5523 16.5523 11 16 11H12C11.4477 11 11 10.5523 11 10H10Z'
+        className='fill-current'
+      />
+    </g>
+  ),
+  'external-link': (
+    <g className='text-inherit'>
+      <path
+        d='M6.75 0.75H2.25C1.42157 0.75 0.75 1.42157 0.75 2.25V15.75C0.75 16.5784 1.42157 17.25 2.25 17.25H15.75C16.5784 17.25 17.25 16.5784 17.25 15.75V11.25M11.25 0.75H17.25M17.25 0.75V6.75M17.25 0.75L6.75 11.25'
         className='stroke-current'
         strokeLinecap='round'
         strokeLinejoin='round'
@@ -410,19 +443,24 @@ const icons: Record<Icon, ReactNode> = {
     </g>
   ),
 };
-export interface IIcon extends SVGAttributes<SVGSVGElement> {
+export interface IIcon extends SVGProps<SVGSVGElement> {
   type: Icon;
 }
 
-export const Icon: FC<IIcon> = ({ type, className }) => {
-  return (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      className={cn('aspect-square h-[1.125rem] text-white', className)}
-      viewBox='0 0 18 18'
-      fill='none'
-    >
-      {icons[type]}
-    </svg>
-  );
-};
+export const Icon = forwardRef<SVGSVGElement, IIcon>(
+  ({ className, type }, ref) => {
+    return (
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        className={cn('aspect-square h-[1.125rem] text-white', className)}
+        viewBox='0 0 18 18'
+        fill='none'
+        ref={ref}
+      >
+        {icons[type]}
+      </svg>
+    );
+  }
+);
+
+Icon.displayName = 'Icon';

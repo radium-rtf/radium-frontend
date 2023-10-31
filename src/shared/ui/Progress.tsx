@@ -1,5 +1,6 @@
 import React, { CSSProperties, FC } from 'react';
-import { cn, Icon } from '@/shared';
+import { cn } from '../utils/cn';
+import { Icon } from './Icon';
 
 interface IProps {
   type?: 'linear' | 'radial';

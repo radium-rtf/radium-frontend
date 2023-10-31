@@ -2,11 +2,9 @@
 
 import { Button, Card, Icon, Input, cn } from '@/shared';
 import { FC, FormEventHandler, useState } from 'react';
-import {
-  ChoiceSectionResponseDto,
-  ShortAnswerSectionResponseDto,
-  useAnswerMutation,
-} from '..';
+import { ShortAnswerSectionResponseDto } from '../model/shortAnswerSectionResponseDto';
+import { ChoiceSectionResponseDto } from '../model/choiceSectionResponseDto';
+import { useAnswerMutation } from '../api/sectionApi';
 
 interface IProps {
   data: ShortAnswerSectionResponseDto;

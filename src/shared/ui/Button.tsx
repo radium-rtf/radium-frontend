@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, FC } from 'react';
 import { Slot } from '@radix-ui/react-slot';
-import { cn } from '@/shared';
+import { cn } from '../utils/cn';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color?: 'accent' | 'destructive' | 'outlined';

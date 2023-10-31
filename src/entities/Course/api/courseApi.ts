@@ -1,5 +1,5 @@
 import { emptyApi } from '@/shared';
-import { CourseResponseDto } from '..';
+import { CourseResponseDto } from '../model/courseResponseDto';
 
 const courseApi = emptyApi.injectEndpoints({
   endpoints: (builder) => ({

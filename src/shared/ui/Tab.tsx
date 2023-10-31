@@ -1,17 +1,21 @@
-import React, { FC, MouseEventHandler, ReactNode } from 'react';
-import { cn, Icon, IconType } from '@/shared';
+import React, { ButtonHTMLAttributes, FC } from 'react';
+import { Icon } from './Icon';
+import { cn } from '../utils/cn';
 
-export interface ITab {
-  icon: IconType;
-  children?: ReactNode;
+export interface ITab extends ButtonHTMLAttributes<HTMLButtonElement> {
+  icon: Icon;
   isSelected?: boolean;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-export const Tab: FC<ITab> = ({ icon, children, isSelected, onClick }) => {
+export const Tab: FC<ITab> = ({
+  icon,
+  children,
+  className,
+  isSelected,
+  ...props
+}) => {
   return (
     <button
-      onClick={onClick}
       className={cn(
         [
           'relative',
@@ -35,8 +39,10 @@ export const Tab: FC<ITab> = ({ icon, children, isSelected, onClick }) => {
           'after:transition-all',
           'after:rounded-full',
         ],
-        isSelected && 'after:w-6/12'
+        isSelected && 'after:w-6/12',
+        className
       )}
+      {...props}
     >
       <Icon
         type={icon}

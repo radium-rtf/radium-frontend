@@ -2,7 +2,7 @@
 
 import { Button, Card, Icon, Radio, cn } from '@/shared';
 import { FC, FormEventHandler, useState } from 'react';
-import { ChoiceSectionResponseDto } from '..';
+import { ChoiceSectionResponseDto } from '../model/choiceSectionResponseDto';
 import { useAnswerMutation } from '../api/sectionApi';
 
 interface IProps {

@@ -1,11 +1,13 @@
-import { CourseResponseDto } from '@/entities/Course';
+import { CourseResponseDto } from '../model/courseResponseDto';
 import { authOptions } from '@/entities/Auth';
 import { getServerSession } from 'next-auth';
 import { IErrors } from '@/shared';
 
-export const getCourse = async (slug: string): Promise<CourseResponseDto | IErrors> => {
+export const getCourse = async (
+  slug: string
+): Promise<CourseResponseDto | IErrors> => {
   const session = await getServerSession(authOptions);
-  if (!session) return 'Not authenticated'
+  if (!session) return 'Not authenticated';
 
   try {
     const response = await fetch(
@@ -15,11 +17,11 @@ export const getCourse = async (slug: string): Promise<CourseResponseDto | IErro
           Authorization: `Bearer ${session.user.accessToken}`,
         },
       }
-    ); 
+    );
     if (response.status !== 200) return 'Not authorized';
 
-    return response.json(); 
+    return response.json();
   } catch (error) {
-    return 'Fetch error'
+    return 'Fetch error';
   }
 };

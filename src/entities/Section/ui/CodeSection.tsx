@@ -1,28 +1,32 @@
 'use client';
+import './code.css';
 
-import { Button, Card, Icon, TextArea, cn } from '@/shared';
+import { Button, Card, Icon, Tab, Tabs, cn } from '@/shared';
 import { FC, FormEventHandler, useState } from 'react';
-import { AnswerSectionResponseDto } from '../model/answerSectionResponseDto';
-import { ChoiceSectionResponseDto } from '../model/choiceSectionResponseDto';
 import { useAnswerMutation } from '../api/sectionApi';
+import { CodeSectionResponseDto } from '../model/codeSectionResponseDto';
+import { Editor } from '@monaco-editor/react';
 
 interface IProps {
-  data: AnswerSectionResponseDto;
+  data: CodeSectionResponseDto;
 }
 
-export const AnswerSection: FC<IProps> = ({ data }) => {
-  const [verdict, setVerdict] = useState<ChoiceSectionResponseDto['verdict']>(
+export const CodeSection: FC<IProps> = ({ data }) => {
+  const [verdict, setVerdict] = useState<CodeSectionResponseDto['verdict']>(
     data.verdict
   );
   const [answer, { isLoading, isError }] = useAnswerMutation();
+  const [code, setCode] = useState<string>('');
+  const [lang, setLang] = useState('javascript');
+  const [isCodeWriting, setIsCodeWriting] = useState(true);
 
   const onSubmitHandler: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
     answer({
       id: data.id,
-      answer: {
-        answer: formData.get('answer') as string,
+      code: {
+        answer: code,
+        lang: lang,
       },
     })
       .unwrap()
@@ -43,11 +47,52 @@ export const AnswerSection: FC<IProps> = ({ data }) => {
         <header className='text-[0.8125rem] leading-normal'>
           {data.content}
         </header>
-        <main>
-          <TextArea
-            placeholder='Ответ'
-            className='min-h-[8rem] w-full resize-y'
-            name='answer'
+        <main className='flex !resize-y flex-col gap-4'>
+          <Tabs>
+            <Tab
+              type='button'
+              onClick={() => !isCodeWriting && setIsCodeWriting(true)}
+              isSelected={isCodeWriting}
+              icon='editor'
+            >
+              Редактор
+            </Tab>
+            <Tab
+              type='button'
+              onClick={() => isCodeWriting && setIsCodeWriting(false)}
+              isSelected={!isCodeWriting}
+              icon='attach'
+            >
+              Прикрепить файл
+            </Tab>
+          </Tabs>
+          <Editor
+            onChange={(val) => setCode(val!)}
+            className='min-h-[16rem] !rounded-lg [&>.line-numbers]:bg-white'
+            options={{
+              autoIndent: 'full',
+              lineHeight: 20,
+              fontSize: 13,
+              fontFamily: 'var(--font-nt-somic)',
+              folding: false,
+              minimap: {
+                enabled: false,
+              },
+              scrollbar: {
+                vertical: 'hidden',
+                horizontal: 'hidden',
+              },
+              lightbulb: {
+                enabled: false,
+              },
+              overviewRulerBorder: false,
+              hideCursorInOverviewRuler: true,
+              glyphMargin: false,
+              useShadowDOM: false,
+              renderLineHighlight: 'none',
+            }}
+            theme='vs-dark'
+            language={lang}
           />
         </main>
         <footer className='flex items-center gap-4 place-self-end'>

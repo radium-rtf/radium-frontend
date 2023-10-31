@@ -4,8 +4,8 @@ interface IProps {
   children?: ReactNode;
 }
 
-const Tabs: FC<IProps> = ({ children }) => {
-  return <ul className='border-b px-6'>{children}</ul>;
+export const Tabs: FC<IProps> = ({ children }) => {
+  return (
+    <ul className='flex items-end border-b border-white/10 px-6'>{children}</ul>
+  );
 };
-
-export default Tabs;

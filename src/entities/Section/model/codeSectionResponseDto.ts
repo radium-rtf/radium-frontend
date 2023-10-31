@@ -1,7 +1,7 @@
 import { SectionResponseDto } from './sectionResponseDto';
 
-export interface AnswerSectionResponseDto extends SectionResponseDto {
-  type: 'answer';
+export interface CodeSectionResponseDto extends SectionResponseDto {
+  type: 'code';
   content: string;
   answer: string;
 }

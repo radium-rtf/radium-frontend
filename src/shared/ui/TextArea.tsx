@@ -1,5 +1,5 @@
+import { cn } from '../utils/cn';
 import { FC, TextareaHTMLAttributes } from 'react';
-import { cn } from '@/shared';
 
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
 

@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { TextSectionResponseDto } from '../model/textSectionResponseDto';
 import { Card } from '@/shared';
+import { TextSectionResponseDto } from '../model/textSectionResponseDto';
 
 interface IProps {
   data: TextSectionResponseDto;
