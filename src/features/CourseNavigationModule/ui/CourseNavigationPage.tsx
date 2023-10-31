@@ -11,7 +11,7 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useUpdateNameMutation } from '../api/moduleEditApi';
+import { useUpdatePageNameMutation } from '../api/moduleEditApi';
 
 interface IProps extends LiHTMLAttributes<HTMLLIElement> {
   currentPage?: string;
@@ -36,7 +36,7 @@ export const CourseNavigationPage: FC<IProps> = ({
   );
   const [isEditing, setIsEditing] = useState(false);
 
-  const [updateName] = useUpdateNameMutation();
+  const [updateName] = useUpdatePageNameMutation();
 
   const formSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

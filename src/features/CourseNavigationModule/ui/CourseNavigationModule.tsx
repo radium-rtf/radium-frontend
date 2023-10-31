@@ -4,6 +4,8 @@ import { List, cn } from '@/shared';
 import { Slot } from '@radix-ui/react-slot';
 import { FC, HTMLAttributes } from 'react';
 import { CourseNavigationPage } from './CourseNavigationPage';
+import { NavigationPageCreation } from './NavigationPageCreation';
+import { useSearchParams } from 'next/navigation';
 
 interface IProps extends HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;
@@ -17,6 +19,8 @@ export const CourseNavigationModule: FC<IProps> = ({
   currentPage,
   ...props
 }) => {
+  const searchParams = useSearchParams();
+  const isEditing = searchParams.get('isEditing') === 'true';
   const Comp = asChild ? Slot : 'div';
   return (
     <Comp {...props}>
@@ -31,8 +35,15 @@ export const CourseNavigationModule: FC<IProps> = ({
       </h2>
       <List>
         {module.pages.map((page) => {
-          return <CourseNavigationPage page={page} key={page.id} />;
+          return (
+            <CourseNavigationPage
+              page={page}
+              currentPage={currentPage}
+              key={page.id}
+            />
+          );
         })}
+        {isEditing && <NavigationPageCreation moduleId={module.id} />}
       </List>
     </Comp>
   );

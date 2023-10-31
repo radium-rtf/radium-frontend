@@ -1,10 +1,11 @@
 import { CourseResponseDto } from '@/entities/Course';
 import { emptyApi } from '@/shared';
 import { UpdateModuleNameRequestDto } from '../model/updateModuleNameRequestDto';
+import { CreatePageRequestDto } from '../model/createPageRequestDto';
 
 const moduleEditApi = emptyApi.injectEndpoints({
   endpoints: (builder) => ({
-    updateName: builder.mutation<
+    updatePageName: builder.mutation<
       CourseResponseDto['modules'][0],
       UpdateModuleNameRequestDto
     >({
@@ -51,8 +52,20 @@ const moduleEditApi = emptyApi.injectEndpoints({
       //   }
       // },
     }),
+    createPage: builder.mutation<
+      CourseResponseDto['modules'][0]['pages'][0],
+      CreatePageRequestDto
+    >({
+      query: (body) => ({
+        url: '/page',
+        method: 'POST',
+        body: body,
+      }),
+      invalidatesTags: (res) => [{ type: 'pages', id: res?.id }, 'courses'],
+    }),
   }),
   overrideExisting: true,
 });
 
-export const { useUpdateNameMutation } = moduleEditApi;
+export const { useUpdatePageNameMutation, useCreatePageMutation } =
+  moduleEditApi;
