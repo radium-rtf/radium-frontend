@@ -1,11 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, InputHTMLAttributes } from 'react';
 
-interface IProps {
-  disabled?: boolean;
+interface IProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
 }
 
-export const Toggle: FC<IProps> = ({ disabled, name }) => {
+export const Toggle: FC<IProps> = ({ ...props }) => {
   return (
     <label
       className='
@@ -28,12 +27,7 @@ export const Toggle: FC<IProps> = ({ disabled, name }) => {
       [&:hover:has(:disabled)]:p-[0.1875rem]
      '
     >
-      <input
-        disabled={disabled}
-        type='checkbox'
-        className='peer appearance-none'
-        name={name}
-      />
+      <input type='checkbox' className='peer appearance-none' {...props} />
       <div
         className='aspect-square h-full rounded-full
         bg-grey-100 transition-all peer-checked:ml-[0.875rem]
