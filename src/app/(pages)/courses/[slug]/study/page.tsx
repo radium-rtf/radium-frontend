@@ -1,6 +1,7 @@
 'use client';
-import { CourseNavigation, useCourseQuery } from '@/entities/Course';
+import { useCourseQuery } from '@/entities/Course';
 import { usePageQuery } from '@/entities/Page';
+import { CourseNavigation } from '@/widgets/CourseNavigation';
 import { CoursePage } from '@/widgets/CoursePage';
 import { Header } from '@/widgets/Header';
 import Image from 'next/image';
