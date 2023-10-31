@@ -37,7 +37,8 @@ export type Icon =
   | 'handle'
   | 'download'
   | 'link'
-  | 'external-link';
+  | 'external-link'
+  | 'add';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -439,6 +440,20 @@ const icons: Record<Icon, ReactNode> = {
         className='stroke-current'
         strokeLinecap='round'
         strokeLinejoin='round'
+      />
+    </g>
+  ),
+  add: (
+    <g className='text-inherit'>
+      <path
+        d='M8.5 0.5L8.5 16.5'
+        className='stroke-current'
+        strokeLinecap='round'
+      />
+      <path
+        d='M0.5 8.5H16.5'
+        className='stroke-current'
+        strokeLinecap='round'
       />
     </g>
   ),
