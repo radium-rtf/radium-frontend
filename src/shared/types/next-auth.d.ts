@@ -1,17 +1,24 @@
-import NextAuth, { DefaultSession } from 'next-auth';
-import { JWT } from 'next-auth/jwt';
+import { DefaultSession } from 'next-auth';
 
 declare module 'next-auth' {
   interface User {
     accessToken?: string | null;
     refreshToken?: string | null;
     expiresIn?: string | null;
+    roles: {
+      isTeacher: boolean;
+      isAuthor: boolean;
+    };
   }
   interface Session {
     user: {
       accessToken?: string | null;
       refreshToken?: string | null;
       expiresIn?: string | null;
+      roles: {
+        isTeacher: boolean;
+        isAuthor: boolean;
+      };
     } & DefaultSession['user'];
   }
 }
@@ -21,5 +28,9 @@ declare module 'next-auth/jwt' {
     accessToken?: string | null;
     refreshToken?: string | null;
     expiresIn?: string | null;
+    roles: {
+      isTeacher: boolean;
+      isAuthor: boolean;
+    };
   }
 }
