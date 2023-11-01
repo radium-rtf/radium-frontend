@@ -22,6 +22,7 @@ export const CourseModuleNavigation: FC<IProps> = ({
     <nav {...props}>
       <NavigationModuleTitle
         name={module.name}
+        moduleId={module.id}
         isCurrentModule={isCurrentPage}
       />
       {module.pages.map((page) => (

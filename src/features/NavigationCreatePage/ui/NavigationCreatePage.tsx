@@ -53,7 +53,7 @@ export const NavigationCreatePage: FC<IProps> = ({
     <button
       {...props}
       className={cn(
-        'flex items-center gap-4 rounded-lg border border-transparent px-6 py-2 outline-none outline-1 -outline-offset-1 transition-colors hover:border-white/10 hover:bg-white/5 focus-visible:outline-white',
+        'flex w-full items-center gap-4 rounded-lg border border-transparent px-6 py-2 outline-none outline-1 -outline-offset-1 transition-colors hover:border-white/10 hover:bg-white/5 focus-visible:outline-white',
         className
       )}
       onClick={() => {

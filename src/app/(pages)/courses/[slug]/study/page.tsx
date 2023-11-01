@@ -52,7 +52,7 @@ export default function Page({ params, searchParams }: IProps) {
         </Link>
       </Header>
       <div className='flex flex-grow items-stretch gap-8 px-12'>
-        <nav className='sticky top-[8.625rem] -ml-6 flex h-[calc(100vh-8.65rem)] w-64 flex-grow-0 flex-col'>
+        <nav className='sticky top-[8.625rem] -ml-6 flex h-[calc(100vh-8.65rem)] w-[calc(16.25rem)] flex-grow-0 flex-col'>
           <CourseEditToggle />
           <Progress
             className='px-6 py-2.5'
