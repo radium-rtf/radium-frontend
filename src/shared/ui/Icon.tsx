@@ -38,7 +38,8 @@ export type Icon =
   | 'download'
   | 'link'
   | 'external-link'
-  | 'add';
+  | 'add'
+  | 'delete';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -456,6 +457,14 @@ const icons: Record<Icon, ReactNode> = {
         strokeLinecap='round'
       />
     </g>
+  ),
+  delete: (
+    <path
+      d='M1.5 3.5H6.5M16.5 3.5H11.5M6.5 3.5V2C6.5 1.17157 7.17157 0.5 8 0.5H10C10.8284 0.5 11.5 1.17157 11.5 2V3.5M6.5 3.5H11.5M3.5 3.5V16C3.5 16.8284 4.17157 17.5 5 17.5H13C13.8284 17.5 14.5 16.8284 14.5 16V3.5M6.5 6.5V14.5M11.5 6.5V14.5'
+      className='stroke-current'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
   ),
 };
 export interface IIcon extends SVGProps<SVGSVGElement> {
