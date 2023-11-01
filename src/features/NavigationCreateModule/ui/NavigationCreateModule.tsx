@@ -1,3 +1,4 @@
+'use client';
 import { Icon, Input, cn } from '@/shared';
 import {
   ButtonHTMLAttributes,
@@ -6,19 +7,19 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useCreatePageMutation } from '../api/moduleEditApi';
+import { useCreateModuleMutation } from '../api/createModuleApi';
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  moduleId: string;
+  courseId: string;
 }
 
-export const NavigationPageCreation: FC<IProps> = ({
+export const NavigationCreateModule: FC<IProps> = ({
   className,
-  moduleId,
+  courseId,
   ...props
 }) => {
   const [isCreating, setIsCreating] = useState(false);
-  const [createPage] = useCreatePageMutation();
+  const [createModule] = useCreateModuleMutation();
 
   useEffect(() => {
     const escapeHandler = (e: KeyboardEvent) => {
@@ -37,14 +38,17 @@ export const NavigationPageCreation: FC<IProps> = ({
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
-    createPage({ name: fd.get('newPage') as string, moduleId: moduleId });
+    createModule({
+      courseId: courseId,
+      name: fd.get('newModule') as string,
+    });
     setIsCreating(false);
   };
 
   if (isCreating) {
     return (
       <form onSubmit={submitHandler} className='px-2 py-1.5'>
-        <Input name='newPage' placeholder='Введите название модуля' />
+        <Input name='newModule' placeholder='Введите название модуля' />
       </form>
     );
   }
@@ -62,7 +66,7 @@ export const NavigationPageCreation: FC<IProps> = ({
     >
       <Icon type='add' className='text-primary-default' />
       <span className='text-[0.8125rem] text-text-primary'>
-        Добавить страницу
+        Добавить модуль
       </span>
     </button>
   );

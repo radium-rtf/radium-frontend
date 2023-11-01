@@ -11,14 +11,14 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useUpdatePageNameMutation } from '../api/moduleEditApi';
+import { useUpdatePageNameMutation } from '../api/pageEditApi';
 
 interface IProps extends LiHTMLAttributes<HTMLLIElement> {
   currentPage?: string;
   page: CourseResponseDto['modules'][0]['pages'][0];
 }
 
-export const CourseNavigationPage: FC<IProps> = ({
+export const NavigationPageTitle: FC<IProps> = ({
   className,
   currentPage,
   page,

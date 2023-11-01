@@ -1,11 +1,14 @@
 'use client';
-import { useCourseQuery } from '@/entities/Course';
-import { usePageQuery } from '@/entities/Page';
-import { CourseNavigation } from '@/widgets/CourseNavigation';
-import { CoursePage } from '@/widgets/CoursePage';
-import { Header } from '@/widgets/Header';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Header } from '@/widgets/Header';
+import { Progress } from '@/shared';
+import { CoursePage } from '@/widgets/CoursePage';
+import { usePageQuery } from '@/entities/Page';
+import { useCourseQuery } from '@/entities/Course';
+import { CourseEditToggle } from '@/features/CourseEditToggle';
+import { CourseModuleNavigation } from '@/widgets/CourseModuleNavigation';
+import { NavigationCreateModule } from '@/features/NavigationCreateModule';
 
 interface IProps {
   params: {
@@ -26,7 +29,11 @@ export default function Page({ params, searchParams }: IProps) {
     return null;
   }
 
+  const isEditing = searchParams.isEditing === 'true';
   window.document.title = `${page.name} - ${course.name}`;
+
+  const { modules, maxScore, score } = course;
+  const currentPage = page.id;
 
   return (
     <>
@@ -44,12 +51,48 @@ export default function Page({ params, searchParams }: IProps) {
           </h1>
         </Link>
       </Header>
-      <div className='flex flex-grow items-start gap-8 px-12'>
-        <CourseNavigation
-          modules={course.modules}
-          className='-ml-6'
-          currentPage={page.id}
-        />
+      <div className='flex flex-grow items-stretch gap-8 px-12'>
+        <nav className='sticky top-[8.625rem] -ml-6 flex h-[calc(100vh-8.65rem)] w-64 flex-grow-0 flex-col'>
+          <CourseEditToggle />
+          <Progress
+            className='px-6 py-2.5'
+            theme='primary'
+            percentage={((maxScore ? score : 1) / (maxScore || 1)) * 100}
+            showPercentage
+          />
+          <ul
+            className='
+              overflow-y-scroll
+              [&::-webkit-scrollbar-thumb]:rounded
+              [&::-webkit-scrollbar-thumb]:bg-transparent
+              [&::-webkit-scrollbar-thumb]:transition-colors
+              [&::-webkit-scrollbar]:w-1
+              [&::-webkit-scrollbar]:opacity-0
+              [&:hover::-webkit-scrollbar-thumb]:bg-grey-300
+              '
+          >
+            {modules.map((module) => {
+              return (
+                <li key={module.id}>
+                  <CourseModuleNavigation
+                    key={module.id}
+                    module={module}
+                    isEditing={isEditing}
+                    currentPage={currentPage}
+                  />
+                </li>
+              );
+            })}
+            <li>
+              {isEditing && (
+                <NavigationCreateModule
+                  className='w-full'
+                  courseId={course.id}
+                />
+              )}
+            </li>
+          </ul>
+        </nav>
         <div className='flex flex-grow justify-center'>
           <CoursePage page={page} />
         </div>
