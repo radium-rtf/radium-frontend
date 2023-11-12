@@ -41,7 +41,8 @@ export type Icon =
   | 'add'
   | 'delete'
   | 'bold'
-  | 'italic';
+  | 'italic'
+  | 'strikethrough';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -485,6 +486,22 @@ const icons: Record<Icon, ReactNode> = {
       />
       <path
         d='M14 0.5V0.5C12.2423 0.5 10.7155 1.70924 10.3129 3.42025L7.68712 14.5797C7.28453 16.2908 5.75774 17.5 4 17.5V17.5'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+    </g>
+  ),
+  strikethrough: (
+    <g className='text-inherit'>
+      <path
+        fillRule='evenodd'
+        clipRule='evenodd'
+        d='M4 5.5C4 3.567 5.567 2 7.5 2H12.5C12.7761 2 13 1.77614 13 1.5C13 1.22386 12.7761 1 12.5 1H7.5C5.01472 1 3 3.01472 3 5.5C3 6.02595 3.09023 6.53083 3.25606 7H4.33682C4.12085 6.54537 4 6.0368 4 5.5ZM14.7439 12H13.6632C13.8792 12.4546 14 12.9632 14 13.5C14 15.433 12.433 17 10.5 17H5.5C5.22386 17 5 17.2239 5 17.5C5 17.7761 5.22386 18 5.5 18H10.5C12.9853 18 15 15.9853 15 13.5C15 12.974 14.9098 12.4692 14.7439 12Z'
+        className='fill-current'
+      />
+      <path
+        d='M0.5 9.5H17.5'
         className='stroke-current'
         strokeLinecap='round'
         strokeLinejoin='round'
