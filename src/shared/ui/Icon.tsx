@@ -477,7 +477,7 @@ const icons: Record<Icon, ReactNode> = {
     <path
       d='M4 8V2.5C4 1.67157 4.67157 1 5.5 1H9C10.933 1 12.5 2.567 12.5 4.5C12.5 6.433 10.933 8 9 8M4 8V15.5C4 16.3284 4.67157 17 5.5 17H9C11.4853 17 13.5 14.9853 13.5 12.5C13.5 10.0147 11.4853 8 9 8M4 8H9'
       className='stroke-current'
-      stroke-width='2'
+      strokeWidth='2'
     />
   ),
   italic: (
