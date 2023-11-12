@@ -43,7 +43,8 @@ export type Icon =
   | 'bold'
   | 'italic'
   | 'strikethrough'
-  | 'monospace';
+  | 'monospace'
+  | 'quote';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -516,6 +517,20 @@ const icons: Record<Icon, ReactNode> = {
       strokeLinecap='round'
       strokeLinejoin='round'
     />
+  ),
+  quote: (
+    <g className='text-inherit'>
+      <path
+        d='M4.5 12.5C6.15685 12.5 7.5 11.1569 7.5 9.5C7.5 7.84315 6.15685 6.5 4.5 6.5V4.5C2.29086 4.5 0.5 6.29086 0.5 8.5C0.5 10.7091 2.29086 12.5 4.5 12.5Z'
+        className='stroke-current'
+        strokeLinejoin='round'
+      />
+      <path
+        d='M14.5 12.5C16.1569 12.5 17.5 11.1569 17.5 9.5C17.5 7.84315 16.1569 6.5 14.5 6.5V4.5C12.2909 4.5 10.5 6.29086 10.5 8.5C10.5 10.7091 12.2909 12.5 14.5 12.5Z'
+        className='stroke-current'
+        strokeLinejoin='round'
+      />
+    </g>
   ),
 };
 export interface IIcon extends SVGProps<SVGSVGElement> {
