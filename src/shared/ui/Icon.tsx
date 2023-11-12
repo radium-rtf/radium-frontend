@@ -42,7 +42,8 @@ export type Icon =
   | 'delete'
   | 'bold'
   | 'italic'
-  | 'strikethrough';
+  | 'strikethrough'
+  | 'monospace';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -507,6 +508,14 @@ const icons: Record<Icon, ReactNode> = {
         strokeLinejoin='round'
       />
     </g>
+  ),
+  monospace: (
+    <path
+      d='M3.5 17.5V0.5L7.99099 4.58272C8.56312 5.10284 9.43688 5.10284 10.009 4.58272L14.5 0.5V17.5'
+      className='stroke-current'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
   ),
 };
 export interface IIcon extends SVGProps<SVGSVGElement> {
