@@ -40,7 +40,8 @@ export type Icon =
   | 'external-link'
   | 'add'
   | 'delete'
-  | 'bold';
+  | 'bold'
+  | 'italic';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -473,6 +474,22 @@ const icons: Record<Icon, ReactNode> = {
       className='stroke-current'
       stroke-width='2'
     />
+  ),
+  italic: (
+    <g className='text-inherit'>
+      <path
+        d='M7.5 0.5H11H14.5M3.5 17.5H7H10.5'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <path
+        d='M14 0.5V0.5C12.2423 0.5 10.7155 1.70924 10.3129 3.42025L7.68712 14.5797C7.28453 16.2908 5.75774 17.5 4 17.5V17.5'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+    </g>
   ),
 };
 export interface IIcon extends SVGProps<SVGSVGElement> {
