@@ -45,7 +45,8 @@ export type Icon =
   | 'strikethrough'
   | 'monospace'
   | 'quote'
-  | 'heading';
+  | 'heading'
+  | 'code';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -536,6 +537,14 @@ const icons: Record<Icon, ReactNode> = {
   heading: (
     <path
       d='M4.5 0.5V8.5M4.5 17.5V8.5M4.5 8.5H13.5M13.5 0.5V17.5M2.5 0.5H6.5M11.5 0.5H15.5M11.5 17.5H15.5M2.5 17.5H6.5'
+      className='stroke-current'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
+  ),
+  code: (
+    <path
+      d='M4.5 5L1.56066 7.93934C0.974874 8.52513 0.974874 9.47487 1.56066 10.0607L4.5 13M13.5 5L16.4393 7.93934C17.0251 8.52513 17.0251 9.47487 16.4393 10.0607L13.5 13M11.5 2.5L6.5 15.5'
       className='stroke-current'
       strokeLinecap='round'
       strokeLinejoin='round'
