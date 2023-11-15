@@ -46,7 +46,8 @@ export type Icon =
   | 'monospace'
   | 'quote'
   | 'heading'
-  | 'code';
+  | 'code'
+  | 'list';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -549,6 +550,22 @@ const icons: Record<Icon, ReactNode> = {
       strokeLinecap='round'
       strokeLinejoin='round'
     />
+  ),
+  list: (
+    <g className='text-inherit'>
+      <circle cx='2.5' cy='5.5' r='2' className='stroke-current' />
+      <circle cx='2.5' cy='12.5' r='2' className='stroke-current' />
+      <path
+        d='M7.5 5.5H17.5'
+        className='stroke-current'
+        strokeLinecap='round'
+      />
+      <path
+        d='M7.5 12.5H17.5'
+        className='stroke-current'
+        strokeLinecap='round'
+      />
+    </g>
   ),
 };
 export interface IIcon extends SVGProps<SVGSVGElement> {
