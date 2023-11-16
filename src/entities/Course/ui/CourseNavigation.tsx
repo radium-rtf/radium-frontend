@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { CourseResponseDto } from '../model/courseResponseDto';
-import { List, Progress, cn } from '@/shared';
+import { List, Progress, cn, Icon } from '@/shared';
 import Link from 'next/link';
 
 interface IProps {
@@ -37,6 +37,22 @@ export const CourseNavigation: FC<IProps> = ({
       [&:hover::-webkit-scrollbar-thumb]:bg-grey-300
       '
       >
+        <List.Item asChild>
+          <Link
+            href={''}
+            className={cn(
+              'flex',
+              'rounded-lg border border-transparent transition-colors hover:border-white/10 hover:bg-white/5',
+              'px-[1.5rem] py-[0.5625rem]'
+            )}
+          >
+            <Icon type={'group'} />
+            <List.Subtitle className='text-sm'>
+              УрФУ.Осень2024
+            </List.Subtitle>
+            <Icon className='absolute w-3 h-3 right-[1.5rem]' type={'chevron-right'} />
+          </Link>
+        </List.Item>
         {modules.map((module) => {
           return (
             <li key={module.id}>
@@ -44,7 +60,7 @@ export const CourseNavigation: FC<IProps> = ({
                 className={cn(
                   'px-6 py-4 text-xl font-bold leading-[normal] text-accent-primary-200',
                   module.pages.map((e) => e.id).includes(currentPage!) &&
-                    'text-accent-secondary-300'
+                  'text-accent-secondary-300'
                 )}
               >
                 {module.name}
@@ -58,7 +74,7 @@ export const CourseNavigation: FC<IProps> = ({
                         className={cn(
                           'rounded-lg border border-transparent transition-colors hover:border-white/10 hover:bg-white/5',
                           currentPage === page.id &&
-                            'border-white/10 bg-white/5'
+                          'border-white/10 bg-white/5'
                         )}
                       >
                         <List.Icon

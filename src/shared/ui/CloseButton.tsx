@@ -1,7 +1,7 @@
 'use client'
 import { FC, MouseEventHandler } from "react";
 import { cn } from "../utils/cn";
-import { Icon } from "./Icon";
+import { Icon } from "../ui/Icon";
 
 interface IProps {
     className?: string;
