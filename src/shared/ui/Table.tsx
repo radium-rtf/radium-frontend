@@ -167,7 +167,7 @@ interface ITableBody {
 export const TableBody: FC<ITableBody> = ({children}) => (
     <MuiTableBody>
         {children.map((row, rowIndex) => (
-            <TableBodyRow key={rowIndex} rowIndex={rowIndex}>{row.props.row}</TableBodyRow>
+            <TableBodyRow key={rowIndex} rowIndex={rowIndex} row={row.props.row}></TableBodyRow>
         ))}
     </MuiTableBody>
 );
