@@ -1,6 +1,6 @@
 'use client'
 import { FC } from "react";
-import { Icon } from "./Icon";
+import { Icon } from "..";
 
 interface IProps {
     fileName: string;
