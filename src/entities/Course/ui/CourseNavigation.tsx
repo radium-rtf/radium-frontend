@@ -37,6 +37,13 @@ export const CourseNavigation: FC<IProps> = ({
       [&:hover::-webkit-scrollbar-thumb]:bg-grey-300
       '
       >
+        <ListItem className='text-sm px-[1.5rem] py-[0.5625rem] break-all' href={''}>
+          <Icon type={'group'} />
+          <p className='w-[70%]'>
+            УрФУ.Осень2024
+          </p>
+          <Icon className='absolute w-3 h-3 right-[1.5rem]' type={'chevron-right'} />
+        </ListItem>
         {modules.map((module) => {
           return (
             <li key={module.id}>
@@ -44,7 +51,7 @@ export const CourseNavigation: FC<IProps> = ({
                 className={cn(
                   'px-6 py-4 text-xl font-bold leading-[normal] text-accent-primary-200',
                   module.pages.map((e) => e.id).includes(currentPage!) &&
-                    'text-accent-secondary-300'
+                  'text-accent-secondary-300'
                 )}
               >
                 {module.name}

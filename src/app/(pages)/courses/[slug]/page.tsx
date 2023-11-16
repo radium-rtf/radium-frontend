@@ -2,7 +2,7 @@ import { Header } from '@/widgets/Header';
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
-import { getCourse } from '@/entities/Course';
+import { getCourseBySlug } from '@/entities/Course';
 import { CourseInfo } from '@/widgets/CourseInfo';
 import { redirect } from 'next/navigation';
 import { Metadata } from 'next';
@@ -14,7 +14,7 @@ interface IProps {
 
 export async function generateMetadata({ params }: IProps): Promise<Metadata> {
   // fetch data
-  const course = await getCourse(params.slug);
+  const course = await getCourseBySlug(params.slug);
 
   if (typeof course === 'string') {
     return {
@@ -34,7 +34,7 @@ export default async function Page({
     slug: string;
   };
 }) {
-  const course = await getCourse(params.slug);
+  const course = await getCourseBySlug(params.slug);
 
   if (typeof course === 'string') {
     if (course === 'Not authenticated') {
