@@ -1,13 +1,14 @@
 'use client'
-import {withStyles} from "@material-ui/core/styles";
-import MuiTableCell, {SortDirection} from "@material-ui/core/TableCell";
-import {TableContainer, TableSortLabel} from '@mui/material';
+import { withStyles } from "@material-ui/core/styles";
+import MuiTableCell, { SortDirection } from "@material-ui/core/TableCell";
+import { TableContainer, TableSortLabel } from '@mui/material';
 import MuiTable from '@mui/material/Table';
 import MuiTableBody from '@mui/material/TableBody';
 import MuiTableHead from '@mui/material/TableHead';
 import MuiTableRow from '@mui/material/TableRow';
-import {Children, FC, ReactElement, ReactNode, useMemo, useState} from "react";
-import {cn, Icon} from '..';
+import { Children, FC, ReactElement, ReactNode, useMemo, useState } from "react";
+import { cn } from "../utils/cn";
+import { Icon } from "./Icon";
 
 type Order = 'asc' | 'desc';
 
@@ -18,12 +19,12 @@ interface ITableHeader {
     createSortHandler: (column: number) => void;
 }
 
-const TableHeader: FC<ITableHeader> = ({children, orderByColumn, order, createSortHandler}) => {
+const TableHeader: FC<ITableHeader> = ({ children, orderByColumn, order, createSortHandler }) => {
     return (
         <MuiTableHead>
             <MuiTableRow>
                 {Children.map(children, (child, column) => (
-                    <TableCell key={column}>
+                    <TableCell className="bg-black bg-opacity-10 hover:bg-white hover:bg-opacity-5" key={column}>
                         <TableSortLabel
                             sx={{
                                 marginLeft: "1.25rem",
@@ -35,7 +36,7 @@ const TableHeader: FC<ITableHeader> = ({children, orderByColumn, order, createSo
                                 className={cn('shrink-0 m-1', orderByColumn !== column && 'opacity-0')}
                                 width='16'
                                 height='16'
-                                type={orderByColumn === column && order === "desc" ? "down" : "up"}/>}
+                                type={orderByColumn === column && order === "desc" ? "down" : "up"} />}
                             active={orderByColumn === column}
                             direction={orderByColumn === column ? order : 'asc'}
                             onClick={() => createSortHandler(column)}
@@ -62,7 +63,7 @@ const PureMuiTableCell = withStyles({
     }
 })(MuiTableCell);
 
-export const TableCell: FC<TableCellProps> = ({children, scope, className, sortDirection = false}) => {
+export const TableCell: FC<TableCellProps> = ({ children, scope, className, sortDirection = false }) => {
     return <PureMuiTableCell
         scope={scope}
         sortDirection={sortDirection}
@@ -75,10 +76,7 @@ export const TableCell: FC<TableCellProps> = ({children, scope, className, sortD
             'outline-none',
             'border-white',
             'border-opacity-10',
-            'bg-white',
-            'bg-opacity-5',
             'text-text-primary',
-            'hover:bg-opacity-20',
             className
         )}>
         {children}
@@ -90,7 +88,7 @@ interface ITableHeaderCell {
     className?: string;
 }
 
-export const TableHeaderCell: FC<ITableHeaderCell> = ({children, className}) => (
+export const TableHeaderCell: FC<ITableHeaderCell> = ({ children, className }) => (
     <div className={className}>
         {children}
     </div>)
@@ -101,7 +99,7 @@ interface ITable {
 }
 
 
-export const Table: FC<ITable> = ({bodyRows, headerRow}) => {
+export const Table: FC<ITable> = ({ bodyRows, headerRow }) => {
     const [order, setOrder] = useState<Order>('asc');
     const [orderByColumn, setOrderByColumn] = useState(0);
 
@@ -164,7 +162,7 @@ interface ITableBody {
     children: ReactElement<ITableBodyRow>[]
 }
 
-export const TableBody: FC<ITableBody> = ({children}) => (
+export const TableBody: FC<ITableBody> = ({ children }) => (
     <MuiTableBody>
         {children.map((row, rowIndex) => (
             <TableBodyRow key={rowIndex} rowIndex={rowIndex} row={row.props.row}></TableBodyRow>
@@ -177,14 +175,14 @@ interface ITableDataCell {
     value: string
 }
 
-export const TableDataCell: FC<ITableDataCell> = ({children}) => (<>{children}</>);
+export const TableDataCell: FC<ITableDataCell> = ({ children }) => (<>{children}</>);
 
 interface ITableBodyRow {
     row: ReactElement<ITableDataCell>[]
     rowIndex: number
 }
 
-export const TableBodyRow: FC<ITableBodyRow> = ({row, rowIndex}) => (
+export const TableBodyRow: FC<ITableBodyRow> = ({ row, rowIndex }) => (
     <MuiTableRow className="border-b border-white border-opacity-10" key={rowIndex}>
         {row.map((value, cellIndex) => (
             <TableCell scope="row" key={cellIndex}>

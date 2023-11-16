@@ -1,6 +1,6 @@
 import { cn, Table, TableBodyRow, TableDataCell, TableHeaderCell } from "@/shared";
 import { FC } from "react";
-import { CourseReportDto } from "@/entities/Group";
+import { CourseReportDto } from "../model/courseReportDto";
 
 interface CourseReportProps {
     courseReport: CourseReportDto;

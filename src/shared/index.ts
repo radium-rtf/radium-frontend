@@ -20,7 +20,6 @@ export { AuthSessionProvider } from './ui/AuthSessionProvider';
 export { ReduxStoreProvider } from './ui/ReduxStoreProvider';
 export { PermutationItem } from './ui/PermutationItem';
 export { InputFile } from './ui/InputFile';
-export { DownloadButton } from './ui/DownloadButton';
 export { Table, TableBodyRow, TableDataCell, TableHeaderCell } from './ui/Table';
 
 // Interfaces

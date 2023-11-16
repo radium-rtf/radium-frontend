@@ -1,5 +1,5 @@
 import { emptyApi } from '@/shared';
-import { CourseReportDto } from '..';
+import { CourseReportDto } from '../model/courseReportDto';
 import { GroupDto } from '../model/groupDto';
 
 const groupApi = emptyApi.injectEndpoints({

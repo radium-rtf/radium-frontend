@@ -38,9 +38,6 @@ export type Icon =
   | 'download'
   | 'link'
   | 'external-link'
-  | 'success'
-  | 'handle'
-  | 'download'
   | 'down'
   | 'up';
 

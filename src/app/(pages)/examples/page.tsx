@@ -7,9 +7,7 @@ import {
     Input,
     InputFile,
     List,
-    ListItem,
     Menu,
-    MenuItem,
     Progress,
     Radio,
     Table,
@@ -59,22 +57,20 @@ export default async function Home() {
                 }}></InputFile>
                 <br></br>
                 <List>
-                    <ListItem key={1} href={''}>ListItem1</ListItem>
-                    <ListItem key={2} href={''}>ListItem2</ListItem>
-                    <ListItem key={3} href={''}>ListItem3</ListItem>
+                    <List.Item key={1}>ListItem1</List.Item>
+                    <List.Item key={2}>ListItem2</List.Item>
+                    <List.Item key={3}>ListItem3</List.Item>
                 </List>
                 <br></br>
                 <Menu>
-                    <MenuItem key={1} onClick={() => {
-                    }} icon='profile'>
+                    <Menu.Item key={1} onClick={() => {
+                    }}>
+                        <Menu.Icon icon={'profile'}/>
                         MenuItem1
-                    </MenuItem>
-                    <MenuItem key={2} icon='courses'>MenuItem2</MenuItem>
-                    <MenuItem key={3} icon='group'>MenuItem3</MenuItem>
-                    <MenuItem key={4} onClick={() => {
-                    }} icon='exit'>
-                        MenuItem3
-                    </MenuItem>
+                    </Menu.Item>
+                    <Menu.Item key={2}>
+                        <Menu.Icon icon={'courses'}/>
+                        MenuItem2</Menu.Item>
                 </Menu>
                 <br></br>
                 <Progress theme={'primary'} percentage={50}></Progress>
