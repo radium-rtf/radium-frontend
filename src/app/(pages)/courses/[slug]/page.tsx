@@ -2,10 +2,16 @@ import { Header } from '@/widgets/Header';
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
-import { getCourse } from '@/entities/Course';
-import { CourseInfo } from '@/widgets/CourseInfo';
+import { CourseAuthors, CourseContacts, getCourse } from '@/entities/Course';
 import { redirect } from 'next/navigation';
 import { Metadata } from 'next';
+import { CourseEditContextWrapper } from '@/features/CourseEditContext';
+import { CourseBanner } from '@/widgets/CourseBanner';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/entities/Auth';
+import { CourseBrief } from '@/widgets/CourseBrief';
+import { CourseDescription } from '@/widgets/CourseDescription';
+import { CourseLandingEditToggle } from '@/widgets/CourseLandingEditToggle';
 
 interface IProps {
   params: { slug: string };
@@ -35,6 +41,10 @@ export default async function Page({
   };
 }) {
   const course = await getCourse(params.slug);
+  const session = await getServerSession(authOptions);
+
+  const isEditAllowed =
+    session!.user.roles.isAuthor || session!.user.roles.isTeacher;
 
   if (typeof course === 'string') {
     if (course === 'Not authenticated') {
@@ -54,20 +64,36 @@ export default async function Page({
         </Link>
       </Header>
       <main className='flex flex-col'>
-        {/*<div className='container mx-auto mb-16 px-12'>*/}
-        <div className='mb-8 md:container md:mx-auto md:mb-16 md:px-12'>
-          <Image
-            src={course.banner}
-            alt={course.name}
-            width={1280}
-            height={256}
-            className='aspect-[2] w-full object-cover md:aspect-[3] md:rounded-lg lg:aspect-[4]'
-            // className='aspect-[3] w-full rounded-lg object-cover'
+        <CourseEditContextWrapper>
+          <CourseBanner
+            name={course.name}
+            url={course.logo}
+            courseId={course.id}
+            isEditAllowed={isEditAllowed}
           />
-        </div>
-        <div className='container mx-auto px-12 lg:px-[8.25rem]'>
-          <CourseInfo course={course} />
-        </div>
+          <main className='container mx-auto px-12 lg:px-[8.25rem]'>
+            <div className='grid gap-8 lg:grid-cols-3 2xl:grid-cols-4'>
+              <h1 className='mx-4 break-all font-mono text-5xl font-bold leading-[normal] text-accent-primary-200 lg:col-span-3 2xl:col-span-4'>
+                {course.name}
+              </h1>
+              <main className='flex flex-col gap-8 lg:col-span-2 2xl:col-span-3'>
+                <CourseBrief
+                  shortDescription={course.shortDescription}
+                  modulesCount={course.modules.length}
+                  courseName={course.name}
+                  courseId={course.id}
+                  isEditAllowed={isEditAllowed}
+                />
+                <CourseDescription description={course.description} />
+              </main>
+              <aside className='col-span-1 flex flex-col gap-8'>
+                <CourseLandingEditToggle />
+                <CourseAuthors authors={course.authors} />
+                <CourseContacts contacts={course.links} />
+              </aside>
+            </div>
+          </main>
+        </CourseEditContextWrapper>
       </main>
     </>
   );
