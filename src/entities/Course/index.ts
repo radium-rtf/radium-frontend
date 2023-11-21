@@ -8,7 +8,6 @@ export { getCourse } from './lib/getCourse';
 
 // UI
 export { CourseCard } from './ui/CourseCard';
-export { CourseDescription } from './ui/CourseDescription';
 export { CourseAuthors } from './ui/CourseAuthors';
 export { CourseContacts } from './ui/CourseContacts';
 
