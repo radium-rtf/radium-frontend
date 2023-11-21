@@ -8,6 +8,17 @@ export interface CourseResponseDto {
       name: string;
     },
   ];
+  coauthors: [
+    {
+      avatar: string;
+      email: string;
+      id: string;
+      isTeacher: true;
+      name: string;
+    },
+  ];
+  isPublished: boolean;
+  isStudent: boolean;
   banner: string;
   description: string;
   id: string;

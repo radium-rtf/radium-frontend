@@ -1,30 +1,30 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, InputHTMLAttributes } from 'react';
+import { cn } from '../utils/cn';
 
-interface IProps {
-  children?: ReactNode;
-  disabled?: boolean;
-  name: string;
-  value: string;
+interface IProps extends InputHTMLAttributes<HTMLInputElement> {
+  labelClassName?: string;
 }
 
-export const Checkbox: FC<IProps> = ({ name, value, children, disabled }) => {
+export const Checkbox: FC<IProps> = ({
+  className,
+  labelClassName,
+  children,
+  ...props
+}) => {
   return (
-    <label className='group relative flex cursor-pointer items-center gap-4 [&:has(:disabled)]:cursor-not-allowed'>
+    <label
+      className={cn(
+        'group relative flex cursor-pointer items-center gap-4 [&:has(:disabled)]:cursor-not-allowed',
+        labelClassName
+      )}
+    >
       <input
+        {...props}
         type='checkbox'
-        name={name}
-        value={value}
-        disabled={disabled}
-        className='
-        peer
-        absolute
-        left-0
-        top-0
-        h-0
-        w-0
-        appearance-none
-        outline-none
-        '
+        className={cn(
+          'peer absolute left-0 top-0 h-0 w-0 appearance-none outline-none',
+          className
+        )}
       />
       <div
         className='

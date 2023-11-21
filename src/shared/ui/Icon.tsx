@@ -48,7 +48,8 @@ export type Icon =
   | 'quote'
   | 'heading'
   | 'code'
-  | 'list';
+  | 'list'
+  | 'share';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -574,6 +575,14 @@ const icons: Record<Icon, ReactNode> = {
         strokeLinecap='round'
       />
     </g>
+  ),
+  share: (
+    <path
+      d='M0.5 12.5V15C0.5 15.8284 1.17157 16.5 2 16.5H15C15.8284 16.5 16.5 15.8284 16.5 15V12.5M8.5 11.5V1.5M8.5 1.5L4.5 5.5M8.5 1.5L12.5 5.5'
+      className='stroke-current'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
   ),
 };
 export interface IIcon extends SVGProps<SVGSVGElement> {
