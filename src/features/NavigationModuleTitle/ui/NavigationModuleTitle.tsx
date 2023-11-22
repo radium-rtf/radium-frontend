@@ -1,11 +1,18 @@
 'use client';
 import { Icon, Input, cn } from '@/shared';
-import { FC, FormEvent, HTMLAttributes, useEffect, useState } from 'react';
+import {
+  FC,
+  FormEvent,
+  HTMLAttributes,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import {
   useDeleteModuleMutation,
   useUpdateModuleNameMutation,
 } from '../api/moduleApi';
-import { useSearchParams } from 'next/navigation';
+import { CourseEditContext } from '@/features/CourseEditContext';
 
 interface IProps extends HTMLAttributes<HTMLHeadingElement> {
   name: string;
@@ -20,41 +27,40 @@ export const NavigationModuleTitle: FC<IProps> = ({
   isCurrentModule = false,
   ...props
 }) => {
-  const searchParams = useSearchParams();
-  const isEditing = searchParams.get('isEditing') === 'true';
-  const [isNameEditing, setIsNameEditing] = useState(false);
+  const { isEditing: isEditMode } = useContext(CourseEditContext);
+  const [isEditing, setIsEditing] = useState(false);
   const [deleteModule] = useDeleteModuleMutation();
   const [updateName] = useUpdateModuleNameMutation();
 
   // Сброс стейта при отключении редактирования
   useEffect(() => {
-    if (searchParams.get('isEditing') !== 'true' && isNameEditing) {
-      setIsNameEditing(false);
+    if (!isEditMode && isEditing) {
+      setIsEditing(false);
     }
-  }, [isNameEditing, searchParams]);
+  }, [isEditing, isEditMode]);
 
   // Создание обработчика Escape при редактировании названия
   useEffect(() => {
     const escapeHandler = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         console.log('test 2 ');
-        setIsNameEditing(false);
+        setIsEditing(false);
       }
     };
-    if (isNameEditing) {
+    if (isEditing) {
       document.addEventListener('keydown', escapeHandler);
     }
     return () => {
       document.removeEventListener('keydown', escapeHandler);
     };
-  }, [isNameEditing]);
+  }, [isEditing]);
 
   // Хендлер изменения имени модуля
   const formSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     updateName({ id: moduleId, name: fd.get('newName') as string });
-    setIsNameEditing(false);
+    setIsEditing(false);
   };
 
   // Хендлер удаления модуля
@@ -62,7 +68,7 @@ export const NavigationModuleTitle: FC<IProps> = ({
     deleteModule({ id: moduleId });
   };
 
-  if (isNameEditing && isEditing) {
+  if (isEditing && isEditing) {
     return (
       <form onSubmit={(e) => formSubmitHandler(e)} className='px-2 py-1.5'>
         <Input name='newName' defaultValue={name} />
@@ -83,7 +89,7 @@ export const NavigationModuleTitle: FC<IProps> = ({
       >
         {name}
       </h2>
-      {isEditing && (
+      {isEditMode && (
         <>
           <button className='p-0.5' type='button' onClick={deleteHandler}>
             <Icon
@@ -94,7 +100,7 @@ export const NavigationModuleTitle: FC<IProps> = ({
           <button
             className='p-0.5'
             type='button'
-            onClick={() => setIsNameEditing(true)}
+            onClick={() => setIsEditing(true)}
           >
             <Icon
               type='edit'

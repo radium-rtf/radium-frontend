@@ -2,16 +2,17 @@
 import { CourseResponseDto } from '@/entities/Course';
 import { Input, List, Progress, cn } from '@/shared';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import {
   FC,
   FormEvent,
   LiHTMLAttributes,
-  useCallback,
+  useContext,
   useEffect,
   useState,
 } from 'react';
 import { useUpdatePageNameMutation } from '../api/pageEditApi';
+import { CourseEditContext } from '@/features/CourseEditContext';
 
 interface IProps extends LiHTMLAttributes<HTMLLIElement> {
   currentPage?: string;
@@ -24,16 +25,8 @@ export const NavigationPageTitle: FC<IProps> = ({
   page,
   ...props
 }) => {
-  const searchParams = useSearchParams();
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams);
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams]
-  );
+  const params: { slug?: string } = useParams();
+  const { isEditing: isEditMode } = useContext(CourseEditContext);
   const [isEditing, setIsEditing] = useState(false);
 
   const [updateName] = useUpdatePageNameMutation();
@@ -46,15 +39,14 @@ export const NavigationPageTitle: FC<IProps> = ({
   };
 
   useEffect(() => {
-    if (searchParams.get('isEditing') !== 'true' && isEditing) {
+    if (!isEditMode && isEditing) {
       setIsEditing(false);
     }
-  }, [isEditing, searchParams]);
+  }, [isEditing, isEditMode]);
 
   useEffect(() => {
     const escapeHandler = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        console.log('test 2 ');
         setIsEditing(false);
       }
     };
@@ -66,7 +58,7 @@ export const NavigationPageTitle: FC<IProps> = ({
     };
   }, [isEditing]);
 
-  if (isEditing && searchParams.get('isEditing') === 'true') {
+  if (isEditing) {
     return (
       <form onSubmit={(e) => formSubmitHandler(e)} className='px-2 py-1.5'>
         <Input name='newName' defaultValue={page.name} />
@@ -98,14 +90,14 @@ export const NavigationPageTitle: FC<IProps> = ({
       </List.Icon>
 
       <List.Content asChild>
-        <Link href={`?${createQueryString('page', page.id)}`} scroll={false}>
+        <Link href={`/courses/${params.slug!}/study/${page.id}`} scroll={false}>
           <List.Title>{page.name}</List.Title>
           {!!page.maxScore && (
             <List.Subtitle>{`${page.score}/${page.maxScore} баллов`}</List.Subtitle>
           )}
         </Link>
       </List.Content>
-      {searchParams.get('isEditing') === 'true' && (
+      {isEditMode && (
         <button type='button' onClick={() => setIsEditing((prev) => !prev)}>
           <List.Icon
             icon='edit'

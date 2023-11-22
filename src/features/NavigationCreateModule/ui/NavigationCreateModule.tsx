@@ -4,10 +4,12 @@ import {
   ButtonHTMLAttributes,
   FC,
   FormEvent,
+  useContext,
   useEffect,
   useState,
 } from 'react';
 import { useCreateModuleMutation } from '../api/createModuleApi';
+import { CourseEditContext } from '@/features/CourseEditContext';
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   courseId: string;
@@ -19,6 +21,7 @@ export const NavigationCreateModule: FC<IProps> = ({
   ...props
 }) => {
   const [isCreating, setIsCreating] = useState(false);
+  const { isEditing } = useContext(CourseEditContext);
   const [createModule] = useCreateModuleMutation();
 
   useEffect(() => {
@@ -44,6 +47,10 @@ export const NavigationCreateModule: FC<IProps> = ({
     });
     setIsCreating(false);
   };
+
+  if (!isEditing) {
+    return null;
+  }
 
   if (isCreating) {
     return (
