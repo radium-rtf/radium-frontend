@@ -6,9 +6,9 @@ import {
   CodeSection,
   MultiChoiceSection,
   ShortAnswerSection,
-  TextSection,
 } from '@/entities/Section';
 import { PermutationSection } from '@/entities/Section/ui/PermutationSection';
+import { TextSection } from '@/widgets/TextSection';
 
 interface IProps {
   params: {
