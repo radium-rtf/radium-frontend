@@ -28,6 +28,7 @@ export const CourseEditToggle: FC<IProps> = ({ className, ...props }) => {
       <p className='text-[0.8125rem] text-text-primary'>Режим редактирования</p>
       <Toggle
         checked={searchParams.get('isEditing') === 'true'}
+        className='shrink-0'
         name='CourseEdit'
         onChange={() => {
           router.push(
