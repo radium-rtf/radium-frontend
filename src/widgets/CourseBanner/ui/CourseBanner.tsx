@@ -1,8 +1,9 @@
 'use client';
 import { cn } from '@/shared';
 import Image from 'next/image';
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { AddBanner, ChangeBanner } from '@/features/ChangeBanner';
+import { CourseEditContext } from '@/features/CourseEditContext';
 
 interface CourseBannerProps {
   url: string;
@@ -17,6 +18,7 @@ export const CourseBanner: FC<CourseBannerProps> = ({
   courseId,
   isEditAllowed,
 }) => {
+  const { isEditing } = useContext(CourseEditContext);
   return (
     <div
       className={cn(
@@ -32,10 +34,10 @@ export const CourseBanner: FC<CourseBannerProps> = ({
             height={256}
             className='aspect-[2] w-full object-cover md:aspect-[3] md:rounded-lg lg:aspect-[4]'
           />
-          {isEditAllowed && <ChangeBanner courseId={courseId} />}
+          {isEditAllowed && isEditing && <ChangeBanner courseId={courseId} />}
         </>
       ) : (
-        isEditAllowed && <AddBanner courseId={courseId} />
+        isEditAllowed && isEditing && <AddBanner courseId={courseId} />
       )}
     </div>
   );
