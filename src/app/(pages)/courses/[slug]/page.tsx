@@ -2,7 +2,7 @@ import { Header } from '@/widgets/Header';
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
-import { CourseAuthors, CourseContacts, getCourse } from '@/entities/Course';
+import { CourseAuthors, getCourse } from '@/entities/Course';
 import { redirect } from 'next/navigation';
 import { Metadata } from 'next';
 import { CourseEditContextWrapper } from '@/features/CourseEditContext';
@@ -12,6 +12,8 @@ import { authOptions } from '@/entities/Auth';
 import { CourseBrief } from '@/widgets/CourseBrief';
 import { CourseDescription } from '@/widgets/CourseDescription';
 import { CourseLandingEditToggle } from '@/widgets/CourseLandingEditToggle';
+import { CourseSettings } from '@/widgets/CourseSettings';
+import { CourseContacts } from '@/widgets/CourseContacts';
 
 interface IProps {
   params: { slug: string };
@@ -84,12 +86,30 @@ export default async function Page({
                   courseId={course.id}
                   isEditAllowed={isEditAllowed}
                 />
-                <CourseDescription description={course.description} />
+                <CourseDescription
+                  courseId={course.id}
+                  description={course.description}
+                  isEditAllowed={isEditAllowed}
+                />
               </main>
               <aside className='col-span-1 flex flex-col gap-8'>
                 <CourseLandingEditToggle />
+                {isEditAllowed && (
+                  <CourseSettings
+                    hasName={course.name !== ''}
+                    hasShortDescription={course.shortDescription !== ''}
+                    hasDescription={course.description !== ''}
+                    hasLogo={course.logo !== ''}
+                    hasBanner={course.banner !== ''}
+                    courseId={course.id}
+                    isPublished={course.isPublished}
+                  />
+                )}
                 <CourseAuthors authors={course.authors} />
-                <CourseContacts contacts={course.links} />
+                <CourseContacts
+                  isEditAllowed={isEditAllowed}
+                  contacts={course.links}
+                />
               </aside>
             </div>
           </main>
