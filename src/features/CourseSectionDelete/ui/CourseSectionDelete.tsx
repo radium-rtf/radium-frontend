@@ -4,6 +4,7 @@ import { FC } from 'react';
 
 interface CourseSectionDeleteProps {
   sectionId: string;
+  pageId: string;
 }
 
 export const CourseSectionDelete: FC<CourseSectionDeleteProps> = ({
