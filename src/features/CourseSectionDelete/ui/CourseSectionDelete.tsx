@@ -4,15 +4,17 @@ import { FC } from 'react';
 
 interface CourseSectionDeleteProps {
   sectionId: string;
+  pageId: string;
 }
 
 export const CourseSectionDelete: FC<CourseSectionDeleteProps> = ({
   sectionId,
+  pageId,
 }) => {
   const [deleteSection] = useDeleteCourseSectionMutation();
 
   return (
-    <Button onClick={() => deleteSection(sectionId)}>
+    <Button onClick={() => deleteSection({ sectionId, pageId })}>
       <Icon type='delete' className='shrink-0' />
     </Button>
   );
