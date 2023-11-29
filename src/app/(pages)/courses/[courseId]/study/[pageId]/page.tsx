@@ -3,12 +3,12 @@ import { usePageQuery } from '@/entities/Page';
 import {
   AnswerSection,
   CodeSection,
-  MultiChoiceSection,
   ShortAnswerSection,
 } from '@/entities/Section';
 import { PermutationSection } from '@/entities/Section/ui/PermutationSection';
 import { TextSection } from '@/widgets/TextSection';
 import { ChoiceSection } from '@/widgets/ChoiceSection';
+import { MultiChoiceSection } from '@/widgets/MultiChoiceSection';
 
 interface IProps {
   params: {
@@ -37,7 +37,9 @@ export default function Page({ params }: IProps) {
             case 'choice':
               return <ChoiceSection key={section.id} data={section} />;
             case 'multiChoice':
-              return <MultiChoiceSection key={section.id} data={section} />;
+              return (
+                <MultiChoiceSection key={section.id} sectionData={section} />
+              );
             case 'answer':
               return <AnswerSection key={section.id} data={section} />;
             case 'shortAnswer':

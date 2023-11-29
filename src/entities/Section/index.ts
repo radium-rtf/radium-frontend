@@ -12,8 +12,6 @@ export type { CodeSectionResponseDto } from './model/codeSectionResponseDto';
 export type { AllSectionsResponseDto } from './model/allSectionsResponseDto';
 
 // ui
-export { ChoiceSection } from './ui/ChoiceSection';
-export { MultiChoiceSection } from './ui/MultiChoiceSection';
 export { AnswerSection } from './ui/AnswerSection';
 export { ShortAnswerSection } from './ui/ShortAnswerSection';
 export { CodeSection } from './ui/CodeSection';
