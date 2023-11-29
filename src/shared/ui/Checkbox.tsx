@@ -1,33 +1,30 @@
-import React, { FC, InputHTMLAttributes } from 'react';
+import React, { FC, InputHTMLAttributes, forwardRef } from 'react';
 import { cn } from '../utils/cn';
 
 interface IProps extends InputHTMLAttributes<HTMLInputElement> {
   labelClassName?: string;
 }
 
-export const Checkbox: FC<IProps> = ({
-  className,
-  labelClassName,
-  children,
-  ...props
-}) => {
-  return (
-    <label
-      className={cn(
-        'group relative flex cursor-pointer items-center gap-4 [&:has(:disabled)]:cursor-not-allowed',
-        labelClassName
-      )}
-    >
-      <input
-        {...props}
-        type='checkbox'
+export const Checkbox: FC<IProps> = forwardRef<HTMLInputElement, IProps>(
+  ({ className, labelClassName, children, ...props }, ref) => {
+    return (
+      <label
         className={cn(
-          'peer absolute left-0 top-0 h-0 w-0 appearance-none outline-none',
-          className
+          'group relative flex cursor-pointer items-center gap-4 [&:has(:disabled)]:cursor-not-allowed',
+          labelClassName
         )}
-      />
-      <div
-        className='
+      >
+        <input
+          ref={ref}
+          {...props}
+          type='checkbox'
+          className={cn(
+            'peer absolute left-0 top-0 h-0 w-0 appearance-none outline-none',
+            className
+          )}
+        />
+        <div
+          className='
         group
         flex
         aspect-square
@@ -66,10 +63,10 @@ export const Checkbox: FC<IProps> = ({
         group-hover:peer-disabled:peer-checked:bg-accent-primary-400
         peer-checked:[&>svg]:opacity-100
         '
-      >
-        <svg
-          viewBox='0 0 9 6'
-          className='
+        >
+          <svg
+            viewBox='0 0 9 6'
+            className='
           h-[0.375rem]
           w-[0.5625rem]
           -translate-y-1/4
@@ -78,16 +75,19 @@ export const Checkbox: FC<IProps> = ({
           opacity-0
           transition
          '
-        >
-          <line x1='0' y1='0' x2='0' y2='6' stroke='black' />
-          <line x1='0' y1='6' x2='9' y2='6' stroke='black' />
-        </svg>
-      </div>
-      {children && (
-        <span className='select-none text-[0.8125rem] text-text-primary'>
-          {children}
-        </span>
-      )}
-    </label>
-  );
-};
+          >
+            <line x1='0' y1='0' x2='0' y2='6' stroke='black' />
+            <line x1='0' y1='6' x2='9' y2='6' stroke='black' />
+          </svg>
+        </div>
+        {children && (
+          <span className='select-none text-[0.8125rem] text-text-primary'>
+            {children}
+          </span>
+        )}
+      </label>
+    );
+  }
+);
+
+Checkbox.displayName = 'Checkbox';
