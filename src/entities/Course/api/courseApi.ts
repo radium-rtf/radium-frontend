@@ -5,7 +5,7 @@ const courseApi = emptyApi.injectEndpoints({
   endpoints: (builder) => ({
     course: builder.query<CourseResponseDto, string>({
       query: (slug) => ({
-        url: `/course/slug/${slug}`,
+        url: `/course/${slug}`,
       }),
       providesTags: (result) =>
         result

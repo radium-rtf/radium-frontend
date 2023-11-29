@@ -14,7 +14,7 @@ export const CourseSectionDelete: FC<CourseSectionDeleteProps> = ({
   const [deleteSection] = useDeleteCourseSectionMutation();
 
   return (
-    <Button onClick={() => deleteSection({ sectionId, pageId })}>
+    <Button type='button' onClick={() => deleteSection({ sectionId, pageId })}>
       <Icon type='delete' className='shrink-0' />
     </Button>
   );

@@ -10,6 +10,7 @@ import { CourseEditToggle } from '@/features/CourseEditToggle';
 import { CourseEditContextWrapper } from '@/features/CourseEditContext';
 import { NavigationCreateModule } from '@/features/NavigationCreateModule';
 import { CourseModuleNavigation } from '@/widgets/CourseModuleNavigation';
+import { CreateCourseSection } from '@/features/CreateCourseSection';
 
 interface CourseStudyLayoutProps {
   children: ReactNode;
@@ -18,8 +19,10 @@ interface CourseStudyLayoutProps {
 export default function CourseStudyLayout({
   children,
 }: CourseStudyLayoutProps) {
-  const params: { slug?: string; pageId?: string } = useParams();
-  const { data: course } = useCourseQuery(params.slug!, { skip: !params.slug });
+  const params: { courseId?: string; pageId?: string } = useParams();
+  const { data: course } = useCourseQuery(params.courseId!, {
+    skip: !params.courseId,
+  });
 
   if (!course) return null;
 
@@ -78,6 +81,7 @@ export default function CourseStudyLayout({
             </ul>
           </nav>
           <div className='flex flex-grow justify-center'>{children}</div>
+          <CreateCourseSection />
         </CourseEditContextWrapper>
       </div>
     </>

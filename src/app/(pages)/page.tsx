@@ -27,7 +27,7 @@ export default async function Home() {
         </Link>
       </Header>
       <main className='flex flex-col'>
-        <UserCourses courses={courses} />
+        <UserCourses courses={courses.recommendations} />
       </main>
     </>
   );

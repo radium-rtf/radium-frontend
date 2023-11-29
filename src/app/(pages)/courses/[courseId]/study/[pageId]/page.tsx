@@ -2,18 +2,18 @@
 import { usePageQuery } from '@/entities/Page';
 import {
   AnswerSection,
-  ChoiceSection,
   CodeSection,
   MultiChoiceSection,
   ShortAnswerSection,
 } from '@/entities/Section';
 import { PermutationSection } from '@/entities/Section/ui/PermutationSection';
 import { TextSection } from '@/widgets/TextSection';
+import { ChoiceSection } from '@/widgets/ChoiceSection';
 
 interface IProps {
   params: {
     pageId: string;
-    slug: string;
+    courseId: string;
   };
 }
 

@@ -16,13 +16,15 @@ import { CourseSettings } from '@/widgets/CourseSettings';
 import { CourseContacts } from '@/widgets/CourseContacts';
 
 interface IProps {
-  params: { slug: string };
+  params: { courseId: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
 export async function generateMetadata({ params }: IProps): Promise<Metadata> {
   // fetch data
-  const course = await getCourse(params.slug);
+  const course = await getCourse(params.courseId);
+
+  console.log(course);
 
   if (typeof course === 'string') {
     return {
@@ -39,10 +41,11 @@ export default async function Page({
   params,
 }: {
   params: {
-    slug: string;
+    courseId: string;
   };
 }) {
-  const course = await getCourse(params.slug);
+  const course = await getCourse(params.courseId);
+
   const session = await getServerSession(authOptions);
 
   const isEditAllowed =

@@ -49,7 +49,7 @@ export const CourseBrief: FC<IProps> = ({
             type='button'
             color='accent'
           >
-            <Link href={`/courses/${params.slug}/study`}>
+            <Link href={`/courses/${params.courseId}/study`}>
               <Icon type='start' className='text-grey-800' />
               <p>Начать</p>
             </Link>

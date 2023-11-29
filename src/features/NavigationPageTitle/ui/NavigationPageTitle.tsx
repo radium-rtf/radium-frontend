@@ -25,7 +25,7 @@ export const NavigationPageTitle: FC<IProps> = ({
   page,
   ...props
 }) => {
-  const params: { slug?: string } = useParams();
+  const params: { courseId?: string } = useParams();
   const { isEditing: isEditMode } = useContext(CourseEditContext);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -90,7 +90,10 @@ export const NavigationPageTitle: FC<IProps> = ({
       </List.Icon>
 
       <List.Content asChild>
-        <Link href={`/courses/${params.slug!}/study/${page.id}`} scroll={false}>
+        <Link
+          href={`/courses/${params.courseId!}/study/${page.id}`}
+          scroll={false}
+        >
           <List.Title>{page.name}</List.Title>
           {!!page.maxScore && (
             <List.Subtitle>{`${page.score}/${page.maxScore} баллов`}</List.Subtitle>
