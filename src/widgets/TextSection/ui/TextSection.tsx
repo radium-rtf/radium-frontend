@@ -26,7 +26,7 @@ export const TextSection: FC<IProps> = ({ data }) => {
       )}
       {isEditMode && (
         <div className='flex items-center gap-4 self-end'>
-          <CourseSectionDelete sectionId={data.id} />
+          <CourseSectionDelete sectionId={data.id} pageId={data.pageId} />
           {!isEditing && (
             <Button
               color='outlined'
