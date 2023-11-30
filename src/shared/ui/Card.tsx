@@ -19,7 +19,7 @@ export const Card: FC<IProps> = ({
     <Comp
       {...props}
       className={cn(
-        'flex flex-col gap-4 rounded-2xl bg-grey-600 p-6',
+        'flex flex-col gap-4 rounded-2xl bg-background-card p-6',
         className
       )}
     >
