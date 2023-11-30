@@ -7,6 +7,7 @@ export type { AnswerSectionResponseDto } from './model/answerSectionResponseDto'
 export type { ShortAnswerSectionResponseDto } from './model/shortAnswerSectionResponseDto';
 export type { AnswerResponseDto } from './model/answerResponseDto';
 export type { CodeSectionResponseDto } from './model/codeSectionResponseDto';
+export type { PermutationSectionResponseDto } from './model/permutationSectionResponseDto';
 
 // types
 export type { AllSectionsResponseDto } from './model/allSectionsResponseDto';

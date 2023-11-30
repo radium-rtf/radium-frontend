@@ -1,12 +1,12 @@
 'use client';
 import { usePageQuery } from '@/entities/Page';
 import { CodeSection } from '@/entities/Section';
-import { PermutationSection } from '@/entities/Section/ui/PermutationSection';
 import { TextSection } from '@/widgets/TextSection';
 import { ChoiceSection } from '@/widgets/ChoiceSection';
 import { MultiChoiceSection } from '@/widgets/MultiChoiceSection';
 import { ShortAnswerSection } from '@/widgets/ShortAnswerSection';
 import { AnswerSection } from '@/widgets/AnswerSection';
+import { PermutationSection } from '@/widgets/PermutationsSection';
 
 interface IProps {
   params: {
@@ -45,7 +45,9 @@ export default function Page({ params }: IProps) {
             case 'answer':
               return <AnswerSection key={section.id} sectionData={section} />;
             case 'permutation':
-              return <PermutationSection key={section.id} data={section} />;
+              return (
+                <PermutationSection key={section.id} sectionData={section} />
+              );
             case 'code':
               return <CodeSection key={section.id} data={section} />;
             default:
