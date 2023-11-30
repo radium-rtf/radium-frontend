@@ -32,6 +32,7 @@ export const EditorListControl = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
+          type='button'
           className={cn(
             'rounded-lg border border-transparent p-2 transition-colors hover:border-white/10 hover:bg-white/5'
           )}
