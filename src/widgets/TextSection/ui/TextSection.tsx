@@ -9,24 +9,27 @@ import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
 import { useUpdateTextSectionMutation } from '../api/updateTextSectionApi';
 
 interface IProps {
-  data: TextSectionResponseDto;
+  sectionData: TextSectionResponseDto;
 }
 
-export const TextSection: FC<IProps> = ({ data }) => {
+export const TextSection: FC<IProps> = ({ sectionData }) => {
   const { isEditing: isEditMode } = useContext(CourseEditContext);
-  const [markdown, setMarkdown] = useState(data.content);
+  const [markdown, setMarkdown] = useState(sectionData.content);
   const [isEditing, setIsEditing] = useState(false);
   const [updateSection] = useUpdateTextSectionMutation();
 
   return (
     <Card>
-      {!isEditing && <MarkdownDisplay markdown={data.content} />}
+      {!isEditing && <MarkdownDisplay markdown={sectionData.content} />}
       {isEditing && (
         <MarkdownEditor markdown={markdown} onChange={setMarkdown} />
       )}
       {isEditMode && (
         <div className='flex items-center gap-4 self-end'>
-          <CourseSectionDelete sectionId={data.id} pageId={data.pageId} />
+          <CourseSectionDelete
+            sectionId={sectionData.id}
+            pageId={sectionData.pageId}
+          />
           {!isEditing && (
             <Button
               color='outlined'
@@ -45,7 +48,7 @@ export const TextSection: FC<IProps> = ({ data }) => {
               className='self-end'
               onClick={() =>
                 updateSection({
-                  sectionId: data.id,
+                  sectionId: sectionData.id,
                   text: { content: markdown },
                 })
                   .unwrap()

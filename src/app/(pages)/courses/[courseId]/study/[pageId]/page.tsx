@@ -32,9 +32,9 @@ export default function Page({ params }: IProps) {
         {page.sections.map((section) => {
           switch (section.type) {
             case 'text':
-              return <TextSection key={section.id} data={section} />;
+              return <TextSection key={section.id} sectionData={section} />;
             case 'choice':
-              return <ChoiceSection key={section.id} data={section} />;
+              return <ChoiceSection key={section.id} sectionData={section} />;
             case 'multiChoice':
               return (
                 <MultiChoiceSection key={section.id} sectionData={section} />

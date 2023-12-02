@@ -14,12 +14,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { answerSchema, answerSchemaType } from '../lib/answerSchema';
 
 interface ChoiceSectionProps {
-  data: ChoiceSectionResponseDto;
+  sectionData: ChoiceSectionResponseDto;
 }
 
-export const ChoiceSection: FC<ChoiceSectionProps> = ({
-  data: sectionData,
-}) => {
+export const ChoiceSection: FC<ChoiceSectionProps> = ({ sectionData }) => {
   // Edit checks
   const { isEditing: isEditMode } = useContext(CourseEditContext);
   const [isEditing, setIsEditing] = useState(false);
