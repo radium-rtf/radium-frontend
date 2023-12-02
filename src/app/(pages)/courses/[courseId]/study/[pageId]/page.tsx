@@ -7,6 +7,7 @@ import { MultiChoiceSection } from '@/widgets/MultiChoiceSection';
 import { ShortAnswerSection } from '@/widgets/ShortAnswerSection';
 import { AnswerSection } from '@/widgets/AnswerSection';
 import { PermutationSection } from '@/widgets/PermutationsSection';
+import { MappingSection } from '@/widgets/MappingSection';
 
 interface IProps {
   params: {
@@ -48,6 +49,8 @@ export default function Page({ params }: IProps) {
               return (
                 <PermutationSection key={section.id} sectionData={section} />
               );
+            case 'mapping':
+              return <MappingSection key={section.id} sectionData={section} />;
             case 'code':
               return <CodeSection key={section.id} data={section} />;
             default:

@@ -11,6 +11,7 @@ export interface SectionResponseDto {
     | 'shortAnswer'
     | 'answer'
     | 'code'
-    | 'permutation';
+    | 'permutation'
+    | 'mapping';
   verdict: 'WA' | 'OK' | 'WAIT' | '';
 }

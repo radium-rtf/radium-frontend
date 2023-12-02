@@ -8,6 +8,7 @@ export type { ShortAnswerSectionResponseDto } from './model/shortAnswerSectionRe
 export type { AnswerResponseDto } from './model/answerResponseDto';
 export type { CodeSectionResponseDto } from './model/codeSectionResponseDto';
 export type { PermutationSectionResponseDto } from './model/permutationSectionResponseDto';
+export type { MappingSectionResponseDto } from './model/mappingSectionResponseDto';
 
 // types
 export type { AllSectionsResponseDto } from './model/allSectionsResponseDto';

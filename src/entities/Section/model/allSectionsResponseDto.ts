@@ -5,6 +5,7 @@ import { AnswerSectionResponseDto } from './answerSectionResponseDto';
 import { ShortAnswerSectionResponseDto } from './shortAnswerSectionResponseDto';
 import { PermutationSectionResponseDto } from './permutationSectionResponseDto';
 import { CodeSectionResponseDto } from './codeSectionResponseDto';
+import { MappingSectionResponseDto } from './mappingSectionResponseDto';
 
 export type AllSectionsResponseDto =
   | TextSectionResponseDto
@@ -13,4 +14,5 @@ export type AllSectionsResponseDto =
   | AnswerSectionResponseDto
   | ShortAnswerSectionResponseDto
   | PermutationSectionResponseDto
-  | CodeSectionResponseDto;
+  | CodeSectionResponseDto
+  | MappingSectionResponseDto;
