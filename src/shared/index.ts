@@ -22,6 +22,7 @@ export { PermutationItem } from './ui/PermutationItem';
 export { InputFile } from './ui/InputFile';
 export { CloseButton } from './ui/CloseButton';
 export { DownloadButton } from './ui/DownloadButton';
+export { CodeEditor } from './ui/CodeEditor';
 
 // Interfaces
 export type { IIcon } from './ui/Icon';

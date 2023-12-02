@@ -1,0 +1,51 @@
+.monaco-editor .margin {
+    margin-top: 16px !important;
+    background-color: transparent !important;
+  }
+  
+  .monaco-editor {
+    border-radius: 8px !important;
+    background-color: transparent !important;
+    border: 1px solid #383a3b !important;
+  }
+  
+  /* .monaco-scrollable-element {
+    padding: 16px !important;
+  } */
+  
+  .monaco-editor .scroll-decoration {
+    display: none !important;
+  }
+  
+  .monaco-editor {
+    resize: horizontal !important;
+  }
+  
+  .monaco-editor .editor-scrollable {
+    border: 1px solid #383a3b !important;
+    border-radius: 8px !important;
+    margin: -1px;
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    padding: 16px !important;
+  }
+  
+  .monaco-editor .lines-content {
+    margin: 16px !important;
+    background-color: transparent !important;
+  }
+  
+  .monaco-editor .view-lines {
+    background-color: transparent !important;
+  }
+  
+  .monaco-editor .margin-view-overlays .line-numbers {
+    width: 38px !important;
+  }
+  
+  .monaco-editor .decorationsOverviewRuler {
+    display: none !important;
+  }
+  
+  .editor-widget {
+    transform: translateX(20px) translateY(16px);
+  }

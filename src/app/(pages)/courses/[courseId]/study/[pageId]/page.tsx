@@ -1,6 +1,5 @@
 'use client';
 import { usePageQuery } from '@/entities/Page';
-import { CodeSection } from '@/entities/Section';
 import { TextSection } from '@/widgets/TextSection';
 import { ChoiceSection } from '@/widgets/ChoiceSection';
 import { MultiChoiceSection } from '@/widgets/MultiChoiceSection';
@@ -8,6 +7,7 @@ import { ShortAnswerSection } from '@/widgets/ShortAnswerSection';
 import { AnswerSection } from '@/widgets/AnswerSection';
 import { PermutationSection } from '@/widgets/PermutationsSection';
 import { MappingSection } from '@/widgets/MappingSection';
+import { CodeSection } from '@/widgets/CodeSection';
 
 interface IProps {
   params: {
@@ -52,7 +52,7 @@ export default function Page({ params }: IProps) {
             case 'mapping':
               return <MappingSection key={section.id} sectionData={section} />;
             case 'code':
-              return <CodeSection key={section.id} data={section} />;
+              return <CodeSection key={section.id} sectionData={section} />;
             default:
               return null;
           }
