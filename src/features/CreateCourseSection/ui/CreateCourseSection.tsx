@@ -27,7 +27,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
               createSection({ pageId, text: { content: 'New section' } })
             }
           >
-            <List.Icon icon='table' className='text-primary-default' />
+            <List.Icon icon='text' className='text-primary-default' />
             <List.Content>
               <List.Title>Текст</List.Title>
             </List.Content>
@@ -52,7 +52,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
               })
             }
           >
-            <List.Icon icon='table' className='text-primary-default' />
+            <List.Icon icon='radio' className='text-primary-default' />
             <List.Content>
               <List.Title>Один вариант</List.Title>
             </List.Content>
@@ -77,9 +77,9 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
               })
             }
           >
-            <List.Icon icon='table' className='text-primary-default' />
+            <List.Icon icon='checkbox' className='text-primary-default' />
             <List.Content>
-              <List.Title>Несколько вариантов</List.Title>
+              <List.Title>Несколько вариантов</List.Title>
             </List.Content>
             <List.Icon
               icon='add'
@@ -100,7 +100,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
               })
             }
           >
-            <List.Icon icon='table' className='text-primary-default' />
+            <List.Icon icon='editor' className='text-primary-default' />
             <List.Content>
               <List.Title>Короткий вопрос</List.Title>
             </List.Content>
@@ -123,9 +123,33 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
               })
             }
           >
-            <List.Icon icon='table' className='text-primary-default' />
+            <List.Icon icon='shuffle' className='text-primary-default' />
             <List.Content>
               <List.Title>Перестановки</List.Title>
+            </List.Content>
+            <List.Icon
+              icon='add'
+              className='h-3 text-primary-default opacity-0 transition-opacity group-hover:opacity-100'
+            />
+          </button>
+        </List.Item>
+        <List.Item asChild>
+          <button
+            className='group rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
+            onClick={() =>
+              createSection({
+                pageId,
+                mapping: {
+                  answer: ['1', '2', '3', '4'],
+                  keys: ['11', '22', '33', '44'],
+                  question: 'Сопоставление',
+                },
+              })
+            }
+          >
+            <List.Icon icon='matching' className='text-primary-default' />
+            <List.Content>
+              <List.Title>Сопоставление</List.Title>
             </List.Content>
             <List.Icon
               icon='add'
@@ -148,6 +172,19 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
             <List.Icon icon='table' className='text-primary-default' />
             <List.Content>
               <List.Title>Длинный ответ</List.Title>
+            </List.Content>
+          </button>
+        </List.Item>
+        <List.Item asChild>
+          <button
+            className='rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
+            onClick={() =>
+              createSection({ pageId, code: { question: 'Программируй' } })
+            }
+          >
+            <List.Icon icon='code' className='text-primary-default' />
+            <List.Content>
+              <List.Title>Программирование</List.Title>
             </List.Content>
           </button>
         </List.Item>

@@ -49,7 +49,12 @@ export type Icon =
   | 'heading'
   | 'code'
   | 'list'
-  | 'share';
+  | 'share'
+  | 'text'
+  | 'radio'
+  | 'checkbox'
+  | 'shuffle'
+  | 'matching';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -583,6 +588,106 @@ const icons: Record<Icon, ReactNode> = {
       strokeLinecap='round'
       strokeLinejoin='round'
     />
+  ),
+  text: (
+    <path
+      d='M8.5 17.5V0.5M8.5 17.5H5.5M8.5 17.5H11.5M8.5 0.5H2.5V3.5M8.5 0.5H14.5V3.5'
+      className='stroke-current'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
+  ),
+  radio: (
+    <g className='text-inherit'>
+      <circle cx='9' cy='9' r='8.5' className='stroke-current' />
+      <circle cx='9' cy='9' r='4.5' className='stroke-current' />
+    </g>
+  ),
+  checkbox: (
+    <g className='text-inherit'>
+      <path
+        d='M13.5 6L7.5 12L4.5 9'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <rect
+        x='0.5'
+        y='0.5'
+        width='17'
+        height='17'
+        rx='1.5'
+        className='stroke-current'
+      />
+    </g>
+  ),
+  shuffle: (
+    <g className='text-inherit'>
+      <rect
+        x='8.5'
+        y='0.5'
+        width='9'
+        height='7'
+        rx='1.5'
+        className='stroke-current'
+      />
+      <rect
+        x='8.5'
+        y='10.5'
+        width='9'
+        height='7'
+        rx='1.5'
+        className='stroke-current'
+      />
+      <path
+        d='M5.5 3.5H3C1.61929 3.5 0.5 4.61929 0.5 6V12C0.5 13.3807 1.61929 14.5 3 14.5H5.5M5.5 3.5L3.5 5.5M5.5 3.5L3.5 1.5M5.5 14.5L3.5 16.5M5.5 14.5L3.5 12.5'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+    </g>
+  ),
+  matching: (
+    <g className='text-inherit'>
+      <rect
+        x='0.5'
+        y='0.5'
+        width='6'
+        height='7'
+        rx='1.5'
+        className='stroke-current'
+      />
+      <rect
+        x='0.5'
+        y='10.5'
+        width='6'
+        height='7'
+        rx='1.5'
+        className='stroke-current'
+      />
+      <path
+        d='M6.5 13.5V13.5C7.60457 13.5 8.5 12.6046 8.5 11.5V7C8.5 5.61929 9.61929 4.5 11 4.5H11.5'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <rect
+        x='11.5'
+        y='0.5'
+        width='6'
+        height='7'
+        rx='1.5'
+        className='stroke-current'
+      />
+      <rect
+        x='11.5'
+        y='10.5'
+        width='6'
+        height='7'
+        rx='1.5'
+        className='stroke-current'
+      />
+    </g>
   ),
 };
 export interface IIcon extends SVGProps<SVGSVGElement> {
