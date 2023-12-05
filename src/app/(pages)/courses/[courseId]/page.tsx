@@ -39,9 +39,13 @@ export async function generateMetadata({ params }: IProps): Promise<Metadata> {
 
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: {
     courseId: string;
+  };
+  searchParams: {
+    initialEdit?: string;
   };
 }) {
   const course = await getCourse(params.courseId);
@@ -69,7 +73,9 @@ export default async function Page({
         </Link>
       </Header>
       <main className='flex flex-col'>
-        <CourseEditContextWrapper>
+        <CourseEditContextWrapper
+          isEditMode={searchParams.initialEdit === 'true'}
+        >
           <CourseBanner
             name={course.name}
             url={course.logo}
@@ -88,6 +94,7 @@ export default async function Page({
                   courseName={course.name}
                   courseId={course.id}
                   isEditAllowed={isEditAllowed}
+                  isAssigned={course.isStudent}
                 />
                 <CourseDescription
                   courseId={course.id}

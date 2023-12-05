@@ -3,6 +3,7 @@ import React, { FC, useContext, useEffect, useState } from 'react';
 import { Button, Card, Icon } from '@/shared';
 import { CourseBriefEdit } from './CourseBriedEdit';
 import { CourseEditContext } from '@/features/CourseEditContext';
+import { CourseJoin } from '@/features/CourseJoin';
 import Link from 'next/link';
 
 interface IProps {
@@ -11,6 +12,7 @@ interface IProps {
   courseName: string;
   courseId: string;
   isEditAllowed: boolean;
+  isAssigned: boolean;
 }
 
 export const CourseBrief: FC<IProps> = ({
@@ -19,6 +21,7 @@ export const CourseBrief: FC<IProps> = ({
   courseName,
   courseId,
   isEditAllowed,
+  isAssigned,
 }) => {
   const { isEditing } = useContext(CourseEditContext);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -52,24 +55,29 @@ export const CourseBrief: FC<IProps> = ({
         <Icon type='courses' />
         <span className='flex-grow text-[0.8125rem]'>{modulesCount} темы</span>
         {!isEditing && !isEditMode && (
-          <Button
-            asChild
-            className='flex items-center gap-2'
-            type='button'
-            color='accent'
-          >
-            <Link
-              scroll={false}
-              href={
-                nextPage
-                  ? `/courses/${courseId}/study/${nextPage}`
-                  : `/courses/${courseId}/study`
-              }
-            >
-              <Icon type='start' className='text-grey-800' />
-              <p>Начать</p>
-            </Link>
-          </Button>
+          <>
+            {!isAssigned && <CourseJoin courseId={courseId} />}
+            {isAssigned && (
+              <Button
+                asChild
+                className='flex items-center gap-2'
+                type='button'
+                color='outlined'
+              >
+                <Link
+                  scroll={false}
+                  href={
+                    nextPage
+                      ? `/courses/${courseId}/study/${nextPage}`
+                      : `/courses/${courseId}/study`
+                  }
+                >
+                  <Icon type='start' />
+                  <p>Продолжить</p>
+                </Link>
+              </Button>
+            )}
+          </>
         )}
         {isEditAllowed && isEditing && (
           <Button
