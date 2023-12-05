@@ -1,9 +1,8 @@
 import React from 'react';
-import { getUserCourses } from '@/entities/Course';
+import { CourseCard, getUserCourses } from '@/entities/Course';
 import { Header } from '@/widgets/Header';
 import Link from 'next/link';
 import Image from 'next/image';
-import { UserCourses } from '@/widgets/UserCourses';
 import { redirect } from 'next/navigation';
 
 export default async function Home() {
@@ -26,8 +25,27 @@ export default async function Home() {
           </h1>
         </Link>
       </Header>
-      <main className='flex flex-col'>
-        <UserCourses courses={courses.recommendations} />
+      <main className='container mx-auto flex flex-col gap-6'>
+        {!!courses.my.length && (
+          <section className='container mx-auto grid grid-cols-1 gap-8 px-6 md:px-12 lg:grid-cols-2 xl:grid-cols-3'>
+            <h2 className='ml-6 font-mono text-[2rem] font-bold leading-[normal] text-primary-default lg:col-span-2 xl:col-span-3'>
+              Вы изучаете
+            </h2>
+            {courses.my.map((course) => {
+              return <CourseCard key={course.id} course={course} />;
+            })}
+          </section>
+        )}
+        {!!courses.recommendations.length && (
+          <section className='container mx-auto grid grid-cols-1 gap-8 px-6 md:px-12 lg:grid-cols-2 xl:grid-cols-3'>
+            <h2 className='ml-6 font-mono text-[2rem] font-bold leading-[normal] text-primary-default lg:col-span-2 xl:col-span-3'>
+              Рекомендации
+            </h2>
+            {courses.recommendations.map((course) => {
+              return <CourseCard key={course.id} course={course} />;
+            })}
+          </section>
+        )}
       </main>
     </>
   );
