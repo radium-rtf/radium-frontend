@@ -9,6 +9,7 @@ import { PermutationSection } from '@/widgets/PermutationsSection';
 import { MappingSection } from '@/widgets/MappingSection';
 import { CodeSection } from '@/widgets/CodeSection';
 import { PageNavigation } from '@/widgets/PageNavigation';
+import { useEffect } from 'react';
 
 interface IProps {
   params: {
@@ -19,6 +20,17 @@ interface IProps {
 
 export default function Page({ params }: IProps) {
   const { data: page } = usePageQuery(params.pageId);
+
+  useEffect(() => {
+    const previousPages = JSON.parse(
+      localStorage.getItem('previousPages') || '{}'
+    ) as { [courseId: string]: string };
+
+    localStorage.setItem(
+      'previousPages',
+      JSON.stringify({ ...previousPages, [params.courseId]: params.pageId })
+    );
+  }, [params.courseId, params.pageId]);
 
   if (!page) return null;
 

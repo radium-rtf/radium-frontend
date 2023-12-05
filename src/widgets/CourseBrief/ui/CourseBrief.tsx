@@ -1,7 +1,6 @@
 'use client';
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { Button, Card, Icon } from '@/shared';
-import { useParams } from 'next/navigation';
 import { CourseBriefEdit } from './CourseBriedEdit';
 import { CourseEditContext } from '@/features/CourseEditContext';
 import Link from 'next/link';
@@ -21,9 +20,19 @@ export const CourseBrief: FC<IProps> = ({
   courseId,
   isEditAllowed,
 }) => {
-  const params = useParams();
   const { isEditing } = useContext(CourseEditContext);
   const [isEditMode, setIsEditMode] = useState(false);
+
+  const [nextPage, setNextPage] = useState<undefined | string>(undefined);
+
+  useEffect(() => {
+    const previousPages = JSON.parse(
+      localStorage.getItem('previousPages') || '{}'
+    ) as { [courseId: string]: string | undefined };
+
+    const nextPage = previousPages[courseId];
+    if (nextPage) setNextPage(nextPage);
+  }, [courseId]);
 
   if (isEditAllowed && isEditing && isEditMode) {
     return (
@@ -49,7 +58,14 @@ export const CourseBrief: FC<IProps> = ({
             type='button'
             color='accent'
           >
-            <Link href={`/courses/${params.courseId}/study`}>
+            <Link
+              scroll={false}
+              href={
+                nextPage
+                  ? `/courses/${courseId}/study/${nextPage}`
+                  : `/courses/${courseId}/study`
+              }
+            >
               <Icon type='start' className='text-grey-800' />
               <p>Начать</p>
             </Link>
