@@ -5,8 +5,10 @@ import { FC, useContext, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { answerSchema, answerSchemaType } from '../lib/answerSchema';
-import { MultiChoiceSectionResponseDto } from '@/entities/CourseSection';
-import { useAnswerMultiChoiceSectionMutation } from '../api/multiChoiceSectionApi';
+import {
+  MultiChoiceSectionResponseDto,
+  useAnswerCourseMultiChoiceSectionMutation,
+} from '@/entities/CourseSection';
 import { useSession } from 'next-auth/react';
 import { CourseEditContext } from '@/features/CourseEditContext';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
@@ -22,7 +24,7 @@ export const MultiChoiceSection: FC<IProps> = ({ sectionData }) => {
     MultiChoiceSectionResponseDto['verdict']
   >(sectionData.verdict);
   const [answer, { isLoading, isError }] =
-    useAnswerMultiChoiceSectionMutation();
+    useAnswerCourseMultiChoiceSectionMutation();
 
   // Form init
   const { register, handleSubmit } = useForm<answerSchemaType>({

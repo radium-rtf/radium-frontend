@@ -1,5 +1,8 @@
 'use client';
-import { MappingSectionResponseDto } from '@/entities/CourseSection';
+import {
+  MappingSectionResponseDto,
+  useAnswerCourseMappingSectionMutation,
+} from '@/entities/CourseSection';
 import { Button, Card, Icon, cn } from '@/shared';
 import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
 import { FC, Fragment, useContext, useState } from 'react';
@@ -33,7 +36,6 @@ import {
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { CourseEditContext } from '@/features/CourseEditContext';
 import { useSession } from 'next-auth/react';
-import { useAnswerMappingSectionMutation } from '../api/mappingSectiobApi';
 import { MappingSectionEdit } from './MappingSectionEdit';
 
 interface MappingSectionProps {
@@ -48,7 +50,7 @@ export const MappingSection: FC<MappingSectionProps> = ({ sectionData }) => {
 
   // Answer
   const [answerMappingSection, { isLoading, isError }] =
-    useAnswerMappingSectionMutation();
+    useAnswerCourseMappingSectionMutation();
 
   // Form init
   const { control, handleSubmit } = useForm<answerSchemaType>({

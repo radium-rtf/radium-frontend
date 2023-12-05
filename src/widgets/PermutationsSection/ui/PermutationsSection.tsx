@@ -1,7 +1,6 @@
 'use client';
 import { Button, Card, Icon, PermutationItem, cn } from '@/shared';
 import { FC, useContext, useState } from 'react';
-import { useAnswerPermutationsSectionMutation } from '../api/permuationsSectionApi';
 import {
   DndContext,
   useSensor,
@@ -34,6 +33,7 @@ import { useSession } from 'next-auth/react';
 import { PermutationsSectionEdit } from './PermutationsSectionEdit';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { useAnswerCoursePermutationsSectionMutation } from '@/entities/CourseSection/api/courseSectionApi';
 
 interface IProps {
   sectionData: PermutationSectionResponseDto;
@@ -80,7 +80,7 @@ export const PermutationSection: FC<IProps> = ({ sectionData }) => {
     PermutationSectionResponseDto['verdict']
   >(sectionData.verdict);
   const [answerPermutationsSection, { isLoading, isError }] =
-    useAnswerPermutationsSectionMutation();
+    useAnswerCoursePermutationsSectionMutation();
 
   // Edit checks
   const session = useSession();

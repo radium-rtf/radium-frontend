@@ -8,11 +8,11 @@ import {
   useEffect,
   useState,
 } from 'react';
-import {
-  useDeleteModuleMutation,
-  useUpdateModuleNameMutation,
-} from '../api/moduleApi';
 import { CourseEditContext } from '@/features/CourseEditContext';
+import {
+  useDeleteCourseModuleMutation,
+  useUpdateCourseModuleNameMutation,
+} from '@/entities/CourseModule';
 
 interface IProps extends HTMLAttributes<HTMLHeadingElement> {
   name: string;
@@ -29,8 +29,8 @@ export const NavigationModuleTitle: FC<IProps> = ({
 }) => {
   const { isEditing: isEditMode } = useContext(CourseEditContext);
   const [isEditing, setIsEditing] = useState(false);
-  const [deleteModule] = useDeleteModuleMutation();
-  const [updateName] = useUpdateModuleNameMutation();
+  const [deleteModule] = useDeleteCourseModuleMutation();
+  const [updateName] = useUpdateCourseModuleNameMutation();
 
   // Сброс стейта при отключении редактирования
   useEffect(() => {
@@ -65,7 +65,7 @@ export const NavigationModuleTitle: FC<IProps> = ({
 
   // Хендлер удаления модуля
   const deleteHandler = () => {
-    deleteModule({ id: moduleId });
+    deleteModule(moduleId);
   };
 
   if (isEditing && isEditing) {

@@ -1,4 +1,7 @@
-import { PermutationSectionResponseDto } from '@/entities/CourseSection';
+import {
+  PermutationSectionResponseDto,
+  useUpdateCoursePermutationsSectionMutation,
+} from '@/entities/CourseSection';
 import { FC } from 'react';
 import {
   Controller,
@@ -30,7 +33,6 @@ import { DevTool } from '@hookform/devtools';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
 import { PermutationsEditItem } from './PermutationsEditItem';
-import { useUpdatePermutationsSectionMutation } from '../api/permuationsSectionApi';
 
 interface PermutationsSectionEditProps {
   sectionData: PermutationSectionResponseDto;
@@ -42,7 +44,8 @@ export const PermutationsSectionEdit: FC<PermutationsSectionEditProps> = ({
   onSuccess,
 }) => {
   // Update hook
-  const [updatePermutationsSection] = useUpdatePermutationsSectionMutation();
+  const [updatePermutationsSection] =
+    useUpdateCoursePermutationsSectionMutation();
 
   // Form init
   const {

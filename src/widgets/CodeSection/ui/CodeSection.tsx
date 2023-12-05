@@ -1,5 +1,8 @@
 'use client';
-import { CodeSectionResponseDto } from '@/entities/CourseSection';
+import {
+  CodeSectionResponseDto,
+  useAnswerCourseCodeSectionMutation,
+} from '@/entities/CourseSection';
 import {
   Button,
   Card,
@@ -27,7 +30,6 @@ import {
   SelectValue,
 } from '@/shared/ui/Select';
 import { LanguageDisplay } from '../lib/languageDisplay';
-import { useAnswerCodeSectionMutation } from '../api/codeSectionApi';
 
 interface CodeSectionProps {
   sectionData: CodeSectionResponseDto;
@@ -44,7 +46,7 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
 
   // Answer
   const [answerCodeSection, { isLoading, isError }] =
-    useAnswerCodeSectionMutation();
+    useAnswerCourseCodeSectionMutation();
 
   // Form init
   const { handleSubmit, control, getValues } = useForm<answerSchemaType>({

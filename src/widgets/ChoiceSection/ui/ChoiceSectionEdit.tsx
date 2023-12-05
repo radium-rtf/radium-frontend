@@ -1,6 +1,9 @@
 'use client';
 
-import { ChoiceSectionResponseDto } from '@/entities/CourseSection';
+import {
+  ChoiceSectionResponseDto,
+  useUpdateCourseChoiceSectionMutation,
+} from '@/entities/CourseSection';
 import { Button, Card, Icon, Input, Radio } from '@/shared';
 import { FC } from 'react';
 import {
@@ -12,7 +15,6 @@ import {
 import { DevTool } from '@hookform/devtools';
 import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
-import { useUpdateChoiceSectionMutation } from '../api/choiceSectionApi';
 import { updateSchema, updateSchemaType } from '../lib/updateSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -55,7 +57,7 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({
     name: 'choice.variants',
   });
 
-  const [updateChoiceSection] = useUpdateChoiceSectionMutation();
+  const [updateChoiceSection] = useUpdateCourseChoiceSectionMutation();
 
   const onSubmitHandler: SubmitHandler<updateSchemaType> = (data) => {
     const body = {

@@ -2,8 +2,10 @@
 
 import { Button, Card, Icon, TextArea, cn } from '@/shared';
 import { FC, useContext, useState } from 'react';
-import { useAnswerAnswerSectionMutation } from '../api/shortAnswerSectionApi';
-import { AnswerSectionResponseDto } from '@/entities/CourseSection';
+import {
+  AnswerSectionResponseDto,
+  useAnswerCourseAnswerSectionMutation,
+} from '@/entities/CourseSection';
 import { useSession } from 'next-auth/react';
 import { CourseEditContext } from '@/features/CourseEditContext';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -21,7 +23,7 @@ export const AnswerSection: FC<AnswerSectionProps> = ({ sectionData }) => {
     sectionData.verdict
   );
   const [answerShortAnswerSection, { isLoading, isError }] =
-    useAnswerAnswerSectionMutation();
+    useAnswerCourseAnswerSectionMutation();
 
   // Form init
   const { register, handleSubmit } = useForm<answerSchemaType>({

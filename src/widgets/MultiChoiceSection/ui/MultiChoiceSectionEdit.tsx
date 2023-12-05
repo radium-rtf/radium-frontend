@@ -1,6 +1,9 @@
 'use client';
 
-import { MultiChoiceSectionResponseDto } from '@/entities/CourseSection';
+import {
+  MultiChoiceSectionResponseDto,
+  useUpdateCourseMultiChoiceSectionMutation,
+} from '@/entities/CourseSection';
 import { Button, Card, Checkbox, Icon, Input } from '@/shared';
 import { FC } from 'react';
 import {
@@ -14,7 +17,6 @@ import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { updateSchema, updateSchemaType } from '../lib/updateSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useUpdateMultiChoiceSectionMutation } from '../api/multiChoiceSectionApi';
 
 interface MultiChoiceSectionEditProps {
   sectionData: MultiChoiceSectionResponseDto;
@@ -55,12 +57,10 @@ export const MultiChoiceSectionEdit: FC<MultiChoiceSectionEditProps> = ({
     name: 'multichoice.variants',
   });
 
-  const [updateMultiChoiceSection] = useUpdateMultiChoiceSectionMutation();
+  const [updateMultiChoiceSection] =
+    useUpdateCourseMultiChoiceSectionMutation();
 
   const onSubmitHandler: SubmitHandler<updateSchemaType> = (data) => {
-    // console.log(data);
-
-    // return;
     const body = {
       ...data,
       multichoice: {
@@ -114,17 +114,6 @@ export const MultiChoiceSectionEdit: FC<MultiChoiceSectionEditProps> = ({
                     id={field.id}
                     className='flex items-center gap-4'
                   >
-                    {/* <Controller
-                      name='multichoice.answer'
-                      control={control}
-                      render={({ field: props }) => (
-                        <Checkbox
-                          {...props}
-                          disabled={index === fields.length - 1}
-                          checked={)}
-                        />
-                      )}
-                    /> */}
                     <Checkbox
                       {...register('multichoice.answer')}
                       value={watch(`multichoice.variants.${index}.value`)}

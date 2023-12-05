@@ -1,6 +1,9 @@
 'use client';
 
-import { AnswerSectionResponseDto } from '@/entities/CourseSection';
+import {
+  AnswerSectionResponseDto,
+  useUpdateCourseAnswerSectionMutation,
+} from '@/entities/CourseSection';
 import { Button, Card, Icon, Input } from '@/shared';
 import { FC } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -9,7 +12,6 @@ import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { updateSchema, updateSchemaType } from '../lib/updateSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useUpdateAnswerSectionMutation } from '../api/shortAnswerSectionApi';
 
 interface AnswerSectionEditProps {
   sectionData: AnswerSectionResponseDto;
@@ -36,7 +38,7 @@ export const AnswerSectionEdit: FC<AnswerSectionEditProps> = ({
     },
   });
 
-  const [updateShortAnswerSection] = useUpdateAnswerSectionMutation();
+  const [updateShortAnswerSection] = useUpdateCourseAnswerSectionMutation();
 
   const onSubmitHandler: SubmitHandler<updateSchemaType> = (data) => {
     updateShortAnswerSection({ sectionId: sectionData.id, ...data })

@@ -1,17 +1,17 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { ChoiceSectionEdit } from './ChoiceSectionEdit';
+import { CourseEditContext } from '@/features/CourseEditContext';
+import { CourseSectionDelete } from '@/features/CourseSectionDelete';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { FC, useContext, useState } from 'react';
 import { ChoiceSectionResponseDto } from '@/entities/CourseSection';
 import { Button, Card, Icon, Radio, cn } from '@/shared';
-import { FC, useContext, useState } from 'react';
-import { useAnswerChoiceSectionMutation } from '../api/choiceSectionApi';
-import { ChoiceSectionEdit } from './ChoiceSectionEdit';
-import { useSession } from 'next-auth/react';
-import { CourseEditContext } from '@/features/CourseEditContext';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { CourseSectionDelete } from '@/features/CourseSectionDelete';
-import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { answerSchema, answerSchemaType } from '../lib/answerSchema';
+import { useAnswerCourseChoiceSectionMutation } from '@/entities/CourseSection';
 
 interface ChoiceSectionProps {
   sectionData: ChoiceSectionResponseDto;
@@ -39,7 +39,8 @@ export const ChoiceSection: FC<ChoiceSectionProps> = ({ sectionData }) => {
     resolver: zodResolver(answerSchema),
   });
 
-  const [answer, { isLoading, isError }] = useAnswerChoiceSectionMutation();
+  const [answer, { isLoading, isError }] =
+    useAnswerCourseChoiceSectionMutation();
 
   const onSubmitHandler: SubmitHandler<answerSchemaType> = (body) => {
     answer({

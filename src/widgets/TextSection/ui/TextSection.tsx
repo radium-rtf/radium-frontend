@@ -2,11 +2,13 @@
 import { FC, useContext, useState } from 'react';
 import { Button, Card, Icon } from '@/shared';
 import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
-import { TextSectionResponseDto } from '@/entities/CourseSection';
+import {
+  TextSectionResponseDto,
+  useUpdateCourseTextSectionMutation,
+} from '@/entities/CourseSection';
 import { CourseEditContext } from '@/features/CourseEditContext';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
-import { useUpdateTextSectionMutation } from '../api/updateTextSectionApi';
 
 interface IProps {
   sectionData: TextSectionResponseDto;
@@ -16,7 +18,7 @@ export const TextSection: FC<IProps> = ({ sectionData }) => {
   const { isEditing: isEditMode } = useContext(CourseEditContext);
   const [markdown, setMarkdown] = useState(sectionData.content);
   const [isEditing, setIsEditing] = useState(false);
-  const [updateSection] = useUpdateTextSectionMutation();
+  const [updateSection] = useUpdateCourseTextSectionMutation();
 
   return (
     <Card>

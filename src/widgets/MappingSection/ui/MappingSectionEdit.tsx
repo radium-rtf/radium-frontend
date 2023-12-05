@@ -10,7 +10,10 @@ import {
   useForm,
 } from 'react-hook-form';
 import { updateSchema, updateSchemaType } from '../lib/updateSchema';
-import { MappingSectionResponseDto } from '@/entities/CourseSection';
+import {
+  MappingSectionResponseDto,
+  useUpdateCourseMappingSectionMutation,
+} from '@/entities/CourseSection';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MappingEditDraggable } from './MappingEditDraggable';
 import {
@@ -31,7 +34,6 @@ import {
   rectSwappingStrategy,
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
-import { useUpdateMappingSectionMutation } from '../api/mappingSectiobApi';
 
 interface MappingSectionEditProps {
   sectionData: MappingSectionResponseDto;
@@ -43,7 +45,7 @@ export const MappingSectionEdit: FC<MappingSectionEditProps> = ({
   onSuccess,
 }) => {
   // Answer
-  const [updateMappingSection] = useUpdateMappingSectionMutation();
+  const [updateMappingSection] = useUpdateCourseMappingSectionMutation();
 
   // Form init
   const {

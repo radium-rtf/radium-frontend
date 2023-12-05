@@ -8,8 +8,8 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useCreateModuleMutation } from '../api/createModuleApi';
 import { CourseEditContext } from '@/features/CourseEditContext';
+import { useCreateCourseModuleMutation } from '@/entities/CourseModule';
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   courseId: string;
@@ -22,7 +22,7 @@ export const NavigationCreateModule: FC<IProps> = ({
 }) => {
   const [isCreating, setIsCreating] = useState(false);
   const { isEditing } = useContext(CourseEditContext);
-  const [createModule] = useCreateModuleMutation();
+  const [createModule] = useCreateCourseModuleMutation();
 
   useEffect(() => {
     const escapeHandler = (e: KeyboardEvent) => {

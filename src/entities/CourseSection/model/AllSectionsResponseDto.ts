@@ -1,4 +1,4 @@
-import { TextSectionResponseDto } from './TextSectionResponseDto';
+import { CourseTextSectionResponseDto } from './TextSectionResponseDto';
 import { ChoiceSectionResponseDto } from './ChoiceSectionResponseDto';
 import { MultiChoiceSectionResponseDto } from './MultiChoiceSectionResponseDto';
 import { AnswerSectionResponseDto } from './AnswerSectionResponseDto';
@@ -8,7 +8,7 @@ import { CodeSectionResponseDto } from './CodeSectionResponseDto';
 import { MappingSectionResponseDto } from './MappingSectionResponseDto';
 
 export type AllSectionsResponseDto =
-  | TextSectionResponseDto
+  | CourseTextSectionResponseDto
   | ChoiceSectionResponseDto
   | MultiChoiceSectionResponseDto
   | AnswerSectionResponseDto

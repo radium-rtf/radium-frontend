@@ -1,6 +1,6 @@
 import { authOptions } from '@/entities/Auth';
 import { getServerSession } from 'next-auth';
-import { AccountCoursesResponseDto } from '../model/accountCoursesResponseDto';
+import { AccountCoursesResponseDto } from '../model/AccountCoursesResponseDto';
 
 export const getUserCourses = async (): Promise<AccountCoursesResponseDto> => {
   const session = await getServerSession(authOptions);
