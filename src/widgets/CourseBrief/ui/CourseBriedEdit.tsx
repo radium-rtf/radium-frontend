@@ -37,11 +37,9 @@ export const CourseBriefEdit: FC<IProps> = ({
   }) => {
     return updateBrief({ courseId, name, shortDescription })
       .unwrap()
-      .then((data) => {
+      .then(() => {
         onSave();
-        data.name === courseName
-          ? router.refresh()
-          : router.push(`/courses/${data.slug}`, { scroll: false });
+        router.refresh();
       });
   };
 

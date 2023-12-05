@@ -78,7 +78,7 @@ export default async function Page({
         >
           <CourseBanner
             name={course.name}
-            url={course.logo}
+            url={course.banner}
             courseId={course.id}
             isEditAllowed={isEditAllowed}
           />
