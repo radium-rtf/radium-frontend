@@ -54,7 +54,9 @@ export type Icon =
   | 'radio'
   | 'checkbox'
   | 'shuffle'
-  | 'matching';
+  | 'matching'
+  | 'arrow-left'
+  | 'arrow-right';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -688,6 +690,22 @@ const icons: Record<Icon, ReactNode> = {
         className='stroke-current'
       />
     </g>
+  ),
+  'arrow-left': (
+    <path
+      d='M17.5 8.5H0.5M0.5 8.5L6.5 14.5M0.5 8.5L6.5 2.5'
+      className='stroke-current'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
+  ),
+  'arrow-right': (
+    <path
+      d='M0.5 8.5H17.5M17.5 8.5L11.5 14.5M17.5 8.5L11.5 2.5'
+      className='stroke-current'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
   ),
 };
 export interface IIcon extends SVGProps<SVGSVGElement> {

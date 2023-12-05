@@ -8,6 +8,7 @@ import { AnswerSection } from '@/widgets/AnswerSection';
 import { PermutationSection } from '@/widgets/PermutationsSection';
 import { MappingSection } from '@/widgets/MappingSection';
 import { CodeSection } from '@/widgets/CodeSection';
+import { PageNavigation } from '@/widgets/PageNavigation';
 
 interface IProps {
   params: {
@@ -57,6 +58,11 @@ export default function Page({ params }: IProps) {
               return null;
           }
         })}
+        <PageNavigation
+          next={page.next}
+          previous={page.previous}
+          progressPercent={(page.score / (page.maxScore || 1)) * 100}
+        />
       </main>
     </>
   );

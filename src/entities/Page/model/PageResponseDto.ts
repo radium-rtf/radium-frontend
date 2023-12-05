@@ -8,4 +8,6 @@ export interface PageResponseDto {
   score: number;
   maxScore: number;
   sections: AllSectionsResponseDto[];
+  previous: string | null;
+  next: string | null;
 }
