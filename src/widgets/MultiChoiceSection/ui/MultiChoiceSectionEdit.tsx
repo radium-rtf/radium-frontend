@@ -1,6 +1,6 @@
 'use client';
 
-import { MultiChoiceSectionResponseDto } from '@/entities/Section';
+import { MultiChoiceSectionResponseDto } from '@/entities/CourseSection';
 import { Button, Card, Checkbox, Icon, Input } from '@/shared';
 import { FC } from 'react';
 import {

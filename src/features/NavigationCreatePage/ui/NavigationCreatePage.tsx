@@ -1,4 +1,3 @@
-import { Icon, Input, cn } from '@/shared';
 import {
   ButtonHTMLAttributes,
   FC,
@@ -6,7 +5,8 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useCreatePageMutation } from '../api/createPageApi';
+import { Icon, Input, cn } from '@/shared';
+import { useCreateCoursePageMutation } from '@/entities/CoursePage';
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   moduleId: string;
@@ -18,7 +18,7 @@ export const NavigationCreatePage: FC<IProps> = ({
   ...props
 }) => {
   const [isCreating, setIsCreating] = useState(false);
-  const [createPage] = useCreatePageMutation();
+  const [createPage] = useCreateCoursePageMutation();
 
   useEffect(() => {
     const escapeHandler = (e: KeyboardEvent) => {

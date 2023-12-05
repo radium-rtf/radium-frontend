@@ -1,4 +1,4 @@
-import { CourseResponseDto } from '../model/courseResponseDto';
+import { CourseResponseDto } from '../model/CourseResponseDto';
 import { authOptions } from '@/entities/Auth';
 import { getServerSession } from 'next-auth';
 import { IErrors } from '@/shared';

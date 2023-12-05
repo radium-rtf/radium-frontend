@@ -1,4 +1,4 @@
-import { CourseResponseDto } from '../model/courseResponseDto';
+import { CourseResponseDto } from '../model/CourseResponseDto';
 
 export const getAllCourses = async (): Promise<CourseResponseDto[]> => {
   const response = await fetch(

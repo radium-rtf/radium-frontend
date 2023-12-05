@@ -1,6 +1,6 @@
 'use client';
 
-import { ChoiceSectionResponseDto } from '@/entities/Section';
+import { ChoiceSectionResponseDto } from '@/entities/CourseSection';
 import { Button, Card, Icon, Input, Radio } from '@/shared';
 import { FC } from 'react';
 import {

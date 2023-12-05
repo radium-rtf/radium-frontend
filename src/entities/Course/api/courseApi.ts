@@ -1,5 +1,5 @@
 import { emptyApi } from '@/shared';
-import { CourseResponseDto } from '../model/courseResponseDto';
+import { CourseResponseDto } from '../model/CourseResponseDto';
 import { CourseUpdateBriefRequestDto } from '../model/CourseUpdateBriefRequestDto';
 import { CourseUpdateDescriptionRequestDto } from '../model/CourseUpdateDescriptionRequestDto';
 import { CourseUpdateBannerRequestDto } from '../model/CourseUpdateBannerRequestDto';
@@ -38,6 +38,19 @@ const courseApi = emptyApi.injectEndpoints({
     joinCourse: builder.mutation<CourseResponseDto, string>({
       query: (courseId) => ({
         url: `/course/join/${courseId}`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: (res) =>
+        res
+          ? [
+              { type: 'courses', id: res.id },
+              { type: 'courses', id: 'LIST' },
+            ]
+          : [{ type: 'courses', id: 'LIST' }],
+    }),
+    publishCourse: builder.mutation<CourseResponseDto, string>({
+      query: (courseId) => ({
+        url: `/course/publish/${courseId}`,
         method: 'PATCH',
       }),
       invalidatesTags: (res) =>
@@ -98,6 +111,7 @@ export const {
   useGetCourseQuery,
   useCreateCourseMutation,
   useJoinCourseMutation,
+  usePublishCourseMutation,
   useDeleteCourseMutation,
   useUpdateCourseBriefMutation,
   useUpdateCourseDescriptionMutation,

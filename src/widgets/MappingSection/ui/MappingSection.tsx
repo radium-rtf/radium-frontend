@@ -1,5 +1,5 @@
 'use client';
-import { MappingSectionResponseDto } from '@/entities/Section';
+import { MappingSectionResponseDto } from '@/entities/CourseSection';
 import { Button, Card, Icon, cn } from '@/shared';
 import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
 import { FC, Fragment, useContext, useState } from 'react';

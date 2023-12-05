@@ -3,7 +3,7 @@
 import { Button, Card, Icon, Input, cn } from '@/shared';
 import { FC, useContext, useState } from 'react';
 import { useAnswerShortAnswerSectionMutation } from '../api/shortAnswerSectionApi';
-import { ShortAnswerSectionResponseDto } from '@/entities/Section';
+import { ShortAnswerSectionResponseDto } from '@/entities/CourseSection';
 import { useSession } from 'next-auth/react';
 import { CourseEditContext } from '@/features/CourseEditContext';
 import { SubmitHandler, useForm } from 'react-hook-form';

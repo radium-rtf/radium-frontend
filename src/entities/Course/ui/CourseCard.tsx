@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Button, Card, Icon } from '@/shared';
-import { CourseResponseDto } from '../model/courseResponseDto';
+import { CourseResponseDto } from '../model/CourseResponseDto';
 import Image from 'next/image';
 import Link from 'next/link';
 

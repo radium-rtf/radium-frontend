@@ -1,5 +1,5 @@
 // Interfaces
-export type { CourseResponseDto } from './model/courseResponseDto';
+export type { CourseResponseDto } from './model/CourseResponseDto';
 
 // Methods
 export { getAllCourses } from './lib/getAllCourses';

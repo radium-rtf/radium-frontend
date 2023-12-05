@@ -1,6 +1,6 @@
 'use client';
 
-import { ShortAnswerSectionResponseDto } from '@/entities/Section';
+import { ShortAnswerSectionResponseDto } from '@/entities/CourseSection';
 import { Button, Card, Icon, Input } from '@/shared';
 import { FC } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';

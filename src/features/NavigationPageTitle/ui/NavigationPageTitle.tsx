@@ -1,8 +1,4 @@
 'use client';
-import { CourseResponseDto } from '@/entities/Course';
-import { Input, List, Progress, cn } from '@/shared';
-import Link from 'next/link';
-import { useParams } from 'next/navigation';
 import {
   FC,
   FormEvent,
@@ -11,8 +7,12 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useUpdatePageNameMutation } from '../api/pageEditApi';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import { CourseResponseDto } from '@/entities/Course';
 import { CourseEditContext } from '@/features/CourseEditContext';
+import { Input, List, Progress, cn } from '@/shared';
+import { useUpdateCoursePageNameMutation } from '@/entities/CoursePage';
 
 interface IProps extends LiHTMLAttributes<HTMLLIElement> {
   currentPage?: string;
@@ -29,7 +29,7 @@ export const NavigationPageTitle: FC<IProps> = ({
   const { isEditing: isEditMode } = useContext(CourseEditContext);
   const [isEditing, setIsEditing] = useState(false);
 
-  const [updateName] = useUpdatePageNameMutation();
+  const [updateName] = useUpdateCoursePageNameMutation();
 
   const formSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

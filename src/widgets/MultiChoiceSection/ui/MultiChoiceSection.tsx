@@ -5,7 +5,7 @@ import { FC, useContext, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { answerSchema, answerSchemaType } from '../lib/answerSchema';
-import { MultiChoiceSectionResponseDto } from '@/entities/Section';
+import { MultiChoiceSectionResponseDto } from '@/entities/CourseSection';
 import { useAnswerMultiChoiceSectionMutation } from '../api/multiChoiceSectionApi';
 import { useSession } from 'next-auth/react';
 import { CourseEditContext } from '@/features/CourseEditContext';

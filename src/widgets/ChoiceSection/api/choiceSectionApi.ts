@@ -1,5 +1,5 @@
-import { AnswerResponseDto } from '@/entities/Section';
-import { AnswerRequestDto } from '@/entities/Section/model/answerRequestDto';
+import { AnswerResponseDto } from '@/entities/CourseSection';
+import { AnswerRequestDto } from '@/entities/CourseSection/model/answerRequestDto';
 import { emptyApi } from '@/shared';
 import { updateChoiceSectionRequestDto } from '../model/updateChoiceSectionRequestDto';
 import { updateChoiceSectionResponseDto } from '../model/updateChoiceSectionResponseDto';

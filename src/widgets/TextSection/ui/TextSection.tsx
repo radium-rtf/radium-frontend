@@ -2,7 +2,7 @@
 import { FC, useContext, useState } from 'react';
 import { Button, Card, Icon } from '@/shared';
 import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
-import { TextSectionResponseDto } from '@/entities/Section';
+import { TextSectionResponseDto } from '@/entities/CourseSection';
 import { CourseEditContext } from '@/features/CourseEditContext';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';

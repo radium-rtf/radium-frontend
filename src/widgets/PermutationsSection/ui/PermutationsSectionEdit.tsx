@@ -1,4 +1,4 @@
-import { PermutationSectionResponseDto } from '@/entities/Section';
+import { PermutationSectionResponseDto } from '@/entities/CourseSection';
 import { FC } from 'react';
 import {
   Controller,

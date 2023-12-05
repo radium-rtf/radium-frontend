@@ -1,15 +1,15 @@
 'use client';
-import { usePageQuery } from '@/entities/Page';
+import { useEffect } from 'react';
+import { CodeSection } from '@/widgets/CodeSection';
 import { TextSection } from '@/widgets/TextSection';
 import { ChoiceSection } from '@/widgets/ChoiceSection';
+import { AnswerSection } from '@/widgets/AnswerSection';
+import { MappingSection } from '@/widgets/MappingSection';
+import { PageNavigation } from '@/widgets/PageNavigation';
+import { useGetPageQuery } from '@/entities/CoursePage';
 import { MultiChoiceSection } from '@/widgets/MultiChoiceSection';
 import { ShortAnswerSection } from '@/widgets/ShortAnswerSection';
-import { AnswerSection } from '@/widgets/AnswerSection';
 import { PermutationSection } from '@/widgets/PermutationsSection';
-import { MappingSection } from '@/widgets/MappingSection';
-import { CodeSection } from '@/widgets/CodeSection';
-import { PageNavigation } from '@/widgets/PageNavigation';
-import { useEffect } from 'react';
 
 interface IProps {
   params: {
@@ -19,7 +19,7 @@ interface IProps {
 }
 
 export default function Page({ params }: IProps) {
-  const { data: page } = usePageQuery(params.pageId);
+  const { data: page } = useGetPageQuery(params.pageId);
 
   useEffect(() => {
     const previousPages = JSON.parse(

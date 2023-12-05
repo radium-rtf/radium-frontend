@@ -27,7 +27,7 @@ import {
   useForm,
 } from 'react-hook-form';
 import { answerSchemaType } from '../lib/answerSchema';
-import { PermutationSectionResponseDto } from '@/entities/Section';
+import { PermutationSectionResponseDto } from '@/entities/CourseSection';
 import { dragEndHandler } from '../lib/dragEndHandler';
 import { CourseEditContext } from '@/features/CourseEditContext';
 import { useSession } from 'next-auth/react';

@@ -10,7 +10,7 @@ import {
   useForm,
 } from 'react-hook-form';
 import { updateSchema, updateSchemaType } from '../lib/updateSchema';
-import { MappingSectionResponseDto } from '@/entities/Section';
+import { MappingSectionResponseDto } from '@/entities/CourseSection';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MappingEditDraggable } from './MappingEditDraggable';
 import {

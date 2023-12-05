@@ -1,8 +1,8 @@
 'use client';
-import { Button, Icon } from '@/shared';
 import { FC } from 'react';
-import { coursePublishHandler } from '../lib/coursePublishHandler';
 import { useRouter } from 'next/navigation';
+import { Button, Icon } from '@/shared';
+import { usePublishCourseMutation } from '@/entities/Course/api/courseApi';
 
 interface CoursePublishToggleProps {
   isPublished: boolean;
@@ -16,13 +16,18 @@ export const CoursePublishToggle: FC<CoursePublishToggleProps> = ({
   isPublishable,
 }) => {
   const { refresh } = useRouter();
+  const [togglePublish] = usePublishCourseMutation();
+
+  const onClickHandler = () => {
+    togglePublish(courseId).unwrap().then(refresh);
+  };
 
   return (
     <Button
       disabled={!isPublishable && !isPublished}
       color='accent'
       className='w-full'
-      onClick={() => coursePublishHandler(courseId, refresh)}
+      onClick={onClickHandler}
     >
       <Icon type='share' className='shrink-0 text-secondary-foreground' />
       <span className='ml-[calc(50%-34px)] -translate-x-1/2'>

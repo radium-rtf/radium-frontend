@@ -1,5 +1,5 @@
 'use client';
-import { CodeSectionResponseDto } from '@/entities/Section';
+import { CodeSectionResponseDto } from '@/entities/CourseSection';
 import {
   Button,
   Card,
