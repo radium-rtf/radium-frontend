@@ -1,9 +1,9 @@
 'use client';
-import { Button, Card, Icon, Input, TextArea, cn } from '@/shared';
 import { FC } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { useBriefMutation } from '../api/courseBriefApi';
 import { useRouter } from 'next/navigation';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useUpdateCourseBriefMutation } from '@/entities/Course';
+import { Button, Card, Icon, Input, TextArea, cn } from '@/shared';
 
 type Inputs = {
   name: string;
@@ -28,7 +28,7 @@ export const CourseBriefEdit: FC<IProps> = ({
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  const [updateBrief] = useBriefMutation();
+  const [updateBrief] = useUpdateCourseBriefMutation();
   const router = useRouter();
 
   const submitHandler: SubmitHandler<Inputs> = async ({

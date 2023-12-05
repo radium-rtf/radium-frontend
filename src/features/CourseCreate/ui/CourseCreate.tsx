@@ -1,7 +1,7 @@
 'use client';
 import { Icon } from '@/shared';
 import { useRouter } from 'next/navigation';
-import { useCreateCourseMutation } from '../api/courseCreateApi';
+import { useCreateCourseMutation } from '@/entities/Course';
 
 export const CourseCreate = () => {
   const router = useRouter();

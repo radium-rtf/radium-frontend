@@ -1,4 +1,4 @@
-export interface CourseBriefRequestDto {
+export interface CourseUpdateBriefRequestDto {
   courseId: string;
   name: string;
   shortDescription: string;

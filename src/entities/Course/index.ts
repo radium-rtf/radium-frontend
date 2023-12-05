@@ -12,7 +12,16 @@ export { CourseAuthors } from './ui/CourseAuthors';
 export { CourseContacts } from './ui/CourseContacts';
 
 // Hooks
-export { useCourseQuery, useLazyCourseQuery } from './api/courseApi';
+export {
+  useGetCoursesQuery,
+  useGetCourseQuery,
+  useCreateCourseMutation,
+  useJoinCourseMutation,
+  useDeleteCourseMutation,
+  useUpdateCourseBriefMutation,
+  useUpdateCourseDescriptionMutation,
+  useUpdateCourseBannerMutation,
+} from './api/courseApi';
 
 // Skeletons
 export { CourseCardSkeleton } from './ui/CourseCardSkeleton';

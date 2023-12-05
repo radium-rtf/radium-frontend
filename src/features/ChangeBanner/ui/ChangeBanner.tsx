@@ -1,8 +1,9 @@
-import { FC, useRef } from 'react';
-import { Button, Icon } from '@/shared';
-import { changeBannerClickHandler } from '../lib/changeBannerClickHandler';
-import { changeBannerFileUploadHandler } from '../lib/changeBannerFileUploadHandler';
 import { useRouter } from 'next/navigation';
+import { uploadFile } from '@/shared/api/uploadFile';
+import { Button, Icon } from '@/shared';
+import { ChangeEvent, FC, useRef } from 'react';
+import { changeBannerClickHandler } from '../lib/changeBannerClickHandler';
+import { useUpdateCourseBannerMutation } from '@/entities/Course';
 
 interface ChangeBannerProps {
   courseId: string;
@@ -11,6 +12,18 @@ interface ChangeBannerProps {
 export const ChangeBanner: FC<ChangeBannerProps> = ({ courseId }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { refresh } = useRouter();
+  const [updateBanner] = useUpdateCourseBannerMutation();
+
+  const onChangeFileHandler = async (event: ChangeEvent<HTMLInputElement>) => {
+    const fd = new FormData();
+    fd.append('file', event.currentTarget.files!.item(0)!);
+    const response = await uploadFile(fd);
+    if (typeof response === 'string') return;
+    updateBanner({ courseId, banner: response.location })
+      .unwrap()
+      .then(refresh);
+  };
+
   return (
     <>
       <Button
@@ -24,7 +37,7 @@ export const ChangeBanner: FC<ChangeBannerProps> = ({ courseId }) => {
         </span>
       </Button>
       <input
-        onChange={(e) => changeBannerFileUploadHandler(e, courseId, refresh)}
+        onChange={onChangeFileHandler}
         ref={inputRef}
         name='banner'
         type='file'

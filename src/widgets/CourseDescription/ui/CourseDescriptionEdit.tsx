@@ -1,8 +1,8 @@
 import { Button, Card, Icon } from '@/shared';
 import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
 import { FC, useState } from 'react';
-import { useDescriptionMutation } from '../api/courseDescriptionApi';
 import { useRouter } from 'next/navigation';
+import { useUpdateCourseDescriptionMutation } from '@/entities/Course';
 
 interface CourseDescriptionEditProps {
   courseId: string;
@@ -17,7 +17,7 @@ export const CourseDescriptionEdit: FC<CourseDescriptionEditProps> = ({
 }) => {
   const router = useRouter();
   const [editorState, setEditorState] = useState(description);
-  const [updateDescription] = useDescriptionMutation();
+  const [updateDescription] = useUpdateCourseDescriptionMutation();
 
   const saveHandler = () => {
     updateDescription({ courseId, description: editorState })

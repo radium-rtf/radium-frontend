@@ -1,8 +1,8 @@
 'use client';
-import { Button, Icon } from '@/shared';
-import { useRouter } from 'next/navigation';
 import { FC } from 'react';
-import { useJoinCourseMutation } from '../api/courseJoinApi';
+import { useRouter } from 'next/navigation';
+import { Button, Icon } from '@/shared';
+import { useJoinCourseMutation } from '@/entities/Course';
 
 interface CourseJoinProps {
   courseId: string;

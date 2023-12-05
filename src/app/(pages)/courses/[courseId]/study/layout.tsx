@@ -5,12 +5,12 @@ import { ReactNode } from 'react';
 import { Progress } from '@/shared';
 import { Header } from '@/widgets/Header';
 import { useParams } from 'next/navigation';
-import { useCourseQuery } from '@/entities/Course';
 import { CourseEditToggle } from '@/features/CourseEditToggle';
 import { CourseEditContextWrapper } from '@/features/CourseEditContext';
 import { NavigationCreateModule } from '@/features/NavigationCreateModule';
 import { CourseModuleNavigation } from '@/widgets/CourseModuleNavigation';
 import { CreateCourseSection } from '@/features/CreateCourseSection';
+import { useGetCourseQuery } from '@/entities/Course';
 
 interface CourseStudyLayoutProps {
   children: ReactNode;
@@ -20,7 +20,7 @@ export default function CourseStudyLayout({
   children,
 }: CourseStudyLayoutProps) {
   const params: { courseId?: string; pageId?: string } = useParams();
-  const { data: course } = useCourseQuery(params.courseId!, {
+  const { data: course } = useGetCourseQuery(params.courseId!, {
     skip: !params.courseId,
   });
 
