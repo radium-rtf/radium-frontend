@@ -22,7 +22,7 @@ export const CourseBanner: FC<CourseBannerProps> = ({
   return (
     <div
       className={cn(
-        'relative mb-8 h-64 overflow-hidden rounded-lg bg-background-card md:container md:mx-auto md:mb-16'
+        'relative mb-8 h-64 overflow-hidden rounded-2xl bg-background-card md:container md:mx-auto md:mb-16'
       )}
     >
       {url !== '' ? (

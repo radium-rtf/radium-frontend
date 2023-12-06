@@ -28,7 +28,7 @@ export const AddBanner: FC<ChangeBannerProps> = ({ courseId }) => {
     <>
       <button
         type='button'
-        className='flex h-full w-full items-center justify-center gap-4 rounded-lg outline-none -outline-offset-2 outline-transparent focus-visible:outline-white'
+        className='flex h-full w-full items-center justify-center gap-4 rounded-2xl outline-none -outline-offset-2 outline-transparent focus-visible:outline-white'
         onClick={() => changeBannerClickHandler(inputRef.current!)}
       >
         <Icon type='add' />
