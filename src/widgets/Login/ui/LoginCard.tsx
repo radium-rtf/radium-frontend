@@ -50,8 +50,6 @@ export const LoginCard = () => {
     const email = formData.email;
     const password = formData.password;
 
-    console.log(email, password);
-
     setIsLoading(() => true);
     signIn('credentials', { email, password, redirect: false })
       .then((e) => {

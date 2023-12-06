@@ -24,8 +24,6 @@ export async function generateMetadata({ params }: IProps): Promise<Metadata> {
   // fetch data
   const course = await getCourse(params.courseId);
 
-  console.log(course);
-
   if (typeof course === 'string') {
     return {
       title: 'Курс не найден - Radium',

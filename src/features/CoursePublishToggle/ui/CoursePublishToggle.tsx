@@ -2,7 +2,7 @@
 import { FC } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Icon } from '@/shared';
-import { usePublishCourseMutation } from '@/entities/Course/api/courseApi';
+import { usePublishCourseMutation } from '@/entities/Course';
 
 interface CoursePublishToggleProps {
   isPublished: boolean;

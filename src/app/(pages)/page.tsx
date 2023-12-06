@@ -1,23 +1,35 @@
+'use client';
 import React from 'react';
-import { CourseCard, getUserCourses } from '@/entities/Course';
-import { Header } from '@/widgets/Header';
+import { useGetAccountCoursesQuery } from '@/entities/Course';
+import { Header, HeaderSkeleton } from '@/widgets/Header';
 import Link from 'next/link';
 import Image from 'next/image';
-import { redirect } from 'next/navigation';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/entities/Auth';
 import { CourseCreate } from '@/features/CourseCreate';
+import {
+  AssignedCourseCard,
+  AuthorShipCourseCard,
+  CourseCard,
+} from '@/widgets/CourseCard';
+import { useSession } from 'next-auth/react';
+import { UserCoursesSkeleton } from '@/widgets/UserCourses';
 
-export default async function Home() {
-  const courses = await getUserCourses();
-  const session = await getServerSession(authOptions);
-  console.log(courses);
+export default function Home() {
+  const { data: courses, isLoading } = useGetAccountCoursesQuery();
+  const { data: session } = useSession();
 
-  if (typeof courses === 'string') {
-    if (courses === 'Not authenticated') {
-      redirect('/login');
-    }
-    return;
+  if (isLoading) {
+    return (
+      <>
+        <HeaderSkeleton />
+        <main className='flex flex-col'>
+          <UserCoursesSkeleton />
+        </main>
+      </>
+    );
+  }
+
+  if (!courses) {
+    return null;
   }
 
   return (
@@ -34,32 +46,33 @@ export default async function Home() {
         {(!!courses.authorship.length ||
           session?.user.roles.isAuthor ||
           session?.user.roles.isTeacher) && (
-          <section className='container mx-auto grid grid-cols-1 gap-8 px-6 md:px-12 lg:grid-cols-2 xl:grid-cols-3'>
-            <h2 className='ml-6 font-mono text-[2rem] font-bold leading-[normal] text-primary-default lg:col-span-2 xl:col-span-3'>
+          <>
+            <h2 className='ml-6 font-mono text-[2rem] font-bold leading-[normal] text-primary-default md:ml-16 lg:col-span-2 xl:col-span-3'>
               В вашем авторстве
             </h2>
-            {courses.authorship.map((course) => {
-              return <CourseCard key={course.id} course={course} />;
-            })}
-            {(session?.user.roles.isAuthor ||
-              session?.user.roles.isTeacher) && <CourseCreate />}
-          </section>
+            <section className='container mx-auto grid grid-cols-1 gap-8 px-6 md:px-12 lg:grid-cols-2 xl:grid-cols-3'>
+              {courses.authorship.map((course) => {
+                return <AuthorShipCourseCard key={course.id} course={course} />;
+              })}
+              {session?.user.roles.isAuthor && <CourseCreate />}
+            </section>
+          </>
         )}
         {!!courses.my.length && (
           <>
-            <h2 className='ml-6 font-mono text-[2rem] font-bold leading-[normal] text-primary-default lg:col-span-2 xl:col-span-3'>
+            <h2 className='ml-6 font-mono text-[2rem] font-bold leading-[normal] text-primary-default md:ml-16 lg:col-span-2 xl:col-span-3'>
               Ваши курсы
             </h2>
             <section className='container mx-auto grid grid-cols-1 gap-8 px-6 md:px-12 lg:grid-cols-2 xl:grid-cols-3'>
               {courses.my.map((course) => {
-                return <CourseCard key={course.id} course={course} />;
+                return <AssignedCourseCard key={course.id} course={course} />;
               })}
             </section>
           </>
         )}
         {!!courses.recommendations.length && (
           <>
-            <h2 className='ml-6 font-mono text-[2rem] font-bold leading-[normal] text-primary-default lg:col-span-2 xl:col-span-3'>
+            <h2 className='ml-6 font-mono text-[2rem] font-bold leading-[normal] text-primary-default md:ml-16 lg:col-span-2 xl:col-span-3'>
               Рекомендации
             </h2>
             <section className='container mx-auto grid grid-cols-1 gap-8 px-6 md:px-12 lg:grid-cols-2 xl:grid-cols-3'>

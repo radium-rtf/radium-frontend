@@ -15,13 +15,16 @@ export { CourseContacts } from './ui/CourseContacts';
 export {
   useGetCoursesQuery,
   useGetCourseQuery,
+  useGetAccountCoursesQuery,
   useCreateCourseMutation,
   useJoinCourseMutation,
+  usePublishCourseMutation,
   useDeleteCourseMutation,
   useUpdateCourseBriefMutation,
   useUpdateCourseDescriptionMutation,
   useUpdateCourseBannerMutation,
 } from './api/courseApi';
+export { useLastCoursePage } from './lib/useLastCoursePage';
 
 // Skeletons
 export { CourseCardSkeleton } from './ui/CourseCardSkeleton';

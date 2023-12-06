@@ -24,13 +24,27 @@ export default function Page({ params }: IProps) {
   useEffect(() => {
     const previousPages = JSON.parse(
       localStorage.getItem('previousPages') || '{}'
-    ) as { [courseId: string]: string };
+    ) as {
+      [courseId: string]:
+        | {
+            pageId: string;
+            pageName: string;
+          }
+        | undefined;
+    };
 
-    localStorage.setItem(
-      'previousPages',
-      JSON.stringify({ ...previousPages, [params.courseId]: params.pageId })
-    );
-  }, [params.courseId, params.pageId]);
+    page &&
+      localStorage.setItem(
+        'previousPages',
+        JSON.stringify({
+          ...previousPages,
+          [params.courseId]: {
+            pageId: params.pageId,
+            pageName: page.name,
+          },
+        })
+      );
+  }, [params.courseId, params.pageId, page]);
 
   if (!page) return null;
 

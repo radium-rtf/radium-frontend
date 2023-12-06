@@ -43,7 +43,6 @@ export const NavigationModuleTitle: FC<IProps> = ({
   useEffect(() => {
     const escapeHandler = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        console.log('test 2 ');
         setIsEditing(false);
       }
     };

@@ -40,8 +40,6 @@ export const MarkdownEditor: FC<IProps> = ({ markdown, onChange }) => {
   const [isPlaintextMode, setIsPlaintextMode] = useState(false);
   const [text, setText] = useState(markdown);
 
-  console.log('rerender');
-
   const initialConfig: InitialConfigType = {
     editorState: () => $convertFromMarkdownString(text, TRANSFORMERS),
     onError: (e) => {

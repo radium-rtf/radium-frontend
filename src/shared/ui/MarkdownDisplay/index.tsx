@@ -9,15 +9,13 @@ interface MarkdownDisplayProps {
 }
 
 const components: Partial<Components> = {
-  code: ({ node, children, ...props }) => {
+  code: ({ children, ...props }) => {
     const text = children!.toString();
-    console.log(node?.type);
 
     const gutter = Array.from(
       { length: text.match(/\n/gi)?.length || 0 },
       (_, k) => k + 1
     ).join('\n');
-    console.log(gutter);
 
     return (
       <code data-gutter={gutter} {...props}>

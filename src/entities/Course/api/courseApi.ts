@@ -3,12 +3,19 @@ import { CourseResponseDto } from '../model/CourseResponseDto';
 import { CourseUpdateBriefRequestDto } from '../model/CourseUpdateBriefRequestDto';
 import { CourseUpdateDescriptionRequestDto } from '../model/CourseUpdateDescriptionRequestDto';
 import { CourseUpdateBannerRequestDto } from '../model/CourseUpdateBannerRequestDto';
+import { AccountCoursesResponseDto } from '../model/AccountCoursesResponseDto';
 
 const courseApi = emptyApi.injectEndpoints({
   endpoints: (builder) => ({
     getCourses: builder.query<CourseResponseDto[], void>({
       query: () => ({
         url: '/course',
+      }),
+      providesTags: [{ type: 'courses', id: 'LIST' }],
+    }),
+    getAccountCourses: builder.query<AccountCoursesResponseDto, void>({
+      query: () => ({
+        url: '/account/courses',
       }),
       providesTags: [{ type: 'courses', id: 'LIST' }],
     }),
@@ -109,6 +116,7 @@ const courseApi = emptyApi.injectEndpoints({
 export const {
   useGetCoursesQuery,
   useGetCourseQuery,
+  useGetAccountCoursesQuery,
   useCreateCourseMutation,
   useJoinCourseMutation,
   usePublishCourseMutation,

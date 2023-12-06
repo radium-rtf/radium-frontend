@@ -1,14 +1,18 @@
 'use client';
-import { FC } from 'react';
+import { ButtonHTMLAttributes, FC } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button, Icon } from '@/shared';
+import { Button, Icon, cn } from '@/shared';
 import { useJoinCourseMutation } from '@/entities/Course';
 
-interface CourseJoinProps {
+interface CourseJoinProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   courseId: string;
 }
 
-export const CourseJoin: FC<CourseJoinProps> = ({ courseId }) => {
+export const CourseJoin: FC<CourseJoinProps> = ({
+  courseId,
+  className,
+  ...props
+}) => {
   const router = useRouter();
   const [joinCourse] = useJoinCourseMutation();
 
@@ -27,8 +31,9 @@ export const CourseJoin: FC<CourseJoinProps> = ({ courseId }) => {
   return (
     <Button
       onClick={onClickHandler}
-      className='flex items-center gap-2'
+      className={cn('flex items-center gap-2', className)}
       type='button'
+      {...props}
       color='accent'
     >
       <Icon type='start' className='text-grey-800' />

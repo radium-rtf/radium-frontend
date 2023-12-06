@@ -1,10 +1,10 @@
 'use client';
-import React, { FC, useContext, useEffect, useState } from 'react';
-import { Button, Card, Icon } from '@/shared';
+import { CourseJoin } from '@/features/CourseJoin';
+import { CourseContinue } from '@/features/CourseContinue';
 import { CourseBriefEdit } from './CourseBriedEdit';
 import { CourseEditContext } from '@/features/CourseEditContext';
-import { CourseJoin } from '@/features/CourseJoin';
-import Link from 'next/link';
+import { Button, Card, Icon } from '@/shared';
+import { FC, useContext, useState } from 'react';
 
 interface IProps {
   shortDescription: string;
@@ -26,17 +26,6 @@ export const CourseBrief: FC<IProps> = ({
   const { isEditing } = useContext(CourseEditContext);
   const [isEditMode, setIsEditMode] = useState(false);
 
-  const [nextPage, setNextPage] = useState<undefined | string>(undefined);
-
-  useEffect(() => {
-    const previousPages = JSON.parse(
-      localStorage.getItem('previousPages') || '{}'
-    ) as { [courseId: string]: string | undefined };
-
-    const nextPage = previousPages[courseId];
-    if (nextPage) setNextPage(nextPage);
-  }, [courseId]);
-
   if (isEditAllowed && isEditing && isEditMode) {
     return (
       <CourseBriefEdit
@@ -57,26 +46,7 @@ export const CourseBrief: FC<IProps> = ({
         {!isEditing && !isEditMode && (
           <>
             {!isAssigned && <CourseJoin courseId={courseId} />}
-            {isAssigned && (
-              <Button
-                asChild
-                className='flex items-center gap-2'
-                type='button'
-                color='outlined'
-              >
-                <Link
-                  scroll={false}
-                  href={
-                    nextPage
-                      ? `/courses/${courseId}/study/${nextPage}`
-                      : `/courses/${courseId}/study`
-                  }
-                >
-                  <Icon type='start' />
-                  <p>Продолжить</p>
-                </Link>
-              </Button>
-            )}
+            {isAssigned && <CourseContinue courseId={courseId} />}
           </>
         )}
         {isEditAllowed && isEditing && (
