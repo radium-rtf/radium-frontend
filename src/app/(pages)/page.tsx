@@ -11,6 +11,7 @@ import { CourseCreate } from '@/features/CourseCreate';
 export default async function Home() {
   const courses = await getUserCourses();
   const session = await getServerSession(authOptions);
+  console.log(courses);
 
   if (typeof courses === 'string') {
     if (courses === 'Not authenticated') {
@@ -30,29 +31,43 @@ export default async function Home() {
         </Link>
       </Header>
       <main className='container mx-auto flex flex-col gap-6'>
-        {(!!courses.my.length ||
+        {(!!courses.authorship.length ||
           session?.user.roles.isAuthor ||
           session?.user.roles.isTeacher) && (
           <section className='container mx-auto grid grid-cols-1 gap-8 px-6 md:px-12 lg:grid-cols-2 xl:grid-cols-3'>
             <h2 className='ml-6 font-mono text-[2rem] font-bold leading-[normal] text-primary-default lg:col-span-2 xl:col-span-3'>
-              Вы изучаете
+              В вашем авторстве
             </h2>
-            {courses.my.map((course) => {
+            {courses.authorship.map((course) => {
               return <CourseCard key={course.id} course={course} />;
             })}
             {(session?.user.roles.isAuthor ||
               session?.user.roles.isTeacher) && <CourseCreate />}
           </section>
         )}
+        {!!courses.my.length && (
+          <>
+            <h2 className='ml-6 font-mono text-[2rem] font-bold leading-[normal] text-primary-default lg:col-span-2 xl:col-span-3'>
+              Ваши курсы
+            </h2>
+            <section className='container mx-auto grid grid-cols-1 gap-8 px-6 md:px-12 lg:grid-cols-2 xl:grid-cols-3'>
+              {courses.my.map((course) => {
+                return <CourseCard key={course.id} course={course} />;
+              })}
+            </section>
+          </>
+        )}
         {!!courses.recommendations.length && (
-          <section className='container mx-auto grid grid-cols-1 gap-8 px-6 md:px-12 lg:grid-cols-2 xl:grid-cols-3'>
+          <>
             <h2 className='ml-6 font-mono text-[2rem] font-bold leading-[normal] text-primary-default lg:col-span-2 xl:col-span-3'>
               Рекомендации
             </h2>
-            {courses.recommendations.map((course) => {
-              return <CourseCard key={course.id} course={course} />;
-            })}
-          </section>
+            <section className='container mx-auto grid grid-cols-1 gap-8 px-6 md:px-12 lg:grid-cols-2 xl:grid-cols-3'>
+              {courses.recommendations.map((course) => {
+                return <CourseCard key={course.id} course={course} />;
+              })}
+            </section>
+          </>
         )}
       </main>
     </>
