@@ -16,6 +16,8 @@ import { CourseAuthors, useGetCourseQuery } from '@/entities/Course';
 
 export default function Page() {
   const { data: session } = useSession();
+  console.log(session);
+
   const params = useParams() as {
     courseId: string;
   };

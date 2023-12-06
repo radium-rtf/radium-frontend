@@ -437,11 +437,9 @@ const icons: Record<Icon, ReactNode> = {
       <path
         d='M0.5 12.5V15C0.5 15.8284 1.17157 16.5 2 16.5H15C15.8284 16.5 16.5 15.8284 16.5 15V12.5M8.5 1.5V11.5M8.5 11.5L4.5 7.5M8.5 11.5L12.5 7.5'
         stroke='#E6E6E6'
-        stroke-linecap='round'
-        stroke-linejoin='round'
-        className='stroke-current'
         strokeLinecap='round'
         strokeLinejoin='round'
+        className='stroke-current'
       />
     </g>
   ),
@@ -474,22 +472,22 @@ const icons: Record<Icon, ReactNode> = {
   down: (
     <g>
       <path
-        d="M10.5 6.5L5.5 11.5M5.5 11.5L0.5 6.5M5.5 11.5L5.5 0.5"
-        stroke="#E6E6E6"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        d='M10.5 6.5L5.5 11.5M5.5 11.5L0.5 6.5M5.5 11.5L5.5 0.5'
+        stroke='#E6E6E6'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </g>
   ),
   up: (
     <g>
       <path
-        d="M0.5 5.5L5.5 0.5M5.5 0.5L10.5 5.5M5.5 0.5L5.5 11.5"
+        d='M0.5 5.5L5.5 0.5M5.5 0.5L10.5 5.5M5.5 0.5L5.5 11.5'
         width='17'
         height='17'
-        stroke="#E6E6E6"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        stroke='#E6E6E6'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </g>
   ),
