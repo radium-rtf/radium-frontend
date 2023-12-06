@@ -39,6 +39,9 @@ export type Icon =
   | 'download'
   | 'link'
   | 'external-link'
+  | 'down'
+  | 'up'
+  | 'external-link'
   | 'add'
   | 'delete'
   | 'bold'
@@ -465,6 +468,28 @@ const icons: Record<Icon, ReactNode> = {
         className='stroke-current'
         strokeLinecap='round'
         strokeLinejoin='round'
+      />
+    </g>
+  ),
+  down: (
+    <g>
+      <path
+        d="M10.5 6.5L5.5 11.5M5.5 11.5L0.5 6.5M5.5 11.5L5.5 0.5"
+        stroke="#E6E6E6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </g>
+  ),
+  up: (
+    <g>
+      <path
+        d="M0.5 5.5L5.5 0.5M5.5 0.5L10.5 5.5M5.5 0.5L5.5 11.5"
+        width='17'
+        height='17'
+        stroke="#E6E6E6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
     </g>
   ),
