@@ -6,7 +6,7 @@ import { Icon } from './Icon';
 import { cn } from '../utils/cn';
 
 interface IProps extends HTMLAttributes<HTMLDivElement> {
-  value: string | number;
+  value: { id: string; value: string };
 }
 
 // Hover effect caused while being dragged. Need to fix it.
@@ -19,7 +19,7 @@ export const PermutationItem: FC<IProps> = ({ value, className, ...props }) => {
     transition,
     isDragging,
   } = useSortable({
-    id: value,
+    id: value.id,
   });
 
   const style = {
@@ -45,7 +45,7 @@ export const PermutationItem: FC<IProps> = ({ value, className, ...props }) => {
       )}
     >
       <Icon type='handle' className='text-primary-default' />
-      <span className='font-mono text-[0.8125rem]'>{value}</span>
+      <span className='font-mono text-[0.8125rem]'>{value.value}</span>
     </div>
   );
 };

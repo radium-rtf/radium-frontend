@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Card, List } from '@/shared';
-import { CourseResponseDto } from '../model/courseResponseDto';
+import { CourseResponseDto } from '../model/CourseResponseDto';
 import Image from 'next/image';
 
 interface IProps {

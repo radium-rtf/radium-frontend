@@ -5,7 +5,7 @@ import {
   CodeSection,
   MultiChoiceSection,
   ShortAnswerSection,
-} from '@/entities/Section';
+} from '@/entities/CourseSection';
 import { PermutationSection } from '@/entities/Section/ui/PermutationSection';
 import { TextSection } from '@/entities/Section/ui/TextSection';
 import { FC } from 'react';

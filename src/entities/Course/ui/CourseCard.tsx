@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Button, Card, Icon } from '@/shared';
-import { CourseResponseDto } from '../model/courseResponseDto';
+import { CourseResponseDto } from '../model/CourseResponseDto';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -9,7 +9,7 @@ interface IProps {
 }
 
 export const CourseCard: FC<IProps> = ({ course }) => {
-  const { name, shortDescription, logo, modules, slug } = course;
+  const { name, shortDescription, logo, modules, id } = course;
   return (
     <Card>
       <header className='flex w-full items-center gap-4'>
@@ -31,7 +31,7 @@ export const CourseCard: FC<IProps> = ({ course }) => {
           <p className='text-[0.8125rem]'>{`${modules.length} тем, 5 месяцев`}</p>
         </div>
         <Button asChild color='outlined'>
-          <Link href={`/courses/${slug}`}>
+          <Link href={`/courses/${id}`}>
             <Icon className='text-grey-800 text-inherit' type='start' />
             <p>Начать</p>
           </Link>

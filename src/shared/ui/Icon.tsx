@@ -2,6 +2,7 @@ import { ReactNode, SVGProps, forwardRef } from 'react';
 import { cn } from '../utils/cn';
 
 export type Icon =
+  | 'save'
   | 'null'
   | 'attach'
   | 'start'
@@ -39,10 +40,36 @@ export type Icon =
   | 'link'
   | 'external-link'
   | 'down'
-  | 'up';
+  | 'up'
+  | 'external-link'
+  | 'add'
+  | 'delete'
+  | 'bold'
+  | 'italic'
+  | 'strikethrough'
+  | 'monospace'
+  | 'quote'
+  | 'heading'
+  | 'code'
+  | 'list'
+  | 'share'
+  | 'text'
+  | 'radio'
+  | 'checkbox'
+  | 'shuffle'
+  | 'matching'
+  | 'arrow-left'
+  | 'arrow-right';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
+  save: (
+    <path
+      d='M12.5 0.5L17.0607 5.06066C17.342 5.34196 17.5 5.7235 17.5 6.12132V16C17.5 16.8284 16.8284 17.5 16 17.5H14.5M12.5 0.5V5C12.5 5.82843 11.8284 6.5 11 6.5H6C5.17157 6.5 4.5 5.82843 4.5 5V0.5M12.5 0.5H8.5H7.5H4.5M4.5 0.5H2C1.17157 0.5 0.5 1.17157 0.5 2V16C0.5 16.8284 1.17157 17.5 2 17.5H3.5M3.5 17.5V13C3.5 12.1716 4.17157 11.5 5 11.5H13C13.8284 11.5 14.5 12.1716 14.5 13V17.5M3.5 17.5H14.5M5.5 14.5H12.5M7.5 4.5V2.5'
+      className='stroke-current'
+      strokeLinecap='round'
+    />
+  ),
   attach: (
     <path
       d='M13.5 4.5V13C13.5 15.4853 11.4853 17.5 9 17.5V17.5C6.51472 17.5 4.5 15.4853 4.5 13V3.5C4.5 1.84315 5.84315 0.5 7.5 0.5V0.5C9.15685 0.5 10.5 1.84315 10.5 3.5V13C10.5 13.8284 9.82843 14.5 9 14.5V14.5C8.17157 14.5 7.5 13.8284 7.5 13V4.5'
@@ -410,11 +437,9 @@ const icons: Record<Icon, ReactNode> = {
       <path
         d='M0.5 12.5V15C0.5 15.8284 1.17157 16.5 2 16.5H15C15.8284 16.5 16.5 15.8284 16.5 15V12.5M8.5 1.5V11.5M8.5 11.5L4.5 7.5M8.5 11.5L12.5 7.5'
         stroke='#E6E6E6'
-        stroke-linecap='round'
-        stroke-linejoin='round'
-        className='stroke-current'
         strokeLinecap='round'
         strokeLinejoin='round'
+        className='stroke-current'
       />
     </g>
   ),
@@ -447,24 +472,263 @@ const icons: Record<Icon, ReactNode> = {
   down: (
     <g>
       <path
-        d="M10.5 6.5L5.5 11.5M5.5 11.5L0.5 6.5M5.5 11.5L5.5 0.5"
-        stroke="#E6E6E6"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        d='M10.5 6.5L5.5 11.5M5.5 11.5L0.5 6.5M5.5 11.5L5.5 0.5'
+        stroke='#E6E6E6'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </g>
   ),
   up: (
     <g>
       <path
-        d="M0.5 5.5L5.5 0.5M5.5 0.5L10.5 5.5M5.5 0.5L5.5 11.5"
+        d='M0.5 5.5L5.5 0.5M5.5 0.5L10.5 5.5M5.5 0.5L5.5 11.5'
         width='17'
         height='17'
-        stroke="#E6E6E6"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        stroke='#E6E6E6'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </g>
+  ),
+  add: (
+    <g className='text-inherit'>
+      <path
+        d='M8.5 0.5L8.5 16.5'
+        className='stroke-current'
+        strokeLinecap='round'
+      />
+      <path
+        d='M0.5 8.5H16.5'
+        className='stroke-current'
+        strokeLinecap='round'
+      />
+    </g>
+  ),
+  delete: (
+    <path
+      d='M1.5 3.5H6.5M16.5 3.5H11.5M6.5 3.5V2C6.5 1.17157 7.17157 0.5 8 0.5H10C10.8284 0.5 11.5 1.17157 11.5 2V3.5M6.5 3.5H11.5M3.5 3.5V16C3.5 16.8284 4.17157 17.5 5 17.5H13C13.8284 17.5 14.5 16.8284 14.5 16V3.5M6.5 6.5V14.5M11.5 6.5V14.5'
+      className='stroke-current'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
+  ),
+  bold: (
+    <path
+      d='M4 8V2.5C4 1.67157 4.67157 1 5.5 1H9C10.933 1 12.5 2.567 12.5 4.5C12.5 6.433 10.933 8 9 8M4 8V15.5C4 16.3284 4.67157 17 5.5 17H9C11.4853 17 13.5 14.9853 13.5 12.5C13.5 10.0147 11.4853 8 9 8M4 8H9'
+      className='stroke-current'
+      strokeWidth='2'
+    />
+  ),
+  italic: (
+    <g className='text-inherit'>
+      <path
+        d='M7.5 0.5H11H14.5M3.5 17.5H7H10.5'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <path
+        d='M14 0.5V0.5C12.2423 0.5 10.7155 1.70924 10.3129 3.42025L7.68712 14.5797C7.28453 16.2908 5.75774 17.5 4 17.5V17.5'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+    </g>
+  ),
+  strikethrough: (
+    <g className='text-inherit'>
+      <path
+        fillRule='evenodd'
+        clipRule='evenodd'
+        d='M4 5.5C4 3.567 5.567 2 7.5 2H12.5C12.7761 2 13 1.77614 13 1.5C13 1.22386 12.7761 1 12.5 1H7.5C5.01472 1 3 3.01472 3 5.5C3 6.02595 3.09023 6.53083 3.25606 7H4.33682C4.12085 6.54537 4 6.0368 4 5.5ZM14.7439 12H13.6632C13.8792 12.4546 14 12.9632 14 13.5C14 15.433 12.433 17 10.5 17H5.5C5.22386 17 5 17.2239 5 17.5C5 17.7761 5.22386 18 5.5 18H10.5C12.9853 18 15 15.9853 15 13.5C15 12.974 14.9098 12.4692 14.7439 12Z'
+        className='fill-current'
+      />
+      <path
+        d='M0.5 9.5H17.5'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+    </g>
+  ),
+  monospace: (
+    <path
+      d='M3.5 17.5V0.5L7.99099 4.58272C8.56312 5.10284 9.43688 5.10284 10.009 4.58272L14.5 0.5V17.5'
+      className='stroke-current'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
+  ),
+  quote: (
+    <g className='text-inherit'>
+      <path
+        d='M4.5 12.5C6.15685 12.5 7.5 11.1569 7.5 9.5C7.5 7.84315 6.15685 6.5 4.5 6.5V4.5C2.29086 4.5 0.5 6.29086 0.5 8.5C0.5 10.7091 2.29086 12.5 4.5 12.5Z'
+        className='stroke-current'
+        strokeLinejoin='round'
+      />
+      <path
+        d='M14.5 12.5C16.1569 12.5 17.5 11.1569 17.5 9.5C17.5 7.84315 16.1569 6.5 14.5 6.5V4.5C12.2909 4.5 10.5 6.29086 10.5 8.5C10.5 10.7091 12.2909 12.5 14.5 12.5Z'
+        className='stroke-current'
+        strokeLinejoin='round'
+      />
+    </g>
+  ),
+  heading: (
+    <path
+      d='M4.5 0.5V8.5M4.5 17.5V8.5M4.5 8.5H13.5M13.5 0.5V17.5M2.5 0.5H6.5M11.5 0.5H15.5M11.5 17.5H15.5M2.5 17.5H6.5'
+      className='stroke-current'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
+  ),
+  code: (
+    <path
+      d='M4.5 5L1.56066 7.93934C0.974874 8.52513 0.974874 9.47487 1.56066 10.0607L4.5 13M13.5 5L16.4393 7.93934C17.0251 8.52513 17.0251 9.47487 16.4393 10.0607L13.5 13M11.5 2.5L6.5 15.5'
+      className='stroke-current'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
+  ),
+  list: (
+    <g className='text-inherit'>
+      <circle cx='2.5' cy='5.5' r='2' className='stroke-current' />
+      <circle cx='2.5' cy='12.5' r='2' className='stroke-current' />
+      <path
+        d='M7.5 5.5H17.5'
+        className='stroke-current'
+        strokeLinecap='round'
+      />
+      <path
+        d='M7.5 12.5H17.5'
+        className='stroke-current'
+        strokeLinecap='round'
+      />
+    </g>
+  ),
+  share: (
+    <path
+      d='M0.5 12.5V15C0.5 15.8284 1.17157 16.5 2 16.5H15C15.8284 16.5 16.5 15.8284 16.5 15V12.5M8.5 11.5V1.5M8.5 1.5L4.5 5.5M8.5 1.5L12.5 5.5'
+      className='stroke-current'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
+  ),
+  text: (
+    <path
+      d='M8.5 17.5V0.5M8.5 17.5H5.5M8.5 17.5H11.5M8.5 0.5H2.5V3.5M8.5 0.5H14.5V3.5'
+      className='stroke-current'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
+  ),
+  radio: (
+    <g className='text-inherit'>
+      <circle cx='9' cy='9' r='8.5' className='stroke-current' />
+      <circle cx='9' cy='9' r='4.5' className='stroke-current' />
+    </g>
+  ),
+  checkbox: (
+    <g className='text-inherit'>
+      <path
+        d='M13.5 6L7.5 12L4.5 9'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <rect
+        x='0.5'
+        y='0.5'
+        width='17'
+        height='17'
+        rx='1.5'
+        className='stroke-current'
+      />
+    </g>
+  ),
+  shuffle: (
+    <g className='text-inherit'>
+      <rect
+        x='8.5'
+        y='0.5'
+        width='9'
+        height='7'
+        rx='1.5'
+        className='stroke-current'
+      />
+      <rect
+        x='8.5'
+        y='10.5'
+        width='9'
+        height='7'
+        rx='1.5'
+        className='stroke-current'
+      />
+      <path
+        d='M5.5 3.5H3C1.61929 3.5 0.5 4.61929 0.5 6V12C0.5 13.3807 1.61929 14.5 3 14.5H5.5M5.5 3.5L3.5 5.5M5.5 3.5L3.5 1.5M5.5 14.5L3.5 16.5M5.5 14.5L3.5 12.5'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+    </g>
+  ),
+  matching: (
+    <g className='text-inherit'>
+      <rect
+        x='0.5'
+        y='0.5'
+        width='6'
+        height='7'
+        rx='1.5'
+        className='stroke-current'
+      />
+      <rect
+        x='0.5'
+        y='10.5'
+        width='6'
+        height='7'
+        rx='1.5'
+        className='stroke-current'
+      />
+      <path
+        d='M6.5 13.5V13.5C7.60457 13.5 8.5 12.6046 8.5 11.5V7C8.5 5.61929 9.61929 4.5 11 4.5H11.5'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <rect
+        x='11.5'
+        y='0.5'
+        width='6'
+        height='7'
+        rx='1.5'
+        className='stroke-current'
+      />
+      <rect
+        x='11.5'
+        y='10.5'
+        width='6'
+        height='7'
+        rx='1.5'
+        className='stroke-current'
+      />
+    </g>
+  ),
+  'arrow-left': (
+    <path
+      d='M17.5 8.5H0.5M0.5 8.5L6.5 14.5M0.5 8.5L6.5 2.5'
+      className='stroke-current'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
+  ),
+  'arrow-right': (
+    <path
+      d='M0.5 8.5H17.5M17.5 8.5L11.5 14.5M17.5 8.5L11.5 2.5'
+      className='stroke-current'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
   ),
 };
 export interface IIcon extends SVGProps<SVGSVGElement> {

@@ -1,38 +1,26 @@
-import React, { ChangeEventHandler, FC, ReactNode } from 'react';
+import React, { FC, InputHTMLAttributes, forwardRef } from 'react';
+import { cn } from '../utils/cn';
 
-interface IProps {
-  children?: ReactNode;
-  name: string;
-  value: string | ReadonlyArray<string> | number;
-  disabled?: boolean;
-  defaultChecked?: boolean;
-  checked?: boolean;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
-}
+interface RadioProps extends InputHTMLAttributes<HTMLInputElement> {}
 
-export const Radio: FC<IProps> = ({
-  disabled,
-  onChange,
-  children,
-  name,
-  value,
-  defaultChecked,
-  checked,
-}) => {
-  return (
-    <label className='group relative flex cursor-pointer items-center gap-4 [&:has(:disabled)]:cursor-not-allowed'>
-      <input
-        defaultChecked={defaultChecked}
-        onChange={onChange}
-        name={name}
-        value={value}
-        checked={checked}
-        type='radio'
-        className='peer absolute left-0 top-0 h-0 w-0 appearance-none'
-        disabled={disabled}
-      />
-      <div
-        className='
+export const Radio: FC<RadioProps> = forwardRef<HTMLInputElement, RadioProps>(
+  ({ className, id, children, ...props }, ref) => {
+    return (
+      <label
+        className={cn(
+          'group relative flex cursor-pointer items-center gap-4 [&:has(:disabled)]:cursor-not-allowed',
+          className
+        )}
+      >
+        <input
+          ref={ref}
+          id={id}
+          type='radio'
+          {...props}
+          className='peer absolute left-0 top-0 h-0 w-0 appearance-none'
+        />
+        <div
+          className='
         peer-disabled: flex aspect-square h-[1.125rem] items-center justify-center rounded-full
         border border-grey-100 outline-white
         transition-colors after:block after:aspect-square after:h-0 after:rounded-full
@@ -43,12 +31,15 @@ export const Radio: FC<IProps> = ({
         peer-disabled:peer-checked:after:bg-accent-primary-400
         peer-hover:peer-disabled:bg-transparent
        '
-      ></div>
-      {children && (
-        <span className='select-none text-[0.8125rem] leading-tight text-text-primary'>
-          {children}
-        </span>
-      )}
-    </label>
-  );
-};
+        ></div>
+        {children && (
+          <span className='select-none text-[0.8125rem] leading-tight text-text-primary'>
+            {children}
+          </span>
+        )}
+      </label>
+    );
+  }
+);
+
+Radio.displayName = 'Radio';

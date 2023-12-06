@@ -32,6 +32,7 @@ export const authOptions: NextAuthOptions = {
           accessToken: response.accessToken,
           refreshToken: response.refreshToken,
           expiresIn: response.expiresIn,
+          roles: { ...response.user.roles },
         };
       },
     }),
@@ -49,6 +50,7 @@ export const authOptions: NextAuthOptions = {
         token.accessToken = user.accessToken;
         token.refreshToken = user.refreshToken;
         token.expiresIn = user.expiresIn;
+        token.roles = { ...user.roles };
       }
       return token;
     },
@@ -56,6 +58,7 @@ export const authOptions: NextAuthOptions = {
       session.user.accessToken = token.accessToken || null;
       session.user.refreshToken = token.refreshToken;
       session.user.expiresIn = token.expiresIn;
+      session.user.roles = { ...token.roles };
       return session;
     },
   },

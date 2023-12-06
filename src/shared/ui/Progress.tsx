@@ -22,7 +22,7 @@ export const Progress: FC<IProps> = ({
       <div className={cn('flex w-full items-center gap-4', className)}>
         <div className='flex h-0.5 w-full items-center bg-grey-400'>
           <div
-            className={cn('h-full bg-accent-primary-200 transition', {
+            className={cn('h-full bg-accent-primary-200 transition-all', {
               'bg-accent-secondary-300': theme === 'secondary',
             })}
             style={{ width: `${percentage}%` }}
@@ -60,6 +60,7 @@ export const Progress: FC<IProps> = ({
               '[stroke-dashoffset:var(--progress)]',
               '[stroke-linecap:round]',
               'fill-none',
+              'transition-all',
             ],
             theme === 'secondary' && [
               'text-accent-secondary-300',

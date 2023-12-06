@@ -1,11 +1,10 @@
 'use client';
-import { store } from '@/shared';
-import { Provider } from 'react-redux';
+import { ReduxStoreProvider } from '@/shared';
 
 export default function CourseReportLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-    return <Provider store={store}>{children}</Provider>;
+  return <ReduxStoreProvider>{children}</ReduxStoreProvider>;
 }

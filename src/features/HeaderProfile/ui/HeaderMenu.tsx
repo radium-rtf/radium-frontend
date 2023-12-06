@@ -13,7 +13,8 @@ export const HeaderMenu: FC<IProps> = ({ photo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className='relative'>
+    // Extra space in this block
+    <div className='relative aspect-square h-12'>
       <button
         className='rounded-full'
         onClick={() => setIsMenuOpen((prev) => !prev)}

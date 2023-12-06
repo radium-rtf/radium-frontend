@@ -1,9 +1,9 @@
 import { getSession } from 'next-auth/react';
-import { updatePasswordRequestDto } from '../model/updatePasswordRequestDto';
+import { UpdatePasswordRequestDto } from '../model/UpdatePasswordRequestDto';
 import { IErrors } from '@/shared';
 
 export const updatePassword = async (
-  data: updatePasswordRequestDto
+  data: UpdatePasswordRequestDto
 ): Promise<'OK' | IErrors> => {
   const session = await getSession();
 

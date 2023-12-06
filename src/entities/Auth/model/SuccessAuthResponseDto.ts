@@ -6,7 +6,10 @@ export interface SuccessAuthResponseDto {
     avatar: string;
     email: string;
     id: string;
-    isTeacher: boolean;
+    roles: {
+      isAuthor: boolean;
+      isTeacher: boolean;
+    };
     name: string;
   };
 }

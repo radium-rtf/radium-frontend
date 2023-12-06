@@ -3,5 +3,6 @@ export { updateUser } from './libs/updateUser';
 export { updatePassword } from './libs/updatePassword';
 
 // DTOS
-export type { updateUserRequestDto } from './model/updateUserRequestDto';
-export type { updatePasswordRequestDto } from './model/updatePasswordRequestDto';
+export type { UpdateUserRequestDto as updateUserRequestDto } from './model/UpdateUserRequestDto';
+export type { UpdatePasswordRequestDto as updatePasswordRequestDto } from './model/UpdatePasswordRequestDto';
+export type { UserResponseDto } from './model/UserResponseDto';
