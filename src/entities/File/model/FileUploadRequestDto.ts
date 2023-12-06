@@ -1,0 +1,1 @@
+export type FileUploadRequestDto = FormData;

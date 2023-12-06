@@ -4,6 +4,7 @@ import { CourseUpdateBriefRequestDto } from '../model/CourseUpdateBriefRequestDt
 import { CourseUpdateDescriptionRequestDto } from '../model/CourseUpdateDescriptionRequestDto';
 import { CourseUpdateBannerRequestDto } from '../model/CourseUpdateBannerRequestDto';
 import { AccountCoursesResponseDto } from '../model/AccountCoursesResponseDto';
+import { CourseUpdateLogoRequestDto } from '../model/CourseUpdateLogoRequestDto';
 
 const courseApi = emptyApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -24,9 +25,7 @@ const courseApi = emptyApi.injectEndpoints({
         url: `/course/${slug}`,
       }),
       providesTags: (result) =>
-        result
-          ? [{ type: 'courses' as const, id: result.slug }, 'courses']
-          : ['courses'],
+        result ? [{ type: 'courses' as const, id: result.id }] : [],
     }),
     createCourse: builder.mutation<CourseResponseDto, void>({
       query: () => ({
@@ -109,8 +108,33 @@ const courseApi = emptyApi.injectEndpoints({
         method: 'PUT',
         body: body,
       }),
+      invalidatesTags: (res) =>
+        res
+          ? [
+              { type: 'courses', id: res.id },
+              { type: 'courses', id: 'LIST' },
+            ]
+          : [{ type: 'courses', id: 'LIST' }],
+    }),
+    updateCourseLogo: builder.mutation<
+      CourseResponseDto,
+      CourseUpdateLogoRequestDto
+    >({
+      query: ({ courseId, ...body }) => ({
+        url: `/course/${courseId}`,
+        method: 'PUT',
+        body: body,
+      }),
+      invalidatesTags: (res) =>
+        res
+          ? [
+              { type: 'courses', id: res.id },
+              { type: 'courses', id: 'LIST' },
+            ]
+          : [{ type: 'courses', id: 'LIST' }],
     }),
   }),
+  overrideExisting: true,
 });
 
 export const {
@@ -124,4 +148,5 @@ export const {
   useUpdateCourseBriefMutation,
   useUpdateCourseDescriptionMutation,
   useUpdateCourseBannerMutation,
+  useUpdateCourseLogoMutation,
 } = courseApi;

@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <>
       <Header>
-        <Link href='/' className='flex items-center gap-6'>
+        <Link href='/' className='flex items-center gap-6' scroll={false}>
           <Image src='/logo.svg' alt='Radium' width={48} height={48} />
           <h1 className='font-mono text-4xl font-bold text-accent-primary-200'>
             Радиум

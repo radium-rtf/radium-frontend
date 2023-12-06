@@ -1,69 +1,40 @@
-import { Header } from '@/widgets/Header';
+'use client';
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
-import { CourseAuthors, getCourse } from '@/entities/Course';
-import { redirect } from 'next/navigation';
-import { Metadata } from 'next';
-import { CourseEditContextWrapper } from '@/features/CourseEditContext';
-import { CourseBanner } from '@/widgets/CourseBanner';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/entities/Auth';
+import { Header } from '@/widgets/Header';
+import { useSession } from 'next-auth/react';
 import { CourseBrief } from '@/widgets/CourseBrief';
-import { CourseDescription } from '@/widgets/CourseDescription';
-import { CourseLandingEditToggle } from '@/widgets/CourseLandingEditToggle';
+import { CourseBanner } from '@/widgets/CourseBanner';
 import { CourseSettings } from '@/widgets/CourseSettings';
 import { CourseContacts } from '@/widgets/CourseContacts';
+import { CourseDescription } from '@/widgets/CourseDescription';
+import { CourseLandingEditToggle } from '@/widgets/CourseLandingEditToggle';
+import { CourseEditContextWrapper } from '@/features/CourseEditContext';
+import { useParams, useSearchParams } from 'next/navigation';
+import { CourseAuthors, useGetCourseQuery } from '@/entities/Course';
 
-interface IProps {
-  params: { courseId: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-}
-
-export async function generateMetadata({ params }: IProps): Promise<Metadata> {
-  // fetch data
-  const course = await getCourse(params.courseId);
-
-  if (typeof course === 'string') {
-    return {
-      title: 'Курс не найден - Radium',
-    };
-  }
-
-  return {
-    title: `${course.name} - Radium`,
-  };
-}
-
-export default async function Page({
-  params,
-  searchParams,
-}: {
-  params: {
+export default function Page() {
+  const { data: session } = useSession();
+  const params = useParams() as {
     courseId: string;
   };
-  searchParams: {
+
+  const { data: course } = useGetCourseQuery(params.courseId);
+
+  const searchParams = useSearchParams() as {
     initialEdit?: string;
   };
-}) {
-  const course = await getCourse(params.courseId);
-
-  const session = await getServerSession(authOptions);
 
   const isEditAllowed =
-    session!.user.roles.isAuthor || session!.user.roles.isTeacher;
+    session?.user.roles.isAuthor || session?.user.roles.isTeacher || false;
 
-  if (typeof course === 'string') {
-    if (course === 'Not authenticated') {
-      redirect('/login');
-    }
-    return;
-  }
+  if (!course) return null;
 
   return (
     <>
       <Header>
-        <Link href='/' className='flex items-center gap-6'>
+        <Link href='/' className='flex items-center gap-6' scroll={false}>
           <Image src='/logo.svg' alt='Radium' width={48} height={48} />
           <h1 className='font-mono text-4xl font-bold text-accent-primary-200'>
             Радиум
@@ -87,6 +58,7 @@ export default async function Page({
               </h1>
               <main className='flex flex-col gap-8 lg:col-span-2 2xl:col-span-3'>
                 <CourseBrief
+                  courseLogo={course.logo}
                   shortDescription={course.shortDescription}
                   modulesCount={course.modules.length}
                   courseName={course.name}
