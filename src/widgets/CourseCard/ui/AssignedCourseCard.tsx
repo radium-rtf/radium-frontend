@@ -24,11 +24,11 @@ export const AssignedCourseCard: FC<IProps> = ({ course }) => {
       />
       <header className='mb-auto flex w-full gap-4'>
         <Image
-          className='block aspect-square h-[4.5rem] w-[4.5rem] flex-shrink-0 rounded object-cover'
+          className='h-18 w-18 aspect-square flex-shrink-0 rounded object-cover'
           src={logo || '/defaultProfile.svg'}
           alt={name}
           height={72}
-          width={10}
+          width={72}
         />
         <div className='flex flex-grow flex-col'>
           <h1 className='my-auto font-mono text-xl font-bold leading-[normal] text-primary-default'>
