@@ -20,13 +20,17 @@ export const CourseCard: FC<IProps> = ({ course }) => {
         scroll={false}
       />
       <header className='flex w-full items-center gap-4'>
-        <Image
-          className='h-18 w-18 aspect-square flex-shrink-0 rounded object-cover'
-          src={logo || '/defaultProfile.svg'}
-          alt={name}
-          height={72}
-          width={72}
-        />
+        {logo ? (
+          <Image
+            className='h-18 w-18 aspect-square flex-shrink-0 rounded-lg object-cover'
+            src={logo}
+            alt={name}
+            height={72}
+            width={72}
+          />
+        ) : (
+          <div className='aspect-square h-[4.5rem] rounded-lg bg-background-overlay' />
+        )}
         <h1 className='font-mono text-xl font-bold leading-[normal] text-primary-default'>
           {name}
         </h1>
