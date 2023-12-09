@@ -238,7 +238,7 @@ export const CodeEditor: FC<CodeEditorProps> = ({ onChange, lang }) => {
         autoIndent: 'full',
         lineHeight: 20,
         fontSize: 13,
-        fontFamily: 'var(--font-nt-somic)',
+        fontFamily: 'var(--font-jetbrains-mono)',
         folding: false,
         minimap: {
           enabled: false,

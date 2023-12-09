@@ -57,7 +57,7 @@ export const MarkdownEditor: FC<IProps> = ({ markdown, onChange }) => {
         h1: 'text-4xl',
       },
       quote: 'border-white/10 border rounded-lg p-4',
-      code: 'block border border-[#383A3B] rounded-lg py-4 after:pointer-events-none pl-16 pr-4 relative before:block before:content-[attr(data-gutter)] before:absolute before:left-0 before:top-0 before:p-4 before:text-right before:min-w-[3rem] after:block after:absolute after:-right-[1px] after:-top-[1px] after:-bottom-[1px] after:left-12 after:bg-black/5 after:content-[""] after:border after:rounded-lg after:border-[#383A3B]',
+      code: 'block border border-[#383A3B] rounded-lg font-code py-4 after:pointer-events-none pl-16 pr-4 relative before:block before:content-[attr(data-gutter)] before:absolute before:left-0 before:top-0 before:p-4 before:text-right before:min-w-[3rem] after:block after:absolute after:-right-[1px] after:-top-[1px] after:-bottom-[1px] after:left-12 after:bg-black/5 after:content-[""] after:border after:rounded-lg after:border-[#383A3B]',
       codeHighlight: {
         atrule: 'PlaygroundEditorTheme__tokenAttr',
         attr: 'text-lime-400',
@@ -168,7 +168,7 @@ export const MarkdownEditor: FC<IProps> = ({ markdown, onChange }) => {
           <ContentEditable
             className={cn([
               'p-4',
-              'font-mono',
+              'font-sans',
               'text-[0.8125rem]',
               'leading-normal',
               'rounded-lg',

@@ -10,6 +10,7 @@
 .markdown-display pre > code {
   display: block;
   border: 1px solid #383a3b;
+  font-family: var(--font-jetbrains-mono);
   border-radius: 0.5rem;
   position: relative;
   padding-top: 1rem;
@@ -38,6 +39,7 @@
   min-width: 3rem;
   padding: 1rem;
   text-align: right;
+  font-family: var(--font-jetbrains-mono);
   content: attr(data-gutter);
 }
 

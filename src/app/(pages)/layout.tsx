@@ -2,7 +2,7 @@ import '../globals.css';
 import type { Metadata } from 'next';
 import { AuthSessionProvider, ReduxStoreProvider, cn } from '@/shared';
 import localFont from 'next/font/local';
-import { Inter } from 'next/font/google';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 
 const ntSomic = localFont({
   src: [
@@ -23,6 +23,11 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['cyrillic', 'latin'],
+  variable: '--font-jetbrains-mono',
+});
+
 export const metadata: Metadata = {
   title: 'Radium',
   description: 'Radium',
@@ -39,7 +44,8 @@ export default function RootLayout({
         className={cn(
           'flex flex-grow flex-col bg-background-default font-sans text-foreground-default',
           inter.variable,
-          ntSomic.variable
+          ntSomic.variable,
+          jetbrainsMono.variable
         )}
       >
         <AuthSessionProvider>
