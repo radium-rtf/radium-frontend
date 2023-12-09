@@ -36,10 +36,12 @@ export const AuthorShipCourseCard: FC<IProps> = ({ course }) => {
           width={72}
         />
         <h1 className='font-mono text-xl font-bold leading-[normal] text-primary-default'>
-          {name}
+          {name || '<без названия>'}
         </h1>
       </header>
-      <p className='flex-grow text-[0.8125rem]'>{shortDescription}</p>
+      <p className='flex-grow text-[0.8125rem]'>
+        {shortDescription || '<без описания>'}
+      </p>
       <footer className='flex items-center gap-2'>
         <div className='flex flex-grow items-center gap-2'>
           <Icon
