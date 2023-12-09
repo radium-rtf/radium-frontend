@@ -7,7 +7,6 @@ export { getUserCourses } from './lib/getUserCourses';
 export { getCourse } from './lib/getCourse';
 
 // UI
-export { CourseCard } from './ui/CourseCard';
 export { CourseAuthors } from './ui/CourseAuthors';
 export { CourseContacts } from './ui/CourseContacts';
 

@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { CodeSection } from '@/widgets/CodeSection';
 import { TextSection } from '@/widgets/TextSection';
 import { ChoiceSection } from '@/widgets/ChoiceSection';
@@ -10,6 +10,7 @@ import { useGetPageQuery } from '@/entities/CoursePage';
 import { MultiChoiceSection } from '@/widgets/MultiChoiceSection';
 import { ShortAnswerSection } from '@/widgets/ShortAnswerSection';
 import { PermutationSection } from '@/widgets/PermutationsSection';
+import { CourseEditContext } from '@/features/CourseEditContext';
 
 interface IProps {
   params: {
@@ -20,6 +21,7 @@ interface IProps {
 
 export default function Page({ params }: IProps) {
   const { data: page } = useGetPageQuery(params.pageId);
+  const { isEditing } = useContext(CourseEditContext);
 
   useEffect(() => {
     const previousPages = JSON.parse(
@@ -84,11 +86,13 @@ export default function Page({ params }: IProps) {
               return null;
           }
         })}
-        <PageNavigation
-          next={page.next}
-          previous={page.previous}
-          progressPercent={(page.score / (page.maxScore || 1)) * 100}
-        />
+        {!isEditing && (
+          <PageNavigation
+            next={page.next}
+            previous={page.previous}
+            progressPercent={(page.score / (page.maxScore || 1)) * 100}
+          />
+        )}
       </main>
     </>
   );
