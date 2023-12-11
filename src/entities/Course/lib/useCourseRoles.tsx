@@ -19,8 +19,6 @@ export const useCourseRoles = (
       course.coauthors.map((author) => author.email)
     );
 
-    console.log(authorsSet, coauthorsSet);
-
     authorsSet.has(session.data.user.email!) && setIsAuthor(true);
     coauthorsSet.has(session.data.user.email!) && setIsCoauthor(true);
   }, [course, session.data?.user]);
