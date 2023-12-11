@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Card, Icon, TextArea, cn } from '@/shared';
+import { Button, Card, cn, Icon, TextArea } from '@/shared';
 import { FC, useContext, useState } from 'react';
 import {
   AnswerSectionResponseDto,
@@ -13,6 +13,8 @@ import { answerSchemaType } from '../lib/answerSchema';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { AnswerSectionEdit } from './AnswerSectionEdit';
 import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { round } from '@floating-ui/utils';
+import { Comment } from '@/widgets/Comment';
 
 interface AnswerSectionProps {
   sectionData: AnswerSectionResponseDto;
@@ -52,6 +54,9 @@ export const AnswerSection: FC<AnswerSectionProps> = ({ sectionData }) => {
     false;
   const { isEditing: isEditMode } = useContext(CourseEditContext);
   const [isEditing, setIsEditing] = useState(false);
+  const reviewScore = sectionData.review
+    ? round(sectionData.review.score * sectionData.maxScore)
+    : null;
 
   if (isEditAllowed && isEditMode && isEditing) {
     return (
@@ -126,7 +131,11 @@ export const AnswerSection: FC<AnswerSectionProps> = ({ sectionData }) => {
                     `${sectionData.maxScore} / ${sectionData.maxScore}`}
                   {verdict === 'WA' && `${0} / ${sectionData.maxScore}`}
                   {verdict === '' && `${sectionData.maxScore}`}
-                  <span> баллов</span>
+                  {reviewScore && (
+                    <span>
+                      {reviewScore} {reviewScore === 1 ? 'балл' : 'баллов'}
+                    </span>
+                  )}
                 </span>
               )}
               <Button type='reset'>Сбросить</Button>
@@ -136,6 +145,14 @@ export const AnswerSection: FC<AnswerSectionProps> = ({ sectionData }) => {
             </>
           )}
         </footer>
+        {sectionData.review && (
+          <Comment
+            avatar={sectionData.review.reviewer.avatar}
+            date={''}
+            comment={sectionData.review.comment}
+            name={sectionData.review.reviewer.name}
+          />
+        )}
       </form>
     </Card>
   );

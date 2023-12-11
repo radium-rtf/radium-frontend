@@ -6,13 +6,13 @@ import {
 import {
   Button,
   Card,
+  cn,
   CodeEditor,
   FileType,
   Icon,
   InputFile,
   Tab,
   Tabs,
-  cn,
 } from '@/shared';
 import { FC, useContext, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -30,6 +30,7 @@ import {
   SelectValue,
 } from '@/shared/ui/Select';
 import { LanguageDisplay } from '../lib/languageDisplay';
+import { Comment } from '@/widgets/Comment';
 
 interface CodeSectionProps {
   sectionData: CodeSectionResponseDto;
@@ -221,7 +222,10 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
                       `${sectionData.maxScore} / ${sectionData.maxScore}`}
                     {verdict === 'WA' && `${0} / ${sectionData.maxScore}`}
                     {verdict === '' && `${sectionData.maxScore}`}
-                    <span> баллов</span>
+                    <span>
+                      {sectionData.review?.score}{' '}
+                      {sectionData.review?.score === 1 ? 'балл' : 'баллов'}
+                    </span>
                   </span>
                 )}
               <Button type='reset'>Сбросить</Button>
@@ -231,6 +235,14 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
             </>
           )}
         </footer>
+        {sectionData.review && (
+          <Comment
+            avatar={sectionData.review.reviewer.avatar}
+            date={''}
+            comment={sectionData.review.comment}
+            name={sectionData.review.reviewer.name}
+          />
+        )}
         <DevTool control={control} />
       </form>
     </Card>
