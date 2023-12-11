@@ -10,7 +10,7 @@ import { CourseEditContextWrapper } from '@/features/CourseEditContext';
 import { NavigationCreateModule } from '@/features/NavigationCreateModule';
 import { CourseModuleNavigation } from '@/widgets/CourseModuleNavigation';
 import { CreateCourseSection } from '@/features/CreateCourseSection';
-import { useGetCourseQuery } from '@/entities/Course';
+import { useCourseRoles, useGetCourseQuery } from '@/entities/Course';
 
 interface CourseStudyLayoutProps {
   children: ReactNode;
@@ -23,6 +23,9 @@ export default function CourseStudyLayout({
   const { data: course } = useGetCourseQuery(params.courseId!, {
     skip: !params.courseId,
   });
+
+  const { isAuthor, isCoauthor } = useCourseRoles(course);
+  const isEditAllowed = isAuthor || isCoauthor;
 
   if (!course) return null;
 
@@ -46,7 +49,7 @@ export default function CourseStudyLayout({
       <div className='flex flex-grow items-stretch gap-8 px-12'>
         <CourseEditContextWrapper>
           <nav className='sticky top-[8.625rem] -ml-6 flex h-[calc(100vh-8.65rem)] w-[calc(16.25rem)] flex-grow-0 flex-col'>
-            <CourseEditToggle />
+            {isEditAllowed && <CourseEditToggle />}
             <Progress
               className='px-6 py-2.5'
               theme='primary'

@@ -3,7 +3,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
 import { Header } from '@/widgets/Header';
-import { useSession } from 'next-auth/react';
 import { CourseBrief } from '@/widgets/CourseBrief';
 import { CourseBanner } from '@/widgets/CourseBanner';
 import { CourseSettings } from '@/widgets/CourseSettings';
@@ -12,12 +11,13 @@ import { CourseDescription } from '@/widgets/CourseDescription';
 import { CourseLandingEditToggle } from '@/widgets/CourseLandingEditToggle';
 import { CourseEditContextWrapper } from '@/features/CourseEditContext';
 import { useParams, useSearchParams } from 'next/navigation';
-import { CourseAuthors, useGetCourseQuery } from '@/entities/Course';
+import {
+  CourseAuthors,
+  useCourseRoles,
+  useGetCourseQuery,
+} from '@/entities/Course';
 
 export default function Page() {
-  const { data: session } = useSession();
-  console.log(session);
-
   const params = useParams() as {
     courseId: string;
   };
@@ -28,8 +28,8 @@ export default function Page() {
     initialEdit?: string;
   };
 
-  const isEditAllowed =
-    session?.user.roles.isAuthor || session?.user.roles.isTeacher || false;
+  const { isAuthor, isCoauthor } = useCourseRoles(course);
+  const isEditAllowed = isAuthor || isCoauthor;
 
   if (!course) return null;
 
@@ -75,7 +75,7 @@ export default function Page() {
                 />
               </main>
               <aside className='col-span-1 flex flex-col gap-8'>
-                <CourseLandingEditToggle />
+                {isEditAllowed && <CourseLandingEditToggle />}
                 {isEditAllowed && (
                   <CourseSettings
                     hasName={course.name !== ''}
