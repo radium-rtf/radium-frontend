@@ -25,6 +25,7 @@ export {
   useUpdateCourseLogoMutation,
 } from './api/courseApi';
 export { useLastCoursePage } from './lib/useLastCoursePage';
+export { useCourseRoles } from './lib/useCourseRoles';
 
 // Skeletons
 export { CourseCardSkeleton } from './ui/CourseCardSkeleton';
