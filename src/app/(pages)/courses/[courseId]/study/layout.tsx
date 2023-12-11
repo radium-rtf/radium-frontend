@@ -103,7 +103,7 @@ export default function CourseStudyLayout({
             </ul>
           </nav>
           <div className='flex flex-grow justify-center'>{children}</div>
-          <CreateCourseSection />
+          {params.pageId && <CreateCourseSection />}
         </CourseEditContextWrapper>
       </div>
     </>
