@@ -45,40 +45,38 @@ export const CourseSettings: FC<CourseSettingsProps> = ({
           hasBanner &&
           'Готов к публикации'}
       </h1>
-      {isEditing && (
-        <div>
-          <Checkbox
-            labelClassName='pointer-events-none py-2'
-            defaultChecked={hasName}
-          >
-            Придумать название курса
-          </Checkbox>
-          <Checkbox
-            labelClassName='pointer-events-none py-2'
-            defaultChecked={hasShortDescription}
-          >
-            Придумать описание курса
-          </Checkbox>
-          <Checkbox
-            labelClassName='pointer-events-none py-2'
-            defaultChecked={hasLogo}
-          >
-            Загрузить лого курса
-          </Checkbox>
-          <Checkbox
-            labelClassName='pointer-events-none py-2'
-            defaultChecked={hasBanner}
-          >
-            Загрузить обложку курса
-          </Checkbox>
-          <Checkbox
-            labelClassName='pointer-events-none py-2'
-            defaultChecked={hasDescription}
-          >
-            Заполнить секцию О курсе
-          </Checkbox>
-        </div>
-      )}
+      <div>
+        <Checkbox
+          labelClassName='pointer-events-none py-2'
+          defaultChecked={hasName}
+        >
+          Придумать название курса
+        </Checkbox>
+        <Checkbox
+          labelClassName='pointer-events-none py-2'
+          defaultChecked={hasShortDescription}
+        >
+          Придумать описание курса
+        </Checkbox>
+        <Checkbox
+          labelClassName='pointer-events-none py-2'
+          defaultChecked={hasLogo}
+        >
+          Загрузить лого курса
+        </Checkbox>
+        <Checkbox
+          labelClassName='pointer-events-none py-2'
+          defaultChecked={hasBanner}
+        >
+          Загрузить обложку курса
+        </Checkbox>
+        <Checkbox
+          labelClassName='pointer-events-none py-2'
+          defaultChecked={hasDescription}
+        >
+          Заполнить секцию О курсе
+        </Checkbox>
+      </div>
       <CoursePublishToggle
         isPublishable={
           hasName &&
