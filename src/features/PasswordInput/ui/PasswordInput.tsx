@@ -1,5 +1,5 @@
 import { Icon, Input } from '@/shared';
-import { InputHTMLAttributes, forwardRef, useState } from 'react';
+import { forwardRef, InputHTMLAttributes, useState } from 'react';
 
 interface IProps extends InputHTMLAttributes<HTMLInputElement> {
   iconType?: Icon;

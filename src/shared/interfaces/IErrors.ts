@@ -1,1 +1,5 @@
-export type IErrors = 'Not authorized' | 'Not authenticated' | 'Not found' | 'Fetch error';
+export type IErrors =
+  | 'Not authorized'
+  | 'Not authenticated'
+  | 'Not found'
+  | 'Fetch error';

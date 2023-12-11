@@ -1,12 +1,12 @@
 'use client';
 
-import { Icon, cn } from '@/shared';
+import { cn, Icon } from '@/shared';
 import Image from 'next/image';
 import {
   ChangeEventHandler,
+  forwardRef,
   InputHTMLAttributes,
   MouseEventHandler,
-  forwardRef,
   useImperativeHandle,
   useRef,
   useState,

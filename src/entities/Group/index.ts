@@ -1,5 +1,5 @@
-export type { CourseReportDto } from "./model/courseReportDto";
+export type { CourseReportDto } from './model/courseReportDto';
 
-export { GroupReportTable } from "./ui/groupReportTable";
+export { GroupReportTable } from './ui/groupReportTable';
 
-export { useCourseReportQuery, useLazyCourseReportQuery } from "./api/groupApi";
+export { useCourseReportQuery, useLazyCourseReportQuery } from './api/groupApi';
