@@ -1,4 +1,11 @@
-import React, { FC, InputHTMLAttributes, forwardRef } from 'react';
+'use client';
+import React, {
+  FC,
+  InputHTMLAttributes,
+  forwardRef,
+  useLayoutEffect,
+  useState,
+} from 'react';
 import { cn } from '../utils/cn';
 
 interface IProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -6,7 +13,16 @@ interface IProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const Checkbox: FC<IProps> = forwardRef<HTMLInputElement, IProps>(
-  ({ className, labelClassName, children, ...props }, ref) => {
+  (
+    { className, labelClassName, onChange, defaultChecked, children, ...props },
+    ref
+  ) => {
+    const [isChecked, setIsChecked] = useState(false);
+
+    useLayoutEffect(() => {
+      setIsChecked(defaultChecked ?? false);
+    }, [defaultChecked]);
+
     return (
       <label
         className={cn(
@@ -16,6 +32,11 @@ export const Checkbox: FC<IProps> = forwardRef<HTMLInputElement, IProps>(
       >
         <input
           ref={ref}
+          checked={isChecked}
+          onChange={(e) => {
+            onChange?.(e);
+            setIsChecked(e.target.checked);
+          }}
           {...props}
           type='checkbox'
           className={cn(
