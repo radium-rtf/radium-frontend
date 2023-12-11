@@ -1,4 +1,4 @@
-import { ReactNode, SVGProps, forwardRef } from 'react';
+import { forwardRef, ReactNode, SVGProps } from 'react';
 import { cn } from '../utils/cn';
 
 export type Icon =
@@ -59,7 +59,10 @@ export type Icon =
   | 'shuffle'
   | 'matching'
   | 'arrow-left'
-  | 'arrow-right';
+  | 'arrow-right'
+  | 'up'
+  | 'task'
+  | 'comment';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -473,7 +476,7 @@ const icons: Record<Icon, ReactNode> = {
     <g>
       <path
         d='M10.5 6.5L5.5 11.5M5.5 11.5L0.5 6.5M5.5 11.5L5.5 0.5'
-        stroke='#E6E6E6'
+        className='stroke-current'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
@@ -485,7 +488,7 @@ const icons: Record<Icon, ReactNode> = {
         d='M0.5 5.5L5.5 0.5M5.5 0.5L10.5 5.5M5.5 0.5L5.5 11.5'
         width='17'
         height='17'
-        stroke='#E6E6E6'
+        className='stroke-current'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
@@ -730,7 +733,35 @@ const icons: Record<Icon, ReactNode> = {
       strokeLinejoin='round'
     />
   ),
+  task: (
+    <g clipPath='url(#clip0_1808_8225)'>
+      <path
+        d='M4.5 4.5H2C1.17157 4.5 0.5 5.17157 0.5 6V16C0.5 16.8284 1.17157 17.5 2 17.5H12C12.8284 17.5 13.5 16.8284 13.5 16V13.5M8.5 13.5L16.9393 5.06066C17.5251 4.47487 17.5251 3.52513 16.9393 2.93934L15.0607 1.06066C14.4749 0.474874 13.5251 0.474874 12.9393 1.06066L4.5 9.5V13.5H8.5Z'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+    </g>
+  ),
+  comment: (
+    <>
+      <g clipPath='url(#clip0_1886_6705)'>
+        <path
+          d='M16 0.5H2C1.17157 0.5 0.5 1.17157 0.5 2V11C0.5 11.8284 1.17157 12.5 2 12.5H6.87868C7.2765 12.5 7.65803 12.658 7.93934 12.9393L12.5 17.5V14C12.5 13.1716 13.1716 12.5 14 12.5H16C16.8284 12.5 17.5 11.8284 17.5 11V2C17.5 1.17157 16.8284 0.5 16 0.5Z'
+          className='stroke-current'
+          strokeLinecap='round'
+          strokeLinejoin='round'
+        />
+      </g>
+      <defs>
+        <clipPath id='clip0_1886_6705'>
+          <rect width='18' height='18' />
+        </clipPath>
+      </defs>
+    </>
+  ),
 };
+
 export interface IIcon extends SVGProps<SVGSVGElement> {
   type: Icon;
 }

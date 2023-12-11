@@ -13,10 +13,12 @@ interface IFormState {
   password: string;
   'password-check': string;
 }
+
 interface IFormStateAction {
   type: 'name' | 'email' | 'password' | 'password-check';
   value: string;
 }
+
 const initialFormState: IFormState = {
   name: '',
   email: '',
@@ -59,10 +61,12 @@ interface IFormErrors {
   password: string | null;
   'password-check': string | null;
 }
+
 interface IFormErrorsAction {
   type: 'name' | 'email' | 'password' | 'password-check';
   value: string | null;
 }
+
 const initialFormErrors: IFormErrors = {
   name: null,
   email: null,
