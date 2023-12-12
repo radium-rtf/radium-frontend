@@ -43,7 +43,7 @@ export const AuthorShipCourseCard: FC<IProps> = ({ course }) => {
           {name || '<без названия>'}
         </h1>
       </header>
-      <p className='flex-grow text-[0.8125rem]'>
+      <p className='line-clamp-4 flex-grow text-[0.8125rem]'>
         {shortDescription || '<без описания>'}
       </p>
       <footer className='flex items-center gap-2'>
