@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Card, Icon, TextArea, cn } from '@/shared';
+import { Button, Card, cn, getNoun, Icon, TextArea } from '@/shared';
 import { FC, useContext, useState } from 'react';
 import {
   AnswerSectionResponseDto,
@@ -13,6 +13,7 @@ import { answerSchemaType } from '../lib/answerSchema';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { AnswerSectionEdit } from './AnswerSectionEdit';
 import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { Comment } from '@/widgets/Comment';
 
 interface AnswerSectionProps {
   sectionData: AnswerSectionResponseDto;
@@ -126,7 +127,10 @@ export const AnswerSection: FC<AnswerSectionProps> = ({ sectionData }) => {
                     `${sectionData.maxScore} / ${sectionData.maxScore}`}
                   {verdict === 'WA' && `${0} / ${sectionData.maxScore}`}
                   {verdict === '' && `${sectionData.maxScore}`}
-                  <span> баллов</span>
+                  <span>
+                    {sectionData.score}{' '}
+                    {getNoun(sectionData.score, 'балл', 'балла', 'баллов')}
+                  </span>
                 </span>
               )}
               <Button type='reset'>Сбросить</Button>
@@ -136,6 +140,14 @@ export const AnswerSection: FC<AnswerSectionProps> = ({ sectionData }) => {
             </>
           )}
         </footer>
+        {sectionData.review && (
+          <Comment
+            avatar={sectionData.review.reviewer.avatar}
+            date={'12 сентября 2023, 14:00'}
+            comment={sectionData.review.comment}
+            name={sectionData.review.reviewer.name}
+          />
+        )}
       </form>
     </Card>
   );
