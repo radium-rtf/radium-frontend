@@ -51,7 +51,7 @@ export default function CourseStudyLayout({
           </h1>
         </Link>
       </Header>
-      <main className='flex flex-grow items-stretch gap-8 px-12'>
+      <main className='mb-8 flex flex-grow items-stretch gap-8 px-12'>
         <CourseEditContextWrapper>
           <nav className='sticky top-[8.625rem] -ml-6 flex h-[calc(100vh-8.65rem)] w-[calc(16.25rem)] flex-grow-0 flex-col'>
             {isEditAllowed && <CourseEditToggle />}
