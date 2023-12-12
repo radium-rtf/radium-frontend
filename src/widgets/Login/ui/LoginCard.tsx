@@ -1,98 +1,80 @@
 'use client';
-import React, { FormEventHandler, useReducer, useState } from 'react';
-import { Button, Card, Icon, Input } from '@/shared';
-import { signIn } from 'next-auth/react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-
-interface IState {
-  email: string;
-  password: string;
-}
-
-interface IAction {
-  type: 'email' | 'password';
-  value: string;
-}
-
-const initialState: IState = {
-  email: '',
-  password: '',
-};
-
-const reducer = (state: IState, action: IAction) => {
-  switch (action.type) {
-    case 'email':
-      return {
-        ...state,
-        email: action.value,
-      };
-    case 'password':
-      return {
-        ...state,
-        password: action.value,
-      };
-    default:
-      throw Error('Unknown action');
-  }
-};
+import { signIn } from 'next-auth/react';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { Button, Card, Icon, Input } from '@/shared';
+import { loginSchema, loginSchemaType } from '../model/loginSchema';
 
 export const LoginCard = () => {
   const router = useRouter();
-  const [formData, dispatchFormData] = useReducer(reducer, initialState);
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const {
+    handleSubmit,
+    register,
+    setError,
+    formState: {
+      errors,
+      isValid,
+      isSubmitted,
+      isSubmitting,
+      isSubmitSuccessful,
+    },
+  } = useForm<loginSchemaType>({ resolver: zodResolver(loginSchema) });
+
   const [isPasswordShowed, setIsPasswordShowed] = useState(false);
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-
-    const email = formData.email;
-    const password = formData.password;
-
-    setIsLoading(() => true);
-    signIn('credentials', { email, password, redirect: false })
-      .then((e) => {
-        if (e?.error) {
-          setError(e.error);
-          return;
-        }
-        router.push('/');
-      })
-      .finally(() => setIsLoading(false));
+  const onSubmitHandler: SubmitHandler<loginSchemaType> = async ({
+    email,
+    password,
+  }) => {
+    try {
+      const result = await signIn('login', {
+        email,
+        password,
+        redirect: false,
+      });
+      if (!result || (!result.ok && result.error)) {
+        setError(
+          'password',
+          { message: 'Неверные данные' },
+          { shouldFocus: false }
+        );
+      }
+      router.push('/');
+    } catch {
+      setError(
+        'email',
+        { message: 'Попробуйте позже' },
+        { shouldFocus: false }
+      );
+    }
   };
 
   return (
     <section className='flex w-[19rem] flex-col items-center gap-9'>
       <div className='flex items-center gap-4'>
-        <Image height={28} width={48} alt='Radium logo' src='/logo.svg' />
-        <h1 className='font-mono text-4xl text-primary-default'>Радиум</h1>
+        <Image height={48} width={48} alt='Radium logo' src='/logo.svg' />
+        <h1 className='font-mono text-4xl font-bold text-primary-default'>
+          Радиум
+        </h1>
       </div>
-      <Card className='w-full'>
-        <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+      <Card className='w-full' asChild>
+        <form
+          onSubmit={handleSubmit(onSubmitHandler)}
+          className={'flex flex-col gap-4'}
+        >
           <Input
             iconType='mail'
             placeholder='Почта'
-            type='email'
-            name='email'
-            onChange={(e) => {
-              error && setError(null);
-              dispatchFormData({ type: 'email', value: e.target.value });
-            }}
-          >
-            {formData.email.includes('@') ? null : (
-              <span className='font-sans text-[0.625rem]'>urfu.me</span>
-            )}
-          </Input>
+            {...register('email')}
+          ></Input>
           <Input
             iconType='password'
             placeholder='Пароль'
             type={isPasswordShowed ? 'text' : 'password'}
-            name='password'
-            onChange={(e) => {
-              error && setError(null);
-              dispatchFormData({ type: 'password', value: e.target.value });
-            }}
+            {...register('password')}
           >
             <button
               onClick={() => setIsPasswordShowed((prev) => !prev)}
@@ -103,17 +85,26 @@ export const LoginCard = () => {
             </button>
           </Input>
           <Button
-            disabled={isLoading}
+            disabled={isSubmitting}
             type='submit'
-            color={isLoading || !error ? 'accent' : 'destructive'}
+            color={!isValid && isSubmitted ? 'destructive' : 'accent'}
             className='gap-4'
           >
             <Icon
-              type={isLoading ? 'loading' : error ? 'alert' : 'enter'}
+              type={
+                isSubmitting
+                  ? 'loading'
+                  : !isValid && isSubmitted
+                  ? 'alert'
+                  : 'enter'
+              }
               className='shrink-0 text-inherit'
             />
             <span className='ml-[calc(50%-34px)] -translate-x-1/2 whitespace-nowrap'>
-              {isLoading ? 'Входим...' : error ? 'Неверные данные!' : 'Войти'}
+              {(isSubmitSuccessful && 'Успех!') ||
+                (errors.email && errors.email.message) ||
+                (errors.password && errors.password.message) ||
+                'Войти'}
             </span>
           </Button>
           <Button asChild className='justify-between gap-4'>

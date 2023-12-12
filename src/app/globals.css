@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {}
-
 @layer utilities {
     .radium-scrollbar::-webkit-scrollbar {
         opacity: "0%";
@@ -13,5 +11,10 @@
     .radium-scrollbar::-webkit-scrollbar-thumb {
         border-radius: 4px;
         background-color: rgb(78, 81, 81);
+    }
+    
+    .font-mono {
+        font-family: var(--font-nt-somic);
+        font-feature-settings: 'salt' on;
     }
 }

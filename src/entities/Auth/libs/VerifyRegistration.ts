@@ -1,13 +1,13 @@
-import { LoginRequestDto } from '../model/LoginRequestDto';
 import { ErrorAuthResponseDto } from '../model/ErrorAuthResponseDto';
 import { SuccessAuthResponseDto } from '../model/SuccessAuthResponseDto';
+import { VerifyRegistrationRequestDto } from '../model/VerifyRegistrationRequestDto';
 
-export const Login = async (
-  credentials: LoginRequestDto
+export const VerifyRegistration = async (
+  credentials: VerifyRegistrationRequestDto
 ): Promise<SuccessAuthResponseDto | ErrorAuthResponseDto> => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API_URL}/auth/signin`,
+      `${process.env.NEXT_PUBLIC_BASE_API_URL}/auth/verify`,
       {
         method: 'POST',
         cache: 'no-cache',

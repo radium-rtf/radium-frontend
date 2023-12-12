@@ -59,7 +59,8 @@ export type Icon =
   | 'shuffle'
   | 'matching'
   | 'arrow-left'
-  | 'arrow-right';
+  | 'arrow-right'
+  | 'hashtag';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -728,6 +729,13 @@ const icons: Record<Icon, ReactNode> = {
       className='stroke-current'
       strokeLinecap='round'
       strokeLinejoin='round'
+    />
+  ),
+  hashtag: (
+    <path
+      d='M8.5 0.5L2.5 17.5M17.5 5.5L2.5 5.5M15.5 0.5L9.5 17.5M15.5 12.5L0.5 12.5'
+      className='stroke-current'
+      strokeLinecap='round'
     />
   ),
 };

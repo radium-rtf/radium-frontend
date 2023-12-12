@@ -6,7 +6,6 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ['var(--font-inter)'],
-        mono: ['var(--font-nt-somic)'],
         code: ['var(--font-jetbrains-mono)'],
       },
       colors: {
