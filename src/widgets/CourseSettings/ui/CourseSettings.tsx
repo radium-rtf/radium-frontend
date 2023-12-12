@@ -13,6 +13,7 @@ interface CourseSettingsProps {
   hasBanner: boolean;
   courseId: string;
   isPublished: boolean;
+  isEditAllowed: boolean;
 }
 
 export const CourseSettings: FC<CourseSettingsProps> = ({
@@ -23,6 +24,7 @@ export const CourseSettings: FC<CourseSettingsProps> = ({
   hasBanner,
   courseId,
   isPublished,
+  isEditAllowed,
 }) => {
   const { isEditing } = useContext(CourseEditContext);
 
@@ -45,50 +47,54 @@ export const CourseSettings: FC<CourseSettingsProps> = ({
           hasBanner &&
           'Готов к публикации'}
       </h1>
-      <div>
-        <Checkbox
-          labelClassName='pointer-events-none py-2'
-          defaultChecked={hasName}
-        >
-          Придумать название курса
-        </Checkbox>
-        <Checkbox
-          labelClassName='pointer-events-none py-2'
-          defaultChecked={hasShortDescription}
-        >
-          Придумать описание курса
-        </Checkbox>
-        <Checkbox
-          labelClassName='pointer-events-none py-2'
-          defaultChecked={hasLogo}
-        >
-          Загрузить лого курса
-        </Checkbox>
-        <Checkbox
-          labelClassName='pointer-events-none py-2'
-          defaultChecked={hasBanner}
-        >
-          Загрузить обложку курса
-        </Checkbox>
-        <Checkbox
-          labelClassName='pointer-events-none py-2'
-          defaultChecked={hasDescription}
-        >
-          Заполнить секцию О курсе
-        </Checkbox>
-      </div>
-      <CoursePublishToggle
-        isPublishable={
-          hasName &&
-          hasShortDescription &&
-          hasDescription &&
-          hasBanner &&
-          hasLogo
-        }
-        courseId={courseId}
-        isPublished={isPublished}
-      />
-      {isEditing && <CourseDelete courseId={courseId} />}
+      {isEditing && (
+        <div>
+          <Checkbox
+            labelClassName='pointer-events-none py-2'
+            defaultChecked={hasName}
+          >
+            Придумать название курса
+          </Checkbox>
+          <Checkbox
+            labelClassName='pointer-events-none py-2'
+            defaultChecked={hasShortDescription}
+          >
+            Придумать описание курса
+          </Checkbox>
+          <Checkbox
+            labelClassName='pointer-events-none py-2'
+            defaultChecked={hasLogo}
+          >
+            Загрузить лого курса
+          </Checkbox>
+          <Checkbox
+            labelClassName='pointer-events-none py-2'
+            defaultChecked={hasBanner}
+          >
+            Загрузить обложку курса
+          </Checkbox>
+          <Checkbox
+            labelClassName='pointer-events-none py-2'
+            defaultChecked={hasDescription}
+          >
+            Заполнить секцию О курсе
+          </Checkbox>
+        </div>
+      )}
+      {isEditAllowed && (
+        <CoursePublishToggle
+          isPublishable={
+            hasName &&
+            hasShortDescription &&
+            hasDescription &&
+            hasBanner &&
+            hasLogo
+          }
+          courseId={courseId}
+          isPublished={isPublished}
+        />
+      )}
+      {isEditing && isEditAllowed && <CourseDelete courseId={courseId} />}
     </Card>
   );
 };

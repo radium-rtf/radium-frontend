@@ -17,6 +17,7 @@ import {
   useGetCourseQuery,
 } from '@/entities/Course';
 import { Footer } from '@/widgets/Footer';
+import { CourseName } from '@/widgets/CourseName';
 
 export default function Page() {
   const params = useParams() as {
@@ -25,9 +26,7 @@ export default function Page() {
 
   const { data: course } = useGetCourseQuery(params.courseId);
 
-  const searchParams = useSearchParams() as {
-    initialEdit?: string;
-  };
+  const searchParams = useSearchParams();
 
   const { isAuthor, isCoauthor } = useCourseRoles(course);
   const isEditAllowed = isAuthor || isCoauthor;
@@ -46,7 +45,7 @@ export default function Page() {
       </Header>
       <main className='flex flex-grow flex-col'>
         <CourseEditContextWrapper
-          isEditMode={searchParams.initialEdit === 'true'}
+          isEditMode={searchParams.get('initialEdit') === 'true'}
         >
           <CourseBanner
             name={course.name}
@@ -56,9 +55,10 @@ export default function Page() {
           />
           <main className='container mx-auto px-12 lg:px-[8.25rem]'>
             <div className='grid gap-8 lg:grid-cols-3 2xl:grid-cols-4'>
-              <h1 className='mx-4 break-all font-mono text-5xl font-bold leading-[normal] text-accent-primary-200 lg:col-span-3 2xl:col-span-4'>
-                {course.name}
-              </h1>
+              <CourseName
+                courseName={course.name}
+                isEditAllowed={isEditAllowed}
+              />
               <main className='flex flex-col gap-8 lg:col-span-2 2xl:col-span-3'>
                 <CourseBrief
                   courseLogo={course.logo}
@@ -86,6 +86,7 @@ export default function Page() {
                     hasBanner={course.banner !== ''}
                     courseId={course.id}
                     isPublished={course.isPublished}
+                    isEditAllowed={isAuthor}
                   />
                 )}
                 <CourseAuthors authors={course.authors} />

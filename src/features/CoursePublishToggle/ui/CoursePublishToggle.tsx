@@ -25,7 +25,7 @@ export const CoursePublishToggle: FC<CoursePublishToggleProps> = ({
   return (
     <Button
       disabled={!isPublishable && !isPublished}
-      color='accent'
+      color={isPublished ? 'destructive' : 'accent'}
       className='w-full'
       onClick={onClickHandler}
     >
