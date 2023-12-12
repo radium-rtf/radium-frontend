@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Card, cn, Icon, TextArea } from '@/shared';
+import { Button, Card, cn, getNoun, Icon, TextArea } from '@/shared';
 import { FC, useContext, useState } from 'react';
 import {
   AnswerSectionResponseDto,
@@ -13,7 +13,6 @@ import { answerSchemaType } from '../lib/answerSchema';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { AnswerSectionEdit } from './AnswerSectionEdit';
 import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
-import { round } from '@floating-ui/utils';
 import { Comment } from '@/widgets/Comment';
 
 interface AnswerSectionProps {
@@ -54,9 +53,6 @@ export const AnswerSection: FC<AnswerSectionProps> = ({ sectionData }) => {
     false;
   const { isEditing: isEditMode } = useContext(CourseEditContext);
   const [isEditing, setIsEditing] = useState(false);
-  const reviewScore = sectionData.review
-    ? round(sectionData.review.score * sectionData.maxScore)
-    : null;
 
   if (isEditAllowed && isEditMode && isEditing) {
     return (
@@ -131,11 +127,10 @@ export const AnswerSection: FC<AnswerSectionProps> = ({ sectionData }) => {
                     `${sectionData.maxScore} / ${sectionData.maxScore}`}
                   {verdict === 'WA' && `${0} / ${sectionData.maxScore}`}
                   {verdict === '' && `${sectionData.maxScore}`}
-                  {reviewScore && (
-                    <span>
-                      {reviewScore} {reviewScore === 1 ? 'балл' : 'баллов'}
-                    </span>
-                  )}
+                  <span>
+                    {sectionData.score}{' '}
+                    {getNoun(sectionData.score, 'балл', 'балла', 'баллов')}
+                  </span>
                 </span>
               )}
               <Button type='reset'>Сбросить</Button>

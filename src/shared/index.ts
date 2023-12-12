@@ -1,5 +1,6 @@
 // Utils
 export { cn } from './utils/cn';
+export { getNoun } from './utils/nouns';
 
 // Components
 export { Radio } from './ui/Radio';

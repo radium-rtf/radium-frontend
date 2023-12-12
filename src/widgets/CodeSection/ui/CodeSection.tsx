@@ -9,6 +9,7 @@ import {
   cn,
   CodeEditor,
   FileType,
+  getNoun,
   Icon,
   InputFile,
   Tab,
@@ -211,7 +212,7 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
               {!isError &&
                 !isLoading &&
                 verdict !== 'WAIT' &&
-                !!sectionData.score && (
+                (!!sectionData.score || sectionData.score === 0) && (
                   <span
                     className={cn(
                       'text-[0.8125rem]',
@@ -223,8 +224,8 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
                     {verdict === 'WA' && `${0} / ${sectionData.maxScore}`}
                     {verdict === '' && `${sectionData.maxScore}`}
                     <span>
-                      {sectionData.review?.score}{' '}
-                      {sectionData.review?.score === 1 ? 'балл' : 'баллов'}
+                      {sectionData.score}{' '}
+                      {getNoun(sectionData.score, 'балл', 'балла', 'баллов')}
                     </span>
                   </span>
                 )}
