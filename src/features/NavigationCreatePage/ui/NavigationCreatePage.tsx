@@ -44,7 +44,7 @@ export const NavigationCreatePage: FC<IProps> = ({
   if (isCreating) {
     return (
       <form onSubmit={submitHandler} className='px-2 py-1.5'>
-        <Input name='newPage' placeholder='Введите название модуля' />
+        <Input name='newPage' placeholder='Страница' />
       </form>
     );
   }
