@@ -204,9 +204,7 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
                   </span>
                 )}
                 {verdict === 'WA' && (
-                  <span className='text-destructive-default'>
-                    Не правильно!
-                  </span>
+                  <span className='text-destructive-default'>Неправильно!</span>
                 )}
               </div>
               {!isError &&

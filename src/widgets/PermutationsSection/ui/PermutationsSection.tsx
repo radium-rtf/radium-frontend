@@ -174,9 +174,7 @@ export const PermutationSection: FC<IProps> = ({ sectionData }) => {
                   <span className='text-secondary-default'>Верно!</span>
                 )}
                 {verdict === 'WA' && (
-                  <span className='text-destructive-default'>
-                    Не правильно!
-                  </span>
+                  <span className='text-destructive-default'>Неправильно!</span>
                 )}
               </div>
               {!isLoading && !isError && (
