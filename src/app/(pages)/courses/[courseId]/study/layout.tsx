@@ -11,6 +11,7 @@ import { NavigationCreateModule } from '@/features/NavigationCreateModule';
 import { CourseModuleNavigation } from '@/widgets/CourseModuleNavigation';
 import { CreateCourseSection } from '@/features/CreateCourseSection';
 import { useCourseRoles, useGetCourseQuery } from '@/entities/Course';
+import { Footer } from '@/widgets/Footer';
 
 interface CourseStudyLayoutProps {
   children: ReactNode;
@@ -50,7 +51,7 @@ export default function CourseStudyLayout({
           </h1>
         </Link>
       </Header>
-      <div className='flex flex-grow items-stretch gap-8 px-12'>
+      <main className='flex flex-grow items-stretch gap-8 px-12'>
         <CourseEditContextWrapper>
           <nav className='sticky top-[8.625rem] -ml-6 flex h-[calc(100vh-8.65rem)] w-[calc(16.25rem)] flex-grow-0 flex-col'>
             {isEditAllowed && <CourseEditToggle />}
@@ -113,7 +114,8 @@ export default function CourseStudyLayout({
           <div className='flex flex-grow justify-center'>{children}</div>
           {params.pageId && <CreateCourseSection />}
         </CourseEditContextWrapper>
-      </div>
+      </main>
+      <Footer />
     </>
   );
 }

@@ -12,6 +12,7 @@ import {
 } from '@/widgets/CourseCard';
 import { useSession } from 'next-auth/react';
 import { UserCoursesSkeleton } from '@/widgets/UserCourses';
+import { Footer } from '@/widgets/Footer';
 
 export default function Home() {
   const { data: courses, isLoading } = useGetAccountCoursesQuery();
@@ -42,7 +43,7 @@ export default function Home() {
           </h1>
         </Link>
       </Header>
-      <main className='container mx-auto flex flex-col gap-6'>
+      <main className='container mx-auto flex flex-grow flex-col gap-6'>
         {(!!courses.authorship.length ||
           session?.user.roles.isAuthor ||
           session?.user.roles.isTeacher) && (
@@ -83,6 +84,7 @@ export default function Home() {
           </>
         )}
       </main>
+      <Footer />
     </>
   );
 }

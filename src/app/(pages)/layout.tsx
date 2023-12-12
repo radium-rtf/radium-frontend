@@ -48,9 +48,11 @@ export default function RootLayout({
           jetbrainsMono.variable
         )}
       >
-        <AuthSessionProvider>
-          <ReduxStoreProvider>{children}</ReduxStoreProvider>
-        </AuthSessionProvider>
+        <main className='flex flex-grow flex-col'>
+          <AuthSessionProvider>
+            <ReduxStoreProvider>{children}</ReduxStoreProvider>
+          </AuthSessionProvider>
+        </main>
       </body>
     </html>
   );

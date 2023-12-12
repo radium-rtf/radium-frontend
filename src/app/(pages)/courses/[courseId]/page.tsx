@@ -16,6 +16,7 @@ import {
   useCourseRoles,
   useGetCourseQuery,
 } from '@/entities/Course';
+import { Footer } from '@/widgets/Footer';
 
 export default function Page() {
   const params = useParams() as {
@@ -43,7 +44,7 @@ export default function Page() {
           </h1>
         </Link>
       </Header>
-      <main className='flex flex-col'>
+      <main className='flex flex-grow flex-col'>
         <CourseEditContextWrapper
           isEditMode={searchParams.initialEdit === 'true'}
         >
@@ -97,6 +98,7 @@ export default function Page() {
           </main>
         </CourseEditContextWrapper>
       </main>
+      <Footer />
     </>
   );
 }
