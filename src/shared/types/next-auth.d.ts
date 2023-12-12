@@ -10,6 +10,7 @@ declare module 'next-auth' {
       isAuthor: boolean;
     };
   }
+
   interface Session {
     user: {
       accessToken?: string | null;

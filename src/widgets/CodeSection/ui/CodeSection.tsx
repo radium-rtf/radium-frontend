@@ -6,13 +6,14 @@ import {
 import {
   Button,
   Card,
+  cn,
   CodeEditor,
   FileType,
+  getNoun,
   Icon,
   InputFile,
   Tab,
   Tabs,
-  cn,
 } from '@/shared';
 import { FC, useContext, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -30,6 +31,7 @@ import {
   SelectValue,
 } from '@/shared/ui/Select';
 import { LanguageDisplay } from '../lib/languageDisplay';
+import { Comment } from '@/widgets/Comment';
 
 interface CodeSectionProps {
   sectionData: CodeSectionResponseDto;
@@ -210,7 +212,7 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
               {!isError &&
                 !isLoading &&
                 verdict !== 'WAIT' &&
-                !!sectionData.score && (
+                (!!sectionData.score || sectionData.score === 0) && (
                   <span
                     className={cn(
                       'text-[0.8125rem]',
@@ -221,7 +223,10 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
                       `${sectionData.maxScore} / ${sectionData.maxScore}`}
                     {verdict === 'WA' && `${0} / ${sectionData.maxScore}`}
                     {verdict === '' && `${sectionData.maxScore}`}
-                    <span> баллов</span>
+                    <span>
+                      {sectionData.score}{' '}
+                      {getNoun(sectionData.score, 'балл', 'балла', 'баллов')}
+                    </span>
                   </span>
                 )}
               <Button type='reset'>Сбросить</Button>
@@ -231,6 +236,14 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
             </>
           )}
         </footer>
+        {sectionData.review && (
+          <Comment
+            avatar={sectionData.review.reviewer.avatar}
+            date={'12 сентября 2023, 14:00'}
+            comment={sectionData.review.comment}
+            name={sectionData.review.reviewer.name}
+          />
+        )}
         <DevTool control={control} />
       </form>
     </Card>

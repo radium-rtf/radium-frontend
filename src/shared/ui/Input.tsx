@@ -1,13 +1,18 @@
-import React, { InputHTMLAttributes, forwardRef } from 'react';
+import React, { forwardRef, InputHTMLAttributes } from 'react';
 import { Icon } from './Icon';
 import { cn } from '../utils/cn';
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   iconType?: Icon;
+  iconClassName?: string;
+  inputClassName?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ className, children, iconType, ...props }, ref) => {
+  (
+    { className, iconClassName, inputClassName, children, iconType, ...props },
+    ref
+  ) => {
     return (
       <label
         className={cn(
@@ -38,26 +43,28 @@ export const Input = forwardRef<HTMLInputElement, TextInputProps>(
       >
         {!!iconType && (
           <Icon
-            className='shrink-0 text-foreground-secondary'
+            className={cn('shrink-0 text-foreground-secondary', iconClassName)}
             type={iconType}
           />
         )}
         <input
           ref={ref}
           {...props}
-          className='
-        peer 
-        w-full
-        flex-grow
-        cursor-text
-        bg-transparent
-        font-mono
-        text-[0.8125rem]
-        leading-tight
-        text-foreground-default
-        outline-none
-        placeholder:text-foreground-secondary
-        disabled:cursor-not-allowed'
+          className={cn(
+            'peer',
+            'w-full',
+            'flex-grow',
+            'cursor-text',
+            'bg-transparent',
+            'font-mono',
+            'text-[0.8125rem]',
+            'leading-tight',
+            'text-foreground-default',
+            'outline-none',
+            'placeholder:text-foreground-secondary',
+            'disabled:cursor-not-allowed',
+            inputClassName
+          )}
         />
         {children}
       </label>

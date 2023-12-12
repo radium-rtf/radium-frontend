@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Card, List } from '@/shared';
-import { CourseResponseDto } from '../model/CourseResponseDto';
+import { CourseResponseDto } from '@/entities/Course/model/CourseResponseDto';
 import Link from 'next/link';
 
 interface IProps {

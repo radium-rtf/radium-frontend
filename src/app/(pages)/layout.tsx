@@ -1,6 +1,6 @@
 import '../globals.css';
 import type { Metadata } from 'next';
-import { AuthSessionProvider, ReduxStoreProvider, cn } from '@/shared';
+import { AuthSessionProvider, cn, ReduxStoreProvider } from '@/shared';
 import localFont from 'next/font/local';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 

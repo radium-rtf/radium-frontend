@@ -57,7 +57,9 @@ export const InputFile: FC<IProps> = ({
   const inputId = useId();
 
   const { isDraggable: isDragging, ref: windowRef } = useDrop();
-  windowRef.current = window?.document;
+  if (window) {
+    windowRef.current = window.document;
+  }
 
   const getLabelText = () => {
     let text = 'Выберите или перетащите файл';

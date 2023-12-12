@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ReactNode } from 'react';
-import { Icon, List, Progress, cn } from '@/shared';
+import { cn, Icon, List, Progress } from '@/shared';
 import { Header } from '@/widgets/Header';
 import { useParams } from 'next/navigation';
 import { CourseEditToggle } from '@/features/CourseEditToggle';
@@ -56,25 +56,29 @@ export default function CourseStudyLayout({
               percentage={((maxScore ? score : 1) / (maxScore || 1)) * 100}
               showPercentage
             />
-            <List.Item asChild>
-              <Link
-                href={`/groups/2d6ac653-1957-42fb-b18d-4645fd8689f9/courses/${course.id}`}
-                className={cn(
-                  'flex',
-                  'rounded-lg border border-transparent transition-colors hover:border-white/10 hover:bg-white/5',
-                  'px-[1.5rem] py-[0.5625rem]'
-                )}
-              >
-                <Icon type={'group'} />
-                <List.Subtitle className='text-sm'>
-                  УрФУ.Осень2024
-                </List.Subtitle>
-                <Icon
-                  className='absolute right-[1.5rem] h-3 w-3'
-                  type={'chevron-right'}
-                />
-              </Link>
-            </List.Item>
+
+            {course.groups.map((group, index) => (
+              <List.Item key={index} asChild>
+                <Link
+                  href={`/groups/${group.id}/courses/${course.id}`}
+                  className={cn(
+                    'flex',
+                    'rounded-lg border border-transparent transition-colors hover:border-white/10 hover:bg-white/5',
+                    'px-[1.5rem] py-[0.5625rem]'
+                  )}
+                >
+                  <Icon type={'group'} />
+                  <List.Subtitle className='text-sm'>
+                    {group.name}
+                  </List.Subtitle>
+                  <Icon
+                    className='absolute right-[1.5rem] h-3 w-3'
+                    type={'chevron-right'}
+                  />
+                </Link>
+              </List.Item>
+            ))}
+
             <ul
               className='
               overflow-y-scroll

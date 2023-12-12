@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Card, List } from '@/shared';
-import { CourseResponseDto } from '../model/CourseResponseDto';
 import Image from 'next/image';
+import { CourseResponseDto } from '../model/CourseResponseDto';
 
 interface IProps {
   authors: CourseResponseDto['authors'];
