@@ -2,7 +2,7 @@
 import { GroupReportTable, useCourseReportQuery } from '@/entities/Group';
 import { useGroupQuery } from '@/entities/Group/api/groupApi';
 
-export default async function Page({
+export default function Page({
   params,
 }: {
   params: {
@@ -21,7 +21,7 @@ export default async function Page({
   }
 
   return (
-    <main className='flex w-[90%] flex-col m-auto'>
+    <main className='m-auto flex w-[90%] flex-col'>
       <GroupReportTable courseReport={courseReport} />
     </main>
   );
