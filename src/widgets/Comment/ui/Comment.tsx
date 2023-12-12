@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
 import Image from 'next/image';
-import { cn, Icon } from '@/shared';
+import { cn } from '@/shared';
 import localFont from 'next/font/local';
-import Link from 'next/link';
 
 const ntSomic = localFont({
   src: [
@@ -53,15 +52,12 @@ export const Comment: FC<IProps> = ({ comment, date, name, avatar }) => {
           <h1 className='text-[0.8125rem] font-normal text-accent-primary-200'>
             {name}
           </h1>
-          <Link className='ml-auto' href=''>
-            <Icon type='link' />
-          </Link>
         </div>
         <span className='font-sans text-[0.625rem] leading-[normal] text-foreground-secondary'>
           {date}
         </span>
       </div>
-      <span className='text-[0.8125rem] font-normal text-text-primary leading-[normal]'>
+      <span className='text-[0.8125rem] font-normal leading-[normal] text-text-primary'>
         {comment}
       </span>
     </main>

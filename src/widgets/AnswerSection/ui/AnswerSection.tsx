@@ -148,7 +148,7 @@ export const AnswerSection: FC<AnswerSectionProps> = ({ sectionData }) => {
         {sectionData.review && (
           <Comment
             avatar={sectionData.review.reviewer.avatar}
-            date={''}
+            date={'12 сентября 2023, 14:00'}
             comment={sectionData.review.comment}
             name={sectionData.review.reviewer.name}
           />
