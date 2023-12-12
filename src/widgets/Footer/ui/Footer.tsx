@@ -9,7 +9,7 @@ export const Footer = () => {
       flex
       items-center
       justify-between
-      bg-bg-page
+      bg-black/10
       px-12
       pb-12
       pt-8
