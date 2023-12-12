@@ -34,13 +34,17 @@ export default function CourseStudyLayout({
     <>
       <Header>
         <Link href='/' className='flex items-center gap-6'>
-          <Image
-            src={logo}
-            alt={name}
-            width={48}
-            height={48}
-            className='h-12 w-12 object-cover'
-          />
+          {logo ? (
+            <Image
+              src={logo}
+              alt={name}
+              width={48}
+              height={48}
+              className='h-12 w-12 rounded-lg object-cover'
+            />
+          ) : (
+            <div className='h-12 w-12 rounded-lg bg-background-overlay object-cover'></div>
+          )}
           <h1 className='font-mono text-4xl font-bold text-accent-primary-200'>
             {name}
           </h1>
