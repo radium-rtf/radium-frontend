@@ -77,7 +77,7 @@ export const RegistrationCard = () => {
             {...register('email')}
           >
             {watch('email').includes('@') ? null : (
-              <span className='font-sans text-[0.625rem]'>urfu.me</span>
+              <span className='font-sans text-[0.625rem]'>@urfu.me</span>
             )}
           </Input>
           <Input

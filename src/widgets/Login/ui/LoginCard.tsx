@@ -15,6 +15,7 @@ export const LoginCard = () => {
     handleSubmit,
     register,
     setError,
+    watch,
     formState: {
       errors,
       isValid,
@@ -22,7 +23,13 @@ export const LoginCard = () => {
       isSubmitting,
       isSubmitSuccessful,
     },
-  } = useForm<loginSchemaType>({ resolver: zodResolver(loginSchema) });
+  } = useForm<loginSchemaType>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
 
   const [isPasswordShowed, setIsPasswordShowed] = useState(false);
   const onSubmitHandler: SubmitHandler<loginSchemaType> = async ({
@@ -65,11 +72,11 @@ export const LoginCard = () => {
           onSubmit={handleSubmit(onSubmitHandler)}
           className={'flex flex-col gap-4'}
         >
-          <Input
-            iconType='mail'
-            placeholder='Почта'
-            {...register('email')}
-          ></Input>
+          <Input iconType='mail' placeholder='Почта' {...register('email')}>
+            {watch('email').includes('@') ? null : (
+              <span className='font-sans text-[0.625rem]'>@urfu.me</span>
+            )}
+          </Input>
           <Input
             iconType='password'
             placeholder='Пароль'
