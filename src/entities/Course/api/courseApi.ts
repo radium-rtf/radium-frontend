@@ -5,6 +5,7 @@ import { CourseUpdateDescriptionRequestDto } from '../model/CourseUpdateDescript
 import { CourseUpdateBannerRequestDto } from '../model/CourseUpdateBannerRequestDto';
 import { AccountCoursesResponseDto } from '../model/AccountCoursesResponseDto';
 import { CourseUpdateLogoRequestDto } from '../model/CourseUpdateLogoRequestDto';
+import { CourseAddCoAuthorRequestDto } from '../model/CourseAddCoAuthorRequestDto';
 
 const courseApi = emptyApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -133,6 +134,17 @@ const courseApi = emptyApi.injectEndpoints({
             ]
           : [{ type: 'courses', id: 'LIST' }],
     }),
+    addCourseCoAuthor: builder.mutation<void, CourseAddCoAuthorRequestDto>({
+      query: (body) => ({
+        url: '/role/coauthor',
+        method: 'POST',
+        body: body,
+      }),
+      invalidatesTags: (_1, _2, args) => [
+        { type: 'courses', id: args.courseId },
+        { type: 'courses', id: 'LIST' },
+      ],
+    }),
   }),
   overrideExisting: true,
 });
@@ -149,4 +161,5 @@ export const {
   useUpdateCourseDescriptionMutation,
   useUpdateCourseBannerMutation,
   useUpdateCourseLogoMutation,
+  useAddCourseCoAuthorMutation,
 } = courseApi;

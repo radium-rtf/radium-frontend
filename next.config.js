@@ -19,7 +19,13 @@ const nextConfig = {
         hostname: '*',
         port: '8080',
         pathname: '**',
-      }
+      },
+      {
+        protocol: 'http',
+        hostname: 'storage.yandexcloud.net',
+        port: '',
+        pathname: '**',
+      },
     ],
   },
 };

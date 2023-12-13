@@ -11,13 +11,10 @@ import { CourseDescription } from '@/widgets/CourseDescription';
 import { CourseLandingEditToggle } from '@/widgets/CourseLandingEditToggle';
 import { CourseEditContextWrapper } from '@/features/CourseEditContext';
 import { useParams, useSearchParams } from 'next/navigation';
-import {
-  CourseAuthors,
-  useCourseRoles,
-  useGetCourseQuery,
-} from '@/entities/Course';
+import { useCourseRoles, useGetCourseQuery } from '@/entities/Course';
 import { Footer } from '@/widgets/Footer';
 import { CourseName } from '@/widgets/CourseName';
+import { CourseAuthors } from '@/widgets/CourseAuthors';
 
 export default function Page() {
   const params = useParams() as {
@@ -43,7 +40,7 @@ export default function Page() {
           </h1>
         </Link>
       </Header>
-      <main className='flex flex-grow flex-col'>
+      <main className='mb-8 flex flex-grow flex-col'>
         <CourseEditContextWrapper
           isEditMode={searchParams.get('initialEdit') === 'true'}
         >
@@ -89,7 +86,12 @@ export default function Page() {
                     isEditAllowed={isAuthor}
                   />
                 )}
-                <CourseAuthors authors={course.authors} />
+                <CourseAuthors
+                  courseId={course.id}
+                  isEditAllowed={isAuthor}
+                  authors={course.authors}
+                  coauthors={course.coauthors}
+                />
                 <CourseContacts
                   isEditAllowed={isEditAllowed}
                   contacts={course.links}

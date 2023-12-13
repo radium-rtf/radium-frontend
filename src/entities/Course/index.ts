@@ -23,6 +23,7 @@ export {
   useUpdateCourseDescriptionMutation,
   useUpdateCourseBannerMutation,
   useUpdateCourseLogoMutation,
+  useAddCourseCoAuthorMutation,
 } from './api/courseApi';
 export { useLastCoursePage } from './lib/useLastCoursePage';
 export { useCourseRoles } from './lib/useCourseRoles';
