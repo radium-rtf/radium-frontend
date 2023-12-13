@@ -112,7 +112,7 @@ const config: Config = {
             '--tw-prose-captions': '#E6E6E6',
             '--tw-prose-code': '#E6E6E6',
             '--tw-prose-pre-code': '#E6E6E6',
-            '--tw-prose-pre-bg': '#E6E6E6',
+            '--tw-prose-pre-bg': 'transparent',
             '--tw-prose-th-borders': '#E6E6E6',
             '--tw-prose-td-borders': '#E6E6E6',
             '--tw-prose-invert-body': '#E6E6E6',

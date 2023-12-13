@@ -33,12 +33,17 @@ export const MarkdownDisplay: FC<MarkdownDisplayProps> = ({ markdown }) => {
       remarkPlugins={[remarkGfm]}
       className={cn(
         'markdown-display',
+        'w-full',
+        'max-w-none',
         'prose',
         'prose-default',
         'prose-no-margin',
         'prose-h1:text-4xl',
         'prose-h2:text-3xl',
-        'prose-h3:text-2xl'
+        'prose-h3:text-2xl',
+        'prose-blockquote:not-italic',
+        'prose-code:font-normal',
+        'prose-code:text-[0.8125rem]'
       )}
       components={components}
     >
