@@ -9,7 +9,7 @@ import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FC, useContext, useState } from 'react';
 import { ChoiceSectionResponseDto } from '@/entities/CourseSection';
-import { Button, Card, Icon, Radio, cn } from '@/shared';
+import { Button, Card, Icon, Radio, cn, getNoun } from '@/shared';
 import { answerSchema, answerSchemaType } from '../model/answerSchema';
 import { useAnswerCourseChoiceSectionMutation } from '@/entities/CourseSection';
 
@@ -60,21 +60,6 @@ export const ChoiceSection: FC<ChoiceSectionProps> = ({ sectionData }) => {
         }
       })
       .catch(() => setError('choice.answer', { message: 'Ошибка!' }));
-  };
-
-  const getAttemptsDisplayName = (attempts: number) => {
-    attempts %= 100;
-    if (attempts >= 5 && attempts <= 20) {
-      return 'попыток';
-    }
-    attempts %= 10;
-    if (attempts === 1) {
-      return 'попытка';
-    }
-    if (attempts >= 2 && attempts <= 4) {
-      return 'Попытки';
-    }
-    return 'попыток';
   };
 
   if (isEditAllowed && isEditMode && isEditing) {
@@ -137,13 +122,19 @@ export const ChoiceSection: FC<ChoiceSectionProps> = ({ sectionData }) => {
                 <>
                   <span className='text-[0.8125rem] text-text-primary'>
                     {sectionData.verdict === '' &&
-                      `${sectionData.maxAttempts} ${getAttemptsDisplayName(
-                        sectionData.maxAttempts
+                      `${sectionData.maxAttempts} ${getNoun(
+                        sectionData.maxAttempts,
+                        'попытка',
+                        'попытки',
+                        'попыток'
                       )}`}
                     {sectionData.verdict !== '' &&
-                      `Осталось ${
-                        sectionData.attempts
-                      } ${getAttemptsDisplayName(sectionData.attempts)}`}
+                      `Осталось ${sectionData.attempts} ${getNoun(
+                        sectionData.maxAttempts,
+                        'попытка',
+                        'попытки',
+                        'попыток'
+                      )}`}
                     {}
                   </span>
                   <span

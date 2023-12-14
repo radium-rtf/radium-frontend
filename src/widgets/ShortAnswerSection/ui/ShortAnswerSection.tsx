@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Card, Icon, Input, cn } from '@/shared';
+import { Button, Card, Icon, Input, cn, getNoun } from '@/shared';
 import { FC, useContext, useState } from 'react';
 import {
   ShortAnswerSectionResponseDto,
@@ -9,38 +9,51 @@ import {
 import { useSession } from 'next-auth/react';
 import { CourseEditContext } from '@/features/CourseEditContext';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { answerSchemaType } from '../lib/answerSchema';
+import { answerSchema, answerSchemaType } from '../model/answerSchema';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { ShortAnswerSectionEdit } from './ShortAnswerSectionEdit';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 interface IProps {
   sectionData: ShortAnswerSectionResponseDto;
 }
 
 export const ShortAnswerSection: FC<IProps> = ({ sectionData }) => {
-  const [verdict, setVerdict] = useState<
-    ShortAnswerSectionResponseDto['verdict']
-  >(sectionData.verdict);
-  const [answerShortAnswerSection, { isLoading, isError }] =
-    useAnswerCourseShortAnswerSectionMutation();
+  const [answer] = useAnswerCourseShortAnswerSectionMutation();
 
   // Form init
-  const { register, handleSubmit } = useForm<answerSchemaType>({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setError,
+    formState: {
+      errors,
+      isSubmitSuccessful,
+      isSubmitting,
+      isSubmitted,
+      isValid,
+    },
+  } = useForm<answerSchemaType>({
+    resolver: zodResolver(answerSchema),
     defaultValues: {
       shortanswer: {
         answer: sectionData.answer,
       },
     },
   });
-  const onSubmitHandler: SubmitHandler<answerSchemaType> = (data) => {
-    answerShortAnswerSection({
+  const onSubmitHandler: SubmitHandler<answerSchemaType> = async (body) => {
+    await answer({
       id: sectionData.id,
-      ...data,
+      ...body,
     })
       .unwrap()
-      .then((result) => {
-        result && setVerdict(result.verdict);
-      });
+      .then((res) => {
+        if (res.verdict === 'WA') {
+          setError('shortanswer.answer', { message: 'Неправильно!' });
+        }
+      })
+      .catch(() => setError('shortanswer.answer', { message: 'Ошибка!' }));
   };
 
   // Edit checks
@@ -87,7 +100,7 @@ export const ShortAnswerSection: FC<IProps> = ({ sectionData }) => {
                 sectionId={sectionData.id}
               />
               <Button
-                className='w-64 shrink-0'
+                className='w-64'
                 color='outlined'
                 onClick={() => setIsEditing(true)}
               >
@@ -100,31 +113,66 @@ export const ShortAnswerSection: FC<IProps> = ({ sectionData }) => {
           )}
           {(!isEditAllowed || !isEditMode) && (
             <>
-              <div className='flex flex-col gap-2 text-[0.8125rem]'>
-                {verdict === 'OK' && (
-                  <span className='text-secondary-default'>Верно!</span>
-                )}
-                {verdict === 'WA' && (
-                  <span className='text-destructive-default'>Неправильно!</span>
-                )}
-              </div>
-              {!isLoading && !isError && (
-                <span
-                  className={cn(
-                    'text-[0.8125rem]',
-                    verdict === 'OK' && 'text-secondary-default'
-                  )}
-                >
-                  {verdict === 'OK' &&
-                    `${sectionData.maxScore} / ${sectionData.maxScore}`}
-                  {verdict === 'WA' && `${0} / ${sectionData.maxScore}`}
-                  {verdict === '' && `${sectionData.maxScore}`}
-                  <span> баллов</span>
-                </span>
+              {!isSubmitting && (
+                <>
+                  <span className='text-[0.8125rem] text-text-primary'>
+                    {sectionData.verdict === '' &&
+                      `${sectionData.maxAttempts} ${getNoun(
+                        sectionData.maxAttempts,
+                        'попытка',
+                        'попытки',
+                        'попыток'
+                      )}`}
+                    {sectionData.verdict !== '' &&
+                      `Осталось ${sectionData.attempts} ${getNoun(
+                        sectionData.maxAttempts,
+                        'попытка',
+                        'попытки',
+                        'попыток'
+                      )}`}
+                    {}
+                  </span>
+                  <span
+                    className={cn(
+                      'text-[0.8125rem]',
+                      sectionData.verdict === 'OK' && 'text-secondary-default'
+                    )}
+                  >
+                    {(sectionData.verdict === 'OK' &&
+                      `${sectionData.maxScore} / ${sectionData.maxScore}`) ||
+                      (sectionData.verdict === 'WA' &&
+                        `${0} / ${sectionData.maxScore}`) ||
+                      (sectionData.verdict === '' && `${sectionData.maxScore}`)}
+                    <span> баллов</span>
+                  </span>
+                </>
               )}
-              <Button type='reset'>Сбросить</Button>
-              <Button disabled={isLoading} type='submit' color='accent'>
-                Ответить
+              <Button
+                type='reset'
+                onClick={() => reset({ shortanswer: { answer: '' } })}
+              >
+                <Icon type='reset' />
+              </Button>
+              <Button
+                className='w-64'
+                color={(!isValid && isSubmitted && 'destructive') || 'accent'}
+                type='submit'
+                disabled={(!isValid && !isSubmitted) || isSubmitting}
+              >
+                <Icon
+                  type={
+                    (isSubmitSuccessful && 'submit') ||
+                    (isSubmitting && 'loading') ||
+                    (!isValid && isSubmitted && 'alert') ||
+                    'success'
+                  }
+                  className='shrink-0 text-inherit'
+                />
+                <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
+                  {(errors.shortanswer?.answer &&
+                    errors.shortanswer.answer.message) ||
+                    'Ответить'}
+                </span>
               </Button>
             </>
           )}

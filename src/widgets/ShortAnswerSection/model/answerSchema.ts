@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const answerSchema = z.object({
   shortanswer: z.object({
-    answer: z.string().min(1, 'Необходимо ввести ответ'),
+    answer: z.string().min(1, 'Введите ответ!'),
   }),
 });
 
