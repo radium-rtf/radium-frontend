@@ -15,7 +15,7 @@ import {
 import { DevTool } from '@hookform/devtools';
 import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
-import { updateSchema, updateSchemaType } from '../lib/updateSchema';
+import { updateSchema, updateSchemaType } from '../model/updateSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 interface MultiChoiceSectionEditProps {
@@ -39,9 +39,9 @@ export const MultiChoiceSectionEdit: FC<MultiChoiceSectionEditProps> = ({
     resolver: zodResolver(updateSchema),
     defaultValues: {
       maxScore: sectionData.maxScore,
-      maxAttempts: 0,
+      maxAttempts: sectionData.maxAttempts,
       multichoice: {
-        answer: sectionData.answers || [],
+        answer: [],
         question: sectionData.content,
         variants: sectionData.variants
           .map((v) => ({

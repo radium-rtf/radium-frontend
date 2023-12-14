@@ -180,7 +180,7 @@ export const ChoiceSection: FC<ChoiceSectionProps> = ({ sectionData }) => {
                     (!isValid && isSubmitted && 'alert') ||
                     'success'
                   }
-                  className='text-inherit'
+                  className='shrink-0 text-inherit'
                 />
                 <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
                   {(errors.choice?.answer && errors.choice.answer.message) ||

@@ -51,31 +51,36 @@ export const CourseSettings: FC<CourseSettingsProps> = ({
         <div>
           <Checkbox
             labelClassName='pointer-events-none py-2'
-            defaultChecked={hasName}
+            checked={hasName}
+            onChange={() => {}}
           >
             Придумать название курса
           </Checkbox>
           <Checkbox
             labelClassName='pointer-events-none py-2'
-            defaultChecked={hasShortDescription}
+            checked={hasShortDescription}
+            onChange={() => {}}
           >
             Придумать описание курса
           </Checkbox>
           <Checkbox
             labelClassName='pointer-events-none py-2'
-            defaultChecked={hasLogo}
+            checked={hasLogo}
+            onChange={() => {}}
           >
             Загрузить лого курса
           </Checkbox>
           <Checkbox
             labelClassName='pointer-events-none py-2'
-            defaultChecked={hasBanner}
+            checked={hasBanner}
+            onChange={() => {}}
           >
             Загрузить обложку курса
           </Checkbox>
           <Checkbox
             labelClassName='pointer-events-none py-2'
-            defaultChecked={hasDescription}
+            checked={hasDescription}
+            onChange={() => {}}
           >
             Заполнить секцию О курсе
           </Checkbox>

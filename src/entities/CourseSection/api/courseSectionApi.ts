@@ -112,7 +112,38 @@ const sectionApi = emptyApi.injectEndpoints({
         body,
         method: 'POST',
       }),
-      invalidatesTags: ['pages', 'courses'],
+      invalidatesTags: ['courses'],
+      async onQueryStarted({ id }, { dispatch, queryFulfilled }) {
+        try {
+          const { data: updatedSection } = await queryFulfilled;
+          dispatch(
+            coursePageApi.util.updateQueryData(
+              'getPage',
+              updatedSection.pageId,
+              (draft) => {
+                const section = draft.sections.find((s) => s.id === id)!;
+
+                if (
+                  section.verdict === 'OK' &&
+                  updatedSection.verdict !== 'OK'
+                ) {
+                  draft.score -= section.maxScore;
+                }
+                if (
+                  section.verdict === 'WA' &&
+                  updatedSection.verdict === 'OK'
+                ) {
+                  draft.score += section.maxScore;
+                }
+                section.verdict = updatedSection.verdict;
+                if (updatedSection.verdict === 'OK') {
+                  section.score = section.maxScore;
+                }
+              }
+            )
+          );
+        } catch {}
+      },
     }),
     updateCourseMultiChoiceSection: builder.mutation<
       MultiChoiceSectionResponseDto,

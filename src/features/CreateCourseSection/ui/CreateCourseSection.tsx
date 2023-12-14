@@ -15,7 +15,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
   if (!isEditing) return null;
 
   return (
-    <aside className='sticky right-0 top-[8.625rem] -mr-6 h-[calc(100vh-8.65rem)] w-64'>
+    <aside className='sticky right-0 top-[8.625rem] -mr-6 max-h-[calc(100vh-8.65rem)] w-64'>
       <h3 className='px-6 py-4 font-mono text-xl font-bold text-primary-default'>
         Элементы
       </h3>

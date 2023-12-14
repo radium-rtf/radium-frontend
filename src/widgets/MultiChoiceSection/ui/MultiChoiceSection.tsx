@@ -1,10 +1,10 @@
 'use client';
 
-import { Button, Card, Checkbox, Icon, cn } from '@/shared';
+import { Button, Card, Checkbox, Icon, cn, getNoun } from '@/shared';
 import { FC, useContext, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { answerSchema, answerSchemaType } from '../lib/answerSchema';
+import { answerSchema, answerSchemaType } from '../model/answerSchema';
 import {
   MultiChoiceSectionResponseDto,
   useAnswerCourseMultiChoiceSectionMutation,
@@ -20,30 +20,39 @@ interface IProps {
 }
 
 export const MultiChoiceSection: FC<IProps> = ({ sectionData }) => {
-  const [verdict, setVerdict] = useState<
-    MultiChoiceSectionResponseDto['verdict']
-  >(sectionData.verdict);
-  const [answer, { isLoading, isError }] =
-    useAnswerCourseMultiChoiceSectionMutation();
+  const [answer] = useAnswerCourseMultiChoiceSectionMutation();
 
   // Form init
-  const { register, handleSubmit } = useForm<answerSchemaType>({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setError,
+    formState: {
+      errors,
+      isSubmitSuccessful,
+      isSubmitting,
+      isSubmitted,
+      isValid,
+    },
+  } = useForm<answerSchemaType>({
     resolver: zodResolver(answerSchema),
     defaultValues: {
-      multiChoice: {
-        answer: sectionData.answers || [],
-      },
+      multiChoice: { answer: sectionData.answers || [] },
     },
   });
-  const onSubmitHandler: SubmitHandler<answerSchemaType> = (data) => {
-    answer({
+  const onSubmitHandler: SubmitHandler<answerSchemaType> = async (body) => {
+    await answer({
       id: sectionData.id,
-      ...data,
+      ...body,
     })
       .unwrap()
-      .then((result) => {
-        result && setVerdict(result.verdict);
-      });
+      .then((res) => {
+        if (res.verdict === 'WA') {
+          setError('multiChoice.answer', { message: 'Неправильно!' });
+        }
+      })
+      .catch(() => setError('multiChoice.answer', { message: 'Ошибка!' }));
   };
 
   // Edit checks
@@ -64,6 +73,8 @@ export const MultiChoiceSection: FC<IProps> = ({ sectionData }) => {
     );
   }
 
+  console.log(errors);
+
   return (
     <Card asChild>
       <form
@@ -83,7 +94,7 @@ export const MultiChoiceSection: FC<IProps> = ({ sectionData }) => {
           <ul>
             {sectionData.variants.map((variant) => (
               <li key={variant} className='py-2'>
-                <Checkbox {...register('multiChoice.answer')} value={variant}>
+                <Checkbox value={variant} {...register(`multiChoice.answer`)}>
                   {variant}
                 </Checkbox>
               </li>
@@ -111,31 +122,66 @@ export const MultiChoiceSection: FC<IProps> = ({ sectionData }) => {
           )}
           {(!isEditAllowed || !isEditMode) && (
             <>
-              <div className='flex flex-col gap-2 text-[0.8125rem]'>
-                {verdict === 'OK' && (
-                  <span className='text-secondary-default'>Верно!</span>
-                )}
-                {verdict === 'WA' && (
-                  <span className='text-destructive-default'>Неправильно!</span>
-                )}
-              </div>
-              {!isLoading && !isError && (
-                <span
-                  className={cn(
-                    'text-[0.8125rem]',
-                    verdict === 'OK' && 'text-secondary-default'
-                  )}
-                >
-                  {verdict === 'OK' &&
-                    `${sectionData.maxScore} / ${sectionData.maxScore}`}
-                  {verdict === 'WA' && `${0} / ${sectionData.maxScore}`}
-                  {verdict === '' && `${sectionData.maxScore}`}
-                  <span> баллов</span>
-                </span>
+              {!isSubmitting && (
+                <>
+                  <span className='text-[0.8125rem] text-text-primary'>
+                    {sectionData.verdict === '' &&
+                      `${sectionData.maxAttempts} ${getNoun(
+                        sectionData.maxAttempts,
+                        'попытка',
+                        'попытки',
+                        'попыток'
+                      )}`}
+                    {sectionData.verdict !== '' &&
+                      `Осталось ${sectionData.attempts} ${getNoun(
+                        sectionData.attempts,
+                        'попытка',
+                        'попытки',
+                        'попыток'
+                      )}`}
+                    {}
+                  </span>
+                  <span
+                    className={cn(
+                      'text-[0.8125rem]',
+                      sectionData.verdict === 'OK' && 'text-secondary-default'
+                    )}
+                  >
+                    {(sectionData.verdict === 'OK' &&
+                      `${sectionData.maxScore} / ${sectionData.maxScore}`) ||
+                      (sectionData.verdict === 'WA' &&
+                        `${0} / ${sectionData.maxScore}`) ||
+                      (sectionData.verdict === '' && `${sectionData.maxScore}`)}
+                    <span> баллов</span>
+                  </span>
+                </>
               )}
-              <Button type='reset'>Сбросить</Button>
-              <Button disabled={isLoading} type='submit' color='accent'>
-                Ответить
+              <Button
+                type='reset'
+                onClick={() => reset({ multiChoice: { answer: [] } })}
+              >
+                <Icon type='reset' />
+              </Button>
+              <Button
+                className='w-64'
+                color={(!isValid && isSubmitted && 'destructive') || 'accent'}
+                type='submit'
+                disabled={(!isValid && !isSubmitted) || isSubmitting}
+              >
+                <Icon
+                  type={
+                    (isSubmitSuccessful && 'submit') ||
+                    (isSubmitting && 'loading') ||
+                    (!isValid && isSubmitted && 'alert') ||
+                    'success'
+                  }
+                  className='shrink-0 text-inherit'
+                />
+                <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
+                  {(errors.multiChoice?.answer &&
+                    errors.multiChoice.answer.message) ||
+                    'Ответить'}
+                </span>
               </Button>
             </>
           )}

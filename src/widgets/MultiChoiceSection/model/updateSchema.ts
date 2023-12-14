@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 export const updateSchema = z.object({
-  maxAttempts: z.number(),
-  maxScore: z.number(),
+  maxAttempts: z.number().nonnegative(),
+  maxScore: z.number().nonnegative(),
   multichoice: z.object({
     answer: z.string().array().min(1, 'Необходимо выбрать как минимум 1 ответ'),
     question: z.string().min(1),
