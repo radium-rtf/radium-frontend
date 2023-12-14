@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import React from 'react';
+import { useLayoutEffect } from 'react';
 import { Header } from '@/widgets/Header';
 import { CourseBrief } from '@/widgets/CourseBrief';
 import { CourseBanner } from '@/widgets/CourseBanner';
@@ -22,6 +22,12 @@ export default function Page() {
   };
 
   const { data: course } = useGetCourseQuery(params.courseId);
+
+  useLayoutEffect(() => {
+    if (course) {
+      window.document.title = course.name;
+    }
+  }, [course]);
 
   const searchParams = useSearchParams();
 

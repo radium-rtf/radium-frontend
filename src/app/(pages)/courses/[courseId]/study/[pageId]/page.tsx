@@ -1,5 +1,5 @@
 'use client';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useLayoutEffect } from 'react';
 import { CodeSection } from '@/widgets/CodeSection';
 import { TextSection } from '@/widgets/TextSection';
 import { ChoiceSection } from '@/widgets/ChoiceSection';
@@ -48,9 +48,13 @@ export default function Page({ params }: IProps) {
       );
   }, [params.courseId, params.pageId, page]);
 
-  if (!page) return null;
+  useLayoutEffect(() => {
+    if (page) {
+      window.document.title = page.name;
+    }
+  }, [page]);
 
-  window.document.title = `${page.name}`;
+  if (!page) return null;
 
   return (
     <>

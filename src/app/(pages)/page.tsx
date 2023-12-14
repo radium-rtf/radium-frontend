@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import { useLayoutEffect } from 'react';
 import { useGetAccountCoursesQuery } from '@/entities/Course';
 import { Header, HeaderSkeleton } from '@/widgets/Header';
 import Link from 'next/link';
@@ -17,6 +17,10 @@ import { Footer } from '@/widgets/Footer';
 export default function Home() {
   const { data: courses, isLoading } = useGetAccountCoursesQuery();
   const { data: session } = useSession();
+
+  useLayoutEffect(() => {
+    window.document.title = 'Мои курсы';
+  }, []);
 
   if (isLoading) {
     return (
@@ -46,7 +50,7 @@ export default function Home() {
       <main className='container mx-auto flex flex-grow flex-col gap-6'>
         {(!!courses.authorship.length ||
           session?.user.roles.isAuthor ||
-          session?.user.roles.isTeacher) && (
+          session?.user.roles.isCoauthor) && (
           <>
             <h2 className='ml-6 font-mono text-[2rem] font-bold leading-[normal] text-primary-default md:ml-16 lg:col-span-2 xl:col-span-3'>
               В вашем авторстве

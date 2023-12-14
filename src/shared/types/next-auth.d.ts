@@ -19,6 +19,7 @@ declare module 'next-auth' {
       roles: {
         isTeacher: boolean;
         isAuthor: boolean;
+        isCoauthor: boolean;
       };
     } & DefaultSession['user'];
   }

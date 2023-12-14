@@ -1,6 +1,7 @@
 'use client';
 import { GroupReportTable, useCourseReportQuery } from '@/entities/Group';
 import { useGroupQuery } from '@/entities/Group/api/groupApi';
+import { useLayoutEffect } from 'react';
 
 export default function Page({
   params,
@@ -15,6 +16,12 @@ export default function Page({
     courseId: params.courseId,
   });
   const { data: group } = useGroupQuery(params.groupId);
+
+  useLayoutEffect(() => {
+    if (group) {
+      window.document.title = group.name;
+    }
+  }, [group]);
 
   if (!courseReport || !group) {
     return null;

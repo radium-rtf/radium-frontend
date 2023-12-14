@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ReactNode } from 'react';
+import { ReactNode, useLayoutEffect } from 'react';
 import { cn, Icon, List, Progress } from '@/shared';
 import { Header } from '@/widgets/Header';
 import { useParams } from 'next/navigation';
@@ -24,6 +24,12 @@ export default function CourseStudyLayout({
   const { data: course } = useGetCourseQuery(params.courseId!, {
     skip: !params.courseId,
   });
+
+  useLayoutEffect(() => {
+    if (course) {
+      window.document.title = course.name;
+    }
+  }, [course]);
 
   const { isAuthor, isCoauthor } = useCourseRoles(course);
   const isEditAllowed = isAuthor || isCoauthor;
