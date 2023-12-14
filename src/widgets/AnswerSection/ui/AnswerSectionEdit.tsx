@@ -30,7 +30,7 @@ export const AnswerSectionEdit: FC<AnswerSectionEditProps> = ({
     resolver: zodResolver(updateSchema),
     defaultValues: {
       maxScore: sectionData.maxScore,
-      maxAttempts: 0,
+      maxAttempts: sectionData.maxAttempts,
       answer: {
         question: sectionData.content,
       },

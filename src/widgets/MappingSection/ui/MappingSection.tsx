@@ -222,7 +222,7 @@ export const MappingSection: FC<MappingSectionProps> = ({ sectionData }) => {
                     )}
                   >
                     {(sectionData.verdict === 'OK' &&
-                      `${sectionData.maxScore} / ${sectionData.maxScore}`) ||
+                      `${sectionData.score} / ${sectionData.maxScore}`) ||
                       (sectionData.verdict === 'WA' &&
                         `${0} / ${sectionData.maxScore}`) ||
                       (sectionData.verdict === '' && `${sectionData.maxScore}`)}

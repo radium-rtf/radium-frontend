@@ -218,7 +218,7 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
                     )}
                   >
                     {verdict === 'OK' &&
-                      `${sectionData.maxScore} / ${sectionData.maxScore}`}
+                      `${sectionData.score} / ${sectionData.maxScore}`}
                     {verdict === 'WA' && `${0} / ${sectionData.maxScore}`}
                     {verdict === '' && `${sectionData.maxScore}`}
                     <span>

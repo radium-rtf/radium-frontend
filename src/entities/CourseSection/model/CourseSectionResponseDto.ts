@@ -15,5 +15,5 @@ export interface SectionResponseDto {
     | 'code'
     | 'permutation'
     | 'mapping';
-  verdict: 'WA' | 'OK' | 'WAIT' | '';
+  verdict: 'WA' | 'OK' | 'WAIT' | 'REVIEWED' | '';
 }
