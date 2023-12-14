@@ -4,6 +4,8 @@ export interface SectionResponseDto {
   order: number;
   score: number;
   maxScore: number;
+  attempts: number;
+  maxAttempts: number;
   type:
     | 'choice'
     | 'multiChoice'

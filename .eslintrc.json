@@ -6,7 +6,6 @@
   ],
   "rules": {
     "import/no-unresolved": "off",
-    "import/named": "off",
-    "import/no-cycle": "error"
+    "import/named": "off"
   }
 }

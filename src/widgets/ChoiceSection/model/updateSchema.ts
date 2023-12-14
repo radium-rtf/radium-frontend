@@ -1,10 +1,10 @@
 import { z } from 'zod';
 
 export const updateSchema = z.object({
-  maxAttempts: z.number(),
-  maxScore: z.number(),
+  maxAttempts: z.number().nonnegative('Негативные попытки!').int(),
+  maxScore: z.number().nonnegative('Негативные баллы!').int(),
   choice: z.object({
-    answer: z.string().min(1, 'chort'),
+    answer: z.string().min(1, 'Необходимо выбрать ответ'),
     question: z.string().min(1),
     variants: z
       .object({ value: z.string() })

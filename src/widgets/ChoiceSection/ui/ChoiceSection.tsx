@@ -10,7 +10,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { FC, useContext, useState } from 'react';
 import { ChoiceSectionResponseDto } from '@/entities/CourseSection';
 import { Button, Card, Icon, Radio, cn } from '@/shared';
-import { answerSchema, answerSchemaType } from '../lib/answerSchema';
+import { answerSchema, answerSchemaType } from '../model/answerSchema';
 import { useAnswerCourseChoiceSectionMutation } from '@/entities/CourseSection';
 
 interface ChoiceSectionProps {
@@ -27,30 +27,54 @@ export const ChoiceSection: FC<ChoiceSectionProps> = ({ sectionData }) => {
     session.data?.user.roles.isTeacher ||
     false;
 
-  const [verdict, setVerdict] = useState<ChoiceSectionResponseDto['verdict']>(
-    sectionData.verdict
-  );
-
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    reset,
+    setError,
+    formState: {
+      errors,
+      isSubmitSuccessful,
+      isSubmitting,
+      isSubmitted,
+      isValid,
+    },
   } = useForm<answerSchemaType>({
     resolver: zodResolver(answerSchema),
+    defaultValues: {
+      choice: { answer: sectionData.answer },
+    },
   });
 
-  const [answer, { isLoading, isError }] =
-    useAnswerCourseChoiceSectionMutation();
+  const [answer] = useAnswerCourseChoiceSectionMutation();
 
-  const onSubmitHandler: SubmitHandler<answerSchemaType> = (body) => {
-    answer({
+  const onSubmitHandler: SubmitHandler<answerSchemaType> = async (body) => {
+    await answer({
       id: sectionData.id,
       ...body,
     })
       .unwrap()
-      .then((result) => {
-        result && setVerdict(result.verdict);
-      });
+      .then((res) => {
+        if (res.verdict === 'WA') {
+          setError('choice.answer', { message: 'Неправильно!' });
+        }
+      })
+      .catch(() => setError('choice.answer', { message: 'Ошибка!' }));
+  };
+
+  const getAttemptsDisplayName = (attempts: number) => {
+    attempts %= 100;
+    if (attempts >= 5 && attempts <= 20) {
+      return 'попыток';
+    }
+    attempts %= 10;
+    if (attempts === 1) {
+      return 'попытка';
+    }
+    if (attempts >= 2 && attempts <= 4) {
+      return 'Попытки';
+    }
+    return 'попыток';
   };
 
   if (isEditAllowed && isEditMode && isEditing) {
@@ -81,17 +105,12 @@ export const ChoiceSection: FC<ChoiceSectionProps> = ({ sectionData }) => {
           <ul>
             {sectionData.variants.map((variant) => (
               <li key={variant} className='py-2'>
-                <Radio
-                  defaultChecked={sectionData.answer === variant}
-                  value={variant}
-                  {...register('choice.answer')}
-                >
+                <Radio value={variant} {...register('choice.answer')}>
                   {variant}
                 </Radio>
               </li>
             ))}
           </ul>
-          {errors.choice?.answer && <p>{errors.choice.answer.message}</p>}
         </main>
         <footer className='flex items-center gap-4 place-self-end'>
           {isEditAllowed && isEditMode && (
@@ -114,31 +133,59 @@ export const ChoiceSection: FC<ChoiceSectionProps> = ({ sectionData }) => {
           )}
           {(!isEditAllowed || !isEditMode) && (
             <>
-              <div className='flex flex-col gap-2 text-[0.8125rem]'>
-                {verdict === 'OK' && (
-                  <span className='text-secondary-default'>Верно!</span>
-                )}
-                {verdict === 'WA' && (
-                  <span className='text-destructive-default'>Неправильно!</span>
-                )}
-              </div>
-              {!isLoading && !isError && (
-                <span
-                  className={cn(
-                    'text-[0.8125rem]',
-                    verdict === 'OK' && 'text-secondary-default'
-                  )}
-                >
-                  {verdict === 'OK' &&
-                    `${sectionData.maxScore} / ${sectionData.maxScore}`}
-                  {verdict === 'WA' && `${0} / ${sectionData.maxScore}`}
-                  {verdict === '' && `${sectionData.maxScore}`}
-                  <span> баллов</span>
-                </span>
+              {!isSubmitting && (
+                <>
+                  <span className='text-[0.8125rem] text-text-primary'>
+                    {sectionData.verdict === '' &&
+                      `${sectionData.maxAttempts} ${getAttemptsDisplayName(
+                        sectionData.maxAttempts
+                      )}`}
+                    {sectionData.verdict !== '' &&
+                      `Осталось ${
+                        sectionData.attempts
+                      } ${getAttemptsDisplayName(sectionData.attempts)}`}
+                    {}
+                  </span>
+                  <span
+                    className={cn(
+                      'text-[0.8125rem]',
+                      sectionData.verdict === 'OK' && 'text-secondary-default'
+                    )}
+                  >
+                    {(sectionData.verdict === 'OK' &&
+                      `${sectionData.maxScore} / ${sectionData.maxScore}`) ||
+                      (sectionData.verdict === 'WA' &&
+                        `${0} / ${sectionData.maxScore}`) ||
+                      (sectionData.verdict === '' && `${sectionData.maxScore}`)}
+                    <span> баллов</span>
+                  </span>
+                </>
               )}
-              <Button type='reset'>Сбросить</Button>
-              <Button disabled={isLoading} type='submit' color='accent'>
-                Ответить
+              <Button
+                type='reset'
+                onClick={() => reset({ choice: { answer: '' } })}
+              >
+                <Icon type='reset' />
+              </Button>
+              <Button
+                className='w-64'
+                color={(!isValid && isSubmitted && 'destructive') || 'accent'}
+                type='submit'
+                disabled={(!isValid && !isSubmitted) || isSubmitting}
+              >
+                <Icon
+                  type={
+                    (isSubmitSuccessful && 'submit') ||
+                    (isSubmitting && 'loading') ||
+                    (!isValid && isSubmitted && 'alert') ||
+                    'success'
+                  }
+                  className='text-inherit'
+                />
+                <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
+                  {(errors.choice?.answer && errors.choice.answer.message) ||
+                    'Ответить'}
+                </span>
               </Button>
             </>
           )}

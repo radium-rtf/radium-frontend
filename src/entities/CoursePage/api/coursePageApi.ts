@@ -3,7 +3,7 @@ import { CoursePageResponseDto } from '../model/CoursePageResponseDto';
 import { CreateCoursePageRequestDto } from '../model/CreateCoursePageRequestDto';
 import { UpdateCoursePageRequestDto } from '../model/UpdateCoursePageRequestDto';
 
-const coursePageApi = emptyApi.injectEndpoints({
+export const coursePageApi = emptyApi.injectEndpoints({
   endpoints: (builder) => ({
     getPage: builder.query<CoursePageResponseDto, string>({
       query: (id) => ({

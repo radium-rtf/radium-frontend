@@ -15,7 +15,7 @@ import {
 import { DevTool } from '@hookform/devtools';
 import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
-import { updateSchema, updateSchemaType } from '../lib/updateSchema';
+import { updateSchema, updateSchemaType } from '../model/updateSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 interface ChoiceSectionEditProps {
@@ -39,9 +39,9 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({
     resolver: zodResolver(updateSchema),
     defaultValues: {
       maxScore: sectionData.maxScore,
-      maxAttempts: 0,
+      maxAttempts: sectionData.maxAttempts,
       choice: {
-        answer: sectionData.answer,
+        answer: '',
         question: sectionData.content,
         variants: sectionData.variants
           .map((v) => ({
@@ -179,7 +179,7 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({
               pageId={sectionData.pageId}
             />
             <Button
-              className='w-64'
+              className='w-64 shrink-0'
               color='outlined'
               type='submit'
               disabled={!isValid}

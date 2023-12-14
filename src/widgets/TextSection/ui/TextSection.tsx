@@ -35,11 +35,11 @@ export const TextSection: FC<IProps> = ({ sectionData }) => {
           {!isEditing && (
             <Button
               color='outlined'
-              className='self-end'
+              className='w-64 self-end'
               onClick={() => setIsEditing(true)}
             >
               <Icon type='edit' className='shrink-0' />
-              <span className='ml-[calc(50%-34px)] w-64 -translate-x-1/2'>
+              <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
                 Редактировать
               </span>
             </Button>
@@ -47,7 +47,7 @@ export const TextSection: FC<IProps> = ({ sectionData }) => {
           {isEditing && (
             <Button
               color='outlined'
-              className='self-end'
+              className='w-64 self-end'
               onClick={() =>
                 updateSection({
                   sectionId: sectionData.id,
@@ -58,7 +58,7 @@ export const TextSection: FC<IProps> = ({ sectionData }) => {
               }
             >
               <Icon type='save' className='shrink-0' />
-              <span className='ml-[calc(50%-34px)] w-64 -translate-x-1/2'>
+              <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
                 Сохранить
               </span>
             </Button>
