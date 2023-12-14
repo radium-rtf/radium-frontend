@@ -24,6 +24,8 @@ export {
   useUpdateCourseBannerMutation,
   useUpdateCourseLogoMutation,
   useAddCourseCoAuthorMutation,
+  useAddCourseContactMutation,
+  useDeleteCourseContactMutation,
 } from './api/courseApi';
 export { useLastCoursePage } from './lib/useLastCoursePage';
 export { useCourseRoles } from './lib/useCourseRoles';

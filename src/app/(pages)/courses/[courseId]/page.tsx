@@ -93,6 +93,7 @@ export default function Page() {
                   coauthors={course.coauthors}
                 />
                 <CourseContacts
+                  courseId={course.id}
                   isEditAllowed={isEditAllowed}
                   contacts={course.links}
                 />

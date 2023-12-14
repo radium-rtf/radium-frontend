@@ -11,6 +11,7 @@ export interface CourseResponseDto {
   id: string;
   links: [
     {
+      id: string;
       link: string;
       name: string;
     },

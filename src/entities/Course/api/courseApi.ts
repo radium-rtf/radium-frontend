@@ -6,6 +6,8 @@ import { CourseUpdateBannerRequestDto } from '../model/CourseUpdateBannerRequest
 import { AccountCoursesResponseDto } from '../model/AccountCoursesResponseDto';
 import { CourseUpdateLogoRequestDto } from '../model/CourseUpdateLogoRequestDto';
 import { CourseAddCoAuthorRequestDto } from '../model/CourseAddCoAuthorRequestDto';
+import { CourseAddContactResponseDto } from '../model/CourseAddContactResponseDto';
+import { CourseAddContactRequestDto } from '../model/CourseAddContactRequestDto';
 
 const courseApi = emptyApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -145,6 +147,31 @@ const courseApi = emptyApi.injectEndpoints({
         { type: 'courses', id: 'LIST' },
       ],
     }),
+    addCourseContact: builder.mutation<
+      CourseAddContactResponseDto,
+      CourseAddContactRequestDto
+    >({
+      query: ({ courseId, ...body }) => ({
+        url: `/course/link/${courseId}`,
+        method: 'POST',
+        body: body,
+      }),
+      invalidatesTags: (_1, _2, args) => [
+        { type: 'courses', id: args.courseId },
+      ],
+    }),
+    deleteCourseContact: builder.mutation<
+      void,
+      { contactId: string; courseId: string }
+    >({
+      query: ({ contactId }) => ({
+        url: `/course/link/${contactId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (_1, _2, args) => [
+        { type: 'courses', id: args.courseId },
+      ],
+    }),
   }),
   overrideExisting: true,
 });
@@ -162,4 +189,6 @@ export const {
   useUpdateCourseBannerMutation,
   useUpdateCourseLogoMutation,
   useAddCourseCoAuthorMutation,
+  useAddCourseContactMutation,
+  useDeleteCourseContactMutation,
 } = courseApi;
