@@ -12,7 +12,6 @@ import {
   useFieldArray,
   useForm,
 } from 'react-hook-form';
-import { DevTool } from '@hookform/devtools';
 import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { updateSchema, updateSchemaType } from '../model/updateSchema';
@@ -192,7 +191,6 @@ export const MultiChoiceSectionEdit: FC<MultiChoiceSectionEditProps> = ({
           )}
         </form>
       </Card>
-      <DevTool control={control} />
     </>
   );
 };

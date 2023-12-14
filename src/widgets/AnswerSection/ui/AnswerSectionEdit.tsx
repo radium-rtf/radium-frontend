@@ -7,7 +7,6 @@ import {
 import { Button, Card, Icon, Input } from '@/shared';
 import { FC } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { DevTool } from '@hookform/devtools';
 import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { updateSchema, updateSchemaType } from '../lib/updateSchema';
@@ -114,7 +113,6 @@ export const AnswerSectionEdit: FC<AnswerSectionEditProps> = ({
           {errors.answer?.question && <p>{errors.answer.question.message}</p>}
         </form>
       </Card>
-      <DevTool control={control} />
     </>
   );
 };

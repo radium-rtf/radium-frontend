@@ -1,17 +1,15 @@
 'use client';
-
+import { FC } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
+import { CourseSectionDelete } from '@/features/CourseSectionDelete';
+import { Button, Card, Icon, Input } from '@/shared';
+import { updateSchema, updateSchemaType } from '../model/updateSchema';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import {
   ShortAnswerSectionResponseDto,
   useUpdateCourseShortAnswerSectionMutation,
 } from '@/entities/CourseSection';
-import { Button, Card, Icon, Input } from '@/shared';
-import { FC } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { DevTool } from '@hookform/devtools';
-import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
-import { CourseSectionDelete } from '@/features/CourseSectionDelete';
-import { updateSchema, updateSchemaType } from '../model/updateSchema';
-import { zodResolver } from '@hookform/resolvers/zod';
 
 interface ShortAnswerSectionEditProps {
   sectionData: ShortAnswerSectionResponseDto;
@@ -118,7 +116,6 @@ export const ShortAnswerSectionEdit: FC<ShortAnswerSectionEditProps> = ({
           )}
         </form>
       </Card>
-      <DevTool control={control} />
     </>
   );
 };
