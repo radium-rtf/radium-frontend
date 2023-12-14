@@ -59,7 +59,7 @@ export default function CourseStudyLayout({
       </Header>
       <main className='mb-8 flex flex-grow items-start gap-8 px-12'>
         <CourseEditContextWrapper>
-          <nav className='sticky top-[8.625rem] -ml-6 flex max-h-[calc(100vh-8.65rem)] w-[calc(16.25rem)] flex-grow-0 flex-col'>
+          <nav className='sticky top-[8.625rem] -ml-6 flex max-h-[calc(100vh-8.65rem)] w-[calc(16.25rem)] shrink-0 flex-grow-0 flex-col'>
             {isEditAllowed && <CourseEditToggle />}
             <Progress
               className='px-6 py-2.5'
@@ -73,18 +73,16 @@ export default function CourseStudyLayout({
                 <Link
                   href={`/groups/${group.id}/courses/${course.id}`}
                   className={cn(
-                    'flex',
-                    'rounded-lg border border-transparent transition-colors hover:border-white/10 hover:bg-white/5',
-                    'px-[1.5rem] py-[0.5625rem]'
+                    'flex w-64 rounded-lg border border-transparent px-6 py-2 transition-colors hover:border-white/10 hover:bg-white/5'
                   )}
                 >
-                  <Icon type={'group'} />
-                  <List.Subtitle className='text-sm'>
-                    {group.name}
-                  </List.Subtitle>
+                  <Icon type='group' className='text-primary-default' />
+                  <List.Content>
+                    <List.Title>{group.name}</List.Title>
+                  </List.Content>
                   <Icon
-                    className='absolute right-[1.5rem] h-3 w-3'
-                    type={'chevron-right'}
+                    className='h-3 w-3 text-primary-default'
+                    type='chevron-right'
                   />
                 </Link>
               </List.Item>
