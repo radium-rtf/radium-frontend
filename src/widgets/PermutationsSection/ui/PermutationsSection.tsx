@@ -1,5 +1,5 @@
 'use client';
-import { Button, Card, Icon, PermutationItem, cn } from '@/shared';
+import { Button, Card, Icon, PermutationItem, cn, getNoun } from '@/shared';
 import { FC, useContext, useState } from 'react';
 import {
   DndContext,
@@ -25,9 +25,9 @@ import {
   useFieldArray,
   useForm,
 } from 'react-hook-form';
-import { answerSchemaType } from '../lib/answerSchema';
+import { answerSchemaType } from '../model/answerSchema';
 import { PermutationSectionResponseDto } from '@/entities/CourseSection';
-import { dragEndHandler } from '../lib/dragEndHandler';
+import { dragEndHandler } from '../model/dragEndHandler';
 import { CourseEditContext } from '@/features/CourseEditContext';
 import { useSession } from 'next-auth/react';
 import { PermutationsSectionEdit } from './PermutationsSectionEdit';
@@ -41,7 +41,20 @@ interface IProps {
 
 export const PermutationSection: FC<IProps> = ({ sectionData }) => {
   // Form init
-  const { setValue, handleSubmit, control } = useForm<answerSchemaType>({
+  const {
+    handleSubmit,
+    reset,
+    setError,
+    setValue,
+    control,
+    formState: {
+      errors,
+      isSubmitSuccessful,
+      isSubmitting,
+      isSubmitted,
+      isValid,
+    },
+  } = useForm<answerSchemaType>({
     values: {
       permutation: {
         answer: (sectionData.answers || sectionData.variants).map((val) => ({
@@ -56,15 +69,20 @@ export const PermutationSection: FC<IProps> = ({ sectionData }) => {
     name: 'permutation.answer',
   });
 
-  const onSubmitHandler: SubmitHandler<answerSchemaType> = (data) => {
-    answerPermutationsSection({
+  const onSubmitHandler: SubmitHandler<answerSchemaType> = async (data) => {
+    await answer({
       id: sectionData.id,
       permutation: {
         answer: data.permutation.answer.map((val) => val.value),
       },
     })
       .unwrap()
-      .then((result) => setVerdict(result.verdict));
+      .then((res) => {
+        if (res.verdict === 'WA') {
+          setError('permutation.answer', { message: 'Неправильно!' });
+        }
+      })
+      .catch(() => setError('permutation.answer', { message: 'Ошибка!' }));
   };
 
   // DnD init
@@ -75,12 +93,7 @@ export const PermutationSection: FC<IProps> = ({ sectionData }) => {
     })
   );
 
-  // Verdict init
-  const [verdict, setVerdict] = useState<
-    PermutationSectionResponseDto['verdict']
-  >(sectionData.verdict);
-  const [answerPermutationsSection, { isLoading, isError }] =
-    useAnswerCoursePermutationsSectionMutation();
+  const [answer] = useAnswerCoursePermutationsSectionMutation();
 
   // Edit checks
   const session = useSession();
@@ -133,6 +146,7 @@ export const PermutationSection: FC<IProps> = ({ sectionData }) => {
             name='permutation.answer'
             control={control}
             render={() => {
+              // clearErrors('permutation.answer');
               return (
                 <SortableContext
                   items={fields}
@@ -156,7 +170,7 @@ export const PermutationSection: FC<IProps> = ({ sectionData }) => {
                 sectionId={sectionData.id}
               />
               <Button
-                className='w-64 shrink-0'
+                className='w-64'
                 color='outlined'
                 onClick={() => setIsEditing(true)}
               >
@@ -169,31 +183,77 @@ export const PermutationSection: FC<IProps> = ({ sectionData }) => {
           )}
           {(!isEditAllowed || !isEditMode) && (
             <>
-              <div className='flex flex-col gap-2 text-[0.8125rem]'>
-                {verdict === 'OK' && (
-                  <span className='text-secondary-default'>Верно!</span>
-                )}
-                {verdict === 'WA' && (
-                  <span className='text-destructive-default'>Неправильно!</span>
-                )}
-              </div>
-              {!isLoading && !isError && (
-                <span
-                  className={cn(
-                    'text-[0.8125rem]',
-                    verdict === 'OK' && 'text-secondary-default'
-                  )}
-                >
-                  {verdict === 'OK' &&
-                    `${sectionData.maxScore} / ${sectionData.maxScore}`}
-                  {verdict === 'WA' && `${0} / ${sectionData.maxScore}`}
-                  {verdict === '' && `${sectionData.maxScore}`}
-                  <span> баллов</span>
-                </span>
+              {!isSubmitting && (
+                <>
+                  <span className='text-[0.8125rem] text-text-primary'>
+                    {sectionData.verdict === '' &&
+                      `${sectionData.maxAttempts} ${getNoun(
+                        sectionData.maxAttempts,
+                        'попытка',
+                        'попытки',
+                        'попыток'
+                      )}`}
+                    {sectionData.verdict !== '' &&
+                      `Осталось ${sectionData.attempts} ${getNoun(
+                        sectionData.maxAttempts,
+                        'попытка',
+                        'попытки',
+                        'попыток'
+                      )}`}
+                    {}
+                  </span>
+                  <span
+                    className={cn(
+                      'text-[0.8125rem]',
+                      sectionData.verdict === 'OK' && 'text-secondary-default'
+                    )}
+                  >
+                    {(sectionData.verdict === 'OK' &&
+                      `${sectionData.maxScore} / ${sectionData.maxScore}`) ||
+                      (sectionData.verdict === 'WA' &&
+                        `${0} / ${sectionData.maxScore}`) ||
+                      (sectionData.verdict === '' && `${sectionData.maxScore}`)}
+                    <span> баллов</span>
+                  </span>
+                </>
               )}
-              <Button type='reset'>Сбросить</Button>
-              <Button disabled={isLoading} type='submit' color='accent'>
-                Ответить
+              <Button
+                type='reset'
+                onClick={() =>
+                  reset({
+                    permutation: {
+                      answer: (sectionData.answers || sectionData.variants).map(
+                        (val) => ({
+                          value: val,
+                        })
+                      ),
+                    },
+                  })
+                }
+              >
+                <Icon type='reset' />
+              </Button>
+              <Button
+                className='w-64'
+                color={(!isValid && isSubmitted && 'destructive') || 'accent'}
+                type='submit'
+                disabled={(!isValid && !isSubmitted) || isSubmitting}
+              >
+                <Icon
+                  type={
+                    (isSubmitSuccessful && 'submit') ||
+                    (isSubmitting && 'loading') ||
+                    (!isValid && isSubmitted && 'alert') ||
+                    'success'
+                  }
+                  className='shrink-0 text-inherit'
+                />
+                <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
+                  {(errors.permutation?.answer &&
+                    !isValid &&
+                    errors.permutation.answer.message) ||
+                    'Ответить'}
+                </span>
               </Button>
             </>
           )}

@@ -9,7 +9,7 @@ import {
   useFieldArray,
   useForm,
 } from 'react-hook-form';
-import { updateSchemaType } from '../lib/updateSchema';
+import { updateSchema, updateSchemaType } from '../model/updateSchema';
 import { Button, Card, Icon, Input } from '@/shared';
 import {
   DndContext,
@@ -19,7 +19,7 @@ import {
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
-import { dragEndHandler } from '../lib/dragEndHandler';
+import { dragEndHandler } from '../model/dragEndHandler';
 import {
   restrictToParentElement,
   restrictToVerticalAxis,
@@ -33,6 +33,7 @@ import { DevTool } from '@hookform/devtools';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
 import { PermutationsEditItem } from './PermutationsEditItem';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 interface PermutationsSectionEditProps {
   sectionData: PermutationSectionResponseDto;
@@ -55,6 +56,7 @@ export const PermutationsSectionEdit: FC<PermutationsSectionEditProps> = ({
     setFocus,
     formState: { isValid },
   } = useForm<updateSchemaType>({
+    resolver: zodResolver(updateSchema),
     defaultValues: {
       maxScore: sectionData.maxScore,
       maxAttempts: 0,
