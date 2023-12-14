@@ -3,7 +3,7 @@ import {
   MappingSectionResponseDto,
   useAnswerCourseMappingSectionMutation,
 } from '@/entities/CourseSection';
-import { Button, Card, Icon, cn } from '@/shared';
+import { Button, Card, Icon, cn, getNoun } from '@/shared';
 import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
 import { FC, Fragment, useContext, useState } from 'react';
 import {
@@ -12,8 +12,7 @@ import {
   useFieldArray,
   useForm,
 } from 'react-hook-form';
-import { answerSchemaType } from '../lib/answerSchema';
-import { DevTool } from '@hookform/devtools';
+import { answerSchemaType } from '../model/answerSchema';
 import {
   DndContext,
   DragEndEvent,
@@ -37,26 +36,35 @@ import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { CourseEditContext } from '@/features/CourseEditContext';
 import { useSession } from 'next-auth/react';
 import { MappingSectionEdit } from './MappingSectionEdit';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { answerSchema } from '../model/answerSchema';
 
 interface MappingSectionProps {
   sectionData: MappingSectionResponseDto;
 }
 
 export const MappingSection: FC<MappingSectionProps> = ({ sectionData }) => {
-  // Verdict
-  const [verdict, setVerdict] = useState<MappingSectionResponseDto['verdict']>(
-    sectionData.verdict
-  );
-
   // Answer
-  const [answerMappingSection, { isLoading, isError }] =
-    useAnswerCourseMappingSectionMutation();
+  const [answer] = useAnswerCourseMappingSectionMutation();
 
   // Form init
-  const { control, handleSubmit } = useForm<answerSchemaType>({
-    defaultValues: {
+  const {
+    control,
+    handleSubmit,
+    reset,
+    setError,
+    formState: {
+      errors,
+      isSubmitSuccessful,
+      isSubmitting,
+      isSubmitted,
+      isValid,
+    },
+  } = useForm<answerSchemaType>({
+    resolver: zodResolver(answerSchema),
+    values: {
       mapping: {
-        answer: (sectionData.answer || sectionData.variants).map((item) => ({
+        answer: (sectionData.answers || sectionData.variants).map((item) => ({
           value: item,
         })),
       },
@@ -68,15 +76,20 @@ export const MappingSection: FC<MappingSectionProps> = ({ sectionData }) => {
     name: 'mapping.answer',
   });
 
-  const onSubmitHandler: SubmitHandler<answerSchemaType> = (data) => {
-    answerMappingSection({
+  const onSubmitHandler: SubmitHandler<answerSchemaType> = async (data) => {
+    await answer({
       id: sectionData.id,
       mapping: {
         answer: data.mapping.answer.map((item) => item.value),
       },
     })
       .unwrap()
-      .then((result) => setVerdict(result.verdict));
+      .then((res) => {
+        if (res.verdict === 'WA') {
+          setError('mapping.answer', { message: 'Неправильно!' });
+        }
+      })
+      .catch(() => setError('mapping.answer', { message: 'Ошибка!' }));
   };
 
   // DnD init
@@ -111,6 +124,8 @@ export const MappingSection: FC<MappingSectionProps> = ({ sectionData }) => {
       />
     );
   }
+
+  console.log(errors, isValid);
 
   return (
     <Card asChild>
@@ -168,7 +183,7 @@ export const MappingSection: FC<MappingSectionProps> = ({ sectionData }) => {
                 sectionId={sectionData.id}
               />
               <Button
-                className='w-64 shrink-0'
+                className='w-64'
                 color='outlined'
                 onClick={() => setIsEditing(true)}
               >
@@ -181,36 +196,81 @@ export const MappingSection: FC<MappingSectionProps> = ({ sectionData }) => {
           )}
           {(!isEditAllowed || !isEditMode) && (
             <>
-              <div className='flex flex-col gap-2 text-[0.8125rem]'>
-                {verdict === 'OK' && (
-                  <span className='text-secondary-default'>Верно!</span>
-                )}
-                {verdict === 'WA' && (
-                  <span className='text-destructive-default'>Неправильно!</span>
-                )}
-              </div>
-              {!isLoading && !isError && (
-                <span
-                  className={cn(
-                    'text-[0.8125rem]',
-                    verdict === 'OK' && 'text-secondary-default'
-                  )}
-                >
-                  {verdict === 'OK' &&
-                    `${sectionData.maxScore} / ${sectionData.maxScore}`}
-                  {verdict === 'WA' && `${0} / ${sectionData.maxScore}`}
-                  {verdict === '' && `${sectionData.maxScore}`}
-                  <span> баллов</span>
-                </span>
+              {!isSubmitting && (
+                <>
+                  <span className='text-[0.8125rem] text-text-primary'>
+                    {sectionData.verdict === '' &&
+                      `${sectionData.maxAttempts} ${getNoun(
+                        sectionData.maxAttempts,
+                        'попытка',
+                        'попытки',
+                        'попыток'
+                      )}`}
+                    {sectionData.verdict !== '' &&
+                      `Осталось ${sectionData.attempts} ${getNoun(
+                        sectionData.maxAttempts,
+                        'попытка',
+                        'попытки',
+                        'попыток'
+                      )}`}
+                    {}
+                  </span>
+                  <span
+                    className={cn(
+                      'text-[0.8125rem]',
+                      sectionData.verdict === 'OK' && 'text-secondary-default'
+                    )}
+                  >
+                    {(sectionData.verdict === 'OK' &&
+                      `${sectionData.maxScore} / ${sectionData.maxScore}`) ||
+                      (sectionData.verdict === 'WA' &&
+                        `${0} / ${sectionData.maxScore}`) ||
+                      (sectionData.verdict === '' && `${sectionData.maxScore}`)}
+                    <span> баллов</span>
+                  </span>
+                </>
               )}
-              <Button type='reset'>Сбросить</Button>
-              <Button disabled={isLoading} type='submit' color='accent'>
-                Ответить
+              <Button
+                type='reset'
+                onClick={() =>
+                  reset({
+                    mapping: {
+                      answer: (sectionData.answers || sectionData.variants).map(
+                        (item) => ({
+                          value: item,
+                        })
+                      ),
+                    },
+                  })
+                }
+              >
+                <Icon type='reset' />
+              </Button>
+              <Button
+                className='w-64'
+                color={(!isValid && isSubmitted && 'destructive') || 'accent'}
+                type='submit'
+                disabled={(!isValid && !isSubmitted) || isSubmitting}
+              >
+                <Icon
+                  type={
+                    (isSubmitSuccessful && 'submit') ||
+                    (isSubmitting && 'loading') ||
+                    (!isValid && isSubmitted && 'alert') ||
+                    'success'
+                  }
+                  className='shrink-0 text-inherit'
+                />
+                <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
+                  {(errors.mapping?.answer &&
+                    !isValid &&
+                    errors.mapping.answer.message) ||
+                    'Ответить'}
+                </span>
               </Button>
             </>
           )}
         </footer>
-        <DevTool control={control} />
       </form>
     </Card>
   );

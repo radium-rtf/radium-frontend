@@ -9,7 +9,7 @@ import {
   useFieldArray,
   useForm,
 } from 'react-hook-form';
-import { updateSchema, updateSchemaType } from '../lib/updateSchema';
+import { updateSchema, updateSchemaType } from '../model/updateSchema';
 import {
   MappingSectionResponseDto,
   useUpdateCourseMappingSectionMutation,
@@ -59,13 +59,13 @@ export const MappingSectionEdit: FC<MappingSectionEditProps> = ({
     resolver: zodResolver(updateSchema),
     defaultValues: {
       maxScore: sectionData.maxScore,
-      maxAttempts: 0,
+      maxAttempts: sectionData.maxAttempts,
       mapping: {
         question: sectionData.content,
         keys: sectionData.keys
           .map((item) => ({ value: item }))
           .concat([{ value: '' }]),
-        answer: (sectionData.answer || sectionData.variants)
+        answer: (sectionData.answers || sectionData.variants)
           .map((item) => ({
             value: item,
           }))
@@ -98,9 +98,11 @@ export const MappingSectionEdit: FC<MappingSectionEditProps> = ({
       sectionId: sectionData.id,
       mapping: {
         question: data.mapping.question,
-        answer: data.mapping.answer.map((item) => item.value),
-        keys: data.mapping.keys.map((item) => item.value),
+        answer: data.mapping.answer.map((item) => item.value).toSpliced(-1, 1),
+        keys: data.mapping.keys.map((item) => item.value).toSpliced(-1, 1),
       },
+      maxAttempts: data.maxAttempts,
+      maxScore: data.maxScore,
     })
       .unwrap()
       .then(onSuccess);

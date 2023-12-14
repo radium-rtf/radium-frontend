@@ -18,7 +18,6 @@ import {
   verticalListSortingStrategy,
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
-import { DevTool } from '@hookform/devtools';
 import {
   Controller,
   SubmitHandler,
@@ -258,7 +257,6 @@ export const PermutationSection: FC<IProps> = ({ sectionData }) => {
             </>
           )}
         </footer>
-        <DevTool control={control} />
       </form>
     </Card>
   );
