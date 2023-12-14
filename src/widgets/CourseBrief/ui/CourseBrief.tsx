@@ -56,7 +56,7 @@ export const CourseBrief: FC<IProps> = ({
         <span className='flex-grow text-[0.8125rem]'>
           {modulesCount} {getNoun(modulesCount, 'тема', 'темы', 'тем')}
         </span>
-        {!isEditing && !isEditMode && (
+        {(!isEditing || !isEditMode) && (
           <>
             {!isAssigned && <CourseJoin courseId={courseId} />}
             {isAssigned && <CourseContinue courseId={courseId} />}
