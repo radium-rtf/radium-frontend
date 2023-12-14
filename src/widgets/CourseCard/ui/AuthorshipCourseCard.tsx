@@ -50,10 +50,14 @@ export const AuthorShipCourseCard: FC<IProps> = ({ course }) => {
         <div className='flex flex-grow items-center gap-2'>
           <Icon
             className='h-[1.125rem]'
-            type={isReadyForPublish ? 'success' : 'courses'}
+            type={
+              isReadyForPublish || course.isPublished ? 'success' : 'courses'
+            }
           />
           <p className='text-[0.8125rem]'>
-            {isReadyForPublish ? 'Готов к публикации' : 'Черновик'}
+            {(course.isPublished && 'Опубликован') ||
+              (isReadyForPublish && 'Готов к публикации') ||
+              'Черновик'}
           </p>
         </div>
         <CourseDeleteSmall className='relative' courseId={id} />
