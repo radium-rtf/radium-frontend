@@ -6,6 +6,8 @@ import { VerifyRegistration } from '../libs/VerifyRegistration';
 export const authOptions: NextAuthOptions = {
   pages: {
     signIn: '/login',
+    newUser: '/registration',
+    verifyRequest: '/registration/verify',
   },
 
   providers: [
@@ -19,8 +21,6 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials) return null;
         const response = await Login(credentials);
-
-        console.log(response);
 
         if (typeof response === 'string') return null;
 
@@ -87,4 +87,8 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
+  session: {
+    strategy: 'jwt',
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 };

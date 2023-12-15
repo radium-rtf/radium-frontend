@@ -19,7 +19,7 @@ export const baseQueryWithReAuth: BaseQueryFn<
   if (!mutex.isLocked()) {
     const release = await mutex.acquire();
     try {
-      if (result.error && result.error.status === 401) {
+      if (!result.meta?.response || result.meta.response.status === 401) {
         signOut();
       }
     } finally {

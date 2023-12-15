@@ -16,6 +16,7 @@ export const LoginCard = () => {
     register,
     setError,
     watch,
+    clearErrors,
     formState: {
       errors,
       isValid,
@@ -42,20 +43,17 @@ export const LoginCard = () => {
         password,
         redirect: false,
       });
-      if (!result || (!result.ok && result.error)) {
+      if (!result || !result.ok || result.error) {
         setError(
-          'password',
+          'root',
           { message: 'Неверные данные' },
           { shouldFocus: false }
         );
+      } else {
+        router.push('/');
       }
-      router.push('/');
     } catch {
-      setError(
-        'email',
-        { message: 'Попробуйте позже' },
-        { shouldFocus: false }
-      );
+      setError('root', { message: 'Попробуйте позже' }, { shouldFocus: false });
     }
   };
 
@@ -72,7 +70,11 @@ export const LoginCard = () => {
           onSubmit={handleSubmit(onSubmitHandler)}
           className={'flex flex-col gap-4'}
         >
-          <Input iconType='mail' placeholder='Почта' {...register('email')}>
+          <Input
+            iconType='mail'
+            placeholder='Почта'
+            {...register('email', { onChange: () => clearErrors('root') })}
+          >
             {watch('email').includes('@') ? null : (
               <span className='font-sans text-[0.625rem]'>@urfu.me</span>
             )}
@@ -81,7 +83,7 @@ export const LoginCard = () => {
             iconType='password'
             placeholder='Пароль'
             type={isPasswordShowed ? 'text' : 'password'}
-            {...register('password')}
+            {...register('password', { onChange: () => clearErrors('root') })}
           >
             <button
               onClick={() => setIsPasswordShowed((prev) => !prev)}
@@ -109,6 +111,7 @@ export const LoginCard = () => {
             />
             <span className='ml-[calc(50%-34px)] -translate-x-1/2 whitespace-nowrap'>
               {(isSubmitSuccessful && 'Успех!') ||
+                (errors.root && errors.root.message) ||
                 (errors.email && errors.email.message) ||
                 (errors.password && errors.password.message) ||
                 'Войти'}
