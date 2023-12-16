@@ -115,16 +115,16 @@ export const MarkdownEditor: FC<IProps> = ({ markdown, onChange }) => {
     return (
       <>
         <button
+          type='button'
           className={cn(
-            'self-end rounded-lg border border-transparent p-2 transition-colors hover:border-white/10 hover:bg-white/5'
+            'self-end rounded-lg border border-transparent bg-white/5 p-2 transition-colors hover:border-white/10 hover:bg-white/5'
           )}
           onClick={() => setIsPlaintextMode(false)}
         >
-          <Icon type='visible' />
+          <Icon type='visible' className='text-primary-default' />
         </button>
         <TextArea
-          className='min-h-[32rem]
-                    resize-y
+          className='resize-y
                     overflow-y-scroll
                     font-code
                     [&::-webkit-scrollbar-thumb]:rounded
@@ -158,6 +158,7 @@ export const MarkdownEditor: FC<IProps> = ({ markdown, onChange }) => {
           <EditorListControl />
         </div>
         <button
+          type='button'
           className={cn(
             'rounded-lg border border-transparent p-2 transition-colors hover:border-white/10 hover:bg-white/5'
           )}
