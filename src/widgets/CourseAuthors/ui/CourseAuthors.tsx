@@ -48,14 +48,6 @@ export const CourseAuthors: FC<IProps> = ({
                 <List.Title>{author.name}</List.Title>
                 <List.Subtitle>{author.email}</List.Subtitle>
               </List.Content>
-              {isEditAllowed &&
-                isEditing &&
-                author.email !== session.data?.user.email && (
-                  <CourseDeleteCoAuthor
-                    courseId={courseId}
-                    email={author.email}
-                  />
-                )}
             </List.Item>
           );
         })}
@@ -82,7 +74,7 @@ export const CourseAuthors: FC<IProps> = ({
                 coauthor.email !== session.data?.user.email && (
                   <CourseDeleteCoAuthor
                     courseId={courseId}
-                    email={coauthor.email}
+                    coAuthorId={coauthor.id}
                   />
                 )}
             </List.Item>
