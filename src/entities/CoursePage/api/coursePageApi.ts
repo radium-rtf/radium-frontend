@@ -46,6 +46,13 @@ export const coursePageApi = emptyApi.injectEndpoints({
             ]
           : [{ type: 'pages', id: 'LIST' }, 'courses'],
     }),
+    deleteCoursePage: builder.mutation<void, string>({
+      query: (pageId) => ({
+        url: `/page/${pageId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: () => ['courses'],
+    }),
   }),
 });
 
@@ -53,4 +60,5 @@ export const {
   useGetPageQuery,
   useCreateCoursePageMutation,
   useUpdateCoursePageNameMutation,
+  useDeleteCoursePageMutation,
 } = coursePageApi;

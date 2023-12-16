@@ -5,4 +5,5 @@ export {
   useGetPageQuery,
   useCreateCoursePageMutation,
   useUpdateCoursePageNameMutation,
+  useDeleteCoursePageMutation,
 } from './api/coursePageApi';

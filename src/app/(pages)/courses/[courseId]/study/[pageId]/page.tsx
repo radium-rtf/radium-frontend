@@ -11,6 +11,7 @@ import { MultiChoiceSection } from '@/widgets/MultiChoiceSection';
 import { ShortAnswerSection } from '@/widgets/ShortAnswerSection';
 import { PermutationSection } from '@/widgets/PermutationsSection';
 import { CourseEditContext } from '@/features/CourseEditContext';
+import { CoursePageInfo } from '@/widgets/CoursePageInfo';
 
 interface IProps {
   params: {
@@ -62,6 +63,7 @@ export default function Page({ params }: IProps) {
         <h2 className='mx-6 font-mono text-5xl font-bold leading-[normal] text-accent-primary-200'>
           {page.name}
         </h2>
+        {isEditing && <CoursePageInfo page={page} />}
         {page.sections.map((section) => {
           switch (section.type) {
             case 'text':
