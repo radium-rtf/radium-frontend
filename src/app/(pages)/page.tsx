@@ -52,10 +52,10 @@ export default function Home() {
           session?.user.roles.isAuthor ||
           session?.user.roles.isCoauthor) && (
           <>
-            <h2 className='ml-6 font-mono text-[2rem] font-bold leading-[normal] text-primary-default md:ml-16 lg:col-span-2 xl:col-span-3'>
+            <h2 className='ml-6 font-mono text-[2rem] font-bold leading-[normal] text-primary-default md:ml-16'>
               В вашем авторстве
             </h2>
-            <section className='container mx-auto grid grid-cols-1 gap-8 px-6 md:px-12 lg:grid-cols-2 xl:grid-cols-3'>
+            <section className='container mx-auto grid gap-8 px-6 md:px-12 lg:grid-cols-2 2xl:grid-cols-3'>
               {courses.authorship.map((course) => {
                 return <AuthorShipCourseCard key={course.id} course={course} />;
               })}
@@ -65,10 +65,10 @@ export default function Home() {
         )}
         {!!courses.my.length && (
           <>
-            <h2 className='ml-6 font-mono text-[2rem] font-bold leading-[normal] text-primary-default md:ml-16 lg:col-span-2 xl:col-span-3'>
+            <h2 className='ml-6 font-mono text-[2rem] font-bold leading-[normal] text-primary-default md:ml-16'>
               Ваши курсы
             </h2>
-            <section className='container mx-auto grid grid-cols-1 gap-8 px-6 md:px-12 lg:grid-cols-2 xl:grid-cols-3'>
+            <section className='container mx-auto grid grid-cols-1 gap-8 px-6 md:px-12 lg:grid-cols-2 2xl:grid-cols-3'>
               {courses.my.map((course) => {
                 return <AssignedCourseCard key={course.id} course={course} />;
               })}
@@ -77,10 +77,10 @@ export default function Home() {
         )}
         {!!courses.recommendations.length && (
           <>
-            <h2 className='ml-6 font-mono text-[2rem] font-bold leading-[normal] text-primary-default md:ml-16 lg:col-span-2 xl:col-span-3'>
+            <h2 className='ml-6 font-mono text-[2rem] font-bold leading-[normal] text-primary-default md:ml-16'>
               Рекомендации
             </h2>
-            <section className='container mx-auto grid grid-cols-1 gap-8 px-6 md:px-12 lg:grid-cols-2 xl:grid-cols-3'>
+            <section className='container mx-auto grid grid-cols-1 gap-8 px-6 md:px-12 lg:grid-cols-2 2xl:grid-cols-3'>
               {courses.recommendations.map((course) => {
                 return <CourseCard key={course.id} course={course} />;
               })}

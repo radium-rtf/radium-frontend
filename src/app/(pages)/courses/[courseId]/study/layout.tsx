@@ -27,7 +27,7 @@ export default function CourseStudyLayout({
 
   useLayoutEffect(() => {
     if (course) {
-      window.document.title = course.name;
+      window.document.title = course.name || '<без названия>';
     }
   }, [course]);
 
@@ -57,7 +57,7 @@ export default function CourseStudyLayout({
           </h1>
         </Link>
       </Header>
-      <main className='mb-8 flex flex-grow items-start gap-8 px-12'>
+      <main className='mb-8 flex flex-grow items-start px-12'>
         <CourseEditContextWrapper>
           <nav className='sticky top-[8.625rem] -ml-6 flex max-h-[calc(100vh-8.65rem)] w-[calc(16.25rem)] shrink-0 flex-grow-0 flex-col'>
             {isEditAllowed && <CourseEditToggle />}

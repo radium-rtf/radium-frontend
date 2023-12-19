@@ -12,6 +12,27 @@ import { ShortAnswerSection } from '@/widgets/ShortAnswerSection';
 import { PermutationSection } from '@/widgets/PermutationsSection';
 import { CourseEditContext } from '@/features/CourseEditContext';
 import { CoursePageInfo } from '@/widgets/CoursePageInfo';
+import {
+  AllSectionsResponseDto,
+  useChangeCourseSectionOrderMutation,
+} from '@/entities/CourseSection';
+import {
+  DndContext,
+  DragEndEvent,
+  KeyboardSensor,
+  MouseSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import {
+  restrictToParentElement,
+  restrictToVerticalAxis,
+} from '@dnd-kit/modifiers';
 
 interface IProps {
   params: {
@@ -23,6 +44,7 @@ interface IProps {
 export default function Page({ params }: IProps) {
   const { data: page } = useGetPageQuery(params.pageId);
   const { isEditing } = useContext(CourseEditContext);
+  const [updateOrder] = useChangeCourseSectionOrderMutation();
 
   useEffect(() => {
     const previousPages = JSON.parse(
@@ -55,6 +77,52 @@ export default function Page({ params }: IProps) {
     }
   }, [page]);
 
+  // DND Handlers
+  const onDragEndHandler = (e: DragEndEvent) => {
+    if (e.over && e.active.id !== e.over?.id) {
+      updateOrder({
+        order: e.over.data.current!.order,
+        pageId: e.over.data.current!.pageId,
+        sectionId: e.active.id as string,
+      });
+    }
+  };
+
+  // DND Sensors
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  const sectionRender = (section: AllSectionsResponseDto) => {
+    switch (section.type) {
+      case 'text':
+        return <TextSection key={section.id} sectionData={section} />;
+      case 'choice':
+        return <ChoiceSection key={section.id} sectionData={section} />;
+      case 'multiChoice':
+        return <MultiChoiceSection key={section.id} sectionData={section} />;
+      case 'shortAnswer':
+        return <ShortAnswerSection key={section.id} sectionData={section} />;
+      case 'answer':
+        return <AnswerSection key={section.id} sectionData={section} />;
+      case 'permutation':
+        return <PermutationSection key={section.id} sectionData={section} />;
+      case 'mapping':
+        return <MappingSection key={section.id} sectionData={section} />;
+      case 'code':
+        return <CodeSection key={section.id} sectionData={section} />;
+      default:
+        return null;
+    }
+  };
+
   if (!page) return null;
 
   return (
@@ -64,34 +132,20 @@ export default function Page({ params }: IProps) {
           {page.name}
         </h2>
         {isEditing && <CoursePageInfo page={page} />}
-        {page.sections.map((section) => {
-          switch (section.type) {
-            case 'text':
-              return <TextSection key={section.id} sectionData={section} />;
-            case 'choice':
-              return <ChoiceSection key={section.id} sectionData={section} />;
-            case 'multiChoice':
-              return (
-                <MultiChoiceSection key={section.id} sectionData={section} />
-              );
-            case 'shortAnswer':
-              return (
-                <ShortAnswerSection key={section.id} sectionData={section} />
-              );
-            case 'answer':
-              return <AnswerSection key={section.id} sectionData={section} />;
-            case 'permutation':
-              return (
-                <PermutationSection key={section.id} sectionData={section} />
-              );
-            case 'mapping':
-              return <MappingSection key={section.id} sectionData={section} />;
-            case 'code':
-              return <CodeSection key={section.id} sectionData={section} />;
-            default:
-              return null;
-          }
-        })}
+        <ul className='flex flex-col gap-8'>
+          <DndContext
+            sensors={sensors}
+            onDragEnd={onDragEndHandler}
+            modifiers={[restrictToVerticalAxis, restrictToParentElement]}
+          >
+            <SortableContext
+              items={page.sections}
+              strategy={verticalListSortingStrategy}
+            >
+              {page.sections.map(sectionRender)}
+            </SortableContext>
+          </DndContext>
+        </ul>
         {!isEditing && (
           <PageNavigation
             next={page.next}
