@@ -7,11 +7,13 @@ import { ChoiceSectionEdit } from './ChoiceSectionEdit';
 import { CourseEditContext } from '@/features/CourseEditContext';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { FC, useContext, useState } from 'react';
+import { CSSProperties, FC, useContext, useState } from 'react';
 import { ChoiceSectionResponseDto } from '@/entities/CourseSection';
 import { Button, Card, Icon, Radio, cn, getNoun } from '@/shared';
 import { answerSchema, answerSchemaType } from '../model/answerSchema';
 import { useAnswerCourseChoiceSectionMutation } from '@/entities/CourseSection';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 interface ChoiceSectionProps {
   sectionData: ChoiceSectionResponseDto;
@@ -62,6 +64,26 @@ export const ChoiceSection: FC<ChoiceSectionProps> = ({ sectionData }) => {
       .catch(() => setError('choice.answer', { message: 'Ошибка!' }));
   };
 
+  const {
+    setNodeRef,
+    setActivatorNodeRef,
+    transform,
+    transition,
+    listeners,
+    isDragging,
+  } = useSortable({
+    id: sectionData.id,
+    data: {
+      order: sectionData.order,
+      pageId: sectionData.pageId,
+    },
+  });
+
+  const style = {
+    transform: CSS.Translate.toString(transform),
+    transition,
+  } as CSSProperties;
+
   if (isEditAllowed && isEditMode && isEditing) {
     return (
       <ChoiceSectionEdit
@@ -72,16 +94,44 @@ export const ChoiceSection: FC<ChoiceSectionProps> = ({ sectionData }) => {
   }
 
   return (
-    <Card asChild>
+    <Card
+      asChild
+      ref={setNodeRef}
+      style={style}
+      className={cn(
+        'border border-transparent transition-colors duration-300',
+        isDragging
+          ? 'z-10 border-white/10 bg-[#2A2E2E]'
+          : '[&:has(.drag:hover)]:border-white/10 [&:has(.drag:hover)]:bg-[#363A3B]'
+      )}
+    >
       <form
         className='flex flex-col gap-4'
         onSubmit={handleSubmit(onSubmitHandler)}
       >
-        <div className='flex items-center gap-4 text-primary-default'>
+        <div
+          className={cn(
+            'flex items-center gap-4 text-primary-default',
+            isEditAllowed && isEditMode && 'relative'
+          )}
+        >
           <Icon type='question' className='text-inherit' />
           <span className='font-mono font-bold leading-[normal] text-inherit'>
             Вопрос
           </span>
+          {isEditAllowed && isEditMode && (
+            <button
+              className='drag after:absolute after:-left-6 after:-right-6 after:-top-6 after:bottom-0 after:block after:rounded-t-2xl after:content-[""]'
+              type='button'
+              ref={setActivatorNodeRef}
+              {...listeners}
+            >
+              <Icon
+                type='handle-horizontal'
+                className='absolute left-1/2 top-0'
+              />
+            </button>
+          )}
         </div>
         <header className='text-[0.8125rem] leading-normal'>
           <MarkdownDisplay markdown={sectionData.content} />

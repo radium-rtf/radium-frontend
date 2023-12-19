@@ -22,6 +22,9 @@ import { AnswerSectionResponseDto } from '../model/AnswerSectionResponseDto';
 import { UpdateCourseAnswerSectionRequestDto } from '../model/UpdateCourseAnswerSectionRequestDto';
 import { AnswerCourseCodeSectionRequestDto } from '../model/AnswerCourseCodeSectionRequestDto';
 import { coursePageApi } from '@/entities/CoursePage';
+import { AllSectionsResponseDto } from '../model/AllSectionsResponseDto';
+import { CourseSectionChangeOrderRequestDto } from '../model/CourseSectionChangeOrderRequestDto';
+import { arrayMove } from '@dnd-kit/sortable';
 
 const sectionApi = emptyApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -420,6 +423,44 @@ const sectionApi = emptyApi.injectEndpoints({
         'courses',
       ],
     }),
+    changeCourseSectionOrder: builder.mutation<
+      AllSectionsResponseDto,
+      CourseSectionChangeOrderRequestDto
+    >({
+      query: ({ sectionId, ...rest }) => ({
+        url: `/section/${sectionId}/order`,
+        method: 'PATCH',
+        body: {
+          order: rest.order,
+        },
+      }),
+      invalidatesTags: (_1, _2, args) => [{ type: 'pages', id: args.pageId }],
+      async onQueryStarted(
+        { pageId, sectionId, order },
+        { dispatch, queryFulfilled }
+      ) {
+        const patchResult = dispatch(
+          coursePageApi.util.updateQueryData('getPage', pageId, (draft) => {
+            const newIndex = draft.sections.findIndex((s) => s.order === order);
+            const oldIndex = draft.sections.findIndex(
+              (s) => s.id === sectionId
+            );
+            draft.sections = arrayMove(draft.sections, oldIndex, newIndex);
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+
+          /**
+           * Alternatively, on failure you can invalidate the corresponding cache tags
+           * to trigger a re-fetch:
+           * dispatch(api.util.invalidateTags(['Post']))
+           */
+        }
+      },
+    }),
   }),
   overrideExisting: true,
 });
@@ -439,4 +480,5 @@ export const {
   useAnswerCourseAnswerSectionMutation,
   useUpdateCourseAnswerSectionMutation,
   useAnswerCourseCodeSectionMutation,
+  useChangeCourseSectionOrderMutation,
 } = sectionApi;

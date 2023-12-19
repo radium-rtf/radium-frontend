@@ -1,8 +1,8 @@
 'use client';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
-import { Button, Card, Icon, Input } from '@/shared';
+import { Button, Card, Icon, Input, cn } from '@/shared';
 import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
-import { FC, Fragment } from 'react';
+import { CSSProperties, FC, Fragment } from 'react';
 import {
   Controller,
   SubmitHandler,
@@ -34,6 +34,8 @@ import {
   rectSwappingStrategy,
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 interface MappingSectionEditProps {
   sectionData: MappingSectionResponseDto;
@@ -126,17 +128,58 @@ export const MappingSectionEdit: FC<MappingSectionEditProps> = ({
     swap(oldIndex, newIndex);
   };
 
+  const {
+    setNodeRef,
+    setActivatorNodeRef,
+    listeners,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: sectionData.id,
+    data: {
+      order: sectionData.order,
+      pageId: sectionData.pageId,
+    },
+  });
+
+  const style = {
+    transform: CSS.Translate.toString(transform),
+    transition,
+  } as CSSProperties;
+
   return (
-    <Card asChild>
+    <Card
+      asChild
+      ref={setNodeRef}
+      style={style}
+      className={cn(
+        'border border-transparent transition-colors duration-300',
+        isDragging
+          ? 'z-10 border-white/10 bg-[#2A2E2E]'
+          : '[&:has(.drag:hover)]:border-white/10 [&:has(.drag:hover)]:bg-[#363A3B]'
+      )}
+    >
       <form
         className='flex flex-col gap-4'
         onSubmit={handleSubmit(onSubmitHandler)}
       >
-        <div className='flex items-center gap-4 text-primary-default'>
+        <div className='relative flex items-center gap-4 text-primary-default'>
           <Icon type='question' className='text-inherit' />
           <span className='font-mono font-bold leading-[normal] text-inherit'>
             Вопрос
           </span>
+          <button
+            className='drag after:absolute after:-left-6 after:-right-6 after:-top-6 after:bottom-0 after:block after:rounded-t-2xl after:content-[""]'
+            type='button'
+            ref={setActivatorNodeRef}
+            {...listeners}
+          >
+            <Icon
+              type='handle-horizontal'
+              className='absolute left-1/2 top-0'
+            />
+          </button>
         </div>
         <header className='flex flex-col gap-4 text-[0.8125rem] leading-normal'>
           <Controller
