@@ -15,11 +15,12 @@ export const baseQueryWithReAuth: BaseQueryFn<
 > = async (args, api, extraOptions) => {
   await mutex.waitForUnlock();
   let result = await baseQuery(args, api, extraOptions);
+  console.log(result);
 
   if (!mutex.isLocked()) {
     const release = await mutex.acquire();
     try {
-      if (!result.meta?.response || result.meta.response.status === 401) {
+      if (result.meta?.response && result.meta.response.status === 401) {
         signOut();
       }
     } finally {
