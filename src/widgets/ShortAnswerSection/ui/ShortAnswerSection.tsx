@@ -15,6 +15,7 @@ import { ShortAnswerSectionEdit } from './ShortAnswerSectionEdit';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
 
 interface IProps {
   sectionData: ShortAnswerSectionResponseDto;
@@ -137,7 +138,7 @@ export const ShortAnswerSection: FC<IProps> = ({ sectionData }) => {
           )}
         </div>
         <header className='text-[0.8125rem] leading-normal'>
-          {sectionData.content}
+          <MarkdownDisplay markdown={sectionData.content} />
         </header>
         <main>
           <Input placeholder='Ответ' {...register('shortanswer.answer')} />
