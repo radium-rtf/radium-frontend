@@ -14,9 +14,6 @@ export const CourseDeleteCoAuthor: FC<CourseDeleteCoAuthorProps> = ({
   const [deleteCoAuthor] = useDeleteCourseCoAuthorMutation();
 
   const onClickHandler = () => {
-    console.log('course id - ', courseId);
-    console.log('coauthor id - ', coAuthorId);
-
     deleteCoAuthor({ courseId, coAuthorId });
   };
 

@@ -27,7 +27,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     return (
       <textarea
-        onResizeCapture={(e) => console.log(e)}
         ref={innerRef}
         onChange={(e) => {
           onChange?.(e);

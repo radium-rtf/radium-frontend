@@ -105,9 +105,7 @@ export const NavigationPageTitle: FC<IProps> = ({
           <List.Icon
             icon='edit'
             className='h-3 opacity-0 transition-opacity group-hover:opacity-100'
-            onClick={() => {
-              console.log;
-            }}
+            onClick={() => {}}
           />
         </button>
       )}

@@ -2,7 +2,7 @@
 import { CoursePageResponseDto } from '@/entities/CoursePage';
 import { CourseDeletePage } from '@/features/CourseDeletePage/ui/CourseDeletePage';
 import { Card, Icon, getNoun } from '@/shared';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { FC } from 'react';
 
 interface CoursePageInfoProps {
@@ -22,8 +22,6 @@ export const CoursePageInfo: FC<CoursePageInfoProps> = ({ page }) => {
     },
     { questions: 0, tasks: 0 }
   );
-  const pathname = usePathname();
-  console.log(pathname);
 
   const router = useRouter();
 

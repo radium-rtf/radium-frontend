@@ -115,7 +115,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                 >
                   <List.Icon icon='editor' className='text-primary-default' />
                   <List.Content>
-                    <List.Title>Короткий вопрос</List.Title>
+                    <List.Title>Короткий ответ</List.Title>
                   </List.Content>
                   <List.Icon
                     icon='add'
