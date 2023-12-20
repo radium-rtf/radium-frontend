@@ -32,6 +32,7 @@ export const CourseBanner: FC<CourseBannerProps> = ({
             alt={name}
             width={1280}
             height={256}
+            priority
             className='aspect-[2] h-full w-full object-cover object-center md:aspect-[3] md:rounded-lg lg:aspect-[4]'
           />
           {isEditAllowed && isEditing && <ChangeBanner courseId={courseId} />}
