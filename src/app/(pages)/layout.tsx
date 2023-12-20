@@ -40,7 +40,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' className='flex h-full flex-col'>
+    <html
+      lang='ru'
+      className='flex h-full flex-col scroll-smooth'
+      style={{ scrollBehavior: 'smooth' }}
+    >
       <body
         className={cn(
           'relative flex flex-grow flex-col bg-background-default font-sans text-foreground-default',

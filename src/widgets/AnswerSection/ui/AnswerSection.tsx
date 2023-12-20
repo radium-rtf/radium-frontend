@@ -104,6 +104,7 @@ export const AnswerSection: FC<AnswerSectionProps> = ({ sectionData }) => {
   return (
     <Card
       asChild
+      id={`section-${sectionData.id}`}
       ref={setNodeRef}
       style={style}
       className={cn(

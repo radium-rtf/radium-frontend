@@ -1,7 +1,7 @@
 'use client';
 import { CourseEditContext } from '@/features/CourseEditContext';
 import { List } from '@/shared';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { FC, useContext } from 'react';
 import { useCreateSectionMutation } from '../api/createCourseSectionApi';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -12,6 +12,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
   const { isEditing } = useContext(CourseEditContext);
   const { pageId } = useParams() as { pageId: string };
   const [createSection] = useCreateSectionMutation();
+  const { push } = useRouter();
 
   return (
     <AnimatePresence>
@@ -38,6 +39,10 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                   className='rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
                   onClick={() =>
                     createSection({ pageId, text: { content: 'New section' } })
+                      .unwrap()
+                      .then((res) =>
+                        push(`#section-${res.id}`, { scroll: true })
+                      )
                   }
                 >
                   <List.Icon icon='text' className='text-primary-default' />
@@ -63,6 +68,10 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                         variants: ['Верный ответ', 'Неверный ответ'],
                       },
                     })
+                      .unwrap()
+                      .then((res) =>
+                        push(`#section-${res.id}`, { scroll: true })
+                      )
                   }
                 >
                   <List.Icon icon='radio' className='text-primary-default' />
@@ -88,6 +97,10 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                         ],
                       },
                     })
+                      .unwrap()
+                      .then((res) =>
+                        push(`#section-${res.id}`, { scroll: true })
+                      )
                   }
                 >
                   <List.Icon icon='checkbox' className='text-primary-default' />
@@ -111,6 +124,10 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                         question: 'Короткий вопрос?',
                       },
                     })
+                      .unwrap()
+                      .then((res) =>
+                        push(`#section-${res.id}`, { scroll: true })
+                      )
                   }
                 >
                   <List.Icon icon='editor' className='text-primary-default' />
@@ -134,6 +151,10 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                         question: 'Перестановка',
                       },
                     })
+                      .unwrap()
+                      .then((res) =>
+                        push(`#section-${res.id}`, { scroll: true })
+                      )
                   }
                 >
                   <List.Icon icon='shuffle' className='text-primary-default' />
@@ -158,6 +179,10 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                         question: 'Сопоставление',
                       },
                     })
+                      .unwrap()
+                      .then((res) =>
+                        push(`#section-${res.id}`, { scroll: true })
+                      )
                   }
                 >
                   <List.Icon icon='matching' className='text-primary-default' />
@@ -180,6 +205,10 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                   className='rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
                   onClick={() =>
                     createSection({ pageId, answer: { question: 'Вопрос?' } })
+                      .unwrap()
+                      .then((res) =>
+                        push(`#section-${res.id}`, { scroll: true })
+                      )
                   }
                 >
                   <List.Icon icon='table' className='text-primary-default' />

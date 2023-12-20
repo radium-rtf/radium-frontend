@@ -70,6 +70,7 @@ export const AnswerSectionEdit: FC<AnswerSectionEditProps> = ({
   return (
     <Card
       asChild
+      id={`section-${sectionData.id}`}
       ref={setNodeRef}
       style={style}
       className={cn(

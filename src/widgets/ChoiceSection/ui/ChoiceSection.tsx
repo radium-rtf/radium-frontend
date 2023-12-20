@@ -96,6 +96,7 @@ export const ChoiceSection: FC<ChoiceSectionProps> = ({ sectionData }) => {
   return (
     <Card
       asChild
+      id={`section-${sectionData.id}`}
       ref={setNodeRef}
       style={style}
       className={cn(

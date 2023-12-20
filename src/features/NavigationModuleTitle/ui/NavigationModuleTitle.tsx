@@ -78,7 +78,7 @@ export const NavigationModuleTitle = forwardRef<HTMLHeadingElement, IProps>(
       >
         <h2
           className={cn(
-            'flex-grow break-all text-xl font-bold text-accent-primary-200',
+            'flex-grow text-xl font-bold text-accent-primary-200',
             isCurrentModule && 'text-accent-secondary-300'
           )}
         >

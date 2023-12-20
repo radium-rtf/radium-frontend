@@ -121,6 +121,7 @@ export const PermutationsSectionEdit: FC<PermutationsSectionEditProps> = ({
   return (
     <Card
       asChild
+      id={`section-${sectionData.id}`}
       ref={setNodeRef}
       style={style}
       className={cn(

@@ -98,6 +98,7 @@ export const MultiChoiceSection: FC<IProps> = ({ sectionData }) => {
   return (
     <Card
       asChild
+      id={`section-${sectionData.id}`}
       ref={setNodeRef}
       style={style}
       className={cn(

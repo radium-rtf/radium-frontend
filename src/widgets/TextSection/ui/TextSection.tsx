@@ -44,6 +44,7 @@ export const TextSection: FC<IProps> = ({ sectionData }) => {
 
   return (
     <Card
+      id={`section-${sectionData.id}`}
       ref={setNodeRef}
       style={style}
       className={cn(

@@ -132,7 +132,7 @@ export default function CourseStudyLayout({
           )}
           {/* Course state */}
           {course && (
-            <nav className='sticky top-[8.625rem] -ml-6 flex max-h-[calc(100vh-8.65rem)] w-64 shrink-0 flex-grow-0 flex-col'>
+            <nav className='sticky top-[8.625rem] -ml-6 flex max-h-[calc(100vh-8.65rem)] w-64 shrink-0 flex-grow-0 flex-col self-start'>
               {isEditAllowed && <CourseEditToggle />}
               <Progress
                 className='w-64 px-6 py-2.5'

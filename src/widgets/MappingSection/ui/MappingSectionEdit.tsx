@@ -151,6 +151,7 @@ export const MappingSectionEdit: FC<MappingSectionEditProps> = ({
   return (
     <Card
       asChild
+      id={`section-${sectionData.id}`}
       ref={setNodeRef}
       style={style}
       className={cn(
