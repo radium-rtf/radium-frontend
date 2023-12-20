@@ -65,7 +65,8 @@ export type Icon =
   | 'task'
   | 'comment'
   | 'hashtag'
-  | 'telegram';
+  | 'telegram'
+  | 'bug';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -786,6 +787,54 @@ const icons: Record<Icon, ReactNode> = {
       <circle cx='5' cy='11' r='1' className='fill-current' />
       <circle cx='9' cy='11' r='1' className='fill-current' />
       <circle cx='13' cy='11' r='1' className='fill-current' />
+    </g>
+  ),
+  bug: (
+    <g className='text-inherit'>
+      <rect
+        x='4.5'
+        y='2.5'
+        width='9'
+        height='13'
+        rx='4.5'
+        className='stroke-current'
+      />
+      <path
+        d='M4.5 6.5V6.5C2.29086 6.5 0.5 4.70914 0.5 2.5V0.5'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <path
+        d='M13.5 6.5V6.5C15.7091 6.5 17.5 4.70914 17.5 2.5V0.5'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <path
+        d='M4.5 9.5H0.5'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <path
+        d='M13.5 9.5H17.5'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <path
+        d='M4.5 12.5V12.5C2.29086 12.5 0.5 14.2909 0.5 16.5V17.5'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <path
+        d='M13.5 12.5V12.5C15.7091 12.5 17.5 14.2909 17.5 16.5V17.5'
+        className='stroke-current'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
     </g>
   ),
 };

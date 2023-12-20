@@ -1,4 +1,4 @@
-import { Icon } from '@/shared';
+import { Button, Icon } from '@/shared';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -9,7 +9,6 @@ export const Footer = () => {
       flex
       items-center
       justify-between
-      bg-black/10
       px-12
       pb-12
       pt-8
@@ -28,7 +27,16 @@ export const Footer = () => {
           2023 · Сделано в рамках Проектного Практикума
         </p>
       </div>
-      <div>
+      <div className='flex items-center gap-4'>
+        <Button asChild>
+          <Link
+            href='https://forms.yandex.ru/u/65813b42068ff01a6fb720a1/'
+            target='_blank'
+          >
+            <Icon type='bug' />
+            <span>Оставить обратную связь</span>
+          </Link>
+        </Button>
         <Link
           href={'https://t.me/radium_rtf'}
           target='_blank'
