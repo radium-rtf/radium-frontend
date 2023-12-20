@@ -79,6 +79,9 @@ const sectionApi = emptyApi.injectEndpoints({
                   draft.score += section.maxScore;
                 }
                 section.verdict = updatedSection.verdict;
+                if (section.attempts) {
+                  section.attempts -= 1;
+                }
                 if (updatedSection.verdict === 'OK') {
                   section.score = section.maxScore;
                 }
@@ -139,6 +142,9 @@ const sectionApi = emptyApi.injectEndpoints({
                   draft.score += section.maxScore;
                 }
                 section.verdict = updatedSection.verdict;
+                if (section.attempts) {
+                  section.attempts -= 1;
+                }
                 if (updatedSection.verdict === 'OK') {
                   section.score = section.maxScore;
                 }
@@ -199,6 +205,9 @@ const sectionApi = emptyApi.injectEndpoints({
                   draft.score += section.maxScore;
                 }
                 section.verdict = updatedSection.verdict;
+                if (section.attempts) {
+                  section.attempts -= 1;
+                }
                 if (updatedSection.verdict === 'OK') {
                   section.score = section.maxScore;
                 }
@@ -259,6 +268,9 @@ const sectionApi = emptyApi.injectEndpoints({
                   draft.score += section.maxScore;
                 }
                 section.verdict = updatedSection.verdict;
+                if (section.attempts) {
+                  section.attempts -= 1;
+                }
                 if (updatedSection.verdict === 'OK') {
                   section.score = section.maxScore;
                 }
@@ -319,6 +331,9 @@ const sectionApi = emptyApi.injectEndpoints({
                   draft.score += section.maxScore;
                 }
                 section.verdict = updatedSection.verdict;
+                if (section.attempts) {
+                  section.attempts -= 1;
+                }
                 if (updatedSection.verdict === 'OK') {
                   section.score = section.maxScore;
                 }
@@ -381,6 +396,9 @@ const sectionApi = emptyApi.injectEndpoints({
                   draft.score += section.maxScore;
                 }
                 section.verdict = updatedSection.verdict;
+                if (section.attempts) {
+                  section.attempts -= 1;
+                }
                 if (updatedSection.verdict === 'OK') {
                   section.score = section.maxScore;
                 }

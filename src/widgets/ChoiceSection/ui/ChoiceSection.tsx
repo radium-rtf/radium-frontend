@@ -213,7 +213,11 @@ export const ChoiceSection: FC<ChoiceSectionProps> = ({ sectionData }) => {
                 className='w-64'
                 color={(!isValid && isSubmitted && 'destructive') || 'accent'}
                 type='submit'
-                disabled={(!isValid && !isSubmitted) || isSubmitting}
+                disabled={
+                  (!isValid && !isSubmitted) ||
+                  isSubmitting ||
+                  (sectionData.attempts <= 0 && !!sectionData.maxAttempts)
+                }
               >
                 <Icon
                   type={

@@ -228,7 +228,8 @@ export const AnswerSection: FC<AnswerSectionProps> = ({ sectionData }) => {
                   (!isValid && !isSubmitted) ||
                   (sectionData.verdict === 'WAIT' &&
                     sectionData.answer === answerValue) ||
-                  isSubmitting
+                  isSubmitting ||
+                  (sectionData.attempts <= 0 && !!sectionData.maxAttempts)
                 }
               >
                 <Icon
