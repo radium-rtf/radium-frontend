@@ -33,6 +33,8 @@ import {
   restrictToParentElement,
   restrictToVerticalAxis,
 } from '@dnd-kit/modifiers';
+import { Card } from '@/shared';
+import Image from 'next/image';
 
 interface IProps {
   params: {
@@ -42,7 +44,7 @@ interface IProps {
 }
 
 export default function Page({ params }: IProps) {
-  const { data: page } = useGetPageQuery(params.pageId);
+  const { data: page, isLoading, error } = useGetPageQuery(params.pageId);
   const { isEditing } = useContext(CourseEditContext);
   const [updateOrder] = useChangeCourseSectionOrderMutation();
 
@@ -123,37 +125,66 @@ export default function Page({ params }: IProps) {
     }
   };
 
-  if (!page) return null;
-
   return (
-    <>
-      <main className='flex w-[45rem] flex-col gap-8'>
-        <h2 className='mx-6 font-mono text-5xl font-bold leading-[normal] text-accent-primary-200'>
-          {page.name}
-        </h2>
-        {isEditing && <CoursePageInfo page={page} />}
-        <ul className='flex flex-col gap-8'>
-          <DndContext
-            sensors={sensors}
-            onDragEnd={onDragEndHandler}
-            modifiers={[restrictToVerticalAxis, restrictToParentElement]}
-          >
-            <SortableContext
-              items={page.sections}
-              strategy={verticalListSortingStrategy}
-            >
-              {page.sections.map(sectionRender)}
-            </SortableContext>
-          </DndContext>
-        </ul>
-        {!isEditing && (
-          <PageNavigation
-            next={page.next}
-            previous={page.previous}
-            progressPercent={(page.score / (page.maxScore || 1)) * 100}
+    <main className='flex w-[45rem] flex-col gap-8'>
+      {/* Loading state */}
+      {isLoading && (
+        <>
+          <div className='h-16 w-full animate-pulse rounded-lg bg-background-card' />
+          <Card className='h-64 animate-pulse' />
+          <Card className='h-64 animate-pulse' />
+          <Card className='h-20 animate-pulse' />
+        </>
+      )}
+      {/* Page state */}
+      {page && (
+        <>
+          <h2 className='mx-6 font-mono text-5xl font-bold leading-[normal] text-accent-primary-200'>
+            {page.name}
+          </h2>
+          {isEditing && <CoursePageInfo page={page} />}
+          {!!page.sections.length && (
+            <ul className='flex flex-col gap-8'>
+              <DndContext
+                sensors={sensors}
+                onDragEnd={onDragEndHandler}
+                modifiers={[restrictToVerticalAxis, restrictToParentElement]}
+              >
+                <SortableContext
+                  items={page.sections}
+                  strategy={verticalListSortingStrategy}
+                >
+                  {page.sections.map(sectionRender)}
+                </SortableContext>
+              </DndContext>
+            </ul>
+          )}
+          {!isEditing && (
+            <PageNavigation
+              next={page.next}
+              previous={page.previous}
+              progressPercent={(page.score / (page.maxScore || 1)) * 100}
+            />
+          )}
+        </>
+      )}
+      {/* Error state */}
+      {error && (
+        <div className='flex h-full flex-col items-center justify-center gap-4'>
+          <Image
+            src={'/error.svg'}
+            width={224}
+            height={224}
+            alt='Not found error'
           />
-        )}
-      </main>
-    </>
+          <h1 className='font-mono text-5xl font-bold text-primary-default'>
+            Такой страницы курса нет :(
+          </h1>
+          <p className='text-[0.8125rem] text-text-primary'>
+            Возможно страница была удалена или вы перешли по неверной ссылке
+          </p>
+        </div>
+      )}
+    </main>
   );
 }
