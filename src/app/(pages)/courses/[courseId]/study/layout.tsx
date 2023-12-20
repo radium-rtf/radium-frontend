@@ -68,7 +68,7 @@ export default function CourseStudyLayout({
               showPercentage
             />
 
-            {course.groups.map((group, index) => (
+            {course.groups?.map((group, index) => (
               <List.Item key={index} asChild>
                 <Link
                   href={`/groups/${group.id}/courses/${course.id}`}
