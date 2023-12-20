@@ -2,6 +2,9 @@ import { emptyApi } from '@/shared';
 import { CoursePageResponseDto } from '../model/CoursePageResponseDto';
 import { CreateCoursePageRequestDto } from '../model/CreateCoursePageRequestDto';
 import { UpdateCoursePageRequestDto } from '../model/UpdateCoursePageRequestDto';
+import { CoursePageChangeOrderRequestDto } from '../model/CoursePageChangeOrderRequestDto';
+import { courseApi } from '@/entities/Course/api/courseApi';
+import { arrayMove } from '@dnd-kit/sortable';
 
 export const coursePageApi = emptyApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -53,6 +56,56 @@ export const coursePageApi = emptyApi.injectEndpoints({
       }),
       invalidatesTags: () => ['courses'],
     }),
+    changeCoursePageOrder: builder.mutation<
+      CoursePageResponseDto,
+      CoursePageChangeOrderRequestDto
+    >({
+      query: ({ pageId, ...rest }) => ({
+        url: `/page/${pageId}/order`,
+        method: 'PATCH',
+        body: {
+          order: rest.order,
+        },
+      }),
+      invalidatesTags: (_1, _2, args) => [
+        { type: 'courses', id: args.courseId },
+      ],
+      async onQueryStarted(
+        { moduleId, courseId, order, pageId },
+        { dispatch, queryFulfilled }
+      ) {
+        const patchResult = dispatch(
+          courseApi.util.updateQueryData('getCourse', courseId, (draft) => {
+            const courseModule = draft.modules.find((m) => m.id === moduleId)!;
+            const newIndex = courseModule?.pages.findIndex(
+              (p) => p.order === order
+            );
+            const oldIndex = courseModule?.pages.findIndex(
+              (p) => p.id === pageId
+            );
+
+            console.log(newIndex, oldIndex);
+
+            courseModule.pages = arrayMove(
+              courseModule?.pages,
+              oldIndex,
+              newIndex
+            );
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+
+          /**
+           * Alternatively, on failure you can invalidate the corresponding cache tags
+           * to trigger a re-fetch:
+           * dispatch(api.util.invalidateTags(['Post']))
+           */
+        }
+      },
+    }),
   }),
 });
 
@@ -61,4 +114,5 @@ export const {
   useCreateCoursePageMutation,
   useUpdateCoursePageNameMutation,
   useDeleteCoursePageMutation,
+  useChangeCoursePageOrderMutation,
 } = coursePageApi;

@@ -10,7 +10,7 @@ import { CourseAddContactResponseDto } from '../model/CourseAddContactResponseDt
 import { CourseAddContactRequestDto } from '../model/CourseAddContactRequestDto';
 import { CourseDeleteCoAuthorRequestDto } from '../model/CourseDeleteCoAuthorRequestDto';
 
-const courseApi = emptyApi.injectEndpoints({
+export const courseApi = emptyApi.injectEndpoints({
   endpoints: (builder) => ({
     getCourses: builder.query<CourseResponseDto[], void>({
       query: () => ({

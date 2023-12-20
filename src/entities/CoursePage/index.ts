@@ -6,4 +6,5 @@ export {
   useCreateCoursePageMutation,
   useUpdateCoursePageNameMutation,
   useDeleteCoursePageMutation,
+  useChangeCoursePageOrderMutation,
 } from './api/coursePageApi';

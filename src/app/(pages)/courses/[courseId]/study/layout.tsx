@@ -12,6 +12,25 @@ import { CourseModuleNavigation } from '@/widgets/CourseModuleNavigation';
 import { CreateCourseSection } from '@/features/CreateCourseSection';
 import { useCourseRoles, useGetCourseQuery } from '@/entities/Course';
 import { Footer } from '@/widgets/Footer';
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import {
+  DndContext,
+  DragEndEvent,
+  KeyboardSensor,
+  MouseSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  restrictToFirstScrollableAncestor,
+  restrictToParentElement,
+  restrictToVerticalAxis,
+} from '@dnd-kit/modifiers';
+import { useChangeCourseModuleOrderMutation } from '@/entities/CourseModule';
 
 interface CourseStudyLayoutProps {
   children: ReactNode;
@@ -25,6 +44,8 @@ export default function CourseStudyLayout({
     skip: !params.courseId,
   });
 
+  const [updateOrder] = useChangeCourseModuleOrderMutation();
+
   useLayoutEffect(() => {
     if (course) {
       window.document.title = course.name || '<без названия>';
@@ -33,6 +54,31 @@ export default function CourseStudyLayout({
 
   const { isAuthor, isCoauthor } = useCourseRoles(course);
   const isEditAllowed = isAuthor || isCoauthor;
+
+  // DND Sensors
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  // DND Handler
+  const onDragEndHandler = (e: DragEndEvent) => {
+    if (course && e.over && e.active.id !== e.over?.id) {
+      console.log(e.over.data.current!.order);
+      console.log(e.active.data.current!.order);
+      updateOrder({
+        courseId: course.id,
+        moduleId: e.active.id as string,
+        order: e.over.data.current!.order,
+      });
+    }
+  };
 
   if (!course) return null;
 
@@ -99,17 +145,31 @@ export default function CourseStudyLayout({
               [&:hover::-webkit-scrollbar-thumb]:bg-grey-300
               '
             >
-              {modules.map((module) => {
-                return (
-                  <li key={module.id}>
-                    <CourseModuleNavigation
-                      key={module.id}
-                      module={module}
-                      currentPage={params.pageId}
-                    />
-                  </li>
-                );
-              })}
+              <DndContext
+                onDragEnd={onDragEndHandler}
+                sensors={sensors}
+                modifiers={[
+                  restrictToVerticalAxis,
+                  restrictToParentElement,
+                  restrictToFirstScrollableAncestor,
+                ]}
+              >
+                <SortableContext
+                  items={modules}
+                  strategy={verticalListSortingStrategy}
+                >
+                  {modules.map((module) => {
+                    return (
+                      <CourseModuleNavigation
+                        courseId={id}
+                        key={module.id}
+                        module={module}
+                        currentPage={params.pageId}
+                      />
+                    );
+                  })}
+                </SortableContext>
+              </DndContext>
               <li>
                 <NavigationCreateModule className='w-full' courseId={id} />
               </li>
