@@ -99,7 +99,7 @@ export const RegistrationCard = () => {
               type='button'
               className='leading-[0]'
             >
-              <Icon type={isPasswordShowed ? 'invisible' : 'visible'} />
+              <Icon type={isPasswordShowed ? 'visible' : 'invisible'} />
             </button>
           </Input>
           <Input
@@ -114,7 +114,7 @@ export const RegistrationCard = () => {
               type='button'
               className='leading-[0]'
             >
-              <Icon type={isSecondPasswordShowed ? 'invisible' : 'visible'} />
+              <Icon type={isSecondPasswordShowed ? 'visible' : 'invisible'} />
             </button>
           </Input>
           <Button

@@ -90,7 +90,7 @@ export const LoginCard = () => {
               type='button'
               className='leading-[0]'
             >
-              <Icon type={isPasswordShowed ? 'invisible' : 'visible'} />
+              <Icon type={isPasswordShowed ? 'visible' : 'invisible'} />
             </button>
           </Input>
           <Button
