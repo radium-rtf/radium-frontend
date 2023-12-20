@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu } from '@/shared';
-import { FC, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { signOut } from 'next-auth/react';
 
 interface IProps {
@@ -11,6 +11,19 @@ interface IProps {
 
 export const HeaderMenu: FC<IProps> = ({ photo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const ref = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    const listener = (e: Event) => {
+      e.target !== ref.current && setIsMenuOpen(false);
+    };
+    if (isMenuOpen) {
+      document.body.addEventListener('click', listener);
+    }
+    return () => {
+      document.body.removeEventListener('click', listener);
+    };
+  }, [isMenuOpen]);
 
   return (
     // Extra space in this block
@@ -29,7 +42,10 @@ export const HeaderMenu: FC<IProps> = ({ photo }) => {
         />
       </button>
       {isMenuOpen && (
-        <Menu className='absolute -bottom-4 right-0 z-10 w-[216px] translate-y-full'>
+        <Menu
+          ref={ref}
+          className='absolute -bottom-4 right-0 z-10 w-[216px] translate-y-full'
+        >
           <Menu.Item asChild>
             <Link href='/profile'>
               <Menu.Icon icon='profile' />

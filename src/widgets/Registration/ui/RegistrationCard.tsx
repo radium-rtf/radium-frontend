@@ -132,7 +132,7 @@ export const RegistrationCard = () => {
                 errors.name?.message ||
                 errors.password?.password?.message ||
                 errors.password?.passwordRepeat?.message ||
-                'Войти'}
+                'Зарегистрироваться'}
             </span>
           </Button>
           <Button asChild className='gap-4'>

@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { HeaderMenu } from '@/features/HeaderProfile/ui/HeaderMenu';
+import { HeaderMenu } from './HeaderMenu';
 import { useSession } from 'next-auth/react';
 
 export const HeaderProfile = () => {
