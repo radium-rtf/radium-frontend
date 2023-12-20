@@ -123,9 +123,9 @@ export const AnswerSection: FC<AnswerSectionProps> = ({ sectionData }) => {
             isEditAllowed && isEditMode && 'relative'
           )}
         >
-          <Icon type='question' className='text-inherit' />
+          <Icon type='task' className='text-inherit' />
           <span className='font-mono font-bold leading-[normal] text-inherit'>
-            Вопрос
+            Задание
           </span>
           {isEditAllowed && isEditMode && (
             <button
