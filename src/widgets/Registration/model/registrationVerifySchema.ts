@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const registrationVerifySchema = z.object({
-  email: z.string().regex(/[a-zA-Z.]@urfu.(me|ru)/),
+  email: z.string().email('Неверная почта'),
   verificationCode: z
     .string()
     .min(6, 'Неверная длина кода')

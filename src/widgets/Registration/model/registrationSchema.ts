@@ -5,7 +5,7 @@ export const registrationSchema = z.object({
     .string()
     .min(1, 'Некорректная почта!')
     .transform((email) => (email.includes('@') ? email : `${email}@urfu.me`))
-    .pipe(z.string().regex(/[a-zA-Z.]@urfu.(me|ru)/, 'Некорректная почта!')),
+    .pipe(z.string().email('Некорректная почта!')),
   name: z.string().min(1, 'Некорректное имя!'),
   password: z
     .object({

@@ -39,7 +39,7 @@ export const LoginCard = () => {
   }) => {
     try {
       const result = await signIn('login', {
-        email,
+        email: email.toLowerCase(),
         password,
         redirect: false,
       });

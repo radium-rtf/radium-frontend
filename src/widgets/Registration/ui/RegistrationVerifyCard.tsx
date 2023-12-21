@@ -44,7 +44,7 @@ export const VerifyRegistrationCard = () => {
     verificationCode,
   }) => {
     const response = await signIn('verifyRegistration', {
-      email,
+      email: email.toLowerCase(),
       verificationCode,
       redirect: false,
     });

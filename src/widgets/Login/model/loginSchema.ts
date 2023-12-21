@@ -5,7 +5,12 @@ export const loginSchema = z.object({
     .string()
     .min(1, 'Введите почту!')
     .transform((email) => (email.includes('@') ? email : `${email}@urfu.me`))
-    .pipe(z.string().regex(/[a-zA-Z.]@urfu.(me|ru)/, 'Некорректная почта!')),
+    .pipe(
+      z
+        .string()
+        .email('Неверная почта!')
+        .transform((e) => e.toLowerCase())
+    ),
   password: z.string().min(1, 'Введите пароль!'),
 });
 

@@ -45,7 +45,7 @@ export const RegistrationCard = () => {
     data
   ) => {
     const response = await Register({
-      email: data.email,
+      email: data.email.toLowerCase(),
       name: data.name,
       password: data.password.password,
     });
@@ -53,7 +53,7 @@ export const RegistrationCard = () => {
       setError('email', { message: 'Ошибка' }, { shouldFocus: false });
       return;
     }
-    router.push(`/registration/verify?email=${data.email}`);
+    router.push(`/registration/verify?email=${response.email}`);
   };
 
   return (
