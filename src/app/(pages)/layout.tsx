@@ -53,7 +53,7 @@ export default function RootLayout({
           jetbrainsMono.variable
         )}
       >
-        <main className='relative flex flex-grow flex-col'>
+        <main className='relative mt-[8.25rem] flex flex-grow flex-col'>
           <AuthSessionProvider>
             <ReduxStoreProvider>{children}</ReduxStoreProvider>
           </AuthSessionProvider>

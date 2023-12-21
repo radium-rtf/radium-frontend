@@ -1,15 +1,15 @@
 import {
-    ButtonHTMLAttributes,
-    forwardRef,
-    ForwardRefExoticComponent,
-    HTMLAttributes,
-    ReactNode,
-    RefAttributes,
-    SVGAttributes,
+  ButtonHTMLAttributes,
+  forwardRef,
+  ForwardRefExoticComponent,
+  HTMLAttributes,
+  ReactNode,
+  RefAttributes,
+  SVGAttributes,
 } from 'react';
-import {cn} from '../utils/cn';
-import {Slot} from '@radix-ui/react-slot';
-import {Icon} from './Icon';
+import { cn } from '../utils/cn';
+import { Slot } from '@radix-ui/react-slot';
+import { Icon } from './Icon';
 
 // Menu
 interface IMenuProps extends HTMLAttributes<HTMLUListElement> {
@@ -108,7 +108,10 @@ const MenuText = forwardRef<HTMLParagraphElement, IMenuTextProps>(
       <Comp
         ref={ref}
         {...props}
-        className={cn('flex-grow text-start', className)}
+        className={cn(
+          'flex-grow text-start text-[0.8125rem] text-text-primary',
+          className
+        )}
       />
     );
   }
