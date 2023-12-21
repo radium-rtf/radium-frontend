@@ -226,10 +226,12 @@ export const TableBodyRow: FC<ITableBodyRow> = ({ row, rowIndex }) => (
 );
 
 function descendingComparator(a: string[], b: string[], orderByColumn: number) {
-  if (b[orderByColumn] < a[orderByColumn]) {
+  const num = Number(a[orderByColumn]);
+  const valueToCompare = isNaN(num) ? a[orderByColumn] : num;
+  if (b[orderByColumn] < valueToCompare) {
     return -1;
   }
-  if (b[orderByColumn] > a[orderByColumn]) {
+  if (b[orderByColumn] > valueToCompare) {
     return 1;
   }
   return 0;
