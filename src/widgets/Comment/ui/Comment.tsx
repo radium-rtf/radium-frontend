@@ -44,7 +44,7 @@ export const Comment: FC<IProps> = ({ comment, date, name, avatar }) => {
         <div className='flex gap-2'>
           <Image
             className='flex-shrink-0 rounded-full'
-            src={avatar || 'defaultProfile.svg'}
+            src={avatar || '/defaultProfile.svg'}
             alt={name}
             width={18}
             height={18}
