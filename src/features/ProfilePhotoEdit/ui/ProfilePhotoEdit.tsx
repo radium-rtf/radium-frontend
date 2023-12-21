@@ -65,7 +65,7 @@ export const ProfilePhotoEdit = forwardRef<HTMLInputElement, IProps>(
           src={
             (newPhoto && convertFileToPhoto(newPhoto)) ||
             initialPhotoURL ||
-            'defaultProfile.svg'
+            '/defaultProfile.svg'
           }
           className='absolute inset-0 h-full w-full object-cover'
           alt='Profile image'

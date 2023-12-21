@@ -22,7 +22,7 @@ export const CourseAuthors: FC<IProps> = ({ authors }) => {
                 className='-m-[0.1875rem] aspect-square h-6 rounded-full object-cover'
               >
                 <Image
-                  src={author.avatar || 'defaultProfile.svg'}
+                  src={author.avatar || '/defaultProfile.svg'}
                   alt={author.name}
                   width={24}
                   height={24}

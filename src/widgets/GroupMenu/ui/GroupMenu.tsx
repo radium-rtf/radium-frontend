@@ -79,7 +79,7 @@ export const GroupMenu: FC<IProps> = ({
                       className='-m-[0.1875rem] aspect-square h-6 rounded-full object-cover'
                     >
                       <Image
-                        src={student.user.avatar || 'defaultProfile.svg'}
+                        src={student.user.avatar || '/defaultProfile.svg'}
                         alt={student.user.name}
                         width={24}
                         height={24}
