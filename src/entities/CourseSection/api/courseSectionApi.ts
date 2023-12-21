@@ -66,24 +66,23 @@ const sectionApi = emptyApi.injectEndpoints({
               (draft) => {
                 const section = draft.sections.find((s) => s.id === id)!;
 
-                if (
-                  section.verdict === 'OK' &&
-                  updatedSection.verdict !== 'OK'
-                ) {
-                  draft.score -= section.maxScore;
-                }
-                if (
-                  section.verdict === 'WA' &&
-                  updatedSection.verdict === 'OK'
-                ) {
-                  draft.score += section.maxScore;
+                // Score change
+                if (updatedSection.verdict === 'OK') {
+                  if (section.score !== section.maxScore) {
+                    draft.score += section.maxScore;
+                    section.score += section.maxScore;
+                  }
+                } else if (updatedSection.verdict === 'WA') {
+                  if (section.score === section.maxScore) {
+                    draft.score -= section.maxScore;
+                    section.score -= section.maxScore;
+                  }
                 }
                 section.verdict = updatedSection.verdict;
+
+                // Attempts change
                 if (section.attempts) {
                   section.attempts -= 1;
-                }
-                if (updatedSection.verdict === 'OK') {
-                  section.score = section.maxScore;
                 }
               }
             )
@@ -129,24 +128,23 @@ const sectionApi = emptyApi.injectEndpoints({
               (draft) => {
                 const section = draft.sections.find((s) => s.id === id)!;
 
-                if (
-                  section.verdict === 'OK' &&
-                  updatedSection.verdict !== 'OK'
-                ) {
-                  draft.score -= section.maxScore;
-                }
-                if (
-                  section.verdict === 'WA' &&
-                  updatedSection.verdict === 'OK'
-                ) {
-                  draft.score += section.maxScore;
+                // Score change
+                if (updatedSection.verdict === 'OK') {
+                  if (section.score !== section.maxScore) {
+                    draft.score += section.maxScore;
+                    section.score += section.maxScore;
+                  }
+                } else if (updatedSection.verdict === 'WA') {
+                  if (section.score === section.maxScore) {
+                    draft.score -= section.maxScore;
+                    section.score -= section.maxScore;
+                  }
                 }
                 section.verdict = updatedSection.verdict;
+
+                // Attempts change
                 if (section.attempts) {
                   section.attempts -= 1;
-                }
-                if (updatedSection.verdict === 'OK') {
-                  section.score = section.maxScore;
                 }
               }
             )
@@ -192,24 +190,23 @@ const sectionApi = emptyApi.injectEndpoints({
               (draft) => {
                 const section = draft.sections.find((s) => s.id === id)!;
 
-                if (
-                  section.verdict === 'OK' &&
-                  updatedSection.verdict !== 'OK'
-                ) {
-                  draft.score -= section.maxScore;
-                }
-                if (
-                  section.verdict === 'WA' &&
-                  updatedSection.verdict === 'OK'
-                ) {
-                  draft.score += section.maxScore;
+                // Score change
+                if (updatedSection.verdict === 'OK') {
+                  if (section.score !== section.maxScore) {
+                    draft.score += section.maxScore;
+                    section.score += section.maxScore;
+                  }
+                } else if (updatedSection.verdict === 'WA') {
+                  if (section.score === section.maxScore) {
+                    draft.score -= section.maxScore;
+                    section.score -= section.maxScore;
+                  }
                 }
                 section.verdict = updatedSection.verdict;
+
+                // Attempts change
                 if (section.attempts) {
                   section.attempts -= 1;
-                }
-                if (updatedSection.verdict === 'OK') {
-                  section.score = section.maxScore;
                 }
               }
             )
@@ -255,24 +252,23 @@ const sectionApi = emptyApi.injectEndpoints({
               (draft) => {
                 const section = draft.sections.find((s) => s.id === id)!;
 
-                if (
-                  section.verdict === 'OK' &&
-                  updatedSection.verdict !== 'OK'
-                ) {
-                  draft.score -= section.maxScore;
-                }
-                if (
-                  section.verdict === 'WA' &&
-                  updatedSection.verdict === 'OK'
-                ) {
-                  draft.score += section.maxScore;
+                // Score change
+                if (updatedSection.verdict === 'OK') {
+                  if (section.score !== section.maxScore) {
+                    draft.score += section.maxScore;
+                    section.score += section.maxScore;
+                  }
+                } else if (updatedSection.verdict === 'WA') {
+                  if (section.score === section.maxScore) {
+                    draft.score -= section.maxScore;
+                    section.score -= section.maxScore;
+                  }
                 }
                 section.verdict = updatedSection.verdict;
+
+                // Attempts change
                 if (section.attempts) {
                   section.attempts -= 1;
-                }
-                if (updatedSection.verdict === 'OK') {
-                  section.score = section.maxScore;
                 }
               }
             )
@@ -318,24 +314,23 @@ const sectionApi = emptyApi.injectEndpoints({
               (draft) => {
                 const section = draft.sections.find((s) => s.id === id)!;
 
-                if (
-                  section.verdict === 'OK' &&
-                  updatedSection.verdict !== 'OK'
-                ) {
-                  draft.score -= section.maxScore;
-                }
-                if (
-                  section.verdict === 'WA' &&
-                  updatedSection.verdict === 'OK'
-                ) {
-                  draft.score += section.maxScore;
+                // Score change
+                if (updatedSection.verdict === 'OK') {
+                  if (section.score !== section.maxScore) {
+                    draft.score += section.maxScore;
+                    section.score += section.maxScore;
+                  }
+                } else if (updatedSection.verdict === 'WA') {
+                  if (section.score === section.maxScore) {
+                    draft.score -= section.maxScore;
+                    section.score -= section.maxScore;
+                  }
                 }
                 section.verdict = updatedSection.verdict;
+
+                // Attempts change
                 if (section.attempts) {
                   section.attempts -= 1;
-                }
-                if (updatedSection.verdict === 'OK') {
-                  section.score = section.maxScore;
                 }
               }
             )
@@ -383,24 +378,24 @@ const sectionApi = emptyApi.injectEndpoints({
                   (s) => s.id === id
                 )! as AnswerSectionResponseDto;
                 section.answer = answer.answer;
-                if (
-                  section.verdict === 'OK' &&
-                  updatedSection.verdict !== 'OK'
-                ) {
-                  draft.score -= section.maxScore;
-                }
-                if (
-                  section.verdict === 'WA' &&
-                  updatedSection.verdict === 'OK'
-                ) {
-                  draft.score += section.maxScore;
+
+                // Score change
+                if (updatedSection.verdict === 'OK') {
+                  if (section.score !== section.maxScore) {
+                    draft.score += section.maxScore;
+                    section.score += section.maxScore;
+                  }
+                } else if (updatedSection.verdict === 'WA') {
+                  if (section.score === section.maxScore) {
+                    draft.score -= section.maxScore;
+                    section.score -= section.maxScore;
+                  }
                 }
                 section.verdict = updatedSection.verdict;
+
+                // Attempts change
                 if (section.attempts) {
                   section.attempts -= 1;
-                }
-                if (updatedSection.verdict === 'OK') {
-                  section.score = section.maxScore;
                 }
               }
             )

@@ -185,7 +185,7 @@ export const AnswerSection: FC<AnswerSectionProps> = ({ sectionData }) => {
                       )}`}
                     {sectionData.verdict !== '' &&
                       `Осталось ${sectionData.attempts} ${getNoun(
-                        sectionData.maxAttempts,
+                        sectionData.attempts,
                         'попытка',
                         'попытки',
                         'попыток'

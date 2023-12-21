@@ -21,7 +21,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
           initial={{ width: 0 }}
           animate={{ width: 256 }}
           exit={{ width: 24 }}
-          className='sticky right-0 top-[8.625rem] -mr-6 max-h-[calc(100vh-8.65rem)] w-64 overflow-hidden'
+          className='sticky right-0 top-[8.625rem] -mr-6 max-h-[calc(100vh-8.65rem)] w-64 self-start overflow-hidden'
         >
           <motion.div
             key='kkekekkkekekkdfsdfg'

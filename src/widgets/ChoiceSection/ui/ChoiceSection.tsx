@@ -171,36 +171,41 @@ export const ChoiceSection: FC<ChoiceSectionProps> = ({ sectionData }) => {
             <>
               {!isSubmitting && (
                 <>
-                  <span className='text-[0.8125rem] text-text-primary'>
-                    {sectionData.verdict === '' &&
-                      `${sectionData.maxAttempts} ${getNoun(
-                        sectionData.maxAttempts,
-                        'попытка',
-                        'попытки',
-                        'попыток'
-                      )}`}
-                    {sectionData.verdict !== '' &&
-                      `Осталось ${sectionData.attempts} ${getNoun(
-                        sectionData.maxAttempts,
-                        'попытка',
-                        'попытки',
-                        'попыток'
-                      )}`}
-                    {}
-                  </span>
-                  <span
-                    className={cn(
-                      'text-[0.8125rem]',
-                      sectionData.verdict === 'OK' && 'text-secondary-default'
-                    )}
-                  >
-                    {(sectionData.verdict === 'OK' &&
-                      `${sectionData.score} / ${sectionData.maxScore}`) ||
-                      (sectionData.verdict === 'WA' &&
-                        `${0} / ${sectionData.maxScore}`) ||
-                      (sectionData.verdict === '' && `${sectionData.maxScore}`)}
-                    <span> баллов</span>
-                  </span>
+                  {sectionData.maxAttempts > 0 && (
+                    <span className='text-[0.8125rem] text-text-primary'>
+                      {sectionData.verdict === '' &&
+                        `${sectionData.maxAttempts} ${getNoun(
+                          sectionData.maxAttempts,
+                          'попытка',
+                          'попытки',
+                          'попыток'
+                        )}`}
+                      {sectionData.verdict !== '' &&
+                        `Осталось ${sectionData.attempts} ${getNoun(
+                          sectionData.attempts,
+                          'попытка',
+                          'попытки',
+                          'попыток'
+                        )}`}
+                      {}
+                    </span>
+                  )}
+                  {sectionData.maxScore > 0 && (
+                    <span
+                      className={cn(
+                        'text-[0.8125rem]',
+                        sectionData.verdict === 'OK' && 'text-secondary-default'
+                      )}
+                    >
+                      {(sectionData.verdict === 'OK' &&
+                        `${sectionData.score} / ${sectionData.maxScore}`) ||
+                        (sectionData.verdict === 'WA' &&
+                          `${0} / ${sectionData.maxScore}`) ||
+                        (sectionData.verdict === '' &&
+                          `${sectionData.maxScore}`)}
+                      <span> баллов</span>
+                    </span>
+                  )}
                 </>
               )}
               <Button
