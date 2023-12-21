@@ -56,7 +56,7 @@ export const HeaderMenu: FC<IProps> = ({ photo }) => {
   }, [isMenuOpen]);
 
   return (
-    <div ref={divRef} className='relative aspect-square h-12'>
+    <div ref={divRef} className='relative aspect-square h-12 transition-all'>
       <button
         className='rounded-full'
         onClick={() => setIsMenuOpen((prev) => !prev)}
