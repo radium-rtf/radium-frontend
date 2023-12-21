@@ -49,8 +49,7 @@ export const HeaderMenu: FC<IProps> = ({ photo }) => {
   }, [isMenuOpen]);
 
   return (
-    // Extra space in this block
-    <div ref={divRef} className='relative aspect-square h-12 transition-all'>
+    <div ref={divRef} className='relative aspect-square h-12'>
       <button
         className='rounded-full'
         onClick={() => setIsMenuOpen((prev) => !prev)}
