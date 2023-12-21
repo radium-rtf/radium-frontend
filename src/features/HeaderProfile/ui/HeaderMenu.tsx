@@ -17,7 +17,14 @@ export const HeaderMenu: FC<IProps> = ({ photo }) => {
 
   useEffect(() => {
     const listener = (e: Event) => {
-      e.target !== menuRef.current && setIsMenuOpen(false);
+      console.log(e.target);
+      if (
+        menuRef.current &&
+        isMenuOpen &&
+        !menuRef.current.contains(e.target as Node)
+      ) {
+        setIsMenuOpen(false);
+      }
     };
     if (isMenuOpen) {
       document.body.addEventListener('click', listener);
