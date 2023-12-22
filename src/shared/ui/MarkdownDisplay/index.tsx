@@ -3,6 +3,7 @@ import Markdown, { Components } from 'react-markdown';
 import './MarkdownDisplay.css';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
+import { cn } from '@/shared/utils/cn';
 
 interface MarkdownDisplayProps {
   markdown: string;
@@ -30,7 +31,20 @@ export const MarkdownDisplay: FC<MarkdownDisplayProps> = ({ markdown }) => {
     <Markdown
       rehypePlugins={[rehypeRaw]}
       remarkPlugins={[remarkGfm]}
-      className={'markdown-display text-4'}
+      className={cn(
+        'markdown-display',
+        'w-full',
+        'max-w-none',
+        'prose',
+        'prose-default',
+        'prose-no-margin',
+        'prose-h1:text-4xl',
+        'prose-h2:text-3xl',
+        'prose-h3:text-2xl',
+        'prose-blockquote:not-italic',
+        'prose-code:font-normal',
+        'prose-code:text-[0.8125rem]'
+      )}
       components={components}
     >
       {markdown}

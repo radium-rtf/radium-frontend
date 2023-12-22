@@ -43,17 +43,21 @@ export const AuthorShipCourseCard: FC<IProps> = ({ course }) => {
           {name || '<без названия>'}
         </h1>
       </header>
-      <p className='flex-grow text-[0.8125rem]'>
+      <p className='line-clamp-4 flex-grow text-[0.8125rem]'>
         {shortDescription || '<без описания>'}
       </p>
       <footer className='flex items-center gap-2'>
         <div className='flex flex-grow items-center gap-2'>
           <Icon
             className='h-[1.125rem]'
-            type={isReadyForPublish ? 'success' : 'courses'}
+            type={
+              isReadyForPublish || course.isPublished ? 'success' : 'courses'
+            }
           />
           <p className='text-[0.8125rem]'>
-            {isReadyForPublish ? 'Готов к публикации' : 'Черновик'}
+            {(course.isPublished && 'Опубликован') ||
+              (isReadyForPublish && 'Готов к публикации') ||
+              'Черновик'}
           </p>
         </div>
         <CourseDeleteSmall className='relative' courseId={id} />

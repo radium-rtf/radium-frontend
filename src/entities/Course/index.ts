@@ -23,8 +23,13 @@ export {
   useUpdateCourseDescriptionMutation,
   useUpdateCourseBannerMutation,
   useUpdateCourseLogoMutation,
+  useAddCourseCoAuthorMutation,
+  useDeleteCourseCoAuthorMutation,
+  useAddCourseContactMutation,
+  useDeleteCourseContactMutation,
 } from './api/courseApi';
 export { useLastCoursePage } from './lib/useLastCoursePage';
+export { useCourseRoles } from './lib/useCourseRoles';
 
 // Skeletons
 export { CourseCardSkeleton } from './ui/CourseCardSkeleton';

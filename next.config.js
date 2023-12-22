@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   images: {
     remotePatterns: [
       {
@@ -19,7 +20,13 @@ const nextConfig = {
         hostname: '*',
         port: '8080',
         pathname: '**',
-      }
+      },
+      {
+        protocol: 'http',
+        hostname: 'storage.yandexcloud.net',
+        port: '',
+        pathname: '**',
+      },
     ],
   },
 };

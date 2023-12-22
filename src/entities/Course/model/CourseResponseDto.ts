@@ -11,6 +11,7 @@ export interface CourseResponseDto {
   id: string;
   links: [
     {
+      id: string;
       link: string;
       name: string;
     },
@@ -18,15 +19,17 @@ export interface CourseResponseDto {
   logo: string;
   maxScore: number;
   modules: CourseModuleResponseDto[];
-  groups: [
-    {
-      id: string;
-      name: string;
-      inviteCode: string;
-      courses: [];
-      students: [];
-    },
-  ];
+  groups:
+    | [
+        {
+          id: string;
+          name: string;
+          inviteCode: string;
+          courses: [];
+          students: [];
+        },
+      ]
+    | null;
   name: string;
   score: number;
   shortDescription: string;

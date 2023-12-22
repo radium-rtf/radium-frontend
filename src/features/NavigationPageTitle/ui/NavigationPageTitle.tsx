@@ -1,5 +1,6 @@
 'use client';
 import {
+  CSSProperties,
   FC,
   FormEvent,
   LiHTMLAttributes,
@@ -13,6 +14,8 @@ import { CourseResponseDto } from '@/entities/Course';
 import { CourseEditContext } from '@/features/CourseEditContext';
 import { Input, List, Progress, cn } from '@/shared';
 import { useUpdateCoursePageNameMutation } from '@/entities/CoursePage';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 interface IProps extends LiHTMLAttributes<HTMLLIElement> {
   currentPage?: string;
@@ -58,9 +61,33 @@ export const NavigationPageTitle: FC<IProps> = ({
     };
   }, [isEditing]);
 
+  const {
+    setNodeRef,
+    setActivatorNodeRef,
+    listeners,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: page.id,
+    data: {
+      order: page.order,
+    },
+    disabled: !isEditMode,
+  });
+
+  const style = {
+    transform: CSS.Translate.toString(transform),
+    transition,
+  } as CSSProperties;
+
   if (isEditing) {
     return (
-      <form onSubmit={(e) => formSubmitHandler(e)} className='px-2 py-1.5'>
+      <form
+        ref={setNodeRef}
+        onSubmit={(e) => formSubmitHandler(e)}
+        className='px-2 py-1.5'
+      >
         <Input name='newName' defaultValue={page.name} />
       </form>
     );
@@ -68,33 +95,46 @@ export const NavigationPageTitle: FC<IProps> = ({
 
   return (
     <List.Item
+      ref={setNodeRef}
+      style={style}
       key={page.id}
       {...props}
       className={cn(
-        'group rounded-lg border border-transparent transition-colors hover:border-white/10 hover:bg-white/5',
+        'group relative rounded-lg border border-transparent transition-colors hover:border-white/10 hover:bg-white/5',
+        isEditMode && 'static',
         currentPage === page.id && 'border-white/10 bg-white/5',
+        isDragging && 'z-20',
         className
       )}
     >
-      <List.Icon
-        icon='courses'
-        className='text-primary-default'
-        asChild={page.maxScore !== 0}
+      <div
+        className={cn(isEditMode && 'cursor-grab')}
+        ref={setActivatorNodeRef}
+        {...listeners}
       >
-        <Progress
-          type='radial'
-          percentage={(page.score / page.maxScore) * 100}
-          theme='primary'
-          className='text-transparent'
-        />
-      </List.Icon>
+        <List.Icon
+          icon='courses'
+          className='text-primary-default'
+          asChild={page.maxScore !== 0}
+        >
+          <Progress
+            type='radial'
+            percentage={(page.score / page.maxScore) * 100}
+            theme='primary'
+            className='text-transparent'
+          />
+        </List.Icon>
+      </div>
 
       <List.Content asChild>
         <Link
           href={`/courses/${params.courseId!}/study/${page.id}`}
           scroll={false}
+          className={cn(
+            !isEditMode && 'after:absolute after:inset-0 after:rounded-lg'
+          )}
         >
-          <List.Title>{page.name}</List.Title>
+          <List.Title ref={setActivatorNodeRef}>{page.name}</List.Title>
           {!!page.maxScore && (
             <List.Subtitle>{`${page.score}/${page.maxScore} баллов`}</List.Subtitle>
           )}
@@ -105,9 +145,7 @@ export const NavigationPageTitle: FC<IProps> = ({
           <List.Icon
             icon='edit'
             className='h-3 opacity-0 transition-opacity group-hover:opacity-100'
-            onClick={() => {
-              console.log;
-            }}
+            onClick={() => {}}
           />
         </button>
       )}

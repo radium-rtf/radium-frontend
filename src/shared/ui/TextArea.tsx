@@ -1,13 +1,37 @@
+'use client';
 import { cn } from '../utils/cn';
-import { TextareaHTMLAttributes, forwardRef } from 'react';
+import {
+  TextareaHTMLAttributes,
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  ({ className, ...props }, ref) => {
+  ({ className, onChange, ...props }, ref) => {
+    const innerRef = useRef<HTMLTextAreaElement>(null);
+    const [value, setValue] = useState('');
+
+    useImperativeHandle(ref, () => innerRef.current!);
+
+    useEffect(() => {
+      innerRef.current!.style.height = 'auto';
+      innerRef.current!.style.height = `calc(${
+        innerRef.current!.scrollHeight
+      }px + 0.5rem)`;
+    }, [value]);
+
     return (
       <textarea
-        ref={ref}
+        ref={innerRef}
+        onChange={(e) => {
+          onChange?.(e);
+          setValue(e.target.value);
+        }}
         {...props}
         className={cn(
           [

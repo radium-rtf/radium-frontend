@@ -1,4 +1,5 @@
-import React, { FC, InputHTMLAttributes, forwardRef } from 'react';
+'use client';
+import { FC, InputHTMLAttributes, forwardRef } from 'react';
 import { cn } from '../utils/cn';
 
 interface IProps extends InputHTMLAttributes<HTMLInputElement> {

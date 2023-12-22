@@ -1,26 +1,51 @@
 import { NextAuthOptions } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { Login } from '../libs/Login';
+import { VerifyRegistration } from '../libs/VerifyRegistration';
 
 export const authOptions: NextAuthOptions = {
   pages: {
     signIn: '/login',
+    newUser: '/registration',
+    verifyRequest: '/registration/verify',
   },
 
   providers: [
     Credentials({
-      name: 'credentials',
+      id: 'login',
+      name: 'login',
       credentials: {
-        email: { type: 'email', placeholder: 'Email', label: 'Email' },
-        password: {
-          type: 'password',
-          placeholder: 'password',
-          label: 'password',
-        },
+        email: {},
+        password: {},
       },
       async authorize(credentials) {
         if (!credentials) return null;
         const response = await Login(credentials);
+
+        if (typeof response === 'string') return null;
+
+        return {
+          email: response.user.email,
+          name: response.user.name,
+          id: response.user.id,
+          image: response.user.avatar,
+          accessToken: response.accessToken,
+          refreshToken: response.refreshToken,
+          expiresIn: response.expiresIn,
+          roles: { ...response.user.roles },
+        };
+      },
+    }),
+    Credentials({
+      id: 'verifyRegistration',
+      name: 'verifyRegistration',
+      credentials: {
+        email: {},
+        verificationCode: {},
+      },
+      async authorize(credentials) {
+        if (!credentials) return null;
+        const response = await VerifyRegistration(credentials);
 
         if (typeof response === 'string') return null;
 
@@ -62,4 +87,8 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
+  session: {
+    strategy: 'jwt',
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 };

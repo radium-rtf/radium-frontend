@@ -4,6 +4,8 @@ export interface SectionResponseDto {
   order: number;
   score: number;
   maxScore: number;
+  attempts: number;
+  maxAttempts: number;
   type:
     | 'choice'
     | 'multiChoice'
@@ -13,5 +15,5 @@ export interface SectionResponseDto {
     | 'code'
     | 'permutation'
     | 'mapping';
-  verdict: 'WA' | 'OK' | 'WAIT' | '';
+  verdict: 'WA' | 'OK' | 'WAIT' | 'REVIEWED' | '';
 }

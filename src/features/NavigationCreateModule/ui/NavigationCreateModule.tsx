@@ -55,7 +55,7 @@ export const NavigationCreateModule: FC<IProps> = ({
   if (isCreating) {
     return (
       <form onSubmit={submitHandler} className='px-2 py-1.5'>
-        <Input name='newModule' placeholder='Введите название модуля' />
+        <Input name='newModule' placeholder='Глава' />
       </form>
     );
   }
@@ -72,9 +72,7 @@ export const NavigationCreateModule: FC<IProps> = ({
       }}
     >
       <Icon type='add' className='text-primary-default' />
-      <span className='text-[0.8125rem] text-text-primary'>
-        Добавить модуль
-      </span>
+      <span className='text-[0.8125rem] text-text-primary'>Добавить главу</span>
     </button>
   );
 };

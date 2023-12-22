@@ -9,6 +9,7 @@ export interface SuccessAuthResponseDto {
     roles: {
       isAuthor: boolean;
       isTeacher: boolean;
+      isCoauthor: boolean;
     };
     name: string;
   };

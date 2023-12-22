@@ -204,9 +204,7 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
                   </span>
                 )}
                 {verdict === 'WA' && (
-                  <span className='text-destructive-default'>
-                    Не правильно!
-                  </span>
+                  <span className='text-destructive-default'>Неправильно!</span>
                 )}
               </div>
               {!isError &&
@@ -220,7 +218,7 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
                     )}
                   >
                     {verdict === 'OK' &&
-                      `${sectionData.maxScore} / ${sectionData.maxScore}`}
+                      `${sectionData.score} / ${sectionData.maxScore}`}
                     {verdict === 'WA' && `${0} / ${sectionData.maxScore}`}
                     {verdict === '' && `${sectionData.maxScore}`}
                     <span>

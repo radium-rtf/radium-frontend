@@ -24,7 +24,7 @@ export const PermutationItem: FC<IProps> = ({ value, className, ...props }) => {
 
   const style = {
     transition,
-    transform: CSS.Transform.toString(transform),
+    transform: CSS.Translate.toString(transform),
     zIndex: isDragging ? 1 : undefined,
     position: isDragging ? 'relative' : undefined,
     backgroundColor: isDragging ? '#393E40' : undefined,

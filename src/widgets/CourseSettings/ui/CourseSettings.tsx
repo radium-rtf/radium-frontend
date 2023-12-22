@@ -13,6 +13,7 @@ interface CourseSettingsProps {
   hasBanner: boolean;
   courseId: string;
   isPublished: boolean;
+  isEditAllowed: boolean;
 }
 
 export const CourseSettings: FC<CourseSettingsProps> = ({
@@ -23,6 +24,7 @@ export const CourseSettings: FC<CourseSettingsProps> = ({
   hasBanner,
   courseId,
   isPublished,
+  isEditAllowed,
 }) => {
   const { isEditing } = useContext(CourseEditContext);
 
@@ -49,48 +51,55 @@ export const CourseSettings: FC<CourseSettingsProps> = ({
         <div>
           <Checkbox
             labelClassName='pointer-events-none py-2'
-            defaultChecked={hasName}
+            checked={hasName}
+            onChange={() => {}}
           >
             Придумать название курса
           </Checkbox>
           <Checkbox
             labelClassName='pointer-events-none py-2'
-            defaultChecked={hasShortDescription}
+            checked={hasShortDescription}
+            onChange={() => {}}
           >
             Придумать описание курса
           </Checkbox>
           <Checkbox
             labelClassName='pointer-events-none py-2'
-            defaultChecked={hasLogo}
+            checked={hasLogo}
+            onChange={() => {}}
           >
             Загрузить лого курса
           </Checkbox>
           <Checkbox
             labelClassName='pointer-events-none py-2'
-            defaultChecked={hasBanner}
+            checked={hasBanner}
+            onChange={() => {}}
           >
             Загрузить обложку курса
           </Checkbox>
           <Checkbox
             labelClassName='pointer-events-none py-2'
-            defaultChecked={hasDescription}
+            checked={hasDescription}
+            onChange={() => {}}
           >
             Заполнить секцию О курсе
           </Checkbox>
         </div>
       )}
-      <CoursePublishToggle
-        isPublishable={
-          hasName &&
-          hasShortDescription &&
-          hasDescription &&
-          hasBanner &&
-          hasLogo
-        }
-        courseId={courseId}
-        isPublished={isPublished}
-      />
-      {isEditing && <CourseDelete courseId={courseId} />}
+      {isEditAllowed && (
+        <CoursePublishToggle
+          isPublishable={
+            hasName &&
+            hasShortDescription &&
+            hasDescription &&
+            hasBanner &&
+            hasLogo
+          }
+          courseId={courseId}
+          isPublished={isPublished}
+        />
+      )}
+      {isEditing && isEditAllowed && <CourseDelete courseId={courseId} />}
     </Card>
   );
 };

@@ -55,6 +55,8 @@ export const MarkdownEditor: FC<IProps> = ({ markdown, onChange }) => {
       },
       heading: {
         h1: 'text-4xl',
+        h2: 'text-3xl',
+        h3: 'text-2xl',
       },
       quote: 'border-white/10 border rounded-lg p-4',
       code: 'block border border-[#383A3B] rounded-lg font-code py-4 after:pointer-events-none pl-16 pr-4 relative before:block before:content-[attr(data-gutter)] before:absolute before:left-0 before:top-0 before:p-4 before:text-right before:min-w-[3rem] after:block after:absolute after:-right-[1px] after:-top-[1px] after:-bottom-[1px] after:left-12 after:bg-black/5 after:content-[""] after:border after:rounded-lg after:border-[#383A3B]',
@@ -113,17 +115,18 @@ export const MarkdownEditor: FC<IProps> = ({ markdown, onChange }) => {
     return (
       <>
         <button
+          type='button'
           className={cn(
-            'self-end rounded-lg border border-transparent p-2 transition-colors hover:border-white/10 hover:bg-white/5'
+            'self-end rounded-lg border border-transparent bg-white/5 p-2 transition-colors hover:border-white/10 hover:bg-white/5'
           )}
           onClick={() => setIsPlaintextMode(false)}
         >
-          <Icon type='visible' />
+          <Icon type='visible' className='text-primary-default' />
         </button>
         <TextArea
-          className='min-h-[32rem]
-                    resize-y
+          className='resize-y
                     overflow-y-scroll
+                    font-code
                     [&::-webkit-scrollbar-thumb]:rounded
                     [&::-webkit-scrollbar-thumb]:bg-transparent
                     [&::-webkit-scrollbar-thumb]:transition-colors
@@ -155,6 +158,7 @@ export const MarkdownEditor: FC<IProps> = ({ markdown, onChange }) => {
           <EditorListControl />
         </div>
         <button
+          type='button'
           className={cn(
             'rounded-lg border border-transparent p-2 transition-colors hover:border-white/10 hover:bg-white/5'
           )}
@@ -167,6 +171,15 @@ export const MarkdownEditor: FC<IProps> = ({ markdown, onChange }) => {
         contentEditable={
           <ContentEditable
             className={cn([
+              'prose',
+              'prose-default',
+              'prose-no-margin',
+              'prose-h1:text-4xl',
+              'prose-h2:text-3xl',
+              'prose-h3:text-2xl',
+              'prose-blockquote:not-italic',
+              'prose-code:font-normal',
+              'prose-code:text-[0.8125rem]',
               'p-4',
               'font-sans',
               'text-[0.8125rem]',

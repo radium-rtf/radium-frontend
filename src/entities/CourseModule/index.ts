@@ -4,4 +4,5 @@ export {
   useCreateCourseModuleMutation,
   useUpdateCourseModuleNameMutation,
   useDeleteCourseModuleMutation,
+  useChangeCourseModuleOrderMutation,
 } from './api/courseModuleApi';

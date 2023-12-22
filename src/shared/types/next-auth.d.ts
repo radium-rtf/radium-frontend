@@ -8,6 +8,7 @@ declare module 'next-auth' {
     roles: {
       isTeacher: boolean;
       isAuthor: boolean;
+      isCoauthor: boolean;
     };
   }
 
@@ -19,6 +20,7 @@ declare module 'next-auth' {
       roles: {
         isTeacher: boolean;
         isAuthor: boolean;
+        isCoauthor: boolean;
       };
     } & DefaultSession['user'];
   }
@@ -32,6 +34,7 @@ declare module 'next-auth/jwt' {
     roles: {
       isTeacher: boolean;
       isAuthor: boolean;
+      isCoauthor: boolean;
     };
   }
 }

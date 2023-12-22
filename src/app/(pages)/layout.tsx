@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { AuthSessionProvider, cn, ReduxStoreProvider } from '@/shared';
 import localFont from 'next/font/local';
 import { Inter, JetBrains_Mono } from 'next/font/google';
+import Wave from 'react-wavify';
 
 const ntSomic = localFont({
   src: [
@@ -39,18 +40,56 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' className='flex h-full flex-col'>
+    <html
+      lang='ru'
+      className='flex h-full flex-col scroll-smooth'
+      style={{ scrollBehavior: 'smooth' }}
+    >
       <body
         className={cn(
-          'flex flex-grow flex-col bg-background-default font-sans text-foreground-default',
+          'relative flex flex-grow flex-col bg-background-default font-sans text-foreground-default',
           inter.variable,
           ntSomic.variable,
           jetbrainsMono.variable
         )}
       >
-        <AuthSessionProvider>
-          <ReduxStoreProvider>{children}</ReduxStoreProvider>
-        </AuthSessionProvider>
+        <main className='relative mt-[8.25rem] flex flex-grow flex-col'>
+          <AuthSessionProvider>
+            <ReduxStoreProvider>{children}</ReduxStoreProvider>
+          </AuthSessionProvider>
+        </main>
+        <Wave
+          fill={`rgba(0, 0, 0, 0.05)`}
+          options={{
+            amplitude: 80,
+            speed: 0.1,
+            points: 5,
+            height: 100,
+          }}
+          style={{
+            position: 'fixed',
+            zIndex: -1000,
+            bottom: '0',
+            height: 600,
+            overflow: 'visible',
+          }}
+        />
+        <Wave
+          fill={`rgba(0, 0, 0, 0.05)`}
+          options={{
+            amplitude: 120,
+            speed: 0.1,
+            points: 5,
+            height: 100,
+          }}
+          style={{
+            position: 'fixed',
+            zIndex: -1000,
+            bottom: '0',
+            height: 450,
+            overflow: 'visible',
+          }}
+        />
       </body>
     </html>
   );

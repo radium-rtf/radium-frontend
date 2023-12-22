@@ -29,4 +29,5 @@ export {
   useAnswerCourseAnswerSectionMutation,
   useUpdateCourseAnswerSectionMutation,
   useAnswerCourseCodeSectionMutation,
+  useChangeCourseSectionOrderMutation,
 } from './api/courseSectionApi';

@@ -3,7 +3,7 @@ import { CourseJoin } from '@/features/CourseJoin';
 import { CourseContinue } from '@/features/CourseContinue';
 import { CourseBriefEdit } from './CourseBriedEdit';
 import { CourseEditContext } from '@/features/CourseEditContext';
-import { Button, Card, Icon } from '@/shared';
+import { Button, Card, Icon, getNoun } from '@/shared';
 import { FC, useContext, useState } from 'react';
 import { ChangeCourseLogo } from '@/features/ChangeCourseLogo';
 
@@ -45,14 +45,18 @@ export const CourseBrief: FC<IProps> = ({
       {isEditAllowed && isEditing && (
         <div className='flex items-center gap-4'>
           <ChangeCourseLogo logo={courseLogo} courseId={courseId} />
-          <h1>{courseName}</h1>
+          <h4 className='font-mono text-base text-primary-default'>
+            {courseName}
+          </h4>
         </div>
       )}
       <p className='text-[0.8125rem] leading-normal'>{shortDescription}</p>
       <div className='flex items-center gap-2'>
         <Icon type='courses' />
-        <span className='flex-grow text-[0.8125rem]'>{modulesCount} темы</span>
-        {!isEditing && !isEditMode && (
+        <span className='flex-grow text-[0.8125rem]'>
+          {modulesCount} {getNoun(modulesCount, 'тема', 'темы', 'тем')}
+        </span>
+        {(!isEditing || !isEditMode) && (
           <>
             {!isAssigned && <CourseJoin courseId={courseId} />}
             {isAssigned && <CourseContinue courseId={courseId} />}
