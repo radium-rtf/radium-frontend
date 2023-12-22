@@ -6,7 +6,7 @@ export { getNoun } from './utils/nouns';
 export { Radio } from './ui/Radio';
 export { Button } from './ui/buttonNew';
 export { Toggle } from './ui/Toggle';
-export { Checkbox } from './ui/Checkbox';
+export { Checkbox } from './ui/checkboxNew';
 export { TextArea } from './ui/TextArea';
 export { Input } from './ui/Input';
 export { Icon } from './ui/Icon';
@@ -54,6 +54,7 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
+export { Switch } from './ui/switch';
 
 // Interfaces
 export type { IIcon } from './ui/Icon';

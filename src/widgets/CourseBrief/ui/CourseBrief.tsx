@@ -3,7 +3,17 @@ import { CourseJoin } from '@/features/CourseJoin';
 import { CourseContinue } from '@/features/CourseContinue';
 import { CourseBriefEdit } from './CourseBriedEdit';
 import { CourseEditContext } from '@/features/CourseEditContext';
-import { Button, Card, Icon, getNoun } from '@/shared';
+import {
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  Icon,
+  cn,
+  getNoun,
+} from '@/shared';
 import { FC, useContext, useState } from 'react';
 import { ChangeCourseLogo } from '@/features/ChangeCourseLogo';
 
@@ -41,17 +51,19 @@ export const CourseBrief: FC<IProps> = ({
   }
 
   return (
-    <Card className='flex flex-col gap-4'>
+    <Card>
       {isEditAllowed && isEditing && (
-        <div className='flex items-center gap-4'>
+        <CardHeader className='flex-row items-center gap-4 space-y-0'>
           <ChangeCourseLogo logo={courseLogo} courseId={courseId} />
-          <h4 className='font-mono text-base text-primary-default'>
+          <h4 className='font-NTSomic text-primary text-base font-medium'>
             {courseName}
           </h4>
-        </div>
+        </CardHeader>
       )}
-      <p className='text-[0.8125rem] leading-normal'>{shortDescription}</p>
-      <div className='flex items-center gap-2'>
+      <CardContent className={cn((!isEditAllowed || !isEditing) && 'pt-6')}>
+        <CardDescription>{shortDescription}</CardDescription>
+      </CardContent>
+      <CardFooter className='flex items-center gap-2'>
         <Icon type='courses' />
         <span className='flex-grow text-[0.8125rem]'>
           {modulesCount} {getNoun(modulesCount, 'тема', 'темы', 'тем')}
@@ -65,16 +77,16 @@ export const CourseBrief: FC<IProps> = ({
         {isEditAllowed && isEditing && (
           <Button
             type='button'
-            color='outlined'
+            variant='outline'
             onClick={() => {
               setIsEditMode(true);
             }}
           >
-            <Icon type='edit' />
+            <Icon className='mr-4 text-inherit' type='edit' />
             <span>Редактировать</span>
           </Button>
         )}
-      </div>
+      </CardFooter>
     </Card>
   );
 };

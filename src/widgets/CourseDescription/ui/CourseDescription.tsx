@@ -1,6 +1,13 @@
 'use client';
 import { CourseEditContext } from '@/features/CourseEditContext';
-import { Button, Card, Icon } from '@/shared';
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Icon,
+} from '@/shared';
 import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
 import { FC, useContext, useState } from 'react';
 import { CourseDescriptionEdit } from './CourseDescriptionEdit';
@@ -31,13 +38,16 @@ export const CourseDescription: FC<CourseDescriptionProps> = ({
 
   return (
     <Card className='gap-6'>
-      <h1 className='font-mono text-[2rem] font-bold leading-[normal] text-primary-default after:left-12'>
-        О курсе
-      </h1>
+      <CardHeader className='flex-row items-center gap-4 space-y-0'>
+        <Icon type='question' className='text-primary' />
+        <CardTitle className='text-base'>О курсе</CardTitle>
+      </CardHeader>
 
-      {(!isEditMode || !isEditing) && (
-        <MarkdownDisplay markdown={description} />
-      )}
+      <CardContent>
+        {(!isEditMode || !isEditing) && (
+          <MarkdownDisplay markdown={description} />
+        )}
+      </CardContent>
 
       {isEditAllowed && isEditing && (
         <Button className='w-64 self-end' onClick={() => setIsEditMode(true)}>

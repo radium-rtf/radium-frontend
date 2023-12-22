@@ -25,12 +25,12 @@ export const CoursePublishToggle: FC<CoursePublishToggleProps> = ({
   return (
     <Button
       disabled={!isPublishable && !isPublished}
-      color={isPublished ? 'destructive' : 'accent'}
-      className='w-full'
+      variant={isPublished ? 'destructive' : 'default'}
+      className='w-full justify-start'
       onClick={onClickHandler}
     >
-      <Icon type='share' className='shrink-0 text-secondary-foreground' />
-      <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
+      <Icon type='share' className='shrink-0 text-inherit' />
+      <span className='ml-[calc(50%-18px)] shrink-0 -translate-x-1/2'>
         {isPublished ? 'Снять с публикации' : 'Опубликовать'}
       </span>
     </Button>
