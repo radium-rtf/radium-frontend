@@ -42,12 +42,12 @@ export default function RootLayout({
   return (
     <html
       lang='ru'
-      className='flex h-full flex-col scroll-smooth'
+      className='dark flex h-full flex-col scroll-smooth'
       style={{ scrollBehavior: 'smooth' }}
     >
       <body
         className={cn(
-          'relative flex flex-grow flex-col bg-background-default font-sans text-foreground-default',
+          'bg-background-default text-foreground-default relative flex flex-grow flex-col font-sans',
           inter.variable,
           ntSomic.variable,
           jetbrainsMono.variable
