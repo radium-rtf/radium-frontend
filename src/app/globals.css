@@ -32,7 +32,7 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
  
-    --radius: 0.5rem;
+    --radius: 1rem;
   }
  
   .dark {
@@ -40,6 +40,7 @@
     --foreground: 0 0% 90%;
  
     --card: 192 5% 19%;
+    --card-hover: 192 4% 22%;
     --card-foreground: 0 0% 90%;
  
     --popover: 197 6% 24%;
@@ -57,9 +58,11 @@
     --muted-foreground: 215 20.2% 65.1%;
  
     --accent: 120 58% 88%;
+    --accent-hover: 120 59% 90%;
     --accent-foreground: 120 8% 23%;
  
     --destructive: 0 79% 76%;
+    --destructive-hover: 0 80% 81%;
     --destructive-foreground: 0 25% 20%;
  
     /* unset */

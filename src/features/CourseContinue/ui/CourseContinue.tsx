@@ -1,28 +1,19 @@
 import { FC } from 'react';
 import Link from 'next/link';
-import { Button, Icon, cn } from '@/shared';
+import { Button, Icon } from '@/shared';
 import { useLastCoursePage } from '@/entities/Course';
 
 interface CourseContinueProps {
   courseId: string;
-  className?: string;
 }
 
-export const CourseContinue: FC<CourseContinueProps> = ({
-  courseId,
-  className,
-}) => {
+export const CourseContinue: FC<CourseContinueProps> = ({ courseId }) => {
   const { nextPageId } = useLastCoursePage(courseId);
   return (
-    <Button
-      asChild
-      className={cn('flex items-center gap-2', className)}
-      type='button'
-      color='outlined'
-    >
+    <Button className='z-10' asChild type='button' variant='outline'>
       <Link scroll={false} href={`/courses/${courseId}/study/${nextPageId}`}>
-        <Icon type='start' />
-        <p>Продолжить</p>
+        <Icon type='start' className='mr-4 text-inherit' />
+        <span>Продолжить</span>
       </Link>
     </Button>
   );

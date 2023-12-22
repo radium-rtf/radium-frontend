@@ -2,7 +2,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React, { FC } from 'react';
-import { Card, Icon } from '@/shared';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Icon,
+} from '@/shared';
 import { CourseJoin } from '@/features/CourseJoin';
 import { CourseResponseDto } from '@/entities/Course';
 
@@ -13,13 +21,13 @@ interface IProps {
 export const CourseCard: FC<IProps> = ({ course }) => {
   const { name, shortDescription, logo, id } = course;
   return (
-    <Card className='relative transition-all hover:brightness-110'>
+    <Card className='hover:bg-card-hover relative flex flex-col transition-all'>
       <Link
         className='absolute inset-0'
         href={`courses/${id}`}
         scroll={false}
       />
-      <header className='flex w-full items-center gap-4'>
+      <CardHeader className='flex-row items-center gap-4 space-y-0'>
         {logo ? (
           <Image
             className='h-18 w-18 aspect-square flex-shrink-0 rounded-lg object-cover'
@@ -31,20 +39,18 @@ export const CourseCard: FC<IProps> = ({ course }) => {
         ) : (
           <div className='aspect-square h-[4.5rem] rounded-lg bg-background-overlay' />
         )}
-        <h1 className='font-mono text-xl font-bold leading-[normal] text-primary-default'>
-          {name}
-        </h1>
-      </header>
-      <p className='line-clamp-4 flex-grow text-[0.8125rem]'>
-        {shortDescription}
-      </p>
-      <footer className='flex items-center gap-2'>
+        <CardTitle>{name}</CardTitle>
+      </CardHeader>
+      <CardContent className='flex-grow'>
+        <CardDescription>{shortDescription}</CardDescription>
+      </CardContent>
+      <CardFooter>
         <div className='flex flex-grow items-center gap-2'>
           <Icon className='h-[1.125rem]' type='courses' />
           {/* <p className='text-[0.8125rem]'>{`${modules.length} тем, 5 месяцев`}</p> */}
         </div>
-        <CourseJoin className='relative' courseId={id} />
-      </footer>
+        <CourseJoin courseId={id} />
+      </CardFooter>
     </Card>
   );
 };

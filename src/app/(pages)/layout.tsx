@@ -12,6 +12,10 @@ const ntSomic = localFont({
       weight: '700',
     },
     {
+      path: '../../../public/fonts/NT-Somic/NTSomic-Medium.woff2',
+      weight: '500',
+    },
+    {
       path: '../../../public/fonts/NT-Somic/NTSomic-Regular.woff2',
       weight: '400',
     },

@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import { fontFamily } from 'tailwindcss/defaultTheme';
 
 const config: Config = {
   darkMode: ['class'],
@@ -7,11 +8,12 @@ const config: Config = {
     container: {
       center: true,
       padding: '2rem',
-      screens: {
-        '2xl': '1400px',
-      },
     },
     extend: {
+      fontFamily: {
+        sans: ['var(--font-inter)', ...fontFamily.sans],
+        NTSomic: ['var(--font-nt-somic)', { fontFeatureSettings: '"salt" on' }],
+      },
       typography: {
         'no-margin': {
           css: {
@@ -75,6 +77,7 @@ const config: Config = {
         },
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
+          hover: 'hsl(var(--destructive-hover))',
           foreground: 'hsl(var(--destructive-foreground))',
         },
         muted: {
@@ -83,6 +86,7 @@ const config: Config = {
         },
         accent: {
           DEFAULT: 'hsl(var(--accent))',
+          hover: 'hsl(var(--accent-hover))',
           foreground: 'hsl(var(--accent-foreground))',
         },
         popover: {
@@ -91,6 +95,7 @@ const config: Config = {
         },
         card: {
           DEFAULT: 'hsl(var(--card))',
+          hover: 'hsl(var(--card-hover))',
           foreground: 'hsl(var(--card-foreground))',
         },
       },
