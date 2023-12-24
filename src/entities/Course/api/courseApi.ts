@@ -137,7 +137,17 @@ export const courseApi = emptyApi.injectEndpoints({
         method: 'PUT',
         body: body,
       }),
-      invalidatesTags: (res) => [{ type: 'courses', id: res?.id }, 'courses'],
+      invalidatesTags: [{ type: 'courses', id: 'LIST' }],
+      async onQueryStarted({ courseId }, { dispatch, queryFulfilled }) {
+        try {
+          const { data: updatedPost } = await queryFulfilled;
+          dispatch(
+            courseApi.util.updateQueryData('getCourse', courseId, (draft) => {
+              draft.description = updatedPost.description;
+            })
+          );
+        } catch {}
+      },
     }),
     updateCourseBanner: builder.mutation<
       CourseResponseDto,
