@@ -232,9 +232,16 @@ export const courseApi = emptyApi.injectEndpoints({
         method: 'POST',
         body: body,
       }),
-      invalidatesTags: (_1, _2, args) => [
-        { type: 'courses', id: args.courseId },
-      ],
+      async onQueryStarted({ courseId }, { dispatch, queryFulfilled }) {
+        try {
+          const { data: newLink } = await queryFulfilled;
+          dispatch(
+            courseApi.util.updateQueryData('getCourse', courseId, (draft) => {
+              draft.links.push(newLink);
+            })
+          );
+        } catch {}
+      },
     }),
     deleteCourseContact: builder.mutation<
       void,
@@ -247,6 +254,26 @@ export const courseApi = emptyApi.injectEndpoints({
       invalidatesTags: (_1, _2, args) => [
         { type: 'courses', id: args.courseId },
       ],
+      async onQueryStarted(
+        { courseId, contactId },
+        { dispatch, queryFulfilled }
+      ) {
+        const patchResult = dispatch(
+          courseApi.util.updateQueryData('getCourse', courseId, (draft) => {
+            const index = draft.links.findIndex(
+              (link) => link.id === contactId
+            );
+            if (index !== -1) {
+              draft.links.splice(index, 1);
+            }
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
     }),
   }),
   overrideExisting: true,

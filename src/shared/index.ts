@@ -62,6 +62,7 @@ export {
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
 export { Switch } from './ui/switch';
+export { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 
 // Interfaces
 export type { IIcon } from './ui/Icon';

@@ -20,7 +20,7 @@ export const CourseDeleteContact: FC<CourseDeleteContactProps> = ({
 
   return (
     <button onClick={onClickHandler} type='button' className='relative'>
-      <Icon type='remove' className='h-3 text-primary-default' />
+      <Icon type='remove' className='h-3 text-primary' />
     </button>
   );
 };
