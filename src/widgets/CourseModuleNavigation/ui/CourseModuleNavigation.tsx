@@ -8,6 +8,7 @@ import {
   SortableContext,
   sortableKeyboardCoordinates,
   useSortable,
+  verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSSProperties, FC, HTMLAttributes, useContext } from 'react';
 import { CSS } from '@dnd-kit/utilities';
@@ -108,7 +109,10 @@ export const CourseModuleNavigation: FC<IProps> = ({
         sensors={sensors}
         modifiers={[restrictToVerticalAxis, restrictToParentElement]}
       >
-        <SortableContext items={module.pages}>
+        <SortableContext
+          items={module.pages}
+          strategy={verticalListSortingStrategy}
+        >
           <div>
             {module.pages.map((page) => (
               <NavigationPageTitle

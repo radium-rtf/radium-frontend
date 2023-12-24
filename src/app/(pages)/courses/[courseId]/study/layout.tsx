@@ -2,7 +2,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ReactNode, useLayoutEffect } from 'react';
-import { Button, cn, Icon, List, Progress } from '@/shared';
+import {
+  Button,
+  cn,
+  Icon,
+  ListContent,
+  ListItem,
+  ListTitle,
+  Progress,
+} from '@/shared';
 import { Header } from '@/widgets/Header';
 import { useParams } from 'next/navigation';
 import { CourseEditToggle } from '@/features/CourseEditToggle';
@@ -91,8 +99,8 @@ export default function CourseStudyLayout({
       <Header>
         {isLoading && (
           <div className='flex items-center gap-6'>
-            <div className='h-12 w-12 animate-pulse rounded-lg bg-background-card' />
-            <div className='h-10 w-64 animate-pulse rounded-lg bg-background-card' />
+            <div className='bg-background-card h-12 w-12 animate-pulse rounded-lg' />
+            <div className='bg-background-card h-10 w-64 animate-pulse rounded-lg' />
           </div>
         )}
         {course && (
@@ -103,12 +111,12 @@ export default function CourseStudyLayout({
                 alt={course.name}
                 width={48}
                 height={48}
-                className='h-12 w-12 rounded-lg object-cover'
+                className='h-12 w-12 rounded-[0.5rem] object-cover'
               />
             ) : (
-              <div className='h-12 w-12 rounded-lg bg-background-overlay object-cover'></div>
+              <div className='bg-background-overlay h-12 w-12 rounded-lg object-cover'></div>
             )}
-            <h1 className='font-mono text-4xl font-bold text-accent-primary-200'>
+            <h1 className='font-NTSomic text-4xl font-bold text-primary'>
               {course.name}
             </h1>
           </Link>
@@ -119,7 +127,7 @@ export default function CourseStudyLayout({
           {/* Loading state */}
           {isLoading && (
             <nav className='sticky top-[8.625rem] -ml-6 flex max-h-[calc(100vh-8.65rem)] w-64 shrink-0 flex-grow-0 flex-col gap-4'>
-              <div className='h-10 w-64 animate-pulse rounded-lg bg-background-card' />
+              <div className='bg-background-card h-10 w-64 animate-pulse rounded-lg' />
               <NavigationModuleTitleSkeleton />
               <NavigationPageTitleSkeleton />
               <NavigationPageTitleSkeleton />
@@ -146,7 +154,7 @@ export default function CourseStudyLayout({
               />
 
               {course.groups?.map((group, index) => (
-                <List.Item key={index} asChild>
+                <ListItem key={index} asChild>
                   <Link
                     href={`/groups/${group.id}/courses/${course.id}`}
                     className={cn(
@@ -154,26 +162,26 @@ export default function CourseStudyLayout({
                     )}
                   >
                     <Icon type='group' className='text-primary-default' />
-                    <List.Content>
-                      <List.Title>{group.name}</List.Title>
-                    </List.Content>
+                    <ListContent>
+                      <ListTitle>{group.name}</ListTitle>
+                    </ListContent>
                     <Icon
-                      className='h-3 w-3 text-primary-default'
+                      className='text-primary-default h-3 w-3'
                       type='chevron-right'
                     />
                   </Link>
-                </List.Item>
+                </ListItem>
               ))}
 
               <ul
                 className='
+              [&:hover::-webkit-scrollbar-thumb]:bg-grey-300
               overflow-y-scroll
               [&::-webkit-scrollbar-thumb]:rounded
               [&::-webkit-scrollbar-thumb]:bg-transparent
               [&::-webkit-scrollbar-thumb]:transition-colors
               [&::-webkit-scrollbar]:w-1
               [&::-webkit-scrollbar]:opacity-0
-              [&:hover::-webkit-scrollbar-thumb]:bg-grey-300
               '
               >
                 <DndContext
@@ -201,13 +209,9 @@ export default function CourseStudyLayout({
                     })}
                   </SortableContext>
                 </DndContext>
-                <li>
-                  <NavigationCreateModule
-                    className='w-full'
-                    courseId={course.id}
-                  />
-                </li>
+                <li></li>
               </ul>
+              <NavigationCreateModule className='w-full' courseId={course.id} />
             </nav>
           )}
           {!error && (
@@ -228,10 +232,10 @@ export default function CourseStudyLayout({
                   height={224}
                   alt='Not found error'
                 />
-                <h1 className='font-mono text-5xl font-bold text-primary-default'>
+                <h1 className='text-primary-default font-mono text-5xl font-bold'>
                   Такого курса нет :(
                 </h1>
-                <p className='text-[0.8125rem] text-text-primary'>
+                <p className='text-text-primary text-[0.8125rem]'>
                   Возможно курс был удален или вы перешли по неверной ссылке
                 </p>
                 <Button color='accent' asChild className='w-64'>

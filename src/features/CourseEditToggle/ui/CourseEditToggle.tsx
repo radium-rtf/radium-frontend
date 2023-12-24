@@ -1,6 +1,6 @@
 'use client';
 import { CourseEditContext } from '@/features/CourseEditContext';
-import { Icon, Toggle, cn } from '@/shared';
+import { Icon, Switch, cn } from '@/shared';
 import { FC, HTMLAttributes, useContext } from 'react';
 
 interface IProps extends HTMLAttributes<HTMLDivElement> {}
@@ -12,14 +12,14 @@ export const CourseEditToggle: FC<IProps> = ({ className, ...props }) => {
       className={cn('flex items-center gap-4 px-6 py-2.5', className)}
       {...props}
     >
-      <Icon type='edit' className='flex-shrink-0 text-primary-default' />
-      <p className='text-[0.8125rem] text-text-primary'>Режим редактирования</p>
-      <Toggle
+      <Icon type='edit' className='flex-shrink-0 text-primary' />
+      <p className='text-[0.8125rem]'>Режим редактирования</p>
+      <Switch
         checked={isEditing}
         className='shrink-0'
         name='CourseEdit'
-        onChange={(e) => {
-          setIsEditing(e.target.checked);
+        onCheckedChange={(isChecked) => {
+          setIsEditing(isChecked);
         }}
       />
     </div>

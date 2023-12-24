@@ -53,17 +53,15 @@ export const NavigationCreatePage: FC<IProps> = ({
     <button
       {...props}
       className={cn(
-        'flex w-full items-center gap-4 rounded-lg border border-transparent px-6 py-2 outline-none outline-1 -outline-offset-1 transition-colors hover:border-white/10 hover:bg-white/5 focus-visible:outline-white',
+        'flex w-full items-center gap-4 rounded-[0.5rem] border border-transparent px-6 py-2 outline-none outline-1 -outline-offset-1 transition-colors hover:border-white/10 hover:bg-white/5 focus-visible:outline-white',
         className
       )}
       onClick={() => {
         setIsCreating((prev) => !prev);
       }}
     >
-      <Icon type='add' className='text-primary-default' />
-      <span className='text-[0.8125rem] text-text-primary'>
-        Добавить страницу
-      </span>
+      <Icon type='add' className='text-primary' />
+      <span className='text-[0.8125rem] leading-tight'>Добавить страницу</span>
     </button>
   );
 };
