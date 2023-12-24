@@ -115,10 +115,18 @@ export const courseApi = emptyApi.injectEndpoints({
         method: 'PUT',
         body: body,
       }),
-      invalidatesTags: (res) =>
-        res
-          ? [{ type: 'courses', id: res.id }]
-          : [{ type: 'courses', id: 'LIST' }],
+      invalidatesTags: [{ type: 'courses', id: 'LIST' }],
+      async onQueryStarted({ courseId }, { dispatch, queryFulfilled }) {
+        try {
+          const { data: updatedPost } = await queryFulfilled;
+          dispatch(
+            courseApi.util.updateQueryData('getCourse', courseId, (draft) => {
+              draft.name = updatedPost.name;
+              draft.shortDescription = updatedPost.shortDescription;
+            })
+          );
+        } catch {}
+      },
     }),
     updateCourseDescription: builder.mutation<
       CourseResponseDto,

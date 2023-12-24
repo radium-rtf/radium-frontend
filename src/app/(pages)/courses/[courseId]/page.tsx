@@ -46,7 +46,7 @@ export default function Page() {
       <Header>
         <Link href='/' className='flex items-center gap-6' scroll={false}>
           <Image src='/logo.svg' alt='Radium' width={48} height={48} />
-          <h1 className='font-mono text-4xl font-bold text-accent-primary-200'>
+          <h1 className='font-NTSomic text-4xl font-bold text-primary'>
             Радиум
           </h1>
         </Link>
@@ -83,7 +83,7 @@ export default function Page() {
               isEditAllowed={isEditAllowed}
             />
             <main className='container mx-auto px-12 lg:px-[8.25rem]'>
-              <div className='grid gap-8 lg:grid-cols-3 2xl:grid-cols-4'>
+              <div className='grid gap-8 xl:grid-cols-3 2xl:grid-cols-4'>
                 <CourseName
                   courseName={course.name}
                   isEditAllowed={isEditAllowed}
@@ -144,10 +144,10 @@ export default function Page() {
                 height={224}
                 alt='Not found error'
               />
-              <h1 className='font-mono text-5xl font-bold text-primary-default'>
+              <h1 className='text-primary-default font-mono text-5xl font-bold'>
                 Такого курса нет :(
               </h1>
-              <p className='text-[0.8125rem] text-text-primary'>
+              <p className='text-text-primary text-[0.8125rem]'>
                 Возможно курс был удален или вы перешли по неверной ссылке
               </p>
               <Button color='accent' asChild className='w-64'>

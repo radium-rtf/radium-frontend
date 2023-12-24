@@ -36,10 +36,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         className={cn(
           [
             'p-4',
-            'font-mono',
             'text-[0.8125rem]',
             'leading-normal',
-            'rounded-lg',
+            'rounded-[0.5rem]',
             'border',
             'border-white/10',
             'outline-none',
