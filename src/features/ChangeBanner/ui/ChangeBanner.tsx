@@ -27,12 +27,11 @@ export const ChangeBanner: FC<ChangeBannerProps> = ({ courseId }) => {
   return (
     <>
       <Button
-        className='absolute right-4 top-4 w-64'
-        color='accent'
+        className='absolute right-4 top-4 w-64 justify-start md:right-12'
         onClick={() => changeBannerClickHandler(inputRef.current!)}
       >
         <Icon type='edit' className='text-inherit' />
-        <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
+        <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
           Сменить обложку
         </span>
       </Button>

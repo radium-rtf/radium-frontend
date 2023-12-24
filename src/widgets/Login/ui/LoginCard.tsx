@@ -83,8 +83,8 @@ export const LoginCard = () => {
             actionIcon={isPasswordShowed ? 'visible' : 'invisible'}
             onActionClick={() => setIsPasswordShowed((prev) => !prev)}
             type={isPasswordShowed ? 'text' : 'password'}
-            id='email'
-            placeholder='Почта'
+            id='password'
+            placeholder='Пароль'
             autoComplete='password'
             {...register('password', { onChange: () => clearErrors('root') })}
           />

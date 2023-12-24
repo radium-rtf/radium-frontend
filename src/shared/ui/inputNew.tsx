@@ -1,8 +1,8 @@
 'use client';
-import { InputHTMLAttributes, forwardRef, useId } from 'react';
 import { cn } from '../utils/cn';
-import { getTextWidth } from '../utils/getTextWidth';
 import { Icon } from './Icon';
+import { useGetTextWidth } from '../hooks/useGetTextWidth';
+import { InputHTMLAttributes, forwardRef, useId } from 'react';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: Icon;
@@ -27,9 +27,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     ref
   ) => {
     const innerId = useId();
-    const textWidth = text
-      ? getTextWidth(text, '13px var(--font-nt-somic)')
-      : 0;
+    const textWidth = useGetTextWidth(text, '13px var(--font-nt-somic)');
     const leftPadding = (16 + (icon ? 34 : 0)) / 16 + 'rem';
     const rightPadding =
       (16 + (textWidth ? textWidth + 16 : 0) + (actionIcon ? 18 + 16 : 0)) /
