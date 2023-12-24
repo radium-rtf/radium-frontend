@@ -28,10 +28,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='ru' className='h-full'>
+    <html lang='ru' className='dark h-full'>
       <body
         className={cn(
-          'h-full bg-bg-page font-sans text-text-primary',
+          'bg-bg-page text-text-primary h-full font-sans',
           inter.variable,
           ntSomic.variable
         )}

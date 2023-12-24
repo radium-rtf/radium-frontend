@@ -37,6 +37,7 @@ export const CourseAddCoAuthor: FC<CourseAddCoAuthorProps> = ({ courseId }) => {
   return (
     <form className='mx-2 my-1.5' onSubmit={handleSubmit(onSubmitHandler)}>
       <Input
+        icon='password'
         className={cn(
           isSubmitSuccessful && '[&:has(:focus)]:border-accent-secondary-400',
           isSubmitted && !isValid && '[&:has(:focus)]:border-red-500'

@@ -8,7 +8,7 @@ export { Button } from './ui/buttonNew';
 export { Toggle } from './ui/Toggle';
 export { Checkbox } from './ui/checkboxNew';
 export { TextArea } from './ui/TextArea';
-export { Input } from './ui/Input';
+export { Input } from './ui/inputNew';
 export { Icon } from './ui/Icon';
 export { IconButton } from './ui/IconButton';
 export { Progress } from './ui/Progress';
@@ -21,7 +21,14 @@ export {
   CardTitle,
 } from './ui/cardNew';
 export { Menu } from './ui/Menu';
-export { List } from './ui/List';
+export {
+  List,
+  ListContent,
+  ListIcon,
+  ListSubtitle,
+  ListTitle,
+  ListItem,
+} from './ui/List';
 export { Tab } from './ui/Tab';
 export { Tabs } from './ui/Tabs';
 export { AuthSessionProvider } from './ui/AuthSessionProvider';

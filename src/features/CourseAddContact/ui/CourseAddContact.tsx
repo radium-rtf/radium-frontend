@@ -70,16 +70,12 @@ export const CourseAddContact: FC<CourseAddContactProps> = ({ courseId }) => {
       </button>
       {isFormOpen && (
         <Card
-          className='absolute -bottom-6 -left-[calc(100%+2rem)] w-full bg-background-overlay'
+          className='bg-background-overlay absolute -bottom-6 -left-[calc(100%+2rem)] w-full'
           asChild
         >
           <form onSubmit={handleSubmit(onSubmitHandler)}>
             <Input iconType='link' placeholder='Ссылка' {...register('link')} />
-            <Input
-              iconType='link'
-              placeholder='Название'
-              {...register('name')}
-            />
+            <Input icon='link' placeholder='Название' {...register('name')} />
             <Button
               type='submit'
               color='accent'

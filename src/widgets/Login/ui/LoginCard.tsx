@@ -61,38 +61,33 @@ export const LoginCard = () => {
     <section className='flex w-[19rem] flex-col items-center gap-9'>
       <div className='flex items-center gap-4'>
         <Image height={48} width={48} alt='Radium logo' src='/logo.svg' />
-        <h1 className='font-mono text-4xl font-bold text-primary-default'>
+        <h1 className='text-primary-default font-mono text-4xl font-bold'>
           Радиум
         </h1>
       </div>
-      <Card className='w-full' asChild>
+      <Card className='w-full'>
         <form
           onSubmit={handleSubmit(onSubmitHandler)}
           className={'flex flex-col gap-4'}
         >
           <Input
-            iconType='mail'
+            icon='mail'
+            text={watch('email').includes('@') ? undefined : '@urfu.ru'}
+            id='email'
             placeholder='Почта'
+            autoComplete='email'
             {...register('email', { onChange: () => clearErrors('root') })}
-          >
-            {watch('email').includes('@') ? null : (
-              <span className='font-sans text-[0.625rem]'>@urfu.me</span>
-            )}
-          </Input>
+          />
           <Input
-            iconType='password'
-            placeholder='Пароль'
+            icon='password'
+            actionIcon={isPasswordShowed ? 'visible' : 'invisible'}
+            onActionClick={() => setIsPasswordShowed((prev) => !prev)}
             type={isPasswordShowed ? 'text' : 'password'}
+            id='email'
+            placeholder='Почта'
+            autoComplete='password'
             {...register('password', { onChange: () => clearErrors('root') })}
-          >
-            <button
-              onClick={() => setIsPasswordShowed((prev) => !prev)}
-              type='button'
-              className='leading-[0]'
-            >
-              <Icon type={isPasswordShowed ? 'visible' : 'invisible'} />
-            </button>
-          </Input>
+          />
           <Button
             disabled={isSubmitting}
             type='submit'

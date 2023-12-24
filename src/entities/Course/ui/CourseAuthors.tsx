@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Card, List } from '@/shared';
+import { Card, CardHeader, CardTitle, List } from '@/shared';
 import Image from 'next/image';
 import { CourseResponseDto } from '../model/CourseResponseDto';
 
@@ -10,7 +10,10 @@ interface IProps {
 export const CourseAuthors: FC<IProps> = ({ authors }) => {
   return (
     <Card className='gap-0 rounded-lg'>
-      <h1 className='mb-4 font-mono text-xl font-bold leading-[normal] text-primary-default'>
+      <CardHeader>
+        <CardTitle>Авторы курса</CardTitle>
+      </CardHeader>
+      <h1 className='text-primary-default mb-4 font-mono text-xl font-bold leading-[normal]'>
         Авторы курса
       </h1>
       <List className='-mx-6 flex flex-col'>

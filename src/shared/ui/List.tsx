@@ -1,29 +1,18 @@
 import React, {
-    forwardRef,
-    ForwardRefExoticComponent,
-    LiHTMLAttributes,
-    ReactNode,
-    RefAttributes,
-    SVGAttributes,
+  forwardRef,
+  ForwardRefExoticComponent,
+  LiHTMLAttributes,
+  ReactNode,
+  RefAttributes,
+  SVGAttributes,
 } from 'react';
-import {cn} from '../utils/cn';
-import {Slot} from '@radix-ui/react-slot';
-import {Icon} from './Icon';
+import { cn } from '../utils/cn';
+import { Slot } from '@radix-ui/react-slot';
+import { Icon } from './Icon';
 
 // List
 interface IListProps extends React.HTMLAttributes<HTMLUListElement> {
   asChild?: boolean;
-}
-
-interface CompoundComponent
-  extends ForwardRefExoticComponent<
-    IListProps & RefAttributes<HTMLUListElement>
-  > {
-  Item: typeof Item;
-  Icon: typeof ListIcon;
-  Content: typeof ListContent;
-  Title: typeof ListTitle;
-  Subtitle: typeof ListSubtitle;
 }
 
 export const List = forwardRef<HTMLUListElement, IListProps>(
@@ -33,7 +22,7 @@ export const List = forwardRef<HTMLUListElement, IListProps>(
       <Comp ref={ref} {...props} className={cn('flex flex-col', className)} />
     );
   }
-) as CompoundComponent;
+);
 List.displayName = 'List';
 
 // List Item
@@ -41,7 +30,7 @@ interface IListItemProps extends LiHTMLAttributes<HTMLLIElement> {
   asChild?: boolean;
 }
 
-const Item = forwardRef<HTMLLIElement, IListItemProps>(
+export const ListItem = forwardRef<HTMLLIElement, IListItemProps>(
   ({ className, asChild, ...props }, ref) => {
     const Comp = asChild ? Slot : 'li';
     return (
@@ -53,8 +42,7 @@ const Item = forwardRef<HTMLLIElement, IListItemProps>(
     );
   }
 );
-Item.displayName = 'ListItem';
-List.Item = Item;
+ListItem.displayName = 'ListItem';
 
 // List Icon
 
@@ -62,8 +50,7 @@ interface IListIconProps extends SVGAttributes<SVGSVGElement> {
   asChild?: boolean;
   icon?: Icon;
 }
-
-const ListIcon = forwardRef<SVGSVGElement, IListIconProps>(
+export const ListIcon = forwardRef<SVGSVGElement, IListIconProps>(
   ({ asChild, icon, className, ...props }, ref) => {
     const Comp = asChild
       ? (Slot as ForwardRefExoticComponent<
@@ -76,22 +63,20 @@ const ListIcon = forwardRef<SVGSVGElement, IListIconProps>(
         {...props}
         type={icon || 'null'}
         ref={ref}
-        className={cn('shrink-0 text-foreground-default', className)}
+        className={cn('text-foreground-default shrink-0', className)}
       />
     );
   }
 );
 
 ListIcon.displayName = 'ListIcon';
-List.Icon = ListIcon;
 
 // List content
 
 interface IListContentProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;
 }
-
-const ListContent = forwardRef<HTMLDivElement, IListContentProps>(
+export const ListContent = forwardRef<HTMLDivElement, IListContentProps>(
   ({ className, asChild, ...props }, ref) => {
     const Comp = asChild ? Slot : 'div';
     return (
@@ -105,40 +90,33 @@ const ListContent = forwardRef<HTMLDivElement, IListContentProps>(
 );
 
 ListContent.displayName = 'ListContent';
-List.Content = ListContent;
 
 // List title
 
 interface IListTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
   asChild?: boolean;
 }
-
-const ListTitle = forwardRef<HTMLHeadingElement, IListTitleProps>(
+export const ListTitle = forwardRef<HTMLHeadingElement, IListTitleProps>(
   ({ className, asChild, ...props }, ref) => {
     const Comp = asChild ? Slot : 'h1';
     return (
       <Comp
         ref={ref}
         {...props}
-        className={cn(
-          'font-mono text-[0.8125rem] leading-tight text-foreground-default',
-          className
-        )}
+        className={cn('font-NTSomic text-[0.8125rem] leading-tight', className)}
       />
     );
   }
 );
 
 ListTitle.displayName = 'ListTitle';
-List.Title = ListTitle;
 
 // List subtitle
 
 interface IListSubtitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
   asChild?: boolean;
 }
-
-const ListSubtitle = forwardRef<HTMLHeadingElement, IListSubtitleProps>(
+export const ListSubtitle = forwardRef<HTMLHeadingElement, IListSubtitleProps>(
   ({ className, asChild, ...props }, ref) => {
     const Comp = asChild ? Slot : 'h2';
     return (
@@ -146,7 +124,7 @@ const ListSubtitle = forwardRef<HTMLHeadingElement, IListSubtitleProps>(
         ref={ref}
         {...props}
         className={cn(
-          'font-sans text-[0.625rem] leading-[normal] text-foreground-secondary',
+          'font-sans text-[0.625rem] leading-[normal] text-[#B3B3B3]',
           className
         )}
       />
@@ -155,4 +133,3 @@ const ListSubtitle = forwardRef<HTMLHeadingElement, IListSubtitleProps>(
 );
 
 ListSubtitle.displayName = 'ListSubtitle';
-List.Subtitle = ListSubtitle;

@@ -1,6 +1,15 @@
 'use client';
 import React, { FC, useContext } from 'react';
-import { Card, List, cn } from '@/shared';
+import {
+  Card,
+  List,
+  ListContent,
+  ListIcon,
+  ListItem,
+  ListSubtitle,
+  ListTitle,
+  cn,
+} from '@/shared';
 import Link from 'next/link';
 import { CourseResponseDto } from '@/entities/Course';
 import { CourseEditContext } from '@/features/CourseEditContext';
@@ -22,13 +31,13 @@ export const CourseContacts: FC<IProps> = ({
 
   return (
     <Card className='gap-0'>
-      <h1 className='mb-4 text-xl font-bold leading-[normal] text-primary-default'>
+      <h1 className='text-primary-default mb-4 text-xl font-bold leading-[normal]'>
         Контакты
       </h1>
       <List className='-mx-6'>
         {contacts.map((contact) => {
           return (
-            <List.Item className='relative' key={contact.name}>
+            <ListItem className='relative' key={contact.name}>
               <Link
                 className={cn(
                   'absolute inset-0',
@@ -38,25 +47,25 @@ export const CourseContacts: FC<IProps> = ({
                 target='_blank'
                 rel='noreferrer noopener'
               />
-              <List.Icon icon='link' />
-              <List.Content className=''>
-                <List.Title>{contact.name}</List.Title>
-                <List.Subtitle className='line-clamp-1 w-48'>
+              <ListIcon icon='link' />
+              <ListContent className=''>
+                <ListTitle>{contact.name}</ListTitle>
+                <ListSubtitle className='line-clamp-1 w-48'>
                   {contact.link}
-                </List.Subtitle>
-              </List.Content>
+                </ListSubtitle>
+              </ListContent>
               {isEditAllowed && isEditing ? (
                 <CourseDeleteContact
                   courseId={courseId}
                   contactId={contact.id}
                 />
               ) : (
-                <List.Icon
-                  className='h-[0.75rem] text-primary-default'
+                <ListIcon
+                  className='text-primary-default h-[0.75rem]'
                   icon='external-link'
                 />
               )}
-            </List.Item>
+            </ListItem>
           );
         })}
       </List>
