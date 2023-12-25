@@ -99,14 +99,24 @@ const sectionApi = emptyApi.injectEndpoints({
         method: 'PUT',
         body: body,
       }),
-      invalidatesTags: (result) =>
-        result
-          ? [
-              { type: 'pages', id: result.pageId },
-              { type: 'pages', id: 'LIST' },
-              'courses',
-            ]
-          : [{ type: 'pages', id: 'LIST' }, 'pages'],
+      invalidatesTags: ['courses'],
+      async onQueryStarted({ sectionId }, { dispatch, queryFulfilled }) {
+        try {
+          const { data: updatedSection } = await queryFulfilled;
+          dispatch(
+            coursePageApi.util.updateQueryData(
+              'getPage',
+              updatedSection.pageId,
+              (draft) => {
+                const section = draft.sections.find((s) => s.id === sectionId)!;
+                draft.maxScore -= section.maxScore - updatedSection.maxScore;
+                draft.score -= section.score - updatedSection.score;
+                Object.assign(section, updatedSection);
+              }
+            )
+          );
+        } catch {}
+      },
     }),
     answerCourseMultiChoiceSection: builder.mutation<
       AnswerResponseDto,
@@ -223,14 +233,24 @@ const sectionApi = emptyApi.injectEndpoints({
         body: body,
         method: 'PUT',
       }),
-      invalidatesTags: (result) =>
-        result
-          ? [
-              { type: 'pages', id: result.pageId },
-              { type: 'pages', id: 'LIST' },
-              'courses',
-            ]
-          : [{ type: 'pages', id: 'LIST' }, 'pages'],
+      invalidatesTags: ['courses'],
+      async onQueryStarted({ sectionId }, { dispatch, queryFulfilled }) {
+        try {
+          const { data: updatedSection } = await queryFulfilled;
+          dispatch(
+            coursePageApi.util.updateQueryData(
+              'getPage',
+              updatedSection.pageId,
+              (draft) => {
+                const section = draft.sections.find((s) => s.id === sectionId)!;
+                draft.maxScore -= section.maxScore - updatedSection.maxScore;
+                draft.score -= section.score - updatedSection.score;
+                Object.assign(section, updatedSection);
+              }
+            )
+          );
+        } catch {}
+      },
     }),
     answerCoursePermutationsSection: builder.mutation<
       AnswerResponseDto,

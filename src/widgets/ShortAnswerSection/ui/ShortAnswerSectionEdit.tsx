@@ -181,12 +181,22 @@ export const ShortAnswerSectionEdit: FC<ShortAnswerSectionEditProps> = ({
             <>
               <Input
                 placeholder='Лимит'
-                {...register('maxAttempts', { valueAsNumber: true })}
+                {...register('maxAttempts', {
+                  valueAsNumber: true,
+                  onChange: () => {
+                    errors.root && clearErrors('root');
+                  },
+                })}
                 text='попыток'
               />
               <Input
                 placeholder='Лимит'
-                {...register('maxScore', { valueAsNumber: true })}
+                {...register('maxScore', {
+                  valueAsNumber: true,
+                  onChange: () => {
+                    errors.root && clearErrors('root');
+                  },
+                })}
                 text='баллов'
               />
             </>
@@ -217,7 +227,7 @@ export const ShortAnswerSectionEdit: FC<ShortAnswerSectionEditProps> = ({
                   ? 'destructive'
                   : 'outline'
               }
-              disabled={isSubmitting || (!isValid && isSubmitted)}
+              disabled={isSubmitting}
               onClick={() => setIsEditing(true)}
             >
               <Icon
@@ -226,11 +236,12 @@ export const ShortAnswerSectionEdit: FC<ShortAnswerSectionEditProps> = ({
               />
               <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
                 {(isSubmitting && 'Сохраняем...') ||
-                  errors.root?.message ||
-                  errors.shortanswer?.question?.message ||
-                  errors.shortanswer?.answer?.message ||
-                  errors.maxScore?.message ||
-                  errors.maxAttempts?.message ||
+                  (!isValid &&
+                    (errors.root?.message ||
+                      errors.shortanswer?.question?.message ||
+                      errors.shortanswer?.answer?.message ||
+                      errors.maxScore?.message ||
+                      errors.maxAttempts?.message)) ||
                   'Сохранить'}
               </span>
             </Button>
