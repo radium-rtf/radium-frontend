@@ -69,9 +69,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           />
         )}
         {text && (
-          <span className='absolute right-[var(--text-right)] top-1/2 -translate-y-1/2 select-none text-[0.625rem] text-[#B3B3B3]'>
+          <label
+            htmlFor={id || innerId}
+            className='absolute right-[var(--text-right)] top-1/2 -translate-y-1/2 select-none text-[0.625rem] text-[#B3B3B3]'
+          >
             {text}
-          </span>
+          </label>
         )}
         {actionIcon && (
           <button

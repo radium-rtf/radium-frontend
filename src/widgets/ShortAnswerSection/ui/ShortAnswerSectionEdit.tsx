@@ -1,9 +1,19 @@
 'use client';
-import { CSSProperties, FC } from 'react';
+import { CSSProperties, FC, useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
-import { Button, Card, Icon, Input, cn } from '@/shared';
+import {
+  Button,
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Icon,
+  Input,
+  cn,
+} from '@/shared';
 import { updateSchema, updateSchemaType } from '../model/updateSchema';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import {
@@ -12,45 +22,21 @@ import {
 } from '@/entities/CourseSection';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
 
 interface ShortAnswerSectionEditProps {
   sectionData: ShortAnswerSectionResponseDto;
-  onSuccess: () => void;
 }
 
 export const ShortAnswerSectionEdit: FC<ShortAnswerSectionEditProps> = ({
   sectionData,
-  onSuccess,
 }) => {
+  // Edit setup
+  const [isEditing, setIsEditing] = useState(false);
+  // DND Setup
   const {
-    register,
-    control,
-    handleSubmit,
-    formState: { errors, isValid },
-  } = useForm<updateSchemaType>({
-    resolver: zodResolver(updateSchema),
-    defaultValues: {
-      maxScore: sectionData.maxScore,
-      maxAttempts: sectionData.maxAttempts,
-      shortanswer: {
-        answer: sectionData.answer,
-        question: sectionData.content,
-      },
-    },
-  });
-
-  const [updateShortAnswerSection] =
-    useUpdateCourseShortAnswerSectionMutation();
-
-  const onSubmitHandler: SubmitHandler<updateSchemaType> = (data) => {
-    updateShortAnswerSection({ sectionId: sectionData.id, ...data })
-      .unwrap()
-      .then(onSuccess);
-  };
-
-  const {
-    setNodeRef,
     setActivatorNodeRef,
+    setNodeRef,
     listeners,
     transform,
     transition,
@@ -68,97 +54,189 @@ export const ShortAnswerSectionEdit: FC<ShortAnswerSectionEditProps> = ({
     transition,
   } as CSSProperties;
 
+  // Form setup
+  const {
+    register,
+    handleSubmit,
+    clearErrors,
+    setError,
+    control,
+    formState: { errors, isSubmitting, isValid, isSubmitted },
+  } = useForm<updateSchemaType>({
+    mode: 'onSubmit',
+    reValidateMode: 'onChange',
+    resolver: zodResolver(updateSchema),
+    defaultValues: {
+      shortanswer: {
+        question: sectionData.content,
+        answer: sectionData.answer,
+      },
+      maxAttempts: sectionData.maxAttempts,
+      maxScore: sectionData.maxScore,
+    },
+  });
+
+  const [updateShortAnswerSection] =
+    useUpdateCourseShortAnswerSectionMutation();
+  const onSubmitHandler: SubmitHandler<updateSchemaType> = async (data) => {
+    const response = await updateShortAnswerSection({
+      sectionId: sectionData.id,
+      ...data,
+    });
+    if ('data' in response) {
+      setIsEditing(false);
+    } else {
+      setError('root', { message: 'Ошибка!' });
+    }
+  };
+
+  // Escape control setup
+  useEffect(() => {
+    const listener = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsEditing(false);
+      }
+    };
+    if (isEditing) {
+      document.body.addEventListener('keydown', listener);
+    }
+    return () => {
+      document.body.removeEventListener('keydown', listener);
+    };
+  }, [isEditing]);
+
   return (
-    <>
-      <Card
-        asChild
-        ref={setNodeRef}
-        style={style}
-        className={cn(
-          'border border-transparent transition-colors duration-300',
-          isDragging
-            ? 'z-10 border-white/10 bg-[#2A2E2E]'
-            : '[&:has(.drag:hover)]:border-white/10 [&:has(.drag:hover)]:bg-[#363A3B]'
-        )}
-      >
-        <form
-          className='flex flex-col gap-4'
-          onSubmit={handleSubmit(onSubmitHandler)}
-        >
-          <div className='relative flex items-center gap-4 text-primary-default'>
-            <Icon type='question' className='text-inherit' />
-            <span className='font-mono font-bold leading-[normal] text-inherit'>
-              Вопрос
-            </span>
-            <button
-              className='drag after:absolute after:-left-6 after:-right-6 after:-top-6 after:bottom-0 after:block after:rounded-t-2xl after:content-[""]'
-              type='button'
-              ref={setActivatorNodeRef}
-              {...listeners}
-            >
-              <Icon
-                type='handle-horizontal'
-                className='absolute left-1/2 top-0'
+    <Card
+      ref={setNodeRef}
+      style={style}
+      className={cn(
+        'border border-transparent transition-colors',
+        isDragging
+          ? 'z-10 border-white/10 bg-[#2A2E2E]'
+          : '[&:has(.drag:hover)]:border-white/10 [&:has(.drag:hover)]:bg-[#363A3B]'
+      )}
+    >
+      <form onSubmit={handleSubmit(onSubmitHandler)}>
+        <CardHeader className='relative flex-row items-center gap-4 space-y-0'>
+          <Icon type='question' className='shrink-0 text-primary' />
+          <CardTitle className='text-base'>Вопрос</CardTitle>
+          <button
+            ref={setActivatorNodeRef}
+            {...listeners}
+            type='button'
+            className='drag absolute inset-0 rounded-sm'
+          >
+            <Icon
+              type='handle-horizontal'
+              className='absolute right-1/2 top-[2.25rem] -translate-y-1/2 translate-x-1/2'
+            />
+          </button>
+        </CardHeader>
+        {!isEditing && (
+          <>
+            <CardContent>
+              <MarkdownDisplay markdown={sectionData.content} />
+            </CardContent>
+            <CardContent>
+              <Input
+                placeholder='Ответ'
+                {...register('shortanswer.answer', {
+                  onChange: () => errors.root && clearErrors('root'),
+                })}
               />
-            </button>
-          </div>
-          <header className='flex flex-col gap-4 text-[0.8125rem] leading-normal'>
-            <Controller
-              name='shortanswer.question'
-              control={control}
-              render={({ field }) => (
-                <MarkdownEditor
-                  markdown={sectionData.content}
-                  onChange={field.onChange}
-                />
-              )}
-            />
-          </header>
-          <div className='flex items-center gap-4 text-primary-default'>
-            <Icon type='question' className='text-inherit' />
-            <span className='font-mono font-bold leading-[normal] text-inherit'>
-              Ответ
-            </span>
-          </div>
-          <main>
-            <Input {...register('shortanswer.answer')} />
-          </main>
-          <footer className='flex items-center gap-4 place-self-end'>
-            <Input
-              className='flex-shrink'
-              {...register('maxAttempts', { valueAsNumber: true })}
-              placeholder='Максимум'
-            >
-              <span className='font-sans text-[0.625rem]'>попыток</span>
-            </Input>
-            <Input
-              className='flex-shrink'
-              {...register('maxScore', { valueAsNumber: true })}
-              placeholder='Максимум'
-            >
-              <span className='font-sans text-[0.625rem]'>баллов</span>
-            </Input>
-            <CourseSectionDelete
-              sectionId={sectionData.id}
-              pageId={sectionData.pageId}
-            />
+            </CardContent>
+          </>
+        )}
+        {isEditing && (
+          <>
+            <CardContent className='flex flex-col gap-4'>
+              <Controller
+                control={control}
+                name='shortanswer.question'
+                render={({ field: { value, onChange } }) => (
+                  <MarkdownEditor
+                    markdown={value}
+                    onChange={(value) => {
+                      onChange(value);
+                      errors.root && clearErrors('root');
+                    }}
+                  />
+                )}
+              />
+            </CardContent>
+            <CardContent className='flex items-center gap-4'>
+              <Icon type='question' className='shrink-0 text-primary' />
+              <CardTitle className='text-base'>Вопрос</CardTitle>
+            </CardContent>
+            <CardContent>
+              <Input
+                placeholder='Правильный ответ (поддерживает RegEx)'
+                {...register('shortanswer.answer')}
+              />
+            </CardContent>
+          </>
+        )}
+        <CardFooter className='justify-end gap-4'>
+          {isEditing && (
+            <>
+              <Input
+                placeholder='Лимит'
+                {...register('maxAttempts', { valueAsNumber: true })}
+                text='попыток'
+              />
+              <Input
+                placeholder='Лимит'
+                {...register('maxScore', { valueAsNumber: true })}
+                text='баллов'
+              />
+            </>
+          )}
+          <CourseSectionDelete
+            sectionId={sectionData.id}
+            pageId={sectionData.pageId}
+          />
+          {!isEditing && (
             <Button
-              className='w-64 flex-shrink-0'
-              color='outlined'
-              type='submit'
-              disabled={!isValid}
+              type='button'
+              className='w-64 shrink-0 justify-start'
+              variant='outline'
+              onClick={() => setIsEditing(true)}
             >
-              <Icon type='save' className='text-inherit' />
-              <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
-                Сохранить
+              <Icon type='edit' className='text-inherit' />
+              <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
+                Редактировать
               </span>
             </Button>
-          </footer>
-          {errors.shortanswer?.answer && (
-            <p>{errors.shortanswer.answer.message}</p>
           )}
-        </form>
-      </Card>
-    </>
+          {isEditing && (
+            <Button
+              type='submit'
+              className='w-64 shrink-0 justify-start'
+              variant={
+                !isValid && isSubmitted && !isSubmitting
+                  ? 'destructive'
+                  : 'outline'
+              }
+              disabled={isSubmitting || (!isValid && isSubmitted)}
+              onClick={() => setIsEditing(true)}
+            >
+              <Icon
+                type={isSubmitting ? 'loading' : 'save'}
+                className='shrink-0 text-inherit'
+              />
+              <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
+                {(isSubmitting && 'Сохраняем...') ||
+                  errors.root?.message ||
+                  errors.shortanswer?.question?.message ||
+                  errors.shortanswer?.answer?.message ||
+                  errors.maxScore?.message ||
+                  errors.maxAttempts?.message ||
+                  'Сохранить'}
+              </span>
+            </Button>
+          )}
+        </CardFooter>
+      </form>
+    </Card>
   );
 };

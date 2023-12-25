@@ -63,6 +63,7 @@ export {
 } from './ui/dropdown-menu';
 export { Switch } from './ui/switch';
 export { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+export { RadioGroup, RadioGroupItem } from './ui/radio-group';
 
 // Interfaces
 export type { IIcon } from './ui/Icon';

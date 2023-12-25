@@ -67,8 +67,6 @@ export const TextSectionEdit: FC<TextSectionEditProps> = ({ sectionData }) => {
     },
   });
 
-  console.log(errors);
-
   const [updateTextSection] = useUpdateCourseTextSectionMutation();
   const onSubmitHandler: SubmitHandler<updateSchemaType> = async (data) => {
     const response = await updateTextSection({
