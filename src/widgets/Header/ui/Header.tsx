@@ -58,7 +58,7 @@ export const Header: FC<IProps> = ({ children }) => {
         left-0
         right-0
         top-0
-        z-10
+        z-40
         mr-[var(--removed-body-scroll-bar-size)]
         flex
         items-center
