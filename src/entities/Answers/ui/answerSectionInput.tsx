@@ -11,18 +11,7 @@ interface IProps {
 }
 
 export const AnswerSectionInput = forwardRef<HTMLInputElement, IProps>(
-  (
-    {
-      className,
-      value,
-      onChange,
-      children,
-      placeHolder,
-      iconType,
-      ...props
-    },
-    ref
-  ) => {
+  ({ className, value, onChange, children, placeHolder, iconType, ...props }, ref) => {
     return (
       <Input
         ref={ref}
@@ -35,9 +24,7 @@ export const AnswerSectionInput = forwardRef<HTMLInputElement, IProps>(
         iconClassName='text-inherit'
         className={className}
       >
-        <span className='flex w-full max-w-[62px] text-[0.625rem]'>
-          {children}
-        </span>
+        <span className='flex w-full max-w-[62px] text-[0.625rem]'>{children}</span>
       </Input>
     );
   }

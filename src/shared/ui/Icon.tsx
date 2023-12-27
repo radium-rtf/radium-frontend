@@ -124,14 +124,7 @@ const icons: Record<Icon, ReactNode> = {
   ),
   picture: (
     <>
-      <rect
-        x='0.5'
-        y='0.5'
-        width='17'
-        height='17'
-        rx='1.5'
-        className='stroke-current'
-      />
+      <rect x='0.5' y='0.5' width='17' height='17' rx='1.5' className='stroke-current' />
       <path
         d='M0.5 12.5L4.68867 8.69212C5.43711 8.01172 6.57573 7.99722 7.34125 8.65835L17 17'
         className='stroke-current'
@@ -149,14 +142,7 @@ const icons: Record<Icon, ReactNode> = {
   ),
   archive: (
     <>
-      <rect
-        x='0.5'
-        y='0.5'
-        width='17'
-        height='17'
-        rx='1.5'
-        className='stroke-current'
-      />
+      <rect x='0.5' y='0.5' width='17' height='17' rx='1.5' className='stroke-current' />
       <path
         d='M8.5 8.5V9.5M8.5 6.5L8.49206 3.32257C8.49074 2.7956 8.2815 2.29045 7.90982 1.9169L7.08639 1.08934C6.71103 0.712092 6.20081 0.5 5.66864 0.5H5.5H11.5H11.3284C10.798 0.5 10.2893 0.710713 9.91421 1.08579L9.08579 1.91421C8.71071 2.28929 8.5 2.79799 8.5 3.32843V6.5Z'
         className='stroke-current'
@@ -284,14 +270,7 @@ const icons: Record<Icon, ReactNode> = {
   ),
   table: (
     <>
-      <rect
-        x='0.5'
-        y='0.5'
-        width='17'
-        height='17'
-        rx='1.5'
-        className='stroke-current'
-      />
+      <rect x='0.5' y='0.5' width='17' height='17' rx='1.5' className='stroke-current' />
       <path d='M6.5 0.5V17.5' className='stroke-current' />
       <path d='M0.5 6.5H17.5' className='stroke-current' />
     </>
@@ -500,16 +479,8 @@ const icons: Record<Icon, ReactNode> = {
   ),
   add: (
     <g className='text-inherit'>
-      <path
-        d='M8.5 0.5L8.5 16.5'
-        className='stroke-current'
-        strokeLinecap='round'
-      />
-      <path
-        d='M0.5 8.5H16.5'
-        className='stroke-current'
-        strokeLinecap='round'
-      />
+      <path d='M8.5 0.5L8.5 16.5' className='stroke-current' strokeLinecap='round' />
+      <path d='M0.5 8.5H16.5' className='stroke-current' strokeLinecap='round' />
     </g>
   ),
   delete: (
@@ -601,16 +572,8 @@ const icons: Record<Icon, ReactNode> = {
     <g className='text-inherit'>
       <circle cx='2.5' cy='5.5' r='2' className='stroke-current' />
       <circle cx='2.5' cy='12.5' r='2' className='stroke-current' />
-      <path
-        d='M7.5 5.5H17.5'
-        className='stroke-current'
-        strokeLinecap='round'
-      />
-      <path
-        d='M7.5 12.5H17.5'
-        className='stroke-current'
-        strokeLinecap='round'
-      />
+      <path d='M7.5 5.5H17.5' className='stroke-current' strokeLinecap='round' />
+      <path d='M7.5 12.5H17.5' className='stroke-current' strokeLinecap='round' />
     </g>
   ),
   share: (
@@ -643,34 +606,13 @@ const icons: Record<Icon, ReactNode> = {
         strokeLinecap='round'
         strokeLinejoin='round'
       />
-      <rect
-        x='0.5'
-        y='0.5'
-        width='17'
-        height='17'
-        rx='1.5'
-        className='stroke-current'
-      />
+      <rect x='0.5' y='0.5' width='17' height='17' rx='1.5' className='stroke-current' />
     </g>
   ),
   shuffle: (
     <g className='text-inherit'>
-      <rect
-        x='8.5'
-        y='0.5'
-        width='9'
-        height='7'
-        rx='1.5'
-        className='stroke-current'
-      />
-      <rect
-        x='8.5'
-        y='10.5'
-        width='9'
-        height='7'
-        rx='1.5'
-        className='stroke-current'
-      />
+      <rect x='8.5' y='0.5' width='9' height='7' rx='1.5' className='stroke-current' />
+      <rect x='8.5' y='10.5' width='9' height='7' rx='1.5' className='stroke-current' />
       <path
         d='M5.5 3.5H3C1.61929 3.5 0.5 4.61929 0.5 6V12C0.5 13.3807 1.61929 14.5 3 14.5H5.5M5.5 3.5L3.5 5.5M5.5 3.5L3.5 1.5M5.5 14.5L3.5 16.5M5.5 14.5L3.5 12.5'
         className='stroke-current'
@@ -681,44 +623,16 @@ const icons: Record<Icon, ReactNode> = {
   ),
   matching: (
     <g className='text-inherit'>
-      <rect
-        x='0.5'
-        y='0.5'
-        width='6'
-        height='7'
-        rx='1.5'
-        className='stroke-current'
-      />
-      <rect
-        x='0.5'
-        y='10.5'
-        width='6'
-        height='7'
-        rx='1.5'
-        className='stroke-current'
-      />
+      <rect x='0.5' y='0.5' width='6' height='7' rx='1.5' className='stroke-current' />
+      <rect x='0.5' y='10.5' width='6' height='7' rx='1.5' className='stroke-current' />
       <path
         d='M6.5 13.5V13.5C7.60457 13.5 8.5 12.6046 8.5 11.5V7C8.5 5.61929 9.61929 4.5 11 4.5H11.5'
         className='stroke-current'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
-      <rect
-        x='11.5'
-        y='0.5'
-        width='6'
-        height='7'
-        rx='1.5'
-        className='stroke-current'
-      />
-      <rect
-        x='11.5'
-        y='10.5'
-        width='6'
-        height='7'
-        rx='1.5'
-        className='stroke-current'
-      />
+      <rect x='11.5' y='0.5' width='6' height='7' rx='1.5' className='stroke-current' />
+      <rect x='11.5' y='10.5' width='6' height='7' rx='1.5' className='stroke-current' />
     </g>
   ),
   'arrow-left': (
@@ -791,14 +705,7 @@ const icons: Record<Icon, ReactNode> = {
   ),
   bug: (
     <g className='text-inherit'>
-      <rect
-        x='4.5'
-        y='2.5'
-        width='9'
-        height='13'
-        rx='4.5'
-        className='stroke-current'
-      />
+      <rect x='4.5' y='2.5' width='9' height='13' rx='4.5' className='stroke-current' />
       <path
         d='M4.5 6.5V6.5C2.29086 6.5 0.5 4.70914 0.5 2.5V0.5'
         className='stroke-current'
@@ -843,20 +750,18 @@ export interface IIcon extends SVGProps<SVGSVGElement> {
   type: Icon;
 }
 
-export const Icon = forwardRef<SVGSVGElement, IIcon>(
-  ({ className, type }, ref) => {
-    return (
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        className={cn('aspect-square h-[1.125rem] text-white', className)}
-        viewBox='0 0 18 18'
-        fill='none'
-        ref={ref}
-      >
-        {icons[type]}
-      </svg>
-    );
-  }
-);
+export const Icon = forwardRef<SVGSVGElement, IIcon>(({ className, type }, ref) => {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      className={cn('aspect-square h-[1.125rem] text-white', className)}
+      viewBox='0 0 18 18'
+      fill='none'
+      ref={ref}
+    >
+      {icons[type]}
+    </svg>
+  );
+});
 
 Icon.displayName = 'Icon';

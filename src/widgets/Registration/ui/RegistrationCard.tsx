@@ -7,10 +7,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  registrationSchema,
-  registrationSchemaType,
-} from '../model/registrationSchema';
+import { registrationSchema, registrationSchemaType } from '../model/registrationSchema';
 
 export const RegistrationCard = () => {
   const router = useRouter();
@@ -22,13 +19,7 @@ export const RegistrationCard = () => {
     handleSubmit,
     setError,
     watch,
-    formState: {
-      isSubmitting,
-      isSubmitSuccessful,
-      isSubmitted,
-      isValid,
-      errors,
-    },
+    formState: { isSubmitting, isSubmitSuccessful, isSubmitted, isValid, errors },
   } = useForm<registrationSchemaType>({
     resolver: zodResolver(registrationSchema),
     defaultValues: {
@@ -41,9 +32,7 @@ export const RegistrationCard = () => {
     },
   });
 
-  const onSubmitHandler: SubmitHandler<registrationSchemaType> = async (
-    data
-  ) => {
+  const onSubmitHandler: SubmitHandler<registrationSchemaType> = async (data) => {
     const response = await Register({
       email: data.email.toLowerCase(),
       name: data.name,
@@ -60,9 +49,7 @@ export const RegistrationCard = () => {
     <section className='flex w-[19rem] flex-col items-center gap-9'>
       <div className='flex items-center gap-4'>
         <Image height={28} width={48} alt='Radium logo' src='/logo.svg' />
-        <h1 className='font-mono text-4xl font-bold text-primary-default'>
-          Радиум
-        </h1>
+        <h1 className='text-primary-default font-mono text-4xl font-bold'>Радиум</h1>
       </div>
       <Card className='w-full'>
         <form
@@ -123,6 +110,7 @@ export const RegistrationCard = () => {
             disabled={isSubmitting}
           >
             <Icon
+              // eslint-disable-next-line no-constant-condition
               type={false ? 'loading' : false ? 'alert' : 'enter'}
               className='shrink-0 text-inherit'
             />
@@ -138,9 +126,7 @@ export const RegistrationCard = () => {
           <Button asChild className='gap-4'>
             <Link href='/login'>
               <Icon type='profile' className='shrink-0 text-inherit' />
-              <span className='ml-[calc(50%-34px)] -translate-x-1/2 whitespace-nowrap'>
-                Войти
-              </span>
+              <span className='ml-[calc(50%-34px)] -translate-x-1/2 whitespace-nowrap'>Войти</span>
             </Link>
           </Button>
         </form>

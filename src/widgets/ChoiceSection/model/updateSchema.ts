@@ -12,10 +12,7 @@ export const updateSchema = z.object({
   choice: z.object({
     answer: z.string({ required_error: 'Необходимо выбрать ответ' }),
     question: z.string().min(1),
-    variants: z
-      .object({ value: z.string() })
-      .array()
-      .min(3, 'Необходим как минимум 2 ответа'),
+    variants: z.object({ value: z.string() }).array().min(3, 'Необходим как минимум 2 ответа'),
   }),
 });
 

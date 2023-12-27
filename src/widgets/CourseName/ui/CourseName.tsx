@@ -7,10 +7,7 @@ interface CourseNameProps {
   isEditAllowed: boolean;
 }
 
-export const CourseName: FC<CourseNameProps> = ({
-  courseName,
-  isEditAllowed,
-}) => {
+export const CourseName: FC<CourseNameProps> = ({ courseName, isEditAllowed }) => {
   const { isEditing } = useContext(CourseEditContext);
 
   if (isEditAllowed && isEditing) {

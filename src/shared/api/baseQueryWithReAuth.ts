@@ -1,8 +1,4 @@
-import {
-  BaseQueryFn,
-  FetchArgs,
-  FetchBaseQueryError,
-} from '@reduxjs/toolkit/query';
+import { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { baseQuery } from './baseQuery';
 import { signOut } from 'next-auth/react';
 import { Mutex } from 'async-mutex';

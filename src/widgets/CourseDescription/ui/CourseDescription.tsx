@@ -17,9 +17,7 @@ export const CourseDescription: FC<CourseDescriptionProps> = ({
   const { isEditing: isEditMode } = useContext(CourseEditContext);
 
   if (isEditAllowed && isEditMode) {
-    return (
-      <CourseDescriptionEdit courseId={courseId} description={description} />
-    );
+    return <CourseDescriptionEdit courseId={courseId} description={description} />;
   }
 
   return <CourseDescriptionDisplay description={description} />;

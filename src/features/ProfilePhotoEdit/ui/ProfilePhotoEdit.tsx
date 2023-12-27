@@ -17,10 +17,7 @@ interface IProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const ProfilePhotoEdit = forwardRef<HTMLInputElement, IProps>(
-  (
-    { initialPhotoURL, onChange: outerChangeHandler, className, ...props },
-    ref
-  ) => {
+  ({ initialPhotoURL, onChange: outerChangeHandler, className, ...props }, ref) => {
     const [newPhoto, setNewPhoto] = useState<File | null>(null);
     const innerRef = useRef<HTMLInputElement>(null);
     useImperativeHandle(ref, () => innerRef.current!, []);
@@ -40,8 +37,7 @@ export const ProfilePhotoEdit = forwardRef<HTMLInputElement, IProps>(
       file && setNewPhoto(file);
     };
 
-    const convertFileToPhoto = (photoFile: File) =>
-      URL.createObjectURL(photoFile);
+    const convertFileToPhoto = (photoFile: File) => URL.createObjectURL(photoFile);
 
     return (
       <picture
@@ -63,9 +59,7 @@ export const ProfilePhotoEdit = forwardRef<HTMLInputElement, IProps>(
         />
         <Image
           src={
-            (newPhoto && convertFileToPhoto(newPhoto)) ||
-            initialPhotoURL ||
-            '/defaultProfile.svg'
+            (newPhoto && convertFileToPhoto(newPhoto)) || initialPhotoURL || '/defaultProfile.svg'
           }
           className='absolute inset-0 h-full w-full object-cover'
           alt='Profile image'

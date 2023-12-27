@@ -14,9 +14,7 @@ export const ChoiceSection: FC<ChoiceSectionProps> = ({ sectionData }) => {
   const { isEditing: isEditMode } = useContext(CourseEditContext);
   const session = useSession();
   const isEditAllowed =
-    session.data?.user.roles.isAuthor ||
-    session.data?.user.roles.isTeacher ||
-    false;
+    session.data?.user.roles.isAuthor || session.data?.user.roles.isTeacher || false;
 
   if (isEditAllowed && isEditMode) {
     return <ChoiceSectionEdit sectionData={sectionData} />;

@@ -8,18 +8,9 @@ interface IProps {
   text: string;
 }
 
-export const FormSubmitButton: FC<IProps> = ({
-  isLoading,
-  error,
-  defaultIcon,
-  text,
-}) => {
+export const FormSubmitButton: FC<IProps> = ({ isLoading, error, defaultIcon, text }) => {
   return (
-    <Button
-      disabled={isLoading}
-      type='submit'
-      color={error ? 'destructive' : 'accent'}
-    >
+    <Button disabled={isLoading} type='submit' color={error ? 'destructive' : 'accent'}>
       <Icon
         className='shrink-0 text-inherit'
         type={isLoading ? 'loading' : error ? 'alert' : defaultIcon}

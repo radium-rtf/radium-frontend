@@ -32,12 +32,7 @@ interface IProps extends LiHTMLAttributes<HTMLLIElement> {
   page: CourseResponseDto['modules'][0]['pages'][0];
 }
 
-export const NavigationPageTitle: FC<IProps> = ({
-  className,
-  currentPage,
-  page,
-  ...props
-}) => {
+export const NavigationPageTitle: FC<IProps> = ({ className, currentPage, page, ...props }) => {
   const formRef = useRef<HTMLFormElement>(null);
   const params: { courseId?: string } = useParams();
   const { isEditing: isEditMode } = useContext(CourseEditContext);
@@ -72,20 +67,14 @@ export const NavigationPageTitle: FC<IProps> = ({
     };
   }, [isEditing]);
 
-  const {
-    setNodeRef,
-    setActivatorNodeRef,
-    listeners,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
-    id: page.id,
-    data: {
-      order: page.order,
-    },
-    disabled: !isEditMode,
-  });
+  const { setNodeRef, setActivatorNodeRef, listeners, transform, transition, isDragging } =
+    useSortable({
+      id: page.id,
+      data: {
+        order: page.order,
+      },
+      disabled: !isEditMode,
+    });
 
   const style = {
     transform: CSS.Translate.toString(transform),
@@ -95,11 +84,7 @@ export const NavigationPageTitle: FC<IProps> = ({
   if (isEditing) {
     return (
       <div ref={setNodeRef}>
-        <form
-          ref={formRef}
-          onSubmit={(e) => formSubmitHandler(e)}
-          className='px-2 py-1.5'
-        >
+        <form ref={formRef} onSubmit={(e) => formSubmitHandler(e)} className='px-2 py-1.5'>
           <Input
             name='newName'
             placeholder='Страница'
@@ -126,16 +111,8 @@ export const NavigationPageTitle: FC<IProps> = ({
         className
       )}
     >
-      <div
-        className={cn(isEditMode && 'cursor-grab')}
-        ref={setActivatorNodeRef}
-        {...listeners}
-      >
-        <ListIcon
-          icon='courses'
-          className='text-primary'
-          asChild={page.maxScore !== 0}
-        >
+      <div className={cn(isEditMode && 'cursor-grab')} ref={setActivatorNodeRef} {...listeners}>
+        <ListIcon icon='courses' className='text-primary' asChild={page.maxScore !== 0}>
           <Progress
             type='radial'
             percentage={(page.score / page.maxScore) * 100}
@@ -149,9 +126,7 @@ export const NavigationPageTitle: FC<IProps> = ({
         <Link
           href={`/courses/${params.courseId!}/study/${page.id}`}
           scroll={false}
-          className={cn(
-            !isEditMode && 'after:absolute after:inset-0 after:rounded-lg'
-          )}
+          className={cn(!isEditMode && 'after:absolute after:inset-0 after:rounded-lg')}
         >
           <ListTitle ref={setActivatorNodeRef}>{page.name}</ListTitle>
           {!!page.maxScore && (

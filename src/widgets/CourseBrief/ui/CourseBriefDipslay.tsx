@@ -1,13 +1,6 @@
 'use client';
 import { FC } from 'react';
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  Icon,
-  getNoun,
-} from '@/shared';
+import { Card, CardDescription, CardFooter, CardHeader, Icon, getNoun } from '@/shared';
 import { CourseJoin } from '@/features/CourseJoin';
 import { CourseContinue } from '@/features/CourseContinue';
 

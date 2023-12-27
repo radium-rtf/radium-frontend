@@ -1,13 +1,5 @@
 'use client';
-import {
-  Button,
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-  Icon,
-} from '@/shared';
+import { Button, Card, CardContent, CardFooter, CardHeader, CardTitle, Icon } from '@/shared';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
 import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
@@ -40,9 +32,7 @@ export const CourseDescriptionEdit: FC<CourseDescriptionEditProps> = ({
   });
 
   const [updateDescription] = useUpdateCourseDescriptionMutation();
-  const onSubmitHandler: SubmitHandler<updateSchemaType> = async ({
-    description,
-  }) => {
+  const onSubmitHandler: SubmitHandler<updateSchemaType> = async ({ description }) => {
     await updateDescription({ courseId, description: description })
       .unwrap()
       .then(() => setIsEditing(false))
@@ -91,31 +81,20 @@ export const CourseDescriptionEdit: FC<CourseDescriptionEditProps> = ({
               onClick={() => setIsEditing(true)}
             >
               <Icon type='edit' />
-              <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
-                Редактировать
-              </span>
+              <span className='ml-[calc(50%-18px)] -translate-x-1/2'>Редактировать</span>
             </Button>
           )}
           {isEditing && (
             <Button
               type='submit'
               className='w-64 shrink-0 justify-start'
-              variant={
-                !isValid && (errors.description || errors.root)
-                  ? 'destructive'
-                  : 'outline'
-              }
+              variant={!isValid && (errors.description || errors.root) ? 'destructive' : 'outline'}
               disabled={isSubmitting}
               onClick={() => setIsEditing(true)}
             >
-              <Icon
-                className='shrink-0 text-inherit'
-                type={isSubmitting ? 'loading' : 'submit'}
-              />
+              <Icon className='shrink-0 text-inherit' type={isSubmitting ? 'loading' : 'submit'} />
               <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
-                {errors.root?.message ||
-                  errors.description?.message ||
-                  'Готово'}
+                {errors.root?.message || errors.description?.message || 'Готово'}
               </span>
             </Button>
           )}

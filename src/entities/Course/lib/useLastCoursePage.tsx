@@ -7,9 +7,7 @@ export const useLastCoursePage = (courseId: string) => {
   const [nextPageName, setNextPageName] = useState<string>('');
 
   useEffect(() => {
-    const previousPages = JSON.parse(
-      localStorage.getItem('previousPages') || '{}'
-    ) as {
+    const previousPages = JSON.parse(localStorage.getItem('previousPages') || '{}') as {
       [courseId: string]:
         | {
             pageId: string;

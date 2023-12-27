@@ -22,9 +22,7 @@ export default async function Page() {
       <Header>
         <Link href='/' className='flex items-center gap-6'>
           <Image src='/logo.svg' alt='Radium' width={48} height={48} />
-          <h1 className='font-mono text-4xl font-bold text-accent-primary-200'>
-            Профиль
-          </h1>
+          <h1 className='text-accent-primary-200 font-mono text-4xl font-bold'>Профиль</h1>
         </Link>
       </Header>
       <main className='flex h-full flex-grow items-center justify-center'>

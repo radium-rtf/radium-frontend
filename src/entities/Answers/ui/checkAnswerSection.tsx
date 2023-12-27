@@ -21,21 +21,13 @@ interface IProps {
   className?: string;
 }
 
-export const CheckAnswerSection: FC<IProps> = ({
-  studentAnswer: answer,
-  reviewed,
-  className,
-}) => {
+export const CheckAnswerSection: FC<IProps> = ({ studentAnswer: answer, reviewed, className }) => {
   const pathname = usePathname();
   const sentDate = new Date(answer.createdAt);
   const [score, setScore] = useState(
-    reviewed && answer.review
-      ? round(answer.review.score * answer.section.maxScore)
-      : undefined
+    reviewed && answer.review ? round(answer.review.score * answer.section.maxScore) : undefined
   );
-  const [comment, setComment] = useState(
-    reviewed && answer.review ? answer.review.comment : ''
-  );
+  const [comment, setComment] = useState(reviewed && answer.review ? answer.review.comment : '');
   const [review, { isLoading, isError }] = useReviewMutation();
 
   const handleReview = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -77,39 +69,27 @@ export const CheckAnswerSection: FC<IProps> = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className={cn(
-          'flex',
-          'm-auto',
-          'rounded-[1rem]',
-          'bg-background-card',
-          className
-        )}
+        className={cn('flex', 'm-auto', 'rounded-[1rem]', 'bg-background-card', className)}
       >
         <main className='inline-block h-full w-full p-[1.5rem]'>
           <div className='mb-[1rem] w-full'>
             <div
-              className='flex
-                      gap-[1rem]
-                      font-mono text-[1rem]
-                      font-bold text-accent-primary-200'
+              className='text-accent-primary-200
+                      flex
+                      gap-[1rem] font-mono
+                      text-[1rem] font-bold'
             >
               <Icon type={'task'} />
               Задание
             </div>
-            <p className='font-sans text-[0.625rem] leading-[normal] text-foreground-secondary'>
-              отправлено {sentDate.getDay()}{' '}
-              {monthDictionary[sentDate.getMonth()]} {sentDate.getFullYear()} в{' '}
-              {sentDate.getHours()}:{sentDate.getMinutes()}
+            <p className='text-foreground-secondary font-sans text-[0.625rem] leading-[normal]'>
+              отправлено {sentDate.getDay()} {monthDictionary[sentDate.getMonth()]}{' '}
+              {sentDate.getFullYear()} в {sentDate.getHours()}:{sentDate.getMinutes()}
             </p>
           </div>
 
           <div className='mb-[1rem]'>
-            <p
-              className={cn(
-                inter.variable,
-                'text-[0.8125rem] leading-tight text-text-primary'
-              )}
-            >
+            <p className={cn(inter.variable, 'text-text-primary text-[0.8125rem] leading-tight')}>
               {answer.section.content}
             </p>
           </div>
@@ -145,7 +125,7 @@ export const CheckAnswerSection: FC<IProps> = ({
               placeHolder='Комментарий'
             />
 
-            <div className='flex items-center justify-end gap-4 text-text-secondary'>
+            <div className='text-text-secondary flex items-center justify-end gap-4'>
               <Input
                 placeholder='Оценка'
                 onChange={handleScoreChange}
@@ -173,14 +153,9 @@ export const CheckAnswerSection: FC<IProps> = ({
                 )}
               >
                 {!isLoading && (
-                  <Icon
-                    className='shrink-0 text-inherit'
-                    type={reviewed ? 'update' : 'submit'}
-                  />
+                  <Icon className='shrink-0 text-inherit' type={reviewed ? 'update' : 'submit'} />
                 )}
-                {isLoading && (
-                  <Icon className='shrink-0 text-inherit' type='loading' />
-                )}
+                {isLoading && <Icon className='shrink-0 text-inherit' type='loading' />}
                 <span className='ml-[calc(50%-34px)] w-full -translate-x-1/2'>
                   {reviewed ? 'Сменить оценку' : 'Оценить'}
                 </span>

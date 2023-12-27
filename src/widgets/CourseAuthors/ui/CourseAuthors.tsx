@@ -29,12 +29,7 @@ interface IProps {
   isEditAllowed: boolean;
 }
 
-export const CourseAuthors: FC<IProps> = ({
-  courseId,
-  authors,
-  coauthors,
-  isEditAllowed,
-}) => {
+export const CourseAuthors: FC<IProps> = ({ courseId, authors, coauthors, isEditAllowed }) => {
   const { isEditing } = useContext(CourseEditContext);
   const session = useSession();
 
@@ -53,18 +48,9 @@ export const CourseAuthors: FC<IProps> = ({
                   className='-m-[0.1875rem] aspect-square h-6 rounded-full object-cover'
                 >
                   <Avatar className='h-6 w-6'>
-                    <AvatarImage
-                      className='h-6 w-6'
-                      src={author.avatar}
-                      alt={author.name}
-                    />
+                    <AvatarImage className='h-6 w-6' src={author.avatar} alt={author.name} />
                     <AvatarFallback>
-                      <Image
-                        src='/defaultProfile.svg'
-                        width={24}
-                        height={24}
-                        alt={author.name}
-                      />
+                      <Image src='/defaultProfile.svg' width={24} height={24} alt={author.name} />
                     </AvatarFallback>
                   </Avatar>
                 </ListIcon>
@@ -93,20 +79,13 @@ export const CourseAuthors: FC<IProps> = ({
                   <ListTitle>{coauthor.name}</ListTitle>
                   <ListSubtitle>{coauthor.email}</ListSubtitle>
                 </ListContent>
-                {isEditAllowed &&
-                  isEditing &&
-                  coauthor.email !== session.data?.user.email && (
-                    <CourseDeleteCoAuthor
-                      courseId={courseId}
-                      coAuthorId={coauthor.id}
-                    />
-                  )}
+                {isEditAllowed && isEditing && coauthor.email !== session.data?.user.email && (
+                  <CourseDeleteCoAuthor courseId={courseId} coAuthorId={coauthor.id} />
+                )}
               </ListItem>
             );
           })}
-          {isEditAllowed && isEditing && (
-            <CourseAddCoAuthor courseId={courseId} />
-          )}
+          {isEditAllowed && isEditing && <CourseAddCoAuthor courseId={courseId} />}
         </List>
       </CardContent>
     </Card>

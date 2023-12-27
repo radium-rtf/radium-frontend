@@ -8,6 +8,9 @@ module.exports = {
   plugins: ['prettier', '@typescript-eslint'],
   parser: '@typescript-eslint/parser',
   rules: {
+    'no-irregular-whitespace': 'off',
+    'no-empty-patterns': 'off',
+    'no-empty': ['error', { allowEmptyCatch: true }],
     'prettier/prettier': [
       'error',
       {

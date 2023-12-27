@@ -2,15 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ReactNode, useLayoutEffect } from 'react';
-import {
-  Button,
-  cn,
-  Icon,
-  ListContent,
-  ListItem,
-  ListTitle,
-  Progress,
-} from '@/shared';
+import { Button, cn, Icon, ListContent, ListItem, ListTitle, Progress } from '@/shared';
 import { Header } from '@/widgets/Header';
 import { useParams } from 'next/navigation';
 import { CourseEditToggle } from '@/features/CourseEditToggle';
@@ -46,9 +38,7 @@ interface CourseStudyLayoutProps {
   children: ReactNode;
 }
 
-export default function CourseStudyLayout({
-  children,
-}: CourseStudyLayoutProps) {
+export default function CourseStudyLayout({ children }: CourseStudyLayoutProps) {
   const params: { courseId?: string; pageId?: string } = useParams();
   const {
     data: course,
@@ -116,9 +106,7 @@ export default function CourseStudyLayout({
             ) : (
               <div className='bg-background-overlay h-12 w-12 rounded-lg object-cover'></div>
             )}
-            <h1 className='font-NTSomic text-4xl font-bold text-primary'>
-              {course.name}
-            </h1>
+            <h1 className='font-NTSomic text-4xl font-bold text-primary'>{course.name}</h1>
           </Link>
         )}
       </Header>
@@ -145,11 +133,7 @@ export default function CourseStudyLayout({
               <Progress
                 className='w-64 px-6 py-2.5'
                 theme='primary'
-                percentage={
-                  ((course.maxScore ? course.score : 1) /
-                    (course.maxScore || 1)) *
-                  100
-                }
+                percentage={((course.maxScore ? course.score : 1) / (course.maxScore || 1)) * 100}
                 showPercentage
               />
 
@@ -165,10 +149,7 @@ export default function CourseStudyLayout({
                     <ListContent>
                       <ListTitle>{group.name}</ListTitle>
                     </ListContent>
-                    <Icon
-                      className='text-primary-default h-3 w-3'
-                      type='chevron-right'
-                    />
+                    <Icon className='text-primary-default h-3 w-3' type='chevron-right' />
                   </Link>
                 </ListItem>
               ))}
@@ -193,10 +174,7 @@ export default function CourseStudyLayout({
                     restrictToFirstScrollableAncestor,
                   ]}
                 >
-                  <SortableContext
-                    items={course.modules}
-                    strategy={verticalListSortingStrategy}
-                  >
+                  <SortableContext items={course.modules} strategy={verticalListSortingStrategy}>
                     {course.modules.map((module) => {
                       return (
                         <CourseModuleNavigation
@@ -216,9 +194,7 @@ export default function CourseStudyLayout({
           )}
           {!error && (
             <>
-              <div className='flex flex-grow justify-center'>
-                {course && children}
-              </div>
+              <div className='flex flex-grow justify-center'>{course && children}</div>
               {params.pageId && course && <CreateCourseSection />}
             </>
           )}
@@ -226,12 +202,7 @@ export default function CourseStudyLayout({
           {error && (
             <>
               <div className='flex h-full w-full flex-col items-center justify-center gap-4'>
-                <Image
-                  src={'/error.svg'}
-                  width={224}
-                  height={224}
-                  alt='Not found error'
-                />
+                <Image src={'/error.svg'} width={224} height={224} alt='Not found error' />
                 <h1 className='text-primary-default font-mono text-5xl font-bold'>
                   Такого курса нет :(
                 </h1>
@@ -241,9 +212,7 @@ export default function CourseStudyLayout({
                 <Button color='accent' asChild className='w-64'>
                   <Link href='/' scroll={false}>
                     <Icon type='arrow-left' className='text-inherit' />
-                    <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
-                      На главную
-                    </span>
+                    <span className='ml-[calc(50%-34px)] -translate-x-1/2'>На главную</span>
                   </Link>
                 </Button>
               </div>

@@ -10,13 +10,7 @@ interface IProps {
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-export const IconButton: FC<IProps> = ({
-  icon,
-  className,
-  disabled,
-  type,
-  onClick,
-}) => {
+export const IconButton: FC<IProps> = ({ icon, className, disabled, type, onClick }) => {
   return (
     <button
       onClick={onClick}

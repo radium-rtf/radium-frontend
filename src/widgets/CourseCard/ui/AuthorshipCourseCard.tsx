@@ -23,19 +23,11 @@ export const AuthorShipCourseCard: FC<IProps> = ({ course }) => {
   const { name, logo, id, shortDescription, description, banner } = course;
 
   const isReadyForPublish =
-    name !== '' &&
-    shortDescription !== '' &&
-    description !== '' &&
-    logo !== '' &&
-    banner !== '';
+    name !== '' && shortDescription !== '' && description !== '' && logo !== '' && banner !== '';
 
   return (
-    <Card className='hover:bg-card-hover relative flex flex-col transition-all'>
-      <Link
-        className='absolute inset-0'
-        href={`courses/${id}`}
-        scroll={false}
-      />
+    <Card className='relative flex flex-col transition-all hover:bg-card-hover'>
+      <Link className='absolute inset-0' href={`courses/${id}`} scroll={false} />
       <CardHeader className='flex-row items-center gap-4 space-y-0'>
         {logo ? (
           <Image
@@ -46,22 +38,18 @@ export const AuthorShipCourseCard: FC<IProps> = ({ course }) => {
             width={72}
           />
         ) : (
-          <div className='aspect-square h-[4.5rem] rounded-lg bg-background-overlay' />
+          <div className='bg-background-overlay aspect-square h-[4.5rem] rounded-lg' />
         )}
         <CardTitle>{name}</CardTitle>
       </CardHeader>
       <CardContent className='grow'>
-        <CardDescription>
-          {shortDescription || '<без описания>'}
-        </CardDescription>
+        <CardDescription>{shortDescription || '<без описания>'}</CardDescription>
       </CardContent>
       <CardFooter className='gap-2'>
         <div className='flex flex-grow items-center gap-2'>
           <Icon
             className='h-[1.125rem]'
-            type={
-              isReadyForPublish || course.isPublished ? 'success' : 'courses'
-            }
+            type={isReadyForPublish || course.isPublished ? 'success' : 'courses'}
           />
           <p className='text-[0.8125rem]'>
             {(course.isPublished && 'Опубликован') ||

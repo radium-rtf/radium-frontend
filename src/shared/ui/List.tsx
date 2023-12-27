@@ -18,9 +18,7 @@ interface IListProps extends React.HTMLAttributes<HTMLUListElement> {
 export const List = forwardRef<HTMLUListElement, IListProps>(
   ({ className, asChild, ...props }, ref) => {
     const Comp = asChild ? Slot : 'ul';
-    return (
-      <Comp ref={ref} {...props} className={cn('flex flex-col', className)} />
-    );
+    return <Comp ref={ref} {...props} className={cn('flex flex-col', className)} />;
   }
 );
 List.displayName = 'List';
@@ -54,8 +52,7 @@ export const ListIcon = forwardRef<SVGSVGElement, IListIconProps>(
   ({ asChild, icon, className, ...props }, ref) => {
     const Comp = asChild
       ? (Slot as ForwardRefExoticComponent<
-          SVGAttributes<SVGSVGElement> &
-            RefAttributes<SVGSVGElement> & { children?: ReactNode }
+          SVGAttributes<SVGSVGElement> & RefAttributes<SVGSVGElement> & { children?: ReactNode }
         >)
       : Icon;
     return (
@@ -80,11 +77,7 @@ export const ListContent = forwardRef<HTMLDivElement, IListContentProps>(
   ({ className, asChild, ...props }, ref) => {
     const Comp = asChild ? Slot : 'div';
     return (
-      <Comp
-        ref={ref}
-        {...props}
-        className={cn('flex flex-grow flex-col gap-0.5', className)}
-      />
+      <Comp ref={ref} {...props} className={cn('flex flex-grow flex-col gap-0.5', className)} />
     );
   }
 );
@@ -123,10 +116,7 @@ export const ListSubtitle = forwardRef<HTMLHeadingElement, IListSubtitleProps>(
       <Comp
         ref={ref}
         {...props}
-        className={cn(
-          'font-sans text-[0.625rem] leading-[normal] text-[#B3B3B3]',
-          className
-        )}
+        className={cn('font-sans text-[0.625rem] leading-[normal] text-[#B3B3B3]', className)}
       />
     );
   }

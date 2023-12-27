@@ -11,11 +11,7 @@ interface IProps {
   courseId: string;
 }
 
-export const StudentAnswerPage: FC<IProps> = ({
-  studentId,
-  groupId,
-  courseId,
-}) => {
+export const StudentAnswerPage: FC<IProps> = ({ studentId, groupId, courseId }) => {
   const { data: answers } = useAnswersQuery({
     groupId: groupId,
     course_id: courseId,
@@ -42,7 +38,7 @@ export const StudentAnswerPage: FC<IProps> = ({
 
   return (
     <div className='mx-auto max-w-[45rem]'>
-      <h1 className='font-mono text-[3rem] font-bold text-accent-primary-200 px-6'>
+      <h1 className='text-accent-primary-200 px-6 font-mono text-[3rem] font-bold'>
         Задания от {studentAnswers.user.name}
       </h1>
       {needToReview.map((answer) => (
@@ -54,17 +50,10 @@ export const StudentAnswerPage: FC<IProps> = ({
         />
       ))}
       {reviewed.length !== 0 && (
-        <h1 className='font-mono text-[2rem] font-bold text-accent-primary-200 px-6'>
-          Проверено
-        </h1>
+        <h1 className='text-accent-primary-200 px-6 font-mono text-[2rem] font-bold'>Проверено</h1>
       )}
       {reviewed.map((answer) => (
-        <CheckAnswerSection
-          key={answer.id}
-          reviewed
-          studentAnswer={answer}
-          className='my-[2rem]'
-        />
+        <CheckAnswerSection key={answer.id} reviewed studentAnswer={answer} className='my-[2rem]' />
       ))}
     </div>
   );

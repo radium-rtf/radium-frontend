@@ -1,10 +1,4 @@
-import {
-  ButtonHTMLAttributes,
-  FC,
-  FormEvent,
-  useEffect,
-  useState,
-} from 'react';
+import { ButtonHTMLAttributes, FC, FormEvent, useEffect, useState } from 'react';
 import { Icon, Input, cn } from '@/shared';
 import { useCreateCoursePageMutation } from '@/entities/CoursePage';
 
@@ -12,11 +6,7 @@ interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   moduleId: string;
 }
 
-export const NavigationCreatePage: FC<IProps> = ({
-  className,
-  moduleId,
-  ...props
-}) => {
+export const NavigationCreatePage: FC<IProps> = ({ className, moduleId, ...props }) => {
   const [isCreating, setIsCreating] = useState(false);
   const [createPage] = useCreateCoursePageMutation();
 

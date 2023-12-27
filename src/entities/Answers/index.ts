@@ -1,9 +1,5 @@
 // Interfaces
-export type {
-  AnswersDto,
-  StudentAnswerDto,
-  StudentAnswersDto,
-} from './model/answersDto';
+export type { AnswersDto, StudentAnswerDto, StudentAnswersDto } from './model/answersDto';
 export type { AnswersRequestDto } from './model/answersRequestDto';
 
 // UI

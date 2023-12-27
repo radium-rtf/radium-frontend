@@ -54,7 +54,6 @@ export const Header: FC<IProps> = ({ children }) => {
     <header
       ref={headerRef}
       className='
-        bg-background
         fixed
         left-0
         right-0
@@ -64,6 +63,7 @@ export const Header: FC<IProps> = ({ children }) => {
         flex
         items-center
         justify-between
+        bg-background
         px-12
         pb-9
         pt-12
@@ -76,17 +76,14 @@ export const Header: FC<IProps> = ({ children }) => {
       <div className='content'>{children}</div>
       <div className='flex items-center gap-6'>
         {session?.data?.user.name && (
-          <span className='font-NTSomic text-primary text-[0.8125rem] leading-tight'>
+          <span className='font-NTSomic text-[0.8125rem] leading-tight text-primary'>
             {session.data.user.name}
           </span>
         )}
         <DropdownMenu>
           <DropdownMenuTrigger className='rounded-full'>
             <Avatar className='h-12 w-12'>
-              <AvatarImage
-                src={session.data?.user.image || undefined}
-                alt='User avatar'
-              />
+              <AvatarImage src={session.data?.user.image || undefined} alt='User avatar' />
               <AvatarFallback>NF</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>

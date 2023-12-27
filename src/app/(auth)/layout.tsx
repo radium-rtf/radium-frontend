@@ -22,11 +22,7 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='ru' className='dark h-full'>
       <body

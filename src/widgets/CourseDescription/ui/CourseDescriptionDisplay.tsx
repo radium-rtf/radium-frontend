@@ -7,9 +7,7 @@ interface CourseDescriptionDisplayProps {
   description: string;
 }
 
-export const CourseDescriptionDisplay: FC<CourseDescriptionDisplayProps> = ({
-  description,
-}) => {
+export const CourseDescriptionDisplay: FC<CourseDescriptionDisplayProps> = ({ description }) => {
   return (
     <Card className='gap-6'>
       <CardHeader className='flex-row items-center gap-4 space-y-0'>

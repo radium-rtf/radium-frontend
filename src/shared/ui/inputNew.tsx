@@ -12,27 +12,12 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  (
-    {
-      className,
-      placeholder,
-      id,
-      type,
-      icon,
-      actionIcon,
-      onActionClick,
-      text,
-      ...props
-    },
-    ref
-  ) => {
+  ({ className, placeholder, id, type, icon, actionIcon, onActionClick, text, ...props }, ref) => {
     const innerId = useId();
     const textWidth = useGetTextWidth(text, '13px var(--font-nt-somic)');
     const leftPadding = (16 + (icon ? 34 : 0)) / 16 + 'rem';
     const rightPadding =
-      (16 + (textWidth ? textWidth + 16 : 0) + (actionIcon ? 18 + 16 : 0)) /
-        16 +
-      'rem';
+      (16 + (textWidth ? textWidth + 16 : 0) + (actionIcon ? 18 + 16 : 0)) / 16 + 'rem';
 
     const style = {
       '--left-padding': leftPadding,
@@ -41,10 +26,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       '--text-right': text ? (actionIcon ? `${16 + 18 + 16}px` : '1rem') : 0,
     } as React.CSSProperties;
     return (
-      <div
-        className='relative h-10 w-full rounded-[0.5rem] text-[#B3B3B3]'
-        style={style}
-      >
+      <div className='relative h-10 w-full rounded-[0.5rem] text-[#B3B3B3]' style={style}>
         <input
           id={id || innerId}
           placeholder={placeholder}
@@ -63,10 +45,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           {placeholder}
         </label>
         {icon && (
-          <Icon
-            type={icon}
-            className='absolute left-4 top-1/2 -translate-y-1/2 text-inherit'
-          />
+          <Icon type={icon} className='absolute left-4 top-1/2 -translate-y-1/2 text-inherit' />
         )}
         {text && (
           <label

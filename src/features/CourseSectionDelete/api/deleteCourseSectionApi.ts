@@ -3,10 +3,7 @@ import { DeleteCourseSectionRequestDto } from '../model/deleteCourseSectionReque
 
 const deleteCourseSectionApi = emptyApi.injectEndpoints({
   endpoints: (builder) => ({
-    deleteCourseSection: builder.mutation<
-      undefined,
-      DeleteCourseSectionRequestDto
-    >({
+    deleteCourseSection: builder.mutation<undefined, DeleteCourseSectionRequestDto>({
       query: ({ sectionId }) => ({
         url: `/section/${sectionId}`,
         method: 'DELETE',

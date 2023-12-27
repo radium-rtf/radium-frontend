@@ -1,2 +1,1 @@
-export const changeBannerClickHandler = (element: HTMLInputElement) =>
-  element.click();
+export const changeBannerClickHandler = (element: HTMLInputElement) => element.click();

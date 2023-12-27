@@ -13,10 +13,9 @@ const components: Partial<Components> = {
   code: ({ children, ...props }) => {
     const text = children!.toString();
 
-    const gutter = Array.from(
-      { length: text.match(/\n/gi)?.length || 0 },
-      (_, k) => k + 1
-    ).join('\n');
+    const gutter = Array.from({ length: text.match(/\n/gi)?.length || 0 }, (_, k) => k + 1).join(
+      '\n'
+    );
 
     return (
       <code data-gutter={gutter} {...props}>

@@ -19,12 +19,7 @@ import {
   RadioGroupItem,
   cn,
 } from '@/shared';
-import {
-  Controller,
-  SubmitHandler,
-  useFieldArray,
-  useForm,
-} from 'react-hook-form';
+import { Controller, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { updateSchema, updateSchemaType } from '../model/updateSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
@@ -35,26 +30,18 @@ interface ChoiceSectionEditProps {
   sectionData: ChoiceSectionResponseDto;
 }
 
-export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({
-  sectionData,
-}) => {
+export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({ sectionData }) => {
   // Edit setup
   const [isEditing, setIsEditing] = useState(false);
   // DND Setup
-  const {
-    setActivatorNodeRef,
-    setNodeRef,
-    listeners,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
-    id: sectionData.id,
-    data: {
-      order: sectionData.order,
-      pageId: sectionData.pageId,
-    },
-  });
+  const { setActivatorNodeRef, setNodeRef, listeners, transform, transition, isDragging } =
+    useSortable({
+      id: sectionData.id,
+      data: {
+        order: sectionData.order,
+        pageId: sectionData.pageId,
+      },
+    });
 
   const style = {
     transform: CSS.Translate.toString(transform),
@@ -166,10 +153,7 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({
               <RadioGroup defaultValue={sectionData.answer} className='gap-0'>
                 {sectionData.variants.map((variant) => (
                   <div key={variant} className='flex items-center gap-4 py-2'>
-                    <RadioGroupItem
-                      value={variant}
-                      id={`${sectionData.id}-${variant}`}
-                    />
+                    <RadioGroupItem value={variant} id={`${sectionData.id}-${variant}`} />
                     <label
                       htmlFor={`${sectionData.id}-${variant}`}
                       className='text-[0.8125rem] leading-normal'
@@ -244,26 +228,15 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({
                                   ).dataset.state === 'checked' &&
                                     setValue('choice.answer', e.target.value);
                                   // add if last input has text
-                                  if (
-                                    e.target.value !== '' &&
-                                    index === fields.length - 1
-                                  ) {
-                                    append(
-                                      { value: '' },
-                                      { shouldFocus: false }
-                                    );
+                                  if (e.target.value !== '' && index === fields.length - 1) {
+                                    append({ value: '' }, { shouldFocus: false });
                                   }
                                   // remove if NOT last empty
-                                  if (
-                                    e.target.value === '' &&
-                                    index !== fields.length - 1
-                                  ) {
+                                  if (e.target.value === '' && index !== fields.length - 1) {
                                     remove(index);
                                     setFocus(
                                       `choice.variants.${
-                                        fields.length - 3 >= 0
-                                          ? fields.length - 3
-                                          : 0
+                                        fields.length - 3 >= 0 ? fields.length - 3 : 0
                                       }.value`
                                     );
                                   }
@@ -305,10 +278,7 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({
               />
             </>
           )}
-          <CourseSectionDelete
-            sectionId={sectionData.id}
-            pageId={sectionData.pageId}
-          />
+          <CourseSectionDelete sectionId={sectionData.id} pageId={sectionData.pageId} />
           {!isEditing && (
             <Button
               type='button'
@@ -317,27 +287,18 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({
               onClick={() => setIsEditing(true)}
             >
               <Icon type='edit' className='text-inherit' />
-              <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
-                Редактировать
-              </span>
+              <span className='ml-[calc(50%-18px)] -translate-x-1/2'>Редактировать</span>
             </Button>
           )}
           {isEditing && (
             <Button
               type='submit'
               className='w-64 shrink-0 justify-start'
-              variant={
-                !isValid && isSubmitted && !isSubmitting
-                  ? 'destructive'
-                  : 'outline'
-              }
+              variant={!isValid && isSubmitted && !isSubmitting ? 'destructive' : 'outline'}
               disabled={isSubmitting}
               onClick={() => setIsEditing(true)}
             >
-              <Icon
-                type={isSubmitting ? 'loading' : 'save'}
-                className='shrink-0 text-inherit'
-              />
+              <Icon type={isSubmitting ? 'loading' : 'save'} className='shrink-0 text-inherit' />
               <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
                 {(isSubmitting && 'Сохраняем...') ||
                   (!isValid &&

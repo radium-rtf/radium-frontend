@@ -3,7 +3,7 @@ import { CourseHeader } from '@/widgets/CourseHeader';
 import { useGroupQuery } from '@/entities/Group/api/groupApi';
 import { GroupMenu } from '@/widgets/GroupMenu';
 import { useAnswersQuery } from '@/entities/Answers';
-import {useGetCourseQuery} from "@/entities/Course";
+import { useGetCourseQuery } from '@/entities/Course';
 
 export default function GroupLayout({
   children,
@@ -29,7 +29,7 @@ export default function GroupLayout({
         {course && group && answers && (
           <GroupMenu className='-ml-6' courseId={course.id} group={group} answers={answers} />
         )}
-        <div className='flex-grow justify-center w-[75%]'>{children}</div>
+        <div className='w-[75%] flex-grow justify-center'>{children}</div>
       </div>
     </>
   );

@@ -9,21 +9,13 @@ import {
   KeyboardSensor,
   rectIntersection,
 } from '@dnd-kit/core';
-import {
-  restrictToVerticalAxis,
-  restrictToParentElement,
-} from '@dnd-kit/modifiers';
+import { restrictToVerticalAxis, restrictToParentElement } from '@dnd-kit/modifiers';
 import {
   SortableContext,
   verticalListSortingStrategy,
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
-import {
-  Controller,
-  SubmitHandler,
-  useFieldArray,
-  useForm,
-} from 'react-hook-form';
+import { Controller, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { answerSchemaType } from '../model/answerSchema';
 import { PermutationSectionResponseDto } from '@/entities/CourseSection';
 import { dragEndHandler } from '../model/dragEndHandler';
@@ -48,13 +40,7 @@ export const PermutationSection: FC<IProps> = ({ sectionData }) => {
     setError,
     setValue,
     control,
-    formState: {
-      errors,
-      isSubmitSuccessful,
-      isSubmitting,
-      isSubmitted,
-      isValid,
-    },
+    formState: { errors, isSubmitSuccessful, isSubmitting, isSubmitted, isValid },
   } = useForm<answerSchemaType>({
     values: {
       permutation: {
@@ -99,26 +85,18 @@ export const PermutationSection: FC<IProps> = ({ sectionData }) => {
   // Edit checks
   const session = useSession();
   const isEditAllowed =
-    session.data?.user.roles.isAuthor ||
-    session.data?.user.roles.isTeacher ||
-    false;
+    session.data?.user.roles.isAuthor || session.data?.user.roles.isTeacher || false;
   const { isEditing: isEditMode } = useContext(CourseEditContext);
   const [isEditing, setIsEditing] = useState(false);
 
-  const {
-    setNodeRef,
-    setActivatorNodeRef,
-    transform,
-    transition,
-    listeners,
-    isDragging,
-  } = useSortable({
-    id: sectionData.id,
-    data: {
-      order: sectionData.order,
-      pageId: sectionData.pageId,
-    },
-  });
+  const { setNodeRef, setActivatorNodeRef, transform, transition, listeners, isDragging } =
+    useSortable({
+      id: sectionData.id,
+      data: {
+        order: sectionData.order,
+        pageId: sectionData.pageId,
+      },
+    });
 
   const style = {
     transform: CSS.Translate.toString(transform),
@@ -127,10 +105,7 @@ export const PermutationSection: FC<IProps> = ({ sectionData }) => {
 
   if (isEditAllowed && isEditMode && isEditing) {
     return (
-      <PermutationsSectionEdit
-        sectionData={sectionData}
-        onSuccess={() => setIsEditing(false)}
-      />
+      <PermutationsSectionEdit sectionData={sectionData} onSuccess={() => setIsEditing(false)} />
     );
   }
 
@@ -161,14 +136,12 @@ export const PermutationSection: FC<IProps> = ({ sectionData }) => {
       >
         <div
           className={cn(
-            'flex items-center gap-4 text-primary-default',
+            'text-primary-default flex items-center gap-4',
             isEditAllowed && isEditMode && 'relative'
           )}
         >
           <Icon type='question' className='text-inherit' />
-          <span className='font-mono font-bold leading-[normal] text-inherit'>
-            Вопрос
-          </span>
+          <span className='font-mono font-bold leading-[normal] text-inherit'>Вопрос</span>
           {isEditAllowed && isEditMode && (
             <button
               className='drag after:absolute after:-left-6 after:-right-6 after:-top-6 after:bottom-0 after:block after:rounded-t-2xl after:content-[""]'
@@ -176,10 +149,7 @@ export const PermutationSection: FC<IProps> = ({ sectionData }) => {
               ref={setActivatorNodeRef}
               {...listeners}
             >
-              <Icon
-                type='handle-horizontal'
-                className='absolute left-1/2 top-0'
-              />
+              <Icon type='handle-horizontal' className='absolute left-1/2 top-0' />
             </button>
           )}
         </div>
@@ -198,10 +168,7 @@ export const PermutationSection: FC<IProps> = ({ sectionData }) => {
             render={() => {
               // clearErrors('permutation.answer');
               return (
-                <SortableContext
-                  items={fields}
-                  strategy={verticalListSortingStrategy}
-                >
+                <SortableContext items={fields} strategy={verticalListSortingStrategy}>
                   <main className='-mx-6'>
                     {fields.map((field) => (
                       <PermutationItem key={field.id} value={field} />
@@ -215,19 +182,10 @@ export const PermutationSection: FC<IProps> = ({ sectionData }) => {
         <footer className='flex items-center gap-4 place-self-end'>
           {isEditAllowed && isEditMode && (
             <div className='flex items-center gap-4'>
-              <CourseSectionDelete
-                pageId={sectionData.pageId}
-                sectionId={sectionData.id}
-              />
-              <Button
-                className='w-64'
-                color='outlined'
-                onClick={() => setIsEditing(true)}
-              >
+              <CourseSectionDelete pageId={sectionData.pageId} sectionId={sectionData.id} />
+              <Button className='w-64' color='outlined' onClick={() => setIsEditing(true)}>
                 <Icon type='edit' className='text-inherit' />
-                <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
-                  Редактировать
-                </span>
+                <span className='ml-[calc(50%-34px)] -translate-x-1/2'>Редактировать</span>
               </Button>
             </div>
           )}
@@ -236,7 +194,7 @@ export const PermutationSection: FC<IProps> = ({ sectionData }) => {
               {!isSubmitting && (
                 <>
                   {sectionData.maxAttempts > 0 && (
-                    <span className='text-[0.8125rem] text-text-primary'>
+                    <span className='text-text-primary text-[0.8125rem]'>
                       {sectionData.verdict === '' &&
                         `${sectionData.maxAttempts} ${getNoun(
                           sectionData.maxAttempts,
@@ -263,10 +221,8 @@ export const PermutationSection: FC<IProps> = ({ sectionData }) => {
                     >
                       {(sectionData.verdict === 'OK' &&
                         `${sectionData.score} / ${sectionData.maxScore}`) ||
-                        (sectionData.verdict === 'WA' &&
-                          `${0} / ${sectionData.maxScore}`) ||
-                        (sectionData.verdict === '' &&
-                          `${sectionData.maxScore}`)}
+                        (sectionData.verdict === 'WA' && `${0} / ${sectionData.maxScore}`) ||
+                        (sectionData.verdict === '' && `${sectionData.maxScore}`)}
                       <span> баллов</span>
                     </span>
                   )}
@@ -277,11 +233,9 @@ export const PermutationSection: FC<IProps> = ({ sectionData }) => {
                 onClick={() =>
                   reset({
                     permutation: {
-                      answer: (sectionData.answers || sectionData.variants).map(
-                        (val) => ({
-                          value: val,
-                        })
-                      ),
+                      answer: (sectionData.answers || sectionData.variants).map((val) => ({
+                        value: val,
+                      })),
                     },
                   })
                 }
@@ -308,9 +262,7 @@ export const PermutationSection: FC<IProps> = ({ sectionData }) => {
                   className='shrink-0 text-inherit'
                 />
                 <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
-                  {(errors.permutation?.answer &&
-                    !isValid &&
-                    errors.permutation.answer.message) ||
+                  {(errors.permutation?.answer && !isValid && errors.permutation.answer.message) ||
                     'Ответить'}
                 </span>
               </Button>

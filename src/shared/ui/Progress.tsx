@@ -22,14 +22,14 @@ export const Progress: FC<IProps> = ({
       <div className={cn('flex w-full items-center gap-4', className)}>
         <div className='flex h-0.5 w-full items-center bg-white/10'>
           <div
-            className={cn('bg-primary h-full transition-all', {
+            className={cn('h-full bg-primary transition-all', {
               'bg-accent-secondary-300': theme === 'secondary',
             })}
             style={{ width: `${percentage}%` }}
           />
         </div>
         {showPercentage && (
-          <span className='text-foreground block w-[40px] text-[0.8125rem]'>
+          <span className='block w-[40px] text-[0.8125rem] text-foreground'>
             {percentage.toFixed()}&nbsp;%
           </span>
         )}
@@ -37,7 +37,7 @@ export const Progress: FC<IProps> = ({
     );
   return (
     <div
-      className={cn('stroke-primary text-primary relative', {
+      className={cn('relative stroke-primary text-primary', {
         'text-secondary': theme === 'secondary',
       })}
     >
@@ -45,12 +45,7 @@ export const Progress: FC<IProps> = ({
         className='aspect-square h-[1.125rem] -rotate-90'
         style={{ '--progress': 54 - 54 * (percentage / 100) } as CSSProperties}
       >
-        <circle
-          className='fill-none stroke-grey-400 stroke-1'
-          cx={9}
-          cy={9}
-          r={8.5}
-        ></circle>
+        <circle className='stroke-grey-400 fill-none stroke-1' cx={9} cy={9} r={8.5}></circle>
         <circle
           className={cn(
             [

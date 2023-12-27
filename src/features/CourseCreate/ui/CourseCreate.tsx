@@ -19,7 +19,7 @@ export const CourseCreate = () => {
     <button
       onClick={onClickHandler}
       type='button'
-      className='bg-card hover:bg-card-hover flex min-h-[16rem] items-center justify-center gap-4 rounded-2xl transition-colors'
+      className='flex min-h-[16rem] items-center justify-center gap-4 rounded-2xl bg-card transition-colors hover:bg-card-hover'
     >
       <Icon type='add' />
       <span className='font-NTSomic text-[0.8125rem]'>Создать курс</span>

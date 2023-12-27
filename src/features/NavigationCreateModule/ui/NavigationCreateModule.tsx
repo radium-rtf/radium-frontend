@@ -1,13 +1,6 @@
 'use client';
 import { Icon, Input, cn } from '@/shared';
-import {
-  ButtonHTMLAttributes,
-  FC,
-  FormEvent,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { ButtonHTMLAttributes, FC, FormEvent, useContext, useEffect, useState } from 'react';
 import { CourseEditContext } from '@/features/CourseEditContext';
 import { useCreateCourseModuleMutation } from '@/entities/CourseModule';
 
@@ -15,11 +8,7 @@ interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   courseId: string;
 }
 
-export const NavigationCreateModule: FC<IProps> = ({
-  className,
-  courseId,
-  ...props
-}) => {
+export const NavigationCreateModule: FC<IProps> = ({ className, courseId, ...props }) => {
   const [isCreating, setIsCreating] = useState(false);
   const { isEditing } = useContext(CourseEditContext);
   const [createModule] = useCreateCourseModuleMutation();

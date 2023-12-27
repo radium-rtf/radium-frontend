@@ -49,15 +49,13 @@ export const Comment: FC<IProps> = ({ comment, date, name, avatar }) => {
             width={18}
             height={18}
           />
-          <h1 className='text-[0.8125rem] font-normal text-accent-primary-200'>
-            {name}
-          </h1>
+          <h1 className='text-accent-primary-200 text-[0.8125rem] font-normal'>{name}</h1>
         </div>
-        <span className='font-sans text-[0.625rem] leading-[normal] text-foreground-secondary'>
+        <span className='text-foreground-secondary font-sans text-[0.625rem] leading-[normal]'>
           {date}
         </span>
       </div>
-      <span className='text-[0.8125rem] font-normal leading-[normal] text-text-primary'>
+      <span className='text-text-primary text-[0.8125rem] font-normal leading-[normal]'>
         {comment}
       </span>
     </main>

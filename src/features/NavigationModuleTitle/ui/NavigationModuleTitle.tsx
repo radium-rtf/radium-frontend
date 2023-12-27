@@ -66,11 +66,7 @@ export const NavigationModuleTitle = forwardRef<HTMLHeadingElement, IProps>(
 
     if (isEditing && isEditing) {
       return (
-        <form
-          ref={formRef}
-          onSubmit={(e) => formSubmitHandler(e)}
-          className='px-2 py-1.5'
-        >
+        <form ref={formRef} onSubmit={(e) => formSubmitHandler(e)} className='px-2 py-1.5'>
           <Input
             name='newName'
             placeholder='Глава'
@@ -104,11 +100,7 @@ export const NavigationModuleTitle = forwardRef<HTMLHeadingElement, IProps>(
                 className='flex-shrink-0 text-destructive opacity-0 transition-opacity duration-300 group-hover:opacity-100'
               />
             </button>
-            <button
-              className='p-0.5'
-              type='button'
-              onClick={() => setIsEditing(true)}
-            >
+            <button className='p-0.5' type='button' onClick={() => setIsEditing(true)}>
               <Icon
                 type='edit'
                 className='flex-shrink-0 opacity-0 transition-opacity group-hover:opacity-100'

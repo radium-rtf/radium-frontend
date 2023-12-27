@@ -26,9 +26,7 @@ interface ChoiceSectionDisplayProps {
   sectionData: ChoiceSectionResponseDto;
 }
 
-export const ChoiceSectionDisplay: FC<ChoiceSectionDisplayProps> = ({
-  sectionData,
-}) => {
+export const ChoiceSectionDisplay: FC<ChoiceSectionDisplayProps> = ({ sectionData }) => {
   // Form setup
   const {
     reset,
@@ -36,13 +34,7 @@ export const ChoiceSectionDisplay: FC<ChoiceSectionDisplayProps> = ({
     setError,
     clearErrors,
     handleSubmit,
-    formState: {
-      errors,
-      isValid,
-      isSubmitting,
-      isSubmitted,
-      isSubmitSuccessful,
-    },
+    formState: { errors, isValid, isSubmitting, isSubmitted, isSubmitSuccessful },
   } = useForm<answerSchemaType>({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
@@ -95,10 +87,7 @@ export const ChoiceSectionDisplay: FC<ChoiceSectionDisplayProps> = ({
               >
                 {sectionData.variants.map((variant) => (
                   <div key={variant} className='flex items-center gap-4 py-2'>
-                    <RadioGroupItem
-                      value={variant}
-                      id={`${sectionData.id}-${variant}`}
-                    />
+                    <RadioGroupItem value={variant} id={`${sectionData.id}-${variant}`} />
                     <label
                       htmlFor={`${sectionData.id}-${variant}`}
                       className='text-[0.8125rem] leading-normal'
@@ -116,9 +105,7 @@ export const ChoiceSectionDisplay: FC<ChoiceSectionDisplayProps> = ({
             <span
               className={cn(
                 'text-[0.8125rem]',
-                sectionData.maxAttempts &&
-                  !sectionData.attempts &&
-                  'text-destructive'
+                sectionData.maxAttempts && !sectionData.attempts && 'text-destructive'
               )}
             >
               {sectionData.verdict === '' &&
@@ -138,12 +125,7 @@ export const ChoiceSectionDisplay: FC<ChoiceSectionDisplayProps> = ({
             </span>
           )}
           {!isSubmitting && sectionData.maxScore > 0 && (
-            <span
-              className={cn(
-                'text-[0.8125rem]',
-                sectionData.verdict === 'OK' && 'text-accent'
-              )}
-            >
+            <span className={cn('text-[0.8125rem]', sectionData.verdict === 'OK' && 'text-accent')}>
               {sectionData.verdict === '' &&
                 `${sectionData.maxScore} ${getNoun(
                   sectionData.maxScore,
@@ -151,15 +133,10 @@ export const ChoiceSectionDisplay: FC<ChoiceSectionDisplayProps> = ({
                   'балла',
                   'баллов'
                 )}`}
-              {sectionData.answer !== '' &&
-                `${sectionData.score} / ${sectionData.maxScore} баллов`}
+              {sectionData.answer !== '' && `${sectionData.score} / ${sectionData.maxScore} баллов`}
             </span>
           )}
-          <Button
-            type='button'
-            variant='outline'
-            onClick={() => reset({ choice: { answer: '' } })}
-          >
+          <Button type='button' variant='outline' onClick={() => reset({ choice: { answer: '' } })}>
             <Icon type='reset' />
           </Button>
           <Button
@@ -175,8 +152,7 @@ export const ChoiceSectionDisplay: FC<ChoiceSectionDisplayProps> = ({
             <Icon type='send' className='text-inherit' />
             <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
               {(isSubmitting && 'Отправляем...') ||
-                (!isValid &&
-                  (errors.root?.message || errors.choice?.answer?.message)) ||
+                (!isValid && (errors.root?.message || errors.choice?.answer?.message)) ||
                 (isSubmitSuccessful && 'Верно!') ||
                 'Отправить'}
             </span>

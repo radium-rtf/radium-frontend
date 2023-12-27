@@ -5,14 +5,7 @@ import MuiTableBody from '@mui/material/TableBody';
 import MuiTableHead from '@mui/material/TableHead';
 import MuiTableRow from '@mui/material/TableRow';
 import MuiTableCell from '@mui/material/TableCell';
-import {
-  Children,
-  FC,
-  ReactElement,
-  ReactNode,
-  useMemo,
-  useState,
-} from 'react';
+import { Children, FC, ReactElement, ReactNode, useMemo, useState } from 'react';
 import { cn } from '../utils/cn';
 import { Icon } from './Icon';
 
@@ -25,12 +18,7 @@ interface ITableHeader {
   createSortHandler: (column: number) => void;
 }
 
-const TableHeader: FC<ITableHeader> = ({
-  children,
-  orderByColumn,
-  order,
-  createSortHandler,
-}) => {
+const TableHeader: FC<ITableHeader> = ({ children, orderByColumn, order, createSortHandler }) => {
   return (
     <MuiTableHead>
       <MuiTableRow>
@@ -48,15 +36,10 @@ const TableHeader: FC<ITableHeader> = ({
               }}
               IconComponent={() => (
                 <Icon
-                  className={cn(
-                    'm-1 shrink-0',
-                    orderByColumn !== column && 'opacity-0'
-                  )}
+                  className={cn('m-1 shrink-0', orderByColumn !== column && 'opacity-0')}
                   width='16'
                   height='16'
-                  type={
-                    orderByColumn === column && order === 'desc' ? 'down' : 'up'
-                  }
+                  type={orderByColumn === column && order === 'desc' ? 'down' : 'up'}
                 />
               )}
               active={orderByColumn === column}
@@ -113,10 +96,9 @@ interface ITableHeaderCell {
   className?: string;
 }
 
-export const TableHeaderCell: FC<ITableHeaderCell> = ({
-  children,
-  className,
-}) => <div className={className}>{children}</div>;
+export const TableHeaderCell: FC<ITableHeaderCell> = ({ children, className }) => (
+  <div className={className}>{children}</div>
+);
 
 interface ITable {
   headerRow: ReactElement<ITableHeaderCell>[];
@@ -189,11 +171,7 @@ interface ITableBody {
 export const TableBody: FC<ITableBody> = ({ children }) => (
   <MuiTableBody>
     {children.map((row, rowIndex) => (
-      <TableBodyRow
-        key={rowIndex}
-        rowIndex={rowIndex}
-        row={row.props.row}
-      ></TableBodyRow>
+      <TableBodyRow key={rowIndex} rowIndex={rowIndex} row={row.props.row}></TableBodyRow>
     ))}
   </MuiTableBody>
 );
@@ -203,9 +181,7 @@ interface ITableDataCell {
   value: string;
 }
 
-export const TableDataCell: FC<ITableDataCell> = ({ children }) => (
-  <>{children}</>
-);
+export const TableDataCell: FC<ITableDataCell> = ({ children }) => <>{children}</>;
 
 interface ITableBodyRow {
   row: ReactElement<ITableDataCell>[];
@@ -213,13 +189,10 @@ interface ITableBodyRow {
 }
 
 export const TableBodyRow: FC<ITableBodyRow> = ({ row, rowIndex }) => (
-  <MuiTableRow
-    className='border-b border-white border-opacity-10'
-    key={rowIndex}
-  >
+  <MuiTableRow className='border-b border-white border-opacity-10' key={rowIndex}>
     {row.map((value, cellIndex) => (
       <TableCell scope='row' key={cellIndex}>
-        <text className='text-sm text-text-primary'>{value}</text>
+        <text className='text-text-primary text-sm'>{value}</text>
       </TableCell>
     ))}
   </MuiTableRow>
@@ -237,10 +210,7 @@ function descendingComparator(a: string[], b: string[], orderByColumn: number) {
   return 0;
 }
 
-function getComparator(
-  order: Order,
-  orderByColumn: number
-): (a: string[], b: string[]) => number {
+function getComparator(order: Order, orderByColumn: number): (a: string[], b: string[]) => number {
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderByColumn)
     : (a, b) => -descendingComparator(a, b, orderByColumn);
@@ -251,8 +221,7 @@ function sortRows(
   comparator: (a: string[], b: string[]) => number
 ): ReactElement<ITableBodyRow>[] {
   const stabilizedThis = array.map(
-    (element, index) =>
-      [element, index] as [ReactElement<ITableBodyRow>, number]
+    (element, index) => [element, index] as [ReactElement<ITableBodyRow>, number]
   );
   stabilizedThis.sort((row1, row2) => {
     const order = comparator(

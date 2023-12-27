@@ -9,10 +9,7 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const Input = forwardRef<HTMLInputElement, TextInputProps>(
-  (
-    { className, iconClassName, inputClassName, children, iconType, ...props },
-    ref
-  ) => {
+  ({ className, iconClassName, inputClassName, children, iconType, ...props }, ref) => {
     return (
       <label
         className={cn(
@@ -43,7 +40,7 @@ export const Input = forwardRef<HTMLInputElement, TextInputProps>(
       >
         {!!iconType && (
           <Icon
-            className={cn('shrink-0 text-foreground-secondary', iconClassName)}
+            className={cn('text-foreground-secondary shrink-0', iconClassName)}
             type={iconType}
           />
         )}

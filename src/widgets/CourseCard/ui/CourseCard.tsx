@@ -21,12 +21,8 @@ interface IProps {
 export const CourseCard: FC<IProps> = ({ course }) => {
   const { name, shortDescription, logo, id } = course;
   return (
-    <Card className='hover:bg-card-hover relative flex flex-col transition-all'>
-      <Link
-        className='absolute inset-0'
-        href={`courses/${id}`}
-        scroll={false}
-      />
+    <Card className='relative flex flex-col transition-all hover:bg-card-hover'>
+      <Link className='absolute inset-0' href={`courses/${id}`} scroll={false} />
       <CardHeader className='flex-row items-center gap-4 space-y-0'>
         {logo ? (
           <Image
@@ -37,7 +33,7 @@ export const CourseCard: FC<IProps> = ({ course }) => {
             width={72}
           />
         ) : (
-          <div className='aspect-square h-[4.5rem] rounded-lg bg-background-overlay' />
+          <div className='bg-background-overlay aspect-square h-[4.5rem] rounded-lg' />
         )}
         <CardTitle>{name}</CardTitle>
       </CardHeader>

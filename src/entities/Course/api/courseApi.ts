@@ -28,8 +28,7 @@ export const courseApi = emptyApi.injectEndpoints({
       query: (slug) => ({
         url: `/course/${slug}`,
       }),
-      providesTags: (result) =>
-        result ? [{ type: 'courses' as const, id: result.id }] : [],
+      providesTags: (result) => (result ? [{ type: 'courses' as const, id: result.id }] : []),
     }),
     createCourse: builder.mutation<CourseResponseDto, void>({
       query: () => ({
@@ -78,26 +77,16 @@ export const courseApi = emptyApi.injectEndpoints({
       }),
       async onQueryStarted(courseId, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
-          courseApi.util.updateQueryData(
-            'getAccountCourses',
-            undefined,
-            (draft) => {
-              const authorShipIndex = draft.authorship.findIndex(
-                (course) => course.id === courseId
-              );
-              const myIndex = draft.my.findIndex(
-                (course) => course.id === courseId
-              );
-              const recomendationsIndex = draft.recommendations.findIndex(
-                (course) => course.id === courseId
-              );
-              authorShipIndex !== -1 &&
-                draft.authorship.splice(authorShipIndex, 1);
-              myIndex !== -1 && draft.my.splice(myIndex, 1);
-              recomendationsIndex !== -1 &&
-                draft.recommendations.splice(recomendationsIndex, 1);
-            }
-          )
+          courseApi.util.updateQueryData('getAccountCourses', undefined, (draft) => {
+            const authorShipIndex = draft.authorship.findIndex((course) => course.id === courseId);
+            const myIndex = draft.my.findIndex((course) => course.id === courseId);
+            const recomendationsIndex = draft.recommendations.findIndex(
+              (course) => course.id === courseId
+            );
+            authorShipIndex !== -1 && draft.authorship.splice(authorShipIndex, 1);
+            myIndex !== -1 && draft.my.splice(myIndex, 1);
+            recomendationsIndex !== -1 && draft.recommendations.splice(recomendationsIndex, 1);
+          })
         );
         try {
           await queryFulfilled;
@@ -106,10 +95,7 @@ export const courseApi = emptyApi.injectEndpoints({
         }
       },
     }),
-    updateCourseBrief: builder.mutation<
-      CourseResponseDto,
-      CourseUpdateBriefRequestDto
-    >({
+    updateCourseBrief: builder.mutation<CourseResponseDto, CourseUpdateBriefRequestDto>({
       query: ({ courseId, ...body }) => ({
         url: `/course/${courseId}`,
         method: 'PUT',
@@ -128,31 +114,27 @@ export const courseApi = emptyApi.injectEndpoints({
         } catch {}
       },
     }),
-    updateCourseDescription: builder.mutation<
-      CourseResponseDto,
-      CourseUpdateDescriptionRequestDto
-    >({
-      query: ({ courseId, ...body }) => ({
-        url: `/course/${courseId}`,
-        method: 'PUT',
-        body: body,
-      }),
-      invalidatesTags: [{ type: 'courses', id: 'LIST' }],
-      async onQueryStarted({ courseId }, { dispatch, queryFulfilled }) {
-        try {
-          const { data: updatedPost } = await queryFulfilled;
-          dispatch(
-            courseApi.util.updateQueryData('getCourse', courseId, (draft) => {
-              draft.description = updatedPost.description;
-            })
-          );
-        } catch {}
-      },
-    }),
-    updateCourseBanner: builder.mutation<
-      CourseResponseDto,
-      CourseUpdateBannerRequestDto
-    >({
+    updateCourseDescription: builder.mutation<CourseResponseDto, CourseUpdateDescriptionRequestDto>(
+      {
+        query: ({ courseId, ...body }) => ({
+          url: `/course/${courseId}`,
+          method: 'PUT',
+          body: body,
+        }),
+        invalidatesTags: [{ type: 'courses', id: 'LIST' }],
+        async onQueryStarted({ courseId }, { dispatch, queryFulfilled }) {
+          try {
+            const { data: updatedPost } = await queryFulfilled;
+            dispatch(
+              courseApi.util.updateQueryData('getCourse', courseId, (draft) => {
+                draft.description = updatedPost.description;
+              })
+            );
+          } catch {}
+        },
+      }
+    ),
+    updateCourseBanner: builder.mutation<CourseResponseDto, CourseUpdateBannerRequestDto>({
       query: ({ courseId, ...body }) => ({
         url: `/course/${courseId}`,
         method: 'PUT',
@@ -166,10 +148,7 @@ export const courseApi = emptyApi.injectEndpoints({
             ]
           : [{ type: 'courses', id: 'LIST' }],
     }),
-    updateCourseLogo: builder.mutation<
-      CourseResponseDto,
-      CourseUpdateLogoRequestDto
-    >({
+    updateCourseLogo: builder.mutation<CourseResponseDto, CourseUpdateLogoRequestDto>({
       query: ({ courseId, ...body }) => ({
         url: `/course/${courseId}`,
         method: 'PUT',
@@ -194,23 +173,15 @@ export const courseApi = emptyApi.injectEndpoints({
         { type: 'courses', id: 'LIST' },
       ],
     }),
-    deleteCourseCoAuthor: builder.mutation<
-      void,
-      CourseDeleteCoAuthorRequestDto
-    >({
+    deleteCourseCoAuthor: builder.mutation<void, CourseDeleteCoAuthorRequestDto>({
       query: ({ coAuthorId, courseId }) => ({
         url: `/role/coauthor/${coAuthorId}/${courseId}`,
         method: 'DELETE',
       }),
-      async onQueryStarted(
-        { courseId, coAuthorId },
-        { dispatch, queryFulfilled }
-      ) {
+      async onQueryStarted({ courseId, coAuthorId }, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
           courseApi.util.updateQueryData('getCourse', courseId, (draft) => {
-            const index = draft.coauthors.findIndex(
-              (coAuthor) => coAuthor.id === coAuthorId
-            );
+            const index = draft.coauthors.findIndex((coAuthor) => coAuthor.id === coAuthorId);
             if (index !== -1) {
               draft.coauthors.splice(index, 1);
             }
@@ -223,10 +194,7 @@ export const courseApi = emptyApi.injectEndpoints({
         }
       },
     }),
-    addCourseContact: builder.mutation<
-      CourseAddContactResponseDto,
-      CourseAddContactRequestDto
-    >({
+    addCourseContact: builder.mutation<CourseAddContactResponseDto, CourseAddContactRequestDto>({
       query: ({ courseId, ...body }) => ({
         url: `/course/link/${courseId}`,
         method: 'POST',
@@ -243,26 +211,16 @@ export const courseApi = emptyApi.injectEndpoints({
         } catch {}
       },
     }),
-    deleteCourseContact: builder.mutation<
-      void,
-      { contactId: string; courseId: string }
-    >({
+    deleteCourseContact: builder.mutation<void, { contactId: string; courseId: string }>({
       query: ({ contactId }) => ({
         url: `/course/link/${contactId}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (_1, _2, args) => [
-        { type: 'courses', id: args.courseId },
-      ],
-      async onQueryStarted(
-        { courseId, contactId },
-        { dispatch, queryFulfilled }
-      ) {
+      invalidatesTags: (_1, _2, args) => [{ type: 'courses', id: args.courseId }],
+      async onQueryStarted({ courseId, contactId }, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
           courseApi.util.updateQueryData('getCourse', courseId, (draft) => {
-            const index = draft.links.findIndex(
-              (link) => link.id === contactId
-            );
+            const index = draft.links.findIndex((link) => link.id === contactId);
             if (index !== -1) {
               draft.links.splice(index, 1);
             }

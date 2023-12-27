@@ -7,18 +7,11 @@ interface CourseSectionDeleteProps {
   pageId: string;
 }
 
-export const CourseSectionDelete: FC<CourseSectionDeleteProps> = ({
-  sectionId,
-  pageId,
-}) => {
+export const CourseSectionDelete: FC<CourseSectionDeleteProps> = ({ sectionId, pageId }) => {
   const [deleteSection] = useDeleteCourseSectionMutation();
 
   return (
-    <Button
-      type='button'
-      variant='outline'
-      onClick={() => deleteSection({ sectionId, pageId })}
-    >
+    <Button type='button' variant='outline' onClick={() => deleteSection({ sectionId, pageId })}>
       <Icon type='delete' className='shrink-0 text-inherit' />
     </Button>
   );

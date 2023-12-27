@@ -9,9 +9,7 @@ interface TextSectionDisplayProps {
   sectionData: TextSectionResponseDto;
 }
 
-export const TextSectionDisplay: FC<TextSectionDisplayProps> = ({
-  sectionData,
-}) => {
+export const TextSectionDisplay: FC<TextSectionDisplayProps> = ({ sectionData }) => {
   const { setNodeRef, transform, transition } = useSortable({
     id: sectionData.id,
     data: {

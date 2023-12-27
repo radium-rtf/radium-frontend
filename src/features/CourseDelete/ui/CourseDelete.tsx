@@ -21,11 +21,7 @@ export const CourseDelete: FC<CourseDeleteProps> = ({ courseId }) => {
   };
 
   return (
-    <Button
-      variant='destructive'
-      className='w-full justify-start'
-      onClick={onClickHandler}
-    >
+    <Button variant='destructive' className='w-full justify-start' onClick={onClickHandler}>
       <Icon type='delete' className='shrink-0 text-inherit' />
       <span className='ml-[calc(50%-18px)] -translate-x-1/2'>Удалить</span>
     </Button>

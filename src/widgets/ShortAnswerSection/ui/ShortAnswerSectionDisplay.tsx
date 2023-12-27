@@ -24,9 +24,7 @@ interface ShortAnswerSectionDisplayProps {
   sectionData: ShortAnswerSectionResponseDto;
 }
 
-export const ShortAnswerSectionDisplay: FC<ShortAnswerSectionDisplayProps> = ({
-  sectionData,
-}) => {
+export const ShortAnswerSectionDisplay: FC<ShortAnswerSectionDisplayProps> = ({ sectionData }) => {
   // Form setup
   const {
     reset,
@@ -34,13 +32,7 @@ export const ShortAnswerSectionDisplay: FC<ShortAnswerSectionDisplayProps> = ({
     setError,
     clearErrors,
     handleSubmit,
-    formState: {
-      errors,
-      isValid,
-      isSubmitting,
-      isSubmitted,
-      isSubmitSuccessful,
-    },
+    formState: { errors, isValid, isSubmitting, isSubmitted, isSubmitSuccessful },
   } = useForm<answerSchemaType>({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
@@ -57,8 +49,7 @@ export const ShortAnswerSectionDisplay: FC<ShortAnswerSectionDisplayProps> = ({
     },
   });
 
-  const [answerShortAnswerSection] =
-    useAnswerCourseShortAnswerSectionMutation();
+  const [answerShortAnswerSection] = useAnswerCourseShortAnswerSectionMutation();
   const onSubmitHandler: SubmitHandler<answerSchemaType> = async (data) => {
     const response = await answerShortAnswerSection({
       id: sectionData.id,
@@ -98,9 +89,7 @@ export const ShortAnswerSectionDisplay: FC<ShortAnswerSectionDisplayProps> = ({
             <span
               className={cn(
                 'text-[0.8125rem]',
-                sectionData.maxAttempts &&
-                  !sectionData.attempts &&
-                  'text-destructive'
+                sectionData.maxAttempts && !sectionData.attempts && 'text-destructive'
               )}
             >
               {sectionData.verdict === '' &&
@@ -120,12 +109,7 @@ export const ShortAnswerSectionDisplay: FC<ShortAnswerSectionDisplayProps> = ({
             </span>
           )}
           {!isSubmitting && sectionData.maxScore > 0 && (
-            <span
-              className={cn(
-                'text-[0.8125rem]',
-                sectionData.verdict === 'OK' && 'text-accent'
-              )}
-            >
+            <span className={cn('text-[0.8125rem]', sectionData.verdict === 'OK' && 'text-accent')}>
               {sectionData.verdict === '' &&
                 `${sectionData.maxScore} ${getNoun(
                   sectionData.maxScore,
@@ -133,8 +117,7 @@ export const ShortAnswerSectionDisplay: FC<ShortAnswerSectionDisplayProps> = ({
                   'балла',
                   'баллов'
                 )}`}
-              {sectionData.answer !== '' &&
-                `${sectionData.score} / ${sectionData.maxScore} баллов`}
+              {sectionData.answer !== '' && `${sectionData.score} / ${sectionData.maxScore} баллов`}
             </span>
           )}
           <Button
@@ -157,9 +140,7 @@ export const ShortAnswerSectionDisplay: FC<ShortAnswerSectionDisplayProps> = ({
             <Icon type='send' className='text-inherit' />
             <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
               {(isSubmitting && 'Отправляем...') ||
-                (!isValid &&
-                  (errors.root?.message ||
-                    errors.shortanswer?.answer?.message)) ||
+                (!isValid && (errors.root?.message || errors.shortanswer?.answer?.message)) ||
                 (isSubmitSuccessful && 'Верно!') ||
                 'Отправить'}
             </span>

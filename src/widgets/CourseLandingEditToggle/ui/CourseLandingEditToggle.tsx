@@ -5,9 +5,7 @@ import { CourseEditContext } from '@/features/CourseEditContext';
 
 interface CourseLandingEditToggleProps {}
 
-export const CourseLandingEditToggle: FC<
-  CourseLandingEditToggleProps
-> = ({}) => {
+export const CourseLandingEditToggle: FC<CourseLandingEditToggleProps> = () => {
   const { isEditing, setIsEditing } = useContext(CourseEditContext);
 
   const changeEditModeHandler = (isOpen: boolean) => {
@@ -21,11 +19,7 @@ export const CourseLandingEditToggle: FC<
         <span className='line-clamp-1 shrink grow font-NTSomic text-[0.8125rem] leading-tight'>
           Режим&nbsp;редактирования
         </span>
-        <Switch
-          onCheckedChange={changeEditModeHandler}
-          checked={isEditing}
-          className='shrink-0'
-        />
+        <Switch onCheckedChange={changeEditModeHandler} checked={isEditing} className='shrink-0' />
       </CardContent>
     </Card>
   );

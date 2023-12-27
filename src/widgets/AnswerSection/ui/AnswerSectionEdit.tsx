@@ -19,10 +19,7 @@ interface AnswerSectionEditProps {
   onSuccess: () => void;
 }
 
-export const AnswerSectionEdit: FC<AnswerSectionEditProps> = ({
-  sectionData,
-  onSuccess,
-}) => {
+export const AnswerSectionEdit: FC<AnswerSectionEditProps> = ({ sectionData, onSuccess }) => {
   const {
     register,
     control,
@@ -47,20 +44,14 @@ export const AnswerSectionEdit: FC<AnswerSectionEditProps> = ({
       .then(onSuccess);
   };
 
-  const {
-    setNodeRef,
-    setActivatorNodeRef,
-    listeners,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
-    id: sectionData.id,
-    data: {
-      order: sectionData.order,
-      pageId: sectionData.pageId,
-    },
-  });
+  const { setNodeRef, setActivatorNodeRef, listeners, transform, transition, isDragging } =
+    useSortable({
+      id: sectionData.id,
+      data: {
+        order: sectionData.order,
+        pageId: sectionData.pageId,
+      },
+    });
 
   const style = {
     transform: CSS.Translate.toString(transform),
@@ -80,43 +71,30 @@ export const AnswerSectionEdit: FC<AnswerSectionEditProps> = ({
           : '[&:has(.drag:hover)]:border-white/10 [&:has(.drag:hover)]:bg-[#363A3B]'
       )}
     >
-      <form
-        className='flex flex-col gap-4'
-        onSubmit={handleSubmit(onSubmitHandler)}
-      >
-        <div className='flex items-center gap-4 text-primary-default'>
+      <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmitHandler)}>
+        <div className='text-primary-default flex items-center gap-4'>
           <Icon type='question' className='text-inherit' />
-          <span className='font-mono font-bold leading-[normal] text-inherit'>
-            Вопрос
-          </span>
+          <span className='font-mono font-bold leading-[normal] text-inherit'>Вопрос</span>
         </div>
         <header className='flex flex-col gap-4 text-[0.8125rem] leading-normal'>
           <Controller
             name='answer.question'
             control={control}
             render={({ field }) => (
-              <MarkdownEditor
-                markdown={sectionData.content}
-                onChange={field.onChange}
-              />
+              <MarkdownEditor markdown={sectionData.content} onChange={field.onChange} />
             )}
           />
         </header>
-        <div className='relative flex items-center gap-4 text-primary-default'>
+        <div className='text-primary-default relative flex items-center gap-4'>
           <Icon type='question' className='text-inherit' />
-          <span className='font-mono font-bold leading-[normal] text-inherit'>
-            Ответ
-          </span>
+          <span className='font-mono font-bold leading-[normal] text-inherit'>Ответ</span>
           <button
             className='drag after:absolute after:-left-6 after:-right-6 after:-top-6 after:bottom-0 after:block after:rounded-t-2xl after:content-[""]'
             type='button'
             ref={setActivatorNodeRef}
             {...listeners}
           >
-            <Icon
-              type='handle-horizontal'
-              className='absolute left-1/2 top-0'
-            />
+            <Icon type='handle-horizontal' className='absolute left-1/2 top-0' />
           </button>
         </div>
         {/* <main>
@@ -137,20 +115,10 @@ export const AnswerSectionEdit: FC<AnswerSectionEditProps> = ({
           >
             <span className='font-sans text-[0.625rem]'>баллов</span>
           </Input>
-          <CourseSectionDelete
-            sectionId={sectionData.id}
-            pageId={sectionData.pageId}
-          />
-          <Button
-            className='w-64 flex-shrink-0'
-            color='outlined'
-            type='submit'
-            disabled={!isValid}
-          >
+          <CourseSectionDelete sectionId={sectionData.id} pageId={sectionData.pageId} />
+          <Button className='w-64 flex-shrink-0' color='outlined' type='submit' disabled={!isValid}>
             <Icon type='save' className='text-inherit' />
-            <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
-              Сохранить
-            </span>
+            <span className='ml-[calc(50%-34px)] -translate-x-1/2'>Сохранить</span>
           </Button>
         </footer>
         {errors.answer?.question && <p>{errors.answer.question.message}</p>}

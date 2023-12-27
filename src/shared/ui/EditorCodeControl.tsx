@@ -1,11 +1,7 @@
 import { cn } from '../utils/cn';
 import { Icon } from './Icon';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import {
-  $getSelection,
-  $isRangeSelection,
-  DEPRECATED_$isGridSelection,
-} from 'lexical';
+import { $getSelection, $isRangeSelection, DEPRECATED_$isGridSelection } from 'lexical';
 import { $setBlocksType } from '@lexical/selection';
 import { $createCodeNode } from '@lexical/code';
 
@@ -15,10 +11,7 @@ export const EditorCodeControl = () => {
   const clickHandler = () => {
     editor.update(() => {
       let selection = $getSelection();
-      if (
-        $isRangeSelection(selection) ||
-        DEPRECATED_$isGridSelection(selection)
-      ) {
+      if ($isRangeSelection(selection) || DEPRECATED_$isGridSelection(selection)) {
         if (selection.isCollapsed()) {
           $setBlocksType(selection, () => $createCodeNode('javascript'));
         } else {
@@ -26,8 +19,7 @@ export const EditorCodeControl = () => {
           const codeNode = $createCodeNode('javascript');
           selection.insertNodes([codeNode]);
           selection = $getSelection();
-          if ($isRangeSelection(selection))
-            selection.insertRawText(textContent);
+          if ($isRangeSelection(selection)) selection.insertRawText(textContent);
         }
       }
     });

@@ -1,3 +1,3 @@
 // UI
-export {CourseHeader} from './ui/CourseHeader';
-export {CourseHeaderSkeleton} from './ui/CourseHeaderSkeleton';
+export { CourseHeader } from './ui/CourseHeader';
+export { CourseHeaderSkeleton } from './ui/CourseHeaderSkeleton';

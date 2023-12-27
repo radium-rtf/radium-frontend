@@ -103,11 +103,7 @@ export const ProfileEdit: FC<IProps> = ({ name }) => {
 
   return (
     <Card className='relative w-[19rem] pt-[5.5rem]'>
-      <form
-        className='flex flex-col gap-4'
-        onSubmit={handleSubmit(onSubmit)}
-        autoComplete='on'
-      >
+      <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)} autoComplete='on'>
         <ProfilePhotoEdit
           className='absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2'
           initialPhotoURL={data?.user?.image || ''}

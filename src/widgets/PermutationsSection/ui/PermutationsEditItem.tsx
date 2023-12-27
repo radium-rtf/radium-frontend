@@ -4,8 +4,7 @@ import { CSSProperties, FC, InputHTMLAttributes, forwardRef } from 'react';
 import { CSS } from '@dnd-kit/utilities';
 import { Icon, Input, cn } from '@/shared';
 
-interface PermutationsEditItemProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value'> {
+interface PermutationsEditItemProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value'> {
   value: { id: string; value: string };
 }
 
@@ -14,14 +13,7 @@ export const PermutationsEditItem: FC<PermutationsEditItemProps> = forwardRef<
   HTMLInputElement,
   PermutationsEditItemProps
 >(({ value, disabled, className, ...props }, ref) => {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: value.id,
     disabled: disabled,
   });

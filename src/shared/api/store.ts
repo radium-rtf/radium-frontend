@@ -6,8 +6,7 @@ export const store = configureStore({
   reducer: {
     [emptyApi.reducerPath]: emptyApi.reducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(emptyApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(emptyApi.middleware),
   devTools: process.env.NODE_ENV !== 'production',
 });
 

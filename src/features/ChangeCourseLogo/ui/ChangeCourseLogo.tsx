@@ -9,10 +9,7 @@ interface ChangeCourseLogoProps {
   courseId: string;
 }
 
-export const ChangeCourseLogo: FC<ChangeCourseLogoProps> = ({
-  logo,
-  courseId,
-}) => {
+export const ChangeCourseLogo: FC<ChangeCourseLogoProps> = ({ logo, courseId }) => {
   const [updateLogo] = useUpdateCourseLogoMutation();
   const [uploadFile] = useUploadFileMutation();
   const inputRef = useRef<HTMLInputElement>(null);

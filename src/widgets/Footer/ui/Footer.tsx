@@ -19,9 +19,7 @@ export const Footer = () => {
       <div className='flex flex-col gap-2'>
         <div className='flex items-center gap-2'>
           <Image src={'/logo.svg'} width={24} height={24} alt='Radium logo' />
-          <h3 className='text-primary-default font-mono text-xl font-bold'>
-            Радиум
-          </h3>
+          <h3 className='text-primary-default font-mono text-xl font-bold'>Радиум</h3>
         </div>
         <p className='text-text-secondary text-[0.625rem]'>
           2023 · Сделано в рамках Проектного Практикума
@@ -29,10 +27,7 @@ export const Footer = () => {
       </div>
       <div className='flex items-center gap-4'>
         <Button asChild variant='outline'>
-          <Link
-            href='https://forms.yandex.ru/u/65813b42068ff01a6fb720a1/'
-            target='_blank'
-          >
+          <Link href='https://forms.yandex.ru/u/65813b42068ff01a6fb720a1/' target='_blank'>
             <Icon type='bug' className='mr-4 text-inherit' />
             <span>Оставить обратную связь</span>
           </Link>

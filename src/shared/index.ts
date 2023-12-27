@@ -21,14 +21,7 @@ export {
   CardTitle,
 } from './ui/cardNew';
 export { Menu } from './ui/Menu';
-export {
-  List,
-  ListContent,
-  ListIcon,
-  ListSubtitle,
-  ListTitle,
-  ListItem,
-} from './ui/List';
+export { List, ListContent, ListIcon, ListSubtitle, ListTitle, ListItem } from './ui/List';
 export { Tab } from './ui/Tab';
 export { Tabs } from './ui/Tabs';
 export { AuthSessionProvider } from './ui/AuthSessionProvider';
@@ -37,12 +30,7 @@ export { PermutationItem } from './ui/PermutationItem';
 export { InputFile } from './ui/InputFile';
 export { CloseButton } from './ui/CloseButton';
 export { CodeEditor } from './ui/CodeEditor';
-export {
-  Table,
-  TableBodyRow,
-  TableDataCell,
-  TableHeaderCell,
-} from './ui/Table';
+export { Table, TableBodyRow, TableDataCell, TableHeaderCell } from './ui/Table';
 export { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 export {
   DropdownMenu,

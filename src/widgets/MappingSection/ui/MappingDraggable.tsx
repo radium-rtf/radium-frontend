@@ -10,14 +10,10 @@ interface MappingDraggableProps {
 }
 
 export const MappingDraggable: FC<MappingDraggableProps> = ({ data }) => {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({ id: data.id, animateLayoutChanges: () => false });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: data.id,
+    animateLayoutChanges: () => false,
+  });
 
   const style = {
     transition,
@@ -38,9 +34,7 @@ export const MappingDraggable: FC<MappingDraggableProps> = ({ data }) => {
       <button type='button'>
         <Icon type='handle' />
       </button>
-      <span className='text-[0.8125rem] leading-normal text-foreground-default'>
-        {data.value}
-      </span>
+      <span className='text-foreground-default text-[0.8125rem] leading-normal'>{data.value}</span>
     </div>
   );
 };

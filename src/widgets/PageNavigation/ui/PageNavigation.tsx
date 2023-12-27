@@ -8,11 +8,7 @@ interface PageNavigatorProps {
   progressPercent: number;
 }
 
-export const PageNavigation: FC<PageNavigatorProps> = ({
-  previous,
-  progressPercent,
-  next,
-}) => {
+export const PageNavigation: FC<PageNavigatorProps> = ({ previous, progressPercent, next }) => {
   return (
     <Card className='flex flex-row items-center'>
       {previous && (
@@ -23,11 +19,7 @@ export const PageNavigation: FC<PageNavigatorProps> = ({
           </Link>
         </Button>
       )}
-      <Progress
-        showPercentage
-        theme='primary'
-        percentage={progressPercent}
-      ></Progress>
+      <Progress showPercentage theme='primary' percentage={progressPercent}></Progress>
       {next && (
         <Button asChild>
           <Link href={next}>

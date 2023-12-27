@@ -8,10 +8,7 @@ interface CourseDeletePageProps {
   onDelete?: () => void;
 }
 
-export const CourseDeletePage: FC<CourseDeletePageProps> = ({
-  pageId,
-  onDelete,
-}) => {
+export const CourseDeletePage: FC<CourseDeletePageProps> = ({ pageId, onDelete }) => {
   const [deletePage] = useDeleteCoursePageMutation();
 
   const onClickHandler = () => {

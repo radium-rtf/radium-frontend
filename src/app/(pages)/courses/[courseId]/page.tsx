@@ -6,14 +6,8 @@ import { Header } from '@/widgets/Header';
 import { CourseBrief, CourseBriefSkeleton } from '@/widgets/CourseBrief';
 import { CourseBanner, CourseBannerSkeleton } from '@/widgets/CourseBanner';
 import { CourseSettings } from '@/widgets/CourseSettings';
-import {
-  CourseContacts,
-  CourseContactsSkeleton,
-} from '@/widgets/CourseContacts';
-import {
-  CourseDescription,
-  CourseDescriptionSkeleton,
-} from '@/widgets/CourseDescription';
+import { CourseContacts, CourseContactsSkeleton } from '@/widgets/CourseContacts';
+import { CourseDescription, CourseDescriptionSkeleton } from '@/widgets/CourseDescription';
 import { CourseLandingEditToggle } from '@/widgets/CourseLandingEditToggle';
 import { CourseEditContextWrapper } from '@/features/CourseEditContext';
 import { useParams, useSearchParams } from 'next/navigation';
@@ -46,9 +40,7 @@ export default function Page() {
       <Header>
         <Link href='/' className='flex items-center gap-6' scroll={false}>
           <Image src='/logo.svg' alt='Radium' width={48} height={48} />
-          <h1 className='font-NTSomic text-4xl font-bold text-primary'>
-            Радиум
-          </h1>
+          <h1 className='font-NTSomic text-4xl font-bold text-primary'>Радиум</h1>
         </Link>
       </Header>
       <main className='mb-8 flex flex-grow flex-col'>
@@ -73,9 +65,7 @@ export default function Page() {
         )}
         {/* Course data */}
         {course && (
-          <CourseEditContextWrapper
-            isEditMode={searchParams.get('initialEdit') === 'true'}
-          >
+          <CourseEditContextWrapper isEditMode={searchParams.get('initialEdit') === 'true'}>
             <CourseBanner
               name={course.name}
               url={course.banner}
@@ -84,10 +74,7 @@ export default function Page() {
             />
             <main className='container mx-auto px-12 lg:px-[8.25rem]'>
               <div className='grid gap-8 xl:grid-cols-3 2xl:grid-cols-4'>
-                <CourseName
-                  courseName={course.name}
-                  isEditAllowed={isEditAllowed}
-                />
+                <CourseName courseName={course.name} isEditAllowed={isEditAllowed} />
                 <main className='flex flex-col gap-8 lg:col-span-2 2xl:col-span-3'>
                   <CourseBrief
                     courseLogo={course.logo}
@@ -138,12 +125,7 @@ export default function Page() {
         {error && (
           <>
             <div className='flex h-full flex-col items-center justify-center gap-4'>
-              <Image
-                src={'/error.svg'}
-                width={224}
-                height={224}
-                alt='Not found error'
-              />
+              <Image src={'/error.svg'} width={224} height={224} alt='Not found error' />
               <h1 className='text-primary-default font-mono text-5xl font-bold'>
                 Такого курса нет :(
               </h1>
@@ -153,9 +135,7 @@ export default function Page() {
               <Button color='accent' asChild className='w-64'>
                 <Link href='/'>
                   <Icon type='arrow-left' className='text-inherit' />
-                  <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
-                    На главную
-                  </span>
+                  <span className='ml-[calc(50%-34px)] -translate-x-1/2'>На главную</span>
                 </Link>
               </Button>
             </div>

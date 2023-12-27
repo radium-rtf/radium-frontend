@@ -3,12 +3,7 @@ import {
   useUpdateCoursePermutationsSectionMutation,
 } from '@/entities/CourseSection';
 import { CSSProperties, FC } from 'react';
-import {
-  Controller,
-  SubmitHandler,
-  useFieldArray,
-  useForm,
-} from 'react-hook-form';
+import { Controller, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { updateSchema, updateSchemaType } from '../model/updateSchema';
 import { Button, Card, Icon, Input, cn } from '@/shared';
 import {
@@ -20,10 +15,7 @@ import {
   useSensors,
 } from '@dnd-kit/core';
 import { dragEndHandler } from '../model/dragEndHandler';
-import {
-  restrictToParentElement,
-  restrictToVerticalAxis,
-} from '@dnd-kit/modifiers';
+import { restrictToParentElement, restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import {
   SortableContext,
   sortableKeyboardCoordinates,
@@ -46,8 +38,7 @@ export const PermutationsSectionEdit: FC<PermutationsSectionEditProps> = ({
   onSuccess,
 }) => {
   // Update hook
-  const [updatePermutationsSection] =
-    useUpdateCoursePermutationsSectionMutation();
+  const [updatePermutationsSection] = useUpdateCoursePermutationsSectionMutation();
 
   // Form init
   const {
@@ -63,9 +54,7 @@ export const PermutationsSectionEdit: FC<PermutationsSectionEditProps> = ({
       maxAttempts: 0,
       permutation: {
         question: sectionData.content,
-        answer: sectionData.variants
-          .map((variant) => ({ value: variant }))
-          .concat([{ value: '' }]),
+        answer: sectionData.variants.map((variant) => ({ value: variant })).concat([{ value: '' }]),
       },
     },
   });
@@ -98,20 +87,14 @@ export const PermutationsSectionEdit: FC<PermutationsSectionEditProps> = ({
     })
   );
 
-  const {
-    setNodeRef,
-    setActivatorNodeRef,
-    listeners,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
-    id: sectionData.id,
-    data: {
-      order: sectionData.order,
-      pageId: sectionData.pageId,
-    },
-  });
+  const { setNodeRef, setActivatorNodeRef, listeners, transform, transition, isDragging } =
+    useSortable({
+      id: sectionData.id,
+      data: {
+        order: sectionData.order,
+        pageId: sectionData.pageId,
+      },
+    });
 
   const style = {
     transform: CSS.Translate.toString(transform),
@@ -131,25 +114,17 @@ export const PermutationsSectionEdit: FC<PermutationsSectionEditProps> = ({
           : '[&:has(.drag:hover)]:border-white/10 [&:has(.drag:hover)]:bg-[#363A3B]'
       )}
     >
-      <form
-        className='flex flex-col gap-4'
-        onSubmit={handleSubmit(onSubmitHandler)}
-      >
-        <div className='relative flex items-center gap-4 text-primary-default'>
+      <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmitHandler)}>
+        <div className='text-primary-default relative flex items-center gap-4'>
           <Icon type='question' className='text-inherit' />
-          <span className='font-mono font-bold leading-[normal] text-inherit'>
-            Вопрос
-          </span>
+          <span className='font-mono font-bold leading-[normal] text-inherit'>Вопрос</span>
           <button
             className='drag after:absolute after:-left-6 after:-right-6 after:-top-6 after:bottom-0 after:block after:rounded-t-2xl after:content-[""]'
             type='button'
             ref={setActivatorNodeRef}
             {...listeners}
           >
-            <Icon
-              type='handle-horizontal'
-              className='absolute left-1/2 top-0'
-            />
+            <Icon type='handle-horizontal' className='absolute left-1/2 top-0' />
           </button>
         </div>
         <header className='flex flex-col gap-4 text-[0.8125rem] leading-normal'>
@@ -157,10 +132,7 @@ export const PermutationsSectionEdit: FC<PermutationsSectionEditProps> = ({
             name='permutation.question'
             control={control}
             render={({ field }) => (
-              <MarkdownEditor
-                markdown={sectionData.content}
-                onChange={field.onChange}
-              />
+              <MarkdownEditor markdown={sectionData.content} onChange={field.onChange} />
             )}
           />
         </header>
@@ -174,10 +146,7 @@ export const PermutationsSectionEdit: FC<PermutationsSectionEditProps> = ({
           modifiers={[restrictToParentElement, restrictToVerticalAxis]}
           sensors={sensors}
         >
-          <SortableContext
-            items={fields}
-            strategy={verticalListSortingStrategy}
-          >
+          <SortableContext items={fields} strategy={verticalListSortingStrategy}>
             <main className='-mx-6 flex flex-col gap-4'>
               {fields.map((field, index) => (
                 <PermutationsEditItem
@@ -187,17 +156,11 @@ export const PermutationsSectionEdit: FC<PermutationsSectionEditProps> = ({
                   {...register(`permutation.answer.${index}.value`, {
                     onChange: (e) => {
                       // add if last input has text
-                      if (
-                        e.target.value !== '' &&
-                        index === fields.length - 1
-                      ) {
+                      if (e.target.value !== '' && index === fields.length - 1) {
                         append({ value: '' }, { shouldFocus: false });
                       }
                       // remove if NOT last empty
-                      if (
-                        e.target.value === '' &&
-                        index !== fields.length - 1
-                      ) {
+                      if (e.target.value === '' && index !== fields.length - 1) {
                         remove(index);
                         setFocus(
                           `permutation.answer.${
@@ -213,32 +176,16 @@ export const PermutationsSectionEdit: FC<PermutationsSectionEditProps> = ({
           </SortableContext>
         </DndContext>
         <footer className='flex items-center gap-4 place-self-end'>
-          <Input
-            {...register('maxAttempts', { valueAsNumber: true })}
-            placeholder='Максимум'
-          >
+          <Input {...register('maxAttempts', { valueAsNumber: true })} placeholder='Максимум'>
             <span className='font-sans text-[0.625rem]'>попыток</span>
           </Input>
-          <Input
-            {...register('maxScore', { valueAsNumber: true })}
-            placeholder='Максимум'
-          >
+          <Input {...register('maxScore', { valueAsNumber: true })} placeholder='Максимум'>
             <span className='font-sans text-[0.625rem]'>баллов</span>
           </Input>
-          <CourseSectionDelete
-            sectionId={sectionData.id}
-            pageId={sectionData.pageId}
-          />
-          <Button
-            className='w-64'
-            color='outlined'
-            type='submit'
-            disabled={!isValid}
-          >
+          <CourseSectionDelete sectionId={sectionData.id} pageId={sectionData.pageId} />
+          <Button className='w-64' color='outlined' type='submit' disabled={!isValid}>
             <Icon type='save' className='text-inherit' />
-            <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
-              Сохранить
-            </span>
+            <span className='ml-[calc(50%-34px)] -translate-x-1/2'>Сохранить</span>
           </Button>
         </footer>
       </form>

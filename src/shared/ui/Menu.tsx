@@ -17,9 +17,7 @@ interface IMenuProps extends HTMLAttributes<HTMLUListElement> {
 }
 
 interface CompoundComponent
-  extends ForwardRefExoticComponent<
-    IMenuProps & RefAttributes<HTMLUListElement>
-  > {
+  extends ForwardRefExoticComponent<IMenuProps & RefAttributes<HTMLUListElement>> {
   Item: typeof MenuItem;
   Icon: typeof MenuIcon;
   Text: typeof MenuText;
@@ -32,10 +30,7 @@ export const Menu = forwardRef<HTMLUListElement, IMenuProps>(
       <Comp
         ref={ref}
         {...props}
-        className={cn(
-          'overflow-hidden rounded-lg bg-bg-overlay py-2',
-          className
-        )}
+        className={cn('bg-bg-overlay overflow-hidden rounded-lg py-2', className)}
       />
     );
   }
@@ -87,7 +82,7 @@ const MenuIcon = forwardRef<SVGSVGElement, IMenuIconProps>(
         {...props}
         type={icon || 'null'}
         ref={ref}
-        className={cn('h-[1.125rem] text-primary-default', className)}
+        className={cn('text-primary-default h-[1.125rem]', className)}
       />
     );
   }
@@ -108,10 +103,7 @@ const MenuText = forwardRef<HTMLParagraphElement, IMenuTextProps>(
       <Comp
         ref={ref}
         {...props}
-        className={cn(
-          'flex-grow text-start text-[0.8125rem] text-text-primary',
-          className
-        )}
+        className={cn('text-text-primary flex-grow text-start text-[0.8125rem]', className)}
       />
     );
   }

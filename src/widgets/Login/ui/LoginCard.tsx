@@ -17,13 +17,7 @@ export const LoginCard = () => {
     setError,
     watch,
     clearErrors,
-    formState: {
-      errors,
-      isValid,
-      isSubmitted,
-      isSubmitting,
-      isSubmitSuccessful,
-    },
+    formState: { errors, isValid, isSubmitted, isSubmitting, isSubmitSuccessful },
   } = useForm<loginSchemaType>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -33,10 +27,7 @@ export const LoginCard = () => {
   });
 
   const [isPasswordShowed, setIsPasswordShowed] = useState(false);
-  const onSubmitHandler: SubmitHandler<loginSchemaType> = async ({
-    email,
-    password,
-  }) => {
+  const onSubmitHandler: SubmitHandler<loginSchemaType> = async ({ email, password }) => {
     try {
       const result = await signIn('login', {
         email: email.toLowerCase(),
@@ -44,11 +35,7 @@ export const LoginCard = () => {
         redirect: false,
       });
       if (!result || !result.ok || result.error) {
-        setError(
-          'root',
-          { message: 'Неверные данные' },
-          { shouldFocus: false }
-        );
+        setError('root', { message: 'Неверные данные' }, { shouldFocus: false });
       } else {
         router.push('/');
       }
@@ -61,15 +48,10 @@ export const LoginCard = () => {
     <section className='flex w-[19rem] flex-col items-center gap-9'>
       <div className='flex items-center gap-4'>
         <Image height={48} width={48} alt='Radium logo' src='/logo.svg' />
-        <h1 className='text-primary-default font-mono text-4xl font-bold'>
-          Радиум
-        </h1>
+        <h1 className='text-primary-default font-mono text-4xl font-bold'>Радиум</h1>
       </div>
       <Card className='w-full'>
-        <form
-          onSubmit={handleSubmit(onSubmitHandler)}
-          className={'flex flex-col gap-4'}
-        >
+        <form onSubmit={handleSubmit(onSubmitHandler)} className={'flex flex-col gap-4'}>
           <Input
             icon='mail'
             text={watch('email').includes('@') ? undefined : '@urfu.ru'}
@@ -95,13 +77,7 @@ export const LoginCard = () => {
             className='gap-4'
           >
             <Icon
-              type={
-                isSubmitting
-                  ? 'loading'
-                  : !isValid && isSubmitted
-                  ? 'alert'
-                  : 'enter'
-              }
+              type={isSubmitting ? 'loading' : !isValid && isSubmitted ? 'alert' : 'enter'}
               className='shrink-0 text-inherit'
             />
             <span className='ml-[calc(50%-34px)] -translate-x-1/2 whitespace-nowrap'>
@@ -115,9 +91,7 @@ export const LoginCard = () => {
           <Button asChild className='justify-between gap-4'>
             <Link href='/registration'>
               <Icon type='profile' className='shrink-0 text-inherit' />
-              <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
-                Зарегистрироваться
-              </span>
+              <span className='ml-[calc(50%-34px)] -translate-x-1/2'>Зарегистрироваться</span>
             </Link>
           </Button>
         </form>

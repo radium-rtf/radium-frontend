@@ -30,9 +30,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
             exit={{ x: 256 }}
             className='w-64'
           >
-            <h3 className='px-6 py-4 font-NTSomic text-xl font-bold text-primary'>
-              Элементы
-            </h3>
+            <h3 className='px-6 py-4 font-NTSomic text-xl font-bold text-primary'>Элементы</h3>
             <List>
               <ListItem asChild>
                 <button
@@ -40,9 +38,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                   onClick={() =>
                     createSection({ pageId, text: { content: 'New section' } })
                       .unwrap()
-                      .then((res) =>
-                        push(`#section-${res.id}`, { scroll: true })
-                      )
+                      .then((res) => push(`#section-${res.id}`, { scroll: true }))
                   }
                 >
                   <ListIcon icon='text' className='text-primary' />
@@ -53,9 +49,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
               </ListItem>
             </List>
             <List>
-              <h3 className='px-6 py-4 font-NTSomic text-xl font-bold text-primary'>
-                Вопросы
-              </h3>
+              <h3 className='px-6 py-4 font-NTSomic text-xl font-bold text-primary'>Вопросы</h3>
               <ListItem asChild>
                 <button
                   className='rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
@@ -69,9 +63,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                       },
                     })
                       .unwrap()
-                      .then((res) =>
-                        push(`#section-${res.id}`, { scroll: true })
-                      )
+                      .then((res) => push(`#section-${res.id}`, { scroll: true }))
                   }
                 >
                   <ListIcon icon='radio' className='text-primary' />
@@ -89,18 +81,11 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                       multichoice: {
                         answer: ['Верный 1', 'Верный 2'],
                         question: 'Вопрос',
-                        variants: [
-                          'Верный 1',
-                          'Верный 2',
-                          'Неверный 1',
-                          'Неверный 2',
-                        ],
+                        variants: ['Верный 1', 'Верный 2', 'Неверный 1', 'Неверный 2'],
                       },
                     })
                       .unwrap()
-                      .then((res) =>
-                        push(`#section-${res.id}`, { scroll: true })
-                      )
+                      .then((res) => push(`#section-${res.id}`, { scroll: true }))
                   }
                 >
                   <ListIcon icon='checkbox' className='text-primary' />
@@ -125,9 +110,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                       },
                     })
                       .unwrap()
-                      .then((res) =>
-                        push(`#section-${res.id}`, { scroll: true })
-                      )
+                      .then((res) => push(`#section-${res.id}`, { scroll: true }))
                   }
                 >
                   <ListIcon icon='editor' className='text-primary' />
@@ -152,9 +135,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                       },
                     })
                       .unwrap()
-                      .then((res) =>
-                        push(`#section-${res.id}`, { scroll: true })
-                      )
+                      .then((res) => push(`#section-${res.id}`, { scroll: true }))
                   }
                 >
                   <ListIcon icon='shuffle' className='text-primary' />
@@ -180,9 +161,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                       },
                     })
                       .unwrap()
-                      .then((res) =>
-                        push(`#section-${res.id}`, { scroll: true })
-                      )
+                      .then((res) => push(`#section-${res.id}`, { scroll: true }))
                   }
                 >
                   <ListIcon icon='matching' className='text-primary' />
@@ -196,9 +175,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                 </button>
               </ListItem>
             </List>
-            <h3 className='px-6 py-4 font-NTSomic text-xl font-bold text-primary'>
-              Задания
-            </h3>
+            <h3 className='px-6 py-4 font-NTSomic text-xl font-bold text-primary'>Задания</h3>
             <List>
               <ListItem asChild>
                 <button
@@ -206,9 +183,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                   onClick={() =>
                     createSection({ pageId, answer: { question: 'Вопрос?' } })
                       .unwrap()
-                      .then((res) =>
-                        push(`#section-${res.id}`, { scroll: true })
-                      )
+                      .then((res) => push(`#section-${res.id}`, { scroll: true }))
                   }
                 >
                   <ListIcon icon='table' className='text-primary' />

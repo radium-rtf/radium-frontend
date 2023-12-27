@@ -19,9 +19,7 @@ export const AddBanner: FC<ChangeBannerProps> = ({ courseId }) => {
     fd.append('file', event.currentTarget.files!.item(0)!);
     const response = await uploadFile(fd);
     if (typeof response === 'string') return;
-    updateBanner({ courseId, banner: response.location })
-      .unwrap()
-      .then(refresh);
+    updateBanner({ courseId, banner: response.location }).unwrap().then(refresh);
   };
 
   return (

@@ -29,10 +29,7 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import {
-  restrictToParentElement,
-  restrictToVerticalAxis,
-} from '@dnd-kit/modifiers';
+import { restrictToParentElement, restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { Card } from '@/shared';
 import Image from 'next/image';
 
@@ -49,9 +46,7 @@ export default function Page({ params }: IProps) {
   const [updateOrder] = useChangeCourseSectionOrderMutation();
 
   useEffect(() => {
-    const previousPages = JSON.parse(
-      localStorage.getItem('previousPages') || '{}'
-    ) as {
+    const previousPages = JSON.parse(localStorage.getItem('previousPages') || '{}') as {
       [courseId: string]:
         | {
             pageId: string;
@@ -130,7 +125,7 @@ export default function Page({ params }: IProps) {
       {/* Loading state */}
       {isLoading && (
         <>
-          <div className='h-16 w-full animate-pulse rounded-lg bg-background-card' />
+          <div className='bg-background-card h-16 w-full animate-pulse rounded-lg' />
           <Card className='h-64 animate-pulse' />
           <Card className='h-64 animate-pulse' />
           <Card className='h-20 animate-pulse' />
@@ -139,7 +134,7 @@ export default function Page({ params }: IProps) {
       {/* Page state */}
       {page && (
         <>
-          <h2 className='mx-6 font-mono text-5xl font-bold leading-[normal] text-accent-primary-200'>
+          <h2 className='text-accent-primary-200 mx-6 font-mono text-5xl font-bold leading-[normal]'>
             {page.name}
           </h2>
           {isEditing && <CoursePageInfo page={page} />}
@@ -150,10 +145,7 @@ export default function Page({ params }: IProps) {
                 onDragEnd={onDragEndHandler}
                 modifiers={[restrictToVerticalAxis, restrictToParentElement]}
               >
-                <SortableContext
-                  items={page.sections}
-                  strategy={verticalListSortingStrategy}
-                >
+                <SortableContext items={page.sections} strategy={verticalListSortingStrategy}>
                   {page.sections.map(sectionRender)}
                 </SortableContext>
               </DndContext>
@@ -171,16 +163,11 @@ export default function Page({ params }: IProps) {
       {/* Error state */}
       {error && (
         <div className='flex h-full flex-col items-center justify-center gap-4'>
-          <Image
-            src={'/error.svg'}
-            width={224}
-            height={224}
-            alt='Not found error'
-          />
-          <h1 className='font-mono text-5xl font-bold text-primary-default'>
+          <Image src={'/error.svg'} width={224} height={224} alt='Not found error' />
+          <h1 className='text-primary-default font-mono text-5xl font-bold'>
             Такой страницы курса нет :(
           </h1>
-          <p className='text-[0.8125rem] text-text-primary'>
+          <p className='text-text-primary text-[0.8125rem]'>
             Возможно страница была удалена или вы перешли по неверной ссылке
           </p>
         </div>

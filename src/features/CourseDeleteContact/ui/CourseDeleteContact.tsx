@@ -8,10 +8,7 @@ interface CourseDeleteContactProps {
   courseId: string;
 }
 
-export const CourseDeleteContact: FC<CourseDeleteContactProps> = ({
-  contactId,
-  courseId,
-}) => {
+export const CourseDeleteContact: FC<CourseDeleteContactProps> = ({ contactId, courseId }) => {
   const [deleteContact] = useDeleteCourseContactMutation();
 
   const onClickHandler = () => {

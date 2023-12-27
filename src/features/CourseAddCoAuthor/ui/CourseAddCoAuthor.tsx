@@ -29,9 +29,7 @@ export const CourseAddCoAuthor: FC<CourseAddCoAuthorProps> = ({ courseId }) => {
   const onSubmitHandler: SubmitHandler<authorsSchemaType> = async (data) => {
     await addCoAuthor(data)
       .unwrap()
-      .catch(() =>
-        setError('email', { message: 'Пользователь не существует' })
-      );
+      .catch(() => setError('email', { message: 'Пользователь не существует' }));
   };
 
   return (

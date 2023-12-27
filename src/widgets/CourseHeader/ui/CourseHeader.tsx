@@ -11,16 +11,8 @@ interface IProps {
 export const CourseHeader: FC<IProps> = (course) => (
   <Header>
     <Link href='/' className='flex items-center gap-6'>
-      <Image
-        src={course.logo}
-        alt={course.name}
-        width={48}
-        height={48}
-        className='object-cover'
-      />
-      <h1 className='font-mono text-4xl font-bold text-accent-primary-200'>
-        {course.name}
-      </h1>
+      <Image src={course.logo} alt={course.name} width={48} height={48} className='object-cover' />
+      <h1 className='text-accent-primary-200 font-mono text-4xl font-bold'>{course.name}</h1>
     </Link>
   </Header>
 );

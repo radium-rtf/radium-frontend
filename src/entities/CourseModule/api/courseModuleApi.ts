@@ -8,10 +8,7 @@ import { arrayMove } from '@dnd-kit/sortable';
 
 const courseModuleApi = emptyApi.injectEndpoints({
   endpoints: (builder) => ({
-    createCourseModule: builder.mutation<
-      CourseModuleResponseDto,
-      CreateCourseModuleRequestDto
-    >({
+    createCourseModule: builder.mutation<CourseModuleResponseDto, CreateCourseModuleRequestDto>({
       query: (body) => ({
         url: '/module',
         method: 'POST',
@@ -48,13 +45,8 @@ const courseModuleApi = emptyApi.injectEndpoints({
           order: rest.order,
         },
       }),
-      invalidatesTags: (_1, _2, args) => [
-        { type: 'courses', id: args.courseId },
-      ],
-      async onQueryStarted(
-        { moduleId, courseId, order },
-        { dispatch, queryFulfilled }
-      ) {
+      invalidatesTags: (_1, _2, args) => [{ type: 'courses', id: args.courseId }],
+      async onQueryStarted({ moduleId, courseId, order }, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
           courseApi.util.updateQueryData('getCourse', courseId, (draft) => {
             const newIndex = draft.modules.findIndex((m) => m.order === order);

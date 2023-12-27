@@ -10,14 +10,10 @@ interface ShortAnswerSectionProps {
   sectionData: ShortAnswerSectionResponseDto;
 }
 
-export const ShortAnswerSection: FC<ShortAnswerSectionProps> = ({
-  sectionData,
-}) => {
+export const ShortAnswerSection: FC<ShortAnswerSectionProps> = ({ sectionData }) => {
   const session = useSession();
   const isEditAllowed =
-    session.data?.user.roles.isAuthor ||
-    session.data?.user.roles.isTeacher ||
-    false;
+    session.data?.user.roles.isAuthor || session.data?.user.roles.isTeacher || false;
   const { isEditing: isEditMode } = useContext(CourseEditContext);
 
   if (isEditAllowed && isEditMode) {

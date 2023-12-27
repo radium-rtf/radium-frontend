@@ -2,15 +2,7 @@ import {
   TextSectionResponseDto,
   useUpdateCourseTextSectionMutation,
 } from '@/entities/CourseSection';
-import {
-  Button,
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  Icon,
-  cn,
-} from '@/shared';
+import { Button, Card, CardContent, CardFooter, CardHeader, Icon, cn } from '@/shared';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSSProperties, FC, useEffect, useState } from 'react';
 import { CSS } from '@dnd-kit/utilities';
@@ -29,20 +21,14 @@ export const TextSectionEdit: FC<TextSectionEditProps> = ({ sectionData }) => {
   // Edit setup
   const [isEditing, setIsEditing] = useState(false);
   // DND Setup
-  const {
-    setActivatorNodeRef,
-    setNodeRef,
-    listeners,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
-    id: sectionData.id,
-    data: {
-      order: sectionData.order,
-      pageId: sectionData.pageId,
-    },
-  });
+  const { setActivatorNodeRef, setNodeRef, listeners, transform, transition, isDragging } =
+    useSortable({
+      id: sectionData.id,
+      data: {
+        order: sectionData.order,
+        pageId: sectionData.pageId,
+      },
+    });
 
   const style = {
     transform: CSS.Translate.toString(transform),
@@ -136,10 +122,7 @@ export const TextSectionEdit: FC<TextSectionEditProps> = ({ sectionData }) => {
           )}
         </CardContent>
         <CardFooter className='justify-end gap-4'>
-          <CourseSectionDelete
-            sectionId={sectionData.id}
-            pageId={sectionData.pageId}
-          />
+          <CourseSectionDelete sectionId={sectionData.id} pageId={sectionData.pageId} />
           {!isEditing && (
             <Button
               type='button'
@@ -148,27 +131,18 @@ export const TextSectionEdit: FC<TextSectionEditProps> = ({ sectionData }) => {
               onClick={() => setIsEditing(true)}
             >
               <Icon type='edit' className='text-inherit' />
-              <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
-                Редактировать
-              </span>
+              <span className='ml-[calc(50%-18px)] -translate-x-1/2'>Редактировать</span>
             </Button>
           )}
           {isEditing && (
             <Button
               type='submit'
               className='w-64 shrink-0 justify-start'
-              variant={
-                !isValid && isSubmitted && !isSubmitting
-                  ? 'destructive'
-                  : 'outline'
-              }
+              variant={!isValid && isSubmitted && !isSubmitting ? 'destructive' : 'outline'}
               disabled={isSubmitting}
               onClick={() => setIsEditing(true)}
             >
-              <Icon
-                type={isSubmitting ? 'loading' : 'save'}
-                className='text-inherit'
-              />
+              <Icon type={isSubmitting ? 'loading' : 'save'} className='text-inherit' />
               <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
                 {(isSubmitting && 'Сохраняем...') ||
                   errors.root?.message ||

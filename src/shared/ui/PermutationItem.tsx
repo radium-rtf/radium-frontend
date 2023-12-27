@@ -11,14 +11,7 @@ interface IProps extends HTMLAttributes<HTMLDivElement> {
 
 // Hover effect caused while being dragged. Need to fix it.
 export const PermutationItem: FC<IProps> = ({ value, className, ...props }) => {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: value.id,
   });
 

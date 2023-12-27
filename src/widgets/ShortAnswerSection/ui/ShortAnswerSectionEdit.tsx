@@ -28,26 +28,18 @@ interface ShortAnswerSectionEditProps {
   sectionData: ShortAnswerSectionResponseDto;
 }
 
-export const ShortAnswerSectionEdit: FC<ShortAnswerSectionEditProps> = ({
-  sectionData,
-}) => {
+export const ShortAnswerSectionEdit: FC<ShortAnswerSectionEditProps> = ({ sectionData }) => {
   // Edit setup
   const [isEditing, setIsEditing] = useState(false);
   // DND Setup
-  const {
-    setActivatorNodeRef,
-    setNodeRef,
-    listeners,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
-    id: sectionData.id,
-    data: {
-      order: sectionData.order,
-      pageId: sectionData.pageId,
-    },
-  });
+  const { setActivatorNodeRef, setNodeRef, listeners, transform, transition, isDragging } =
+    useSortable({
+      id: sectionData.id,
+      data: {
+        order: sectionData.order,
+        pageId: sectionData.pageId,
+      },
+    });
 
   const style = {
     transform: CSS.Translate.toString(transform),
@@ -76,8 +68,7 @@ export const ShortAnswerSectionEdit: FC<ShortAnswerSectionEditProps> = ({
     },
   });
 
-  const [updateShortAnswerSection] =
-    useUpdateCourseShortAnswerSectionMutation();
+  const [updateShortAnswerSection] = useUpdateCourseShortAnswerSectionMutation();
   const onSubmitHandler: SubmitHandler<updateSchemaType> = async (data) => {
     const response = await updateShortAnswerSection({
       sectionId: sectionData.id,
@@ -201,10 +192,7 @@ export const ShortAnswerSectionEdit: FC<ShortAnswerSectionEditProps> = ({
               />
             </>
           )}
-          <CourseSectionDelete
-            sectionId={sectionData.id}
-            pageId={sectionData.pageId}
-          />
+          <CourseSectionDelete sectionId={sectionData.id} pageId={sectionData.pageId} />
           {!isEditing && (
             <Button
               type='button'
@@ -213,27 +201,18 @@ export const ShortAnswerSectionEdit: FC<ShortAnswerSectionEditProps> = ({
               onClick={() => setIsEditing(true)}
             >
               <Icon type='edit' className='text-inherit' />
-              <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
-                Редактировать
-              </span>
+              <span className='ml-[calc(50%-18px)] -translate-x-1/2'>Редактировать</span>
             </Button>
           )}
           {isEditing && (
             <Button
               type='submit'
               className='w-64 shrink-0 justify-start'
-              variant={
-                !isValid && isSubmitted && !isSubmitting
-                  ? 'destructive'
-                  : 'outline'
-              }
+              variant={!isValid && isSubmitted && !isSubmitting ? 'destructive' : 'outline'}
               disabled={isSubmitting}
               onClick={() => setIsEditing(true)}
             >
-              <Icon
-                type={isSubmitting ? 'loading' : 'save'}
-                className='shrink-0 text-inherit'
-              />
+              <Icon type={isSubmitting ? 'loading' : 'save'} className='shrink-0 text-inherit' />
               <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
                 {(isSubmitting && 'Сохраняем...') ||
                   (!isValid &&

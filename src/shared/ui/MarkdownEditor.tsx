@@ -1,8 +1,5 @@
 'use client';
-import {
-  LexicalComposer,
-  InitialConfigType,
-} from '@lexical/react/LexicalComposer';
+import { LexicalComposer, InitialConfigType } from '@lexical/react/LexicalComposer';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
@@ -101,14 +98,7 @@ export const MarkdownEditor: FC<IProps> = ({ markdown, onChange }) => {
       },
     },
     namespace: 'Editor',
-    nodes: [
-      HeadingNode,
-      QuoteNode,
-      CodeNode,
-      CodeHighlightNode,
-      ListNode,
-      ListItemNode,
-    ],
+    nodes: [HeadingNode, QuoteNode, CodeNode, CodeHighlightNode, ListNode, ListItemNode],
   };
 
   if (isPlaintextMode) {
@@ -124,13 +114,13 @@ export const MarkdownEditor: FC<IProps> = ({ markdown, onChange }) => {
           <Icon type='visible' className='text-primary-default' />
         </button>
         <TextArea
-          className='resize-y
+          className='font-code
+                    [&:hover::-webkit-scrollbar-thumb]:bg-grey-300
+                    resize-y
                     overflow-y-scroll
-                    font-code
                     [&::-webkit-scrollbar-thumb]:rounded
                     [&::-webkit-scrollbar-thumb]:bg-transparent
-                    [&::-webkit-scrollbar-thumb]:transition-colors
-                  [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar]:opacity-0 [&:hover::-webkit-scrollbar-thumb]:bg-grey-300'
+                  [&::-webkit-scrollbar-thumb]:transition-colors [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar]:opacity-0'
           value={text}
           onChange={(e) => {
             setText(e.target.value);
@@ -142,10 +132,7 @@ export const MarkdownEditor: FC<IProps> = ({ markdown, onChange }) => {
   }
 
   return (
-    <LexicalComposer
-      key={String(isPlaintextMode)}
-      initialConfig={initialConfig}
-    >
+    <LexicalComposer key={String(isPlaintextMode)} initialConfig={initialConfig}>
       <div className={cn('flex items-center justify-between')}>
         <div className='flex items-center gap-0.5'>
           <EditorBoldControl />

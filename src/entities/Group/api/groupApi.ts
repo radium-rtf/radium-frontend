@@ -4,10 +4,7 @@ import { GroupDto } from '../model/groupDto';
 
 const groupApi = emptyApi.injectEndpoints({
   endpoints: (builder) => ({
-    courseReport: builder.query<
-      CourseReportDto,
-      { groupId: string; courseId: string }
-    >({
+    courseReport: builder.query<CourseReportDto, { groupId: string; courseId: string }>({
       query: ({ groupId, courseId }): { url: string } => ({
         url: `/group/report/${groupId}/${courseId}`,
       }),
@@ -22,9 +19,5 @@ const groupApi = emptyApi.injectEndpoints({
   overrideExisting: true,
 });
 
-export const {
-  useCourseReportQuery,
-  useLazyCourseReportQuery,
-  useGroupQuery,
-  useLazyGroupQuery,
-} = groupApi;
+export const { useCourseReportQuery, useLazyCourseReportQuery, useGroupQuery, useLazyGroupQuery } =
+  groupApi;

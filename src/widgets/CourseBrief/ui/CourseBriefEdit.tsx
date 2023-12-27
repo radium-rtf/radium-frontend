@@ -47,10 +47,7 @@ export const CourseBriefEdit: FC<IProps> = ({
   });
 
   const [updateBrief] = useUpdateCourseBriefMutation();
-  const onSubmitHandler: SubmitHandler<updateSchemaType> = async ({
-    name,
-    shortDescription,
-  }) => {
+  const onSubmitHandler: SubmitHandler<updateSchemaType> = async ({ name, shortDescription }) => {
     await updateBrief({ courseId, name, shortDescription })
       .unwrap()
       .then(() => setIsEditing(false))
@@ -77,9 +74,7 @@ export const CourseBriefEdit: FC<IProps> = ({
         <CardHeader className='flex-row items-center gap-4 space-y-0'>
           <ChangeCourseLogo logo={courseLogo} courseId={courseId} />
           {!isEditing && (
-            <CardTitle className='text-[1rem] leading-[normal]'>
-              {courseName}
-            </CardTitle>
+            <CardTitle className='text-[1rem] leading-[normal]'>{courseName}</CardTitle>
           )}
           {isEditing && (
             <Input
@@ -92,9 +87,7 @@ export const CourseBriefEdit: FC<IProps> = ({
           )}
         </CardHeader>
         <CardContent>
-          {!isEditing && (
-            <CardDescription>{courseShortDescription}</CardDescription>
-          )}
+          {!isEditing && <CardDescription>{courseShortDescription}</CardDescription>}
           {isEditing && (
             <TextArea
               className='min-h-[4rem] w-full resize-y'
@@ -113,9 +106,7 @@ export const CourseBriefEdit: FC<IProps> = ({
               onClick={() => setIsEditing(true)}
             >
               <Icon type='edit' />
-              <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
-                Редактировать
-              </span>
+              <span className='ml-[calc(50%-18px)] -translate-x-1/2'>Редактировать</span>
             </Button>
           )}
           {isEditing && (
@@ -126,10 +117,7 @@ export const CourseBriefEdit: FC<IProps> = ({
               disabled={isSubmitting}
               onClick={() => setIsEditing(true)}
             >
-              <Icon
-                className='shrink-0 text-inherit'
-                type={isSubmitting ? 'loading' : 'submit'}
-              />
+              <Icon className='shrink-0 text-inherit' type={isSubmitting ? 'loading' : 'submit'} />
               <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
                 {errors.root?.message ||
                   errors.name?.message ||

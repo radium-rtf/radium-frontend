@@ -6,10 +6,7 @@ export const updateSchema = z.object({
   mapping: z.object({
     question: z.string().min(1),
     answer: z.object({ value: z.string() }).array(),
-    keys: z
-      .object({ value: z.string() })
-      .array()
-      .min(3, 'Необходим как минимум 2 ответа'),
+    keys: z.object({ value: z.string() }).array().min(3, 'Необходим как минимум 2 ответа'),
   }),
 });
 
