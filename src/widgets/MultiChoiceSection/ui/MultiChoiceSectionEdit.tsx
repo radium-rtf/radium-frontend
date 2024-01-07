@@ -7,7 +7,7 @@ import {
   useUpdateCourseMultiChoiceSectionMutation,
 } from '@/entities/CourseSection';
 import { Card, CardContent, CardTitle, Checkbox, Icon, Input, cn } from '@/shared';
-import { CSSProperties, FC, useState } from 'react';
+import { CSSProperties, FC, useEffect, useState } from 'react';
 import { Controller, FormProvider, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
@@ -93,6 +93,21 @@ export const MultiChoiceSectionEdit: FC<MultiChoiceSectionEditProps> = ({ sectio
       setError('root', { message: 'Ошибка!' });
     }
   };
+
+  // Escape control setup
+  useEffect(() => {
+    const listener = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsEditing(false);
+      }
+    };
+    if (isEditing) {
+      document.body.addEventListener('keydown', listener);
+    }
+    return () => {
+      document.body.removeEventListener('keydown', listener);
+    };
+  }, [isEditing]);
 
   return (
     <FormProvider {...form}>

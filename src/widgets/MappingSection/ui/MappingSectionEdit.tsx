@@ -1,21 +1,22 @@
 'use client';
-import { CourseSectionDelete } from '@/features/CourseSectionDelete';
-import { Button, Card, Icon, Input, cn } from '@/shared';
-import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
-import { CSSProperties, FC, Fragment } from 'react';
-import { Controller, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
-import { updateSchema, updateSchemaType } from '../model/updateSchema';
+
 import {
+  CourseSectionFooterEdit,
+  CourseSectionHeaderEdit,
   MappingSectionResponseDto,
   useUpdateCourseMappingSectionMutation,
 } from '@/entities/CourseSection';
+import { Card, CardContent, CardTitle, Icon, Input, cn } from '@/shared';
+import { CSSProperties, FC, Fragment, useEffect, useState } from 'react';
+import { Controller, FormProvider, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
+import { updateSchema, updateSchemaType } from '../model/updateSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { MappingEditDraggable } from './MappingEditDraggable';
+import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
 import {
   DndContext,
   DragEndEvent,
   KeyboardSensor,
-  MouseSensor,
+  PointerSensor,
   closestCorners,
   useSensor,
   useSensors,
@@ -25,28 +26,60 @@ import {
   SortableContext,
   rectSwappingStrategy,
   sortableKeyboardCoordinates,
+  useSortable,
 } from '@dnd-kit/sortable';
-import { useSortable } from '@dnd-kit/sortable';
+import { MappingDraggable } from './MappingDraggable';
 import { CSS } from '@dnd-kit/utilities';
+import { CourseSectionDelete } from '@/features/CourseSectionDelete';
+import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
+import { MappingEditDraggable } from './MappingEditDraggable';
 
 interface MappingSectionEditProps {
   sectionData: MappingSectionResponseDto;
-  onSuccess: () => void;
 }
 
-export const MappingSectionEdit: FC<MappingSectionEditProps> = ({ sectionData, onSuccess }) => {
-  // Answer
-  const [updateMappingSection] = useUpdateCourseMappingSectionMutation();
+export const MappingSectionEdit: FC<MappingSectionEditProps> = ({ sectionData }) => {
+  // Edit setup
+  const [isEditing, setIsEditing] = useState(false);
 
-  // Form init
-  const {
-    register,
-    control,
-    handleSubmit,
-    getValues,
-    setFocus,
-    formState: { isValid },
-  } = useForm<updateSchemaType>({
+  // Section DND Setup
+  const { setActivatorNodeRef, setNodeRef, listeners, transform, transition, isDragging } =
+    useSortable({
+      id: sectionData.id,
+      data: {
+        order: sectionData.order,
+        pageId: sectionData.pageId,
+      },
+    });
+
+  const style = {
+    transform: CSS.Translate.toString(transform),
+    transition,
+  } as CSSProperties;
+
+  // Answers DND setup
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    if (
+      event.over?.data.current?.sortable.index !==
+      event.over?.data.current?.sortable.items.length - 1
+    ) {
+      const { active, over } = event;
+      const oldIndex = answerFields.findIndex((answer) => answer.id === active.id);
+      const newIndex = answerFields.findIndex((answer) => answer.id === over?.id);
+
+      swap(oldIndex, newIndex);
+    }
+  };
+
+  // Form setup
+  const form = useForm<updateSchemaType>({
     resolver: zodResolver(updateSchema),
     defaultValues: {
       maxScore: sectionData.maxScore,
@@ -62,6 +95,17 @@ export const MappingSectionEdit: FC<MappingSectionEditProps> = ({ sectionData, o
       },
     },
   });
+
+  const {
+    register,
+    control,
+    handleSubmit,
+    getValues,
+    setFocus,
+    clearErrors,
+    setError,
+    formState: { errors },
+  } = form;
 
   const {
     fields: keysFields,
@@ -82,192 +126,213 @@ export const MappingSectionEdit: FC<MappingSectionEditProps> = ({ sectionData, o
     name: 'mapping.answer',
   });
 
-  const onSubmitHandler: SubmitHandler<updateSchemaType> = (data) => {
-    updateMappingSection({
-      sectionId: sectionData.id,
+  const [updateMappingSection] = useUpdateCourseMappingSectionMutation();
+  const onSubmitHandler: SubmitHandler<updateSchemaType> = async (data) => {
+    const body = {
+      ...data,
       mapping: {
-        question: data.mapping.question,
+        ...data.mapping,
         answer: data.mapping.answer.map((item) => item.value).toSpliced(-1, 1),
         keys: data.mapping.keys.map((item) => item.value).toSpliced(-1, 1),
       },
-      maxAttempts: data.maxAttempts,
-      maxScore: data.maxScore,
-    })
-      .unwrap()
-      .then(onSuccess);
-  };
-
-  // DnD init
-  const sensors = useSensors(
-    useSensor(MouseSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
-
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
-    const oldIndex = answerFields.findIndex((answer) => answer.id === active.id);
-    const newIndex = answerFields.findIndex((answer) => answer.id === over?.id);
-
-    swap(oldIndex, newIndex);
-  };
-
-  const { setNodeRef, setActivatorNodeRef, listeners, transform, transition, isDragging } =
-    useSortable({
-      id: sectionData.id,
-      data: {
-        order: sectionData.order,
-        pageId: sectionData.pageId,
-      },
+    };
+    const response = await updateMappingSection({
+      sectionId: sectionData.id,
+      ...body,
     });
+    if ('data' in response) {
+      setIsEditing(false);
+    } else {
+      setError('root', { message: 'Ошибка!' });
+    }
+  };
 
-  const style = {
-    transform: CSS.Translate.toString(transform),
-    transition,
-  } as CSSProperties;
+  // Escape control setup
+  useEffect(() => {
+    const listener = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsEditing(false);
+      }
+    };
+    if (isEditing) {
+      document.body.addEventListener('keydown', listener);
+    }
+    return () => {
+      document.body.removeEventListener('keydown', listener);
+    };
+  }, [isEditing]);
 
   return (
-    <Card
-      asChild
-      id={`section-${sectionData.id}`}
-      ref={setNodeRef}
-      style={style}
-      className={cn(
-        'border border-transparent transition-colors duration-300',
-        isDragging
-          ? 'z-10 border-white/10 bg-[#2A2E2E]'
-          : '[&:has(.drag:hover)]:border-white/10 [&:has(.drag:hover)]:bg-[#363A3B]'
-      )}
-    >
-      <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmitHandler)}>
-        <div className='text-primary-default relative flex items-center gap-4'>
-          <Icon type='question' className='text-inherit' />
-          <span className='font-mono font-bold leading-[normal] text-inherit'>Вопрос</span>
-          <button
-            className='drag after:absolute after:-left-6 after:-right-6 after:-top-6 after:bottom-0 after:block after:rounded-t-2xl after:content-[""]'
-            type='button'
-            ref={setActivatorNodeRef}
-            {...listeners}
-          >
-            <Icon type='handle-horizontal' className='absolute left-1/2 top-0' />
-          </button>
-        </div>
-        <header className='flex flex-col gap-4 text-[0.8125rem] leading-normal'>
-          <Controller
-            name='mapping.question'
-            control={control}
-            render={({ field }) => (
-              <MarkdownEditor markdown={sectionData.content} onChange={field.onChange} />
-            )}
-          />
-        </header>
-        <div className='text-primary-default flex items-center gap-4'>
-          <Icon type='question' className='text-inherit' />
-          <span className='font-mono font-bold leading-[normal] text-inherit'>Ответ</span>
-        </div>
+    <FormProvider {...form}>
+      <Card
+        ref={setNodeRef}
+        style={style}
+        className={cn(
+          'border border-transparent transition-colors',
+          isDragging
+            ? 'z-10 border-white/10 bg-[#2A2E2E]'
+            : '[&:has(.drag:hover)]:border-white/10 [&:has(.drag:hover)]:bg-[#363A3B]'
+        )}
+      >
+        <form onSubmit={handleSubmit(onSubmitHandler)}>
+          <CourseSectionHeaderEdit ref={setActivatorNodeRef} {...listeners} />
+          {!isEditing && (
+            <>
+              <CardContent>
+                <MarkdownDisplay markdown={sectionData.content} />
+              </CardContent>
+              <CardContent>
+                <DndContext
+                  sensors={sensors}
+                  modifiers={[restrictToParentElement, restrictToVerticalAxis]}
+                  collisionDetection={closestCorners}
+                >
+                  <SortableContext
+                    items={answerFields.toSpliced(-1, 1)}
+                    strategy={rectSwappingStrategy}
+                  >
+                    <div className='grid grid-cols-2 gap-4'>
+                      <Controller
+                        control={control}
+                        name='mapping.answer'
+                        render={() => {
+                          return (
+                            <>
+                              {answerFields.toSpliced(-1, 1).map((field, index) => {
+                                return (
+                                  <Fragment key={field.id}>
+                                    <span className='text-foreground-default flex-grow rounded-[0.5rem] border border-white/5 px-4 py-2 text-[0.8125rem] leading-normal'>
+                                      {sectionData.keys[index]}
+                                    </span>
+                                    <MappingDraggable data={field} />
+                                  </Fragment>
+                                );
+                              })}
+                            </>
+                          );
+                        }}
+                      />
+                    </div>
+                  </SortableContext>
+                </DndContext>
+              </CardContent>
+            </>
+          )}
+          {isEditing && (
+            <>
+              <CardContent className='flex flex-col gap-4'>
+                <Controller
+                  control={control}
+                  name='mapping.question'
+                  render={({ field: { value, onChange } }) => (
+                    <MarkdownEditor
+                      markdown={value}
+                      onChange={(value) => {
+                        onChange(value);
+                        errors.root && clearErrors('root');
+                      }}
+                    />
+                  )}
+                />
+              </CardContent>
+              <CardContent className='flex items-center gap-4'>
+                <Icon type='question' className='shrink-0 text-primary' />
+                <CardTitle className='text-base'>Ответ</CardTitle>
+              </CardContent>
+              <CardContent>
+                <DndContext
+                  onDragEnd={handleDragEnd}
+                  sensors={sensors}
+                  modifiers={[restrictToParentElement, restrictToVerticalAxis]}
+                  collisionDetection={closestCorners}
+                >
+                  <SortableContext items={answerFields} strategy={rectSwappingStrategy}>
+                    <main className='grid grid-cols-2 gap-4'>
+                      {answerFields.map((field, index) => {
+                        return (
+                          <Fragment key={field.id}>
+                            <Input
+                              placeholder={`Строка ${index + 1}`}
+                              {...register(`mapping.keys.${index}.value`, {
+                                onChange: (e) => {
+                                  // Remove answer if key and answer is empty
+                                  if (
+                                    e.target.value === '' &&
+                                    getValues(`mapping.answer.${index}.value`) === '' &&
+                                    index !== keysFields.length - 1
+                                  ) {
+                                    answerRemove(index);
+                                    keysRemove(index);
+                                    setFocus(
+                                      `mapping.keys.${
+                                        keysFields.length - 3 >= 0 ? keysFields.length - 3 : 0
+                                      }.value`
+                                    );
+                                  }
 
-        <DndContext
-          onDragEnd={(e) => {
-            if (
-              e.over?.data.current?.sortable.index !==
-              e.over?.data.current?.sortable.items.length - 1
-            ) {
-              handleDragEnd(e);
+                                  // add new answer if key is not empty
+                                  if (e.target.value !== '' && index === keysFields.length - 1) {
+                                    answerAppend({ value: '' }, { shouldFocus: false });
+                                    keysAppend({ value: '' }, { shouldFocus: false });
+                                  }
+                                },
+                              })}
+                            />
+                            <MappingEditDraggable
+                              disabled={index === keysFields.length - 1}
+                              data={answerFields[index]}
+                              placeholder={`Вариант ${index + 1}`}
+                              {...register(`mapping.answer.${index}.value`, {
+                                onChange: (e) => {
+                                  // Remove answer if key and answer is empty
+                                  if (
+                                    e.target.value === '' &&
+                                    getValues(`mapping.keys.${index}.value`) === '' &&
+                                    index !== keysFields.length - 1
+                                  ) {
+                                    answerRemove(index);
+                                    keysRemove(index);
+                                    setFocus(
+                                      `mapping.keys.${
+                                        keysFields.length - 3 >= 0 ? keysFields.length - 3 : 0
+                                      }.value`
+                                    );
+                                  }
+
+                                  // add new answer if key is not empty
+                                  if (e.target.value !== '' && index === keysFields.length - 1) {
+                                    answerAppend({ value: '' }, { shouldFocus: false });
+                                    keysAppend({ value: '' }, { shouldFocus: false });
+                                  }
+                                },
+                              })}
+                            />
+                          </Fragment>
+                        );
+                      })}
+                    </main>
+                  </SortableContext>
+                </DndContext>
+              </CardContent>
+            </>
+          )}
+          <CourseSectionFooterEdit
+            isEditing={isEditing}
+            setIsEditing={setIsEditing}
+            deleteButton={
+              <CourseSectionDelete sectionId={sectionData.id} pageId={sectionData.pageId} />
             }
-          }}
-          sensors={sensors}
-          modifiers={[restrictToParentElement, restrictToVerticalAxis]}
-          collisionDetection={closestCorners}
-        >
-          <SortableContext items={answerFields} strategy={rectSwappingStrategy}>
-            <main className='grid grid-cols-2 gap-4'>
-              {answerFields.map((field, index) => {
-                return (
-                  <Fragment key={field.id}>
-                    <Input
-                      {...register(`mapping.keys.${index}.value`, {
-                        onChange: (e) => {
-                          // Remove answer if key and answer is empty
-                          if (
-                            e.target.value === '' &&
-                            getValues(`mapping.answer.${index}.value`) === '' &&
-                            index !== keysFields.length - 1
-                          ) {
-                            answerRemove(index);
-                            keysRemove(index);
-                            setFocus(
-                              `mapping.keys.${
-                                keysFields.length - 3 >= 0 ? keysFields.length - 3 : 0
-                              }.value`
-                            );
-                          }
-
-                          // add new answer if key is not empty
-                          if (e.target.value !== '' && index === keysFields.length - 1) {
-                            answerAppend({ value: '' }, { shouldFocus: false });
-                            keysAppend({ value: '' }, { shouldFocus: false });
-                          }
-                        },
-                      })}
-                    />
-                    <MappingEditDraggable
-                      disabled={index === keysFields.length - 1}
-                      data={answerFields[index]}
-                      {...register(`mapping.answer.${index}.value`, {
-                        onChange: (e) => {
-                          // Remove answer if key and answer is empty
-                          if (
-                            e.target.value === '' &&
-                            getValues(`mapping.keys.${index}.value`) === '' &&
-                            index !== keysFields.length - 1
-                          ) {
-                            answerRemove(index);
-                            keysRemove(index);
-                            setFocus(
-                              `mapping.keys.${
-                                keysFields.length - 3 >= 0 ? keysFields.length - 3 : 0
-                              }.value`
-                            );
-                          }
-
-                          // add new answer if key is not empty
-                          if (e.target.value !== '' && index === keysFields.length - 1) {
-                            answerAppend({ value: '' }, { shouldFocus: false });
-                            keysAppend({ value: '' }, { shouldFocus: false });
-                          }
-                        },
-                      })}
-                    />
-                  </Fragment>
-                );
-              })}
-            </main>
-          </SortableContext>
-        </DndContext>
-
-        <footer className='flex items-center gap-4 place-self-end'>
-          <Input
-            className='flex-shrink'
-            {...register('maxAttempts', { valueAsNumber: true })}
-            placeholder='Максимум'
-          >
-            <span className='font-sans text-[0.625rem]'>попыток</span>
-          </Input>
-          <Input
-            className='flex-shrink'
-            {...register('maxScore', { valueAsNumber: true })}
-            placeholder='Максимум'
-          >
-            <span className='font-sans text-[0.625rem]'>баллов</span>
-          </Input>
-          <CourseSectionDelete sectionId={sectionData.id} pageId={sectionData.pageId} />
-          <Button className='w-64 flex-shrink-0' color='outlined' type='submit' disabled={!isValid}>
-            <Icon type='save' className='text-inherit' />
-            <span className='ml-[calc(50%-34px)] -translate-x-1/2'>Сохранить</span>
-          </Button>
-        </footer>
-      </form>
-    </Card>
+            errorMessage={
+              errors.root?.message ||
+              errors.mapping?.question?.message ||
+              errors.mapping?.keys?.root?.message ||
+              errors.mapping?.answer?.root?.message ||
+              errors.maxAttempts?.message ||
+              errors.maxScore?.message
+            }
+          />
+        </form>
+      </Card>
+    </FormProvider>
   );
 };

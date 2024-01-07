@@ -9,7 +9,7 @@ import {
   useAnswerCoursePermutationsSectionMutation,
 } from '@/entities/CourseSection';
 import { Controller, FormProvider, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
-import { answerSchemaType } from '../model/answerSchema';
+import { answerSchema, answerSchemaType } from '../model/answerSchema';
 import {
   DndContext,
   KeyboardSensor,
@@ -27,6 +27,7 @@ import { dragEndHandler } from '../model/dragEndHandler';
 import { restrictToParentElement, restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { PermutationItem } from './PermutationItem';
 import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 interface PermutationSectionDisplayProps {
   sectionData: PermutationSectionResponseDto;
@@ -44,6 +45,9 @@ export const PermutationsSectionDisplay: FC<PermutationSectionDisplayProps> = ({
 
   // Form setup
   const form = useForm<answerSchemaType>({
+    mode: 'onSubmit',
+    reValidateMode: 'onChange',
+    resolver: zodResolver(answerSchema),
     defaultValues: DEFAULT_STATE,
   });
 

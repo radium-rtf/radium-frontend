@@ -5,8 +5,27 @@ export const updateSchema = z.object({
   maxScore: z.number(),
   mapping: z.object({
     question: z.string().min(1),
-    answer: z.object({ value: z.string() }).array(),
-    keys: z.object({ value: z.string() }).array().min(3, 'Необходим как минимум 2 ответа'),
+    answer: z
+      .object({ value: z.string() })
+      .array()
+      .min(3, 'Необходим как минимум 2 ответа')
+      .refine((answers) => {
+        for (let i = 0; i < answers.length - 1; i++) {
+          if (answers[i].value === '') return false;
+        }
+        return true;
+      }, 'Пустой ответ!'),
+
+    keys: z
+      .object({ value: z.string() })
+      .array()
+      .min(3, 'Необходим как минимум 2 варинта')
+      .refine((answers) => {
+        for (let i = 0; i < answers.length - 1; i++) {
+          if (answers[i].value === '') return false;
+        }
+        return true;
+      }, 'Пустой вариант!'),
   }),
 });
 
