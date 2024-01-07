@@ -1,11 +1,24 @@
+'use client';
+
 import {
+  CourseSectionFooterEdit,
+  CourseSectionHeaderEdit,
   PermutationSectionResponseDto,
   useUpdateCoursePermutationsSectionMutation,
 } from '@/entities/CourseSection';
-import { CSSProperties, FC } from 'react';
-import { Controller, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
+import { Card, CardContent, CardTitle, Icon, cn } from '@/shared';
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import { CSSProperties, FC, useEffect, useState } from 'react';
+import { CSS } from '@dnd-kit/utilities';
+import { Controller, FormProvider, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { updateSchema, updateSchemaType } from '../model/updateSchema';
-import { Button, Card, Icon, Input, cn } from '@/shared';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import {
   DndContext,
   KeyboardSensor,
@@ -16,78 +29,21 @@ import {
 } from '@dnd-kit/core';
 import { dragEndHandler } from '../model/dragEndHandler';
 import { restrictToParentElement, restrictToVerticalAxis } from '@dnd-kit/modifiers';
-import {
-  SortableContext,
-  sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import { CourseSectionDelete } from '@/features/CourseSectionDelete';
-import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
 import { PermutationsEditItem } from './PermutationsEditItem';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
+import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { PermutationItem } from './PermutationItem';
+import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
 
 interface PermutationsSectionEditProps {
   sectionData: PermutationSectionResponseDto;
-  onSuccess: () => void;
 }
 
-export const PermutationsSectionEdit: FC<PermutationsSectionEditProps> = ({
-  sectionData,
-  onSuccess,
-}) => {
-  // Update hook
-  const [updatePermutationsSection] = useUpdateCoursePermutationsSectionMutation();
+export const PermutationSectionEdit: FC<PermutationsSectionEditProps> = ({ sectionData }) => {
+  // Edit setup
+  const [isEditing, setIsEditing] = useState(false);
 
-  // Form init
-  const {
-    register,
-    control,
-    handleSubmit,
-    setFocus,
-    formState: { isValid },
-  } = useForm<updateSchemaType>({
-    resolver: zodResolver(updateSchema),
-    defaultValues: {
-      maxScore: sectionData.maxScore,
-      maxAttempts: 0,
-      permutation: {
-        question: sectionData.content,
-        answer: sectionData.variants.map((variant) => ({ value: variant })).concat([{ value: '' }]),
-      },
-    },
-  });
-
-  const { fields, append, remove, move } = useFieldArray({
-    control: control,
-    name: 'permutation.answer',
-  });
-
-  const onSubmitHandler: SubmitHandler<updateSchemaType> = (data) => {
-    updatePermutationsSection({
-      sectionId: sectionData.id,
-      ...data,
-      permutation: {
-        question: data.permutation.question,
-        answer: data.permutation.answer
-          .map((answer) => answer.value)
-          .filter((answer) => answer !== ''),
-      },
-    })
-      .unwrap()
-      .then(onSuccess);
-  };
-
-  //  DND
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
-
-  const { setNodeRef, setActivatorNodeRef, listeners, transform, transition, isDragging } =
+  // Section DND Setup
+  const { setActivatorNodeRef, setNodeRef, listeners, transform, transition, isDragging } =
     useSortable({
       id: sectionData.id,
       data: {
@@ -101,94 +57,201 @@ export const PermutationsSectionEdit: FC<PermutationsSectionEditProps> = ({
     transition,
   } as CSSProperties;
 
+  // Answers DND setup
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  // Form setup
+  const form = useForm<updateSchemaType>({
+    mode: 'onSubmit',
+    reValidateMode: 'onChange',
+    resolver: zodResolver(updateSchema),
+    defaultValues: {
+      permutation: {
+        question: sectionData.content,
+        answer: sectionData.variants
+          .map((v) => ({
+            value: v,
+          }))
+          .concat([{ value: '' }]),
+      },
+      maxAttempts: sectionData.maxAttempts,
+      maxScore: sectionData.maxScore,
+    },
+  });
+
+  const {
+    control,
+    register,
+    setFocus,
+    setError,
+    clearErrors,
+    handleSubmit,
+    formState: { errors },
+  } = form;
+
+  const { fields, append, remove, move } = useFieldArray({
+    control,
+    name: 'permutation.answer',
+  });
+
+  const [updatePermutationsSection] = useUpdateCoursePermutationsSectionMutation();
+  const onSubmitHandler: SubmitHandler<updateSchemaType> = async (data) => {
+    const body = {
+      ...data,
+      permutation: {
+        ...data.permutation,
+        answer: data.permutation.answer.map((o) => o.value),
+      },
+    };
+    body.permutation.answer.pop();
+    const response = await updatePermutationsSection({
+      sectionId: sectionData.id,
+      ...body,
+    });
+    if ('data' in response) {
+      setIsEditing(false);
+    } else {
+      setError('root', { message: 'Ошибка!' });
+    }
+  };
+
+  // Escape control setup
+  useEffect(() => {
+    const listener = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsEditing(false);
+      }
+    };
+    if (isEditing) {
+      document.body.addEventListener('keydown', listener);
+    }
+    return () => {
+      document.body.removeEventListener('keydown', listener);
+    };
+  }, [isEditing]);
+
   return (
-    <Card
-      asChild
-      id={`section-${sectionData.id}`}
-      ref={setNodeRef}
-      style={style}
-      className={cn(
-        'border border-transparent transition-colors duration-300',
-        isDragging
-          ? 'z-10 border-white/10 bg-[#2A2E2E]'
-          : '[&:has(.drag:hover)]:border-white/10 [&:has(.drag:hover)]:bg-[#363A3B]'
-      )}
-    >
-      <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmitHandler)}>
-        <div className='text-primary-default relative flex items-center gap-4'>
-          <Icon type='question' className='text-inherit' />
-          <span className='font-mono font-bold leading-[normal] text-inherit'>Вопрос</span>
-          <button
-            className='drag after:absolute after:-left-6 after:-right-6 after:-top-6 after:bottom-0 after:block after:rounded-t-2xl after:content-[""]'
-            type='button'
-            ref={setActivatorNodeRef}
-            {...listeners}
-          >
-            <Icon type='handle-horizontal' className='absolute left-1/2 top-0' />
-          </button>
-        </div>
-        <header className='flex flex-col gap-4 text-[0.8125rem] leading-normal'>
-          <Controller
-            name='permutation.question'
-            control={control}
-            render={({ field }) => (
-              <MarkdownEditor markdown={sectionData.content} onChange={field.onChange} />
-            )}
-          />
-        </header>
-        <DndContext
-          collisionDetection={rectIntersection}
-          onDragEnd={(e) => {
-            if (e.over?.data.current?.sortable.index !== fields.length - 1) {
-              dragEndHandler(e, fields, move);
-            }
-          }}
-          modifiers={[restrictToParentElement, restrictToVerticalAxis]}
-          sensors={sensors}
-        >
-          <SortableContext items={fields} strategy={verticalListSortingStrategy}>
-            <main className='-mx-6 flex flex-col gap-4'>
-              {fields.map((field, index) => (
-                <PermutationsEditItem
-                  key={field.id}
-                  value={field}
-                  disabled={index === fields.length - 1}
-                  {...register(`permutation.answer.${index}.value`, {
-                    onChange: (e) => {
-                      // add if last input has text
-                      if (e.target.value !== '' && index === fields.length - 1) {
-                        append({ value: '' }, { shouldFocus: false });
-                      }
-                      // remove if NOT last empty
-                      if (e.target.value === '' && index !== fields.length - 1) {
-                        remove(index);
-                        setFocus(
-                          `permutation.answer.${
-                            fields.length - 3 >= 0 ? fields.length - 3 : 0
-                          }.value`
-                        );
-                      }
-                    },
-                  })}
+    <FormProvider {...form}>
+      <Card
+        ref={setNodeRef}
+        style={style}
+        className={cn(
+          'border border-transparent transition-colors',
+          isDragging
+            ? 'z-10 border-white/10 bg-[#2A2E2E]'
+            : '[&:has(.drag:hover)]:border-white/10 [&:has(.drag:hover)]:bg-[#363A3B]'
+        )}
+      >
+        <form onSubmit={handleSubmit(onSubmitHandler)}>
+          <CourseSectionHeaderEdit ref={setActivatorNodeRef} {...listeners} />
+          {!isEditing && (
+            <>
+              <CardContent>
+                <MarkdownDisplay markdown={sectionData.content} />
+              </CardContent>
+              <CardContent>
+                <div className='-mx-6'>
+                  <DndContext
+                    collisionDetection={rectIntersection}
+                    modifiers={[restrictToParentElement, restrictToVerticalAxis]}
+                    sensors={sensors}
+                  >
+                    <SortableContext items={fields.toSpliced(-1, 1)}>
+                      {fields.toSpliced(-1, 1).map((field) => (
+                        <PermutationItem key={field.id} value={field} />
+                      ))}
+                    </SortableContext>
+                  </DndContext>
+                </div>
+              </CardContent>
+            </>
+          )}
+          {isEditing && (
+            <>
+              <CardContent className='flex flex-col gap-4'>
+                <Controller
+                  control={control}
+                  name='permutation.question'
+                  render={({ field: { value, onChange } }) => (
+                    <MarkdownEditor
+                      markdown={value}
+                      onChange={(value) => {
+                        onChange(value);
+                        errors.root && clearErrors('root');
+                      }}
+                    />
+                  )}
                 />
-              ))}
-            </main>
-          </SortableContext>
-        </DndContext>
-        <footer className='flex items-center gap-4 place-self-end'>
-          <Input {...register('maxAttempts', { valueAsNumber: true })} placeholder='Максимум'>
-            <span className='font-sans text-[0.625rem]'>попыток</span>
-          </Input>
-          <Input {...register('maxScore', { valueAsNumber: true })} placeholder='Максимум'>
-            <span className='font-sans text-[0.625rem]'>баллов</span>
-          </Input>
-          <CourseSectionDelete sectionId={sectionData.id} pageId={sectionData.pageId} />
-          <Button className='w-64' color='outlined' type='submit' disabled={!isValid}>
-            <Icon type='save' className='text-inherit' />
-            <span className='ml-[calc(50%-34px)] -translate-x-1/2'>Сохранить</span>
-          </Button>
-        </footer>
-      </form>
-    </Card>
+              </CardContent>
+              <CardContent className='flex items-center gap-4'>
+                <Icon type='question' className='shrink-0 text-primary' />
+                <CardTitle className='text-base'>Ответ</CardTitle>
+              </CardContent>
+              <CardContent>
+                <DndContext
+                  collisionDetection={rectIntersection}
+                  onDragEnd={(e) => {
+                    if (e.over?.data.current?.sortable.index !== fields.length - 1) {
+                      dragEndHandler(e, fields, move);
+                    }
+                  }}
+                  modifiers={[restrictToParentElement, restrictToVerticalAxis]}
+                  sensors={sensors}
+                >
+                  <SortableContext items={fields} strategy={verticalListSortingStrategy}>
+                    <main className='-mx-6 flex flex-col gap-4'>
+                      {fields.map((field, index) => (
+                        <PermutationsEditItem
+                          key={field.id}
+                          value={field}
+                          placeholder={`Вариант ${index + 1}`}
+                          disabled={index === fields.length - 1}
+                          {...register(`permutation.answer.${index}.value`, {
+                            onChange: (e) => {
+                              // add if last input has text
+                              if (e.target.value !== '' && index === fields.length - 1) {
+                                append({ value: '' }, { shouldFocus: false });
+                              }
+                              // remove if NOT last empty
+                              if (e.target.value === '' && index !== fields.length - 1) {
+                                remove(index);
+                                setFocus(
+                                  `permutation.answer.${
+                                    fields.length - 3 >= 0 ? fields.length - 3 : 0
+                                  }.value`
+                                );
+                              }
+                            },
+                          })}
+                        />
+                      ))}
+                    </main>
+                  </SortableContext>
+                </DndContext>
+              </CardContent>
+            </>
+          )}
+          <CourseSectionFooterEdit
+            isEditing={isEditing}
+            setIsEditing={setIsEditing}
+            deleteButton={
+              <CourseSectionDelete sectionId={sectionData.id} pageId={sectionData.pageId} />
+            }
+            errorMessage={
+              errors.root?.message ||
+              errors.permutation?.question?.message ||
+              errors.permutation?.answer?.message ||
+              errors.maxAttempts?.message ||
+              errors.maxScore?.message
+            }
+          />
+        </form>
+      </Card>
+    </FormProvider>
   );
 };

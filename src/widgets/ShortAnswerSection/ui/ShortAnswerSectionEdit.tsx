@@ -157,7 +157,7 @@ export const ShortAnswerSectionEdit: FC<ShortAnswerSectionEditProps> = ({ sectio
             </CardContent>
             <CardContent className='flex items-center gap-4'>
               <Icon type='question' className='shrink-0 text-primary' />
-              <CardTitle className='text-base'>Вопрос</CardTitle>
+              <CardTitle className='text-base'>Ответ</CardTitle>
             </CardContent>
             <CardContent>
               <Input

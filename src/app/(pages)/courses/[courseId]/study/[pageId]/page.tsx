@@ -9,7 +9,7 @@ import { PageNavigation } from '@/widgets/PageNavigation';
 import { useGetPageQuery } from '@/entities/CoursePage';
 import { MultiChoiceSection } from '@/widgets/MultiChoiceSection';
 import { ShortAnswerSection } from '@/widgets/ShortAnswerSection';
-import { PermutationSection } from '@/widgets/PermutationsSection';
+import { PermutationsSection } from '@/widgets/PermutationsSection';
 import { CourseEditContext } from '@/features/CourseEditContext';
 import { CoursePageInfo } from '@/widgets/CoursePageInfo';
 import {
@@ -110,7 +110,7 @@ export default function Page({ params }: IProps) {
       case 'answer':
         return <AnswerSection key={section.id} sectionData={section} />;
       case 'permutation':
-        return <PermutationSection key={section.id} sectionData={section} />;
+        return <PermutationsSection key={section.id} sectionData={section} />;
       case 'mapping':
         return <MappingSection key={section.id} sectionData={section} />;
       case 'code':

@@ -1,1 +1,1 @@
-export { PermutationSection } from './ui/PermutationsSection';
+export { PermutationsSection } from './ui/PermutationsSection';
