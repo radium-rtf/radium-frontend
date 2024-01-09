@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Button, Card, Icon, Input } from '@/shared';
+import { Button, Card, CardContent, CardFooter, CardHeader, Icon, Input } from '@/shared';
 import { loginSchema, loginSchemaType } from '../model/loginSchema';
 
 export const LoginCard = () => {
@@ -51,49 +51,57 @@ export const LoginCard = () => {
         <h1 className='text-primary-default font-mono text-4xl font-bold'>Радиум</h1>
       </div>
       <Card className='w-full'>
-        <form onSubmit={handleSubmit(onSubmitHandler)} className={'flex flex-col gap-4'}>
-          <Input
-            icon='mail'
-            text={watch('email').includes('@') ? undefined : '@urfu.ru'}
-            id='email'
-            placeholder='Почта'
-            autoComplete='email'
-            {...register('email', { onChange: () => clearErrors('root') })}
-          />
-          <Input
-            icon='password'
-            actionIcon={isPasswordShowed ? 'visible' : 'invisible'}
-            onActionClick={() => setIsPasswordShowed((prev) => !prev)}
-            type={isPasswordShowed ? 'text' : 'password'}
-            id='password'
-            placeholder='Пароль'
-            autoComplete='password'
-            {...register('password', { onChange: () => clearErrors('root') })}
-          />
-          <Button
-            disabled={isSubmitting}
-            type='submit'
-            color={!isValid && isSubmitted ? 'destructive' : 'accent'}
-            className='gap-4'
-          >
-            <Icon
-              type={isSubmitting ? 'loading' : !isValid && isSubmitted ? 'alert' : 'enter'}
-              className='shrink-0 text-inherit'
+        <form onSubmit={handleSubmit(onSubmitHandler)}>
+          <CardHeader>
+            <Input
+              icon='mail'
+              text={watch('email').includes('@') ? undefined : '@urfu.ru'}
+              id='email'
+              placeholder='Почта'
+              autoComplete='email'
+              {...register('email', { onChange: () => clearErrors('root') })}
             />
-            <span className='ml-[calc(50%-34px)] -translate-x-1/2 whitespace-nowrap'>
-              {(isSubmitSuccessful && 'Успех!') ||
-                (errors.root && errors.root.message) ||
-                (errors.email && errors.email.message) ||
-                (errors.password && errors.password.message) ||
-                'Войти'}
-            </span>
-          </Button>
-          <Button asChild className='justify-between gap-4'>
-            <Link href='/registration'>
-              <Icon type='profile' className='shrink-0 text-inherit' />
-              <span className='ml-[calc(50%-34px)] -translate-x-1/2'>Зарегистрироваться</span>
-            </Link>
-          </Button>
+          </CardHeader>
+          <CardContent>
+            <Input
+              icon='password'
+              actionIcon={isPasswordShowed ? 'visible' : 'invisible'}
+              onActionClick={() => setIsPasswordShowed((prev) => !prev)}
+              type={isPasswordShowed ? 'text' : 'password'}
+              id='password'
+              placeholder='Пароль'
+              autoComplete='password'
+              {...register('password', { onChange: () => clearErrors('root') })}
+            />
+          </CardContent>
+          <CardContent>
+            <Button
+              disabled={isSubmitting}
+              type='submit'
+              color={!isValid && isSubmitted ? 'destructive' : 'accent'}
+              className='w-64 justify-start gap-4'
+            >
+              <Icon
+                type={isSubmitting ? 'loading' : !isValid && isSubmitted ? 'alert' : 'enter'}
+                className='shrink-0 text-inherit'
+              />
+              <span className='ml-[calc(50%-34px)] -translate-x-1/2 whitespace-nowrap'>
+                {(isSubmitSuccessful && 'Успех!') ||
+                  (errors.root && errors.root.message) ||
+                  (errors.email && errors.email.message) ||
+                  (errors.password && errors.password.message) ||
+                  'Войти'}
+              </span>
+            </Button>
+          </CardContent>
+          <CardFooter>
+            <Button variant='outline' asChild className='w-64 justify-between gap-4'>
+              <Link href='/registration'>
+                <Icon type='profile' className='shrink-0 text-inherit' />
+                <span className='ml-[calc(50%-34px)] -translate-x-1/2'>Зарегистрироваться</span>
+              </Link>
+            </Button>
+          </CardFooter>
         </form>
       </Card>
     </section>

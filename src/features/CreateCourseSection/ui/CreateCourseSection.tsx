@@ -34,7 +34,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
             <List>
               <ListItem asChild>
                 <button
-                  className='rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
+                  className='group rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
                   onClick={() =>
                     createSection({ pageId, text: { content: 'New section' } })
                       .unwrap()
@@ -45,6 +45,10 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                   <ListContent>
                     <ListTitle>Текст</ListTitle>
                   </ListContent>
+                  <ListIcon
+                    icon='add'
+                    className='h-3 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100'
+                  />
                 </button>
               </ListItem>
             </List>
@@ -52,7 +56,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
               <h3 className='px-6 py-4 font-NTSomic text-xl font-bold text-primary'>Вопросы</h3>
               <ListItem asChild>
                 <button
-                  className='rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
+                  className='group rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
                   onClick={() =>
                     createSection({
                       pageId,
@@ -70,6 +74,10 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                   <ListContent>
                     <ListTitle>Один вариант</ListTitle>
                   </ListContent>
+                  <ListIcon
+                    icon='add'
+                    className='h-3 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100'
+                  />
                 </button>
               </ListItem>
               <ListItem asChild>
@@ -94,7 +102,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                   </ListContent>
                   <ListIcon
                     icon='add'
-                    className='h-3 text-primary opacity-0 transition-opacity group-hover:opacity-100'
+                    className='h-3 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100'
                   />
                 </button>
               </ListItem>
@@ -119,7 +127,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                   </ListContent>
                   <ListIcon
                     icon='add'
-                    className='h-3 text-primary opacity-0 transition-opacity group-hover:opacity-100'
+                    className='h-3 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100'
                   />
                 </button>
               </ListItem>
@@ -144,7 +152,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                   </ListContent>
                   <ListIcon
                     icon='add'
-                    className='h-3 text-primary opacity-0 transition-opacity group-hover:opacity-100'
+                    className='h-3 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100'
                   />
                 </button>
               </ListItem>
@@ -170,7 +178,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                   </ListContent>
                   <ListIcon
                     icon='add'
-                    className='h-3 text-primary opacity-0 transition-opacity group-hover:opacity-100'
+                    className='h-3 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100'
                   />
                 </button>
               </ListItem>
@@ -179,7 +187,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
             <List>
               <ListItem asChild>
                 <button
-                  className='rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
+                  className='group rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
                   onClick={() =>
                     createSection({ pageId, answer: { question: 'Вопрос?' } })
                       .unwrap()
@@ -190,6 +198,10 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                   <ListContent>
                     <ListTitle>Длинный ответ</ListTitle>
                   </ListContent>
+                  <ListIcon
+                    icon='add'
+                    className='h-3 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100'
+                  />
                 </button>
               </ListItem>
               {/* <List.Item asChild>
