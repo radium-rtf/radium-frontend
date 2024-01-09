@@ -35,7 +35,7 @@ export const GroupMenu: FC<IProps> = ({ group, className, answers, courseId }) =
             key='Ведомость'
             asChild
             className={cn(
-              'font-mono text-[0.8125rem] font-normal ',
+              'font-NTSomic text-[0.8125rem] font-normal ',
               'rounded-lg ',
               'select-none',
               !selectedStudentId && 'bg-text-primary border border-white/10 bg-opacity-5'
@@ -76,11 +76,11 @@ export const GroupMenu: FC<IProps> = ({ group, className, answers, courseId }) =
                     />
                   </List.Icon>
                   <List.Content>
-                    <List.Title className='font-mono text-[0.8125rem] font-normal'>
+                    <List.Title className='font-NTSomic text-[0.8125rem] font-normal'>
                       {student.user.name}
                     </List.Title>
                     {session?.user.roles.isTeacher && (
-                      <List.Subtitle className='text-accent-secondary-300 font-mono text-[0.625rem] font-normal'>
+                      <List.Subtitle className='text-accent-secondary-300 font-NTSomic text-[0.625rem] font-normal'>
                         {answersNeedToReview !== 0 && (
                           <>
                             {answersNeedToReview}

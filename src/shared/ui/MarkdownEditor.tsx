@@ -111,7 +111,7 @@ export const MarkdownEditor: FC<IProps> = ({ markdown, onChange }) => {
           )}
           onClick={() => setIsPlaintextMode(false)}
         >
-          <Icon type='visible' className='text-primary-default' />
+          <Icon type='visible' className='text-primary' />
         </button>
         <TextArea
           className='font-code

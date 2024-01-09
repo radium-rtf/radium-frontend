@@ -72,9 +72,9 @@ export const AnswerSectionEdit: FC<AnswerSectionEditProps> = ({ sectionData, onS
       )}
     >
       <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmitHandler)}>
-        <div className='text-primary-default flex items-center gap-4'>
+        <div className='flex items-center gap-4 text-primary'>
           <Icon type='question' className='text-inherit' />
-          <span className='font-mono font-bold leading-[normal] text-inherit'>Вопрос</span>
+          <span className='font-NTSomic font-bold leading-[normal] text-inherit'>Вопрос</span>
         </div>
         <header className='flex flex-col gap-4 text-[0.8125rem] leading-normal'>
           <Controller
@@ -85,9 +85,9 @@ export const AnswerSectionEdit: FC<AnswerSectionEditProps> = ({ sectionData, onS
             )}
           />
         </header>
-        <div className='text-primary-default relative flex items-center gap-4'>
+        <div className='relative flex items-center gap-4 text-primary'>
           <Icon type='question' className='text-inherit' />
-          <span className='font-mono font-bold leading-[normal] text-inherit'>Ответ</span>
+          <span className='font-NTSomic font-bold leading-[normal] text-inherit'>Ответ</span>
           <button
             className='drag after:absolute after:-left-6 after:-right-6 after:-top-6 after:bottom-0 after:block after:rounded-t-2xl after:content-[""]'
             type='button'

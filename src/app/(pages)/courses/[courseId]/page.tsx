@@ -38,7 +38,7 @@ export default function Page() {
           <h1 className='font-NTSomic text-4xl font-bold text-primary'>Радиум</h1>
         </Link>
       </Header>
-      <main className='mb-8 flex flex-grow flex-col'>
+      <main className='mb-8 mt-[8.25rem] flex flex-grow flex-col'>
         {/* Loading skeleton */}
         {isLoading && (
           <>
@@ -121,9 +121,7 @@ export default function Page() {
           <>
             <div className='flex h-full flex-col items-center justify-center gap-4'>
               <Image src={'/error.svg'} width={224} height={224} alt='Not found error' />
-              <h1 className='text-primary-default font-mono text-5xl font-bold'>
-                Такого курса нет :(
-              </h1>
+              <h1 className='font-NTSomic text-5xl font-bold text-primary'>Такого курса нет :(</h1>
               <p className='text-text-primary text-[0.8125rem]'>
                 Возможно курс был удален или вы перешли по неверной ссылке
               </p>

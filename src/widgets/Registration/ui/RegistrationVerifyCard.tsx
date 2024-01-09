@@ -53,7 +53,7 @@ export const VerifyRegistrationCard = () => {
     <section className='flex w-[19rem] flex-col items-center gap-9'>
       <div className='flex items-center gap-4'>
         <Image height={28} width={48} alt='Radium logo' src='/logo.svg' />
-        <h1 className='text-primary-default font-NTSomic text-4xl font-bold'>Радиум</h1>
+        <h1 className='font-NTSomic text-4xl font-bold text-primary'>Радиум</h1>
       </div>
       <Card className='w-full'>
         <form onSubmit={handleSubmit(onSubmitHandler)}>

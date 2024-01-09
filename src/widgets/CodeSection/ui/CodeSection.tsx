@@ -78,9 +78,9 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
   return (
     <Card asChild>
       <form onSubmit={handleSubmit(onSubmitHandler)}>
-        <div className='text-primary-default flex items-center gap-4'>
+        <div className='flex items-center gap-4 text-primary'>
           <Icon type='question' className='text-inherit' />
-          <span className='font-mono font-bold leading-[normal] text-inherit'>Вопрос</span>
+          <span className='font-NTSomic font-bold leading-[normal] text-inherit'>Вопрос</span>
         </div>
         <header className='text-[0.8125rem] leading-normal'>{sectionData.content}</header>
         <Tabs>

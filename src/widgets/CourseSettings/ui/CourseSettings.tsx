@@ -45,7 +45,7 @@ export const CourseSettings: FC<CourseSettingsProps> = ({
             'Готов к публикации'}
         </CardTitle>
       </CardHeader>
-      <h1 className='text-primary-default font-mono text-xl font-bold leading-[normal]'></h1>
+      <h1 className='font-NTSomic text-xl font-bold leading-[normal] text-primary'></h1>
       {isEditing && (
         <CardContent>
           <div className='flex items-center gap-4 py-2'>

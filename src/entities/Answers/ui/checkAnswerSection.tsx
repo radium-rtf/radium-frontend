@@ -76,7 +76,7 @@ export const CheckAnswerSection: FC<IProps> = ({ studentAnswer: answer, reviewed
             <div
               className='text-accent-primary-200
                       flex
-                      gap-[1rem] font-mono
+                      gap-[1rem] font-NTSomic
                       text-[1rem] font-bold'
             >
               <Icon type={'task'} />

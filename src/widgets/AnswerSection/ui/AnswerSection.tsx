@@ -98,12 +98,12 @@ export const AnswerSection: FC<AnswerSectionProps> = ({ sectionData }) => {
       <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmitHandler)}>
         <div
           className={cn(
-            'text-primary-default flex items-center gap-4',
+            'flex items-center gap-4 text-primary',
             isEditAllowed && isEditMode && 'relative'
           )}
         >
           <Icon type='task' className='text-inherit' />
-          <span className='font-mono font-bold leading-[normal] text-inherit'>Задание</span>
+          <span className='font-NTSomic font-bold leading-[normal] text-inherit'>Задание</span>
           {isEditAllowed && isEditMode && (
             <button
               className='drag after:absolute after:-left-6 after:-right-6 after:-top-6 after:bottom-0 after:block after:rounded-t-2xl after:content-[""]'

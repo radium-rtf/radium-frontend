@@ -13,7 +13,7 @@ export const CourseAuthors: FC<IProps> = ({ authors }) => {
       <CardHeader>
         <CardTitle>Авторы курса</CardTitle>
       </CardHeader>
-      <h1 className='text-primary-default mb-4 font-mono text-xl font-bold leading-[normal]'>
+      <h1 className='mb-4 font-NTSomic text-xl font-bold leading-[normal] text-primary'>
         Авторы курса
       </h1>
       <List className='-mx-6 flex flex-col'>

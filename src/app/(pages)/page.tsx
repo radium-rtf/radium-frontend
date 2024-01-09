@@ -34,7 +34,7 @@ export default function Home() {
       <main className='container mx-auto mb-8 mt-[8.25rem] flex flex-grow flex-col gap-6'>
         {isLoading && (
           <>
-            <div className='bg-background-card ml-6 h-[42px] w-1/2 animate-pulse rounded-lg md:ml-16' />
+            <div className='ml-6 h-[42px] w-1/2 animate-pulse rounded-lg bg-card md:ml-16' />
             <section className='container mx-auto grid gap-8 px-6 md:px-12 lg:grid-cols-2 2xl:grid-cols-3'>
               {Array.from({ length: 6 }).map((_, index) => (
                 <Card className='h-64 animate-pulse' key={index}>
@@ -58,7 +58,7 @@ export default function Home() {
             )}
             {!!courses.my.length && (
               <>
-                <h2 className='text-primary-default ml-6 font-mono text-[2rem] font-bold leading-[normal] md:ml-16'>
+                <h2 className='ml-6 font-NTSomic text-[2rem] font-bold leading-[normal] text-primary md:ml-16'>
                   Ваши курсы
                 </h2>
                 <section className='container mx-auto grid grid-cols-1 gap-8 px-6 md:px-12 lg:grid-cols-2 2xl:grid-cols-3'>
@@ -70,7 +70,7 @@ export default function Home() {
             )}
             {!!courses.recommendations.length && (
               <>
-                <h2 className='text-primary-default ml-6 font-mono text-[2rem] font-bold leading-[normal] md:ml-16'>
+                <h2 className='ml-6 font-NTSomic text-[2rem] font-bold leading-[normal] text-primary md:ml-16'>
                   Рекомендации
                 </h2>
                 <section className='container mx-auto grid grid-cols-1 gap-8 px-6 md:px-12 lg:grid-cols-2 2xl:grid-cols-3'>

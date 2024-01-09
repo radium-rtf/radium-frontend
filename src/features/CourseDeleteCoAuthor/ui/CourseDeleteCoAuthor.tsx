@@ -16,7 +16,7 @@ export const CourseDeleteCoAuthor: FC<CourseDeleteCoAuthorProps> = ({ courseId, 
 
   return (
     <button type='button' onClick={onClickHandler}>
-      <Icon type='remove' className='text-primary-default h-3' />
+      <Icon type='remove' className='h-3 text-primary' />
     </button>
   );
 };

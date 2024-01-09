@@ -30,7 +30,7 @@ export const Button: FC<ButtonProps> = ({
           'bg-white/5',
           'px-4',
           'py-2',
-          'font-mono',
+          'font-NTSomic',
           'text-[0.8125rem]',
           'leading-tight',
           '-outline-offset-1',

@@ -158,7 +158,7 @@ export default function CoursePageLayout({ children }: CourseStudyLayoutProps) {
                     <ListContent>
                       <ListTitle>{group.name}</ListTitle>
                     </ListContent>
-                    <Icon className='text-primary-default h-3 w-3' type='chevron-right' />
+                    <Icon className='h-3 w-3 text-primary' type='chevron-right' />
                   </Link>
                 </ListItem>
               ))}
@@ -203,7 +203,7 @@ export default function CoursePageLayout({ children }: CourseStudyLayoutProps) {
             <>
               <div className='flex h-full w-full flex-col items-center justify-center gap-4'>
                 <Image src={'/error.svg'} width={224} height={224} alt='Not found error' />
-                <h1 className='text-primary-default font-mono text-5xl font-bold'>
+                <h1 className='font-NTSomic text-5xl font-bold text-primary'>
                   Такого курса нет :(
                 </h1>
                 <p className='text-text-primary text-[0.8125rem]'>

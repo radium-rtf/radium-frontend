@@ -166,7 +166,7 @@ export default function CoursePage({ params }: IProps) {
       {error && (
         <div className='flex h-full flex-col items-center justify-center gap-4'>
           <Image src={'/error.svg'} width={224} height={224} alt='Not found error' />
-          <h1 className='text-primary-default font-mono text-5xl font-bold'>
+          <h1 className='font-NTSomic text-5xl font-bold text-primary'>
             Такой страницы курса нет :(
           </h1>
           <p className='text-text-primary text-[0.8125rem]'>

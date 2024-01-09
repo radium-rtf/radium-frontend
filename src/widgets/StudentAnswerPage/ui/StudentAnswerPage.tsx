@@ -38,7 +38,7 @@ export const StudentAnswerPage: FC<IProps> = ({ studentId, groupId, courseId }) 
 
   return (
     <div className='mx-auto max-w-[45rem]'>
-      <h1 className='text-accent-primary-200 px-6 font-mono text-[3rem] font-bold'>
+      <h1 className='text-accent-primary-200 px-6 font-NTSomic text-[3rem] font-bold'>
         Задания от {studentAnswers.user.name}
       </h1>
       {needToReview.map((answer) => (
@@ -50,7 +50,9 @@ export const StudentAnswerPage: FC<IProps> = ({ studentId, groupId, courseId }) 
         />
       ))}
       {reviewed.length !== 0 && (
-        <h1 className='text-accent-primary-200 px-6 font-mono text-[2rem] font-bold'>Проверено</h1>
+        <h1 className='text-accent-primary-200 px-6 font-NTSomic text-[2rem] font-bold'>
+          Проверено
+        </h1>
       )}
       {reviewed.map((answer) => (
         <CheckAnswerSection key={answer.id} reviewed studentAnswer={answer} className='my-[2rem]' />

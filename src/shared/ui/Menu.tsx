@@ -82,7 +82,7 @@ const MenuIcon = forwardRef<SVGSVGElement, IMenuIconProps>(
         {...props}
         type={icon || 'null'}
         ref={ref}
-        className={cn('text-primary-default h-[1.125rem]', className)}
+        className={cn('h-[1.125rem] text-primary', className)}
       />
     );
   }
