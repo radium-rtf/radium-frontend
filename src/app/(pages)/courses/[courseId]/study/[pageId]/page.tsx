@@ -1,17 +1,17 @@
 'use client';
-import { useContext, useEffect, useLayoutEffect } from 'react';
 import { CodeSection } from '@/widgets/CodeSection';
 import { TextSection } from '@/widgets/TextSection';
 import { ChoiceSection } from '@/widgets/ChoiceSection';
 import { AnswerSection } from '@/widgets/AnswerSection';
 import { MappingSection } from '@/widgets/MappingSection';
 import { PageNavigation } from '@/widgets/PageNavigation';
-import { useGetPageQuery } from '@/entities/CoursePage';
-import { MultiChoiceSection } from '@/widgets/MultiChoiceSection';
-import { ShortAnswerSection } from '@/widgets/ShortAnswerSection';
-import { PermutationsSection } from '@/widgets/PermutationsSection';
-import { CourseEditContext } from '@/features/CourseEditContext';
 import { CoursePageInfo } from '@/widgets/CoursePageInfo';
+import { useGetPageQuery } from '@/entities/CoursePage';
+import { CourseEditContext } from '@/features/CourseEditContext';
+import { ShortAnswerSection } from '@/widgets/ShortAnswerSection';
+import { MultiChoiceSection } from '@/widgets/MultiChoiceSection';
+import { PermutationsSection } from '@/widgets/PermutationsSection';
+import { useContext, useEffect } from 'react';
 import {
   AllSectionsResponseDto,
   useChangeCourseSectionOrderMutation,
@@ -30,7 +30,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { restrictToParentElement, restrictToVerticalAxis } from '@dnd-kit/modifiers';
-import { Card } from '@/shared';
+import { Card, useUpdateTitle } from '@/shared';
 import Image from 'next/image';
 
 interface IProps {
@@ -68,11 +68,7 @@ export default function Page({ params }: IProps) {
       );
   }, [params.courseId, params.pageId, page]);
 
-  useLayoutEffect(() => {
-    if (page) {
-      window.document.title = page.name;
-    }
-  }, [page]);
+  useUpdateTitle(page?.name || '<без названия>');
 
   // DND Handlers
   const onDragEndHandler = (e: DragEndEvent) => {

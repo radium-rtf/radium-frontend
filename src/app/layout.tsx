@@ -1,23 +1,26 @@
-import '../globals.css';
-import type { Metadata } from 'next';
-import { AuthSessionProvider, cn, ReduxStoreProvider } from '@/shared';
+import './globals.css';
 import localFont from 'next/font/local';
+import { AuthSessionProvider, ReduxStoreProvider, cn } from '@/shared';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import Wave from 'react-wavify';
 
 const ntSomic = localFont({
   src: [
     {
-      path: '../../../public/fonts/NT-Somic/NTSomic-Bold.woff2',
-      weight: '700',
+      path: '../../public/fonts/NT-Somic/NTSomic-Regular.woff2',
+      weight: '400',
     },
     {
-      path: '../../../public/fonts/NT-Somic/NTSomic-Medium.woff2',
+      path: '../../public/fonts/NT-Somic/NTSomic-Medium.woff2',
       weight: '500',
     },
     {
-      path: '../../../public/fonts/NT-Somic/NTSomic-Regular.woff2',
-      weight: '400',
+      path: '../../public/fonts/NT-Somic/NTSomic-Semibold.woff2',
+      weight: '600',
+    },
+    {
+      path: '../../public/fonts/NT-Somic/NTSomic-Bold.woff2',
+      weight: '700',
     },
   ],
   variable: '--font-nt-somic',
@@ -33,31 +36,20 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-jetbrains-mono',
 });
 
-export const metadata: Metadata = {
-  title: 'Radium',
-  description: 'Radium',
-};
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang='ru'
-      className='dark flex h-full flex-col scroll-smooth'
-      style={{ scrollBehavior: 'smooth' }}
-    >
+    <html lang='ru' className='dark relative h-full scroll-smooth'>
       <body
         className={cn(
-          'bg-background-default text-foreground-default relative flex flex-grow flex-col font-sans',
+          'h-full bg-background font-sans text-foreground',
           inter.variable,
           ntSomic.variable,
           jetbrainsMono.variable
         )}
       >
-        <main className='relative mt-[8.25rem] flex flex-grow flex-col'>
-          <AuthSessionProvider>
-            <ReduxStoreProvider>{children}</ReduxStoreProvider>
-          </AuthSessionProvider>
-        </main>
+        <AuthSessionProvider>
+          <ReduxStoreProvider>{children}</ReduxStoreProvider>
+        </AuthSessionProvider>
         <Wave
           fill={`rgba(0, 0, 0, 0.05)`}
           options={{

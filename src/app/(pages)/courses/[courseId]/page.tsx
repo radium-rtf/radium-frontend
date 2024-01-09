@@ -1,8 +1,8 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useEffect } from 'react';
 import { Header } from '@/widgets/Header';
+import { Footer } from '@/widgets/Footer';
 import { CourseBrief, CourseBriefSkeleton } from '@/widgets/CourseBrief';
 import { CourseBanner, CourseBannerSkeleton } from '@/widgets/CourseBanner';
 import { CourseSettings } from '@/widgets/CourseSettings';
@@ -12,10 +12,9 @@ import { CourseLandingEditToggle } from '@/widgets/CourseLandingEditToggle';
 import { CourseEditContextWrapper } from '@/features/CourseEditContext';
 import { useParams, useSearchParams } from 'next/navigation';
 import { useCourseRoles, useGetCourseQuery } from '@/entities/Course';
-import { Footer } from '@/widgets/Footer';
 import { CourseName, CourseNameSkeleton } from '@/widgets/CourseName';
 import { CourseAuthors, CourseAuthorsSkeleton } from '@/widgets/CourseAuthors';
-import { Button, Icon } from '@/shared';
+import { Button, Icon, useUpdateTitle } from '@/shared';
 
 export default function Page() {
   const params = useParams() as {
@@ -24,11 +23,7 @@ export default function Page() {
 
   const { data: course, isLoading, error } = useGetCourseQuery(params.courseId);
 
-  useEffect(() => {
-    if (course) {
-      window.document.title = course.name || '<без названия>';
-    }
-  }, [course]);
+  useUpdateTitle(course?.name || '<без названия>');
 
   const searchParams = useSearchParams();
 

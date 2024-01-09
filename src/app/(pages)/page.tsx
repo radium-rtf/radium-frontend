@@ -1,22 +1,19 @@
 'use client';
-import { useLayoutEffect } from 'react';
-import { useGetAccountCoursesQuery } from '@/entities/Course';
-import { Header } from '@/widgets/Header';
 import Link from 'next/link';
 import Image from 'next/image';
-import { CourseCreate } from '@/features/CourseCreate';
-import { AssignedCourseCard, AuthorShipCourseCard, CourseCard } from '@/widgets/CourseCard';
-import { useSession } from 'next-auth/react';
+import { Header } from '@/widgets/Header';
 import { Footer } from '@/widgets/Footer';
-import { Card } from '@/shared';
+import { useSession } from 'next-auth/react';
+import { CourseCreate } from '@/features/CourseCreate';
+import { Card, useUpdateTitle } from '@/shared';
+import { useGetAccountCoursesQuery } from '@/entities/Course';
+import { AssignedCourseCard, AuthorShipCourseCard, CourseCard } from '@/widgets/CourseCard';
 
 export default function Home() {
   const { data: courses, isLoading } = useGetAccountCoursesQuery();
   const { data: session } = useSession();
 
-  useLayoutEffect(() => {
-    window.document.title = 'Мои курсы';
-  }, []);
+  useUpdateTitle('Мои курсы');
 
   return (
     <>
@@ -34,7 +31,7 @@ export default function Home() {
           <h1 className='font-NTSomic text-4xl font-bold text-primary'>Радиум</h1>
         </Link>
       </Header>
-      <main className='container mx-auto mb-8 flex flex-grow flex-col gap-6'>
+      <main className='container mx-auto mb-8 mt-[8.25rem] flex flex-grow flex-col gap-6'>
         {isLoading && (
           <>
             <div className='bg-background-card ml-6 h-[42px] w-1/2 animate-pulse rounded-lg md:ml-16' />
