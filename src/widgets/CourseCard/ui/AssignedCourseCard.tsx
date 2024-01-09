@@ -17,7 +17,7 @@ export const AssignedCourseCard: FC<IProps> = ({ course }) => {
 
   return (
     <Card className='relative flex flex-col transition-all hover:bg-card-hover'>
-      <Link className='absolute inset-0 z-0' href={`courses/${id}`} scroll={false} />
+      <Link className='absolute inset-0 z-0 rounded-lg' href={`courses/${id}`} scroll={false} />
       <CardHeader className='flex-row items-center gap-4 space-y-0'>
         {logo ? (
           <Image

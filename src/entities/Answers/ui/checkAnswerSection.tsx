@@ -69,7 +69,7 @@ export const CheckAnswerSection: FC<IProps> = ({ studentAnswer: answer, reviewed
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className={cn('flex', 'm-auto', 'rounded-[1rem]', 'bg-background-card', className)}
+        className={cn('flex', 'm-auto', 'rounded-[1rem]', 'bg-card', className)}
       >
         <main className='inline-block h-full w-full p-[1.5rem]'>
           <div className='mb-[1rem] w-full'>

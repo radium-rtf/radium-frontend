@@ -25,7 +25,7 @@ export const ChangeBanner: FC<ChangeBannerProps> = ({ courseId }) => {
   return (
     <>
       <Button
-        className='absolute right-4 top-4 w-64 justify-start md:right-12'
+        className='absolute right-4 top-4 w-64 justify-start'
         onClick={() => changeBannerClickHandler(inputRef.current!)}
       >
         <Icon type='edit' className='text-inherit' />

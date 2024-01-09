@@ -44,13 +44,13 @@ export default function Page() {
           <>
             <CourseBannerSkeleton />
             <main className='container mx-auto px-12 lg:px-[8.25rem]'>
-              <div className='grid gap-8 lg:grid-cols-3 2xl:grid-cols-4'>
+              <div className='grid gap-8 xl:grid-cols-3 2xl:grid-cols-4'>
                 <CourseNameSkeleton />
-                <main className='flex flex-col gap-8 lg:col-span-2 2xl:col-span-3'>
+                <main className='flex flex-col gap-8 xl:col-span-2 2xl:col-span-3'>
                   <CourseBriefSkeleton />
                   <CourseDescriptionSkeleton />
                 </main>
-                <aside className='col-span-1 flex flex-col gap-8'>
+                <aside className='flex flex-col gap-8'>
                   <CourseAuthorsSkeleton />
                   <CourseContactsSkeleton />
                 </aside>
@@ -70,7 +70,7 @@ export default function Page() {
             <main className='container mx-auto px-12 lg:px-[8.25rem]'>
               <div className='grid gap-8 xl:grid-cols-3 2xl:grid-cols-4'>
                 <CourseName courseName={course.name} isEditAllowed={isEditAllowed} />
-                <main className='flex flex-col gap-8 lg:col-span-2 2xl:col-span-3'>
+                <main className='flex flex-col gap-8 xl:col-span-2 2xl:col-span-3'>
                   <CourseBrief
                     courseLogo={course.logo}
                     shortDescription={course.shortDescription}
@@ -86,7 +86,7 @@ export default function Page() {
                     isEditAllowed={isEditAllowed}
                   />
                 </main>
-                <aside className='col-span-1 flex flex-col gap-8'>
+                <aside className='flex flex-col gap-8'>
                   {isEditAllowed && <CourseLandingEditToggle />}
                   {isEditAllowed && (
                     <CourseSettings

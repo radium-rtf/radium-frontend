@@ -13,7 +13,7 @@ export const Card = forwardRef<HTMLDivElement, IProps>(({ className, asChild, ..
     <Comp
       ref={ref}
       {...props}
-      className={cn('bg-background-card flex flex-col gap-4 rounded-2xl p-6', className)}
+      className={cn('flex flex-col gap-4 rounded-2xl bg-card p-6', className)}
     />
   );
 });

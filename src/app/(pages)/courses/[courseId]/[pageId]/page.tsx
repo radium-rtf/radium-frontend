@@ -127,7 +127,7 @@ export default function CoursePage({ params }: IProps) {
       {/* Loading state */}
       {isLoading && (
         <>
-          <div className='bg-background-card h-16 w-full animate-pulse rounded-lg' />
+          <div className='h-16 w-full animate-pulse rounded-lg bg-card' />
           <Card className='h-64 animate-pulse' />
           <Card className='h-64 animate-pulse' />
           <Card className='h-20 animate-pulse' />

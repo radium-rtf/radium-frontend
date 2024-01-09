@@ -9,7 +9,7 @@ export const CheckAnswerSectionSkeleton: FC = () => (
       'h-[23.0625rem]',
       'w-[45rem]',
       'rounded-[1rem]',
-      'bg-background-card',
+      'bg-card',
       'my-[2rem]'
     )}
   >

@@ -17,7 +17,7 @@ export const CourseBanner: FC<CourseBannerProps> = ({ name, url, courseId, isEdi
   return (
     <div
       className={cn(
-        'bg-background-card relative mb-8 h-64 overflow-hidden rounded-2xl md:container md:mx-auto md:mb-16'
+        'relative mb-8 h-64 overflow-hidden rounded-2xl bg-card md:container md:mx-auto md:mb-16 md:pl-0 md:pr-0'
       )}
     >
       {url !== '' ? (
