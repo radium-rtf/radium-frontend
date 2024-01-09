@@ -1,8 +1,17 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ReactNode, useLayoutEffect } from 'react';
-import { Button, cn, Icon, ListContent, ListItem, ListTitle, Progress } from '@/shared';
+import { ReactNode } from 'react';
+import {
+  Button,
+  cn,
+  Icon,
+  ListContent,
+  ListItem,
+  ListTitle,
+  Progress,
+  useUpdateTitle,
+} from '@/shared';
 import { Header } from '@/widgets/Header';
 import { useParams } from 'next/navigation';
 import { CourseEditToggle } from '@/features/CourseEditToggle';
@@ -50,11 +59,7 @@ export default function CourseStudyLayout({ children }: CourseStudyLayoutProps) 
 
   const [updateOrder] = useChangeCourseModuleOrderMutation();
 
-  useLayoutEffect(() => {
-    if (course) {
-      window.document.title = course.name || '<без названия>';
-    }
-  }, [course]);
+  useUpdateTitle(course?.name);
 
   const { isAuthor, isCoauthor } = useCourseRoles(course);
   const isEditAllowed = isAuthor || isCoauthor;
@@ -142,10 +147,10 @@ export default function CourseStudyLayout({ children }: CourseStudyLayoutProps) 
                   <Link
                     href={`/groups/${group.id}/courses/${course.id}`}
                     className={cn(
-                      'flex w-64 rounded-lg border border-transparent px-6 py-2 transition-colors hover:border-white/10 hover:bg-white/5'
+                      'flex w-64 rounded-[0.5rem] border border-transparent px-6 py-2 transition-colors hover:border-white/10 hover:bg-white/5'
                     )}
                   >
-                    <Icon type='group' className='text-primary-default' />
+                    <Icon type='group' className='text-primary' />
                     <ListContent>
                       <ListTitle>{group.name}</ListTitle>
                     </ListContent>

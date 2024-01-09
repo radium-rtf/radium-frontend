@@ -21,8 +21,16 @@ export default function Home() {
   return (
     <>
       <Header>
-        <Link href='/' className='flex items-center gap-6' scroll={false}>
-          <Image src='/logo.svg' alt='Radium' width={48} height={48} />
+        <Link href='/' className='flex items-center gap-6 transition-all' scroll={false}>
+          <Image
+            src='/logo.svg'
+            quality={100}
+            sizes='3rem 2.25rem'
+            alt='Radium'
+            width={48}
+            height={48}
+            priority
+          />
           <h1 className='font-NTSomic text-4xl font-bold text-primary'>Радиум</h1>
         </Link>
       </Header>

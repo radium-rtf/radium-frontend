@@ -134,7 +134,7 @@ export default function Page({ params }: IProps) {
       {/* Page state */}
       {page && (
         <>
-          <h2 className='text-accent-primary-200 mx-6 font-mono text-5xl font-bold leading-[normal]'>
+          <h2 className='mx-6 font-NTSomic text-5xl font-bold leading-[normal] text-primary'>
             {page.name}
           </h2>
           {isEditing && <CoursePageInfo page={page} />}

@@ -71,3 +71,5 @@ export { emptyApi } from './api/api';
 // Hooks
 export { useAppDispatch, useAppSelector } from './api/store';
 export { useDrop } from './hooks/useDrop';
+export { useScrollPosition } from './hooks/useScrollPosition';
+export { useUpdateTitle } from './hooks/useUpdateTitle';
