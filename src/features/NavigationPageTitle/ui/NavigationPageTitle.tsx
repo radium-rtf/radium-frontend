@@ -124,7 +124,7 @@ export const NavigationPageTitle: FC<IProps> = ({ className, currentPage, page, 
 
       <ListContent asChild>
         <Link
-          href={`/courses/${params.courseId!}/study/${page.id}`}
+          href={`/courses/${params.courseId!}/${page.id}`}
           scroll={false}
           className={cn(!isEditMode && 'after:absolute after:inset-0 after:rounded-lg')}
         >

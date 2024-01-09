@@ -36,7 +36,7 @@ export const CheckAnswerSectionSkeleton: FC = () => (
           'min-h-[8rem]',
           'max-h-96',
           'overflow-y-auto',
-          'radium-scrollbar',
+          'scrollbar',
           'break-words',
           'outline-none',
           'bg-transparent',

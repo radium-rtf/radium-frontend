@@ -99,7 +99,7 @@ export const CheckAnswerSection: FC<IProps> = ({ studentAnswer: answer, reviewed
               'min-h-[8rem]',
               'max-h-96',
               'overflow-y-auto',
-              'radium-scrollbar',
+              'scrollbar',
               'break-words',
               inter.variable,
               'outline-none',
@@ -130,7 +130,6 @@ export const CheckAnswerSection: FC<IProps> = ({ studentAnswer: answer, reviewed
                 placeholder='Оценка'
                 onChange={handleScoreChange}
                 value={score ?? ''}
-                inputClassName='text-text-secondary font-[0.8125rem]'
                 className='
                 h-full max-h-[2.25rem]
                 w-full max-w-[16rem]

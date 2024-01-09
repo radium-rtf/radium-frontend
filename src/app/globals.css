@@ -80,3 +80,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    @apply w-1 opacity-50;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    @apply rounded bg-transparent transition-colors;
+  }
+
+  .scrollbar:hover::-webkit-scrollbar-thumb {
+    @apply bg-card;
+  }
+}

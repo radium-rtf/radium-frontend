@@ -41,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='ru' className='dark relative h-full scroll-smooth'>
       <body
         className={cn(
-          'h-full bg-background font-sans text-foreground',
+          'scrollbar flex h-full flex-col bg-background font-sans text-foreground',
           inter.variable,
           ntSomic.variable,
           jetbrainsMono.variable

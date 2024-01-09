@@ -40,8 +40,14 @@ interface IProps {
   };
 }
 
-export default function Page({ params }: IProps) {
-  const { data: page, isLoading, error } = useGetPageQuery(params.pageId);
+export default function CoursePage({ params }: IProps) {
+  const {
+    data: page,
+    isLoading,
+    error,
+  } = useGetPageQuery(params.pageId, {
+    skip: !Number.isNaN(Number(params.pageId)) && Number(params.pageId) === 0,
+  });
   const { isEditing } = useContext(CourseEditContext);
   const [updateOrder] = useChangeCourseSectionOrderMutation();
 

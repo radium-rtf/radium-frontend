@@ -10,6 +10,7 @@ import {
   ListItem,
   ListTitle,
   Progress,
+  useScrollPosition,
   useUpdateTitle,
 } from '@/shared';
 import { Header } from '@/widgets/Header';
@@ -47,19 +48,14 @@ interface CourseStudyLayoutProps {
   children: ReactNode;
 }
 
-export default function CourseStudyLayout({ children }: CourseStudyLayoutProps) {
-  const params: { courseId?: string; pageId?: string } = useParams();
-  const {
-    data: course,
-    isLoading,
-    error,
-  } = useGetCourseQuery(params.courseId!, {
-    skip: !params.courseId,
-  });
+export default function CoursePageLayout({ children }: CourseStudyLayoutProps) {
+  const params: { courseId: string; pageId: string } = useParams();
+  const { data: course, isLoading, error } = useGetCourseQuery(params.courseId!);
 
   const [updateOrder] = useChangeCourseModuleOrderMutation();
-
   useUpdateTitle(course?.name);
+
+  const scrollHeight = useScrollPosition();
 
   const { isAuthor, isCoauthor } = useCourseRoles(course);
   const isEditAllowed = isAuthor || isCoauthor;
@@ -79,8 +75,6 @@ export default function CourseStudyLayout({ children }: CourseStudyLayoutProps) 
   // DND Handler
   const onDragEndHandler = (e: DragEndEvent) => {
     if (course && e.over && e.active.id !== e.over?.id) {
-      console.log(e.over.data.current!.order);
-      console.log(e.active.data.current!.order);
       updateOrder({
         courseId: course.id,
         moduleId: e.active.id as string,
@@ -94,12 +88,12 @@ export default function CourseStudyLayout({ children }: CourseStudyLayoutProps) 
       <Header>
         {isLoading && (
           <div className='flex items-center gap-6'>
-            <div className='bg-background-card h-12 w-12 animate-pulse rounded-lg' />
-            <div className='bg-background-card h-10 w-64 animate-pulse rounded-lg' />
+            <div className='h-12 w-12 animate-pulse rounded-[0.5rem] bg-card' />
+            <div className='h-10 w-64 animate-pulse rounded-[0.5rem] bg-card' />
           </div>
         )}
         {course && (
-          <Link href='/' className='flex items-center gap-6'>
+          <Link href={`/courses/${course.id}`} className='flex items-center gap-6'>
             {course.logo ? (
               <Image
                 src={course.logo}
@@ -109,18 +103,23 @@ export default function CourseStudyLayout({ children }: CourseStudyLayoutProps) 
                 className='h-12 w-12 rounded-[0.5rem] object-cover'
               />
             ) : (
-              <div className='bg-background-overlay h-12 w-12 rounded-lg object-cover'></div>
+              <div className='h-12 w-12 rounded-[0.5rem] bg-popover object-cover'></div>
             )}
             <h1 className='font-NTSomic text-4xl font-bold text-primary'>{course.name}</h1>
           </Link>
         )}
       </Header>
-      <main className='mb-8 flex flex-grow px-12'>
+      <main className='mb-8 mt-[8.25rem] flex flex-grow px-12'>
         <CourseEditContextWrapper>
           {/* Loading state */}
           {isLoading && (
-            <nav className='sticky top-[8.625rem] -ml-6 flex max-h-[calc(100vh-8.65rem)] w-64 shrink-0 flex-grow-0 flex-col gap-4'>
-              <div className='bg-background-card h-10 w-64 animate-pulse rounded-lg' />
+            <nav
+              className={cn(
+                'sticky top-[8.25rem] -ml-6 flex max-h-[calc(100vh-8.25rem)] w-64 shrink-0 flex-grow-0 flex-col gap-4',
+                scrollHeight > 50 && 'top-16 max-h-[calc(100vh-4rem)]'
+              )}
+            >
+              <div className='h-10 w-64 animate-pulse rounded-[0.5rem] bg-card' />
               <NavigationModuleTitleSkeleton />
               <NavigationPageTitleSkeleton />
               <NavigationPageTitleSkeleton />
@@ -133,7 +132,12 @@ export default function CourseStudyLayout({ children }: CourseStudyLayoutProps) 
           )}
           {/* Course state */}
           {course && (
-            <nav className='sticky top-[8.625rem] -ml-6 flex max-h-[calc(100vh-8.65rem)] w-64 shrink-0 flex-grow-0 flex-col self-start'>
+            <nav
+              className={cn(
+                'sticky top-[8.25rem] -ml-6 flex max-h-[calc(100vh-8.65rem)] w-64 shrink-0 flex-grow-0 flex-col self-start transition-all',
+                scrollHeight > 50 && 'top-16 max-h-[calc(100vh-4rem)]'
+              )}
+            >
               {isEditAllowed && <CourseEditToggle />}
               <Progress
                 className='w-64 px-6 py-2.5'
@@ -159,17 +163,7 @@ export default function CourseStudyLayout({ children }: CourseStudyLayoutProps) 
                 </ListItem>
               ))}
 
-              <ul
-                className='
-              [&:hover::-webkit-scrollbar-thumb]:bg-grey-300
-              overflow-y-scroll
-              [&::-webkit-scrollbar-thumb]:rounded
-              [&::-webkit-scrollbar-thumb]:bg-transparent
-              [&::-webkit-scrollbar-thumb]:transition-colors
-              [&::-webkit-scrollbar]:w-1
-              [&::-webkit-scrollbar]:opacity-0
-              '
-              >
+              <ul className='scrollbar overflow-y-scroll'>
                 <DndContext
                   onDragEnd={onDragEndHandler}
                   sensors={sensors}
@@ -192,9 +186,10 @@ export default function CourseStudyLayout({ children }: CourseStudyLayoutProps) 
                     })}
                   </SortableContext>
                 </DndContext>
-                <li></li>
+                <li>
+                  <NavigationCreateModule className='w-full' courseId={course.id} />
+                </li>
               </ul>
-              <NavigationCreateModule className='w-full' courseId={course.id} />
             </nav>
           )}
           {!error && (

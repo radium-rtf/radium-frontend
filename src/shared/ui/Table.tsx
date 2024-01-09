@@ -130,7 +130,7 @@ export const Table: FC<ITable> = ({ bodyRows, headerRow }) => {
   return (
     <div
       className='
-            radium-scrollbar
+            scrollbar
             overflow-hidden
             rounded-lg
             border
