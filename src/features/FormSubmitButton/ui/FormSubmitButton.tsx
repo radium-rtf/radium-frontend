@@ -10,12 +10,17 @@ interface IProps {
 
 export const FormSubmitButton: FC<IProps> = ({ isLoading, error, defaultIcon, text }) => {
   return (
-    <Button disabled={isLoading} type='submit' color={error ? 'destructive' : 'accent'}>
+    <Button
+      disabled={isLoading}
+      className='w-full justify-start'
+      type='submit'
+      variant={error ? 'destructive' : 'default'}
+    >
       <Icon
         className='shrink-0 text-inherit'
         type={isLoading ? 'loading' : error ? 'alert' : defaultIcon}
       />
-      <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
+      <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
         {isLoading ? 'Загружаем...' : error || text}
       </span>
     </Button>

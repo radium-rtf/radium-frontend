@@ -11,7 +11,8 @@ export const registrationSchema = z.object({
     .object({
       password: z
         .string()
-        .min(8, 'Слишком короткий пароль!')
+        .min(6, 'Слишком короткий пароль!')
+        .max(32, 'Слишком длинный пароль!')
         .regex(/[A-Za-z]/, 'Нет буквы')
         .regex(/[0-9]/, 'В пароле нет цифр!')
         .regex(/[^A-Za-z0-9]/, 'Нет спецсимвола'),

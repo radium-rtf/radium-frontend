@@ -165,9 +165,7 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
             <>
               <div className='flex flex-col gap-2 text-[0.8125rem]'>
                 {verdict === 'OK' && <span className='text-secondary-default'>Верно!</span>}
-                {verdict === 'WAIT' && (
-                  <span className='text-accent-primary-200'>Принято на проверку</span>
-                )}
+                {verdict === 'WAIT' && <span className='text-primary'>Принято на проверку</span>}
                 {verdict === 'WA' && <span className='text-destructive-default'>Неправильно!</span>}
               </div>
               {!isError &&

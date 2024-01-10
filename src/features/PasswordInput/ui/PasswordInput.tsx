@@ -9,11 +9,14 @@ export const PasswordInput = forwardRef<HTMLInputElement, IProps>(({ iconType, .
   const [isHidden, setIsHidden] = useState(false);
 
   return (
-    <Input iconType={iconType} type={isHidden ? 'text' : 'password'} ref={ref} {...props}>
-      <button type='button' onClick={() => setIsHidden((prev) => !prev)}>
-        <Icon type={isHidden ? 'visible' : 'invisible'} />
-      </button>
-    </Input>
+    <Input
+      icon={iconType}
+      type={isHidden ? 'text' : 'password'}
+      ref={ref}
+      {...props}
+      actionIcon={isHidden ? 'visible' : 'invisible'}
+      onActionClick={() => setIsHidden((prev) => !prev)}
+    />
   );
 });
 

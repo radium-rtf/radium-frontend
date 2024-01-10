@@ -12,7 +12,7 @@ export const CourseHeader: FC<IProps> = (course) => (
   <Header>
     <Link href='/' className='flex items-center gap-6'>
       <Image src={course.logo} alt={course.name} width={48} height={48} className='object-cover' />
-      <h1 className='text-accent-primary-200 font-NTSomic text-4xl font-bold'>{course.name}</h1>
+      <h1 className='font-NTSomic text-4xl font-bold text-primary'>{course.name}</h1>
     </Link>
   </Header>
 );

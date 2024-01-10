@@ -2,7 +2,7 @@
 import { updatePassword, updateUser } from '@/entities/User';
 import { useSession } from 'next-auth/react';
 import { ProfilePhotoEdit } from '@/features/ProfilePhotoEdit';
-import { Card, Input } from '@/shared';
+import { Card, CardContent, CardFooter, CardHeader, Input } from '@/shared';
 import { FC, useState } from 'react';
 import { FormSubmitButton } from '@/features/FormSubmitButton';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -102,48 +102,58 @@ export const ProfileEdit: FC<IProps> = ({ name }) => {
   };
 
   return (
-    <Card className='relative w-[19rem] pt-[5.5rem]'>
-      <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)} autoComplete='on'>
-        <ProfilePhotoEdit
-          className='absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2'
-          initialPhotoURL={data?.user?.image || ''}
-          {...register('avatar')}
-        />
-        <Input
-          type='text'
-          autoComplete='nickname'
-          iconType='profile'
-          placeholder='Имя'
-          defaultValue={name}
-          {...register('name', {
-            validate: nicknameValidation,
-          })}
-        />
-        <PasswordInput
-          iconType='password'
-          placeholder='Текущий пароль'
-          autoComplete='password'
-          {...register('currentPassword')}
-        />
-        <PasswordInput
-          iconType='password'
-          placeholder='Новый пароль'
-          autoComplete='new-password'
-          {...register('newPassword', {
-            validate: newPasswordValidation,
-          })}
-        />
-        <FormSubmitButton
-          defaultIcon='success'
-          isLoading={isLoading}
-          text={isSuccessful ? 'Успех!' : 'Подтвердить'}
-          error={
-            errors.avatar?.message ||
-            errors.name?.message ||
-            errors.currentPassword?.message ||
-            errors.newPassword?.message
-          }
-        />
+    <Card className='relative w-[19rem]'>
+      <form onSubmit={handleSubmit(onSubmit)} autoComplete='on'>
+        <CardHeader className='pt-[4.5rem]'>
+          <ProfilePhotoEdit
+            className='absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2'
+            initialPhotoURL={data?.user?.image || ''}
+            {...register('avatar')}
+          />
+        </CardHeader>
+        <CardContent>
+          <Input
+            type='text'
+            autoComplete='nickname'
+            icon='profile'
+            placeholder='Имя'
+            defaultValue={name}
+            {...register('name', {
+              validate: nicknameValidation,
+            })}
+          />
+        </CardContent>
+        <CardContent>
+          <PasswordInput
+            iconType='password'
+            placeholder='Текущий пароль'
+            autoComplete='password'
+            {...register('currentPassword')}
+          />
+        </CardContent>
+        <CardContent>
+          <PasswordInput
+            iconType='password'
+            placeholder='Новый пароль'
+            autoComplete='new-password'
+            {...register('newPassword', {
+              validate: newPasswordValidation,
+            })}
+          />
+        </CardContent>
+        <CardFooter>
+          <FormSubmitButton
+            defaultIcon='success'
+            isLoading={isLoading}
+            text={isSuccessful ? 'Успех!' : 'Подтвердить'}
+            error={
+              errors.avatar?.message ||
+              errors.name?.message ||
+              errors.currentPassword?.message ||
+              errors.newPassword?.message
+            }
+          />
+        </CardFooter>
       </form>
     </Card>
   );

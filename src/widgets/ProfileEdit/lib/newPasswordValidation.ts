@@ -6,11 +6,11 @@ export const newPasswordValidation = (value: string): boolean | string => {
   if (!value.match(/\d/g)) {
     return 'В\u00a0пароле\u00a0нет\u00a0цифр!';
   }
-  if (!value.match(/[^A-Za-z0-9]/g)) {
-    return 'Нет\u00a0спец\u00a0символа!';
-  }
-  if (value.length < 8) {
+  if (value.length < 6) {
     return 'Слишком\u00a0короткий\u00a0пароль!';
+  }
+  if (value.length > 32) {
+    return 'Слишком\u00a0длинный\u00a0пароль!';
   }
   return true;
 };
