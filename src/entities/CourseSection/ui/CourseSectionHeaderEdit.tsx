@@ -8,11 +8,11 @@ interface CourseSectionHeaderEditProps extends ButtonHTMLAttributes<HTMLButtonEl
 }
 
 export const CourseSectionHeaderEdit = forwardRef<HTMLButtonElement, CourseSectionHeaderEditProps>(
-  (props, ref) => {
+  ({ isTask, ...props }, ref) => {
     return (
       <CardHeader className='relative flex-row items-center gap-4 space-y-0'>
         <Icon type='question' className='shrink-0 text-primary' />
-        <CardTitle className='text-base'>{props.isTask ? 'Задание' : 'Вопрос'}</CardTitle>
+        <CardTitle className='text-base'>{isTask ? 'Задание' : 'Вопрос'}</CardTitle>
         <button {...props} ref={ref} type='button' className='drag absolute inset-0 rounded-sm'>
           <Icon
             type='handle-horizontal'
