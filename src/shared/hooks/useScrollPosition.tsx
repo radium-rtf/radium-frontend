@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 export const useScrollPosition = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const scrollHandler = () => {
       const scroll = window.scrollY || document.documentElement.scrollTop;
       setScrollPosition(scroll);

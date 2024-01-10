@@ -83,7 +83,7 @@
 
 @layer utilities {
   .scrollbar::-webkit-scrollbar {
-    @apply w-1 opacity-50;
+    @apply w-1 opacity-50 h-1;
   }
 
   .scrollbar::-webkit-scrollbar-thumb {

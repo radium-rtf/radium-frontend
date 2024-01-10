@@ -1,7 +1,7 @@
 'use client';
 import { GroupReportTable, useCourseReportQuery } from '@/entities/Group';
 import { useGroupQuery } from '@/entities/Group/api/groupApi';
-import { useLayoutEffect } from 'react';
+import { useUpdateTitle } from '@/shared';
 
 export default function Page({
   params,
@@ -17,18 +17,14 @@ export default function Page({
   });
   const { data: group } = useGroupQuery(params.groupId);
 
-  useLayoutEffect(() => {
-    if (group) {
-      window.document.title = group.name;
-    }
-  }, [group]);
+  useUpdateTitle(group?.name);
 
   if (!courseReport || !group) {
     return null;
   }
 
   return (
-    <main className='m-auto flex w-[90%] flex-col'>
+    <main className='scrollbar m-auto flex w-[90%] flex-col'>
       <GroupReportTable courseReport={courseReport} />
     </main>
   );

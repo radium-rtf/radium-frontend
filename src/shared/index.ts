@@ -29,7 +29,16 @@ export { ReduxStoreProvider } from './ui/ReduxStoreProvider';
 export { InputFile } from './ui/InputFile';
 export { CloseButton } from './ui/CloseButton';
 export { CodeEditor } from './ui/CodeEditor';
-export { Table, TableBodyRow, TableDataCell, TableHeaderCell } from './ui/Table';
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+} from './ui/tableNew';
 export { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 export {
   DropdownMenu,
