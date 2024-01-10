@@ -9,10 +9,25 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   actionIcon?: Icon;
   onActionClick?: () => void;
   text?: string;
+  wrapperClassName?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, placeholder, id, type, icon, actionIcon, onActionClick, text, ...props }, ref) => {
+  (
+    {
+      id,
+      type,
+      icon,
+      text,
+      className,
+      actionIcon,
+      placeholder,
+      onActionClick,
+      wrapperClassName,
+      ...props
+    },
+    ref
+  ) => {
     const innerId = useId();
     const textWidth = useGetTextWidth(text, '13px var(--font-nt-somic)');
     const leftPadding = (16 + (icon ? 34 : 0)) / 16 + 'rem';
@@ -26,7 +41,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       '--text-right': text ? (actionIcon ? `${16 + 18 + 16}px` : '1rem') : 0,
     } as React.CSSProperties;
     return (
-      <div className='relative h-10 w-full rounded-[0.5rem] text-[#B3B3B3]' style={style}>
+      <div
+        className={cn('relative h-10 w-full rounded-[0.5rem] text-[#B3B3B3]', wrapperClassName)}
+        style={style}
+      >
         <input
           id={id || innerId}
           placeholder={placeholder}
