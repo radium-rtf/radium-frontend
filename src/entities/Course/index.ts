@@ -6,10 +6,6 @@ export { getAllCourses } from './lib/getAllCourses';
 export { getUserCourses } from './lib/getUserCourses';
 export { getCourse } from './lib/getCourse';
 
-// UI
-export { CourseAuthors } from './ui/CourseAuthors';
-export { CourseContacts } from './ui/CourseContacts';
-
 // Hooks
 export {
   useGetCoursesQuery,

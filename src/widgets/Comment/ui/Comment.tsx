@@ -1,22 +1,6 @@
 import React, { FC } from 'react';
 import Image from 'next/image';
 import { cn } from '@/shared';
-import localFont from 'next/font/local';
-
-const ntSomic = localFont({
-  src: [
-    {
-      path: '../../../../public/fonts/NT-Somic/NTSomic-Bold.woff2',
-      weight: '700',
-    },
-    {
-      path: '../../../../public/fonts/NT-Somic/NTSomic-Regular.woff2',
-      weight: '400',
-    },
-  ],
-  variable: '--font-nt-somic',
-});
-
 interface IProps {
   avatar: string;
   name: string;
@@ -32,8 +16,8 @@ export const Comment: FC<IProps> = ({ comment, date, name, avatar }) => {
         'w-full',
         'border',
         'p-4',
-        ntSomic.variable,
-        'rounded-lg',
+        'font-NTSomic',
+        'rounded-[0.5rem]',
         'border-white/10',
         'outline-none',
         'bg-black',
@@ -41,9 +25,9 @@ export const Comment: FC<IProps> = ({ comment, date, name, avatar }) => {
       )}
     >
       <div className='mb-4'>
-        <div className='flex gap-2'>
+        <div className='flex items-center gap-2'>
           <Image
-            className='flex-shrink-0 rounded-full'
+            className='aspect-square h-[1.125rem] w-[1.125rem] shrink-0 rounded-full'
             src={avatar || '/defaultProfile.svg'}
             alt={name}
             width={18}
