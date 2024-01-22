@@ -5,6 +5,13 @@ const config: Config = {
   darkMode: ['class'],
   content: ['./src/**/*.{ts,tsx}'],
   theme: {
+    fontSize: {
+      xs: '0.5rem',
+      sm: '0.625rem',
+      base: '0.8125rem',
+      lg: '1.25rem',
+      xl: '3rem',
+    },
     container: {
       center: true,
       padding: '2rem',
