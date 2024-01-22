@@ -136,7 +136,7 @@ export default function CoursePage({ params }: IProps) {
       {/* Page state */}
       {page && (
         <>
-          <h2 className='mx-6 font-NTSomic text-5xl font-bold leading-[normal] text-primary'>
+          <h2 className='text-5xl mx-6 font-NTSomic font-bold leading-[normal] text-primary'>
             {page.name}
           </h2>
           {isEditing && <CoursePageInfo page={page} />}
@@ -166,10 +166,10 @@ export default function CoursePage({ params }: IProps) {
       {error && (
         <div className='flex h-full flex-col items-center justify-center gap-4'>
           <Image src={'/error.svg'} width={224} height={224} alt='Not found error' />
-          <h1 className='font-NTSomic text-5xl font-bold text-primary'>
+          <h1 className='font-NTSomic text-[2rem] font-bold text-primary'>
             Такой страницы курса нет :(
           </h1>
-          <p className='text-text-primary text-[0.8125rem]'>
+          <p className='text-primary'>
             Возможно страница была удалена или вы перешли по неверной ссылке
           </p>
         </div>

@@ -1,5 +1,5 @@
 'use client';
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 import { signOut, useSession } from 'next-auth/react';
 import {
   Avatar,
@@ -17,10 +17,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 interface IProps {
-  children?: ReactNode;
+  logoUrl?: string;
+  href?: string;
+  title?: string;
 }
 
-export const Header: FC<IProps> = ({ children }) => {
+export const Header: FC<IProps> = ({ logoUrl, title, href }) => {
   const scrollHeight = useScrollPosition();
   const session = useSession();
 
@@ -30,22 +32,43 @@ export const Header: FC<IProps> = ({ children }) => {
     <header
       className={cn(
         'fixed left-0 right-0 top-0 z-40 mr-[var(--removed-body-scroll-bar-size)] flex items-center justify-between bg-background px-12 pb-9 pt-12 transition-[padding]',
-        scrollHeight > SCROLL_THRESHOLD && 'py-[0.875rem] text-xl'
+        scrollHeight > SCROLL_THRESHOLD && 'py-[0.875rem]'
       )}
     >
-      <div
-        className={cn(
-          'content select-none [&_*]:transition-all',
-          scrollHeight > SCROLL_THRESHOLD && '[&_h1]:!text-2xl [&_img]:h-9 [&_img]:!w-9'
+      <div>
+        {(title || logoUrl) && (
+          <Link
+            href={href || '/'}
+            className='flex items-center gap-6 transition-all'
+            scroll={false}
+          >
+            {logoUrl && (
+              <Image
+                src='/logo.svg'
+                quality={100}
+                alt='Radium'
+                width={48}
+                height={48}
+                priority
+                className={cn('h-12 transition-[height]', scrollHeight > SCROLL_THRESHOLD && 'h-9')}
+              />
+            )}
+            {title && (
+              <h1
+                className={cn(
+                  'font-NTSomic text-xl font-bold text-primary transition-[font-size]',
+                  scrollHeight > SCROLL_THRESHOLD && 'text-lg'
+                )}
+              >
+                {title}
+              </h1>
+            )}
+          </Link>
         )}
-      >
-        {children}
       </div>
-      <div className='flex items-center gap-6'>
+      <div className='flex items-center gap-6 justify-self-end'>
         {session?.data?.user.name && (
-          <span className='font-NTSomic text-[0.8125rem] leading-tight text-primary'>
-            {session.data.user.name}
-          </span>
+          <span className='font-NTSomic leading-tight text-primary'>{session.data.user.name}</span>
         )}
         <DropdownMenu>
           <DropdownMenuTrigger className='rounded-full'>

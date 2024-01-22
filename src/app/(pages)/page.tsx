@@ -1,6 +1,4 @@
 'use client';
-import Link from 'next/link';
-import Image from 'next/image';
 import { Header } from '@/widgets/Header';
 import { Footer } from '@/widgets/Footer';
 import { useSession } from 'next-auth/react';
@@ -9,7 +7,7 @@ import { Card, useUpdateTitle } from '@/shared';
 import { useGetAccountCoursesQuery } from '@/entities/Course';
 import { AssignedCourseCard, AuthorShipCourseCard, CourseCard } from '@/widgets/CourseCard';
 
-export default function Home() {
+export default function AllCoursesPage() {
   const { data: courses, isLoading } = useGetAccountCoursesQuery();
   const { data: session } = useSession();
 
@@ -17,20 +15,7 @@ export default function Home() {
 
   return (
     <>
-      <Header>
-        <Link href='/' className='flex items-center gap-6 transition-all' scroll={false}>
-          <Image
-            src='/logo.svg'
-            quality={100}
-            sizes='3rem 2.25rem'
-            alt='Radium'
-            width={48}
-            height={48}
-            priority
-          />
-          <h1 className='font-NTSomic text-4xl font-bold text-primary'>Радиум</h1>
-        </Link>
-      </Header>
+      <Header logoUrl='/logo.svg' title='Радиум' />
       <main className='container mx-auto mb-8 mt-[8.25rem] flex flex-grow flex-col gap-6'>
         {isLoading && (
           <>
@@ -58,7 +43,7 @@ export default function Home() {
             )}
             {!!courses.my.length && (
               <>
-                <h2 className='ml-6 font-NTSomic text-[2rem] font-bold leading-[normal] text-primary md:ml-16'>
+                <h2 className='ml-6 font-NTSomic text-xl font-bold leading-[normal] text-primary md:ml-16'>
                   Ваши курсы
                 </h2>
                 <section className='container mx-auto grid grid-cols-1 gap-8 px-6 md:px-12 lg:grid-cols-2 2xl:grid-cols-3'>
@@ -70,7 +55,7 @@ export default function Home() {
             )}
             {!!courses.recommendations.length && (
               <>
-                <h2 className='ml-6 font-NTSomic text-[2rem] font-bold leading-[normal] text-primary md:ml-16'>
+                <h2 className='ml-6 font-NTSomic text-xl font-bold leading-[normal] text-primary md:ml-16'>
                   Рекомендации
                 </h2>
                 <section className='container mx-auto grid grid-cols-1 gap-8 px-6 md:px-12 lg:grid-cols-2 2xl:grid-cols-3'>

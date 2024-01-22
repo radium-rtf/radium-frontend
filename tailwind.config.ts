@@ -10,7 +10,8 @@ const config: Config = {
       sm: '0.625rem',
       base: '0.8125rem',
       lg: '1.25rem',
-      xl: '3rem',
+      xl: '2rem',
+      '2xl': '3rem',
     },
     container: {
       center: true,

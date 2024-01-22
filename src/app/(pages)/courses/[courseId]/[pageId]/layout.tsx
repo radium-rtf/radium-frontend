@@ -85,8 +85,8 @@ export default function CoursePageLayout({ children }: CourseStudyLayoutProps) {
 
   return (
     <>
-      <Header>
-        {isLoading && (
+      <Header title={course?.name} href={`/courses/${course?.id}`} logoUrl={course?.logo} />
+      {/* {isLoading && (
           <div className='flex items-center gap-6'>
             <div className='h-12 w-12 animate-pulse rounded-[0.5rem] bg-card' />
             <div className='h-10 w-64 animate-pulse rounded-[0.5rem] bg-card' />
@@ -107,8 +107,8 @@ export default function CoursePageLayout({ children }: CourseStudyLayoutProps) {
             )}
             <h1 className='font-NTSomic text-4xl font-bold text-primary'>{course.name}</h1>
           </Link>
-        )}
-      </Header>
+        )} */}
+      {/* </Header> */}
       <main className='mb-8 mt-[8.25rem] flex flex-grow px-12'>
         <CourseEditContextWrapper>
           {/* Loading state */}
@@ -203,7 +203,7 @@ export default function CoursePageLayout({ children }: CourseStudyLayoutProps) {
             <>
               <div className='flex h-full w-full flex-col items-center justify-center gap-4'>
                 <Image src={'/error.svg'} width={224} height={224} alt='Not found error' />
-                <h1 className='font-NTSomic text-5xl font-bold text-primary'>
+                <h1 className='text-5xl font-NTSomic font-bold text-primary'>
                   Такого курса нет :(
                 </h1>
                 <p className='text-text-primary text-[0.8125rem]'>
