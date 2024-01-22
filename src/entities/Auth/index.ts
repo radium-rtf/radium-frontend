@@ -11,3 +11,4 @@ export { VerifyRegistration } from './libs/VerifyRegistration';
 
 // Configs
 export { authOptions } from './model/authOptions';
+export { publicRoutes, authRoutes, apiAuthPrefix, DEFAULT_LOGIN_REDIRECT_URL } from './libs/routes';
