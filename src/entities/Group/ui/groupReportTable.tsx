@@ -48,7 +48,7 @@ export const GroupReportTable: FC<CourseReportProps> = ({ courseReport }) => {
       header: ({ column }) => {
         return (
           <button
-            className='-m-4 flex h-full w-64 flex-col gap-1.5 p-4 text-start'
+            className='flex h-full w-64 flex-col gap-1.5 p-4 text-start'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
             <div className='flex items-center gap-1.5'>
@@ -84,7 +84,7 @@ export const GroupReportTable: FC<CourseReportProps> = ({ courseReport }) => {
       header: ({ column }) => {
         return (
           <button
-            className='-m-4 flex w-32 flex-col items-center justify-center gap-1.5 p-4'
+            className='flex w-full min-w-[8rem] flex-col items-center justify-center gap-1.5 p-4'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
             <span className='line-clamp-2 font-NTSomic text-[0.8125rem] leading-tight'>Итого</span>
@@ -116,7 +116,7 @@ export const GroupReportTable: FC<CourseReportProps> = ({ courseReport }) => {
         header: ({ column }) => {
           return (
             <button
-              className='-m-4 flex w-32 flex-col items-center justify-center gap-1.5 p-4'
+              className='flex h-full w-full min-w-[8rem] flex-col items-center justify-center gap-1.5 p-4'
               onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
             >
               <span
@@ -170,7 +170,7 @@ export const GroupReportTable: FC<CourseReportProps> = ({ courseReport }) => {
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id} className='first:w-64'>
+                  <TableHead key={header.id} className='p-0 first:w-64'>
                     {header.isPlaceholder
                       ? null
                       : flexRender(header.column.columnDef.header, header.getContext())}

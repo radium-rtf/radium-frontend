@@ -38,7 +38,7 @@ export const StudentAnswerPage: FC<IProps> = ({ studentId, groupId, courseId }) 
 
   return (
     <div className='mx-auto flex max-w-[45rem] flex-col gap-8'>
-      <h1 className='px-6 font-NTSomic text-[3rem] font-bold text-primary'>
+      <h1 className='px-6 font-NTSomic text-2xl font-bold text-primary'>
         Задания от {studentAnswers.user.name}
       </h1>
       {needToReview.map((answer) => (

@@ -38,7 +38,7 @@ export {
   TableRow,
   TableCell,
   TableCaption,
-} from './ui/tableNew';
+} from './ui/Table';
 export { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 export {
   DropdownMenu,

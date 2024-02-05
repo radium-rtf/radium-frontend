@@ -43,16 +43,17 @@ export const GroupMenu: FC<IProps> = ({ group, answers, courseId }) => {
         scrollHeight > 50 && 'top-16 max-h-[calc(100vh-4rem)]'
       )}
     >
-      <h2 className='px-6 py-4 text-xl font-medium leading-[normal] text-accent'>{group.name}</h2>
+      <h2 className='px-6 py-4 text-lg font-medium leading-[normal] text-accent'>{group.name}</h2>
       <List className='scrollbar overflow-y-scroll'>
         {[
           <ListItem
             key='Ведомость'
             asChild
             className={cn(
-              'font-NTSomic text-[0.8125rem] font-normal ',
+              'font-NTSomic text-[0.8125rem] font-normal',
               'rounded-[0.5rem]',
               'select-none',
+              'border border-transparent',
               !selectedStudentId && 'bg-text-primary border border-white/10 bg-opacity-5'
             )}
           >
