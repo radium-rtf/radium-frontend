@@ -130,7 +130,7 @@ export default function CoursePageLayout({ children }: CourseStudyLayoutProps) {
               <NavigationPageTitleSkeleton />
             </nav>
           )}
-          {/* Course state */}
+          {/* Course loaded state */}
           {course && (
             <nav
               className={cn(

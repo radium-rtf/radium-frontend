@@ -40,6 +40,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       '--action-right': actionIcon ? '1rem' : 0,
       '--text-right': text ? (actionIcon ? `${16 + 18 + 16}px` : '1rem') : 0,
     } as React.CSSProperties;
+
     return (
       <div
         className={cn('relative h-10 w-full rounded-[0.5rem] text-[#B3B3B3]', wrapperClassName)}
@@ -50,7 +51,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           placeholder={placeholder}
           type={type}
           className={cn(
-            'peer absolute inset-0 flex h-10 w-full rounded-[0.5rem] border border-white/10 bg-transparent pb-0.5 pl-[var(--left-padding)] pr-[var(--right-padding)] pt-3 text-sm text-foreground ring-offset-background transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:select-none placeholder:text-transparent hover:bg-white/5 focus-visible:bg-black/5 focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+            'text-normal peer absolute inset-0 flex h-10 w-full rounded-[0.5rem] border border-white/10 bg-transparent pb-0.5 pl-[var(--left-padding)] pr-[var(--right-padding)] pt-3 text-foreground ring-offset-background transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:select-none placeholder:text-transparent hover:bg-white/5 focus-visible:bg-black/5 focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
             className
           )}
           ref={ref}

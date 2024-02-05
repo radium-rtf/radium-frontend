@@ -38,7 +38,7 @@ export const AuthorShipCourseCard: FC<IProps> = ({ course }) => {
             width={72}
           />
         ) : (
-          <div className='bg-background-overlay aspect-square h-[4.5rem] rounded-lg' />
+          <div className='aspect-square h-[4.5rem] rounded-lg bg-popover' />
         )}
         <CardTitle>{name}</CardTitle>
       </CardHeader>
@@ -51,7 +51,7 @@ export const AuthorShipCourseCard: FC<IProps> = ({ course }) => {
             className='h-[1.125rem]'
             type={isReadyForPublish || course.isPublished ? 'success' : 'courses'}
           />
-          <p className='text-[0.8125rem]'>
+          <p>
             {(course.isPublished && 'Опубликован') ||
               (isReadyForPublish && 'Готов к публикации') ||
               'Черновик'}

@@ -28,7 +28,7 @@ export const AssignedCourseCard: FC<IProps> = ({ course }) => {
             width={72}
           />
         ) : (
-          <div className='bg-background-overlay aspect-square h-[4.5rem] rounded-lg' />
+          <div className='aspect-square h-[4.5rem] rounded-lg bg-popover' />
         )}
         <div className='flex flex-grow flex-col'>
           <CardTitle>{name}</CardTitle>
@@ -44,7 +44,7 @@ export const AssignedCourseCard: FC<IProps> = ({ course }) => {
         <div className='flex w-full items-center gap-4'>
           <div className='flex flex-grow items-center gap-2'>
             <Icon className='h-[1.125rem]' type='courses' />
-            {nextPageName && <p className='text-[0.8125rem]'>Далее: {nextPageName}</p>}
+            {nextPageName && <p>Далее: {nextPageName}</p>}
           </div>
           <CourseContinue courseId={id} />
         </div>

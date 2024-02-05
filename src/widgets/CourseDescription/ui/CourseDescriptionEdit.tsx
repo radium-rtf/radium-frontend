@@ -58,10 +58,22 @@ export const CourseDescriptionEdit: FC<CourseDescriptionEditProps> = ({
       <form onSubmit={handleSubmit(onSubmitHandler)}>
         <CardHeader className='flex-row items-center gap-4 space-y-0'>
           <Icon type='question' className='text-primary' />
-          <CardTitle className='text-base'>О курсе</CardTitle>
+          <CardTitle className='text-[1rem]'>О курсе</CardTitle>
         </CardHeader>
         <CardContent>
-          {!isEditing && <MarkdownDisplay markdown={description} />}
+          {!isEditing && (
+            <>
+              {description ? (
+                <MarkdownDisplay markdown={description} />
+              ) : (
+                <span className='text-[#B3B3B3]'>
+                  Добавьте подробное описание, чтобы привлечь больше пользователей к курсу.
+                  Расскажите, кому подходит Ваш курс, какие знания он предоставит и где могут
+                  пригодиться полученные знания.
+                </span>
+              )}
+            </>
+          )}
           {isEditing && (
             <Controller
               control={control}

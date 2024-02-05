@@ -33,17 +33,16 @@ export const CourseCard: FC<IProps> = ({ course }) => {
             width={72}
           />
         ) : (
-          <div className='bg-background-overlay aspect-square h-[4.5rem] rounded-lg' />
+          <div className='aspect-square h-[4.5rem] rounded-lg bg-popover' />
         )}
         <CardTitle>{name}</CardTitle>
       </CardHeader>
       <CardContent className='flex-grow'>
-        <CardDescription>{shortDescription}</CardDescription>
+        <CardDescription className='line-clamp-4'>{shortDescription}</CardDescription>
       </CardContent>
       <CardFooter>
         <div className='flex flex-grow items-center gap-2'>
           <Icon className='h-[1.125rem]' type='courses' />
-          {/* <p className='text-[0.8125rem]'>{`${modules.length} тем, 5 месяцев`}</p> */}
         </div>
         <CourseJoin courseId={id} />
       </CardFooter>

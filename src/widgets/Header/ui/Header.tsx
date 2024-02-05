@@ -85,20 +85,20 @@ export const Header: FC<IProps> = ({ logoUrl, title, href }) => {
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent className='w-64' align='end'>
-            <DropdownMenuItem asChild>
+            <DropdownMenuItem asChild className='cursor-pointer'>
               <Link href='/profile' scroll={false}>
-                <Icon className='mr-4 text-inherit' type='profile' />
+                <Icon className='mr-4 text-primary' type='profile' />
                 <span>Мой профиль</span>
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem asChild>
+            <DropdownMenuItem asChild className='cursor-pointer'>
               <Link href='/' scroll={false}>
-                <Icon className='mr-4 text-inherit' type='courses' />
+                <Icon className='mr-4 text-primary' type='courses' />
                 <span>Мои курсы</span>
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => signOut()}>
-              <Icon className='mr-4 text-inherit' type='exit' />
+            <DropdownMenuItem onClick={() => signOut()} className='cursor-pointer'>
+              <Icon className='mr-4 text-primary' type='exit' />
               <span>Выйти</span>
             </DropdownMenuItem>
           </DropdownMenuContent>

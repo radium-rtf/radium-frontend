@@ -14,7 +14,7 @@ export const CourseName: FC<CourseNameProps> = ({ courseName, isEditAllowed }) =
     return null;
   }
   return (
-    <h1 className='mx-4 break-all font-NTSomic text-5xl font-bold leading-[normal] text-primary xl:col-span-3 2xl:col-span-4'>
+    <h1 className='mx-4 break-all font-NTSomic text-2xl font-bold leading-[normal] text-primary xl:col-span-3 2xl:col-span-4'>
       {courseName}
     </h1>
   );

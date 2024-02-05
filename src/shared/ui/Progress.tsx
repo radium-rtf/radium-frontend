@@ -35,9 +35,10 @@ export const Progress: FC<IProps> = ({
         )}
       </div>
     );
+
   return (
     <div
-      className={cn('relative stroke-primary text-primary', {
+      className={cn('relative  text-primary', {
         'text-secondary': theme === 'secondary',
       })}
     >
@@ -45,10 +46,11 @@ export const Progress: FC<IProps> = ({
         className='aspect-square h-[1.125rem] -rotate-90'
         style={{ '--progress': 54 - 54 * (percentage / 100) } as CSSProperties}
       >
-        <circle className='stroke-grey-400 fill-none stroke-1' cx={9} cy={9} r={8.5}></circle>
+        <circle className='fill-none stroke-white/20 stroke-1' cx={9} cy={9} r={8.5}></circle>
         <circle
           className={cn(
             [
+              'stroke-primary',
               'stroke-1',
               '[stroke-dasharray:54]',
               '[stroke-dashoffset:var(--progress)]',
@@ -56,7 +58,7 @@ export const Progress: FC<IProps> = ({
               'fill-none',
               'transition-all',
             ],
-            theme === 'secondary' && ['text-secondary', 'stroke-secondary']
+            theme === 'secondary' && 'stroke-secondary text-secondary'
           )}
           cx={9}
           cy={9}

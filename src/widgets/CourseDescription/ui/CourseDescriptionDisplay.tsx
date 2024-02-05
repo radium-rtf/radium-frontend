@@ -12,11 +12,15 @@ export const CourseDescriptionDisplay: FC<CourseDescriptionDisplayProps> = ({ de
     <Card className='gap-6'>
       <CardHeader className='flex-row items-center gap-4 space-y-0'>
         <Icon type='question' className='text-primary' />
-        <CardTitle className='text-base'>О курсе</CardTitle>
+        <CardTitle className='text-[1rem]'>О курсе</CardTitle>
       </CardHeader>
 
       <CardContent className='pb-6'>
-        <MarkdownDisplay markdown={description} />
+        {description ? (
+          <MarkdownDisplay markdown={description} />
+        ) : (
+          <span className='text-white/50'>{'<Описание отсутствует>'}</span>
+        )}
       </CardContent>
     </Card>
   );
