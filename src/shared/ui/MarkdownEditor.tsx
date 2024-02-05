@@ -51,9 +51,9 @@ export const MarkdownEditor: FC<IProps> = ({ markdown, onChange }) => {
         underlineStrikethrough: 'underline line-through',
       },
       heading: {
-        h1: 'text-4xl',
-        h2: 'text-3xl',
-        h3: 'text-2xl',
+        h1: 'text-2xl',
+        h2: 'text-xl',
+        h3: 'text-lg',
       },
       quote: 'border-white/10 border rounded-lg p-4',
       code: 'block border border-[#383A3B] rounded-lg font-code py-4 after:pointer-events-none pl-16 pr-4 relative before:block before:content-[attr(data-gutter)] before:absolute before:left-0 before:top-0 before:p-4 before:text-right before:min-w-[3rem] after:block after:absolute after:-right-[1px] after:-top-[1px] after:-bottom-[1px] after:left-12 after:bg-black/5 after:content-[""] after:border after:rounded-lg after:border-[#383A3B]',
@@ -132,79 +132,82 @@ export const MarkdownEditor: FC<IProps> = ({ markdown, onChange }) => {
   }
 
   return (
-    <LexicalComposer key={String(isPlaintextMode)} initialConfig={initialConfig}>
-      <div className={cn('flex items-center justify-between')}>
-        <div className='flex items-center gap-0.5'>
-          <EditorBoldControl />
-          <EditorItalicControl />
-          <EditorStrikethroughControl />
-          <EditorMonospaceControl />
-          <EditorHeadingControl />
-          <EditorCodeControl />
-          <EditorQuoteControl />
-          <EditorListControl />
+    <LexicalComposer initialConfig={initialConfig}>
+      <div className='flex flex-col gap-4'>
+        <div className={cn('flex items-center justify-between')}>
+          <div className='flex items-center'>
+            <EditorBoldControl />
+            <EditorItalicControl />
+            <EditorStrikethroughControl />
+            <EditorMonospaceControl />
+            <EditorHeadingControl />
+            <EditorCodeControl />
+            <EditorQuoteControl />
+            <EditorListControl />
+          </div>
+          <button
+            type='button'
+            className={cn(
+              'rounded-lg border border-transparent p-2 transition-colors hover:border-white/10 hover:bg-white/5'
+            )}
+            onClick={() => setIsPlaintextMode(true)}
+          >
+            <Icon type='visible' />
+          </button>
         </div>
-        <button
-          type='button'
-          className={cn(
-            'rounded-lg border border-transparent p-2 transition-colors hover:border-white/10 hover:bg-white/5'
-          )}
-          onClick={() => setIsPlaintextMode(true)}
-        >
-          <Icon type='visible' />
-        </button>
+        <RichTextPlugin
+          contentEditable={
+            <ContentEditable
+              className={cn([
+                'prose',
+                'prose-default',
+                'prose-no-margin',
+                'prose-h1:text-2xl',
+                'prose-h2:text-xl',
+                'prose-h3:text-lg',
+                'prose-headings:mb-4',
+                'prose-blockquote:not-italic',
+                'prose-code:font-normal',
+                'prose-code:text-[0.8125rem]',
+                'p-4',
+                'font-sans',
+                'text-[0.8125rem]',
+                'leading-normal',
+                'rounded-lg',
+                'border',
+                'border-white/10',
+                'outline-none',
+                'bg-transparent',
+                'text-text-primary',
+                'resize',
+                'transition-colors',
+                'max-w-full',
+                'placeholder:text-foreground-secondary',
+                'disabled:opacity-50',
+                '[&:not(:disabled)]:hover:bg-white/5',
+                '[&:not(:disabled)]:focus:bg-black/10',
+                '[&:not(:disabled)]:focus:border-primary-default',
+              ])}
+            />
+          }
+          placeholder={null}
+          ErrorBoundary={LexicalErrorBoundary}
+        />
+        <HistoryPlugin />
+        <ListPlugin />
+        <CodeHighlightPlugin />
+        <OnChangePlugin
+          ignoreSelectionChange
+          ignoreHistoryMergeTagChange
+          onChange={(editorState) => {
+            editorState.read(() => {
+              const md = $convertToMarkdownString(TRANSFORMERS);
+              setText(md);
+              onChange?.(md);
+            });
+          }}
+        />
       </div>
-      <RichTextPlugin
-        contentEditable={
-          <ContentEditable
-            className={cn([
-              'prose',
-              'prose-default',
-              'prose-no-margin',
-              'prose-h1:text-4xl',
-              'prose-h2:text-3xl',
-              'prose-h3:text-2xl',
-              'prose-blockquote:not-italic',
-              'prose-code:font-normal',
-              'prose-code:text-[0.8125rem]',
-              'p-4',
-              'font-sans',
-              'text-[0.8125rem]',
-              'leading-normal',
-              'rounded-lg',
-              'border',
-              'border-white/10',
-              'outline-none',
-              'bg-transparent',
-              'text-text-primary',
-              'resize',
-              'transition-colors',
-              'max-w-full',
-              'placeholder:text-foreground-secondary',
-              'disabled:opacity-50',
-              '[&:not(:disabled)]:hover:bg-white/5',
-              '[&:not(:disabled)]:focus:bg-black/10',
-              '[&:not(:disabled)]:focus:border-primary-default',
-            ])}
-          />
-        }
-        placeholder={null}
-        ErrorBoundary={LexicalErrorBoundary}
-      />
-      <HistoryPlugin />
-      <ListPlugin />
-      <CodeHighlightPlugin />
-      <OnChangePlugin
-        ignoreSelectionChange
-        ignoreHistoryMergeTagChange
-        onChange={(editorState) => {
-          editorState.read(() => {
-            const md = $convertToMarkdownString(TRANSFORMERS);
-            setText(md);
-            onChange?.(md);
-          });
-        }}
-      />
     </LexicalComposer>
   );
 };

@@ -35,14 +35,17 @@ export const MarkdownDisplay: FC<MarkdownDisplayProps> = ({ markdown }) => {
         'w-full',
         'max-w-none',
         'prose',
+        'prose-p:text-base',
         'prose-default',
         'prose-no-margin',
-        'prose-h1:text-4xl',
-        'prose-h2:text-3xl',
-        'prose-h3:text-2xl',
+        'prose-headings:mb-4',
+        'prose-h1:text-2xl',
+        'prose-h2:text-xl',
+        'prose-h3:text-lg',
         'prose-blockquote:not-italic',
         'prose-code:font-normal',
-        'prose-code:text-[0.8125rem]'
+        'prose-code:text-[0.8125rem]',
+        'prose-pre:p-0'
       )}
       components={components}
     >

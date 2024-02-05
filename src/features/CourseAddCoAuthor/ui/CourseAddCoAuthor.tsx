@@ -17,6 +17,7 @@ export const CourseAddCoAuthor: FC<CourseAddCoAuthorProps> = ({ courseId }) => {
     handleSubmit,
     register,
     setError,
+    reset,
     formState: { isValid, isSubmitted, isSubmitSuccessful },
   } = useForm<authorsSchemaType>({
     resolver: zodResolver(authorsSchema),
@@ -29,6 +30,7 @@ export const CourseAddCoAuthor: FC<CourseAddCoAuthorProps> = ({ courseId }) => {
   const onSubmitHandler: SubmitHandler<authorsSchemaType> = async (data) => {
     await addCoAuthor(data)
       .unwrap()
+      .then(() => reset())
       .catch(() => setError('email', { message: 'Пользователь не существует' }));
   };
 
