@@ -78,7 +78,11 @@ export const Header: FC<IProps> = ({ logoUrl, title, href }) => {
                 scrollHeight > SCROLL_THRESHOLD && 'h-9 w-9'
               )}
             >
-              <AvatarImage src={session.data?.user.image || undefined} alt='User avatar' />
+              <AvatarImage
+                className='object-cover'
+                src={session.data?.user.image || undefined}
+                alt='User avatar'
+              />
               <AvatarFallback>
                 <Image src='/defaultProfile.svg' alt='default logo' height={48} width={48} />
               </AvatarFallback>

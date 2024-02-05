@@ -42,7 +42,7 @@ export const ProfilePhotoEdit = forwardRef<HTMLInputElement, IProps>(
     return (
       <picture
         className={cn(
-          'relative aspect-square h-32 overflow-hidden rounded-full bg-gray-400',
+          'relative aspect-square h-32 w-32 overflow-hidden rounded-full bg-gray-400',
           className
         )}
       >
@@ -51,7 +51,7 @@ export const ProfilePhotoEdit = forwardRef<HTMLInputElement, IProps>(
             onPhotoChangeHandler(e);
             outerChangeHandler?.(e);
           }}
-          className='invisible'
+          className='hidden'
           type='file'
           accept='image/*'
           ref={innerRef}

@@ -91,7 +91,7 @@ export const ProfileEdit: FC<IProps> = ({ name }) => {
   return (
     <Card className='relative w-[19rem]'>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete='on'>
-        <CardHeader className='pt-[4.5rem]'>
+        <CardHeader className='flex items-center justify-center pt-[4.5rem]'>
           <ProfilePhotoEdit
             className='absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2'
             initialPhotoURL={data?.user?.image || ''}
