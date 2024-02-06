@@ -1,6 +1,5 @@
 'use client';
 import { FC } from 'react';
-import { useRouter } from 'next/navigation';
 import { Button, Icon } from '@/shared';
 import { usePublishCourseMutation } from '@/entities/Course';
 
@@ -15,11 +14,10 @@ export const CoursePublishToggle: FC<CoursePublishToggleProps> = ({
   isPublished,
   isPublishable,
 }) => {
-  const { refresh } = useRouter();
   const [togglePublish] = usePublishCourseMutation();
 
   const onClickHandler = () => {
-    togglePublish(courseId).unwrap().then(refresh);
+    togglePublish(courseId);
   };
 
   return (

@@ -69,6 +69,19 @@ export const courseApi = emptyApi.injectEndpoints({
               { type: 'courses', id: 'LIST' },
             ]
           : [{ type: 'courses', id: 'LIST' }],
+      async onQueryStarted(courseId, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          courseApi.util.updateQueryData('getCourse', courseId, (draft) => {
+            draft.isPublished = !draft.isPublished;
+          })
+        );
+
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
     }),
     deleteCourse: builder.mutation<void, string>({
       query: (courseId) => ({
