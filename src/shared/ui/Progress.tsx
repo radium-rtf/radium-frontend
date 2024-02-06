@@ -20,41 +20,37 @@ export const Progress: FC<IProps> = ({
   if (type === 'linear')
     return (
       <div className={cn('flex w-full items-center gap-4', className)}>
-        <div className='flex h-0.5 w-full items-center bg-grey-400'>
+        <div className='flex h-0.5 w-full items-center bg-white/10'>
           <div
-            className={cn('h-full bg-accent-primary-200 transition-all', {
+            className={cn('h-full bg-primary transition-all', {
               'bg-accent-secondary-300': theme === 'secondary',
             })}
             style={{ width: `${percentage}%` }}
           />
         </div>
         {showPercentage && (
-          <span className='block w-[40px] text-[0.8125rem] text-text-primary'>
+          <span className='block w-[40px] text-[0.8125rem] text-foreground'>
             {percentage.toFixed()}&nbsp;%
           </span>
         )}
       </div>
     );
+
   return (
     <div
-      className={cn(
-        'relative stroke-accent-primary-200 text-accent-primary-200',
-        { 'text-accent-secondary-300': theme === 'secondary' }
-      )}
+      className={cn('relative  text-primary', {
+        'text-secondary': theme === 'secondary',
+      })}
     >
       <svg
         className='aspect-square h-[1.125rem] -rotate-90'
         style={{ '--progress': 54 - 54 * (percentage / 100) } as CSSProperties}
       >
-        <circle
-          className='fill-none stroke-grey-400 stroke-1'
-          cx={9}
-          cy={9}
-          r={8.5}
-        ></circle>
+        <circle className='fill-none stroke-white/20 stroke-1' cx={9} cy={9} r={8.5}></circle>
         <circle
           className={cn(
             [
+              'stroke-primary',
               'stroke-1',
               '[stroke-dasharray:54]',
               '[stroke-dashoffset:var(--progress)]',
@@ -62,10 +58,7 @@ export const Progress: FC<IProps> = ({
               'fill-none',
               'transition-all',
             ],
-            theme === 'secondary' && [
-              'text-accent-secondary-300',
-              'stroke-accent-secondary-300',
-            ]
+            theme === 'secondary' && 'stroke-secondary text-secondary'
           )}
           cx={9}
           cy={9}

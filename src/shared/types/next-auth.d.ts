@@ -1,40 +1,42 @@
-import { DefaultSession } from 'next-auth';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import NextAuth from 'next-auth/next';
 
 declare module 'next-auth' {
   interface User {
-    accessToken?: string | null;
-    refreshToken?: string | null;
-    expiresIn?: string | null;
+    id: string;
+    name: string;
+    image: string;
+    email: string;
     roles: {
-      isTeacher: boolean;
       isAuthor: boolean;
+      isTeacher: boolean;
       isCoauthor: boolean;
     };
+
+    accessToken: string;
+    refreshToken: string;
+    expiresIn: string;
   }
 
   interface Session {
-    user: {
-      accessToken?: string | null;
-      refreshToken?: string | null;
-      expiresIn?: string | null;
-      roles: {
-        isTeacher: boolean;
-        isAuthor: boolean;
-        isCoauthor: boolean;
-      };
-    } & DefaultSession['user'];
+    user: User;
   }
 }
 
 declare module 'next-auth/jwt' {
   interface JWT {
-    accessToken?: string | null;
-    refreshToken?: string | null;
-    expiresIn?: string | null;
+    sub: string;
+    name: string;
+    email: string;
+    picture: string;
     roles: {
-      isTeacher: boolean;
       isAuthor: boolean;
+      isTeacher: boolean;
       isCoauthor: boolean;
     };
+
+    accessToken: string;
+    refreshToken: string;
+    expiresIn: string;
   }
 }

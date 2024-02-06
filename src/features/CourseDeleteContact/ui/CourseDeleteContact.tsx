@@ -8,10 +8,7 @@ interface CourseDeleteContactProps {
   courseId: string;
 }
 
-export const CourseDeleteContact: FC<CourseDeleteContactProps> = ({
-  contactId,
-  courseId,
-}) => {
+export const CourseDeleteContact: FC<CourseDeleteContactProps> = ({ contactId, courseId }) => {
   const [deleteContact] = useDeleteCourseContactMutation();
 
   const onClickHandler = () => {
@@ -20,7 +17,7 @@ export const CourseDeleteContact: FC<CourseDeleteContactProps> = ({
 
   return (
     <button onClick={onClickHandler} type='button' className='relative'>
-      <Icon type='remove' className='h-3 text-primary-default' />
+      <Icon type='remove' className='h-3 text-primary' />
     </button>
   );
 };

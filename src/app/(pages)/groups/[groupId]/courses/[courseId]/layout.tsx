@@ -1,9 +1,10 @@
 'use client';
-import { CourseHeader } from '@/widgets/CourseHeader';
 import { useGroupQuery } from '@/entities/Group/api/groupApi';
 import { GroupMenu } from '@/widgets/GroupMenu';
 import { useAnswersQuery } from '@/entities/Answers';
-import {useGetCourseQuery} from "@/entities/Course";
+import { useGetCourseQuery } from '@/entities/Course';
+import { Header } from '@/widgets/Header';
+import { Footer } from '@/widgets/Footer';
 
 export default function GroupLayout({
   children,
@@ -24,13 +25,14 @@ export default function GroupLayout({
 
   return (
     <>
-      {course && <CourseHeader logo={course.logo} name={course.name} />}
-      <div className='flex flex-grow items-start gap-8 px-12'>
+      {course && <Header href={`/courses/${course.id}`} title={course.name} />}
+      <div className='flex flex-grow items-start gap-8 px-12 pb-8 pt-[8.25rem]'>
         {course && group && answers && (
-          <GroupMenu className='-ml-6' courseId={course.id} group={group} answers={answers} />
+          <GroupMenu courseId={course.id} group={group} answers={answers} />
         )}
-        <div className='flex-grow justify-center w-[75%]'>{children}</div>
+        <div className='w-[75%] flex-grow justify-center'>{children}</div>
       </div>
+      <Footer />
     </>
   );
 }

@@ -17,6 +17,7 @@ export const CourseAddCoAuthor: FC<CourseAddCoAuthorProps> = ({ courseId }) => {
     handleSubmit,
     register,
     setError,
+    reset,
     formState: { isValid, isSubmitted, isSubmitSuccessful },
   } = useForm<authorsSchemaType>({
     resolver: zodResolver(authorsSchema),
@@ -29,14 +30,14 @@ export const CourseAddCoAuthor: FC<CourseAddCoAuthorProps> = ({ courseId }) => {
   const onSubmitHandler: SubmitHandler<authorsSchemaType> = async (data) => {
     await addCoAuthor(data)
       .unwrap()
-      .catch(() =>
-        setError('email', { message: 'Пользователь не существует' })
-      );
+      .then(() => reset())
+      .catch(() => setError('email', { message: 'Пользователь не существует' }));
   };
 
   return (
     <form className='mx-2 my-1.5' onSubmit={handleSubmit(onSubmitHandler)}>
       <Input
+        icon='password'
         className={cn(
           isSubmitSuccessful && '[&:has(:focus)]:border-accent-secondary-400',
           isSubmitted && !isValid && '[&:has(:focus)]:border-red-500'

@@ -10,13 +10,7 @@ interface IProps {
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-export const IconButton: FC<IProps> = ({
-  icon,
-  className,
-  disabled,
-  type,
-  onClick,
-}) => {
+export const IconButton: FC<IProps> = ({ icon, className, disabled, type, onClick }) => {
   return (
     <button
       onClick={onClick}
@@ -27,7 +21,7 @@ export const IconButton: FC<IProps> = ({
           'transition',
           'outline-white',
           'group rounded p-[0.5625rem]',
-          'text-accent-primary-200',
+          'text-primary',
           'disabled:cursor-not-allowed',
           'disabled:text-accent-primary-300',
           'hover:bg-grey-600',

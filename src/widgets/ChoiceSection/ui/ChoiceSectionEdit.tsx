@@ -1,48 +1,59 @@
 'use client';
-
 import {
   ChoiceSectionResponseDto,
+  CourseSectionFooterEdit,
+  CourseSectionHeaderEdit,
   useUpdateCourseChoiceSectionMutation,
 } from '@/entities/CourseSection';
-import { Button, Card, Icon, Input, Radio, cn } from '@/shared';
-import { CSSProperties, FC } from 'react';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSSProperties, FC, useEffect, useState } from 'react';
+import { CSS } from '@dnd-kit/utilities';
 import {
-  Controller,
-  SubmitHandler,
-  useFieldArray,
-  useForm,
-} from 'react-hook-form';
-import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
-import { CourseSectionDelete } from '@/features/CourseSectionDelete';
+  Card,
+  CardContent,
+  CardTitle,
+  Icon,
+  Input,
+  RadioGroup,
+  RadioGroupItem,
+  cn,
+} from '@/shared';
+import { Controller, FormProvider, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { updateSchema, updateSchemaType } from '../model/updateSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
+import { CourseSectionDelete } from '@/features/CourseSectionDelete';
+import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
 
 interface ChoiceSectionEditProps {
   sectionData: ChoiceSectionResponseDto;
-  onSuccess: () => void;
 }
 
-export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({
-  sectionData,
-  onSuccess,
-}) => {
-  const {
-    register,
-    control,
-    handleSubmit,
-    setValue,
-    setFocus,
-    watch,
-    formState: { errors, isValid },
-  } = useForm<updateSchemaType>({
+export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({ sectionData }) => {
+  // Edit setup
+  const [isEditing, setIsEditing] = useState(false);
+  // DND Setup
+  const { setActivatorNodeRef, setNodeRef, listeners, transform, transition, isDragging } =
+    useSortable({
+      id: sectionData.id,
+      data: {
+        order: sectionData.order,
+        pageId: sectionData.pageId,
+      },
+    });
+
+  const style = {
+    transform: CSS.Translate.toString(transform),
+    transition,
+  } as CSSProperties;
+
+  // Form setup
+  const form = useForm<updateSchemaType>({
+    mode: 'onSubmit',
+    reValidateMode: 'onChange',
     resolver: zodResolver(updateSchema),
     defaultValues: {
-      maxScore: sectionData.maxScore,
-      maxAttempts: sectionData.maxAttempts,
       choice: {
-        answer: '',
         question: sectionData.content,
         variants: sectionData.variants
           .map((v) => ({
@@ -50,8 +61,20 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({
           }))
           .concat([{ value: '' }]),
       },
+      maxAttempts: sectionData.maxAttempts,
+      maxScore: sectionData.maxScore,
     },
   });
+
+  const {
+    control,
+    setValue,
+    setFocus,
+    setError,
+    clearErrors,
+    handleSubmit,
+    formState: { errors },
+  } = form;
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -59,8 +82,7 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({
   });
 
   const [updateChoiceSection] = useUpdateCourseChoiceSectionMutation();
-
-  const onSubmitHandler: SubmitHandler<updateSchemaType> = (data) => {
+  const onSubmitHandler: SubmitHandler<updateSchemaType> = async (data) => {
     const body = {
       ...data,
       choice: {
@@ -69,170 +91,171 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({
       },
     };
     body.choice.variants.pop();
-    updateChoiceSection({ sectionId: sectionData.id, ...body })
-      .unwrap()
-      .then(onSuccess);
+    const response = await updateChoiceSection({
+      sectionId: sectionData.id,
+      ...body,
+    });
+    if ('data' in response) {
+      setIsEditing(false);
+    } else {
+      setError('root', { message: 'Ошибка!' });
+    }
   };
 
-  const {
-    setNodeRef,
-    setActivatorNodeRef,
-    listeners,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
-    id: sectionData.id,
-    data: {
-      order: sectionData.order,
-      pageId: sectionData.pageId,
-    },
-  });
-
-  const style = {
-    transform: CSS.Translate.toString(transform),
-    transition,
-  } as CSSProperties;
+  // Escape control setup
+  useEffect(() => {
+    const listener = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsEditing(false);
+      }
+    };
+    if (isEditing) {
+      document.body.addEventListener('keydown', listener);
+    }
+    return () => {
+      document.body.removeEventListener('keydown', listener);
+    };
+  }, [isEditing]);
 
   return (
-    <Card
-      asChild
-      id={`section-${sectionData.id}`}
-      ref={setNodeRef}
-      style={style}
-      className={cn(
-        'border border-transparent transition-colors duration-300',
-        isDragging
-          ? 'z-10 border-white/10 bg-[#2A2E2E]'
-          : '[&:has(.drag:hover)]:border-white/10 [&:has(.drag:hover)]:bg-[#363A3B]'
-      )}
-    >
-      <form
-        className='flex flex-col gap-4'
-        onSubmit={handleSubmit(onSubmitHandler)}
+    <FormProvider {...form}>
+      <Card
+        ref={setNodeRef}
+        style={style}
+        className={cn(
+          'border border-transparent transition-colors',
+          isDragging
+            ? 'z-10 border-white/10 bg-[#2A2E2E]'
+            : '[&:has(.drag:hover)]:border-white/10 [&:has(.drag:hover)]:bg-[#363A3B]'
+        )}
       >
-        <div className='relative flex items-center gap-4 text-primary-default'>
-          <Icon type='question' className='text-inherit' />
-          <span className='font-mono font-bold leading-[normal] text-inherit'>
-            Вопрос
-          </span>
-          <button
-            className='drag after:absolute after:-left-6 after:-right-6 after:-top-6 after:bottom-0 after:block after:rounded-t-2xl after:content-[""]'
-            type='button'
-            ref={setActivatorNodeRef}
-            {...listeners}
-          >
-            <Icon
-              type='handle-horizontal'
-              className='absolute left-1/2 top-0'
-            />
-          </button>
-        </div>
-        <header className='flex flex-col gap-4 text-[0.8125rem] leading-normal'>
-          <Controller
-            name='choice.question'
-            control={control}
-            render={({ field }) => (
-              <MarkdownEditor
-                markdown={sectionData.content}
-                onChange={field.onChange}
-              />
-            )}
+        <form onSubmit={handleSubmit(onSubmitHandler)}>
+          <CourseSectionHeaderEdit ref={setActivatorNodeRef} {...listeners} />
+          {!isEditing && (
+            <>
+              <CardContent>
+                <MarkdownDisplay markdown={sectionData.content} />
+              </CardContent>
+              <CardContent>
+                <RadioGroup defaultValue={sectionData.answer} className='gap-0'>
+                  {sectionData.variants.map((variant) => (
+                    <div key={variant} className='flex items-center gap-4 py-2'>
+                      <RadioGroupItem value={variant} id={`${sectionData.id}-${variant}`} />
+                      <label
+                        htmlFor={`${sectionData.id}-${variant}`}
+                        className='text-[0.8125rem] leading-normal'
+                      >
+                        {variant}
+                      </label>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </CardContent>
+            </>
+          )}
+          {isEditing && (
+            <>
+              <CardContent className='flex flex-col gap-4'>
+                <Controller
+                  control={control}
+                  name='choice.question'
+                  render={({ field: { value, onChange } }) => (
+                    <MarkdownEditor
+                      markdown={value}
+                      onChange={(value) => {
+                        onChange(value);
+                        errors.root && clearErrors('root');
+                      }}
+                    />
+                  )}
+                />
+              </CardContent>
+              <CardContent className='flex items-center gap-4'>
+                <Icon type='question' className='shrink-0 text-primary' />
+                <CardTitle className='text-base'>Ответ</CardTitle>
+              </CardContent>
+              <CardContent className='flex flex-col gap-4'>
+                <Controller
+                  control={control}
+                  name='choice.answer'
+                  render={({ field }) => (
+                    <RadioGroup
+                      className='gap-4'
+                      onValueChange={(e) => {
+                        field.onChange(e);
+                        // Reset root error
+                        errors.root && clearErrors('root');
+                      }}
+                      value={field.value}
+                    >
+                      {fields.map((field, index) => {
+                        return (
+                          <Controller
+                            key={field.id}
+                            control={control}
+                            name={`choice.variants.${index}.value`}
+                            render={({ field: { onChange, ...field } }) => (
+                              <div className='flex items-center gap-4'>
+                                <RadioGroupItem
+                                  value={field.value}
+                                  disabled={index === fields.length - 1}
+                                />
+                                <Input
+                                  {...field}
+                                  placeholder={`Вариант ${index + 1}`}
+                                  onChange={(e) => {
+                                    onChange(e);
+                                    // Reset root error
+                                    errors.root && clearErrors('root');
+                                    // Change answer if input checked
+                                    (
+                                      e.target.parentElement!.parentElement!.querySelector(
+                                        `[role="radio"]`
+                                      ) as HTMLButtonElement
+                                    ).dataset.state === 'checked' &&
+                                      setValue('choice.answer', e.target.value);
+                                    // add if last input has text
+                                    if (e.target.value !== '' && index === fields.length - 1) {
+                                      append({ value: '' }, { shouldFocus: false });
+                                    }
+                                    // remove if NOT last empty
+                                    if (e.target.value === '' && index !== fields.length - 1) {
+                                      remove(index);
+                                      setFocus(
+                                        `choice.variants.${
+                                          fields.length - 3 >= 0 ? fields.length - 3 : 0
+                                        }.value`
+                                      );
+                                    }
+                                  }}
+                                />
+                              </div>
+                            )}
+                          />
+                        );
+                      })}
+                    </RadioGroup>
+                  )}
+                />
+              </CardContent>
+            </>
+          )}
+          <CourseSectionFooterEdit
+            isEditing={isEditing}
+            setIsEditing={setIsEditing}
+            deleteButton={
+              <CourseSectionDelete sectionId={sectionData.id} pageId={sectionData.pageId} />
+            }
+            errorMessage={
+              errors.root?.message ||
+              errors.choice?.question?.message ||
+              errors.choice?.answer?.message ||
+              errors.maxAttempts?.message ||
+              errors.maxScore?.message
+            }
           />
-        </header>
-        <div className='flex items-center gap-4 text-primary-default'>
-          <Icon type='question' className='text-inherit' />
-          <span className='font-mono font-bold leading-[normal] text-inherit'>
-            Ответ
-          </span>
-        </div>
-        <main>
-          <ul className='flex flex-col gap-4'>
-            {fields.map((field, index) => {
-              return (
-                <div
-                  key={field.id}
-                  id={field.id}
-                  className='flex items-center gap-4'
-                >
-                  <Controller
-                    name='choice.answer'
-                    control={control}
-                    render={({ field }) => (
-                      <Radio
-                        {...field}
-                        disabled={index === fields.length - 1}
-                        value={watch(`choice.variants.${index}.value`)}
-                      />
-                    )}
-                  />
-                  <Input
-                    {...register(`choice.variants.${index}.value`, {
-                      onChange: (e) => {
-                        // Change answer if input checked
-                        (
-                          e.target.parentElement.parentElement.querySelector(
-                            `input[type="radio"]`
-                          ) as HTMLInputElement
-                        ).checked && setValue('choice.answer', e.target.value);
-                        // add if last input has text
-                        if (
-                          e.target.value !== '' &&
-                          index === fields.length - 1
-                        ) {
-                          append({ value: '' }, { shouldFocus: false });
-                        }
-                        // remove if NOT last empty
-                        if (
-                          e.target.value === '' &&
-                          index !== fields.length - 1
-                        ) {
-                          remove(index);
-                          setFocus(
-                            `choice.variants.${
-                              fields.length - 3 >= 0 ? fields.length - 3 : 0
-                            }.value`
-                          );
-                        }
-                      },
-                    })}
-                  />
-                </div>
-              );
-            })}
-          </ul>
-        </main>
-        <footer className='flex items-center gap-4 place-self-end'>
-          <Input
-            {...register('maxAttempts', { valueAsNumber: true })}
-            placeholder='Максимум'
-          >
-            <span className='font-sans text-[0.625rem]'>попыток</span>
-          </Input>
-          <Input
-            {...register('maxScore', { valueAsNumber: true })}
-            placeholder='Максимум'
-          >
-            <span className='font-sans text-[0.625rem]'>баллов</span>
-          </Input>
-          <CourseSectionDelete
-            sectionId={sectionData.id}
-            pageId={sectionData.pageId}
-          />
-          <Button
-            className='w-64 shrink-0'
-            color='outlined'
-            type='submit'
-            disabled={!isValid}
-          >
-            <Icon type='save' className='text-inherit' />
-            <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
-              Сохранить
-            </span>
-          </Button>
-        </footer>
-        {errors.choice?.variants && <p>{errors.choice.variants.message}</p>}
-      </form>
-    </Card>
+        </form>
+      </Card>
+    </FormProvider>
   );
 };

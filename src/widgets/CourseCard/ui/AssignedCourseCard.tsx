@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React, { FC } from 'react';
-import { Card, Icon, Progress } from '@/shared';
+import { Card, CardFooter, CardHeader, CardTitle, Icon, Progress } from '@/shared';
 import { CourseContinue } from '@/features/CourseContinue';
 import { CourseResponseDto, useLastCoursePage } from '@/entities/Course';
 
@@ -16,13 +16,9 @@ export const AssignedCourseCard: FC<IProps> = ({ course }) => {
   const { nextPageName } = useLastCoursePage(id);
 
   return (
-    <Card className='relative transition-all hover:brightness-110'>
-      <Link
-        className='absolute inset-0'
-        href={`courses/${id}`}
-        scroll={false}
-      />
-      <header className='mb-auto flex w-full gap-4'>
+    <Card className='relative flex flex-col transition-all hover:bg-card-hover'>
+      <Link className='absolute inset-0 z-0 rounded-lg' href={`courses/${id}`} scroll={false} />
+      <CardHeader className='flex-row items-center gap-4 space-y-0'>
         {logo ? (
           <Image
             className='h-18 w-18 aspect-square flex-shrink-0 rounded-lg object-cover'
@@ -32,12 +28,10 @@ export const AssignedCourseCard: FC<IProps> = ({ course }) => {
             width={72}
           />
         ) : (
-          <div className='aspect-square h-[4.5rem] rounded-lg bg-background-overlay' />
+          <div className='aspect-square h-[4.5rem] rounded-lg bg-popover' />
         )}
         <div className='flex flex-grow flex-col'>
-          <h1 className='my-auto font-mono text-xl font-bold leading-[normal] text-primary-default'>
-            {name}
-          </h1>
+          <CardTitle>{name}</CardTitle>
           <Progress
             theme='primary'
             className='justify-items-end'
@@ -45,16 +39,16 @@ export const AssignedCourseCard: FC<IProps> = ({ course }) => {
             showPercentage
           />
         </div>
-      </header>
-      <footer className='flex items-center gap-2 justify-self-end'>
-        <div className='flex flex-grow items-center gap-2'>
-          <Icon className='h-[1.125rem]' type='courses' />
-          {nextPageName && (
-            <p className='text-[0.8125rem]'>Далее: {nextPageName}</p>
-          )}
+      </CardHeader>
+      <CardFooter className='grow items-end'>
+        <div className='flex w-full items-center gap-4'>
+          <div className='flex flex-grow items-center gap-2'>
+            <Icon className='h-[1.125rem]' type='courses' />
+            {nextPageName && <p>Далее: {nextPageName}</p>}
+          </div>
+          <CourseContinue courseId={id} />
         </div>
-        <CourseContinue className='relative' courseId={id} />
-      </footer>
+      </CardFooter>
     </Card>
   );
 };

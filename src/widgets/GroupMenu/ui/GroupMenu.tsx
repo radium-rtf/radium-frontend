@@ -1,7 +1,19 @@
 'use client';
 
 import React, { FC } from 'react';
-import { cn, List } from '@/shared';
+import {
+  cn,
+  List,
+  ListContent,
+  ListItem,
+  ListSubtitle,
+  ListTitle,
+  ListIcon,
+  useScrollPosition,
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+} from '@/shared';
 import Link from 'next/link';
 import Image from 'next/image';
 import { AnswersDto } from '@/entities/Answers';
@@ -14,99 +26,90 @@ interface IProps {
     name: string;
     id: string;
   };
-  className?: string;
   answers: AnswersDto;
   courseId: string;
 }
 
-export const GroupMenu: FC<IProps> = ({
-  group,
-  className,
-  answers,
-  courseId,
-}) => {
+export const GroupMenu: FC<IProps> = ({ group, answers, courseId }) => {
   const params = useParams();
   const { data: session } = useSession();
   const selectedStudentId = params.studentId;
+  const scrollHeight = useScrollPosition();
 
   return (
-    <nav className={cn('sticky top-[8.625rem] w-64', className)}>
-      <h2 className='px-6 py-4 text-xl font-bold leading-[normal] text-accent-secondary-300'>
-        {group.name}
-      </h2>
-      <List>
+    <nav
+      className={cn(
+        'sticky top-[8.25rem] -ml-6 flex max-h-[calc(100vh-8.25rem)] w-64 shrink-0 flex-grow-0 flex-col self-start transition-all',
+        scrollHeight > 50 && 'top-16 max-h-[calc(100vh-4rem)]'
+      )}
+    >
+      <h2 className='px-6 py-4 text-lg font-medium leading-[normal] text-accent'>{group.name}</h2>
+      <List className='scrollbar overflow-y-scroll'>
         {[
-          <List.Item
+          <ListItem
             key='Ведомость'
             asChild
             className={cn(
-              'font-mono text-[0.8125rem] font-normal ',
-              'rounded-lg ',
+              'font-NTSomic text-[0.8125rem] font-normal',
+              'rounded-[0.5rem]',
               'select-none',
-              !selectedStudentId &&
-                'border border-white/10 bg-text-primary bg-opacity-5'
+              'border border-transparent',
+              !selectedStudentId && 'bg-text-primary border border-white/10 bg-opacity-5'
             )}
           >
-            <Link
-              passHref={false}
-              href={`/groups/${group.id}/courses/${courseId}`}
-            >
-              <List.Icon className='text-accent-primary-200' icon='table' />
-              <List.Title className='text-lg'>Ведомость</List.Title>
+            <Link passHref={false} href={`/groups/${group.id}/courses/${courseId}`}>
+              <ListIcon className='text-primary' icon='table' />
+              <ListTitle>Ведомость</ListTitle>
             </Link>
-          </List.Item>,
-          ...answers.students.map(
-            (student: StudentAnswersDto) => {
-              const answersNeedToReview = student.answers.filter(
-                (answer) => answer.verdict === 'WAIT'
-              ).length;
+          </ListItem>,
+          ...answers.students.map((student: StudentAnswersDto) => {
+            const answersNeedToReview = student.answers.filter(
+              (answer) => answer.verdict === 'WAIT'
+            ).length;
 
-              return (
-                <List.Item asChild key={student.user.id}>
-                  <Link
-                    className={cn(
-                      'flex',
-                      'rounded-lg border border-transparent',
-                      'transition-colors',
-                      'hover:border-white/10 hover:bg-white/5',
-                      selectedStudentId === student.user.id &&
-                        'border border-white/10 bg-text-primary bg-opacity-5'
+            return (
+              <ListItem asChild key={student.user.id}>
+                <Link
+                  className={cn(
+                    'flex',
+                    'rounded-[0.5rem] border border-transparent',
+                    'transition-colors',
+                    'hover:border-white/10 hover:bg-white/5',
+                    selectedStudentId === student.user.id &&
+                      'bg-text-primary border border-white/10 bg-opacity-5'
+                  )}
+                  href={`/groups/${group.id}/courses/${courseId}/student/${student.user.id}/answers`}
+                >
+                  <ListIcon asChild>
+                    <Avatar className='h-[1.125rem] w-[1.125rem] shrink-0'>
+                      <AvatarImage src={student.user.avatar} width={18} height={18} />
+                      <AvatarFallback>
+                        <Image
+                          src={'/defaultProfile.svg'}
+                          alt={student.user.name}
+                          width={18}
+                          height={18}
+                        />
+                      </AvatarFallback>
+                    </Avatar>
+                  </ListIcon>
+                  <ListContent>
+                    <ListTitle>{student.user.name}</ListTitle>
+                    {session?.user.roles.isTeacher && (
+                      <ListSubtitle className='text-accent'>
+                        {answersNeedToReview !== 0 && (
+                          <>
+                            {answersNeedToReview}
+                            {(answersNeedToReview === 1 && ' новое задание') || ' новых задания'}
+                          </>
+                        )}
+                      </ListSubtitle>
                     )}
-                    href={`/groups/${group.id}/courses/${courseId}/student/${student.user.id}/answers`}
-                  >
-                    <List.Icon
-                      asChild
-                      className='-m-[0.1875rem] aspect-square h-6 rounded-full object-cover'
-                    >
-                      <Image
-                        src={student.user.avatar || '/defaultProfile.svg'}
-                        alt={student.user.name}
-                        width={24}
-                        height={24}
-                      />
-                    </List.Icon>
-                    <List.Content>
-                      <List.Title className='font-mono text-[0.8125rem] font-normal'>
-                        {student.user.name}
-                      </List.Title>
-                      {session?.user.roles.isTeacher && (
-                        <List.Subtitle className='font-mono text-[0.625rem] font-normal text-accent-secondary-300'>
-                          {answersNeedToReview !== 0 && (
-                            <>
-                              {answersNeedToReview}
-                              {(answersNeedToReview === 1 &&
-                                ' новое задание') ||
-                                ' новых задания'}
-                            </>
-                          )}
-                        </List.Subtitle>
-                      )}
-                    </List.Content>
-                  </Link>
-                </List.Item>
-              );
-            }
-          ),
+                  </ListContent>
+                </Link>
+              </ListItem>
+            );
+          }),
         ]}
       </List>
     </nav>

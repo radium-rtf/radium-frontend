@@ -4,26 +4,62 @@ export { getNoun } from './utils/nouns';
 
 // Components
 export { Radio } from './ui/Radio';
-export { Button } from './ui/Button';
+export { Button } from './ui/buttonNew';
 export { Toggle } from './ui/Toggle';
-export { Checkbox } from './ui/Checkbox';
+export { Checkbox } from './ui/checkboxNew';
 export { TextArea } from './ui/TextArea';
-export { Input } from './ui/Input';
+export { Input } from './ui/inputNew';
 export { Icon } from './ui/Icon';
 export { IconButton } from './ui/IconButton';
 export { Progress } from './ui/Progress';
-export { Card } from './ui/Card';
+export {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from './ui/cardNew';
 export { Menu } from './ui/Menu';
-export { List } from './ui/List';
+export { List, ListContent, ListIcon, ListSubtitle, ListTitle, ListItem } from './ui/List';
 export { Tab } from './ui/Tab';
 export { Tabs } from './ui/Tabs';
 export { AuthSessionProvider } from './ui/AuthSessionProvider';
 export { ReduxStoreProvider } from './ui/ReduxStoreProvider';
-export { PermutationItem } from './ui/PermutationItem';
 export { InputFile } from './ui/InputFile';
 export { CloseButton } from './ui/CloseButton';
 export { CodeEditor } from './ui/CodeEditor';
-export { Table, TableBodyRow, TableDataCell, TableHeaderCell } from './ui/Table';
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+} from './ui/Table';
+export { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+export {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from './ui/dropdown-menu';
+export { Switch } from './ui/switch';
+export { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+export { RadioGroup, RadioGroupItem } from './ui/radio-group';
 
 // Interfaces
 export type { IIcon } from './ui/Icon';
@@ -44,3 +80,5 @@ export { emptyApi } from './api/api';
 // Hooks
 export { useAppDispatch, useAppSelector } from './api/store';
 export { useDrop } from './hooks/useDrop';
+export { useScrollPosition } from './hooks/useScrollPosition';
+export { useUpdateTitle } from './hooks/useUpdateTitle';

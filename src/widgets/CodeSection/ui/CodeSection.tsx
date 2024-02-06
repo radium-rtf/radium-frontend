@@ -23,13 +23,7 @@ import { DevTool } from '@hookform/devtools';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { useSession } from 'next-auth/react';
 import { CourseEditContext } from '@/features/CourseEditContext';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/shared/ui/Select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/Select';
 import { LanguageDisplay } from '../lib/languageDisplay';
 import { Comment } from '@/widgets/Comment';
 
@@ -39,16 +33,13 @@ interface CodeSectionProps {
 
 export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
   // Verdict
-  const [verdict, setVerdict] = useState<CodeSectionResponseDto['verdict']>(
-    sectionData.verdict
-  );
+  const [verdict, setVerdict] = useState<CodeSectionResponseDto['verdict']>(sectionData.verdict);
 
   // IsCodeWriting
   const [isCodeWriting, setIsCodeWriting] = useState(true);
 
   // Answer
-  const [answerCodeSection, { isLoading, isError }] =
-    useAnswerCourseCodeSectionMutation();
+  const [answerCodeSection, { isLoading, isError }] = useAnswerCourseCodeSectionMutation();
 
   // Form init
   const { handleSubmit, control, getValues } = useForm<answerSchemaType>({
@@ -76,9 +67,7 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
   // Edit checks
   const session = useSession();
   const isEditAllowed =
-    session.data?.user.roles.isAuthor ||
-    session.data?.user.roles.isTeacher ||
-    false;
+    session.data?.user.roles.isAuthor || session.data?.user.roles.isTeacher || false;
   const { isEditing: isEditMode } = useContext(CourseEditContext);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -87,17 +76,13 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
   }
 
   return (
-    <Card asChild>
+    <Card>
       <form onSubmit={handleSubmit(onSubmitHandler)}>
-        <div className='flex items-center gap-4 text-primary-default'>
+        <div className='flex items-center gap-4 text-primary'>
           <Icon type='question' className='text-inherit' />
-          <span className='font-mono font-bold leading-[normal] text-inherit'>
-            Вопрос
-          </span>
+          <span className='font-NTSomic font-bold leading-[normal] text-inherit'>Вопрос</span>
         </div>
-        <header className='text-[0.8125rem] leading-normal'>
-          {sectionData.content}
-        </header>
+        <header className='text-[0.8125rem] leading-normal'>{sectionData.content}</header>
         <Tabs>
           <Tab
             type='button'
@@ -132,16 +117,14 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
                         <SelectValue placeholder={'Выберите язык'} />
                       </SelectTrigger>
                       <SelectContent position='popper'>
-                        {(sectionData.languages || ['javascript', 'cpp']).map(
-                          (lang) => (
-                            <SelectItem key={lang} value={lang}>
-                              <div className='flex items-center gap-4'>
-                                <Icon type='table' />
-                                <span>{LanguageDisplay[lang as 'cpp']}</span>
-                              </div>
-                            </SelectItem>
-                          )
-                        )}
+                        {(sectionData.languages || ['javascript', 'cpp']).map((lang) => (
+                          <SelectItem key={lang} value={lang}>
+                            <div className='flex items-center gap-4'>
+                              <Icon type='table' />
+                              <span>{LanguageDisplay[lang as 'cpp']}</span>
+                            </div>
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   );
@@ -151,9 +134,7 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
                 control={control}
                 name='answer'
                 render={({ field: { onChange } }) => {
-                  return (
-                    <CodeEditor onChange={onChange} lang={getValues('lang')} />
-                  );
+                  return <CodeEditor onChange={onChange} lang={getValues('lang')} />;
                 }}
               />
             </>
@@ -164,10 +145,7 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
               name='file'
               render={({ field: { onChange } }) => {
                 return (
-                  <InputFile
-                    onFileLoaded={(e) => onChange(e)}
-                    allowedFileTypes={FileType.jpg}
-                  />
+                  <InputFile onFileLoaded={(e) => onChange(e)} allowedFileTypes={FileType.jpg} />
                 );
               }}
             />
@@ -176,54 +154,32 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
         <footer className='flex items-center gap-4 place-self-end'>
           {isEditAllowed && isEditMode && (
             <div className='flex items-center gap-4'>
-              <CourseSectionDelete
-                pageId={sectionData.pageId}
-                sectionId={sectionData.id}
-              />
-              <Button
-                className='w-64 shrink-0'
-                color='outlined'
-                onClick={() => setIsEditing(true)}
-              >
+              <CourseSectionDelete pageId={sectionData.pageId} sectionId={sectionData.id} />
+              <Button className='w-64 shrink-0' color='outlined' onClick={() => setIsEditing(true)}>
                 <Icon type='edit' className='text-inherit' />
-                <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
-                  Редактировать
-                </span>
+                <span className='ml-[calc(50%-34px)] -translate-x-1/2'>Редактировать</span>
               </Button>
             </div>
           )}
           {(!isEditAllowed || !isEditMode) && (
             <>
               <div className='flex flex-col gap-2 text-[0.8125rem]'>
-                {verdict === 'OK' && (
-                  <span className='text-secondary-default'>Верно!</span>
-                )}
-                {verdict === 'WAIT' && (
-                  <span className='text-accent-primary-200'>
-                    Принято на проверку
-                  </span>
-                )}
-                {verdict === 'WA' && (
-                  <span className='text-destructive-default'>Неправильно!</span>
-                )}
+                {verdict === 'OK' && <span className='text-secondary-default'>Верно!</span>}
+                {verdict === 'WAIT' && <span className='text-primary'>Принято на проверку</span>}
+                {verdict === 'WA' && <span className='text-destructive-default'>Неправильно!</span>}
               </div>
               {!isError &&
                 !isLoading &&
                 verdict !== 'WAIT' &&
                 (!!sectionData.score || sectionData.score === 0) && (
                   <span
-                    className={cn(
-                      'text-[0.8125rem]',
-                      verdict === 'OK' && 'text-secondary-default'
-                    )}
+                    className={cn('text-[0.8125rem]', verdict === 'OK' && 'text-secondary-default')}
                   >
-                    {verdict === 'OK' &&
-                      `${sectionData.score} / ${sectionData.maxScore}`}
+                    {verdict === 'OK' && `${sectionData.score} / ${sectionData.maxScore}`}
                     {verdict === 'WA' && `${0} / ${sectionData.maxScore}`}
                     {verdict === '' && `${sectionData.maxScore}`}
                     <span>
-                      {sectionData.score}{' '}
-                      {getNoun(sectionData.score, 'балл', 'балла', 'баллов')}
+                      {sectionData.score} {getNoun(sectionData.score, 'балл', 'балла', 'баллов')}
                     </span>
                   </span>
                 )}

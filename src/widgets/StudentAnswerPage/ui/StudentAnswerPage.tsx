@@ -1,7 +1,7 @@
 'use client';
 
 import React, { FC } from 'react';
-import { StudentAnswersDto } from '@/entities/Answers/model/answersDto';
+import { StudentAnswersDto } from '@/entities/Answers';
 import { CheckAnswerSection, useAnswersQuery } from '@/entities/Answers';
 import { useSession } from 'next-auth/react';
 
@@ -11,11 +11,7 @@ interface IProps {
   courseId: string;
 }
 
-export const StudentAnswerPage: FC<IProps> = ({
-  studentId,
-  groupId,
-  courseId,
-}) => {
+export const StudentAnswerPage: FC<IProps> = ({ studentId, groupId, courseId }) => {
   const { data: answers } = useAnswersQuery({
     groupId: groupId,
     course_id: courseId,
@@ -41,30 +37,18 @@ export const StudentAnswerPage: FC<IProps> = ({
   );
 
   return (
-    <div className='mx-auto max-w-[45rem]'>
-      <h1 className='font-mono text-[3rem] font-bold text-accent-primary-200 px-6'>
+    <div className='mx-auto flex max-w-[45rem] flex-col gap-8'>
+      <h1 className='px-6 font-NTSomic text-2xl font-bold text-primary'>
         Задания от {studentAnswers.user.name}
       </h1>
       {needToReview.map((answer) => (
-        <CheckAnswerSection
-          key={answer.id}
-          reviewed={!!answer.review}
-          studentAnswer={answer}
-          className='my-[2rem]'
-        />
+        <CheckAnswerSection key={answer.id} reviewed={!!answer.review} studentAnswer={answer} />
       ))}
       {reviewed.length !== 0 && (
-        <h1 className='font-mono text-[2rem] font-bold text-accent-primary-200 px-6'>
-          Проверено
-        </h1>
+        <h1 className='px-6 font-NTSomic text-[2rem] font-bold text-primary'>Проверено</h1>
       )}
       {reviewed.map((answer) => (
-        <CheckAnswerSection
-          key={answer.id}
-          reviewed
-          studentAnswer={answer}
-          className='my-[2rem]'
-        />
+        <CheckAnswerSection key={answer.id} reviewed studentAnswer={answer} />
       ))}
     </div>
   );

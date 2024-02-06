@@ -8,6 +8,7 @@ import {
   SortableContext,
   sortableKeyboardCoordinates,
   useSortable,
+  verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSSProperties, FC, HTMLAttributes, useContext } from 'react';
 import { CSS } from '@dnd-kit/utilities';
@@ -20,10 +21,7 @@ import {
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
-import {
-  restrictToParentElement,
-  restrictToVerticalAxis,
-} from '@dnd-kit/modifiers';
+import { restrictToParentElement, restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { useChangeCoursePageOrderMutation } from '@/entities/CoursePage';
 
 interface IProps extends HTMLAttributes<HTMLElement> {
@@ -32,31 +30,20 @@ interface IProps extends HTMLAttributes<HTMLElement> {
   currentPage?: string;
 }
 
-export const CourseModuleNavigation: FC<IProps> = ({
-  courseId,
-  module,
-  currentPage,
-  ...props
-}) => {
+export const CourseModuleNavigation: FC<IProps> = ({ courseId, module, currentPage, ...props }) => {
   const { isEditing } = useContext(CourseEditContext);
   const isCurrentModule = module.pages.map((e) => e.id).includes(currentPage!);
   const [updateOrder] = useChangeCoursePageOrderMutation();
 
   // DND
-  const {
-    setNodeRef,
-    setActivatorNodeRef,
-    listeners,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
-    id: module.id,
-    data: {
-      order: module.order,
-    },
-    disabled: !isEditing,
-  });
+  const { setNodeRef, setActivatorNodeRef, listeners, transform, transition, isDragging } =
+    useSortable({
+      id: module.id,
+      data: {
+        order: module.order,
+      },
+      disabled: !isEditing,
+    });
 
   const style = {
     transform: CSS.Translate.toString(transform),
@@ -90,12 +77,7 @@ export const CourseModuleNavigation: FC<IProps> = ({
   };
 
   return (
-    <nav
-      ref={setNodeRef}
-      style={style}
-      {...props}
-      className={cn(isDragging && 'z-20')}
-    >
+    <nav ref={setNodeRef} style={style} {...props} className={cn(isDragging && 'z-20')}>
       <NavigationModuleTitle
         ref={setActivatorNodeRef}
         name={module.name}
@@ -108,14 +90,10 @@ export const CourseModuleNavigation: FC<IProps> = ({
         sensors={sensors}
         modifiers={[restrictToVerticalAxis, restrictToParentElement]}
       >
-        <SortableContext items={module.pages}>
+        <SortableContext items={module.pages} strategy={verticalListSortingStrategy}>
           <div>
             {module.pages.map((page) => (
-              <NavigationPageTitle
-                key={page.id}
-                page={page}
-                currentPage={currentPage}
-              />
+              <NavigationPageTitle key={page.id} page={page} currentPage={currentPage} />
             ))}
           </div>
         </SortableContext>

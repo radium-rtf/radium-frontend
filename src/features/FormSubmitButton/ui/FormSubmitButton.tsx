@@ -8,23 +8,19 @@ interface IProps {
   text: string;
 }
 
-export const FormSubmitButton: FC<IProps> = ({
-  isLoading,
-  error,
-  defaultIcon,
-  text,
-}) => {
+export const FormSubmitButton: FC<IProps> = ({ isLoading, error, defaultIcon, text }) => {
   return (
     <Button
       disabled={isLoading}
+      className='w-full justify-start'
       type='submit'
-      color={error ? 'destructive' : 'accent'}
+      variant={error ? 'destructive' : 'default'}
     >
       <Icon
         className='shrink-0 text-inherit'
         type={isLoading ? 'loading' : error ? 'alert' : defaultIcon}
       />
-      <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
+      <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
         {isLoading ? 'Загружаем...' : error || text}
       </span>
     </Button>

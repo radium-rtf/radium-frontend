@@ -1,9 +1,4 @@
-export function getNoun(
-  number: number,
-  one: string,
-  two: string,
-  five: string
-) {
+export function getNoun(number: number, one: string, two: string, five: string) {
   let n = Math.abs(number);
   n %= 100;
   if (n >= 5 && n <= 20) {

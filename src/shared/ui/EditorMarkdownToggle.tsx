@@ -4,10 +4,7 @@ import { Icon } from './Icon';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $createTextNode, $getRoot } from 'lexical';
 import { $isCodeNode, $createCodeNode } from '@lexical/code';
-import {
-  $convertFromMarkdownString,
-  $convertToMarkdownString,
-} from '@lexical/markdown';
+import { $convertFromMarkdownString, $convertToMarkdownString } from '@lexical/markdown';
 import { TRANSFORMERS } from '../utils/TRANSFORMERS';
 
 export const EditorMarkdownToggle = () => {
@@ -21,11 +18,7 @@ export const EditorMarkdownToggle = () => {
         $convertFromMarkdownString(firstChild.getTextContent(), TRANSFORMERS);
       } else {
         const markdown = $convertToMarkdownString(TRANSFORMERS);
-        root
-          .clear()
-          .append(
-            $createCodeNode('markdown').append($createTextNode(markdown))
-          );
+        root.clear().append($createCodeNode('markdown').append($createTextNode(markdown)));
       }
       root.selectEnd();
     });

@@ -7,10 +7,7 @@ interface CourseDeleteCoAuthorProps {
   courseId: string;
 }
 
-export const CourseDeleteCoAuthor: FC<CourseDeleteCoAuthorProps> = ({
-  courseId,
-  coAuthorId,
-}) => {
+export const CourseDeleteCoAuthor: FC<CourseDeleteCoAuthorProps> = ({ courseId, coAuthorId }) => {
   const [deleteCoAuthor] = useDeleteCourseCoAuthorMutation();
 
   const onClickHandler = () => {
@@ -19,7 +16,7 @@ export const CourseDeleteCoAuthor: FC<CourseDeleteCoAuthorProps> = ({
 
   return (
     <button type='button' onClick={onClickHandler}>
-      <Icon type='remove' className='h-3 text-primary-default' />
+      <Icon type='remove' className='h-3 text-primary' />
     </button>
   );
 };

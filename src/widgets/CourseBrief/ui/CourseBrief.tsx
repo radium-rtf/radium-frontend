@@ -1,13 +1,10 @@
 'use client';
-import { CourseJoin } from '@/features/CourseJoin';
-import { CourseContinue } from '@/features/CourseContinue';
-import { CourseBriefEdit } from './CourseBriedEdit';
+import { FC, useContext } from 'react';
+import { CourseBriefDisplay } from './CourseBriefDipslay';
+import { CourseBriefEdit } from './CourseBriefEdit';
 import { CourseEditContext } from '@/features/CourseEditContext';
-import { Button, Card, Icon, getNoun } from '@/shared';
-import { FC, useContext, useState } from 'react';
-import { ChangeCourseLogo } from '@/features/ChangeCourseLogo';
 
-interface IProps {
+interface CourseBriefDisplayProps {
   shortDescription: string;
   modulesCount: number;
   courseName: string;
@@ -17,64 +14,34 @@ interface IProps {
   isAssigned: boolean;
 }
 
-export const CourseBrief: FC<IProps> = ({
-  shortDescription,
-  modulesCount,
-  courseName,
-  courseLogo,
+export const CourseBrief: FC<CourseBriefDisplayProps> = ({
   courseId,
-  isEditAllowed,
+  courseLogo,
+  courseName,
   isAssigned,
+  isEditAllowed,
+  modulesCount,
+  shortDescription,
 }) => {
-  const { isEditing } = useContext(CourseEditContext);
-  const [isEditMode, setIsEditMode] = useState(false);
+  const { isEditing: isEditMode } = useContext(CourseEditContext);
 
-  if (isEditAllowed && isEditing && isEditMode) {
+  if (isEditAllowed && isEditMode) {
     return (
       <CourseBriefEdit
+        courseId={courseId}
         courseName={courseName}
         courseShortDescription={shortDescription}
-        courseId={courseId}
-        onSave={() => setIsEditMode(false)}
+        courseLogo={courseLogo}
       />
     );
   }
 
   return (
-    <Card className='flex flex-col gap-4'>
-      {isEditAllowed && isEditing && (
-        <div className='flex items-center gap-4'>
-          <ChangeCourseLogo logo={courseLogo} courseId={courseId} />
-          <h4 className='font-mono text-base text-primary-default'>
-            {courseName}
-          </h4>
-        </div>
-      )}
-      <p className='text-[0.8125rem] leading-normal'>{shortDescription}</p>
-      <div className='flex items-center gap-2'>
-        <Icon type='courses' />
-        <span className='flex-grow text-[0.8125rem]'>
-          {modulesCount} {getNoun(modulesCount, 'тема', 'темы', 'тем')}
-        </span>
-        {(!isEditing || !isEditMode) && (
-          <>
-            {!isAssigned && <CourseJoin courseId={courseId} />}
-            {isAssigned && <CourseContinue courseId={courseId} />}
-          </>
-        )}
-        {isEditAllowed && isEditing && (
-          <Button
-            type='button'
-            color='outlined'
-            onClick={() => {
-              setIsEditMode(true);
-            }}
-          >
-            <Icon type='edit' />
-            <span>Редактировать</span>
-          </Button>
-        )}
-      </div>
-    </Card>
+    <CourseBriefDisplay
+      courseId={courseId}
+      modulesCount={modulesCount}
+      shortDescription={shortDescription}
+      isAssigned={isAssigned}
+    />
   );
 };

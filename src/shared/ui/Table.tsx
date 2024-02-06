@@ -1,269 +1,93 @@
-'use client';
-import { SortDirection, TableContainer, TableSortLabel } from '@mui/material';
-import MuiTable from '@mui/material/Table';
-import MuiTableBody from '@mui/material/TableBody';
-import MuiTableHead from '@mui/material/TableHead';
-import MuiTableRow from '@mui/material/TableRow';
-import MuiTableCell from '@mui/material/TableCell';
-import {
-  Children,
-  FC,
-  ReactElement,
-  ReactNode,
-  useMemo,
-  useState,
-} from 'react';
-import { cn } from '../utils/cn';
-import { Icon } from './Icon';
+import * as React from 'react';
 
-type Order = 'asc' | 'desc';
+import { cn } from '@/shared';
 
-interface ITableHeader {
-  children: ReactNode;
-  orderByColumn: number;
-  order: Order;
-  createSortHandler: (column: number) => void;
-}
+const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(
+  ({ className, ...props }, ref) => (
+    <div className='relative w-full overflow-auto'>
+      <table ref={ref} className={cn('w-full caption-bottom text-sm', className)} {...props} />
+    </div>
+  )
+);
+Table.displayName = 'Table';
 
-const TableHeader: FC<ITableHeader> = ({
-  children,
-  orderByColumn,
-  order,
-  createSortHandler,
-}) => {
-  return (
-    <MuiTableHead>
-      <MuiTableRow>
-        {Children.map(children, (child, column) => (
-          <TableCell
-            className='bg-black bg-opacity-10 hover:bg-white hover:bg-opacity-5'
-            key={column}
-          >
-            <TableSortLabel
-              sx={{
-                marginLeft: '1.25rem',
-                '& .MuiTableSortLabel-icon': {
-                  color: '#E6E6E6',
-                },
-              }}
-              IconComponent={() => (
-                <Icon
-                  className={cn(
-                    'm-1 shrink-0',
-                    orderByColumn !== column && 'opacity-0'
-                  )}
-                  width='16'
-                  height='16'
-                  type={
-                    orderByColumn === column && order === 'desc' ? 'down' : 'up'
-                  }
-                />
-              )}
-              active={orderByColumn === column}
-              direction={orderByColumn === column ? order : 'asc'}
-              onClick={() => createSortHandler(column)}
-            >
-              {child}
-            </TableSortLabel>
-          </TableCell>
-        ))}
-      </MuiTableRow>
-    </MuiTableHead>
-  );
-};
+const TableHeader = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <thead ref={ref} className={cn('[&_tr]:border-b [&_tr]:border-white/10', className)} {...props} />
+));
+TableHeader.displayName = 'TableHeader';
 
-interface TableCellProps {
-  children: ReactNode;
-  scope?: string;
-  className?: string;
-  sortDirection?: SortDirection;
-}
+const TableBody = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <tbody ref={ref} className={cn('[&_tr:last-child]:border-0', className)} {...props} />
+));
+TableBody.displayName = 'TableBody';
 
-export const TableCell: FC<TableCellProps> = ({
-  children,
-  scope,
-  className,
-  sortDirection = false,
-}) => {
-  return (
-    <MuiTableCell
-      style={{ borderBottom: 'none' }}
-      scope={scope}
-      sortDirection={sortDirection}
+const TableFooter = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <tfoot
+    ref={ref}
+    className={cn('border-t bg-muted/50 font-medium [&>tr]:last:border-b-0', className)}
+    {...props}
+  />
+));
+TableFooter.displayName = 'TableFooter';
+
+const TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTMLTableRowElement>>(
+  ({ className, ...props }, ref) => (
+    <tr
+      ref={ref}
       className={cn(
-        'flex',
-        'p-4',
-        'break-words',
-        'gap-1.5',
-        'border-r',
-        'outline-none',
-        'border-white',
-        'border-opacity-10',
-        'text-text-primary',
+        'border-b border-white/10 transition-colors [&>td:not(:last-child)]:border-r [&>td]:border-white/10 [&>th:not(:last-child)]:border-r [&>th]:border-white/10',
+        // 'hover:bg-muted/50',
+        'data-[state=selected]:bg-muted',
         className
       )}
-    >
-      {children}
-    </MuiTableCell>
-  );
-};
-
-interface ITableHeaderCell {
-  children: ReactNode;
-  className?: string;
-}
-
-export const TableHeaderCell: FC<ITableHeaderCell> = ({
-  children,
-  className,
-}) => <div className={className}>{children}</div>;
-
-interface ITable {
-  headerRow: ReactElement<ITableHeaderCell>[];
-  bodyRows: ReactElement<ITableBodyRow>[];
-}
-
-export const Table: FC<ITable> = ({ bodyRows, headerRow }) => {
-  const [order, setOrder] = useState<Order>('asc');
-  const [orderByColumn, setOrderByColumn] = useState(0);
-
-  const handleRequestSort = (column: number) => {
-    if (orderByColumn === column) {
-      setOrder(order === 'asc' ? 'desc' : 'asc');
-    } else {
-      setOrder('desc');
-    }
-    setOrderByColumn(column);
-  };
-
-  const createSortHandler = (column: number) => {
-    handleRequestSort(column);
-  };
-
-  const orderedRows = useMemo(
-    () => sortRows(bodyRows, getComparator(order, orderByColumn)),
-    [bodyRows, order, orderByColumn]
-  );
-
-  return (
-    <div
-      className='
-            radium-scrollbar
-            overflow-hidden
-            rounded-lg
-            border
-            border-white
-            border-opacity-10
-            '
-    >
-      <TableContainer
-        sx={{
-          '&::-webkit-scrollbar': {
-            height: '4px',
-          },
-          '&::-webkit-scrollbar-thumb': {
-            borderRadius: '4px',
-            backgroundColor: 'rgb(132, 133, 134)',
-          },
-        }}
-      >
-        <MuiTable className='table-auto'>
-          <TableHeader
-            orderByColumn={orderByColumn}
-            order={order}
-            createSortHandler={createSortHandler}
-          >
-            {headerRow}
-          </TableHeader>
-          <TableBody>{orderedRows}</TableBody>
-        </MuiTable>
-      </TableContainer>
-    </div>
-  );
-};
-
-interface ITableBody {
-  children: ReactElement<ITableBodyRow>[];
-}
-
-export const TableBody: FC<ITableBody> = ({ children }) => (
-  <MuiTableBody>
-    {children.map((row, rowIndex) => (
-      <TableBodyRow
-        key={rowIndex}
-        rowIndex={rowIndex}
-        row={row.props.row}
-      ></TableBodyRow>
-    ))}
-  </MuiTableBody>
+      {...props}
+    />
+  )
 );
+TableRow.displayName = 'TableRow';
 
-interface ITableDataCell {
-  children: ReactNode;
-  value: string;
-}
+const TableHead = React.forwardRef<
+  HTMLTableCellElement,
+  React.ThHTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => (
+  <th
+    ref={ref}
+    className={cn(
+      'w-32 border-b border-white/10 bg-black/5 p-4 text-left align-middle font-medium text-foreground [&:has([role=checkbox])]:pr-0',
+      className
+    )}
+    {...props}
+  />
+));
+TableHead.displayName = 'TableHead';
 
-export const TableDataCell: FC<ITableDataCell> = ({ children }) => (
-  <>{children}</>
-);
+const TableCell = React.forwardRef<
+  HTMLTableCellElement,
+  React.TdHTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => (
+  <td
+    ref={ref}
+    className={cn('p-4 align-middle [&:has([role=checkbox])]:pr-0', className)}
+    {...props}
+  />
+));
+TableCell.displayName = 'TableCell';
 
-interface ITableBodyRow {
-  row: ReactElement<ITableDataCell>[];
-  rowIndex: number;
-}
+const TableCaption = React.forwardRef<
+  HTMLTableCaptionElement,
+  React.HTMLAttributes<HTMLTableCaptionElement>
+>(({ className, ...props }, ref) => (
+  <caption ref={ref} className={cn('mt-4 text-sm text-muted-foreground', className)} {...props} />
+));
+TableCaption.displayName = 'TableCaption';
 
-export const TableBodyRow: FC<ITableBodyRow> = ({ row, rowIndex }) => (
-  <MuiTableRow
-    className='border-b border-white border-opacity-10'
-    key={rowIndex}
-  >
-    {row.map((value, cellIndex) => (
-      <TableCell scope='row' key={cellIndex}>
-        <text className='text-sm text-text-primary'>{value}</text>
-      </TableCell>
-    ))}
-  </MuiTableRow>
-);
-
-function descendingComparator(a: string[], b: string[], orderByColumn: number) {
-  const num = Number(a[orderByColumn]);
-  const valueToCompare = isNaN(num) ? a[orderByColumn] : num;
-  if (b[orderByColumn] < valueToCompare) {
-    return -1;
-  }
-  if (b[orderByColumn] > valueToCompare) {
-    return 1;
-  }
-  return 0;
-}
-
-function getComparator(
-  order: Order,
-  orderByColumn: number
-): (a: string[], b: string[]) => number {
-  return order === 'desc'
-    ? (a, b) => descendingComparator(a, b, orderByColumn)
-    : (a, b) => -descendingComparator(a, b, orderByColumn);
-}
-
-function sortRows(
-  array: readonly ReactElement<ITableBodyRow>[],
-  comparator: (a: string[], b: string[]) => number
-): ReactElement<ITableBodyRow>[] {
-  const stabilizedThis = array.map(
-    (element, index) =>
-      [element, index] as [ReactElement<ITableBodyRow>, number]
-  );
-  stabilizedThis.sort((row1, row2) => {
-    const order = comparator(
-      row1[0].props.row.map((child) => child.props.value),
-      row2[0].props.row.map((child) => child.props.value)
-    );
-
-    if (order !== 0) {
-      return order;
-    }
-    return row1[1] - row2[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
-}
+export { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption };

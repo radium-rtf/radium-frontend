@@ -12,10 +12,7 @@ export const CloseButton: FC<IProps> = ({ className, onClick }) => {
   return (
     <button onClick={onClick}>
       <Icon
-        className={cn(
-          className,
-          'h-6 w-6 p-1 hover:bg-text-primary hover:bg-opacity-10'
-        )}
+        className={cn(className, 'hover:bg-text-primary h-6 w-6 p-1 hover:bg-opacity-10')}
         type={'remove'}
       />
     </button>

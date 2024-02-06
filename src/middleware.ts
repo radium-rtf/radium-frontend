@@ -1,35 +1,32 @@
 import { getToken } from 'next-auth/jwt';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
+import { DEFAULT_LOGIN_REDIRECT_URL, authRoutes, publicRoutes } from '@/entities/Auth';
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(req: NextRequest) {
-  const token = await getToken({ req });
-  const { pathname } = req.nextUrl;
-  const loginPaths = ['/login', '/registration'];
+  const { nextUrl } = req;
 
-  if (loginPaths.some((path) => pathname.startsWith(path))) {
-    if (token) {
-      return NextResponse.redirect(new URL('/', req.url));
-    } else {
-      return NextResponse.next();
+  const isLoggedIn = !!(await getToken({ req }));
+  const isApiAuthRoute = nextUrl.pathname.startsWith('/api/auth');
+  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+  const isAuthRoute = authRoutes.includes(nextUrl.pathname);
+
+  if (isApiAuthRoute) {
+    return null;
+  }
+
+  if (isAuthRoute) {
+    if (isLoggedIn) {
+      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT_URL, nextUrl));
     }
-  } else {
-    if (token) {
-      return NextResponse.next();
-    } else {
-      return NextResponse.redirect(new URL('/login', req.url));
-    }
+    return null;
+  }
+
+  if (!isLoggedIn && !isPublicRoute) {
+    return Response.redirect(new URL('/login', nextUrl));
   }
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - static (static files)
-     * - favicon.ico (favicon file)
-     */
-    '/((?!api|static|favicon.ico|_next|logo.svg).*)',
-  ],
+  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
 };

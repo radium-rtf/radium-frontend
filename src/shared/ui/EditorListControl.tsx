@@ -1,10 +1,7 @@
 import { cn } from '../utils/cn';
 import { Icon } from './Icon';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import {
-  INSERT_ORDERED_LIST_COMMAND,
-  INSERT_UNORDERED_LIST_COMMAND,
-} from '@lexical/list';
+import { INSERT_ORDERED_LIST_COMMAND, INSERT_UNORDERED_LIST_COMMAND } from '@lexical/list';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -41,9 +38,7 @@ export const EditorListControl = () => {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem onClick={() => clickHandler('ol')}>
-          Нумерованный список
-        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => clickHandler('ol')}>Нумерованный список</DropdownMenuItem>
         <DropdownMenuItem onClick={() => clickHandler('ul')}>
           Ненумерованный список
         </DropdownMenuItem>

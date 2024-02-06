@@ -1,11 +1,7 @@
 import { cn } from '../utils/cn';
 import { Icon } from './Icon';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import {
-  $createParagraphNode,
-  $getSelection,
-  $isRangeSelection,
-} from 'lexical';
+import { $createParagraphNode, $getSelection, $isRangeSelection } from 'lexical';
 import { $setBlocksType } from '@lexical/selection';
 import { $createHeadingNode, HeadingTagType } from '@lexical/rich-text';
 import {
@@ -44,18 +40,10 @@ export const EditorHeadingControl = () => {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem onClick={() => clickHandler('paragraph')}>
-          Параграф
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => clickHandler('h1')}>
-          Заголовок 1
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => clickHandler('h2')}>
-          Заголовок 2
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => clickHandler('h3')}>
-          Заголовок 3
-        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => clickHandler('paragraph')}>Параграф</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => clickHandler('h1')}>Заголовок 1</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => clickHandler('h2')}>Заголовок 2</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => clickHandler('h3')}>Заголовок 3</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -1,13 +1,5 @@
 'use client';
-import {
-  FC,
-  ReactNode,
-  RefObject,
-  useEffect,
-  useId,
-  useRef,
-  useState,
-} from 'react';
+import { FC, ReactNode, RefObject, useEffect, useId, useRef, useState } from 'react';
 import { FileType } from '../types/FileType';
 import { useDrop } from '../hooks/useDrop';
 import { cn } from '../utils/cn';
@@ -136,14 +128,8 @@ export const InputFile: FC<IProps> = ({
           'aria-disabled:opacity-50',
           'aria-disabled:cursor-not-allowed',
           'transition',
-          isAttachError && [
-            'text-accent-destructive-300',
-            'border-accent-destructive-400',
-          ],
-          isDragging && [
-            'text-accent-primary-300',
-            'border-accent-primary-400',
-          ],
+          isAttachError && ['text-accent-destructive-300', 'border-accent-destructive-400'],
+          isDragging && ['text-accent-primary-300', 'border-accent-primary-400'],
           file && ['bg-white bg-opacity-5', 'text-text-primary'],
           !isDisabled && 'hover:bg-grey-600'
         )}
@@ -158,7 +144,7 @@ export const InputFile: FC<IProps> = ({
         />
         {!file ? getLabelText() : file.name}
 
-        <div className='ml-auto mr-0 flex gap-4 text-text-secondary'>
+        <div className='text-text-secondary ml-auto mr-0 flex gap-4'>
           {file && <span>{getFileSizeText(file)}</span>}
           {(file && (
             <CloseButton

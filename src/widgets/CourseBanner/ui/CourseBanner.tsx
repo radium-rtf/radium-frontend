@@ -12,17 +12,12 @@ interface CourseBannerProps {
   isEditAllowed: boolean;
 }
 
-export const CourseBanner: FC<CourseBannerProps> = ({
-  name,
-  url,
-  courseId,
-  isEditAllowed,
-}) => {
+export const CourseBanner: FC<CourseBannerProps> = ({ name, url, courseId, isEditAllowed }) => {
   const { isEditing } = useContext(CourseEditContext);
   return (
     <div
       className={cn(
-        'relative mb-8 h-64 overflow-hidden rounded-2xl bg-background-card md:container md:mx-auto md:mb-16'
+        'relative mb-8 h-64 overflow-hidden rounded-2xl bg-card md:container md:mx-auto md:mb-16 md:pl-0 md:pr-0'
       )}
     >
       {url !== '' ? (

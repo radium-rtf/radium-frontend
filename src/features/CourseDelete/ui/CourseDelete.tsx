@@ -21,9 +21,9 @@ export const CourseDelete: FC<CourseDeleteProps> = ({ courseId }) => {
   };
 
   return (
-    <Button color='destructive' className='w-full' onClick={onClickHandler}>
-      <Icon type='delete' className='shrink-0 text-secondary-foreground' />
-      <span className='ml-[calc(50%-34px)] -translate-x-1/2'>Удалить</span>
+    <Button variant='destructive' className='w-full justify-start' onClick={onClickHandler}>
+      <Icon type='delete' className='shrink-0 text-inherit' />
+      <span className='ml-[calc(50%-18px)] -translate-x-1/2'>Удалить</span>
     </Button>
   );
 };

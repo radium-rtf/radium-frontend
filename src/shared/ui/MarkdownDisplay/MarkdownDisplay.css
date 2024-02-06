@@ -1,12 +1,3 @@
-.markdown-display {
-  font-size: 0.8125rem;
-  line-height: 1.5;
-}
-
-.markdown-display h1 {
-  font-size: 2.25em;
-  line-height: 2.5rem;
-}
 .markdown-display pre > code {
   display: block;
   border: 1px solid #383a3b;

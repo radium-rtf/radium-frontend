@@ -11,5 +11,4 @@ const defaultState: ICourseEditContext = {
   setIsEditing: () => {},
 };
 
-export const CourseEditContext =
-  createContext<ICourseEditContext>(defaultState);
+export const CourseEditContext = createContext<ICourseEditContext>(defaultState);

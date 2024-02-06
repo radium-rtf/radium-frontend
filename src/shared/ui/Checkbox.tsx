@@ -26,29 +26,16 @@ export const Checkbox: FC<IProps> = forwardRef<HTMLInputElement, IProps>(
         />
         <div
           className='
-        group
-        flex
-        aspect-square
-        h-[1.125rem] items-center
-        justify-center
-        rounded
-        border
         border-grey-100
-        outline-white
-        transition-colors
         group-hover:border-grey-100
         group-hover:bg-grey-500
-        group-active:border-grey-100
-        group-active:bg-transparent
-        peer-checked:border-accent-primary-300
+        group-active:border-grey-100 peer-checked:border-accent-primary-300
         peer-checked:bg-accent-primary-200
-        peer-checked:first:translate-x-2
         group-hover:peer-checked:bg-accent-primary-100
         group-active:peer-checked:border-accent-primary-400
         group-active:peer-checked:bg-accent-primary-300
         peer-focus-visible:border-grey-600
         peer-focus-visible:bg-grey-400
-        peer-focus-visible:outline
         peer-focus-visible:peer-checked:border-accent-primary-300
         peer-focus-visible:peer-checked:bg-accent-primary-200
         peer-focus-visible:peer-active:border-grey-800
@@ -57,11 +44,24 @@ export const Checkbox: FC<IProps> = forwardRef<HTMLInputElement, IProps>(
         peer-focus-visible:peer-active:peer-checked:bg-accent-primary-300
         peer-disabled:border-grey-300
         group-hover:peer-disabled:border-grey-300
-        group-hover:peer-disabled:bg-transparent
         peer-disabled:peer-checked:border-accent-primary-500
         peer-disabled:peer-checked:bg-accent-primary-400
         group-hover:peer-disabled:peer-checked:border-accent-primary-500
         group-hover:peer-disabled:peer-checked:bg-accent-primary-400
+        group
+        flex
+        aspect-square
+        h-[1.125rem]
+        items-center
+        justify-center
+        rounded
+        border
+        outline-white
+        transition-colors
+        group-active:bg-transparent
+        peer-checked:first:translate-x-2
+        peer-focus-visible:outline
+        group-hover:peer-disabled:bg-transparent
         peer-checked:[&>svg]:opacity-100
         '
         >
@@ -82,9 +82,7 @@ export const Checkbox: FC<IProps> = forwardRef<HTMLInputElement, IProps>(
           </svg>
         </div>
         {children && (
-          <span className='select-none text-[0.8125rem] text-text-primary'>
-            {children}
-          </span>
+          <span className='text-text-primary select-none text-[0.8125rem]'>{children}</span>
         )}
       </label>
     );

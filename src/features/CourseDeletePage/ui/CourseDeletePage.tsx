@@ -8,10 +8,7 @@ interface CourseDeletePageProps {
   onDelete?: () => void;
 }
 
-export const CourseDeletePage: FC<CourseDeletePageProps> = ({
-  pageId,
-  onDelete,
-}) => {
+export const CourseDeletePage: FC<CourseDeletePageProps> = ({ pageId, onDelete }) => {
   const [deletePage] = useDeleteCoursePageMutation();
 
   const onClickHandler = () => {
@@ -19,12 +16,8 @@ export const CourseDeletePage: FC<CourseDeletePageProps> = ({
   };
 
   return (
-    <Button
-      color='destructive'
-      className='flex-shrink-0'
-      onClick={onClickHandler}
-    >
-      <Icon type='delete' className='text-inherit' />
+    <Button variant='destructive' className='shrink-0' onClick={onClickHandler}>
+      <Icon type='delete' className='mr-4 text-inherit' />
       <span>Удалить страницу</span>
     </Button>
   );

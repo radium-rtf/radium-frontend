@@ -1,16 +1,13 @@
 'use client';
 import React, { useState } from 'react';
-import { Button, Card, Icon, Input } from '@/shared';
+import { Button, Card, CardContent, CardFooter, CardHeader, Icon, Input } from '@/shared';
 import Link from 'next/link';
 import { Register } from '@/entities/Auth';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  registrationSchema,
-  registrationSchemaType,
-} from '../model/registrationSchema';
+import { registrationSchema, registrationSchemaType } from '../model/registrationSchema';
 
 export const RegistrationCard = () => {
   const router = useRouter();
@@ -20,15 +17,10 @@ export const RegistrationCard = () => {
   const {
     register,
     handleSubmit,
+    clearErrors,
     setError,
     watch,
-    formState: {
-      isSubmitting,
-      isSubmitSuccessful,
-      isSubmitted,
-      isValid,
-      errors,
-    },
+    formState: { isSubmitting, isSubmitSuccessful, isSubmitted, errors },
   } = useForm<registrationSchemaType>({
     resolver: zodResolver(registrationSchema),
     defaultValues: {
@@ -41,15 +33,13 @@ export const RegistrationCard = () => {
     },
   });
 
-  const onSubmitHandler: SubmitHandler<registrationSchemaType> = async (
-    data
-  ) => {
+  const onSubmitHandler: SubmitHandler<registrationSchemaType> = async (data) => {
     const response = await Register({
       email: data.email.toLowerCase(),
       name: data.name,
       password: data.password.password,
     });
-    if (typeof response === 'string') {
+    if (!response) {
       setError('email', { message: 'Ошибка' }, { shouldFocus: false });
       return;
     }
@@ -60,89 +50,89 @@ export const RegistrationCard = () => {
     <section className='flex w-[19rem] flex-col items-center gap-9'>
       <div className='flex items-center gap-4'>
         <Image height={28} width={48} alt='Radium logo' src='/logo.svg' />
-        <h1 className='font-mono text-4xl font-bold text-primary-default'>
-          Радиум
-        </h1>
+        <h1 className='font-NTSomic text-xl font-bold text-primary'>Радиум</h1>
       </div>
       <Card className='w-full'>
-        <form
-          onSubmit={handleSubmit(onSubmitHandler)}
-          className='mx-auto flex w-[256px] flex-col gap-4'
-        >
-          <Input
-            iconType='mail'
-            type='text'
-            placeholder='Почта'
-            autoComplete='email'
-            {...register('email')}
-          >
-            {watch('email').includes('@') ? null : (
-              <span className='font-sans text-[0.625rem]'>@urfu.me</span>
-            )}
-          </Input>
-          <Input
-            iconType='profile'
-            type='text'
-            placeholder='Имя'
-            autoComplete='nickname'
-            {...register('name')}
-          />
-          <Input
-            iconType='password'
-            type={isPasswordShowed ? 'text' : 'password'}
-            autoComplete='new-password'
-            placeholder='Пароль'
-            {...register('password.password')}
-          >
-            <button
-              onClick={() => setIsPasswordShowed((prev) => !prev)}
-              type='button'
-              className='leading-[0]'
-            >
-              <Icon type={isPasswordShowed ? 'visible' : 'invisible'} />
-            </button>
-          </Input>
-          <Input
-            iconType='password'
-            type={isSecondPasswordShowed ? 'text' : 'password'}
-            autoComplete='new-password'
-            placeholder='Еще раз пароль'
-            {...register('password.passwordRepeat')}
-          >
-            <button
-              onClick={() => setIsSecondPasswordShowed((prev) => !prev)}
-              type='button'
-              className='leading-[0]'
-            >
-              <Icon type={isSecondPasswordShowed ? 'visible' : 'invisible'} />
-            </button>
-          </Input>
-          <Button
-            type='submit'
-            color={!isValid && isSubmitted ? 'destructive' : 'accent'}
-            disabled={isSubmitting}
-          >
-            <Icon
-              type={false ? 'loading' : false ? 'alert' : 'enter'}
-              className='shrink-0 text-inherit'
+        <form onSubmit={handleSubmit(onSubmitHandler)} className=''>
+          <CardHeader>
+            <Input
+              icon='mail'
+              text={watch('email').includes('@') ? undefined : '@urfu.ru'}
+              id='email'
+              placeholder='Почта'
+              autoComplete='email'
+              {...register('email', { onChange: () => clearErrors('root') })}
             />
-            <span className='ml-[calc(50%-34px)] -translate-x-1/2 whitespace-nowrap'>
-              {(isSubmitSuccessful && 'Успех!') ||
-                errors.email?.message ||
-                errors.name?.message ||
-                errors.password?.password?.message ||
-                errors.password?.passwordRepeat?.message ||
-                'Зарегистрироваться'}
-            </span>
-          </Button>
-          <Button asChild className='gap-4'>
-            <Link href='/login'>
-              <Icon type='profile' className='shrink-0 text-inherit' />
-              <span className='ml-[calc(50%-34px)] -translate-x-1/2 whitespace-nowrap'>
-                Войти
+          </CardHeader>
+          <CardContent>
+            <Input
+              type='text'
+              icon='profile'
+              placeholder='Имя'
+              autoComplete='nickname'
+              {...register('name')}
+            />
+          </CardContent>
+          <CardContent>
+            <Input
+              icon='password'
+              actionIcon={isPasswordShowed ? 'visible' : 'invisible'}
+              onActionClick={() => setIsPasswordShowed((prev) => !prev)}
+              type={isPasswordShowed ? 'text' : 'password'}
+              id='password'
+              placeholder='Пароль'
+              autoComplete='new-password'
+              {...register('password.password', { onChange: () => clearErrors('root') })}
+            />
+          </CardContent>
+          <CardContent>
+            <Input
+              icon='password'
+              actionIcon={isSecondPasswordShowed ? 'visible' : 'invisible'}
+              onActionClick={() => setIsSecondPasswordShowed((prev) => !prev)}
+              type={isPasswordShowed ? 'text' : 'password'}
+              id='passwordNew'
+              placeholder='Еще раз пароль'
+              autoComplete='new-password'
+              {...register('password.passwordRepeat', { onChange: () => clearErrors('root') })}
+            />
+          </CardContent>
+          <CardContent>
+            <Button
+              type='submit'
+              className='w-64 justify-start'
+              variant={
+                isSubmitted && (errors.email || errors.name || errors.password || errors.password)
+                  ? 'destructive'
+                  : 'default'
+              }
+              disabled={isSubmitting}
+            >
+              <Icon
+                // eslint-disable-next-line no-constant-condition
+                type={false ? 'loading' : false ? 'alert' : 'enter'}
+                className='shrink-0 text-inherit'
+              />
+              <span className='ml-[calc(50%-18px)] -translate-x-1/2 whitespace-nowrap'>
+                {(isSubmitSuccessful && 'Успех!') ||
+                  errors.email?.message ||
+                  errors.name?.message ||
+                  errors.password?.password?.message ||
+                  errors.password?.passwordRepeat?.message ||
+                  'Зарегистрироваться'}
               </span>
-            </Link>
-          </Button>
+            </Button>
+          </CardContent>
+          <CardFooter>
+            <Button variant='outline' asChild className='w-64 justify-start'>
+              <Link href='/login'>
+                <Icon type='profile' className='shrink-0 text-inherit' />
+                <span className='ml-[calc(50%-18px)] -translate-x-1/2 whitespace-nowrap'>
+                  Войти
+                </span>
+              </Link>
+            </Button>
+          </CardFooter>
         </form>
       </Card>
     </section>

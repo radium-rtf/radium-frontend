@@ -1,42 +1,36 @@
 'use client';
 
 import React, { ChangeEvent, FC, useState } from 'react';
-import { Button, cn, Icon, Input } from '@/shared';
+import {
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  Icon,
+  Input,
+  TextArea,
+} from '@/shared';
 import { StudentAnswerDto } from '@/entities/Answers/model/answersDto';
-import { Inter } from 'next/font/google';
-import { AnswerSectionInput } from '@/entities/Answers/ui/answerSectionInput';
 import { useReviewMutation } from '@/entities/Answers/api/reviewApi';
 import { round } from '@floating-ui/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 
-const inter = Inter({
-  subsets: ['cyrillic', 'latin'],
-  variable: '--font-inter',
-});
-
 interface IProps {
   studentAnswer: StudentAnswerDto;
   reviewed?: boolean;
-  className?: string;
 }
 
-export const CheckAnswerSection: FC<IProps> = ({
-  studentAnswer: answer,
-  reviewed,
-  className,
-}) => {
+export const CheckAnswerSection: FC<IProps> = ({ studentAnswer: answer, reviewed }) => {
   const pathname = usePathname();
   const sentDate = new Date(answer.createdAt);
   const [score, setScore] = useState(
-    reviewed && answer.review
-      ? round(answer.review.score * answer.section.maxScore)
-      : undefined
+    reviewed && answer.review ? round(answer.review.score * answer.section.maxScore) : undefined
   );
-  const [comment, setComment] = useState(
-    reviewed && answer.review ? answer.review.comment : ''
-  );
-  const [review, { isLoading, isError }] = useReviewMutation();
+  const [comment, setComment] = useState(reviewed && answer.review ? answer.review.comment : '');
+  const [review, { isLoading }] = useReviewMutation();
 
   const handleReview = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -77,117 +71,52 @@ export const CheckAnswerSection: FC<IProps> = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className={cn(
-          'flex',
-          'm-auto',
-          'rounded-[1rem]',
-          'bg-background-card',
-          className
-        )}
       >
-        <main className='inline-block h-full w-full p-[1.5rem]'>
-          <div className='mb-[1rem] w-full'>
-            <div
-              className='flex
-                      gap-[1rem]
-                      font-mono text-[1rem]
-                      font-bold text-accent-primary-200'
-            >
-              <Icon type={'task'} />
-              Задание
+        <Card>
+          <CardHeader>
+            <div className='flex items-center gap-4'>
+              <Icon type='task' className='text-primary' />
+              <span className='font-NTSomic text-base font-medium leading-[normal] text-primary'>
+                Задание
+              </span>
             </div>
-            <p className='font-sans text-[0.625rem] leading-[normal] text-foreground-secondary'>
-              отправлено {sentDate.getDay()}{' '}
-              {monthDictionary[sentDate.getMonth()]} {sentDate.getFullYear()} в{' '}
-              {sentDate.getHours()}:{sentDate.getMinutes()}
+            <p className='text-[0.625rem] leading-[normal] text-[#B3B3B3]'>
+              отправлено {sentDate.getDay()} {monthDictionary[sentDate.getMonth()]}{' '}
+              {sentDate.getFullYear()} в {sentDate.getHours()}:{sentDate.getMinutes()}
             </p>
-          </div>
-
-          <div className='mb-[1rem]'>
-            <p
-              className={cn(
-                inter.variable,
-                'text-[0.8125rem] leading-tight text-text-primary'
-              )}
-            >
-              {answer.section.content}
-            </p>
-          </div>
-          <div
-            className={cn(
-              'p-4',
-              'min-h-[8rem]',
-              'max-h-96',
-              'overflow-y-auto',
-              'radium-scrollbar',
-              'break-words',
-              inter.variable,
-              'outline-none',
-              'bg-transparent',
-              'text-text-primary',
-              'transition-colors',
-              'text-[0.8125rem]',
-              'leading-normal',
-              'rounded-lg',
-              'border',
-              'border-white/10',
-              'mb-[1rem]'
-            )}
-          >
-            {answer.answer}
-          </div>
-          <form>
-            <AnswerSectionInput
+          </CardHeader>
+          <CardContent>
+            <CardDescription>{answer.section.content}</CardDescription>
+          </CardContent>
+          <CardContent>
+            <TextArea className='w-full resize-y' defaultValue={answer.answer} readOnly></TextArea>
+          </CardContent>
+          <CardContent>
+            <Input
+              icon='comment'
+              placeholder='Комментарий'
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              iconType='comment'
-              className='mb-[1rem] w-full'
-              placeHolder='Комментарий'
             />
-
-            <div className='flex items-center justify-end gap-4 text-text-secondary'>
-              <Input
-                placeholder='Оценка'
-                onChange={handleScoreChange}
-                value={score ?? ''}
-                inputClassName='text-text-secondary font-[0.8125rem]'
-                className='
-                h-full max-h-[2.25rem]
-                w-full max-w-[16rem]
-                px-[1rem] py-[0.5625rem]'
-              >
-                <span className='flex w-full max-w-[62px] text-[0.625rem]'>
-                  / {answer.section.maxScore} баллов
-                </span>
-              </Input>
-
-              <Button
-                color={!isError ? 'outlined' : 'destructive'}
-                onClick={handleReview}
-                className={cn(
-                  'flex',
-                  'w-full max-w-[16rem]',
-                  'px-[1rem] py-[0.5625rem]',
-                  'text-inherit',
-                  isError && 'text-text-primary'
-                )}
-              >
-                {!isLoading && (
-                  <Icon
-                    className='shrink-0 text-inherit'
-                    type={reviewed ? 'update' : 'submit'}
-                  />
-                )}
-                {isLoading && (
-                  <Icon className='shrink-0 text-inherit' type='loading' />
-                )}
-                <span className='ml-[calc(50%-34px)] w-full -translate-x-1/2'>
-                  {reviewed ? 'Сменить оценку' : 'Оценить'}
-                </span>
-              </Button>
-            </div>
-          </form>
-        </main>
+          </CardContent>
+          <CardFooter className='flex justify-end gap-4'>
+            <Input
+              wrapperClassName='w-64'
+              placeholder='Оценка'
+              value={score ?? ''}
+              onChange={handleScoreChange}
+              text={`/ ${answer.section.maxScore} баллов`}
+            />
+            <Button
+              onClick={handleReview}
+              variant='outline'
+              className='w-64 shrink-0 justify-start'
+            >
+              <Icon type={isLoading ? 'loading' : reviewed ? 'update' : 'submit'} />
+              <span className='ml-[calc(50%-18px)] -translate-x-1/2'>Оценить</span>
+            </Button>
+          </CardFooter>
+        </Card>
       </motion.div>
     </AnimatePresence>
   );

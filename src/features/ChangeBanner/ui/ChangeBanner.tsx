@@ -19,22 +19,17 @@ export const ChangeBanner: FC<ChangeBannerProps> = ({ courseId }) => {
     fd.append('file', event.currentTarget.files!.item(0)!);
     const response = await uploadFile(fd);
     if (typeof response === 'string') return;
-    updateBanner({ courseId, banner: response.location })
-      .unwrap()
-      .then(refresh);
+    updateBanner({ courseId, banner: response.location }).unwrap().then(refresh);
   };
 
   return (
     <>
       <Button
-        className='absolute right-4 top-4 w-64'
-        color='accent'
+        className='absolute right-4 top-4 w-64 justify-start'
         onClick={() => changeBannerClickHandler(inputRef.current!)}
       >
         <Icon type='edit' className='text-inherit' />
-        <span className='ml-[calc(50%-34px)] -translate-x-1/2'>
-          Сменить обложку
-        </span>
+        <span className='ml-[calc(50%-18px)] -translate-x-1/2'>Сменить обложку</span>
       </Button>
       <input
         onChange={onChangeFileHandler}

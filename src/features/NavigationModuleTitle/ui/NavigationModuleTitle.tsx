@@ -6,6 +6,7 @@ import {
   forwardRef,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 import { CourseEditContext } from '@/features/CourseEditContext';
@@ -22,6 +23,7 @@ interface IProps extends HTMLAttributes<HTMLHeadingElement> {
 
 export const NavigationModuleTitle = forwardRef<HTMLHeadingElement, IProps>(
   ({ className, name, moduleId, isCurrentModule = false, ...props }, ref) => {
+    const formRef = useRef<HTMLFormElement>(null);
     const { isEditing: isEditMode } = useContext(CourseEditContext);
     const [isEditing, setIsEditing] = useState(false);
     const [deleteModule] = useDeleteCourseModuleMutation();
@@ -64,8 +66,14 @@ export const NavigationModuleTitle = forwardRef<HTMLHeadingElement, IProps>(
 
     if (isEditing && isEditing) {
       return (
-        <form onSubmit={(e) => formSubmitHandler(e)} className='px-2 py-1.5'>
-          <Input name='newName' defaultValue={name} />
+        <form ref={formRef} onSubmit={(e) => formSubmitHandler(e)} className='px-2 py-1.5'>
+          <Input
+            name='newName'
+            placeholder='Глава'
+            defaultValue={name}
+            actionIcon='submit'
+            onActionClick={() => formRef.current?.requestSubmit()}
+          />
         </form>
       );
     }
@@ -78,8 +86,8 @@ export const NavigationModuleTitle = forwardRef<HTMLHeadingElement, IProps>(
       >
         <h2
           className={cn(
-            'flex-grow text-xl font-bold text-accent-primary-200',
-            isCurrentModule && 'text-accent-secondary-300'
+            'flex-grow text-lg font-bold text-primary',
+            isCurrentModule && 'text-accent'
           )}
         >
           {name}
@@ -89,14 +97,10 @@ export const NavigationModuleTitle = forwardRef<HTMLHeadingElement, IProps>(
             <button className='p-0.5' type='button' onClick={deleteHandler}>
               <Icon
                 type='delete'
-                className='flex-shrink-0 text-destructive-default opacity-0 transition-opacity duration-300 group-hover:opacity-100'
+                className='flex-shrink-0 text-destructive opacity-0 transition-opacity duration-300 group-hover:opacity-100'
               />
             </button>
-            <button
-              className='p-0.5'
-              type='button'
-              onClick={() => setIsEditing(true)}
-            >
+            <button className='p-0.5' type='button' onClick={() => setIsEditing(true)}>
               <Icon
                 type='edit'
                 className='flex-shrink-0 opacity-0 transition-opacity group-hover:opacity-100'

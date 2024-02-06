@@ -1,6 +1,6 @@
 'use client';
 import { CourseEditContext } from '@/features/CourseEditContext';
-import { List } from '@/shared';
+import { List, ListContent, ListIcon, ListItem, ListTitle, cn, useScrollPosition } from '@/shared';
 import { useParams, useRouter } from 'next/navigation';
 import { FC, useContext } from 'react';
 import { useCreateSectionMutation } from '../api/createCourseSectionApi';
@@ -13,6 +13,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
   const { pageId } = useParams() as { pageId: string };
   const [createSection] = useCreateSectionMutation();
   const { push } = useRouter();
+  const scrollHeight = useScrollPosition();
 
   return (
     <AnimatePresence>
@@ -21,7 +22,10 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
           initial={{ width: 0 }}
           animate={{ width: 256 }}
           exit={{ width: 24 }}
-          className='sticky right-0 top-[8.625rem] -mr-6 max-h-[calc(100vh-8.65rem)] w-64 self-start overflow-hidden'
+          className={cn(
+            'sticky right-0 top-[8.25rem] -mr-6 max-h-[calc(100vh-8.25rem)] w-64 self-start overflow-hidden transition-[top,_max-height]',
+            scrollHeight > 50 && 'top-16 max-h-[calc(100vh-4rem)]'
+          )}
         >
           <motion.div
             key='kkekekkkekekkdfsdfg'
@@ -30,35 +34,33 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
             exit={{ x: 256 }}
             className='w-64'
           >
-            <h3 className='px-6 py-4 font-mono text-xl font-bold text-primary-default'>
-              Элементы
-            </h3>
+            <h3 className='px-6 py-4 font-NTSomic text-lg font-bold text-primary'>Элементы</h3>
             <List>
-              <List.Item asChild>
+              <ListItem asChild>
                 <button
-                  className='rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
+                  className='group rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
                   onClick={() =>
                     createSection({ pageId, text: { content: 'New section' } })
                       .unwrap()
-                      .then((res) =>
-                        push(`#section-${res.id}`, { scroll: true })
-                      )
+                      .then((res) => push(`#section-${res.id}`, { scroll: true }))
                   }
                 >
-                  <List.Icon icon='text' className='text-primary-default' />
-                  <List.Content>
-                    <List.Title>Текст</List.Title>
-                  </List.Content>
+                  <ListIcon icon='text' className='text-primary' />
+                  <ListContent>
+                    <ListTitle>Текст</ListTitle>
+                  </ListContent>
+                  <ListIcon
+                    icon='add'
+                    className='h-3 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100'
+                  />
                 </button>
-              </List.Item>
+              </ListItem>
             </List>
             <List>
-              <h3 className='px-6 py-4 font-mono text-xl font-bold text-primary-default'>
-                Вопросы
-              </h3>
-              <List.Item asChild>
+              <h3 className='px-6 py-4 font-NTSomic text-lg font-bold text-primary'>Вопросы</h3>
+              <ListItem asChild>
                 <button
-                  className='rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
+                  className='group rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
                   onClick={() =>
                     createSection({
                       pageId,
@@ -69,18 +71,20 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                       },
                     })
                       .unwrap()
-                      .then((res) =>
-                        push(`#section-${res.id}`, { scroll: true })
-                      )
+                      .then((res) => push(`#section-${res.id}`, { scroll: true }))
                   }
                 >
-                  <List.Icon icon='radio' className='text-primary-default' />
-                  <List.Content>
-                    <List.Title>Один вариант</List.Title>
-                  </List.Content>
+                  <ListIcon icon='radio' className='text-primary' />
+                  <ListContent>
+                    <ListTitle>Один вариант</ListTitle>
+                  </ListContent>
+                  <ListIcon
+                    icon='add'
+                    className='h-3 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100'
+                  />
                 </button>
-              </List.Item>
-              <List.Item asChild>
+              </ListItem>
+              <ListItem asChild>
                 <button
                   className='group rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
                   onClick={() =>
@@ -89,31 +93,24 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                       multichoice: {
                         answer: ['Верный 1', 'Верный 2'],
                         question: 'Вопрос',
-                        variants: [
-                          'Верный 1',
-                          'Верный 2',
-                          'Неверный 1',
-                          'Неверный 2',
-                        ],
+                        variants: ['Верный 1', 'Верный 2', 'Неверный 1', 'Неверный 2'],
                       },
                     })
                       .unwrap()
-                      .then((res) =>
-                        push(`#section-${res.id}`, { scroll: true })
-                      )
+                      .then((res) => push(`#section-${res.id}`, { scroll: true }))
                   }
                 >
-                  <List.Icon icon='checkbox' className='text-primary-default' />
-                  <List.Content>
-                    <List.Title>Несколько вариантов</List.Title>
-                  </List.Content>
-                  <List.Icon
+                  <ListIcon icon='checkbox' className='text-primary' />
+                  <ListContent>
+                    <ListTitle>Несколько вариантов</ListTitle>
+                  </ListContent>
+                  <ListIcon
                     icon='add'
-                    className='h-3 text-primary-default opacity-0 transition-opacity group-hover:opacity-100'
+                    className='h-3 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100'
                   />
                 </button>
-              </List.Item>
-              <List.Item asChild>
+              </ListItem>
+              <ListItem asChild>
                 <button
                   className='group rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
                   onClick={() =>
@@ -125,22 +122,20 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                       },
                     })
                       .unwrap()
-                      .then((res) =>
-                        push(`#section-${res.id}`, { scroll: true })
-                      )
+                      .then((res) => push(`#section-${res.id}`, { scroll: true }))
                   }
                 >
-                  <List.Icon icon='editor' className='text-primary-default' />
-                  <List.Content>
-                    <List.Title>Короткий ответ</List.Title>
-                  </List.Content>
-                  <List.Icon
+                  <ListIcon icon='editor' className='text-primary' />
+                  <ListContent>
+                    <ListTitle>Короткий ответ</ListTitle>
+                  </ListContent>
+                  <ListIcon
                     icon='add'
-                    className='h-3 text-primary-default opacity-0 transition-opacity group-hover:opacity-100'
+                    className='h-3 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100'
                   />
                 </button>
-              </List.Item>
-              <List.Item asChild>
+              </ListItem>
+              <ListItem asChild>
                 <button
                   className='group rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
                   onClick={() =>
@@ -152,22 +147,20 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                       },
                     })
                       .unwrap()
-                      .then((res) =>
-                        push(`#section-${res.id}`, { scroll: true })
-                      )
+                      .then((res) => push(`#section-${res.id}`, { scroll: true }))
                   }
                 >
-                  <List.Icon icon='shuffle' className='text-primary-default' />
-                  <List.Content>
-                    <List.Title>Перестановки</List.Title>
-                  </List.Content>
-                  <List.Icon
+                  <ListIcon icon='shuffle' className='text-primary' />
+                  <ListContent>
+                    <ListTitle>Перестановки</ListTitle>
+                  </ListContent>
+                  <ListIcon
                     icon='add'
-                    className='h-3 text-primary-default opacity-0 transition-opacity group-hover:opacity-100'
+                    className='h-3 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100'
                   />
                 </button>
-              </List.Item>
-              <List.Item asChild>
+              </ListItem>
+              <ListItem asChild>
                 <button
                   className='group rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
                   onClick={() =>
@@ -180,43 +173,41 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                       },
                     })
                       .unwrap()
-                      .then((res) =>
-                        push(`#section-${res.id}`, { scroll: true })
-                      )
+                      .then((res) => push(`#section-${res.id}`, { scroll: true }))
                   }
                 >
-                  <List.Icon icon='matching' className='text-primary-default' />
-                  <List.Content>
-                    <List.Title>Сопоставление</List.Title>
-                  </List.Content>
-                  <List.Icon
+                  <ListIcon icon='matching' className='text-primary' />
+                  <ListContent>
+                    <ListTitle>Сопоставление</ListTitle>
+                  </ListContent>
+                  <ListIcon
                     icon='add'
-                    className='h-3 text-primary-default opacity-0 transition-opacity group-hover:opacity-100'
+                    className='h-3 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100'
                   />
                 </button>
-              </List.Item>
+              </ListItem>
             </List>
-            <h3 className='px-6 py-4 font-mono text-xl font-bold text-primary-default'>
-              Задания
-            </h3>
+            <h3 className='px-6 py-4 font-NTSomic text-lg font-bold text-primary'>Задания</h3>
             <List>
-              <List.Item asChild>
+              <ListItem asChild>
                 <button
-                  className='rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
+                  className='group rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
                   onClick={() =>
                     createSection({ pageId, answer: { question: 'Вопрос?' } })
                       .unwrap()
-                      .then((res) =>
-                        push(`#section-${res.id}`, { scroll: true })
-                      )
+                      .then((res) => push(`#section-${res.id}`, { scroll: true }))
                   }
                 >
-                  <List.Icon icon='table' className='text-primary-default' />
-                  <List.Content>
-                    <List.Title>Длинный ответ</List.Title>
-                  </List.Content>
+                  <ListIcon icon='table' className='text-primary' />
+                  <ListContent>
+                    <ListTitle>Длинный ответ</ListTitle>
+                  </ListContent>
+                  <ListIcon
+                    icon='add'
+                    className='h-3 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100'
+                  />
                 </button>
-              </List.Item>
+              </ListItem>
               {/* <List.Item asChild>
                 <button
                   className='rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
@@ -227,7 +218,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                     })
                   }
                 >
-                  <List.Icon icon='code' className='text-primary-default' />
+                  <List.Icon icon='code' className='text-primary' />
                   <List.Content>
                     <List.Title>Программирование</List.Title>
                   </List.Content>

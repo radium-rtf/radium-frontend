@@ -1,18 +1,14 @@
 'use client';
-import { ButtonHTMLAttributes, FC } from 'react';
+import { FC } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button, Icon, cn } from '@/shared';
+import { Button, Icon } from '@/shared';
 import { useJoinCourseMutation } from '@/entities/Course';
 
-interface CourseJoinProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface CourseJoinProps {
   courseId: string;
 }
 
-export const CourseJoin: FC<CourseJoinProps> = ({
-  courseId,
-  className,
-  ...props
-}) => {
+export const CourseJoin: FC<CourseJoinProps> = ({ courseId }) => {
   const router = useRouter();
   const [joinCourse] = useJoinCourseMutation();
 
@@ -20,24 +16,14 @@ export const CourseJoin: FC<CourseJoinProps> = ({
     joinCourse(courseId)
       .unwrap()
       .then((course) => {
-        router.push(
-          `/courses/${course.id}/study/${
-            course.modules[0]?.pages?.[0]?.id || ''
-          }`
-        );
+        router.push(`/courses/${course.id}/${course.modules[0]?.pages?.[0]?.id || '0'}`);
       });
   };
 
   return (
-    <Button
-      onClick={onClickHandler}
-      className={cn('flex items-center gap-2', className)}
-      type='button'
-      {...props}
-      color='accent'
-    >
-      <Icon type='start' className='text-grey-800' />
-      <p>Начать</p>
+    <Button onClick={onClickHandler} type='button'>
+      <Icon type='start' className='mr-4 text-inherit' />
+      <span>Начать</span>
     </Button>
   );
 };

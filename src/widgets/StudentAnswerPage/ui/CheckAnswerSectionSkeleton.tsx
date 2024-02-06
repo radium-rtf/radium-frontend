@@ -9,25 +9,25 @@ export const CheckAnswerSectionSkeleton: FC = () => (
       'h-[23.0625rem]',
       'w-[45rem]',
       'rounded-[1rem]',
-      'bg-background-card',
+      'bg-card',
       'my-[2rem]'
     )}
   >
     <main className='inline-block h-full w-full p-[1.5rem]'>
       <div
-        className='mb-4
+        className='bg-grey-400
+                    mb-4
                     h-8
-                    w-full
-                    animate-pulse rounded border
-                    border-white/10 bg-grey-400'
+                    w-full animate-pulse rounded
+                    border border-white/10'
       />
 
       <div
-        className='mb-4
+        className='bg-grey-400
+                    mb-4
                     h-5
-                    w-full
-                    animate-pulse rounded border
-                    border-white/10 bg-grey-400'
+                    w-full animate-pulse rounded
+                    border border-white/10'
       />
 
       <div
@@ -36,7 +36,7 @@ export const CheckAnswerSectionSkeleton: FC = () => (
           'min-h-[8rem]',
           'max-h-96',
           'overflow-y-auto',
-          'radium-scrollbar',
+          'scrollbar',
           'break-words',
           'outline-none',
           'bg-transparent',
@@ -52,10 +52,10 @@ export const CheckAnswerSectionSkeleton: FC = () => (
       />
       <div
         className='
+        bg-grey-400
         h-[2.25rem]
-        w-full
-        animate-pulse rounded border
-        border-white/10 bg-grey-400
+        w-full animate-pulse rounded
+        border border-white/10
         px-[1rem]
         py-[0.5625rem]'
       />
@@ -70,20 +70,20 @@ export const CheckAnswerSectionSkeleton: FC = () => (
       >
         <div
           className='
+                    bg-grey-400
                     h-[2.25rem]
-                    w-[16rem]
-                    animate-pulse rounded border
-                    border-white/10 bg-grey-400
+                    w-[16rem] animate-pulse rounded
+                    border border-white/10
                     px-[1rem]
                     py-[0.5625rem]'
         />
 
         <div
           className='
+                    bg-grey-400
                     h-[2.25rem]
-                    w-[16rem]
-                    animate-pulse rounded border
-                    border-white/10 bg-grey-400
+                    w-[16rem] animate-pulse rounded
+                    border border-white/10
                     px-[1rem]
                     py-[0.5625rem]'
         />

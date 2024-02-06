@@ -1,17 +1,11 @@
 import { emptyApi } from '@/shared';
 import { CreateSectionRequestDto } from '../model/createSectionRequestDto';
-import {
-  AllSectionsResponseDto,
-  SectionResponseDto,
-} from '@/entities/CourseSection';
+import { AllSectionsResponseDto, SectionResponseDto } from '@/entities/CourseSection';
 import { coursePageApi } from '@/entities/CoursePage';
 
 const createCourseSectionApi = emptyApi.injectEndpoints({
   endpoints: (builder) => ({
-    createSection: builder.mutation<
-      SectionResponseDto,
-      CreateSectionRequestDto
-    >({
+    createSection: builder.mutation<SectionResponseDto, CreateSectionRequestDto>({
       query: (body) => ({
         url: '/section',
         method: 'POST',

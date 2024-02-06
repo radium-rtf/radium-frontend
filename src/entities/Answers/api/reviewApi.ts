@@ -10,7 +10,7 @@ const reviewApi = emptyApi.injectEndpoints({
         body,
         method: 'POST',
       }),
-      invalidatesTags: ['review']
+      invalidatesTags: ['review'],
     }),
   }),
 });

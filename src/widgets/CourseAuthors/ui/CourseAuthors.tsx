@@ -1,6 +1,20 @@
 'use client';
 import Image from 'next/image';
-import { Card, List } from '@/shared';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  List,
+  ListContent,
+  ListIcon,
+  ListItem,
+  ListSubtitle,
+  ListTitle,
+} from '@/shared';
 import { CourseResponseDto } from '@/entities/Course';
 import { CourseEditContext } from '@/features/CourseEditContext';
 import { CourseAddCoAuthor } from '@/features/CourseAddCoAuthor';
@@ -15,75 +29,65 @@ interface IProps {
   isEditAllowed: boolean;
 }
 
-export const CourseAuthors: FC<IProps> = ({
-  courseId,
-  authors,
-  coauthors,
-  isEditAllowed,
-}) => {
+export const CourseAuthors: FC<IProps> = ({ courseId, authors, coauthors, isEditAllowed }) => {
   const { isEditing } = useContext(CourseEditContext);
   const session = useSession();
 
   return (
     <Card className='gap-0'>
-      <h1 className='mb-4 font-mono text-xl font-bold leading-[normal] text-primary-default'>
-        Авторы курса
-      </h1>
-      <List className='-mx-6 flex flex-col'>
-        {authors.map((author) => {
-          return (
-            <List.Item key={author.id}>
-              <List.Icon
-                asChild
-                className='-m-[0.1875rem] aspect-square h-6 rounded-full object-cover'
-              >
-                <Image
-                  src={author.avatar || '/defaultProfile.svg'}
-                  alt={author.name}
-                  width={24}
-                  height={24}
-                />
-              </List.Icon>
-              <List.Content>
-                <List.Title>{author.name}</List.Title>
-                <List.Subtitle>{author.email}</List.Subtitle>
-              </List.Content>
-            </List.Item>
-          );
-        })}
-        {coauthors.map((coauthor) => {
-          return (
-            <List.Item key={coauthor.id}>
-              <List.Icon
-                asChild
-                className='-m-[0.1875rem] aspect-square h-6 rounded-full object-cover'
-              >
-                <Image
-                  src={coauthor.avatar || '/defaultProfile.svg'}
-                  alt={coauthor.name}
-                  width={24}
-                  height={24}
-                />
-              </List.Icon>
-              <List.Content>
-                <List.Title>{coauthor.name}</List.Title>
-                <List.Subtitle>{coauthor.email}</List.Subtitle>
-              </List.Content>
-              {isEditAllowed &&
-                isEditing &&
-                coauthor.email !== session.data?.user.email && (
-                  <CourseDeleteCoAuthor
-                    courseId={courseId}
-                    coAuthorId={coauthor.id}
+      <CardHeader>
+        <CardTitle>Авторы курса</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <List className='-mx-6 flex flex-col'>
+          {authors.map((author) => {
+            return (
+              <ListItem key={author.id}>
+                <ListIcon
+                  asChild
+                  className='-m-[0.1875rem] aspect-square h-6 rounded-full object-cover'
+                >
+                  <Avatar className='h-6 w-6'>
+                    <AvatarImage className='h-6 w-6' src={author.avatar} alt={author.name} />
+                    <AvatarFallback>
+                      <Image src='/defaultProfile.svg' width={24} height={24} alt={author.name} />
+                    </AvatarFallback>
+                  </Avatar>
+                </ListIcon>
+                <ListContent>
+                  <ListTitle>{author.name}</ListTitle>
+                  <ListSubtitle>{author.email}</ListSubtitle>
+                </ListContent>
+              </ListItem>
+            );
+          })}
+          {coauthors.map((coauthor) => {
+            return (
+              <ListItem key={coauthor.id}>
+                <ListIcon
+                  asChild
+                  className='-m-[0.1875rem] aspect-square h-6 rounded-full object-cover'
+                >
+                  <Image
+                    src={coauthor.avatar || '/defaultProfile.svg'}
+                    alt={coauthor.name}
+                    width={24}
+                    height={24}
                   />
+                </ListIcon>
+                <ListContent>
+                  <ListTitle>{coauthor.name}</ListTitle>
+                  <ListSubtitle>{coauthor.email}</ListSubtitle>
+                </ListContent>
+                {isEditAllowed && isEditing && coauthor.email !== session.data?.user.email && (
+                  <CourseDeleteCoAuthor courseId={courseId} coAuthorId={coauthor.id} />
                 )}
-            </List.Item>
-          );
-        })}
-        {isEditAllowed && isEditing && (
-          <CourseAddCoAuthor courseId={courseId} />
-        )}
-      </List>
+              </ListItem>
+            );
+          })}
+          {isEditAllowed && isEditing && <CourseAddCoAuthor courseId={courseId} />}
+        </List>
+      </CardContent>
     </Card>
   );
 };

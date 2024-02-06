@@ -2,6 +2,7 @@ import { NextAuthOptions } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { Login } from '../libs/Login';
 import { VerifyRegistration } from '../libs/VerifyRegistration';
+import { refreshAccessToken } from '../libs/refreshAccessToken';
 
 export const authOptions: NextAuthOptions = {
   pages: {
@@ -22,17 +23,19 @@ export const authOptions: NextAuthOptions = {
         if (!credentials) return null;
         const response = await Login(credentials);
 
-        if (typeof response === 'string') return null;
+        if (!response) return null;
 
         return {
-          email: response.user.email,
-          name: response.user.name,
+          // User data
           id: response.user.id,
+          name: response.user.name,
+          email: response.user.email,
           image: response.user.avatar,
+          roles: response.user.roles,
+          // Tokens
           accessToken: response.accessToken,
           refreshToken: response.refreshToken,
           expiresIn: response.expiresIn,
-          roles: { ...response.user.roles },
         };
       },
     }),
@@ -47,17 +50,19 @@ export const authOptions: NextAuthOptions = {
         if (!credentials) return null;
         const response = await VerifyRegistration(credentials);
 
-        if (typeof response === 'string') return null;
+        if (!response) return null;
 
         return {
-          email: response.user.email,
-          name: response.user.name,
+          // User data
           id: response.user.id,
+          name: response.user.name,
+          email: response.user.email,
           image: response.user.avatar,
+          roles: response.user.roles,
+          // Tokens
           accessToken: response.accessToken,
           refreshToken: response.refreshToken,
           expiresIn: response.expiresIn,
-          roles: { ...response.user.roles },
         };
       },
     }),
@@ -65,22 +70,30 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ user, token, trigger, session }) {
       if (trigger === 'update') {
-        if (!session) return token;
-        return {
-          ...token,
-          ...session,
-        };
+        return { ...token, ...session };
       }
       if (user) {
-        token.accessToken = user.accessToken;
-        token.refreshToken = user.refreshToken;
-        token.expiresIn = user.expiresIn;
-        token.roles = { ...user.roles };
+        return {
+          ...token,
+          sub: user.id,
+          name: user.name,
+          email: user.email,
+          image: user.image,
+          roles: user.roles,
+          accessToken: user.accessToken,
+          refreshToken: user.refreshToken,
+          expiresIn: user.expiresIn,
+        };
       }
-      return token;
+
+      if (new Date() < new Date(token.expiresIn)) {
+        return token;
+      }
+
+      return refreshAccessToken(token);
     },
     async session({ token, session }) {
-      session.user.accessToken = token.accessToken || null;
+      session.user.accessToken = token.accessToken;
       session.user.refreshToken = token.refreshToken;
       session.user.expiresIn = token.expiresIn;
       session.user.roles = { ...token.roles };

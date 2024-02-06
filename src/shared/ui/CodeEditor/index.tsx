@@ -176,8 +176,7 @@ export const CodeEditor: FC<CodeEditorProps> = ({ onChange, lang }) => {
           },
           {
             foreground: 'eeeeee',
-            token:
-              'punctuation.definition.string.end.json - meta.structure.dictionary.value.json',
+            token: 'punctuation.definition.string.end.json - meta.structure.dictionary.value.json',
           },
           {
             foreground: '8be9fd',
@@ -185,18 +184,15 @@ export const CodeEditor: FC<CodeEditorProps> = ({ onChange, lang }) => {
           },
           {
             foreground: 'f1fa8c',
-            token:
-              'meta.structure.dictionary.value.json string.quoted.double.json',
+            token: 'meta.structure.dictionary.value.json string.quoted.double.json',
           },
           {
             foreground: '50fa7b',
-            token:
-              'meta meta meta meta meta meta meta.structure.dictionary.value string',
+            token: 'meta meta meta meta meta meta meta.structure.dictionary.value string',
           },
           {
             foreground: 'ffb86c',
-            token:
-              'meta meta meta meta meta meta.structure.dictionary.value string',
+            token: 'meta meta meta meta meta meta.structure.dictionary.value string',
           },
           {
             foreground: 'ff79c6',

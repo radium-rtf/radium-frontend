@@ -1,93 +1,26 @@
 import type { Config } from 'tailwindcss';
+import { fontFamily } from 'tailwindcss/defaultTheme';
 
 const config: Config = {
-  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
+  darkMode: ['class'],
+  content: ['./src/**/*.{ts,tsx}'],
   theme: {
+    fontSize: {
+      xs: '0.5rem',
+      sm: '0.625rem',
+      base: '0.8125rem',
+      lg: '1.25rem',
+      xl: '2rem',
+      '2xl': '3rem',
+    },
+    container: {
+      center: true,
+      padding: '2rem',
+    },
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)'],
-        code: ['var(--font-jetbrains-mono)'],
-      },
-      colors: {
-        bg: {
-          page: '#222526',
-          overlay: '#393E40',
-        },
-        background: {
-          default: '#222526',
-          card: '#2E3233',
-          overlay: '#393E40',
-        },
-        foreground: {
-          default: '#E6E6E6',
-          secondary: '#B3B3B3',
-        },
-        primary: {
-          default: '#BFD5FF',
-          foreground: '#303A40',
-        },
-        secondary: {
-          default: '#CEF2CE',
-          disabled: '#788B7A',
-          hovered: '#D8F5D8',
-          pressed: '#B9DAB9',
-          foreground: '#364036',
-        },
-        destructive: {
-          default: '#F29191',
-          disabled: '#8A5B5C',
-          hovered: '#F5A7A7',
-          pressed: '#DA8282',
-          foreground: '#402626',
-        },
-        accent: {
-          primary: {
-            100: '#C5D9FF',
-            200: '#BFD5FF',
-            300: '#ACC0E6',
-            400: '#707D93',
-            500: '#657183',
-          },
-          secondary: {
-            100: '#D8F5D8',
-            200: '#D3F3D3',
-            300: '#CEF2CE',
-            400: '#B9DAB9',
-            500: '#ADC4AD',
-            600: '#A5C2A5',
-            700: '#94AE94',
-            800: '#879B88',
-            900: '#788B7A',
-            1000: '#606F62',
-            1100: '#364036',
-          },
-          destructive: {
-            100: '#F5A7A7',
-            200: '#DA8282',
-            300: '#F29191',
-            400: '#DA8282',
-            500: '#C48686',
-            600: '#C27474',
-            700: '#AE6868',
-            800: '#8A5B5B',
-            900: '#6E4949',
-            1000: '#402626',
-          },
-        },
-        grey: {
-          100: '#848586',
-          200: '#747576',
-          300: '#4E5151',
-          400: '#383A3B',
-          500: '#383A3C',
-          600: '#2D2F2F',
-          700: '#202324',
-          800: '#1A1C1D',
-        },
-        text: {
-          primary: '#E6E6E6',
-          secondary: '#B3B3B3',
-        },
+        sans: ['var(--font-inter)', ...fontFamily.sans],
+        NTSomic: ['var(--font-nt-somic)', { fontFeatureSettings: '"salt" on' }],
       },
       typography: {
         'no-margin': {
@@ -136,8 +69,65 @@ const config: Config = {
           },
         },
       },
+      colors: {
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          hover: 'hsl(var(--destructive-hover))',
+          foreground: 'hsl(var(--destructive-foreground))',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          hover: 'hsl(var(--accent-hover))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          hover: 'hsl(var(--card-hover))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+      },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+      },
+      keyframes: {
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
+        },
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+      },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [require('@tailwindcss/typography'), require('tailwindcss-animate')],
 };
 export default config;

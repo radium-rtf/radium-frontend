@@ -31,3 +31,10 @@ export {
   useAnswerCourseCodeSectionMutation,
   useChangeCourseSectionOrderMutation,
 } from './api/courseSectionApi';
+
+// UI
+export { CourseSectionHeader } from './ui/CourseSectionHeader';
+export { CourseSectionFooter } from './ui/CourseSectionFooter';
+
+export { CourseSectionHeaderEdit } from './ui/CourseSectionHeaderEdit';
+export { CourseSectionFooterEdit } from './ui/CourseSectionFooterEdit';

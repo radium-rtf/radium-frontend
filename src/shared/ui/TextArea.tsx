@@ -20,9 +20,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     useEffect(() => {
       innerRef.current!.style.height = 'auto';
-      innerRef.current!.style.height = `calc(${
-        innerRef.current!.scrollHeight
-      }px + 0.5rem)`;
+      innerRef.current!.style.height = `calc(${innerRef.current!.scrollHeight}px + 0.5rem)`;
     }, [value]);
 
     return (
@@ -36,10 +34,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         className={cn(
           [
             'p-4',
-            'font-mono',
             'text-[0.8125rem]',
             'leading-normal',
-            'rounded-lg',
+            'rounded-[0.5rem]',
             'border',
             'border-white/10',
             'outline-none',

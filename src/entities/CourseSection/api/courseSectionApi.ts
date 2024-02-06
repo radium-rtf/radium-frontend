@@ -39,11 +39,7 @@ const sectionApi = emptyApi.injectEndpoints({
       }),
       invalidatesTags: (result) =>
         result
-          ? [
-              { type: 'pages', id: result.pageId },
-              { type: 'pages', id: 'LIST' },
-              'courses',
-            ]
+          ? [{ type: 'pages', id: result.pageId }, { type: 'pages', id: 'LIST' }, 'courses']
           : [{ type: 'pages', id: 'LIST' }, 'pages'],
     }),
     answerCourseChoiceSection: builder.mutation<
@@ -60,32 +56,28 @@ const sectionApi = emptyApi.injectEndpoints({
         try {
           const { data: updatedSection } = await queryFulfilled;
           dispatch(
-            coursePageApi.util.updateQueryData(
-              'getPage',
-              updatedSection.pageId,
-              (draft) => {
-                const section = draft.sections.find((s) => s.id === id)!;
+            coursePageApi.util.updateQueryData('getPage', updatedSection.pageId, (draft) => {
+              const section = draft.sections.find((s) => s.id === id)!;
 
-                // Score change
-                if (updatedSection.verdict === 'OK') {
-                  if (section.score !== section.maxScore) {
-                    draft.score += section.maxScore;
-                    section.score += section.maxScore;
-                  }
-                } else if (updatedSection.verdict === 'WA') {
-                  if (section.score === section.maxScore) {
-                    draft.score -= section.maxScore;
-                    section.score -= section.maxScore;
-                  }
+              // Score change
+              if (updatedSection.verdict === 'OK') {
+                if (section.score !== section.maxScore) {
+                  draft.score += section.maxScore;
+                  section.score += section.maxScore;
                 }
-                section.verdict = updatedSection.verdict;
-
-                // Attempts change
-                if (section.attempts) {
-                  section.attempts -= 1;
+              } else if (updatedSection.verdict === 'WA') {
+                if (section.score === section.maxScore) {
+                  draft.score -= section.maxScore;
+                  section.score -= section.maxScore;
                 }
               }
-            )
+              section.verdict = updatedSection.verdict;
+
+              // Attempts change
+              if (section.attempts) {
+                section.attempts -= 1;
+              }
+            })
           );
         } catch {}
       },
@@ -99,14 +91,20 @@ const sectionApi = emptyApi.injectEndpoints({
         method: 'PUT',
         body: body,
       }),
-      invalidatesTags: (result) =>
-        result
-          ? [
-              { type: 'pages', id: result.pageId },
-              { type: 'pages', id: 'LIST' },
-              'courses',
-            ]
-          : [{ type: 'pages', id: 'LIST' }, 'pages'],
+      invalidatesTags: ['courses'],
+      async onQueryStarted({ sectionId }, { dispatch, queryFulfilled }) {
+        try {
+          const { data: updatedSection } = await queryFulfilled;
+          dispatch(
+            coursePageApi.util.updateQueryData('getPage', updatedSection.pageId, (draft) => {
+              const section = draft.sections.find((s) => s.id === sectionId)!;
+              draft.maxScore -= section.maxScore - updatedSection.maxScore;
+              draft.score -= section.score - updatedSection.score;
+              Object.assign(section, updatedSection);
+            })
+          );
+        } catch {}
+      },
     }),
     answerCourseMultiChoiceSection: builder.mutation<
       AnswerResponseDto,
@@ -122,32 +120,28 @@ const sectionApi = emptyApi.injectEndpoints({
         try {
           const { data: updatedSection } = await queryFulfilled;
           dispatch(
-            coursePageApi.util.updateQueryData(
-              'getPage',
-              updatedSection.pageId,
-              (draft) => {
-                const section = draft.sections.find((s) => s.id === id)!;
+            coursePageApi.util.updateQueryData('getPage', updatedSection.pageId, (draft) => {
+              const section = draft.sections.find((s) => s.id === id)!;
 
-                // Score change
-                if (updatedSection.verdict === 'OK') {
-                  if (section.score !== section.maxScore) {
-                    draft.score += section.maxScore;
-                    section.score += section.maxScore;
-                  }
-                } else if (updatedSection.verdict === 'WA') {
-                  if (section.score === section.maxScore) {
-                    draft.score -= section.maxScore;
-                    section.score -= section.maxScore;
-                  }
+              // Score change
+              if (updatedSection.verdict === 'OK') {
+                if (section.score !== section.maxScore) {
+                  draft.score += section.maxScore;
+                  section.score += section.maxScore;
                 }
-                section.verdict = updatedSection.verdict;
-
-                // Attempts change
-                if (section.attempts) {
-                  section.attempts -= 1;
+              } else if (updatedSection.verdict === 'WA') {
+                if (section.score === section.maxScore) {
+                  draft.score -= section.maxScore;
+                  section.score -= section.maxScore;
                 }
               }
-            )
+              section.verdict = updatedSection.verdict;
+
+              // Attempts change
+              if (section.attempts) {
+                section.attempts -= 1;
+              }
+            })
           );
         } catch {}
       },
@@ -163,11 +157,7 @@ const sectionApi = emptyApi.injectEndpoints({
       }),
       invalidatesTags: (result) =>
         result
-          ? [
-              { type: 'pages', id: result.pageId },
-              { type: 'pages', id: 'LIST' },
-              'courses',
-            ]
+          ? [{ type: 'pages', id: result.pageId }, { type: 'pages', id: 'LIST' }, 'courses']
           : [{ type: 'pages', id: 'LIST' }, 'pages'],
     }),
     answerCourseShortAnswerSection: builder.mutation<
@@ -184,32 +174,28 @@ const sectionApi = emptyApi.injectEndpoints({
         try {
           const { data: updatedSection } = await queryFulfilled;
           dispatch(
-            coursePageApi.util.updateQueryData(
-              'getPage',
-              updatedSection.pageId,
-              (draft) => {
-                const section = draft.sections.find((s) => s.id === id)!;
+            coursePageApi.util.updateQueryData('getPage', updatedSection.pageId, (draft) => {
+              const section = draft.sections.find((s) => s.id === id)!;
 
-                // Score change
-                if (updatedSection.verdict === 'OK') {
-                  if (section.score !== section.maxScore) {
-                    draft.score += section.maxScore;
-                    section.score += section.maxScore;
-                  }
-                } else if (updatedSection.verdict === 'WA') {
-                  if (section.score === section.maxScore) {
-                    draft.score -= section.maxScore;
-                    section.score -= section.maxScore;
-                  }
+              // Score change
+              if (updatedSection.verdict === 'OK') {
+                if (section.score !== section.maxScore) {
+                  draft.score += section.maxScore;
+                  section.score += section.maxScore;
                 }
-                section.verdict = updatedSection.verdict;
-
-                // Attempts change
-                if (section.attempts) {
-                  section.attempts -= 1;
+              } else if (updatedSection.verdict === 'WA') {
+                if (section.score === section.maxScore) {
+                  draft.score -= section.maxScore;
+                  section.score -= section.maxScore;
                 }
               }
-            )
+              section.verdict = updatedSection.verdict;
+
+              // Attempts change
+              if (section.attempts) {
+                section.attempts -= 1;
+              }
+            })
           );
         } catch {}
       },
@@ -223,14 +209,20 @@ const sectionApi = emptyApi.injectEndpoints({
         body: body,
         method: 'PUT',
       }),
-      invalidatesTags: (result) =>
-        result
-          ? [
-              { type: 'pages', id: result.pageId },
-              { type: 'pages', id: 'LIST' },
-              'courses',
-            ]
-          : [{ type: 'pages', id: 'LIST' }, 'pages'],
+      invalidatesTags: ['courses'],
+      async onQueryStarted({ sectionId }, { dispatch, queryFulfilled }) {
+        try {
+          const { data: updatedSection } = await queryFulfilled;
+          dispatch(
+            coursePageApi.util.updateQueryData('getPage', updatedSection.pageId, (draft) => {
+              const section = draft.sections.find((s) => s.id === sectionId)!;
+              draft.maxScore -= section.maxScore - updatedSection.maxScore;
+              draft.score -= section.score - updatedSection.score;
+              Object.assign(section, updatedSection);
+            })
+          );
+        } catch {}
+      },
     }),
     answerCoursePermutationsSection: builder.mutation<
       AnswerResponseDto,
@@ -246,32 +238,28 @@ const sectionApi = emptyApi.injectEndpoints({
         try {
           const { data: updatedSection } = await queryFulfilled;
           dispatch(
-            coursePageApi.util.updateQueryData(
-              'getPage',
-              updatedSection.pageId,
-              (draft) => {
-                const section = draft.sections.find((s) => s.id === id)!;
+            coursePageApi.util.updateQueryData('getPage', updatedSection.pageId, (draft) => {
+              const section = draft.sections.find((s) => s.id === id)!;
 
-                // Score change
-                if (updatedSection.verdict === 'OK') {
-                  if (section.score !== section.maxScore) {
-                    draft.score += section.maxScore;
-                    section.score += section.maxScore;
-                  }
-                } else if (updatedSection.verdict === 'WA') {
-                  if (section.score === section.maxScore) {
-                    draft.score -= section.maxScore;
-                    section.score -= section.maxScore;
-                  }
+              // Score change
+              if (updatedSection.verdict === 'OK') {
+                if (section.score !== section.maxScore) {
+                  draft.score += section.maxScore;
+                  section.score += section.maxScore;
                 }
-                section.verdict = updatedSection.verdict;
-
-                // Attempts change
-                if (section.attempts) {
-                  section.attempts -= 1;
+              } else if (updatedSection.verdict === 'WA') {
+                if (section.score === section.maxScore) {
+                  draft.score -= section.maxScore;
+                  section.score -= section.maxScore;
                 }
               }
-            )
+              section.verdict = updatedSection.verdict;
+
+              // Attempts change
+              if (section.attempts) {
+                section.attempts -= 1;
+              }
+            })
           );
         } catch {}
       },
@@ -287,11 +275,7 @@ const sectionApi = emptyApi.injectEndpoints({
       }),
       invalidatesTags: (result) =>
         result
-          ? [
-              { type: 'pages', id: result.pageId },
-              { type: 'pages', id: 'LIST' },
-              'courses',
-            ]
+          ? [{ type: 'pages', id: result.pageId }, { type: 'pages', id: 'LIST' }, 'courses']
           : [{ type: 'pages', id: 'LIST' }, 'pages'],
     }),
     answerCourseMappingSection: builder.mutation<
@@ -308,32 +292,28 @@ const sectionApi = emptyApi.injectEndpoints({
         try {
           const { data: updatedSection } = await queryFulfilled;
           dispatch(
-            coursePageApi.util.updateQueryData(
-              'getPage',
-              updatedSection.pageId,
-              (draft) => {
-                const section = draft.sections.find((s) => s.id === id)!;
+            coursePageApi.util.updateQueryData('getPage', updatedSection.pageId, (draft) => {
+              const section = draft.sections.find((s) => s.id === id)!;
 
-                // Score change
-                if (updatedSection.verdict === 'OK') {
-                  if (section.score !== section.maxScore) {
-                    draft.score += section.maxScore;
-                    section.score += section.maxScore;
-                  }
-                } else if (updatedSection.verdict === 'WA') {
-                  if (section.score === section.maxScore) {
-                    draft.score -= section.maxScore;
-                    section.score -= section.maxScore;
-                  }
+              // Score change
+              if (updatedSection.verdict === 'OK') {
+                if (section.score !== section.maxScore) {
+                  draft.score += section.maxScore;
+                  section.score += section.maxScore;
                 }
-                section.verdict = updatedSection.verdict;
-
-                // Attempts change
-                if (section.attempts) {
-                  section.attempts -= 1;
+              } else if (updatedSection.verdict === 'WA') {
+                if (section.score === section.maxScore) {
+                  draft.score -= section.maxScore;
+                  section.score -= section.maxScore;
                 }
               }
-            )
+              section.verdict = updatedSection.verdict;
+
+              // Attempts change
+              if (section.attempts) {
+                section.attempts -= 1;
+              }
+            })
           );
         } catch {}
       },
@@ -349,11 +329,7 @@ const sectionApi = emptyApi.injectEndpoints({
       }),
       invalidatesTags: (result) =>
         result
-          ? [
-              { type: 'pages', id: result.pageId },
-              { type: 'pages', id: 'LIST' },
-              'courses',
-            ]
+          ? [{ type: 'pages', id: result.pageId }, { type: 'pages', id: 'LIST' }, 'courses']
           : [{ type: 'pages', id: 'LIST' }, 'pages'],
     }),
     answerCourseAnswerSection: builder.mutation<
@@ -370,35 +346,29 @@ const sectionApi = emptyApi.injectEndpoints({
         try {
           const { data: updatedSection } = await queryFulfilled;
           dispatch(
-            coursePageApi.util.updateQueryData(
-              'getPage',
-              updatedSection.pageId,
-              (draft) => {
-                const section = draft.sections.find(
-                  (s) => s.id === id
-                )! as AnswerSectionResponseDto;
-                section.answer = answer.answer;
+            coursePageApi.util.updateQueryData('getPage', updatedSection.pageId, (draft) => {
+              const section = draft.sections.find((s) => s.id === id)! as AnswerSectionResponseDto;
+              section.answer = answer.answer;
 
-                // Score change
-                if (updatedSection.verdict === 'OK') {
-                  if (section.score !== section.maxScore) {
-                    draft.score += section.maxScore;
-                    section.score += section.maxScore;
-                  }
-                } else if (updatedSection.verdict === 'WA') {
-                  if (section.score === section.maxScore) {
-                    draft.score -= section.maxScore;
-                    section.score -= section.maxScore;
-                  }
+              // Score change
+              if (updatedSection.verdict === 'OK') {
+                if (section.score !== section.maxScore) {
+                  draft.score += section.maxScore;
+                  section.score += section.maxScore;
                 }
-                section.verdict = updatedSection.verdict;
-
-                // Attempts change
-                if (section.attempts) {
-                  section.attempts -= 1;
+              } else if (updatedSection.verdict === 'WA') {
+                if (section.score === section.maxScore) {
+                  draft.score -= section.maxScore;
+                  section.score -= section.maxScore;
                 }
               }
-            )
+              section.verdict = updatedSection.verdict;
+
+              // Attempts change
+              if (section.attempts) {
+                section.attempts -= 1;
+              }
+            })
           );
         } catch {}
       },
@@ -414,28 +384,23 @@ const sectionApi = emptyApi.injectEndpoints({
       }),
       invalidatesTags: (result) =>
         result
-          ? [
-              { type: 'pages', id: result.pageId },
-              { type: 'pages', id: 'LIST' },
-              'courses',
-            ]
+          ? [{ type: 'pages', id: result.pageId }, { type: 'pages', id: 'LIST' }, 'courses']
           : [{ type: 'pages', id: 'LIST' }, 'pages'],
     }),
-    answerCourseCodeSection: builder.mutation<
-      AnswerResponseDto,
-      AnswerCourseCodeSectionRequestDto
-    >({
-      query: (body) => ({
-        url: '/answer',
-        method: 'POST',
-        body: body,
-      }),
-      invalidatesTags: (response, _, request) => [
-        { type: 'pages', id: request.id },
-        'pages',
-        'courses',
-      ],
-    }),
+    answerCourseCodeSection: builder.mutation<AnswerResponseDto, AnswerCourseCodeSectionRequestDto>(
+      {
+        query: (body) => ({
+          url: '/answer',
+          method: 'POST',
+          body: body,
+        }),
+        invalidatesTags: (response, _, request) => [
+          { type: 'pages', id: request.id },
+          'pages',
+          'courses',
+        ],
+      }
+    ),
     changeCourseSectionOrder: builder.mutation<
       AllSectionsResponseDto,
       CourseSectionChangeOrderRequestDto
@@ -448,16 +413,11 @@ const sectionApi = emptyApi.injectEndpoints({
         },
       }),
       invalidatesTags: (_1, _2, args) => [{ type: 'pages', id: args.pageId }],
-      async onQueryStarted(
-        { pageId, sectionId, order },
-        { dispatch, queryFulfilled }
-      ) {
+      async onQueryStarted({ pageId, sectionId, order }, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
           coursePageApi.util.updateQueryData('getPage', pageId, (draft) => {
             const newIndex = draft.sections.findIndex((s) => s.order === order);
-            const oldIndex = draft.sections.findIndex(
-              (s) => s.id === sectionId
-            );
+            const oldIndex = draft.sections.findIndex((s) => s.id === sectionId);
             draft.sections = arrayMove(draft.sections, oldIndex, newIndex);
           })
         );
