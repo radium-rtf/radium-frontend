@@ -78,7 +78,11 @@ export const LoginCard = () => {
             <Button
               disabled={isSubmitting}
               type='submit'
-              color={!isValid && isSubmitted ? 'destructive' : 'accent'}
+              variant={
+                isSubmitted && (errors.root || errors.email || errors.password)
+                  ? 'destructive'
+                  : 'default'
+              }
               className='w-64 justify-start gap-4'
             >
               <Icon

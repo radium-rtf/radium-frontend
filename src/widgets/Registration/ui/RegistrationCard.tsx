@@ -20,7 +20,7 @@ export const RegistrationCard = () => {
     clearErrors,
     setError,
     watch,
-    formState: { isSubmitting, isSubmitSuccessful, isSubmitted, isValid, errors },
+    formState: { isSubmitting, isSubmitSuccessful, isSubmitted, errors },
   } = useForm<registrationSchemaType>({
     resolver: zodResolver(registrationSchema),
     defaultValues: {
@@ -101,7 +101,11 @@ export const RegistrationCard = () => {
             <Button
               type='submit'
               className='w-64 justify-start'
-              variant={!isValid && isSubmitted ? 'destructive' : 'default'}
+              variant={
+                isSubmitted && (errors.email || errors.name || errors.password || errors.password)
+                  ? 'destructive'
+                  : 'default'
+              }
               disabled={isSubmitting}
             >
               <Icon

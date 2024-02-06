@@ -40,7 +40,7 @@ export const AuthorShipCourseCard: FC<IProps> = ({ course }) => {
         ) : (
           <div className='aspect-square h-[4.5rem] rounded-lg bg-popover' />
         )}
-        <CardTitle>{name}</CardTitle>
+        <CardTitle>{name || '<без названия>'}</CardTitle>
       </CardHeader>
       <CardContent className='grow'>
         <CardDescription>{shortDescription || '<без описания>'}</CardDescription>
