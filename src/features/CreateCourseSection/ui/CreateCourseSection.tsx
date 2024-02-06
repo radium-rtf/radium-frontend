@@ -1,6 +1,6 @@
 'use client';
 import { CourseEditContext } from '@/features/CourseEditContext';
-import { List, ListContent, ListIcon, ListItem, ListTitle } from '@/shared';
+import { List, ListContent, ListIcon, ListItem, ListTitle, cn, useScrollPosition } from '@/shared';
 import { useParams, useRouter } from 'next/navigation';
 import { FC, useContext } from 'react';
 import { useCreateSectionMutation } from '../api/createCourseSectionApi';
@@ -13,6 +13,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
   const { pageId } = useParams() as { pageId: string };
   const [createSection] = useCreateSectionMutation();
   const { push } = useRouter();
+  const scrollHeight = useScrollPosition();
 
   return (
     <AnimatePresence>
@@ -21,7 +22,10 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
           initial={{ width: 0 }}
           animate={{ width: 256 }}
           exit={{ width: 24 }}
-          className='sticky right-0 top-[8.625rem] -mr-6 max-h-[calc(100vh-8.65rem)] w-64 self-start overflow-hidden'
+          className={cn(
+            'sticky right-0 top-[8.25rem] -mr-6 max-h-[calc(100vh-8.25rem)] w-64 self-start overflow-hidden transition-[top,_max-height]',
+            scrollHeight > 50 && 'top-16 max-h-[calc(100vh-4rem)]'
+          )}
         >
           <motion.div
             key='kkekekkkekekkdfsdfg'
