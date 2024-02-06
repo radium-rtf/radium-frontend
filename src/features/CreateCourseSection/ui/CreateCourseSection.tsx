@@ -30,7 +30,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
             exit={{ x: 256 }}
             className='w-64'
           >
-            <h3 className='px-6 py-4 font-NTSomic text-xl font-bold text-primary'>Элементы</h3>
+            <h3 className='px-6 py-4 font-NTSomic text-lg font-bold text-primary'>Элементы</h3>
             <List>
               <ListItem asChild>
                 <button
@@ -53,7 +53,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
               </ListItem>
             </List>
             <List>
-              <h3 className='px-6 py-4 font-NTSomic text-xl font-bold text-primary'>Вопросы</h3>
+              <h3 className='px-6 py-4 font-NTSomic text-lg font-bold text-primary'>Вопросы</h3>
               <ListItem asChild>
                 <button
                   className='group rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
@@ -183,7 +183,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                 </button>
               </ListItem>
             </List>
-            <h3 className='px-6 py-4 font-NTSomic text-xl font-bold text-primary'>Задания</h3>
+            <h3 className='px-6 py-4 font-NTSomic text-lg font-bold text-primary'>Задания</h3>
             <List>
               <ListItem asChild>
                 <button

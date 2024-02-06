@@ -7,6 +7,7 @@ interface IProps extends HTMLAttributes<HTMLDivElement> {}
 
 export const CourseEditToggle: FC<IProps> = ({ className, ...props }) => {
   const { isEditing, setIsEditing } = useContext(CourseEditContext);
+
   return (
     <div className={cn('flex items-center gap-4 px-6 py-2.5', className)} {...props}>
       <Icon type='edit' className='flex-shrink-0 text-primary' />

@@ -35,8 +35,6 @@ export const ProfileEdit: FC<IProps> = ({ name }) => {
     },
   });
 
-  console.log(errors);
-
   const onSubmit: SubmitHandler<z.infer<typeof profileEditSchema>> = async (values) => {
     let avatarUrl: string | null = null;
     if (values.avatar.has('file')) {
@@ -50,8 +48,6 @@ export const ProfileEdit: FC<IProps> = ({ name }) => {
         });
       }
     }
-
-    console.log(name, data?.user.name);
 
     if (avatarUrl || values.name !== data?.user?.name) {
       const response = await updateUser({
