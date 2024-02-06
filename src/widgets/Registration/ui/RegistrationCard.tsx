@@ -39,7 +39,7 @@ export const RegistrationCard = () => {
       name: data.name,
       password: data.password.password,
     });
-    if (typeof response === 'string') {
+    if (!response) {
       setError('email', { message: 'Ошибка' }, { shouldFocus: false });
       return;
     }
