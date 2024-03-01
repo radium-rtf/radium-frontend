@@ -75,7 +75,9 @@ const MenuIcon = forwardRef<SVGSVGElement, IMenuIconProps>(
     const Comp = asChild
       ? (Slot as ForwardRefExoticComponent<
           SVGAttributes<SVGSVGElement> & RefAttributes<SVGSVGElement>
-        > & { children?: ReactNode })
+        > & {
+          children?: ReactNode;
+        })
       : Icon;
     return (
       <Comp

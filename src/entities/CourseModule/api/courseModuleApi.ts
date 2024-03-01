@@ -52,8 +52,6 @@ const courseModuleApi = emptyApi.injectEndpoints({
             const newIndex = draft.modules.findIndex((m) => m.order === order);
             const oldIndex = draft.modules.findIndex((m) => m.id === moduleId);
 
-            console.log(newIndex, oldIndex);
-
             draft.modules = arrayMove(draft.modules, oldIndex, newIndex);
           })
         );

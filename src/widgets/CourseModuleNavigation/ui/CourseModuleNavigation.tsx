@@ -65,8 +65,6 @@ export const CourseModuleNavigation: FC<IProps> = ({ courseId, module, currentPa
   // DND Handler
   const onDragEndHandler = (e: DragEndEvent) => {
     if (e.over && e.active.id !== e.over?.id) {
-      console.log(e.over.data.current!.order);
-      console.log(e.active.data.current!.order);
       updateOrder({
         order: e.over.data.current!.order,
         pageId: e.active.id as string,

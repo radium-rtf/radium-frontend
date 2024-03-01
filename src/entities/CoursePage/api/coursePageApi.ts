@@ -63,8 +63,6 @@ export const coursePageApi = emptyApi.injectEndpoints({
               const newIndex = courseModule?.pages.findIndex((p) => p.order === order);
               const oldIndex = courseModule?.pages.findIndex((p) => p.id === pageId);
 
-              console.log(newIndex, oldIndex);
-
               courseModule.pages = arrayMove(courseModule?.pages, oldIndex, newIndex);
             })
           );

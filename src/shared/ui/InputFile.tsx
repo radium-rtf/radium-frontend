@@ -55,10 +55,15 @@ export const InputFile: FC<IProps> = ({
 
   const getLabelText = () => {
     let text = 'Выберите или перетащите файл';
-    if (isLoading) text = 'Загружаем файл';
-    else if (isDisabled) text = 'Прикрепить файл нельзя';
-    else if (isDragging) text = 'Перетащите файл сюда';
-    else if (isAttachError) text = 'Не получилось прикрепить файл';
+    if (isLoading) {
+      text = 'Загружаем файл';
+    } else if (isDisabled) {
+      text = 'Прикрепить файл нельзя';
+    } else if (isDragging) {
+      text = 'Перетащите файл сюда';
+    } else if (isAttachError) {
+      text = 'Не получилось прикрепить файл';
+    }
     return text;
   };
 
