@@ -19,7 +19,9 @@ export const EditorCodeControl = () => {
           const codeNode = $createCodeNode('javascript');
           selection.insertNodes([codeNode]);
           selection = $getSelection();
-          if ($isRangeSelection(selection)) selection.insertRawText(textContent);
+          if ($isRangeSelection(selection)) {
+            selection.insertRawText(textContent);
+          }
         }
       }
     });

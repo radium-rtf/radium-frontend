@@ -9,8 +9,12 @@ export const useCourseRoles = (course: CourseResponseDto | undefined | null) => 
   const [isCoauthor, setIsCoauthor] = useState(false);
 
   useEffect(() => {
-    if (!session.data?.user) return;
-    if (!course) return;
+    if (!session.data?.user) {
+      return;
+    }
+    if (!course) {
+      return;
+    }
 
     const authorsSet = new Set(course.authors.map((author) => author.email));
     const coauthorsSet = new Set(course.coauthors.map((author) => author.email));

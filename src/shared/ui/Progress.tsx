@@ -17,7 +17,7 @@ export const Progress: FC<IProps> = ({
   theme,
   showPercentage,
 }) => {
-  if (type === 'linear')
+  if (type === 'linear') {
     return (
       <div className={cn('flex w-full items-center gap-4', className)}>
         <div className='flex h-0.5 w-full items-center bg-white/10'>
@@ -35,6 +35,7 @@ export const Progress: FC<IProps> = ({
         )}
       </div>
     );
+  }
 
   return (
     <div
