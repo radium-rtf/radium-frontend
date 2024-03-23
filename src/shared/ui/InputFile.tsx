@@ -1,150 +1,104 @@
 'use client';
-import { FC, ReactNode, RefObject, useEffect, useId, useRef, useState } from 'react';
+import { FC, InputHTMLAttributes, useId, useRef, ChangeEvent, DragEvent } from 'react';
 import { FileType } from '../types/FileType';
-import { useDrop } from '../hooks/useDrop';
+// import { useDrop } from '../hooks/useDrop';
 import { cn } from '../utils/cn';
-import { Icon } from './Icon';
-import { CloseButton } from './CloseButton';
+// import { Icon } from './Icon';
+// import { CloseButton } from './CloseButton';
 
-interface IProps {
-  name?: string;
-  disabled?: boolean;
-  maxBytesFileSize?: number;
-  allowedFileTypes: FileType;
-  onFileLoaded: (file: File) => void;
-  children?: ReactNode;
-}
+type InputFileProps = InputHTMLAttributes<HTMLInputElement> & {
+  allowedFileTypes: FileType[];
+  fileList?: FileList;
+  onFileListChange?: (fileList: FileList | null) => void;
+};
 
-export const InputFile: FC<IProps> = ({
-  name,
-  allowedFileTypes = FileType.zip,
-  onFileLoaded,
-  disabled = false,
-  maxBytesFileSize = 10 ** 30,
-  children = <span>.zip</span>,
+// const getFileSizeText = (file: File): string => {
+//   const fileSize = file.size;
+//   if (fileSize < 10e5) {
+//     return `${Math.round(fileSize / 2 ** 10)} КБ`;
+//   } else {
+//     return `${Math.round((fileSize / 2 ** 20) * 10) / 10} МБ`;
+//   }
+// };
+
+export const InputFile: FC<InputFileProps> = ({
+  allowedFileTypes,
+  className,
+  disabled,
+  onChange,
+  // fileList,
+  onFileListChange,
+  ...props
 }) => {
-  const [file, setFile] = useState<File>();
-  const [isDisabled, setDisabled] = useState(disabled);
-  const [isAttachError, setAttachError] = useState(false);
-  const [isLoading, setLoading] = useState(false);
-  const inputRef: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
+  // const inputTypes = '.' + allowedFileTypes.map((type) => FileType[type]).join(', .');
+  const fileInputId = useId();
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (isLoading) {
-      setAttachError(false);
-      setFile(undefined);
-      setDisabled(true);
-    } else {
-      setDisabled(false);
-    }
-  }, [isLoading]);
+  // useEffect(() => {
+  //   if (fileList && inputRef.current) {
+  //     inputRef.current.files = fileList;
+  //   }
+  // }, [fileList]);
 
-  useEffect(() => {
-    const files = inputRef?.current?.files;
-    if (files) {
-      handleFileChange(files[0]);
-    }
-  }, [inputRef?.current?.files, inputRef?.current?.value]);
-
-  const inputId = useId();
-
-  const { isDraggable: isDragging, ref: windowRef } = useDrop();
-  if (window) {
-    windowRef.current = window.document;
-  }
-
-  const getLabelText = () => {
-    let text = 'Выберите или перетащите файл';
-    if (isLoading) text = 'Загружаем файл';
-    else if (isDisabled) text = 'Прикрепить файл нельзя';
-    else if (isDragging) text = 'Перетащите файл сюда';
-    else if (isAttachError) text = 'Не получилось прикрепить файл';
-    return text;
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.currentTarget.files;
+    onFileListChange?.(files);
   };
 
-  const getFileSizeText = (file: File): string => {
-    const fileSize = file.size;
-    if (fileSize < 10e5) {
-      return `${Math.round(fileSize / 2 ** 10)} КБ`;
-    } else {
-      return `${Math.round((fileSize / 2 ** 20) * 10) / 10} МБ`;
-    }
+  const dropHandler = (e: DragEvent<HTMLLabelElement>) => {
+    const files = e.dataTransfer.files;
+    onFileListChange?.(files);
   };
 
-  const handleFileChange = (file: File) => {
-    if (!file) {
-      return;
-    }
-
-    setFile(undefined);
-    const fileType: string | undefined = file.name.split('.').pop();
-    if (
-      fileType === undefined ||
-      (allowedFileTypes & FileType[fileType as keyof typeof FileType]) === 0
-    ) {
-      setAttachError(true);
-      return;
-    }
-
-    if (file.size > maxBytesFileSize) {
-      setAttachError(true);
-      return;
-    }
-
-    setLoading(true);
-    onFileLoaded(file);
-    if (inputRef.current?.value) {
-      inputRef.current.value = '';
-    }
-    setFile(file);
-    setLoading(false);
-  };
+  const file = inputRef.current?.files?.item(0);
 
   return (
     <div className='h-9 w-full items-center'>
       <label
-        htmlFor={inputId}
-        onDrop={(e) => {
-          e.stopPropagation();
-          e.preventDefault();
-          if (e.dataTransfer.files) {
-            handleFileChange(e.dataTransfer.files[0]);
-          }
-        }}
-        aria-disabled={isDisabled}
+        htmlFor={fileInputId}
+        onDrop={dropHandler}
+        aria-disabled={disabled}
         className={cn(
-          'h-9',
-          'text-text-secondary',
-          'text-sm',
-          'py-1.5',
-          'px-4',
-          'rounded-lg',
-          'border-grey-500',
-          'border',
-          'cursor-pointer',
-          'flex',
-          'select-none',
-          'gap-3',
-          'aria-disabled:opacity-50',
-          'aria-disabled:cursor-not-allowed',
-          'transition',
-          isAttachError && ['text-accent-destructive-300', 'border-accent-destructive-400'],
-          isDragging && ['text-accent-primary-300', 'border-accent-primary-400'],
-          file && ['bg-white bg-opacity-5', 'text-text-primary'],
-          !isDisabled && 'hover:bg-grey-600'
+          [
+            'h-9',
+            'text-foreground-secondary',
+            'text-sm',
+            'py-1.5',
+            'px-4',
+            'rounded-lg',
+            'items-center',
+            'font-NTSomic',
+            'outline-white',
+            'border-white/10',
+            'border',
+            '-outline-offset-1',
+            'cursor-pointer',
+            'flex',
+            'select-none',
+            'text-[0.8125rem]',
+            'gap-3',
+            'aria-disabled:opacity-50',
+            'aria-disabled:cursor-not-allowed',
+            'transition',
+            // isDragging && ['text-accent-primary-300', 'border-accent-primary-400'],
+            // files && ['bg-white bg-opacity-5', 'text-text-primary'],
+            !disabled && 'hover:bg-grey-600',
+          ],
+          className
         )}
       >
-        <Icon
-          type={isLoading ? 'loading' : file?.name ? 'archive' : 'attach'}
+        {/* <Icon
+          // type={isLoading ? 'loading' : file?.name ? 'archive' : 'attach'}
+          type={'attach'}
           className={cn(
-            'text-text-secondary',
-            { 'text-accent-destructive-300': isAttachError },
+            'text-foreground-secondary',
+            // { 'text-accent-destructive-300': isAttachError },
             { 'text-accent-primary-300': isDragging }
           )}
-        />
-        {!file ? getLabelText() : file.name}
+        /> */}
+        {!file ? 'Прикрепите файл' : file.name}
 
-        <div className='text-text-secondary ml-auto mr-0 flex gap-4'>
+        {/* <div className='text-foreground-secondary ml-auto mr-0 flex items-center gap-4 '>
           {file && <span>{getFileSizeText(file)}</span>}
           {(file && (
             <CloseButton
@@ -157,17 +111,29 @@ export const InputFile: FC<IProps> = ({
               }}
             />
           )) ||
-            (!isAttachError && !isLoading && children)}
-        </div>
+            (!isAttachError && !isLoading && inputTypes)} */}
+        {/* </div> */}
       </label>
       <input
-        name={name}
-        id={inputId}
+        id={fileInputId}
         ref={inputRef}
-        onChange={(e) => setFile(e.target.files?.[0])}
-        disabled={isDisabled}
+        accept={allowedFileTypes.map((type) => FileType[type]).join(', .')}
+        // onDrop={(e) => {
+        //   e.preventDefault();
+        //   const file = e.dataTransfer.files.item(0);
+        //   if (file) {
+        //     setFile(file);
+        //     onDrag?.(e);
+        //   }
+        // }}
+        onChange={(e) => {
+          onChange?.(e);
+          changeHandler(e);
+        }}
+        disabled={disabled}
         type='file'
         className='hidden'
+        {...props}
       />
     </div>
   );
