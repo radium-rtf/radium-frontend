@@ -1,137 +1,123 @@
 'use client';
-import { FC, InputHTMLAttributes, useId, useRef, ChangeEvent, DragEvent } from 'react';
+import {
+  ChangeEventHandler,
+  DragEventHandler,
+  FC,
+  InputHTMLAttributes,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { FileType } from '../types/FileType';
-// import { useDrop } from '../hooks/useDrop';
 import { cn } from '../utils/cn';
-// import { Icon } from './Icon';
-// import { CloseButton } from './CloseButton';
+import { Icon } from './Icon';
+import { useDrop } from '../hooks/useDrop';
 
-type InputFileProps = InputHTMLAttributes<HTMLInputElement> & {
-  allowedFileTypes: FileType[];
+type InputFileProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
+  allowedFileTypes?: FileType[];
   fileList?: FileList;
   onFileListChange?: (fileList: FileList | null) => void;
 };
 
-// const getFileSizeText = (file: File): string => {
-//   const fileSize = file.size;
-//   if (fileSize < 10e5) {
-//     return `${Math.round(fileSize / 2 ** 10)} КБ`;
-//   } else {
-//     return `${Math.round((fileSize / 2 ** 20) * 10) / 10} МБ`;
-//   }
-// };
-
 export const InputFile: FC<InputFileProps> = ({
   allowedFileTypes,
-  className,
   disabled,
-  onChange,
-  // fileList,
   onFileListChange,
+  fileList = null,
   ...props
 }) => {
-  // const inputTypes = '.' + allowedFileTypes.map((type) => FileType[type]).join(', .');
-  const fileInputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
+  const [title, setTitle] = useState<string | null>(null);
+  const [isError, setIsError] = useState(false);
 
-  // useEffect(() => {
-  //   if (fileList && inputRef.current) {
-  //     inputRef.current.files = fileList;
-  //   }
-  // }, [fileList]);
+  const { isDraggable, ref } = useDrop();
+  ref.current = document;
 
-  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.currentTarget.files;
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.files = fileList;
+      inputRef.current.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  }, [fileList]);
+
+  const inputChangeHandler: ChangeEventHandler<HTMLInputElement> = (e) => {
+    isError && setIsError(false);
+    const files = e.target.files;
+    if (!files || !files.length) {
+      setTitle(null);
+    } else {
+      const names: string[] = [];
+      for (const file of files) {
+        if (!allowedFileTypes?.some((type) => type === file.name.split('.')[1])) {
+          setIsError(true);
+          return;
+        }
+        names.push(file.name);
+      }
+      setTitle(names.join(', '));
+    }
     onFileListChange?.(files);
   };
 
-  const dropHandler = (e: DragEvent<HTMLLabelElement>) => {
-    const files = e.dataTransfer.files;
-    onFileListChange?.(files);
+  const fileDropHandler: DragEventHandler<HTMLInputElement> = (e) => {
+    const { files } = e.dataTransfer;
+    if (inputRef.current) {
+      inputRef.current.files = files;
+      inputRef.current.dispatchEvent(new Event('change', { bubbles: true }));
+    }
   };
-
-  const file = inputRef.current?.files?.item(0);
 
   return (
-    <div className='h-9 w-full items-center'>
-      <label
-        htmlFor={fileInputId}
-        onDrop={dropHandler}
-        aria-disabled={disabled}
+    <div
+      onDrop={fileDropHandler}
+      onClick={() => inputRef.current?.click()}
+      className={cn(
+        'flex h-9 w-full cursor-pointer items-center justify-stretch gap-2.5 rounded-[0.5rem] border border-white/10 text-[#B3B3B3] transition-colors [&:not(:has(.reset:hover))]:hover:bg-white/10',
+        isError && 'border-destructive text-destructive',
+        disabled && 'opacity-50',
+        isDraggable && 'border-primary text-primary'
+      )}
+    >
+      <div
         className={cn(
-          [
-            'h-9',
-            'text-foreground-secondary',
-            'text-sm',
-            'py-1.5',
-            'px-4',
-            'rounded-lg',
-            'items-center',
-            'font-NTSomic',
-            'outline-white',
-            'border-white/10',
-            'border',
-            '-outline-offset-1',
-            'cursor-pointer',
-            'flex',
-            'select-none',
-            'text-[0.8125rem]',
-            'gap-3',
-            'aria-disabled:opacity-50',
-            'aria-disabled:cursor-not-allowed',
-            'transition',
-            // isDragging && ['text-accent-primary-300', 'border-accent-primary-400'],
-            // files && ['bg-white bg-opacity-5', 'text-text-primary'],
-            !disabled && 'hover:bg-grey-600',
-          ],
-          className
+          '-m-[1px] flex grow items-center gap-4 self-stretch rounded-[0.5rem] px-4 py-[0.5625rem]',
+          title && 'pr-0'
         )}
       >
-        {/* <Icon
-          // type={isLoading ? 'loading' : file?.name ? 'archive' : 'attach'}
-          type={'attach'}
-          className={cn(
-            'text-foreground-secondary',
-            // { 'text-accent-destructive-300': isAttachError },
-            { 'text-accent-primary-300': isDragging }
-          )}
-        /> */}
-        {!file ? 'Прикрепите файл' : file.name}
-
-        {/* <div className='text-foreground-secondary ml-auto mr-0 flex items-center gap-4 '>
-          {file && <span>{getFileSizeText(file)}</span>}
-          {(file && (
-            <CloseButton
-              onClick={(e) => {
-                setFile(undefined);
-                if (inputRef.current?.value) {
-                  inputRef.current.value = '';
-                }
-                e.preventDefault();
-              }}
-            />
-          )) ||
-            (!isAttachError && !isLoading && inputTypes)} */}
-        {/* </div> */}
-      </label>
+        <Icon type='attach' className='text-inherit' />
+        <p className='grow text-base'>
+          {(disabled && 'Прикрепить файл нельзя') ||
+            (isDraggable && 'Перетащите файл сюда') ||
+            title ||
+            'Выберите или перетащите файл'}
+        </p>
+        {allowedFileTypes && <p>{allowedFileTypes.join(', ')}</p>}
+      </div>
+      {title && (
+        <button
+          disabled={disabled}
+          type='button'
+          onClick={(e) => {
+            e.stopPropagation();
+            if (inputRef.current) {
+              inputRef.current.value = '';
+              inputRef.current.files = new DataTransfer().files;
+              inputRef.current.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+          }}
+          className='reset mr-2.5 rounded-[0.25rem] p-1.5 transition-colors hover:bg-white/5'
+        >
+          <Icon className='h-3 w-3 text-inherit' type='remove' />
+        </button>
+      )}
       <input
-        id={fileInputId}
-        ref={inputRef}
-        accept={allowedFileTypes.map((type) => FileType[type]).join(', .')}
-        // onDrop={(e) => {
-        //   e.preventDefault();
-        //   const file = e.dataTransfer.files.item(0);
-        //   if (file) {
-        //     setFile(file);
-        //     onDrag?.(e);
-        //   }
-        // }}
-        onChange={(e) => {
-          onChange?.(e);
-          changeHandler(e);
-        }}
         disabled={disabled}
+        ref={inputRef}
+        onChange={(e) => {
+          inputChangeHandler(e);
+        }}
         type='file'
+        accept={allowedFileTypes ? allowedFileTypes.map((type) => `.${type}`).join() : undefined}
         className='hidden'
         {...props}
       />
