@@ -55,6 +55,26 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                   />
                 </button>
               </ListItem>
+              <ListItem asChild>
+                <button
+                  className='rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
+                  onClick={() =>
+                    createSection({
+                      pageId,
+                      media: {
+                        url: 'https://mykaleidoscope.ru/x/uploads/posts/2022-10/1666358819_2-mykaleidoscope-ru-p-ozero-ritsa-vkontakte-2.jpg',
+                      },
+                    })
+                      .unwrap()
+                      .then((res) => push(`#section-${res.id}`, { scroll: true }))
+                  }
+                >
+                  <ListIcon icon='picture' className='text-primary' />
+                  <ListContent>
+                    <ListTitle>Картинка или видео</ListTitle>
+                  </ListContent>
+                </button>
+              </ListItem>
             </List>
             <List>
               <h3 className='px-6 py-4 font-NTSomic text-lg font-bold text-primary'>Вопросы</h3>
@@ -208,26 +228,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                   />
                 </button>
               </ListItem>
-              <ListItem asChild>
-                <button
-                  className='rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
-                  onClick={() =>
-                    createSection({
-                      pageId,
-                      media: {
-                        url: 'https://mykaleidoscope.ru/x/uploads/posts/2022-10/1666358819_2-mykaleidoscope-ru-p-ozero-ritsa-vkontakte-2.jpg',
-                      },
-                    })
-                      .unwrap()
-                      .then((res) => push(`#section-${res.id}`, { scroll: true }))
-                  }
-                >
-                  <ListIcon icon='attach' className='text-primary' />
-                  <ListContent>
-                    <ListTitle>Файл</ListTitle>
-                  </ListContent>
-                </button>
-              </ListItem>
+
               {/* <ListItem asChild>
                 <button
                   className='rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
