@@ -3,18 +3,7 @@ import {
   CodeSectionResponseDto,
   useAnswerCourseCodeSectionMutation,
 } from '@/entities/CourseSection';
-import {
-  Button,
-  Card,
-  cn,
-  CodeEditor,
-  FileType,
-  getNoun,
-  Icon,
-  InputFile,
-  Tab,
-  Tabs,
-} from '@/shared';
+import { Button, Card, cn, CodeEditor, getNoun, Icon, Tab, Tabs } from '@/shared';
 import { FC, useContext, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { answerSchema, answerSchemaType } from '../lib/answerSchema';
@@ -139,17 +128,17 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
               />
             </>
           )}
-          {!isCodeWriting && (
+          {/* {!isCodeWriting && (
             <Controller
               control={control}
               name='file'
               render={({ field: { onChange } }) => {
                 return (
-                  <InputFile onFileLoaded={(e) => onChange(e)} allowedFileTypes={FileType.jpg} />
+                  <InputFile onFileLoaded={(e) => onChange(e)} allowedFileTypes={[FileType.jpg]} />
                 );
               }}
             />
-          )}
+          )} */}
         </main>
         <footer className='flex items-center gap-4 place-self-end'>
           {isEditAllowed && isEditMode && (

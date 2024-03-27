@@ -32,6 +32,7 @@ import {
 import { restrictToParentElement, restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { Card, useUpdateTitle } from '@/shared';
 import Image from 'next/image';
+import { MediaSection } from '@/widgets/MediaSection';
 
 interface IProps {
   params: {
@@ -117,6 +118,9 @@ export default function CoursePage({ params }: IProps) {
         return <MappingSection key={section.id} sectionData={section} />;
       case 'code':
         return <CodeSection key={section.id} sectionData={section} />;
+      case 'media':
+        return <MediaSection key={section.id} sectionData={section} />;
+
       default:
         return null;
     }

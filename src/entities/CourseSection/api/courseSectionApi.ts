@@ -1,6 +1,8 @@
 import { emptyApi } from '@/shared';
 import { UpdateCourseTextSectionRequestDto } from '../model/UpdateCourseTextSectionRequestDto';
+import { UpdateCourseMediaSectionRequestDto } from '../model/UpdateCourseMediaSectionRequestDto';
 import { CourseTextSectionResponseDto } from '../model/TextSectionResponseDto';
+import { MediaSectionResponseDto } from '../model/MediaSectionResponceDto';
 import { AnswerResponseDto } from '../model/AnswerResponseDto';
 import { AnswerCourseChoiceSectionRequestDto } from '../model/AnswerCourseChoiceSectionRequestDto';
 import { ChoiceSectionResponseDto } from '../model/ChoiceSectionResponseDto';
@@ -31,6 +33,20 @@ const sectionApi = emptyApi.injectEndpoints({
     updateCourseTextSection: builder.mutation<
       CourseTextSectionResponseDto,
       UpdateCourseTextSectionRequestDto
+    >({
+      query: ({ sectionId, ...body }) => ({
+        url: `/section/${sectionId}`,
+        method: 'PUT',
+        body: body,
+      }),
+      invalidatesTags: (result) =>
+        result
+          ? [{ type: 'pages', id: result.pageId }, { type: 'pages', id: 'LIST' }, 'courses']
+          : [{ type: 'pages', id: 'LIST' }, 'pages'],
+    }),
+    updateCourseMediaSection: builder.mutation<
+      MediaSectionResponseDto,
+      UpdateCourseMediaSectionRequestDto
     >({
       query: ({ sectionId, ...body }) => ({
         url: `/section/${sectionId}`,
@@ -440,6 +456,7 @@ const sectionApi = emptyApi.injectEndpoints({
 
 export const {
   useUpdateCourseTextSectionMutation,
+  useUpdateCourseMediaSectionMutation,
   useAnswerCourseChoiceSectionMutation,
   useUpdateCourseChoiceSectionMutation,
   useAnswerCourseMultiChoiceSectionMutation,

@@ -1,6 +1,14 @@
 export enum FileType {
-  zip = 1,
-  jpg = 2,
-  jpeg = 4,
-  all = ~(~0 << Object.keys(FileType).filter((v) => isNaN(Number(v))).length),
+  zip = 'zip',
+  jpg = 'jpg',
+  jpeg = 'jpeg',
+  png = 'png',
+  mp4 = 'mp4',
+  gif = 'gif',
+  doc = 'doc',
+  docx = 'docx',
+  ppt = 'ppt',
+  pptx = 'pptx',
+  txt = 'txt',
+  pdf = 'pdf',
 }

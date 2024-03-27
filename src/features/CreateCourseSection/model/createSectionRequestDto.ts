@@ -7,6 +7,9 @@ export interface CreateSectionRequestDto {
     question: string;
     variants: string[];
   };
+  media?: {
+    url: string;
+  };
   code?: {
     question: string;
   };

@@ -10,6 +10,7 @@ export interface ITab extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const Tab: FC<ITab> = ({ icon, children, className, isSelected, ...props }) => {
   return (
     <button
+      type='button'
       className={cn(
         [
           'relative',
@@ -38,8 +39,8 @@ export const Tab: FC<ITab> = ({ icon, children, className, isSelected, ...props 
       )}
       {...props}
     >
-      <Icon type={icon} className={cn([isSelected && 'text-primary'])} />
-      <span className={cn('text-text-primary text-sm', isSelected && 'text-primary')}>
+      <Icon type={icon} className={cn([isSelected && 'text-primary underline'])} />
+      <span className={cn('text-text-primary text-base', isSelected && 'text-primary')}>
         {children}
       </span>
     </button>

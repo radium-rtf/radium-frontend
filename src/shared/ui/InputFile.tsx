@@ -1,178 +1,125 @@
 'use client';
-import { FC, ReactNode, RefObject, useEffect, useId, useRef, useState } from 'react';
+import {
+  ChangeEventHandler,
+  DragEventHandler,
+  FC,
+  InputHTMLAttributes,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { FileType } from '../types/FileType';
-import { useDrop } from '../hooks/useDrop';
 import { cn } from '../utils/cn';
 import { Icon } from './Icon';
-import { CloseButton } from './CloseButton';
+import { useDrop } from '../hooks/useDrop';
 
-interface IProps {
-  name?: string;
-  disabled?: boolean;
-  maxBytesFileSize?: number;
-  allowedFileTypes: FileType;
-  onFileLoaded: (file: File) => void;
-  children?: ReactNode;
-}
+type InputFileProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
+  allowedFileTypes?: FileType[];
+  fileList?: FileList;
+  onFileListChange?: (fileList: FileList | null) => void;
+};
 
-export const InputFile: FC<IProps> = ({
-  name,
-  allowedFileTypes = FileType.zip,
-  onFileLoaded,
-  disabled = false,
-  maxBytesFileSize = 10 ** 30,
-  children = <span>.zip</span>,
+export const InputFile: FC<InputFileProps> = ({
+  allowedFileTypes,
+  disabled,
+  onFileListChange,
+  fileList = null,
+  ...props
 }) => {
-  const [file, setFile] = useState<File>();
-  const [isDisabled, setDisabled] = useState(disabled);
-  const [isAttachError, setAttachError] = useState(false);
-  const [isLoading, setLoading] = useState(false);
-  const inputRef: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [title, setTitle] = useState<string | null>(null);
+  const [isError, setIsError] = useState(false);
+
+  const { isDraggable, ref } = useDrop();
+  ref.current = document;
 
   useEffect(() => {
-    if (isLoading) {
-      setAttachError(false);
-      setFile(undefined);
-      setDisabled(true);
+    if (inputRef.current) {
+      inputRef.current.files = fileList;
+      inputRef.current.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  }, [fileList]);
+
+  const inputChangeHandler: ChangeEventHandler<HTMLInputElement> = (e) => {
+    isError && setIsError(false);
+    const files = e.target.files;
+    if (!files || !files.length) {
+      setTitle(null);
     } else {
-      setDisabled(false);
+      const names: string[] = [];
+      for (const file of files) {
+        if (!allowedFileTypes?.some((type) => type === file.name.split('.')[1])) {
+          setIsError(true);
+          return;
+        }
+        names.push(file.name);
+      }
+      setTitle(names.join(', '));
     }
-  }, [isLoading]);
-
-  useEffect(() => {
-    const files = inputRef?.current?.files;
-    if (files) {
-      handleFileChange(files[0]);
-    }
-  }, [inputRef?.current?.files, inputRef?.current?.value]);
-
-  const inputId = useId();
-
-  const { isDraggable: isDragging, ref: windowRef } = useDrop();
-  if (window) {
-    windowRef.current = window.document;
-  }
-
-  const getLabelText = () => {
-    let text = 'Выберите или перетащите файл';
-    if (isLoading) {
-      text = 'Загружаем файл';
-    } else if (isDisabled) {
-      text = 'Прикрепить файл нельзя';
-    } else if (isDragging) {
-      text = 'Перетащите файл сюда';
-    } else if (isAttachError) {
-      text = 'Не получилось прикрепить файл';
-    }
-    return text;
+    onFileListChange?.(files);
   };
 
-  const getFileSizeText = (file: File): string => {
-    const fileSize = file.size;
-    if (fileSize < 10e5) {
-      return `${Math.round(fileSize / 2 ** 10)} КБ`;
-    } else {
-      return `${Math.round((fileSize / 2 ** 20) * 10) / 10} МБ`;
+  const fileDropHandler: DragEventHandler<HTMLInputElement> = (e) => {
+    const { files } = e.dataTransfer;
+    if (inputRef.current) {
+      inputRef.current.files = files;
+      inputRef.current.dispatchEvent(new Event('change', { bubbles: true }));
     }
-  };
-
-  const handleFileChange = (file: File) => {
-    if (!file) {
-      return;
-    }
-
-    setFile(undefined);
-    const fileType: string | undefined = file.name.split('.').pop();
-    if (
-      fileType === undefined ||
-      (allowedFileTypes & FileType[fileType as keyof typeof FileType]) === 0
-    ) {
-      setAttachError(true);
-      return;
-    }
-
-    if (file.size > maxBytesFileSize) {
-      setAttachError(true);
-      return;
-    }
-
-    setLoading(true);
-    onFileLoaded(file);
-    if (inputRef.current?.value) {
-      inputRef.current.value = '';
-    }
-    setFile(file);
-    setLoading(false);
   };
 
   return (
-    <div className='h-9 w-full items-center'>
-      <label
-        htmlFor={inputId}
-        onDrop={(e) => {
-          e.stopPropagation();
-          e.preventDefault();
-          if (e.dataTransfer.files) {
-            handleFileChange(e.dataTransfer.files[0]);
-          }
-        }}
-        aria-disabled={isDisabled}
+    <div
+      onDrop={fileDropHandler}
+      onClick={() => inputRef.current?.click()}
+      className={cn(
+        'flex h-9 w-full cursor-pointer items-center justify-stretch gap-2.5 rounded-[0.5rem] border border-white/10 text-[#B3B3B3] transition-colors [&:not(:has(.reset:hover))]:hover:bg-white/10',
+        isError && 'border-destructive text-destructive',
+        disabled && 'opacity-50',
+        isDraggable && 'border-primary text-primary'
+      )}
+    >
+      <div
         className={cn(
-          'h-9',
-          'text-text-secondary',
-          'text-sm',
-          'py-1.5',
-          'px-4',
-          'rounded-lg',
-          'border-grey-500',
-          'border',
-          'cursor-pointer',
-          'flex',
-          'select-none',
-          'gap-3',
-          'aria-disabled:opacity-50',
-          'aria-disabled:cursor-not-allowed',
-          'transition',
-          isAttachError && ['text-accent-destructive-300', 'border-accent-destructive-400'],
-          isDragging && ['text-accent-primary-300', 'border-accent-primary-400'],
-          file && ['bg-white bg-opacity-5', 'text-text-primary'],
-          !isDisabled && 'hover:bg-grey-600'
+          '-m-[1px] flex grow items-center gap-4 self-stretch rounded-[0.5rem] px-4 py-[0.5625rem]',
+          title && 'pr-0'
         )}
       >
-        <Icon
-          type={isLoading ? 'loading' : file?.name ? 'archive' : 'attach'}
-          className={cn(
-            'text-text-secondary',
-            { 'text-accent-destructive-300': isAttachError },
-            { 'text-accent-primary-300': isDragging }
-          )}
-        />
-        {!file ? getLabelText() : file.name}
-
-        <div className='text-text-secondary ml-auto mr-0 flex gap-4'>
-          {file && <span>{getFileSizeText(file)}</span>}
-          {(file && (
-            <CloseButton
-              onClick={(e) => {
-                setFile(undefined);
-                if (inputRef.current?.value) {
-                  inputRef.current.value = '';
-                }
-                e.preventDefault();
-              }}
-            />
-          )) ||
-            (!isAttachError && !isLoading && children)}
-        </div>
-      </label>
+        <Icon type='attach' className='text-inherit' />
+        <p className='grow text-base'>
+          {(disabled && 'Прикрепить файл нельзя') ||
+            (isDraggable && 'Перетащите файл сюда') ||
+            title ||
+            'Выберите или перетащите файл'}
+        </p>
+        {allowedFileTypes && <p>{allowedFileTypes.join(', ')}</p>}
+      </div>
+      {title && (
+        <button
+          disabled={disabled}
+          type='button'
+          onClick={(e) => {
+            e.stopPropagation();
+            if (inputRef.current) {
+              inputRef.current.value = '';
+              inputRef.current.files = new DataTransfer().files;
+              inputRef.current.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+          }}
+          className='reset mr-2.5 rounded-[0.25rem] p-1.5 transition-colors hover:bg-white/5'
+        >
+          <Icon className='h-3 w-3 text-inherit' type='remove' />
+        </button>
+      )}
       <input
-        name={name}
-        id={inputId}
+        disabled={disabled}
         ref={inputRef}
-        onChange={(e) => setFile(e.target.files?.[0])}
-        disabled={isDisabled}
+        onChange={(e) => {
+          inputChangeHandler(e);
+        }}
         type='file'
+        accept={allowedFileTypes ? allowedFileTypes.map((type) => `.${type}`).join() : undefined}
         className='hidden'
+        {...props}
       />
     </div>
   );

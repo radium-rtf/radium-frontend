@@ -8,7 +8,7 @@ export async function refreshAccessToken(token: JWT): Promise<JWT> {
       refreshToken: token.refreshToken,
     };
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/auth/refresh`, {
       method: 'POST',
       body: JSON.stringify(body),
     });
