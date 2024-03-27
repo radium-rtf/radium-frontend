@@ -9,7 +9,7 @@ export type { AnswerResponseDto } from './model/AnswerResponseDto';
 export type { CodeSectionResponseDto } from './model/CodeSectionResponseDto';
 export type { PermutationSectionResponseDto } from './model/PermutationSectionResponseDto';
 export type { MappingSectionResponseDto } from './model/MappingSectionResponseDto';
-export type { CourseMediaSectionResponseDto as MediaSectionResponseDto } from './model/MediaSectionResponceDto';
+export type { MediaSectionResponseDto } from './model/MediaSectionResponceDto';
 // types
 export type { AllSectionsResponseDto } from './model/AllSectionsResponseDto';
 

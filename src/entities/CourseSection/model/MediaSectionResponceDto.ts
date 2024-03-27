@@ -1,6 +1,6 @@
 import { SectionResponseDto } from './CourseSectionResponseDto';
 
-export interface CourseMediaSectionResponseDto extends SectionResponseDto {
+export interface MediaSectionResponseDto extends SectionResponseDto {
   type: 'media';
   file: {
     location: string;
