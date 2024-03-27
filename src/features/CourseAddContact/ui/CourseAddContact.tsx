@@ -39,7 +39,9 @@ export const CourseAddContact: FC<CourseAddContactProps> = ({ courseId }) => {
   };
 
   useEffect(() => {
-    if (!isFormOpen) return;
+    if (!isFormOpen) {
+      return;
+    }
 
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;

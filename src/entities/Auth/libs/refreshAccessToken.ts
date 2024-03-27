@@ -30,8 +30,6 @@ export async function refreshAccessToken(token: JWT): Promise<JWT> {
       expiresIn: refreshedUser.expiresIn,
     };
   } catch (error) {
-    console.error(error);
-
     return {
       ...token,
       error: 'RefreshAccessTokenError',

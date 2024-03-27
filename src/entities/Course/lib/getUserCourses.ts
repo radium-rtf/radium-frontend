@@ -5,7 +5,9 @@ import { AccountCoursesResponseDto } from '../model/AccountCoursesResponseDto';
 export const getUserCourses = async (): Promise<AccountCoursesResponseDto> => {
   const session = await getServerSession(authOptions);
 
-  if (!session) throw Error('Not authenticated');
+  if (!session) {
+    throw Error('Not authenticated');
+  }
 
   return fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/account/courses`, {
     headers: {

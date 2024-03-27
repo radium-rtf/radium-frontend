@@ -20,10 +20,14 @@ export const authOptions: NextAuthOptions = {
         password: {},
       },
       async authorize(credentials) {
-        if (!credentials) return null;
+        if (!credentials) {
+          return null;
+        }
         const response = await Login(credentials);
 
-        if (!response) return null;
+        if (!response) {
+          return null;
+        }
 
         return {
           // User data
@@ -47,10 +51,14 @@ export const authOptions: NextAuthOptions = {
         verificationCode: {},
       },
       async authorize(credentials) {
-        if (!credentials) return null;
+        if (!credentials) {
+          return null;
+        }
         const response = await VerifyRegistration(credentials);
 
-        if (!response) return null;
+        if (!response) {
+          return null;
+        }
 
         return {
           // User data

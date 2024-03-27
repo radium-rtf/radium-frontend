@@ -5,7 +5,9 @@ import { IErrors } from '../interfaces/IErrors';
 export const uploadFile = async (formData: FormData): Promise<UploadFileResponseDto | IErrors> => {
   const session = await getSession();
 
-  if (!session) throw Error('Not authenticated');
+  if (!session) {
+    throw Error('Not authenticated');
+  }
 
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/upload`, {
@@ -16,7 +18,9 @@ export const uploadFile = async (formData: FormData): Promise<UploadFileResponse
       body: formData,
     });
 
-    if (response.status !== 201) throw Error('Not authorized');
+    if (response.status !== 201) {
+      throw Error('Not authorized');
+    }
 
     return response.json();
   } catch (error) {

@@ -1,5 +1,7 @@
 export const newPasswordValidation = (value: string): boolean | string => {
-  if (value === '') return true;
+  if (value === '') {
+    return true;
+  }
   if (!value.match(/[a-zA-z]/g)) {
     return 'В\u00a0пароле\u00a0нет\u00a0букв!';
   }

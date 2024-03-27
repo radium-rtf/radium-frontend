@@ -5,7 +5,9 @@ import { IErrors } from '@/shared';
 
 export const getCourse = async (courseId: string): Promise<CourseResponseDto | IErrors> => {
   const session = await getServerSession(authOptions);
-  if (!session) return 'Not authenticated';
+  if (!session) {
+    return 'Not authenticated';
+  }
 
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/course/${courseId}`, {
@@ -13,7 +15,9 @@ export const getCourse = async (courseId: string): Promise<CourseResponseDto | I
         Authorization: `Bearer ${session.user.accessToken}`,
       },
     });
-    if (response.status !== 200) return 'Not authorized';
+    if (response.status !== 200) {
+      return 'Not authorized';
+    }
 
     return response.json();
   } catch (error) {

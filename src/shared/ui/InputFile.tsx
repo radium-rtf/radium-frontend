@@ -40,6 +40,7 @@ export const InputFile: FC<InputFileProps> = ({
     }
   }, [fileList]);
 
+
   const inputChangeHandler: ChangeEventHandler<HTMLInputElement> = (e) => {
     isError && setIsError(false);
     const files = e.target.files;

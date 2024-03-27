@@ -11,7 +11,9 @@ export const updateSchema = z.object({
       .min(3, 'Необходим как минимум 2 ответа')
       .refine((answers) => {
         for (let i = 0; i < answers.length - 1; i++) {
-          if (answers[i].value === '') return false;
+          if (answers[i].value === '') {
+            return false;
+          }
         }
         return true;
       }, 'Пустой ответ!'),
@@ -22,7 +24,9 @@ export const updateSchema = z.object({
       .min(3, 'Необходим как минимум 2 варинта')
       .refine((answers) => {
         for (let i = 0; i < answers.length - 1; i++) {
-          if (answers[i].value === '') return false;
+          if (answers[i].value === '') {
+            return false;
+          }
         }
         return true;
       }, 'Пустой вариант!'),
