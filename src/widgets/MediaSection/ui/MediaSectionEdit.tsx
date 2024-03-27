@@ -64,6 +64,7 @@ export const MediaSectionEdit: FC<MediaSectionEditProps> = ({ sectionData }) => 
     defaultValues: {
       media: {
         url: sectionData.file.location,
+        file: null,
       },
     },
   });
@@ -122,8 +123,6 @@ export const MediaSectionEdit: FC<MediaSectionEditProps> = ({ sectionData }) => 
       document.body.removeEventListener('keydown', listener);
     };
   }, [isEditing]);
-
-  // console.log(errors);
 
   return (
     <Card
