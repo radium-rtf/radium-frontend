@@ -2,7 +2,7 @@ import { emptyApi } from '@/shared';
 import { UpdateCourseTextSectionRequestDto } from '../model/UpdateCourseTextSectionRequestDto';
 import { UpdateCourseMediaSectionRequestDto } from '../model/UpdateCourseMediaSectionRequestDto';
 import { CourseTextSectionResponseDto } from '../model/TextSectionResponseDto';
-import { CourseMediaSectionResponseDto } from '../model/MediaSectionResponceDto';
+import { MediaSectionResponseDto } from '../model/MediaSectionResponceDto';
 import { AnswerResponseDto } from '../model/AnswerResponseDto';
 import { AnswerCourseChoiceSectionRequestDto } from '../model/AnswerCourseChoiceSectionRequestDto';
 import { ChoiceSectionResponseDto } from '../model/ChoiceSectionResponseDto';
@@ -45,7 +45,7 @@ const sectionApi = emptyApi.injectEndpoints({
           : [{ type: 'pages', id: 'LIST' }, 'pages'],
     }),
     updateCourseMediaSection: builder.mutation<
-      CourseMediaSectionResponseDto,
+      MediaSectionResponseDto,
       UpdateCourseMediaSectionRequestDto
     >({
       query: ({ sectionId, ...body }) => ({

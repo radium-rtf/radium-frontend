@@ -71,7 +71,7 @@ export const MediaSectionEdit: FC<MediaSectionEditProps> = ({ sectionData }) => 
   const [updateMediaSection] = useUpdateCourseMediaSectionMutation();
   const onSubmitHandler: SubmitHandler<updateSchemaType> = async (data) => {
     let fileUrl: string = '';
-    if (mediaItem == 'link') {
+    if (mediaItem === 'link') {
       const response = await updateMediaSection({
         sectionId: sectionData.id,
         ...data,
@@ -87,7 +87,6 @@ export const MediaSectionEdit: FC<MediaSectionEditProps> = ({ sectionData }) => 
         const fd = new FormData();
         fd.append('file', file);
         const fileResponse = await uploadFile(fd);
-        console.log(fileResponse);
 
         if (typeof fileResponse !== 'string') {
           fileUrl = fileResponse.location;
@@ -152,14 +151,14 @@ export const MediaSectionEdit: FC<MediaSectionEditProps> = ({ sectionData }) => 
           {isEditing && (
             <Tabs>
               <Tab
-                isSelected={mediaItem == 'file'}
+                isSelected={mediaItem === 'file'}
                 onClick={() => isEditing && setMediaItem('file')}
                 icon='attach'
               >
                 Файл
               </Tab>
               <Tab
-                isSelected={mediaItem == 'link'}
+                isSelected={mediaItem === 'link'}
                 onClick={() => isEditing && setMediaItem('link')}
                 icon='link'
               >
@@ -168,7 +167,7 @@ export const MediaSectionEdit: FC<MediaSectionEditProps> = ({ sectionData }) => 
             </Tabs>
           )}
 
-          {isEditing && mediaItem == 'link' && (
+          {isEditing && mediaItem === 'link' && (
             <Controller
               control={control}
               name='media.url'
@@ -186,7 +185,7 @@ export const MediaSectionEdit: FC<MediaSectionEditProps> = ({ sectionData }) => 
               )}
             />
           )}
-          {isEditing && mediaItem == 'file' && (
+          {isEditing && mediaItem === 'file' && (
             <Controller
               control={control}
               name='media.file'
