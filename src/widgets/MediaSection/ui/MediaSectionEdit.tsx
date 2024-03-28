@@ -73,9 +73,14 @@ export const MediaSectionEdit: FC<MediaSectionEditProps> = ({ sectionData }) => 
   const onSubmitHandler: SubmitHandler<updateSchemaType> = async (data) => {
     let fileUrl: string = '';
     if (mediaItem === 'link') {
+      if (!data.media.url) {
+        return setError('root', { message: 'Введите ссылку!' });
+      }
       const response = await updateMediaSection({
         sectionId: sectionData.id,
-        ...data,
+        media: {
+          url: data.media.url,
+        },
       });
       if ('data' in response) {
         setIsEditing(false);
@@ -84,16 +89,17 @@ export const MediaSectionEdit: FC<MediaSectionEditProps> = ({ sectionData }) => 
       }
     } else {
       const file = data.media.file;
-      if (file) {
-        const fd = new FormData();
-        fd.append('file', file);
-        const fileResponse = await uploadFile(fd);
+      if (!file) {
+        return setError('root', { message: 'Выберите файл!' });
+      }
+      const fd = new FormData();
+      fd.append('file', file);
+      const fileResponse = await uploadFile(fd);
 
-        if (typeof fileResponse !== 'string') {
-          fileUrl = fileResponse.location;
-        } else {
-          return setError('root', { message: 'Файл не загружен' });
-        }
+      if (typeof fileResponse !== 'string') {
+        fileUrl = fileResponse.location;
+      } else {
+        return setError('root', { message: 'Файл не загружен!' });
       }
       const response = await updateMediaSection({
         sectionId: sectionData.id,
