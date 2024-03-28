@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const updateSchema = z.object({
   media: z.object({
-    url: z.string().min(1, 'Введите ссылку!'),
+    url: z.string(),
     file: z.instanceof(File).nullable(),
   }),
 });
