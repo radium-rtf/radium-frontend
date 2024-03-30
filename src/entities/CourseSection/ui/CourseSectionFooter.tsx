@@ -4,7 +4,6 @@ import { useFormContext } from 'react-hook-form';
 import { AllSectionsResponseDto } from '../model/AllSectionsResponseDto';
 import { Button, CardFooter, Icon, cn, getNoun } from '@/shared';
 import { useLazyGetCourseQuestionAnswerQuery } from '../api/courseSectionApi';
-import { useState } from 'react';
 
 type CourseSectionFooterProps<TFormState extends object> = {
   sectionData: AllSectionsResponseDto;
@@ -26,9 +25,9 @@ export const CourseSectionFooter = <TFormState extends object>({
   const [getAnswer] = useLazyGetCourseQuestionAnswerQuery();
   const {
     reset,
-    formState: { isSubmitting, isValid: valid, isSubmitSuccessful, isSubmitted },
+    trigger,
+    formState: { isSubmitting, isValid, isSubmitSuccessful, isSubmitted },
   } = useFormContext<TFormState>();
-  const [isValid, setIsValid] = useState<boolean>(!!valid);
 
   return (
     <CardFooter
@@ -71,7 +70,7 @@ export const CourseSectionFooter = <TFormState extends object>({
           onClick={async () => {
             const answer = await getAnswer({ sectionId: sectionData.id });
             answer.data && onAnswer?.(answer.data);
-            setIsValid(true);
+            trigger();
           }}
         >
           <Icon type='wand' />
