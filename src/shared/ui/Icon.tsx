@@ -66,7 +66,8 @@ export type Icon =
   | 'comment'
   | 'hashtag'
   | 'telegram'
-  | 'bug';
+  | 'bug'
+  | 'wand';
 
 const icons: Record<Icon, ReactNode> = {
   null: null,
@@ -742,6 +743,21 @@ const icons: Record<Icon, ReactNode> = {
         strokeLinecap='round'
         strokeLinejoin='round'
       />
+    </g>
+  ),
+  wand: (
+    <g className='text-inherit'>
+      <path
+        d='M11.5 4.5L14.5 1.5C15.0523 0.947715 15.9477 0.947715 16.5 1.5V1.5C17.0523 2.05228 17.0523 2.94771 16.5 3.5L13.5 6.5M11.5 4.5L1.5 14.5C0.947716 15.0523 0.947715 15.9477 1.5 16.5V16.5C2.05228 17.0523 2.94772 17.0523 3.5 16.5L13.5 6.5M11.5 4.5L13.5 6.5'
+        stroke='#E6E6E6'
+      />
+      <path
+        d='M2.79814 1.90372L3.5 0.5L4.20186 1.90372C4.39539 2.29077 4.70923 2.60461 5.09628 2.79814L6.5 3.5L5.09628 4.20186C4.70923 4.39539 4.39539 4.70923 4.20186 5.09628L3.5 6.5L2.79814 5.09628C2.60461 4.70923 2.29077 4.39539 1.90372 4.20186L0.5 3.5L1.90372 2.79814C2.29077 2.60461 2.60461 2.29077 2.79814 1.90372Z'
+        stroke='#E6E6E6'
+        stroke-linejoin='round'
+      />
+      <circle cx='8' cy='1' r='1' fill='#E6E6E6' />
+      <circle cx='1' cy='10' r='1' fill='#E6E6E6' />
     </g>
   ),
 };
