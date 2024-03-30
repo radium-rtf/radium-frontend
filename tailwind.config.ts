@@ -5,6 +5,12 @@ const config: Config = {
   darkMode: ['class'],
   content: ['./src/**/*.{ts,tsx}'],
   theme: {
+    screens: {
+      sm: '640px',
+      md: '816px',
+      lg: '1208px',
+      xl: '1376px',
+    },
     fontSize: {
       xs: '0.5rem',
       sm: '0.625rem',
@@ -15,7 +21,11 @@ const config: Config = {
     },
     container: {
       center: true,
-      padding: '2rem',
+      padding: '3rem',
+      screens: {
+        md: '784px',
+        lg: '1176px',
+      },
     },
     extend: {
       fontFamily: {
@@ -105,6 +115,36 @@ const config: Config = {
           DEFAULT: 'hsl(var(--card))',
           hover: 'hsl(var(--card-hover))',
           foreground: 'hsl(var(--card-foreground))',
+        },
+        // New
+        backgroundHeader: 'hsl(var(--background-header))',
+        backgroundPage: 'hsl(var(--background-page))',
+
+        outlineGeneral: 'hsl(var(--outline-general))',
+
+        whiteLight: 'hsl(var(--white-light))',
+        whiteMedium: 'hsl(var(--white-medium))',
+        whiteHard: 'hsl(var(--white-hard))',
+        whiteHeavy: 'hsl(var(--white-heavy))',
+
+        blackLight: 'hsl(var(--black-light))',
+        blackMedium: 'hsl(var(--black-medium))',
+        blackHard: 'hsl(var(--black-hard))',
+
+        'accent-secondary': {
+          DEFAULT: 'hsl(var(--accent-secondary-regular))',
+          foreground: 'hsl(var(--accent-secondary-foreground))',
+          disabled: 'hsl(var(--accent-secondary-disabled))',
+          hovered: 'hsl(var(--accent-secondary-hovered))',
+          pressed: 'hsl(var(--accent-secondary-pressed))',
+        },
+
+        'accent-destructive': {
+          DEFAULT: 'hsl(var(--accent-secondary-regular))',
+          foreground: 'hsl(var(--accent-secondary-foreground))',
+          disabled: 'hsl(var(--accent-secondary-disabled))',
+          hovered: 'hsl(var(--accent-secondary-hovered))',
+          pressed: 'hsl(var(--accent-secondary-pressed))',
         },
       },
       borderRadius: {

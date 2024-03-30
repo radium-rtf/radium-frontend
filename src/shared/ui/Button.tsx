@@ -1,66 +1,45 @@
-import { ButtonHTMLAttributes, FC } from 'react';
+import { cn } from '@/shared';
 import { Slot } from '@radix-ui/react-slot';
-import { cn } from '../utils/cn';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { ButtonHTMLAttributes, forwardRef } from 'react';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  color?: 'accent' | 'destructive' | 'outlined';
-  asChild?: boolean;
-}
+const buttonVariants = cva(
+  'font-NTSomic shrink-0 text-base leading-tight ring-offset-background focus-visible:ring-ring inline-flex items-center justify-center whitespace-nowrap rounded-[0.5rem] border border-blackMedium font-normal leading-tight transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  {
+    variants: {
+      variant: {
+        default:
+          'bg-accent-secondary text-accent-secondary-foreground hover:bg-accent-secondary-hovered active:bg-accent-secondary-pressed',
+        destructive:
+          'bg-accent-destructive text-accent-destructive-foreground hover:bg-accent-destructive-hovered active:bg-accent-destructive-pressed',
+        outline:
+          'border border-outlineGeneral bg-whiteLight hover:bg-whiteMedium active:bg-blackLight',
+      },
+      size: {
+        default: 'h-9 px-4 py-2',
+        wide: 'w-64 h-9 px-4 py-2 justify-between',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
+    },
+  }
+);
 
-export const Button: FC<ButtonProps> = ({
-  color = 'outlined',
-  asChild = false,
-  children,
-  className,
-  ...props
-}) => {
-  const Comp = asChild ? Slot : 'button';
-  return (
-    <Comp
-      className={cn(
-        [
-          'text-foreground-default',
-          'inline-flex',
-          'cursor-pointer',
-          'items-center',
-          'gap-4',
-          'rounded-lg',
-          'border',
-          'border-white/10',
-          'bg-white/5',
-          'px-4',
-          'py-2',
-          'font-NTSomic',
-          'text-[0.8125rem]',
-          'leading-tight',
-          '-outline-offset-1',
-          'outline-white',
-          'transition-colors',
-          '[&:not(:disabled)]:hover:bg-white/10',
-          'focus-visible:outline',
-          '[&:not(:disabled)]:active:bg-black/5',
-          'disabled:cursor-not-allowed',
-          'disabled:opacity-50',
-        ],
-        color === 'accent' && [
-          'bg-secondary-default',
-          'text-secondary-foreground',
-          'border-black/10',
-          '[&:not(:disabled)]:hover:bg-secondary-hovered',
-          '[&:not(:disabled)]:active:bg-secondary-pressed',
-        ],
-        color === 'destructive' && [
-          'bg-destructive-default',
-          'text-destructive-foreground',
-          'border-black/20',
-          '[&:not(:disabled)]:hover:bg-destructive-hovered',
-          '[&:not(:disabled)]:active:bg-destructive-pressed',
-        ],
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </Comp>
-  );
-};
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
+  VariantProps<typeof buttonVariants> & {
+    asChild?: boolean;
+  };
+
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : 'button';
+    return (
+      <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+    );
+  }
+);
+Button.displayName = 'Button';
+
+export { Button, buttonVariants };

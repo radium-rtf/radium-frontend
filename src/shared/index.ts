@@ -4,12 +4,13 @@ export { getNoun } from './utils/nouns';
 
 // Components
 export { Radio } from './ui/Radio';
-export { Button } from './ui/buttonNew';
+export { Button, buttonVariants } from './ui/Button';
 export { Toggle } from './ui/Toggle';
 export { Checkbox } from './ui/checkboxNew';
 export { TextArea } from './ui/TextArea';
 export { Input } from './ui/inputNew';
 export { Icon } from './ui/Icon';
+export { SmallIcon } from './ui/SmallIcon';
 export { IconButton } from './ui/IconButton';
 export { Progress } from './ui/Progress';
 export {
@@ -61,7 +62,6 @@ export { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 export { RadioGroup, RadioGroupItem } from './ui/radio-group';
 
 // Interfaces
-export type { IIcon } from './ui/Icon';
 export type { ITab } from './ui/Tab';
 export type { UploadFileResponseDto } from './model/uploadFileResponseDto';
 
