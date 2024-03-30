@@ -27,6 +27,7 @@ import { coursePageApi } from '@/entities/CoursePage';
 import { AllSectionsResponseDto } from '../model/AllSectionsResponseDto';
 import { CourseSectionChangeOrderRequestDto } from '../model/CourseSectionChangeOrderRequestDto';
 import { arrayMove } from '@dnd-kit/sortable';
+import { GetCourseQuestionAnswerResponseDto } from '../model/GetCourseQuestionAnswerResponseDto';
 
 const sectionApi = emptyApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -450,6 +451,14 @@ const sectionApi = emptyApi.injectEndpoints({
         }
       },
     }),
+    getCourseQuestionAnswer: builder.query<
+      GetCourseQuestionAnswerResponseDto,
+      { sectionId: string }
+    >({
+      query: ({ sectionId }) => ({
+        url: `/section/${sectionId}/answer`,
+      }),
+    }),
   }),
   overrideExisting: true,
 });
@@ -471,4 +480,6 @@ export const {
   useUpdateCourseAnswerSectionMutation,
   useAnswerCourseCodeSectionMutation,
   useChangeCourseSectionOrderMutation,
+  useGetCourseQuestionAnswerQuery,
+  useLazyGetCourseQuestionAnswerQuery,
 } = sectionApi;

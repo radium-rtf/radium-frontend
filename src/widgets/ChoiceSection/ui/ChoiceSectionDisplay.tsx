@@ -33,6 +33,7 @@ export const ChoiceSectionDisplay: FC<ChoiceSectionDisplayProps> = ({ sectionDat
     reset,
     control,
     setError,
+    setValue,
     clearErrors,
     handleSubmit,
     formState: { errors },
@@ -96,6 +97,8 @@ export const ChoiceSectionDisplay: FC<ChoiceSectionDisplayProps> = ({ sectionDat
             sectionData={sectionData}
             resetObject={{ choice: { answer: '' } }}
             errorMessage={errors.root?.message || errors.choice?.message}
+            isQuestion
+            onAnswer={({ Answer }) => Answer && setValue('choice.answer', Answer)}
           />
         </form>
       </Card>

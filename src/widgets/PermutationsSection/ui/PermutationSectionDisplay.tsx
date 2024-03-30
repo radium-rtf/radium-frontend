@@ -56,6 +56,7 @@ export const PermutationsSectionDisplay: FC<PermutationSectionDisplayProps> = ({
     control,
     setError,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = form;
 
@@ -130,6 +131,14 @@ export const PermutationsSectionDisplay: FC<PermutationSectionDisplayProps> = ({
             sectionData={sectionData}
             resetObject={DEFAULT_STATE}
             errorMessage={errors.root?.message || errors.permutation?.answer?.message}
+            isQuestion
+            onAnswer={({ Answers }) =>
+              Answers &&
+              setValue(
+                'permutation.answer',
+                Answers.map((value) => ({ value }))
+              )
+            }
           />
         </form>
       </Card>

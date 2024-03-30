@@ -3,12 +3,16 @@
 import { useFormContext } from 'react-hook-form';
 import { AllSectionsResponseDto } from '../model/AllSectionsResponseDto';
 import { Button, CardFooter, Icon, cn, getNoun } from '@/shared';
+import { useLazyGetCourseQuestionAnswerQuery } from '../api/courseSectionApi';
+import { useState } from 'react';
 
 type CourseSectionFooterProps<TFormState extends object> = {
   sectionData: AllSectionsResponseDto;
   resetObject?: TFormState;
   errorMessage?: string | null;
   isTask?: boolean;
+  isQuestion?: boolean;
+  onAnswer?: (answers: { Answer?: string; Answers?: string[] }) => void;
 };
 
 export const CourseSectionFooter = <TFormState extends object>({
@@ -16,11 +20,15 @@ export const CourseSectionFooter = <TFormState extends object>({
   resetObject,
   errorMessage,
   isTask,
+  isQuestion,
+  onAnswer,
 }: CourseSectionFooterProps<TFormState>) => {
+  const [getAnswer] = useLazyGetCourseQuestionAnswerQuery();
   const {
     reset,
-    formState: { isSubmitting, isValid, isSubmitSuccessful, isSubmitted },
+    formState: { isSubmitting, isValid: valid, isSubmitSuccessful, isSubmitted },
   } = useFormContext<TFormState>();
+  const [isValid, setIsValid] = useState<boolean>(!!valid);
 
   return (
     <CardFooter
@@ -55,6 +63,19 @@ export const CourseSectionFooter = <TFormState extends object>({
             `${sectionData.maxScore} ${getNoun(sectionData.maxScore, 'балл', 'балла', 'баллов')}`}
           {sectionData.verdict !== '' && `${sectionData.score} / ${sectionData.maxScore} баллов`}
         </span>
+      )}
+      {isQuestion && (
+        <Button
+          type='button'
+          variant='outline'
+          onClick={async () => {
+            const answer = await getAnswer({ sectionId: sectionData.id });
+            answer.data && onAnswer?.(answer.data);
+            setIsValid(true);
+          }}
+        >
+          <Icon type='wand' />
+        </Button>
       )}
       <Button type='button' variant='outline' onClick={() => reset(resetObject)}>
         <Icon type='undo' />
