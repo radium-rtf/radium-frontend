@@ -29,6 +29,7 @@ type CourseInfoEditProps = {
   shortDescription: string;
   slug: string;
   isPublished: boolean;
+  isAuthor: boolean;
 };
 
 export const CourseInfoEdit: FC<CourseInfoEditProps> = ({
@@ -37,6 +38,7 @@ export const CourseInfoEdit: FC<CourseInfoEditProps> = ({
   shortDescription,
   slug,
   isPublished,
+  isAuthor,
 }) => {
   const [updateCourseInfo] = useUpdateCourseBriefMutation();
   const [publishCourse] = usePublishCourseMutation();
@@ -68,7 +70,7 @@ export const CourseInfoEdit: FC<CourseInfoEditProps> = ({
       form.setError('root', { message: 'Не удалось обновить данные' });
     }
 
-    if (isPublished !== (newIsPublished === 'on')) {
+    if (isAuthor && isPublished !== (newIsPublished === 'on')) {
       const publishResponse = await publishCourse(courseId);
       if (!('data' in publishResponse)) {
         form.setError('root', { message: 'Не удалось опубликовать курс' });
@@ -95,23 +97,25 @@ export const CourseInfoEdit: FC<CourseInfoEditProps> = ({
         <CardContent>
           <div className='mx-6 h-[1px] bg-whiteMedium' />
         </CardContent>
-        <CardContent>
-          <Controller
-            control={form.control}
-            name='isPublished'
-            render={({ field: { value, onChange, disabled } }) => (
-              <Select disabled={disabled} onValueChange={onChange} value={value}>
-                <SelectTrigger icon='alert' placeholder='Hello'>
-                  <SelectValue className='bg-black' />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value={'off'}>Скрыт для всех</SelectItem>
-                  <SelectItem value={'on'}>Доступен для всех</SelectItem>
-                </SelectContent>
-              </Select>
-            )}
-          />
-        </CardContent>
+        {isAuthor && (
+          <CardContent>
+            <Controller
+              control={form.control}
+              name='isPublished'
+              render={({ field: { value, onChange, disabled } }) => (
+                <Select disabled={disabled} onValueChange={onChange} value={value}>
+                  <SelectTrigger icon='alert' placeholder='Hello'>
+                    <SelectValue className='bg-black' />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value={'off'}>Скрыт для всех</SelectItem>
+                    <SelectItem value={'on'}>Доступен для всех</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+          </CardContent>
+        )}
         <CardContent>
           <Input icon='link' placeholder='Адрес' {...form.register('slug')} />
         </CardContent>
