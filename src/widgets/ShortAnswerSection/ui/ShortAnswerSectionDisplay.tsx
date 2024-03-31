@@ -125,7 +125,7 @@ export const ShortAnswerSectionDisplay: FC<ShortAnswerSectionDisplayProps> = ({ 
             variant='outline'
             onClick={() => reset({ shortanswer: { answer: '' } })}
           >
-            <Icon type='reset' />
+            <Icon type='undo' />
           </Button>
           <Button
             disabled={

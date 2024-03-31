@@ -82,7 +82,7 @@ export const Checkbox: FC<IProps> = forwardRef<HTMLInputElement, IProps>(
           </svg>
         </div>
         {children && (
-          <span className='text-text-primary select-none text-[0.8125rem]'>{children}</span>
+          <span className='select-none text-[0.8125rem] text-text-primary'>{children}</span>
         )}
       </label>
     );

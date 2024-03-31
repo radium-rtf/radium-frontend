@@ -39,7 +39,7 @@ export const Comment: FC<IProps> = ({ comment, date, name, avatar }) => {
           {date}
         </span>
       </div>
-      <span className='text-text-primary text-[0.8125rem] font-normal leading-[normal]'>
+      <span className='text-[0.8125rem] font-normal leading-[normal] text-text-primary'>
         {comment}
       </span>
     </main>

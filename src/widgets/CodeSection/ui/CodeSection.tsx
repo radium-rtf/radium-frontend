@@ -103,7 +103,7 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
                       defaultValue={sectionData.languages?.[0] || 'javascript'}
                     >
                       <SelectTrigger>
-                        <SelectValue placeholder={'Выберите язык'} />
+                        <SelectValue />
                       </SelectTrigger>
                       <SelectContent position='popper'>
                         {(sectionData.languages || ['javascript', 'cpp']).map((lang) => (

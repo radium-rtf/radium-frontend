@@ -1,6 +1,6 @@
 'use client';
 import { FC } from 'react';
-import { Icon } from '@/shared';
+import { SmallIcon } from '@/shared';
 import { useDeleteCourseContactMutation } from '@/entities/Course';
 
 interface CourseDeleteContactProps {
@@ -17,7 +17,7 @@ export const CourseDeleteContact: FC<CourseDeleteContactProps> = ({ contactId, c
 
   return (
     <button onClick={onClickHandler} type='button' className='relative'>
-      <Icon type='remove' className='h-3 text-primary' />
+      <SmallIcon type='remove' className='h-3 text-primary' />
     </button>
   );
 };

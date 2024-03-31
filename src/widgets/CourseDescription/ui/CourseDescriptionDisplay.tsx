@@ -9,7 +9,7 @@ interface CourseDescriptionDisplayProps {
 
 export const CourseDescriptionDisplay: FC<CourseDescriptionDisplayProps> = ({ description }) => {
   return (
-    <Card className='gap-6'>
+    <Card className='gap-6 lg:grow'>
       <CardHeader className='flex-row items-center gap-4 space-y-0'>
         <Icon type='question' className='text-primary' />
         <CardTitle className='text-[1rem]'>О курсе</CardTitle>

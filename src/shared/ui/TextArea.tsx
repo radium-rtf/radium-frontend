@@ -45,7 +45,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
             'resize',
             'transition-colors',
             'max-w-full',
-            'placeholder:text-foreground-secondary',
+            'placeholder:text-text-secondary',
             'disabled:opacity-50',
             '[&:not(:disabled)]:hover:bg-white/5',
             '[&:not(:disabled)]:focus:bg-black/10',

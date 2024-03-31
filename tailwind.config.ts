@@ -5,12 +5,6 @@ const config: Config = {
   darkMode: ['class'],
   content: ['./src/**/*.{ts,tsx}'],
   theme: {
-    screens: {
-      sm: '640px',
-      md: '816px',
-      lg: '1208px',
-      xl: '1376px',
-    },
     fontSize: {
       xs: '0.5rem',
       sm: '0.625rem',
@@ -22,10 +16,6 @@ const config: Config = {
     container: {
       center: true,
       padding: '3rem',
-      screens: {
-        md: '784px',
-        lg: '1176px',
-      },
     },
     extend: {
       fontFamily: {
@@ -119,6 +109,7 @@ const config: Config = {
         // New
         backgroundHeader: 'hsl(var(--background-header))',
         backgroundPage: 'hsl(var(--background-page))',
+        backgroundOverlay: 'hsl(var(--background-overlay))',
 
         outlineGeneral: 'hsl(var(--outline-general))',
 
@@ -131,6 +122,14 @@ const config: Config = {
         blackMedium: 'hsl(var(--black-medium))',
         blackHard: 'hsl(var(--black-hard))',
 
+        'accent-primary': {
+          DEFAULT: 'hsl(var(--accent-primary-regular))',
+          foreground: 'hsl(var(--accent-primary-foreground))',
+          disabled: 'hsl(var(--accent-primary-disabled))',
+          hovered: 'hsl(var(--accent-primary-hovered))',
+          pressed: 'hsl(var(--accent-primary-pressed))',
+        },
+
         'accent-secondary': {
           DEFAULT: 'hsl(var(--accent-secondary-regular))',
           foreground: 'hsl(var(--accent-secondary-foreground))',
@@ -140,11 +139,19 @@ const config: Config = {
         },
 
         'accent-destructive': {
-          DEFAULT: 'hsl(var(--accent-secondary-regular))',
-          foreground: 'hsl(var(--accent-secondary-foreground))',
-          disabled: 'hsl(var(--accent-secondary-disabled))',
-          hovered: 'hsl(var(--accent-secondary-hovered))',
-          pressed: 'hsl(var(--accent-secondary-pressed))',
+          DEFAULT: 'hsl(var(--accent-destructive-regular))',
+          foreground: 'hsl(var(--accent-destructive-foreground))',
+          disabled: 'hsl(var(--accent-destructive-disabled))',
+          hovered: 'hsl(var(--accent-destructive-hovered))',
+          pressed: 'hsl(var(--accent-destructive-pressed))',
+        },
+        text: {
+          primary: 'hsl(var(--text-primary))',
+          secondary: 'hsl(var(--text-secondary))',
+          keyword: 'hsl(var(--text-keyword))',
+          method: 'hsl(var(--text-method))',
+          type: 'hsl(var(--text-type))',
+          macro: 'hsl(var(--text-macro))',
         },
       },
       borderRadius: {

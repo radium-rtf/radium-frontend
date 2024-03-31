@@ -33,7 +33,7 @@ export const Radio: FC<RadioProps> = forwardRef<HTMLInputElement, RadioProps>(
        '
         ></div>
         {children && (
-          <span className='text-text-primary select-none text-[0.8125rem] leading-tight'>
+          <span className='select-none text-[0.8125rem] leading-tight text-text-primary'>
             {children}
           </span>
         )}

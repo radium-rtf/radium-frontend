@@ -10,8 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   Icon,
-  cn,
-  useScrollPosition,
+  IconButton,
 } from '@/shared';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -23,61 +22,30 @@ interface IProps {
 }
 
 export const Header: FC<IProps> = ({ logoUrl, title, href }) => {
-  const scrollHeight = useScrollPosition();
   const session = useSession();
 
-  const SCROLL_THRESHOLD = 50;
-
   return (
-    <header
-      className={cn(
-        'fixed left-0 right-0 top-0 z-40 mr-[var(--removed-body-scroll-bar-size)] flex items-center justify-between bg-background px-12 pb-9 pt-12 transition-[padding]',
-        scrollHeight > SCROLL_THRESHOLD && 'py-[0.875rem]'
+    <header className='sticky top-0 z-40 flex items-center gap-4 bg-backgroundHeader px-12 py-3.5'>
+      <Link href={href || '/'} className='contents' scroll={false}>
+        <Image
+          src={logoUrl || '/logo.svg'}
+          alt={`Url to ${title || 'home page'}`}
+          width={24}
+          height={24}
+          className='h-6 w-6 rounded object-cover'
+        />
+        <h1 className='grow text-lg font-medium text-primary'>{title || 'Радиум'}</h1>
+      </Link>
+      <IconButton>
+        <Icon type='notification' className='shrink-0 text-inherit' />
+      </IconButton>
+      {session.data && (
+        <p className='font-NTSomic leading-tight text-primary'>{session.data.user.name}</p>
       )}
-    >
-      <div>
-        {(title || logoUrl) && (
-          <Link
-            href={href || '/'}
-            className='flex items-center gap-6 transition-all'
-            scroll={false}
-          >
-            {logoUrl && (
-              <Image
-                src='/logo.svg'
-                quality={100}
-                alt='Radium'
-                width={48}
-                height={48}
-                priority
-                className={cn('h-12 transition-[height]', scrollHeight > SCROLL_THRESHOLD && 'h-9')}
-              />
-            )}
-            {title && (
-              <h1
-                className={cn(
-                  'font-NTSomic text-xl font-bold text-primary transition-[font-size]',
-                  scrollHeight > SCROLL_THRESHOLD && 'text-lg'
-                )}
-              >
-                {title}
-              </h1>
-            )}
-          </Link>
-        )}
-      </div>
-      <div className='flex items-center gap-6 justify-self-end'>
-        {session?.data?.user.name && (
-          <span className='font-NTSomic leading-tight text-primary'>{session.data.user.name}</span>
-        )}
-        <DropdownMenu>
-          <DropdownMenuTrigger className='rounded-full'>
-            <Avatar
-              className={cn(
-                'h-12 w-12 transition-all',
-                scrollHeight > SCROLL_THRESHOLD && 'h-9 w-9'
-              )}
-            >
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <IconButton className='p-1.5'>
+            <Avatar className='h-6 w-6'>
               <AvatarImage
                 className='object-cover'
                 src={session.data?.user.image || undefined}
@@ -87,27 +55,57 @@ export const Header: FC<IProps> = ({ logoUrl, title, href }) => {
                 <Image src='/defaultProfile.svg' alt='default logo' height={48} width={48} />
               </AvatarFallback>
             </Avatar>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className='w-64' align='end'>
-            <DropdownMenuItem asChild className='cursor-pointer'>
-              <Link href='/profile' scroll={false}>
-                <Icon className='mr-4 text-primary' type='profile' />
-                <span>Мой профиль</span>
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild className='cursor-pointer'>
-              <Link href='/' scroll={false}>
-                <Icon className='mr-4 text-primary' type='courses' />
-                <span>Мои курсы</span>
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => signOut()} className='cursor-pointer'>
-              <Icon className='mr-4 text-primary' type='exit' />
-              <span>Выйти</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
+          </IconButton>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className='w-64' align='end'>
+          <DropdownMenuItem asChild className='cursor-pointer'>
+            <Link href='/profile' scroll={false}>
+              <Icon className='mr-4 text-primary' type='profile' />
+              <span>Мой профиль</span>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild className='cursor-pointer'>
+            <Link href='/' scroll={false}>
+              <Icon className='mr-4 text-primary' type='courses' />
+              <span>Мои курсы</span>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => signOut()} className='cursor-pointer'>
+            <Icon className='mr-4 text-primary' type='exit' />
+            <span>Выйти</span>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <svg
+        width='16'
+        height='16'
+        viewBox='0 0 16 16'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+        className='absolute bottom-0 right-0 translate-y-full'
+      >
+        <path
+          fillRule='evenodd'
+          clipRule='evenodd'
+          d='M0 0H16V16C16 7.16344 8.83656 0 0 0Z'
+          className='fill-backgroundHeader'
+        />
+      </svg>
+      <svg
+        width='16'
+        height='16'
+        viewBox='0 0 16 16'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+        className='absolute bottom-0 left-0 translate-y-full -rotate-90'
+      >
+        <path
+          fillRule='evenodd'
+          clipRule='evenodd'
+          d='M0 0H16V16C16 7.16344 8.83656 0 0 0Z'
+          className='fill-backgroundHeader'
+        />
+      </svg>
     </header>
   );
 };

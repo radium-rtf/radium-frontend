@@ -16,7 +16,7 @@ export default function AllCoursesPage() {
   return (
     <>
       <Header logoUrl='/logo.svg' title='Радиум' />
-      <main className='container mx-auto mb-8 mt-[8.25rem] flex flex-grow flex-col gap-6'>
+      <main className='container mx-auto my-12 flex flex-grow flex-col gap-6'>
         {isLoading && (
           <>
             <div className='ml-6 h-[42px] w-1/2 animate-pulse rounded-lg bg-card md:ml-16' />

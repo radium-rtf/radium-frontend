@@ -59,7 +59,7 @@ export const AuthorShipCourseCard: FC<IProps> = ({ course }) => {
         </div>
         <CourseDeleteSmall courseId={id} />
         <Button asChild className='z-10' variant='outline' type='button'>
-          <Link href={`/courses/${id}?initialEdit=true`}>
+          <Link href={`/courses/${id}/edit`}>
             <Icon type='edit' className='mr-4 shrink-0 text-inherit' />
             <span>Редактировать</span>
           </Link>

@@ -2,6 +2,7 @@ import { FC, ReactNode, SVGProps } from 'react';
 import { cn } from '../utils/cn';
 
 export type SmallIcon =
+  | 'blank'
   | 'chevron-up'
   | 'chevron-right'
   | 'chevron-down'
@@ -26,6 +27,7 @@ type SmallIconProps = SVGProps<SVGSVGElement> & {
 };
 
 const smallIcons: Record<SmallIcon, ReactNode> = {
+  blank: null,
   'chevron-up': (
     <path
       d='M11.5 8.5L6 3L0.5 8.5'

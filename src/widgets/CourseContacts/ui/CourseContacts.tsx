@@ -1,33 +1,24 @@
-'use client';
-import React, { FC, useContext } from 'react';
+import { FC } from 'react';
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
   List,
+  ListActionIcon,
   ListContent,
   ListIcon,
   ListItem,
   ListSubtitle,
   ListTitle,
-  cn,
 } from '@/shared';
 import Link from 'next/link';
 import { CourseResponseDto } from '@/entities/Course';
-import { CourseEditContext } from '@/features/CourseEditContext';
-import { CourseAddContact } from '@/features/CourseAddContact';
-import { CourseDeleteContact } from '@/features/CourseDeleteContact';
 
 interface IProps {
   contacts: CourseResponseDto['links'];
-  courseId: string;
-  isEditAllowed: boolean;
 }
-
-export const CourseContacts: FC<IProps> = ({ contacts, isEditAllowed, courseId }) => {
-  const { isEditing } = useContext(CourseEditContext);
-
+export const CourseContacts: FC<IProps> = ({ contacts }) => {
   return (
     <Card className='gap-0'>
       <CardHeader>
@@ -39,25 +30,23 @@ export const CourseContacts: FC<IProps> = ({ contacts, isEditAllowed, courseId }
             return (
               <ListItem className='relative' key={contact.name}>
                 <Link
-                  className={cn('absolute inset-0', isEditAllowed && isEditing && 'right-16')}
+                  className={'absolute inset-0'}
                   href={contact.link}
                   target='_blank'
                   rel='noreferrer noopener'
                 />
                 <ListIcon icon='link' />
-                <ListContent className=''>
-                  <ListTitle>{contact.name}</ListTitle>
-                  <ListSubtitle className='line-clamp-1 w-48'>{contact.link}</ListSubtitle>
+                <ListContent>
+                  <ListTitle className='line-clamp-1'>{contact.name}</ListTitle>
+                  <ListSubtitle className='line-clamp-1'>{contact.link}</ListSubtitle>
                 </ListContent>
-                {isEditAllowed && isEditing ? (
-                  <CourseDeleteContact courseId={courseId} contactId={contact.id} />
-                ) : (
-                  <ListIcon className='h-[0.75rem] text-primary' icon='external-link' />
-                )}
+                <ListActionIcon
+                  className='h-[0.75rem] shrink-0 text-primary'
+                  icon='external-link'
+                />
               </ListItem>
             );
           })}
-          {isEditAllowed && isEditing && <CourseAddContact courseId={courseId} />}
         </List>
       </CardContent>
     </Card>

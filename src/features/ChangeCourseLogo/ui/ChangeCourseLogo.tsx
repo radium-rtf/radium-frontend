@@ -1,55 +1,64 @@
 import { useUpdateCourseLogoMutation } from '@/entities/Course';
 import { useUploadFileMutation } from '@/entities/File/api/fileApi';
 import { Icon, cn } from '@/shared';
-import Image from 'next/image';
-import { ChangeEvent, FC, useRef, useState } from 'react';
+import { ButtonHTMLAttributes, ChangeEvent, FC, useEffect, useRef, useState } from 'react';
 
-interface ChangeCourseLogoProps {
-  logo: string;
+type ChangeCourseLogoProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   courseId: string;
-}
+  hideText?: boolean;
+};
 
-export const ChangeCourseLogo: FC<ChangeCourseLogoProps> = ({ logo, courseId }) => {
+export const ChangeCourseLogo: FC<ChangeCourseLogoProps> = ({
+  courseId,
+  onClick,
+  hideText = false,
+  className,
+  ...props
+}) => {
   const [updateLogo] = useUpdateCourseLogoMutation();
   const [uploadFile] = useUploadFileMutation();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+    if (isError) {
+      timeoutId = setTimeout(setIsError, 2000, false);
+    }
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [isError]);
 
   const onChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const fd = new FormData();
     fd.append('file', e.target.files![0]);
     const response = await uploadFile(fd);
-    if ('data' in response) {
-      await updateLogo({ courseId, logo: response.data.location })
-        .unwrap()
-        .catch(() => setIsError(true));
-    } else {
+    if (!('data' in response)) {
+      setIsError(true);
+      return;
+    }
+    const updateResponse = await updateLogo({ courseId, logo: response.data.location });
+    if (!('data' in updateResponse)) {
       setIsError(true);
     }
   };
 
   return (
     <button
-      onClick={() => inputRef.current?.click()}
+      onClick={(e) => {
+        inputRef.current?.click();
+        onClick?.(e);
+      }}
       type='button'
       className={cn(
-        'relative block h-[4.5rem] w-[4.5rem] shrink-0 grow-0 overflow-hidden rounded-[0.5rem] bg-popover',
-        isError && 'ring ring-red-500'
+        'relative flex shrink-0 grow-0 items-center justify-center overflow-hidden rounded-[0.5rem]',
+        isError && 'ring ring-red-500',
+        className
       )}
+      {...props}
     >
-      {logo && (
-        <Image
-          src={logo}
-          height={72}
-          width={72}
-          alt='Logo'
-          className='h-[4.5rem] w-[4.5rem] object-cover object-center'
-        />
-      )}
-      <div className='absolute inset-0 flex items-center justify-center opacity-0 transition-opacity hover:bg-popover/50 hover:opacity-100'>
-        <Icon className='text-inherit' type={logo ? 'edit' : 'add'} />
-      </div>
       <input
         name='file'
         ref={inputRef}
@@ -58,6 +67,7 @@ export const ChangeCourseLogo: FC<ChangeCourseLogoProps> = ({ logo, courseId }) 
         type='file'
         accept='image/*'
       />
+      {!hideText && <Icon type='add' />}
     </button>
   );
 };

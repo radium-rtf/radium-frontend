@@ -22,7 +22,15 @@ export {
   CardTitle,
 } from './ui/cardNew';
 export { Menu } from './ui/Menu';
-export { List, ListContent, ListIcon, ListSubtitle, ListTitle, ListItem } from './ui/List';
+export {
+  List,
+  ListContent,
+  ListIcon,
+  ListSubtitle,
+  ListTitle,
+  ListItem,
+  ListActionIcon,
+} from './ui/List';
 export { Tab } from './ui/Tab';
 export { Tabs } from './ui/Tabs';
 export { AuthSessionProvider } from './ui/AuthSessionProvider';
@@ -81,3 +89,16 @@ export { useAppDispatch, useAppSelector } from './api/store';
 export { useDrop } from './hooks/useDrop';
 export { useScrollPosition } from './hooks/useScrollPosition';
 export { useUpdateTitle } from './hooks/useUpdateTitle';
+
+export {
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
+} from './ui/Select';

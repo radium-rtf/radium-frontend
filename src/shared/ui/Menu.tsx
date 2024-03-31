@@ -82,7 +82,7 @@ const MenuIcon = forwardRef<SVGSVGElement, IMenuIconProps>(
     return (
       <Comp
         {...props}
-        type={icon || 'null'}
+        type={icon || 'blank'}
         ref={ref}
         className={cn('h-[1.125rem] text-primary', className)}
       />
@@ -105,7 +105,7 @@ const MenuText = forwardRef<HTMLParagraphElement, IMenuTextProps>(
       <Comp
         ref={ref}
         {...props}
-        className={cn('text-text-primary flex-grow text-start text-[0.8125rem]', className)}
+        className={cn('flex-grow text-start text-[0.8125rem] text-text-primary', className)}
       />
     );
   }

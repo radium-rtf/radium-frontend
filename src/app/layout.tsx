@@ -2,7 +2,6 @@ import './globals.css';
 import localFont from 'next/font/local';
 import { AuthSessionProvider, ReduxStoreProvider, cn } from '@/shared';
 import { Inter, JetBrains_Mono } from 'next/font/google';
-import Wave from 'react-wavify';
 
 const ntSomic = localFont({
   src: [
@@ -41,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='ru' className='dark relative h-full scroll-smooth'>
       <body
         className={cn(
-          'scrollbar flex h-full flex-col bg-background font-sans text-foreground',
+          'scrollbar flex min-h-full flex-col',
           inter.variable,
           ntSomic.variable,
           jetbrainsMono.variable
@@ -50,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AuthSessionProvider>
           <ReduxStoreProvider>{children}</ReduxStoreProvider>
         </AuthSessionProvider>
-        <Wave
+        {/* <Wave
           fill={`rgba(0, 0, 0, 0.05)`}
           options={{
             amplitude: 80,
@@ -81,7 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             height: 450,
             overflow: 'visible',
           }}
-        />
+        /> */}
       </body>
     </html>
   );
