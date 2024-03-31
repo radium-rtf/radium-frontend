@@ -1,5 +1,5 @@
 'use client';
-import { useGetCourseQuery } from '@/entities/Course';
+import { useCourseRoles, useGetCourseQuery } from '@/entities/Course';
 import { List, ListContent, ListIcon, ListItem, ListTitle, cn, useUpdateTitle } from '@/shared';
 import { CourseCoAuthorEdit } from '@/widgets/CourseCoAuthorsEdit';
 import { CourseContactsEdit } from '@/widgets/CourseContactsEdit';
@@ -19,6 +19,7 @@ export default function CourseEditPage({
   const { data: course, isLoading } = useGetCourseQuery(params.courseId);
 
   useUpdateTitle(`Редактирование - ${course?.name || '<без названия>'}`);
+  const { isAuthor } = useCourseRoles(course);
 
   return (
     <>
@@ -89,6 +90,7 @@ export default function CourseEditPage({
                 {course && (
                   <>
                     <CourseInfoEdit
+                      isAuthor={isAuthor}
                       courseId={course.id}
                       name={course.name}
                       shortDescription={course.shortDescription}
