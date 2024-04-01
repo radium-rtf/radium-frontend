@@ -15,8 +15,8 @@ export const Footer = () => {
         </Link>
       </Button>
       <IconButton asChild>
-        <Link href={'https://t.me/radium_rtf'} target='_blank'>
-          <Icon type='link' />
+        <Link href={'https://t.me/radium_rtf'} target='_blank' className='shrink-0'>
+          <Icon type='telegram' className='shrink-0' />
         </Link>
       </IconButton>
       <svg

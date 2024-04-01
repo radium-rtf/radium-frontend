@@ -34,7 +34,7 @@ export const Header: FC<IProps> = ({ logoUrl, title, href }) => {
           height={24}
           className='h-6 w-6 rounded object-cover'
         />
-        <h1 className='grow text-lg font-medium text-primary'>{title || 'Радиум'}</h1>
+        <h1 className='grow font-NTSomic text-lg font-medium text-primary'>{title || 'Радиум'}</h1>
       </Link>
       <IconButton>
         <Icon type='notification' className='shrink-0 text-inherit' />

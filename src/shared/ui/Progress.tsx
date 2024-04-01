@@ -1,6 +1,6 @@
 import React, { CSSProperties, FC } from 'react';
 import { cn } from '../utils/cn';
-import { Icon } from './Icon';
+import { SmallIcon } from './SmallIcon';
 
 interface IProps {
   type?: 'linear' | 'radial';
@@ -66,14 +66,15 @@ export const Progress: FC<IProps> = ({
           r={8.5}
         ></circle>
       </svg>
-      <Icon
-        type='submit'
+      <SmallIcon
+        type='done'
         className={cn(
           [
             'absolute',
             'left-1/2',
             'top-1/2',
             'h-[0.5625rem]',
+            'w-[0.5625rem]',
             '-translate-x-1/2',
             '-translate-y-1/2',
             'opacity-0',
