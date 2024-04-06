@@ -74,7 +74,6 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
         <header className='text-[0.8125rem] leading-normal'>{sectionData.content}</header>
         <Tabs>
           <Tab
-            type='button'
             onClick={() => !isCodeWriting && setIsCodeWriting(true)}
             isSelected={isCodeWriting}
             icon='editor'
@@ -82,7 +81,6 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
             Редактор
           </Tab>
           <Tab
-            type='button'
             onClick={() => isCodeWriting && setIsCodeWriting(false)}
             isSelected={!isCodeWriting}
             icon='attach'
