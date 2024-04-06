@@ -21,7 +21,7 @@ export const Tab: FC<ITab> = ({ icon, children, isSelected, variant }) => {
       )}
     >
       <Icon type={icon} className={cn([isSelected && 'tab-selected'])} />
-      <span className={cn('text-text-primary text-base', isSelected && 'tab-selected')}>
+      <span className={cn('text-base text-text-primary', isSelected && 'tab-selected')}>
         {children}
       </span>
     </button>
