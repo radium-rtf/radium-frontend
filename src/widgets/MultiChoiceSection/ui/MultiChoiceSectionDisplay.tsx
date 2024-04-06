@@ -34,7 +34,6 @@ export const MultiChoiceSectionDisplay: FC<MultiChoiceSectionDisplayProps> = ({ 
     reset,
     control,
     setError,
-    setValue,
     handleSubmit,
     formState: { errors },
   } = form;
@@ -95,14 +94,6 @@ export const MultiChoiceSectionDisplay: FC<MultiChoiceSectionDisplayProps> = ({ 
             sectionData={sectionData}
             resetObject={{ multiChoice: { answer: [] } }}
             errorMessage={errors.root?.message || errors.multiChoice?.message}
-            isQuestion
-            onAnswer={({ Answers }) =>
-              Answers &&
-              setValue(
-                'multiChoice.answer',
-                Answers.map((value) => value)
-              )
-            }
           />
         </form>
       </Card>

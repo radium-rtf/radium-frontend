@@ -55,7 +55,6 @@ export const MappingSectionDisplay: FC<MappingSectionDisplayProps> = ({ sectionD
     reset,
     control,
     setError,
-    setValue,
     handleSubmit,
     formState: { errors },
   } = form;
@@ -146,14 +145,6 @@ export const MappingSectionDisplay: FC<MappingSectionDisplayProps> = ({ sectionD
             sectionData={sectionData}
             resetObject={DEFAULT_STATE}
             errorMessage={errors.root?.message || errors.mapping?.answer?.message}
-            isQuestion
-            onAnswer={({ Answers }) =>
-              Answers &&
-              setValue(
-                'mapping.answer',
-                Answers.map((value) => ({ value }))
-              )
-            }
           />
         </form>
       </Card>
