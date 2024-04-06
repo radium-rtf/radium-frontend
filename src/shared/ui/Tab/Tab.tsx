@@ -6,20 +6,12 @@ import './index.css';
 export interface ITab extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: Icon;
   isSelected?: boolean;
-  variant?: 'basic' | 'outlined' | 'outlined-backgrounded';
+  isIdle?: boolean;
 }
 
-export const Tab: FC<ITab> = ({ icon, children, isSelected, variant }) => {
+export const Tab: FC<ITab> = ({ icon, children, isSelected, isIdle }) => {
   return (
-    <button
-      type='button'
-      className={cn(
-        'tab',
-        isSelected && 'tab-selected',
-        variant === 'outlined' && 'tab-outlined',
-        variant === 'outlined-backgrounded' && 'tab-outlined-backgrounded'
-      )}
-    >
+    <button type='button' className={cn('tab', isSelected && 'tab-selected', isIdle && 'tab-idle')}>
       <Icon type={icon} className={cn([isSelected && 'tab-selected'])} />
       <span className={cn('text-base text-text-primary', isSelected && 'tab-selected')}>
         {children}
