@@ -6,7 +6,7 @@ import './index.css';
 export interface ITab extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: Icon;
   isSelected?: boolean;
-  isIdle: boolean;
+  isIdle?: boolean;
 }
 
 export const Tab: FC<ITab> = ({ icon, children, isSelected, isIdle }) => {
