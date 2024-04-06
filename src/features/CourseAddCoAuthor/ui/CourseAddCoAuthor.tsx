@@ -22,27 +22,27 @@ export const CourseAddCoAuthor: FC<CourseAddCoAuthorProps> = ({ courseId }) => {
   } = useForm<authorsSchemaType>({
     resolver: zodResolver(authorsSchema),
     defaultValues: {
-      courseId: courseId,
       email: '',
     },
   });
 
-  const onSubmitHandler: SubmitHandler<authorsSchemaType> = async (data) => {
-    await addCoAuthor(data)
+  const onSubmitHandler: SubmitHandler<authorsSchemaType> = async ({ email }) => {
+    await addCoAuthor({ courseId, email })
       .unwrap()
       .then(() => reset())
       .catch(() => setError('email', { message: 'Пользователь не существует' }));
   };
 
   return (
-    <form className='mx-2 my-1.5' onSubmit={handleSubmit(onSubmitHandler)}>
+    <form className='flex w-full flex-col gap-4' onSubmit={handleSubmit(onSubmitHandler)}>
+      <span className='font-NTSomic leading-tight'>Добавить автора</span>
       <Input
         icon='password'
         className={cn(
           isSubmitSuccessful && '[&:has(:focus)]:border-accent-secondary-400',
           isSubmitted && !isValid && '[&:has(:focus)]:border-red-500'
         )}
-        placeholder='Имя пользователя или почта'
+        placeholder='Почта'
         {...register('email')}
       />
     </form>

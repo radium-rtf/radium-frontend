@@ -40,7 +40,7 @@ export const Tab: FC<ITab> = ({ icon, children, className, isSelected, ...props 
       {...props}
     >
       <Icon type={icon} className={cn([isSelected && 'text-primary underline'])} />
-      <span className={cn('text-text-primary text-base', isSelected && 'text-primary')}>
+      <span className={cn('text-base text-text-primary', isSelected && 'text-primary')}>
         {children}
       </span>
     </button>

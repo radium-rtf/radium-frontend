@@ -122,6 +122,7 @@ export const courseApi = emptyApi.injectEndpoints({
             courseApi.util.updateQueryData('getCourse', courseId, (draft) => {
               draft.name = updatedPost.name;
               draft.shortDescription = updatedPost.shortDescription;
+              draft.slug = updatedPost.slug;
             })
           );
         } catch {}

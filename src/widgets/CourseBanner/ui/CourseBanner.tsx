@@ -1,39 +1,49 @@
 'use client';
+import { ChangeBanner } from '@/features/ChangeBanner';
 import { cn } from '@/shared';
-import Image from 'next/image';
-import { FC, useContext } from 'react';
-import { AddBanner, ChangeBanner } from '@/features/ChangeBanner';
-import { CourseEditContext } from '@/features/CourseEditContext';
+import { ImageWithFallback } from '@/shared/ui/ImageWithFallback';
+import { ImageProps } from 'next/image';
+import { FC, useEffect, useState } from 'react';
 
-interface CourseBannerProps {
-  url: string;
-  name: string;
-  courseId: string;
+type CourseBannerProps = ImageProps & {
   isEditAllowed: boolean;
-}
+  courseId: string;
+};
 
-export const CourseBanner: FC<CourseBannerProps> = ({ name, url, courseId, isEditAllowed }) => {
-  const { isEditing } = useContext(CourseEditContext);
+export const CourseBanner: FC<CourseBannerProps> = ({
+  src,
+  alt,
+  isEditAllowed,
+  courseId,
+  className,
+  ...props
+}) => {
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    setIsError(false);
+  }, [src]);
+
   return (
-    <div
-      className={cn(
-        'relative mb-8 h-64 overflow-hidden rounded-2xl bg-card md:container md:mx-auto md:mb-16 md:pl-0 md:pr-0'
-      )}
-    >
-      {url !== '' ? (
-        <>
-          <Image
-            src={url}
-            alt={name}
-            width={1280}
-            height={256}
-            priority
-            className='aspect-[2] h-full w-full object-cover object-center md:aspect-[3] md:rounded-lg lg:aspect-[4]'
-          />
-          {isEditAllowed && isEditing && <ChangeBanner courseId={courseId} />}
-        </>
-      ) : (
-        isEditAllowed && isEditing && <AddBanner courseId={courseId} />
+    <div className='relative'>
+      <ImageWithFallback
+        src={src}
+        alt={alt}
+        width={1280}
+        height={256}
+        priority
+        fallback={
+          <div className='h-64 w-full rounded-2xl bg-card object-cover object-[center_-16px]' />
+        }
+        className={cn('h-64 w-full rounded-2xl object-cover object-[center_-16px]', className)}
+        {...props}
+      />
+      {isEditAllowed && (
+        <ChangeBanner
+          hideText={!!src && !isError}
+          courseId={courseId}
+          className='absolute inset-0'
+        />
       )}
     </div>
   );

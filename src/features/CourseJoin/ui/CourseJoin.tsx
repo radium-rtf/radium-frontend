@@ -21,9 +21,10 @@ export const CourseJoin: FC<CourseJoinProps> = ({ courseId }) => {
   };
 
   return (
-    <Button onClick={onClickHandler} type='button'>
-      <Icon type='start' className='mr-4 text-inherit' />
+    <Button onClick={onClickHandler} type='button' size='wide'>
+      <Icon type='start' className='text-inherit' />
       <span>Начать</span>
+      <Icon type='blank' />
     </Button>
   );
 };

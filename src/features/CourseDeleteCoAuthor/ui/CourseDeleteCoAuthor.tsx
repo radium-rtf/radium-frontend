@@ -1,5 +1,5 @@
 import { useDeleteCourseCoAuthorMutation } from '@/entities/Course';
-import { Icon } from '@/shared';
+import { IconButton, SmallIcon } from '@/shared';
 import { FC } from 'react';
 
 interface CourseDeleteCoAuthorProps {
@@ -15,8 +15,12 @@ export const CourseDeleteCoAuthor: FC<CourseDeleteCoAuthorProps> = ({ courseId, 
   };
 
   return (
-    <button type='button' onClick={onClickHandler}>
-      <Icon type='remove' className='h-3 text-primary' />
-    </button>
+    <IconButton
+      onClick={onClickHandler}
+      type='button'
+      className='action relative z-10 -m-[0.5625rem]'
+    >
+      <SmallIcon className='text-accent-primary' type='remove' />
+    </IconButton>
   );
 };

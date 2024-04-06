@@ -70,7 +70,7 @@ export const ProfilePhotoEdit = forwardRef<HTMLInputElement, IProps>(
           onClick={imageClickHandler}
           className='absolute inset-0 flex cursor-pointer items-center justify-center bg-gray-800/80 opacity-0 transition-opacity hover:opacity-100'
         >
-          <Icon type={!newPhoto ? 'edit' : 'reset'} />
+          <Icon type={!newPhoto ? 'edit' : 'undo'} />
         </div>
       </picture>
     );

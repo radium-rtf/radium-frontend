@@ -53,17 +53,17 @@ export const VerifyRegistrationCard = () => {
     <section className='flex w-[19rem] flex-col items-center gap-9'>
       <div className='flex items-center gap-4'>
         <Image height={28} width={48} alt='Radium logo' src='/logo.svg' />
-        <h1 className='text-4xl font-NTSomic font-bold text-primary'>Радиум</h1>
+        <h1 className='font-NTSomic text-xl font-bold text-primary'>Радиум</h1>
       </div>
       <Card className='w-full'>
         <form onSubmit={handleSubmit(onSubmitHandler)}>
           <CardHeader>
-            <span className='text-text-primary text-[0.8125rem]'>
+            <span className='text-[0.8125rem] text-text-primary'>
               Отправили 6-значный код на почту. Введите его здесь, чтобы завершить регистрацию.
             </span>
           </CardHeader>
           <CardContent>
-            <Input icon='hashtag' placeholder='6-значный код' {...register('verificationCode')} />
+            <Input icon='code' placeholder='6-значный код' {...register('verificationCode')} />
           </CardContent>
           <CardFooter>
             <Button

@@ -12,6 +12,7 @@ import { FileType } from '../types/FileType';
 import { cn } from '../utils/cn';
 import { Icon } from './Icon';
 import { useDrop } from '../hooks/useDrop';
+import { SmallIcon } from './SmallIcon';
 
 type InputFileProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
   allowedFileTypes?: FileType[];
@@ -107,7 +108,7 @@ export const InputFile: FC<InputFileProps> = ({
           }}
           className='reset mr-2.5 rounded-[0.25rem] p-1.5 transition-colors hover:bg-white/5'
         >
-          <Icon className='h-3 w-3 text-inherit' type='remove' />
+          <SmallIcon className='h-3 w-3 text-inherit' type='remove' />
         </button>
       )}
       <input

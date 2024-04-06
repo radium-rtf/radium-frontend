@@ -1,41 +1,27 @@
-import React, { FC, MouseEventHandler } from 'react';
-import { Icon } from './Icon';
+import { Slot } from '@radix-ui/react-slot';
 import { cn } from '../utils/cn';
+import { ButtonHTMLAttributes, forwardRef } from 'react';
 
-interface IProps {
-  icon: Icon;
-  className?: string;
-  disabled?: boolean;
-  type: 'button' | 'reset' | 'submit';
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-}
-
-export const IconButton: FC<IProps> = ({ icon, className, disabled, type, onClick }) => {
-  return (
-    <button
-      onClick={onClick}
-      type={type}
-      disabled={disabled}
-      className={cn(
-        [
-          'transition',
-          'outline-white',
-          'group rounded p-[0.5625rem]',
-          'text-primary',
-          'disabled:cursor-not-allowed',
-          'disabled:text-accent-primary-300',
-          'hover:bg-grey-600',
-          'active:bg-grey-800',
-          'focus-visible:outline',
-        ],
-        className
-      )}
-    >
-      <Icon
-        type={icon}
-        className='text-inherit
-     '
-      />
-    </button>
-  );
+type IProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  isActive?: boolean;
+  asChild?: boolean;
 };
+
+export const IconButton = forwardRef<HTMLButtonElement, IProps>(
+  ({ className, isActive, asChild, ...props }, ref) => {
+    const Comp = asChild ? Slot : 'button';
+    return (
+      <Comp
+        ref={ref}
+        className={cn(
+          'inline-flex h-9 w-9 items-center justify-center rounded-[0.5rem] border border-transparent p-[0.5625rem] transition-colors hover:border-outlineGeneral hover:bg-whiteLight active:bg-blackLight disabled:pointer-events-none disabled:opacity-50',
+          isActive && 'bg-whiteLight text-primary hover:bg-whiteMedium',
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
+
+IconButton.displayName = 'IconButton';

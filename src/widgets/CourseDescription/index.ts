@@ -1,2 +1,2 @@
-export { CourseDescription } from './ui/CourseDescription';
+export { CourseDescriptionDisplay as CourseDescription } from './ui/CourseDescriptionDisplay';
 export { CourseDescriptionSkeleton } from './ui/CourseDescriptionSkeleton';
