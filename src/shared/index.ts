@@ -22,7 +22,6 @@ export {
   CardTitle,
 } from './ui/cardNew';
 export { Menu } from './ui/Menu';
-export { List, ListContent, ListIcon, ListSubtitle, ListTitle, ListItem } from './ui/List';
 export { Tab } from './ui/Tab/Tab';
 export {
   List,
@@ -33,7 +32,6 @@ export {
   ListItem,
   ListActionIcon,
 } from './ui/List';
-export { Tab } from './ui/Tab';
 export { Tabs } from './ui/Tabs';
 export { AuthSessionProvider } from './ui/AuthSessionProvider';
 export { ReduxStoreProvider } from './ui/ReduxStoreProvider';
@@ -72,9 +70,7 @@ export { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 export { RadioGroup, RadioGroupItem } from './ui/radio-group';
 
 // Interfaces
-export type { IIcon } from './ui/Icon';
 export type { ITab } from './ui/Tab/Tab';
-export type { ITab } from './ui/Tab';
 export type { UploadFileResponseDto } from './model/uploadFileResponseDto';
 
 // Types
