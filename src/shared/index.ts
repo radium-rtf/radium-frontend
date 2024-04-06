@@ -22,7 +22,7 @@ export {
 } from './ui/cardNew';
 export { Menu } from './ui/Menu';
 export { List, ListContent, ListIcon, ListSubtitle, ListTitle, ListItem } from './ui/List';
-export { Tab } from './ui/Tab';
+export { Tab } from './ui/Tab/Tab';
 export { Tabs } from './ui/Tabs';
 export { AuthSessionProvider } from './ui/AuthSessionProvider';
 export { ReduxStoreProvider } from './ui/ReduxStoreProvider';
@@ -62,7 +62,7 @@ export { RadioGroup, RadioGroupItem } from './ui/radio-group';
 
 // Interfaces
 export type { IIcon } from './ui/Icon';
-export type { ITab } from './ui/Tab';
+export type { ITab } from './ui/Tab/Tab';
 export type { UploadFileResponseDto } from './model/uploadFileResponseDto';
 
 // Types
