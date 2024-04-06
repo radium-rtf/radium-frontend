@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint .",
     "prepare": "husky install",
-    "check:typescript": "tsc -noEmit"
+    "check:typescript": "tsc -noEmit",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.0.8",
@@ -41,7 +43,6 @@
     "next": "^14.0.3",
     "next-auth": "^4.24.5",
     "next-redux-wrapper": "^8.1.0",
-    "postcss": "^8.4.31",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.47.0",
@@ -58,9 +59,18 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^1.2.25",
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
     "@hookform/devtools": "^4.3.1",
+    "@storybook/addon-essentials": "^8.0.5",
+    "@storybook/addon-interactions": "^8.0.5",
+    "@storybook/addon-links": "^8.0.5",
+    "@storybook/addon-onboarding": "^8.0.5",
+    "@storybook/blocks": "^8.0.5",
+    "@storybook/nextjs": "^8.0.5",
+    "@storybook/react": "^8.0.5",
+    "@storybook/test": "^8.0.5",
     "@tailwindcss/typography": "^0.5.10",
     "@typescript-eslint/eslint-plugin": "^6.16.0",
     "@typescript-eslint/parser": "^6.16.0",
@@ -68,10 +78,14 @@
     "eslint-config-next": "^14.0.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.2",
+    "eslint-plugin-storybook": "^0.8.0",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
+    "postcss": "^8.4.38",
+    "postcss-cli": "^11.0.0",
     "prettier": "^3.1.1",
     "prettier-plugin-tailwindcss": "^0.5.9",
+    "storybook": "^8.0.5",
     "tsc-files": "^1.1.4"
   }
 }
