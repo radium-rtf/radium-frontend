@@ -1,31 +1,23 @@
 'use client';
-import Link from 'next/link';
-import Image from 'next/image';
 import { Header } from '@/widgets/Header';
 import { Footer } from '@/widgets/Footer';
-import { CourseBrief, CourseBriefSkeleton } from '@/widgets/CourseBrief';
 import { CourseBanner, CourseBannerSkeleton } from '@/widgets/CourseBanner';
-import { CourseSettings } from '@/widgets/CourseSettings';
 import { CourseContacts, CourseContactsSkeleton } from '@/widgets/CourseContacts';
 import { CourseDescription, CourseDescriptionSkeleton } from '@/widgets/CourseDescription';
-import { CourseLandingEditToggle } from '@/widgets/CourseLandingEditToggle';
-import { CourseEditContextWrapper } from '@/features/CourseEditContext';
-import { useParams, useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useCourseRoles, useGetCourseQuery } from '@/entities/Course';
-import { CourseName, CourseNameSkeleton } from '@/widgets/CourseName';
 import { CourseAuthors, CourseAuthorsSkeleton } from '@/widgets/CourseAuthors';
-import { Button, Icon, useUpdateTitle } from '@/shared';
+import { useUpdateTitle } from '@/shared';
+import { CourseBrief, CourseBriefSkeleton } from '@/widgets/CourseBrief';
 
 export default function Page() {
   const params = useParams() as {
     courseId: string;
   };
 
-  const { data: course, isLoading, error } = useGetCourseQuery(params.courseId);
+  const { data: course, isLoading } = useGetCourseQuery(params.courseId);
 
   useUpdateTitle(course?.name || '<без названия>');
-
-  const searchParams = useSearchParams();
 
   const { isAuthor, isCoauthor } = useCourseRoles(course);
   const isEditAllowed = isAuthor || isCoauthor;
@@ -33,102 +25,82 @@ export default function Page() {
   return (
     <>
       <Header title='Радиум' logoUrl='/logo.svg' />
-      <main className='mb-8 mt-[8.25rem] flex flex-grow flex-col'>
-        {/* Loading skeleton */}
-        {isLoading && (
-          <>
-            <CourseBannerSkeleton />
-            <main className='container mx-auto px-12 lg:px-[8.25rem]'>
-              <div className='grid gap-8 xl:grid-cols-3 2xl:grid-cols-4'>
-                <CourseNameSkeleton />
-                <main className='flex flex-col gap-8 xl:col-span-2 2xl:col-span-3'>
-                  <CourseBriefSkeleton />
-                  <CourseDescriptionSkeleton />
-                </main>
-                <aside className='flex flex-col gap-8'>
+      <main className='container grow'>
+        <div className='sticky top-16 py-12'>
+          {/* "Это костыль" */}
+          <div className='sticky top-16 z-10 -mt-12 h-12 bg-backgroundPage'>
+            <svg
+              width='16'
+              height='16'
+              viewBox='0 0 16 16'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+              className='absolute bottom-0 right-0 translate-y-full'
+            >
+              <path
+                fillRule='evenodd'
+                clipRule='evenodd'
+                d='M0 0H16V16C16 7.16344 8.83656 0 0 0Z'
+                className='fill-backgroundPage'
+              />
+            </svg>
+            <svg
+              width='16'
+              height='16'
+              viewBox='0 0 16 16'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+              className='absolute bottom-0 left-0 translate-y-full -rotate-90'
+            >
+              <path
+                fillRule='evenodd'
+                clipRule='evenodd'
+                d='M0 0H16V16C16 7.16344 8.83656 0 0 0Z'
+                className='fill-backgroundPage'
+              />
+            </svg>
+          </div>
+          {isLoading && (
+            <>
+              <CourseBannerSkeleton />
+              <CourseBriefSkeleton />
+              <div className='contents items-start gap-8 lg:flex'>
+                <div className='mb-8 grid shrink-0 grid-cols-2 items-start gap-8 lg:order-1 lg:mb-0 lg:w-[22.5rem] lg:grid-cols-1'>
                   <CourseAuthorsSkeleton />
                   <CourseContactsSkeleton />
-                </aside>
+                </div>
+                <CourseDescriptionSkeleton />
               </div>
-            </main>
-          </>
-        )}
-        {/* Course data */}
-        {course && (
-          <CourseEditContextWrapper isEditMode={searchParams.get('initialEdit') === 'true'}>
-            <CourseBanner
-              name={course.name}
-              url={course.banner}
-              courseId={course.id}
-              isEditAllowed={isEditAllowed}
-            />
-            <main className='container mx-auto px-12 lg:px-[8.25rem]'>
-              <div className='grid gap-8 xl:grid-cols-3 2xl:grid-cols-4'>
-                <CourseName courseName={course.name} isEditAllowed={isEditAllowed} />
-                <main className='flex flex-col gap-8 xl:col-span-2 2xl:col-span-3'>
-                  <CourseBrief
-                    courseLogo={course.logo}
-                    shortDescription={course.shortDescription}
-                    modulesCount={course.modules.length}
-                    courseName={course.name}
-                    courseId={course.id}
-                    isEditAllowed={isEditAllowed}
-                    isAssigned={course.isStudent}
-                  />
-                  <CourseDescription
-                    courseId={course.id}
-                    description={course.description}
-                    isEditAllowed={isEditAllowed}
-                  />
-                </main>
-                <aside className='flex flex-col gap-8'>
-                  {isEditAllowed && <CourseLandingEditToggle />}
-                  {isEditAllowed && (
-                    <CourseSettings
-                      hasName={course.name !== ''}
-                      hasShortDescription={course.shortDescription !== ''}
-                      hasDescription={course.description !== ''}
-                      hasLogo={course.logo !== ''}
-                      hasBanner={course.banner !== ''}
-                      courseId={course.id}
-                      isPublished={course.isPublished}
-                      isEditAllowed={isAuthor}
-                    />
-                  )}
-                  <CourseAuthors
-                    courseId={course.id}
-                    isEditAllowed={isAuthor}
-                    authors={course.authors}
-                    coauthors={course.coauthors}
-                  />
-                  <CourseContacts
-                    courseId={course.id}
-                    isEditAllowed={isEditAllowed}
-                    contacts={course.links}
-                  />
-                </aside>
+            </>
+          )}
+          {course && (
+            <>
+              <CourseBanner
+                isEditAllowed={isEditAllowed}
+                courseId={course.id}
+                alt={course.name}
+                src={course.banner}
+              />
+              <CourseBrief
+                isEditAllowed={isEditAllowed}
+                percentage={(course.score / (course.maxScore || 1)) * 100}
+                title={course.name}
+                logo={course.logo}
+                courseId={course.id}
+                isAssigned={course.isStudent}
+                modulesCount={course.modules.length}
+                shortDescription={course.shortDescription}
+              />
+              <div className='contents items-start gap-8 lg:flex'>
+                <div className='mb-8 grid shrink-0 grid-cols-2 items-start gap-8 lg:order-1 lg:mb-0 lg:w-[22.5rem] lg:grid-cols-1'>
+                  <CourseAuthors authors={course.authors} coauthors={course.coauthors} />
+                  <CourseContacts contacts={course.links} />
+                </div>
+                <CourseDescription description={course.description} />
               </div>
-            </main>
-          </CourseEditContextWrapper>
-        )}
-        {/* Error */}
-        {error && (
-          <>
-            <div className='flex h-full flex-col items-center justify-center gap-4'>
-              <Image src={'/error.svg'} width={224} height={224} alt='Not found error' />
-              <h1 className='text-5xl font-NTSomic font-bold text-primary'>Такого курса нет :(</h1>
-              <p className='text-text-primary text-[0.8125rem]'>
-                Возможно курс был удален или вы перешли по неверной ссылке
-              </p>
-              <Button color='accent' asChild className='w-64'>
-                <Link href='/'>
-                  <Icon type='arrow-left' className='text-inherit' />
-                  <span className='ml-[calc(50%-34px)] -translate-x-1/2'>На главную</span>
-                </Link>
-              </Button>
-            </div>
-          </>
-        )}
+            </>
+          )}
+        </div>
       </main>
       <Footer />
     </>

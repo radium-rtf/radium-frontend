@@ -1,46 +1,70 @@
-import { useRouter } from 'next/navigation';
-import { uploadFile } from '@/shared/api/uploadFile';
-import { Button, Icon } from '@/shared';
-import { ChangeEvent, FC, useRef } from 'react';
-import { changeBannerClickHandler } from '../lib/changeBannerClickHandler';
+'use client';
+import { Icon, cn } from '@/shared';
+import { ButtonHTMLAttributes, ChangeEvent, FC, useRef, useState } from 'react';
 import { useUpdateCourseBannerMutation } from '@/entities/Course';
+import { useUploadFileMutation } from '@/entities/File/api/fileApi';
 
-interface ChangeBannerProps {
+type ChangeBannerProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   courseId: string;
-}
+  hideText?: boolean;
+};
 
-export const ChangeBanner: FC<ChangeBannerProps> = ({ courseId }) => {
+export const ChangeBanner: FC<ChangeBannerProps> = ({
+  hideText = false,
+  courseId,
+  onClick,
+  className,
+  ...props
+}) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { refresh } = useRouter();
+  const [isError, setIsError] = useState(false);
   const [updateBanner] = useUpdateCourseBannerMutation();
+  const [uploadFile] = useUploadFileMutation();
 
-  const onChangeFileHandler = async (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = async (event: ChangeEvent<HTMLInputElement>) => {
     const fd = new FormData();
     fd.append('file', event.currentTarget.files!.item(0)!);
     const response = await uploadFile(fd);
-    if (typeof response === 'string') {
+    if (!('data' in response)) {
+      setIsError(true);
       return;
     }
-    updateBanner({ courseId, banner: response.location }).unwrap().then(refresh);
+    const uploadResponse = await updateBanner({ courseId, banner: response.data.location });
+    if (!('data' in uploadResponse)) {
+      setIsError(true);
+    }
   };
 
   return (
     <>
-      <Button
-        className='absolute right-4 top-4 w-64 justify-start'
-        onClick={() => changeBannerClickHandler(inputRef.current!)}
+      <button
+        onClick={(e) => {
+          inputRef.current?.click();
+          onClick?.(e);
+        }}
+        type='button'
+        className={cn(
+          'relative flex shrink-0 grow-0 items-center justify-center overflow-hidden rounded-[0.5rem]',
+          isError && 'ring ring-red-500',
+          className
+        )}
+        {...props}
       >
-        <Icon type='edit' className='text-inherit' />
-        <span className='ml-[calc(50%-18px)] -translate-x-1/2'>Сменить обложку</span>
-      </Button>
-      <input
-        onChange={onChangeFileHandler}
-        ref={inputRef}
-        name='banner'
-        type='file'
-        accept='image/*'
-        className='hidden'
-      />
+        <input
+          name='file'
+          ref={inputRef}
+          onChange={onChangeHandler}
+          className='hidden'
+          type='file'
+          accept='image/*'
+        />
+        {!hideText && (
+          <div className='flex -translate-y-4 items-center gap-4'>
+            <Icon type='add' />
+            <span className='leading-tight'>Загрузить обложку</span>
+          </div>
+        )}
+      </button>
     </>
   );
 };

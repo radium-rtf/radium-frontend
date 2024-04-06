@@ -1,6 +1,7 @@
 import React, {
   forwardRef,
   ForwardRefExoticComponent,
+  HTMLAttributes,
   LiHTMLAttributes,
   ReactNode,
   RefAttributes,
@@ -8,14 +9,15 @@ import React, {
 } from 'react';
 import { cn } from '../utils/cn';
 import { Slot } from '@radix-ui/react-slot';
+import { SmallIcon } from './SmallIcon';
 import { Icon } from './Icon';
 
 // List
-interface IListProps extends React.HTMLAttributes<HTMLUListElement> {
+type ListProps = HTMLAttributes<HTMLUListElement> & {
   asChild?: boolean;
-}
+};
 
-export const List = forwardRef<HTMLUListElement, IListProps>(
+export const List = forwardRef<HTMLUListElement, ListProps>(
   ({ className, asChild, ...props }, ref) => {
     const Comp = asChild ? Slot : 'ul';
     return <Comp ref={ref} {...props} className={cn('flex flex-col', className)} />;
@@ -24,18 +26,21 @@ export const List = forwardRef<HTMLUListElement, IListProps>(
 List.displayName = 'List';
 
 // List Item
-interface IListItemProps extends LiHTMLAttributes<HTMLLIElement> {
+type ListItemProps = LiHTMLAttributes<HTMLLIElement> & {
   asChild?: boolean;
-}
+};
 
-export const ListItem = forwardRef<HTMLLIElement, IListItemProps>(
+export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
   ({ className, asChild, ...props }, ref) => {
     const Comp = asChild ? Slot : 'li';
     return (
       <Comp
         ref={ref}
         {...props}
-        className={cn('flex items-center gap-4 px-6 py-2', className)}
+        className={cn(
+          'flex shrink-0 items-center gap-4 rounded-[0.5rem] border border-transparent px-6 py-[0.5625rem] transition-colors',
+          className
+        )}
       ></Comp>
     );
   }
@@ -43,12 +48,11 @@ export const ListItem = forwardRef<HTMLLIElement, IListItemProps>(
 ListItem.displayName = 'ListItem';
 
 // List Icon
-
-interface IListIconProps extends SVGAttributes<SVGSVGElement> {
+type ListIconProps = SVGAttributes<SVGSVGElement> & {
   asChild?: boolean;
   icon?: Icon;
-}
-export const ListIcon = forwardRef<SVGSVGElement, IListIconProps>(
+};
+export const ListIcon = forwardRef<SVGSVGElement, ListIconProps>(
   ({ asChild, icon, className, ...props }, ref) => {
     const Comp = asChild
       ? (Slot as ForwardRefExoticComponent<
@@ -58,15 +62,40 @@ export const ListIcon = forwardRef<SVGSVGElement, IListIconProps>(
     return (
       <Comp
         {...props}
-        type={icon || 'null'}
+        type={icon || 'blank'}
         ref={ref}
-        className={cn('text-foreground-default shrink-0', className)}
+        className={cn('shrink-0 text-accent-primary', className)}
       />
     );
   }
 );
 
 ListIcon.displayName = 'ListIcon';
+
+// List Icon
+type ListActionIconProps = SVGAttributes<SVGSVGElement> & {
+  asChild?: boolean;
+  icon?: SmallIcon;
+};
+export const ListActionIcon = forwardRef<SVGSVGElement, ListActionIconProps>(
+  ({ asChild, icon, className, ...props }, ref) => {
+    const Comp = asChild
+      ? (Slot as ForwardRefExoticComponent<
+          SVGAttributes<SVGSVGElement> & RefAttributes<SVGSVGElement> & { children?: ReactNode }
+        >)
+      : SmallIcon;
+    return (
+      <Comp
+        {...props}
+        type={icon || 'blank'}
+        ref={ref}
+        className={cn('text-text shrink-0', className)}
+      />
+    );
+  }
+);
+
+ListActionIcon.displayName = 'ListIcon';
 
 // List content
 
@@ -77,7 +106,11 @@ export const ListContent = forwardRef<HTMLDivElement, IListContentProps>(
   ({ className, asChild, ...props }, ref) => {
     const Comp = asChild ? Slot : 'div';
     return (
-      <Comp ref={ref} {...props} className={cn('flex flex-grow flex-col gap-0.5', className)} />
+      <Comp
+        ref={ref}
+        {...props}
+        className={cn('shrink grow space-y-0.5 overflow-hidden', className)}
+      />
     );
   }
 );
@@ -96,7 +129,7 @@ export const ListTitle = forwardRef<HTMLHeadingElement, IListTitleProps>(
       <Comp
         ref={ref}
         {...props}
-        className={cn('font-NTSomic text-[0.8125rem] leading-tight', className)}
+        className={cn('line-clamp-1 font-NTSomic  text-base leading-tight', className)}
       />
     );
   }
@@ -116,7 +149,7 @@ export const ListSubtitle = forwardRef<HTMLHeadingElement, IListSubtitleProps>(
       <Comp
         ref={ref}
         {...props}
-        className={cn('font-sans text-[0.625rem] leading-[normal] text-[#B3B3B3]', className)}
+        className={cn('line-clamp-1 text-sm leading-[normal]  text-text-secondary', className)}
       />
     );
   }

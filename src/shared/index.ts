@@ -4,12 +4,13 @@ export { getNoun } from './utils/nouns';
 
 // Components
 export { Radio } from './ui/Radio';
-export { Button } from './ui/buttonNew';
+export { Button, buttonVariants } from './ui/Button';
 export { Toggle } from './ui/Toggle';
 export { Checkbox } from './ui/checkboxNew';
 export { TextArea } from './ui/TextArea';
 export { Input } from './ui/inputNew';
 export { Icon } from './ui/Icon';
+export { SmallIcon } from './ui/SmallIcon';
 export { IconButton } from './ui/IconButton';
 export { Progress } from './ui/Progress';
 export {
@@ -23,6 +24,16 @@ export {
 export { Menu } from './ui/Menu';
 export { List, ListContent, ListIcon, ListSubtitle, ListTitle, ListItem } from './ui/List';
 export { Tab } from './ui/Tab/Tab';
+export {
+  List,
+  ListContent,
+  ListIcon,
+  ListSubtitle,
+  ListTitle,
+  ListItem,
+  ListActionIcon,
+} from './ui/List';
+export { Tab } from './ui/Tab';
 export { Tabs } from './ui/Tabs';
 export { AuthSessionProvider } from './ui/AuthSessionProvider';
 export { ReduxStoreProvider } from './ui/ReduxStoreProvider';
@@ -63,6 +74,7 @@ export { RadioGroup, RadioGroupItem } from './ui/radio-group';
 // Interfaces
 export type { IIcon } from './ui/Icon';
 export type { ITab } from './ui/Tab/Tab';
+export type { ITab } from './ui/Tab';
 export type { UploadFileResponseDto } from './model/uploadFileResponseDto';
 
 // Types
@@ -81,3 +93,16 @@ export { useAppDispatch, useAppSelector } from './api/store';
 export { useDrop } from './hooks/useDrop';
 export { useScrollPosition } from './hooks/useScrollPosition';
 export { useUpdateTitle } from './hooks/useUpdateTitle';
+
+export {
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
+} from './ui/Select';

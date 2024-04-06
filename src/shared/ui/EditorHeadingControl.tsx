@@ -36,7 +36,7 @@ export const EditorHeadingControl = () => {
             'rounded-lg border border-transparent p-2 transition-colors hover:border-white/10 hover:bg-white/5'
           )}
         >
-          <Icon type='heading' />
+          <Icon type='header' />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>

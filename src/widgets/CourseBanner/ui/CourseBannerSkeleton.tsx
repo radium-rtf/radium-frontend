@@ -1,5 +1,3 @@
 export const CourseBannerSkeleton = () => {
-  return (
-    <div className='relative mb-8 h-64 overflow-hidden rounded-2xl bg-card md:container md:mx-auto md:mb-16' />
-  );
+  return <div className='h-64 w-full animate-pulse rounded bg-whiteLight' />;
 };

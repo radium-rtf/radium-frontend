@@ -16,14 +16,14 @@ export const CourseDelete: FC<CourseDeleteProps> = ({ courseId }) => {
     deleteCourse(courseId)
       .unwrap()
       .then(() => {
-        replace('/');
+        replace('/', { scroll: false });
       });
   };
 
   return (
-    <Button variant='destructive' className='w-full justify-start' onClick={onClickHandler}>
-      <Icon type='delete' className='shrink-0 text-inherit' />
-      <span className='ml-[calc(50%-18px)] -translate-x-1/2'>Удалить</span>
+    <Button type='button' variant='destructive' onClick={onClickHandler}>
+      <Icon type='delete' className='mr-4 shrink-0 text-inherit' />
+      <span>Удалить курс</span>
     </Button>
   );
 };

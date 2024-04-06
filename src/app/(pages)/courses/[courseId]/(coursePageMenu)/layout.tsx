@@ -10,7 +10,7 @@ import {
   ListItem,
   ListTitle,
   Progress,
-  useScrollPosition,
+  SmallIcon,
   useUpdateTitle,
 } from '@/shared';
 import { Header } from '@/widgets/Header';
@@ -53,8 +53,6 @@ export default function CoursePageLayout({ children }: CourseStudyLayoutProps) {
 
   const [updateOrder] = useChangeCourseModuleOrderMutation();
   useUpdateTitle(course?.name);
-
-  const scrollHeight = useScrollPosition();
 
   const { isAuthor, isCoauthor } = useCourseRoles(course);
   const isEditAllowed = isAuthor || isCoauthor;
@@ -108,14 +106,13 @@ export default function CoursePageLayout({ children }: CourseStudyLayoutProps) {
           </Link>
         )} */}
       {/* </Header> */}
-      <main className='mb-8 mt-[8.25rem] flex flex-grow px-12'>
+      <main className='my-12 flex flex-grow items-start gap-8 px-12'>
         {/* <CourseEditContextWrapper> */}
         {/* Loading state */}
         {isLoading && (
           <nav
             className={cn(
-              'sticky top-[8.25rem] -ml-6 flex max-h-[calc(100vh-8.25rem)] w-64 shrink-0 flex-grow-0 flex-col gap-4',
-              scrollHeight > 50 && 'top-16 max-h-[calc(100vh-4rem)]'
+              'sticky top-28 -ml-6 flex max-h-[calc(100vh-8.25rem)] w-64 shrink-0 flex-grow-0 flex-col gap-4'
             )}
           >
             <div className='h-10 w-64 animate-pulse rounded-[0.5rem] bg-card' />
@@ -133,8 +130,7 @@ export default function CoursePageLayout({ children }: CourseStudyLayoutProps) {
         {course && (
           <nav
             className={cn(
-              'sticky top-[8.25rem] -ml-6 flex max-h-[calc(100vh-8.65rem)] w-64 shrink-0 flex-grow-0 flex-col self-start transition-all',
-              scrollHeight > 50 && 'top-16 max-h-[calc(100vh-4rem)]'
+              'sticky top-28 -ml-6 flex max-h-[calc(100vh-7rem)] w-64 shrink-0 flex-grow-0 flex-col self-start transition-all'
             )}
           >
             {isEditAllowed && <CourseEditToggle />}
@@ -157,7 +153,7 @@ export default function CoursePageLayout({ children }: CourseStudyLayoutProps) {
                   <ListContent>
                     <ListTitle>{group.name}</ListTitle>
                   </ListContent>
-                  <Icon className='h-3 w-3 text-primary' type='chevron-right' />
+                  <SmallIcon type='chevron-right' />
                 </Link>
               </ListItem>
             ))}
@@ -194,7 +190,7 @@ export default function CoursePageLayout({ children }: CourseStudyLayoutProps) {
         {!error && (
           <>
             <div className='flex flex-grow justify-center'>{course && children}</div>
-            {params.pageId && course && <CreateCourseSection />}
+            {params.pageId && params.pageId !== '0' && course && <CreateCourseSection />}
           </>
         )}
         {/* Error state */}
@@ -203,7 +199,7 @@ export default function CoursePageLayout({ children }: CourseStudyLayoutProps) {
             <div className='flex h-full w-full flex-col items-center justify-center gap-4'>
               <Image src={'/error.svg'} width={224} height={224} alt='Not found error' />
               <h1 className='text-5xl font-NTSomic font-bold text-primary'>Такого курса нет :(</h1>
-              <p className='text-text-primary text-[0.8125rem]'>
+              <p className='text-[0.8125rem] text-text-primary'>
                 Возможно курс был удален или вы перешли по неверной ссылке
               </p>
               <Button color='accent' asChild className='w-64'>

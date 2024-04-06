@@ -57,7 +57,7 @@ export const CourseSectionFooter = <TFormState extends object>({
         </span>
       )}
       <Button type='button' variant='outline' onClick={() => reset(resetObject)}>
-        <Icon type='reset' />
+        <Icon type='undo' />
       </Button>
       {!isTask && (
         <Button

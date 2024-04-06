@@ -39,7 +39,7 @@ export const RegistrationCard = () => {
       name: data.name,
       password: data.password.password,
     });
-    if (!response) {
+    if (!response || !response.email) {
       setError('email', { message: 'Ошибка' }, { shouldFocus: false });
       return;
     }
@@ -90,7 +90,7 @@ export const RegistrationCard = () => {
               icon='password'
               actionIcon={isSecondPasswordShowed ? 'visible' : 'invisible'}
               onActionClick={() => setIsSecondPasswordShowed((prev) => !prev)}
-              type={isPasswordShowed ? 'text' : 'password'}
+              type={isSecondPasswordShowed ? 'text' : 'password'}
               id='passwordNew'
               placeholder='Еще раз пароль'
               autoComplete='new-password'

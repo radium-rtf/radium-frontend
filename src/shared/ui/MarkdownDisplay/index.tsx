@@ -45,7 +45,8 @@ export const MarkdownDisplay: FC<MarkdownDisplayProps> = ({ markdown }) => {
         'prose-blockquote:not-italic',
         'prose-code:font-normal',
         'prose-code:text-[0.8125rem]',
-        'prose-pre:p-0'
+        'prose-pre:p-0',
+        'prose-li:text-base'
       )}
       components={components}
     >
