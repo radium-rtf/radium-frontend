@@ -1,6 +1,6 @@
 'use client';
 import { CourseEditContext } from '@/features/CourseEditContext';
-import { List, ListContent, ListIcon, ListItem, ListTitle, cn } from '@/shared';
+import { FileType, List, ListContent, ListIcon, ListItem, ListTitle, cn } from '@/shared';
 import { useParams, useRouter } from 'next/navigation';
 import { FC, useContext } from 'react';
 import { useCreateSectionMutation } from '../api/createCourseSectionApi';
@@ -207,6 +207,28 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
             </List>
             <h3 className='px-6 py-4 font-NTSomic text-lg font-bold text-primary'>Задания</h3>
             <List>
+              <ListItem asChild>
+                <button
+                  className='group rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
+                  onClick={() =>
+                    createSection({
+                      pageId,
+                      file: { fileTypes: [FileType.zip], question: 'Задание?' },
+                    })
+                      .unwrap()
+                      .then((res) => push(`#section-${res.id}`, { scroll: true }))
+                  }
+                >
+                  <ListIcon icon='attach' className='text-primary' />
+                  <ListContent>
+                    <ListTitle>Файл</ListTitle>
+                  </ListContent>
+                  <ListIcon
+                    icon='add'
+                    className='h-3 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100'
+                  />
+                </button>
+              </ListItem>
               <ListItem asChild>
                 <button
                   className='group rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'

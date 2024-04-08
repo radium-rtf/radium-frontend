@@ -157,14 +157,14 @@ export const MediaSectionEdit: FC<MediaSectionEditProps> = ({ sectionData }) => 
             <Tabs>
               <Tab
                 isSelected={mediaItem === 'file'}
-                onClick={() => isEditing && setMediaItem('file')}
+                onClick={() => setMediaItem('file')}
                 icon='attach'
               >
                 Файл
               </Tab>
               <Tab
                 isSelected={mediaItem === 'link'}
-                onClick={() => isEditing && setMediaItem('link')}
+                onClick={() => setMediaItem('link')}
                 icon='link'
               >
                 Ссылка

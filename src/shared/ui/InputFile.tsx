@@ -49,7 +49,7 @@ export const InputFile: FC<InputFileProps> = ({
     } else {
       const names: string[] = [];
       for (const file of files) {
-        if (!allowedFileTypes?.some((type) => type === file.name.split('.')[1])) {
+        if (!allowedFileTypes?.some((type) => type === `.${file.name.split('.')[1]}`)) {
           setIsError(true);
           return;
         }
@@ -118,7 +118,7 @@ export const InputFile: FC<InputFileProps> = ({
           inputChangeHandler(e);
         }}
         type='file'
-        accept={allowedFileTypes ? allowedFileTypes.map((type) => `.${type}`).join() : undefined}
+        accept={allowedFileTypes ? allowedFileTypes.join() : undefined}
         className='hidden'
         {...props}
       />

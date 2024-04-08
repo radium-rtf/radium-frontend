@@ -9,9 +9,13 @@ export interface ITab extends ButtonHTMLAttributes<HTMLButtonElement> {
   isIdle?: boolean;
 }
 
-export const Tab: FC<ITab> = ({ icon, children, isSelected, isIdle }) => {
+export const Tab: FC<ITab> = ({ icon, children, isSelected, isIdle, ...props }) => {
   return (
-    <button type='button' className={cn('tab', isSelected && 'tab-selected', isIdle && 'tab-idle')}>
+    <button
+      type='button'
+      className={cn('tab', isSelected && 'tab-selected', isIdle && 'tab-idle')}
+      {...props}
+    >
       <Icon type={icon} className={cn([isSelected && 'tab-selected'])} />
       <span className={cn('text-base text-text-primary', isSelected && 'tab-selected')}>
         {children}
