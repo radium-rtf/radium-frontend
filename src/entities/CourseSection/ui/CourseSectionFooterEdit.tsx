@@ -9,11 +9,11 @@ interface CourseSectionFooterEditProps {
   setIsEditing: (v: boolean) => void;
   deleteButton?: ReactNode;
   errorMessage?: string | null;
-  isNotScorable?: boolean;
+  hasScore?: boolean;
 }
 
 export const CourseSectionFooterEdit: FC<CourseSectionFooterEditProps> = ({
-  isNotScorable = false,
+  hasScore,
   deleteButton,
   isEditing,
   setIsEditing,
@@ -27,7 +27,7 @@ export const CourseSectionFooterEdit: FC<CourseSectionFooterEditProps> = ({
 
   return (
     <CardFooter className='justify-end gap-4'>
-      {!isNotScorable && isEditing && (
+      {hasScore && isEditing && (
         <>
           <Input
             placeholder='Лимит'

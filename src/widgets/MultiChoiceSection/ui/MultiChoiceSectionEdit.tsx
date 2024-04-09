@@ -254,6 +254,7 @@ export const MultiChoiceSectionEdit: FC<MultiChoiceSectionEditProps> = ({ sectio
             </>
           )}
           <CourseSectionFooterEdit
+            hasScore
             isEditing={isEditing}
             setIsEditing={setIsEditing}
             deleteButton={

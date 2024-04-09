@@ -245,6 +245,7 @@ export const PermutationSectionEdit: FC<PermutationsSectionEditProps> = ({ secti
             </>
           )}
           <CourseSectionFooterEdit
+            hasScore
             isEditing={isEditing}
             setIsEditing={setIsEditing}
             deleteButton={

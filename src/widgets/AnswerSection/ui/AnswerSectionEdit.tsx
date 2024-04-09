@@ -133,6 +133,7 @@ export const AnswerSectionEdit: FC<AnswerSectionEditProps> = ({ sectionData }) =
             </CardContent>
           )}
           <CourseSectionFooterEdit
+            hasScore
             isEditing={isEditing}
             setIsEditing={setIsEditing}
             deleteButton={

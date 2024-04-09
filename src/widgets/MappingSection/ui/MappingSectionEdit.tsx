@@ -325,6 +325,7 @@ export const MappingSectionEdit: FC<MappingSectionEditProps> = ({ sectionData })
             </>
           )}
           <CourseSectionFooterEdit
+            hasScore
             isEditing={isEditing}
             setIsEditing={setIsEditing}
             deleteButton={

@@ -126,7 +126,6 @@ export const TextSectionEdit: FC<TextSectionEditProps> = ({ sectionData }) => {
             )}
           </CardContent>
           <CourseSectionFooterEdit
-            isNotScorable
             isEditing={isEditing}
             setIsEditing={setIsEditing}
             deleteButton={

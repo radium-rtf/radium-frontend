@@ -249,6 +249,7 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({ sectionData }) =
             </>
           )}
           <CourseSectionFooterEdit
+            hasScore
             isEditing={isEditing}
             setIsEditing={setIsEditing}
             deleteButton={
