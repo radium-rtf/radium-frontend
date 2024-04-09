@@ -9,9 +9,11 @@ interface CourseSectionFooterEditProps {
   setIsEditing: (v: boolean) => void;
   deleteButton?: ReactNode;
   errorMessage?: string | null;
+  isNotScorable?: boolean;
 }
 
 export const CourseSectionFooterEdit: FC<CourseSectionFooterEditProps> = ({
+  isNotScorable = false,
   deleteButton,
   isEditing,
   setIsEditing,
@@ -25,7 +27,7 @@ export const CourseSectionFooterEdit: FC<CourseSectionFooterEditProps> = ({
 
   return (
     <CardFooter className='justify-end gap-4'>
-      {isEditing && (
+      {!isNotScorable && isEditing && (
         <>
           <Input
             placeholder='Лимит'
@@ -51,14 +53,10 @@ export const CourseSectionFooterEdit: FC<CourseSectionFooterEditProps> = ({
       )}
       {deleteButton}
       {!isEditing && (
-        <Button
-          type='button'
-          className='w-64 shrink-0 justify-start'
-          variant='outline'
-          onClick={() => setIsEditing(true)}
-        >
-          <Icon type='edit' className='text-inherit' />
-          <span className='ml-[calc(50%-18px)] -translate-x-1/2'>Редактировать</span>
+        <Button type='button' variant='outline' size='wide' onClick={() => setIsEditing(true)}>
+          <Icon type='edit' className='shrink-0 text-inherit' />
+          <span>Редактировать</span>
+          <Icon type='blank' className='shrink-0 text-inherit' />
         </Button>
       )}
       {isEditing && (

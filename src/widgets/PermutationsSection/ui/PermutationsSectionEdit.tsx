@@ -73,11 +73,16 @@ export const PermutationSectionEdit: FC<PermutationsSectionEditProps> = ({ secti
     defaultValues: {
       permutation: {
         question: sectionData.content,
-        answer: sectionData.variants
-          .map((v) => ({
-            value: v,
-          }))
-          .concat([{ value: '' }]),
+        answer:
+          sectionData.variants.length < 10
+            ? sectionData.variants
+                .map((v) => ({
+                  value: v,
+                }))
+                .concat([{ value: '' }])
+            : sectionData.variants.map((v) => ({
+                value: v,
+              })),
       },
       maxAttempts: sectionData.maxAttempts,
       maxScore: sectionData.maxScore,
@@ -108,7 +113,6 @@ export const PermutationSectionEdit: FC<PermutationsSectionEditProps> = ({ secti
         answer: data.permutation.answer.map((o) => o.value),
       },
     };
-    body.permutation.answer.pop();
     const response = await updatePermutationsSection({
       sectionId: sectionData.id,
       ...body,
@@ -214,7 +218,11 @@ export const PermutationSectionEdit: FC<PermutationsSectionEditProps> = ({ secti
                           {...register(`permutation.answer.${index}.value`, {
                             onChange: (e) => {
                               // add if last input has text
-                              if (e.target.value !== '' && index === fields.length - 1) {
+                              if (
+                                e.target.value !== '' &&
+                                index === fields.length - 1 &&
+                                fields.length < 10
+                              ) {
                                 append({ value: '' }, { shouldFocus: false });
                               }
                               // remove if NOT last empty
@@ -245,6 +253,9 @@ export const PermutationSectionEdit: FC<PermutationsSectionEditProps> = ({ secti
             errorMessage={
               errors.root?.message ||
               errors.permutation?.question?.message ||
+              errors.permutation?.answer?.message ||
+              errors.permutation?.answer?.find?.((v) => v?.value?.message)?.value?.message ||
+              errors.permutation?.answer?.root?.message ||
               errors.permutation?.answer?.message ||
               errors.maxAttempts?.message ||
               errors.maxScore?.message

@@ -49,11 +49,16 @@ export const MultiChoiceSectionEdit: FC<MultiChoiceSectionEditProps> = ({ sectio
       multichoice: {
         answer: [],
         question: sectionData.content,
-        variants: sectionData.variants
-          .map((v) => ({
-            value: v,
-          }))
-          .concat([{ value: '' }]),
+        variants:
+          sectionData.variants.length < 10
+            ? sectionData.variants
+                .map((v) => ({
+                  value: v,
+                }))
+                .concat([{ value: '' }])
+            : sectionData.variants.map((v) => ({
+                value: v,
+              })),
       },
     },
   });
@@ -82,7 +87,6 @@ export const MultiChoiceSectionEdit: FC<MultiChoiceSectionEditProps> = ({ sectio
         variants: data.multichoice.variants.map((o) => o.value),
       },
     };
-    body.multichoice.variants.pop();
     const response = await updateMultiChoiceSection({
       sectionId: sectionData.id,
       ...body,
@@ -219,7 +223,11 @@ export const MultiChoiceSectionEdit: FC<MultiChoiceSectionEditProps> = ({ sectio
                                           );
                                         }
                                       }
-                                      if (e.target.value !== '' && index === fields.length - 1) {
+                                      if (
+                                        e.target.value !== '' &&
+                                        index === fields.length - 1 &&
+                                        fields.length < 10
+                                      ) {
                                         append({ value: '' }, { shouldFocus: false });
                                       }
 
@@ -256,6 +264,9 @@ export const MultiChoiceSectionEdit: FC<MultiChoiceSectionEditProps> = ({ sectio
               errors.multichoice?.variants?.root?.message ||
               errors.multichoice?.question?.message ||
               errors.multichoice?.answer?.message ||
+              errors.multichoice?.variants?.find?.((v) => v?.value?.message)?.value?.message ||
+              errors.multichoice?.variants?.root?.message ||
+              errors.multichoice?.variants?.message ||
               errors.maxAttempts?.message ||
               errors.maxScore?.message
             }

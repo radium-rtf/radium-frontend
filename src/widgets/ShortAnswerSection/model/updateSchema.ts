@@ -12,10 +12,12 @@ export const updateSchema = z.object({
   shortanswer: z.object({
     answer: z
       .string({ invalid_type_error: 'Необходимо ввести ответ' })
-      .min(1, 'Необходимо ввести ответ'),
+      .min(1, 'Необходимо ввести ответ')
+      .max(256, 'Слишком длинный ответ'),
     question: z
       .string({ invalid_type_error: 'Необходимо ввести вопрос' })
-      .min(1, 'Необходимо ввести вопрос'),
+      .min(1, 'Введите вопрос')
+      .max(4096, 'Слишком длинный вопрос'),
   }),
 });
 

@@ -55,11 +55,16 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({ sectionData }) =
     defaultValues: {
       choice: {
         question: sectionData.content,
-        variants: sectionData.variants
-          .map((v) => ({
-            value: v,
-          }))
-          .concat([{ value: '' }]),
+        variants:
+          sectionData.variants.length < 10
+            ? sectionData.variants
+                .map((v) => ({
+                  value: v,
+                }))
+                .concat([{ value: '' }])
+            : sectionData.variants.map((v) => ({
+                value: v,
+              })),
       },
       maxAttempts: sectionData.maxAttempts,
       maxScore: sectionData.maxScore,
@@ -90,7 +95,6 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({ sectionData }) =
         variants: data.choice.variants.map((o) => o.value),
       },
     };
-    body.choice.variants.pop();
     const response = await updateChoiceSection({
       sectionId: sectionData.id,
       ...body,
@@ -215,7 +219,11 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({ sectionData }) =
                                     ).dataset.state === 'checked' &&
                                       setValue('choice.answer', e.target.value);
                                     // add if last input has text
-                                    if (e.target.value !== '' && index === fields.length - 1) {
+                                    if (
+                                      e.target.value !== '' &&
+                                      index === fields.length - 1 &&
+                                      fields.length < 10
+                                    ) {
                                       append({ value: '' }, { shouldFocus: false });
                                     }
                                     // remove if NOT last empty
@@ -250,6 +258,9 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({ sectionData }) =
               errors.root?.message ||
               errors.choice?.question?.message ||
               errors.choice?.answer?.message ||
+              errors.choice?.variants?.find?.((v) => v?.value?.message)?.value?.message ||
+              errors.choice?.variants?.root?.message ||
+              errors.choice?.variants?.message ||
               errors.maxAttempts?.message ||
               errors.maxScore?.message
             }
