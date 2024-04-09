@@ -111,9 +111,9 @@ const config: Config = {
         backgroundPage: 'hsl(var(--background-page))',
         backgroundOverlay: 'hsl(var(--background-overlay))',
 
-        outlineGeneral: 'hsl(var(--outline-general))',
+        outlineGeneral: 'var(--outline-general)',
 
-        whiteLight: 'hsl(var(--white-light))',
+        whiteLight: 'var(--white-light)',
         whiteMedium: 'hsl(var(--white-medium))',
         whiteHard: 'hsl(var(--white-hard))',
         whiteHeavy: 'hsl(var(--white-heavy))',
@@ -123,7 +123,7 @@ const config: Config = {
         blackHard: 'hsl(var(--black-hard))',
 
         'accent-primary': {
-          DEFAULT: 'hsl(var(--accent-primary-regular))',
+          DEFAULT: 'var(--accent-primary-regular)',
           foreground: 'hsl(var(--accent-primary-foreground))',
           disabled: 'hsl(var(--accent-primary-disabled))',
           hovered: 'hsl(var(--accent-primary-hovered))',

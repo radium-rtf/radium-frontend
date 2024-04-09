@@ -29,3 +29,14 @@ export { useCourseRoles } from './lib/useCourseRoles';
 
 // Skeletons
 export { CourseCardSkeleton } from './ui/CourseCardSkeleton';
+
+// Constants
+export {
+  SECTION_MAX_ANSWERS_COUNT,
+  SECTION_MAX_CONTENT_LENGTH,
+  SECTION_MAX_VARIANT_LENGTH,
+  SECTION_MIN_CONTENT_LENGTH,
+  SECTION_MIN_VARIANT_LENGTH,
+  SECTION_MAX_VARIANT_COUNT,
+  SECTION_MIN_VARIANT_COUNT,
+} from './lib/constants';

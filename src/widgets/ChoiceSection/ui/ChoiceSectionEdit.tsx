@@ -24,6 +24,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
 import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
+import { SECTION_MAX_ANSWERS_COUNT } from '@/entities/Course';
 
 interface ChoiceSectionEditProps {
   sectionData: ChoiceSectionResponseDto;
@@ -55,11 +56,16 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({ sectionData }) =
     defaultValues: {
       choice: {
         question: sectionData.content,
-        variants: sectionData.variants
-          .map((v) => ({
-            value: v,
-          }))
-          .concat([{ value: '' }]),
+        variants:
+          sectionData.variants.length < SECTION_MAX_ANSWERS_COUNT
+            ? sectionData.variants
+                .map((v) => ({
+                  value: v,
+                }))
+                .concat([{ value: '' }])
+            : sectionData.variants.map((v) => ({
+                value: v,
+              })),
       },
       maxAttempts: sectionData.maxAttempts,
       maxScore: sectionData.maxScore,
@@ -90,7 +96,6 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({ sectionData }) =
         variants: data.choice.variants.map((o) => o.value),
       },
     };
-    body.choice.variants.pop();
     const response = await updateChoiceSection({
       sectionId: sectionData.id,
       ...body,
@@ -215,7 +220,11 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({ sectionData }) =
                                     ).dataset.state === 'checked' &&
                                       setValue('choice.answer', e.target.value);
                                     // add if last input has text
-                                    if (e.target.value !== '' && index === fields.length - 1) {
+                                    if (
+                                      e.target.value !== '' &&
+                                      index === fields.length - 1 &&
+                                      fields.length < SECTION_MAX_ANSWERS_COUNT
+                                    ) {
                                       append({ value: '' }, { shouldFocus: false });
                                     }
                                     // remove if NOT last empty
@@ -241,6 +250,7 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({ sectionData }) =
             </>
           )}
           <CourseSectionFooterEdit
+            hasScore
             isEditing={isEditing}
             setIsEditing={setIsEditing}
             deleteButton={
@@ -250,6 +260,9 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({ sectionData }) =
               errors.root?.message ||
               errors.choice?.question?.message ||
               errors.choice?.answer?.message ||
+              errors.choice?.variants?.find?.((v) => v?.value?.message)?.value?.message ||
+              errors.choice?.variants?.root?.message ||
+              errors.choice?.variants?.message ||
               errors.maxAttempts?.message ||
               errors.maxScore?.message
             }

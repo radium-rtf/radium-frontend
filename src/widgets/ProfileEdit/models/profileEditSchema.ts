@@ -9,7 +9,7 @@ export const profileEditSchema = z.object({
     }
     return fd;
   }),
-  name: z.string().min(1, 'Некорректное имя!'),
+  name: z.string().min(1, 'Некорректное имя!').min(48, 'Некорректное имя!'),
   password: z
     .object({
       currentPassword: z.string(),
@@ -42,7 +42,7 @@ export const profileEditSchema = z.object({
           .string()
           .min(6, 'Слишком короткий пароль!')
           .max(32, 'Слишком длинный пароль!')
-          .regex(/[A-Za-z]/, 'Нет буквы')
+          // .regex(/[A-Za-z]/, 'Нет буквы')
           .regex(/[0-9]/, 'В пароле нет цифр!');
         return validator.safeParse(newPassword).success;
       },
