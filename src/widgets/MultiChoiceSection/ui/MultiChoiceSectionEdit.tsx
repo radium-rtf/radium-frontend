@@ -16,6 +16,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { SECTION_MAX_ANSWERS_COUNT } from '@/entities/Course';
 
 interface MultiChoiceSectionEditProps {
   sectionData: MultiChoiceSectionResponseDto;
@@ -50,7 +51,7 @@ export const MultiChoiceSectionEdit: FC<MultiChoiceSectionEditProps> = ({ sectio
         answer: [],
         question: sectionData.content,
         variants:
-          sectionData.variants.length < 10
+          sectionData.variants.length < SECTION_MAX_ANSWERS_COUNT
             ? sectionData.variants
                 .map((v) => ({
                   value: v,
@@ -226,7 +227,7 @@ export const MultiChoiceSectionEdit: FC<MultiChoiceSectionEditProps> = ({ sectio
                                       if (
                                         e.target.value !== '' &&
                                         index === fields.length - 1 &&
-                                        fields.length < 10
+                                        fields.length < SECTION_MAX_ANSWERS_COUNT
                                       ) {
                                         append({ value: '' }, { shouldFocus: false });
                                       }

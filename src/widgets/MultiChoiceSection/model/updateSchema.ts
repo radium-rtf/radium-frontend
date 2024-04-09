@@ -1,3 +1,11 @@
+import {
+  SECTION_MAX_CONTENT_LENGTH,
+  SECTION_MAX_VARIANT_COUNT,
+  SECTION_MAX_VARIANT_LENGTH,
+  SECTION_MIN_CONTENT_LENGTH,
+  SECTION_MIN_VARIANT_COUNT,
+  SECTION_MIN_VARIANT_LENGTH,
+} from '@/entities/Course';
 import { z } from 'zod';
 
 export const updateSchema = z.object({
@@ -5,9 +13,14 @@ export const updateSchema = z.object({
   maxScore: z.number().nonnegative(),
   multichoice: z.object({
     answer: z.string().array().min(1, 'Минимум 1 ответ'),
-    question: z.string().min(1, 'Введите вопрос').max(4096, 'Слишком длинный вопрос'),
+    question: z
+      .string()
+      .min(SECTION_MIN_CONTENT_LENGTH, 'Введите вопрос')
+      .max(SECTION_MAX_CONTENT_LENGTH, 'Слишком длинный вопрос'),
     variants: z
-      .object({ value: z.string() })
+      .object({
+        value: z.string(),
+      })
       .array()
       .transform((arr) => {
         if (arr[arr.length - 1].value) {
@@ -20,12 +33,12 @@ export const updateSchema = z.object({
           .object({
             value: z
               .string()
-              .min(3, 'Слишком короткий вариант')
-              .max(256, 'Слишком длинный вариант'),
+              .min(SECTION_MIN_VARIANT_LENGTH, 'Слишком короткий вариант')
+              .max(SECTION_MAX_VARIANT_LENGTH, 'Слишком длинный вариант'),
           })
           .array()
-          .min(2, 'Минимум 2 варианта')
-          .max(10, 'Максимум 10 вариантов')
+          .min(SECTION_MIN_VARIANT_COUNT, `Минимум ${SECTION_MIN_VARIANT_COUNT} варианта`)
+          .max(SECTION_MAX_VARIANT_COUNT, `Максимум ${SECTION_MAX_VARIANT_COUNT} вариантов`)
           .refine(
             (nums) => {
               return Object.values(

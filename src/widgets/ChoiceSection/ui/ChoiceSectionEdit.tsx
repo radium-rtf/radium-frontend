@@ -24,6 +24,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
 import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
+import { SECTION_MAX_ANSWERS_COUNT } from '@/entities/Course';
 
 interface ChoiceSectionEditProps {
   sectionData: ChoiceSectionResponseDto;
@@ -56,7 +57,7 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({ sectionData }) =
       choice: {
         question: sectionData.content,
         variants:
-          sectionData.variants.length < 10
+          sectionData.variants.length < SECTION_MAX_ANSWERS_COUNT
             ? sectionData.variants
                 .map((v) => ({
                   value: v,
@@ -222,7 +223,7 @@ export const ChoiceSectionEdit: FC<ChoiceSectionEditProps> = ({ sectionData }) =
                                     if (
                                       e.target.value !== '' &&
                                       index === fields.length - 1 &&
-                                      fields.length < 10
+                                      fields.length < SECTION_MAX_ANSWERS_COUNT
                                     ) {
                                       append({ value: '' }, { shouldFocus: false });
                                     }

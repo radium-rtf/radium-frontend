@@ -33,6 +33,7 @@ import { PermutationsEditItem } from './PermutationsEditItem';
 import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
 import { PermutationItem } from './PermutationItem';
 import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
+import { SECTION_MAX_ANSWERS_COUNT } from '@/entities/Course';
 
 interface PermutationsSectionEditProps {
   sectionData: PermutationSectionResponseDto;
@@ -74,7 +75,7 @@ export const PermutationSectionEdit: FC<PermutationsSectionEditProps> = ({ secti
       permutation: {
         question: sectionData.content,
         answer:
-          sectionData.variants.length < 10
+          sectionData.variants.length < SECTION_MAX_ANSWERS_COUNT
             ? sectionData.variants
                 .map((v) => ({
                   value: v,
@@ -221,7 +222,7 @@ export const PermutationSectionEdit: FC<PermutationsSectionEditProps> = ({ secti
                               if (
                                 e.target.value !== '' &&
                                 index === fields.length - 1 &&
-                                fields.length < 10
+                                fields.length < SECTION_MAX_ANSWERS_COUNT
                               ) {
                                 append({ value: '' }, { shouldFocus: false });
                               }

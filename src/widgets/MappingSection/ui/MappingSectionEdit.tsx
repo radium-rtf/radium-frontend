@@ -33,6 +33,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
 import { MappingEditDraggable } from './MappingEditDraggable';
+import { SECTION_MAX_ANSWERS_COUNT } from '@/entities/Course';
 
 interface MappingSectionEditProps {
   sectionData: MappingSectionResponseDto;
@@ -274,7 +275,7 @@ export const MappingSectionEdit: FC<MappingSectionEditProps> = ({ sectionData })
                                   if (
                                     e.target.value !== '' &&
                                     index === keysFields.length - 1 &&
-                                    keysFields.length < 10
+                                    keysFields.length < SECTION_MAX_ANSWERS_COUNT
                                   ) {
                                     answerAppend({ value: '' }, { shouldFocus: false });
                                     keysAppend({ value: '' }, { shouldFocus: false });
@@ -307,7 +308,7 @@ export const MappingSectionEdit: FC<MappingSectionEditProps> = ({ sectionData })
                                   if (
                                     e.target.value !== '' &&
                                     index === keysFields.length - 1 &&
-                                    keysFields.length < 10
+                                    keysFields.length < SECTION_MAX_ANSWERS_COUNT
                                   ) {
                                     answerAppend({ value: '' }, { shouldFocus: false });
                                     keysAppend({ value: '' }, { shouldFocus: false });
