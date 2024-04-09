@@ -1,8 +1,11 @@
 'use client';
 import { Icon, Input, cn } from '@/shared';
-import { ButtonHTMLAttributes, FC, FormEvent, useContext, useEffect, useState } from 'react';
+import { ButtonHTMLAttributes, FC, useContext, useEffect, useState } from 'react';
 import { CourseEditContext } from '@/features/CourseEditContext';
 import { useCreateCourseModuleMutation } from '@/entities/CourseModule';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { createModuleSchema, createModuleSchemaType } from '../model/createModuleSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   courseId: string;
@@ -12,6 +15,13 @@ export const NavigationCreateModule: FC<IProps> = ({ className, courseId, ...pro
   const [isCreating, setIsCreating] = useState(false);
   const { isEditing } = useContext(CourseEditContext);
   const [createModule] = useCreateCourseModuleMutation();
+
+  const form = useForm<createModuleSchemaType>({
+    defaultValues: {
+      name: '',
+    },
+    resolver: zodResolver(createModuleSchema),
+  });
 
   useEffect(() => {
     const escapeHandler = (e: KeyboardEvent) => {
@@ -27,14 +37,13 @@ export const NavigationCreateModule: FC<IProps> = ({ className, courseId, ...pro
     };
   }, [isCreating]);
 
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const fd = new FormData(e.currentTarget);
-    createModule({
-      courseId: courseId,
-      name: fd.get('newModule') as string,
+  const submitHandler: SubmitHandler<createModuleSchemaType> = async ({ name }) => {
+    await createModule({
+      courseId,
+      name,
     });
     setIsCreating(false);
+    form.reset();
   };
 
   if (!isEditing) {
@@ -43,8 +52,14 @@ export const NavigationCreateModule: FC<IProps> = ({ className, courseId, ...pro
 
   if (isCreating) {
     return (
-      <form onSubmit={submitHandler} className='px-2 py-1.5'>
-        <Input name='newModule' placeholder='Глава' />
+      <form onSubmit={form.handleSubmit(submitHandler)} className='px-2 py-1.5'>
+        <Input
+          disabled={form.formState.isSubmitting}
+          placeholder='Глава'
+          actionIcon='success'
+          onActionClick={() => form.handleSubmit(submitHandler)()}
+          {...form.register('name')}
+        />
       </form>
     );
   }
