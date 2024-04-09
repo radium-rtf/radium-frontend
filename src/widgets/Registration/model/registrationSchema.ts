@@ -6,14 +6,14 @@ export const registrationSchema = z.object({
     .min(1, 'Некорректная почта!')
     .transform((email) => (email.includes('@') ? email : `${email}@urfu.me`))
     .pipe(z.string().email('Некорректная почта!')),
-  name: z.string().min(1, 'Некорректное имя!'),
+  name: z.string().min(1, 'Некорректное имя!').max(48, 'Некорректное имя!'),
   password: z
     .object({
       password: z
         .string()
         .min(6, 'Слишком короткий пароль!')
         .max(32, 'Слишком длинный пароль!')
-        .regex(/[A-Za-z]/, 'Нет буквы')
+        // .regex(/([A-Za-z]|[#?!@$%^&*\-.])+/i, 'Нет буквы')
         .regex(/[0-9]/, 'В пароле нет цифр!'),
       passwordRepeat: z.string(),
     })
