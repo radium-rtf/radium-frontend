@@ -67,7 +67,10 @@ export const CourseSectionFooterEdit: FC<CourseSectionFooterEditProps> = ({
           disabled={isSubmitting}
           onClick={() => setIsEditing(true)}
         >
-          <Icon type={isSubmitting ? 'loading' : 'save'} className='shrink-0 text-inherit' />
+          <Icon
+            type={isSubmitting ? 'loading' : errorMessage ? 'alert' : 'save'}
+            className='shrink-0 text-inherit'
+          />
           <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
             {(isSubmitting && 'Сохраняем...') || (!isValid && errorMessage) || 'Сохранить'}
           </span>

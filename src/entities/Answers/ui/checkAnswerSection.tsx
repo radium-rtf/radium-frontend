@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, { FC } from 'react';
 import {
   Button,
   Card,
@@ -14,55 +14,51 @@ import {
 } from '@/shared';
 import { StudentAnswerDto } from '@/entities/Answers/model/answersDto';
 import { useReviewMutation } from '@/entities/Answers/api/reviewApi';
-import { round } from '@floating-ui/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { answerSchema, answerSchemaType } from '../model/answersSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 interface IProps {
   studentAnswer: StudentAnswerDto;
   reviewed?: boolean;
 }
 
-export const CheckAnswerSection: FC<IProps> = ({ studentAnswer: answer, reviewed }) => {
+export const CheckAnswerSection: FC<IProps> = ({ studentAnswer: answer }) => {
+  const [review] = useReviewMutation();
+
+  // Form init
+  const form = useForm<answerSchemaType>({
+    resolver: zodResolver(answerSchema),
+    defaultValues: {
+      comment: '',
+      score: 0,
+    },
+  });
+
+  const {
+    register,
+    clearErrors,
+    reset,
+    handleSubmit,
+    setError,
+    formState: { errors, isValid, isSubmitting, isSubmitSuccessful, isSubmitted, isDirty },
+  } = form;
+
+  const onSubmitHandler: SubmitHandler<answerSchemaType> = async (data) => {
+    const response = await review({
+      answerId: answer.id,
+      ...data,
+    });
+    if ('data' in response) {
+      setTimeout(() => reset(undefined, { keepValues: true, keepDirty: false }), 5000);
+    } else {
+      setError('root', { message: 'Ошибка!' });
+    }
+  };
   const pathname = usePathname();
   const sentDate = new Date(answer.createdAt);
-  const [score, setScore] = useState(
-    reviewed && answer.review ? round(answer.review.score * answer.section.maxScore) : undefined
-  );
-  const [comment, setComment] = useState(reviewed && answer.review ? answer.review.comment : '');
-  const [review, { isLoading }] = useReviewMutation();
-
-  const handleReview = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    if (!score && score !== 0) {
-      return;
-    }
-
-    review({
-      answerId: answer.id,
-      comment: comment,
-      score: score,
-    }).unwrap();
-  };
-
-  const handleScoreChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length === 0) {
-      setScore(undefined);
-      return;
-    }
-
-    const score = Number(e.target.value);
-
-    if (isNaN(score)) {
-      return;
-    } else if (score <= 0) {
-      setScore(0);
-    } else if (score >= answer.section.maxScore) {
-      setScore(answer.section.maxScore);
-    } else {
-      setScore(score);
-    }
-  };
 
   return (
     <AnimatePresence mode='wait'>
@@ -73,49 +69,78 @@ export const CheckAnswerSection: FC<IProps> = ({ studentAnswer: answer, reviewed
         exit={{ opacity: 0 }}
       >
         <Card>
-          <CardHeader>
-            <div className='flex items-center gap-4'>
-              <Icon type='task' className='text-primary' />
-              <span className='font-NTSomic text-base font-medium leading-[normal] text-primary'>
-                Задание
-              </span>
-            </div>
-            <p className='text-[0.625rem] leading-[normal] text-[#B3B3B3]'>
-              отправлено {sentDate.getDay()} {monthDictionary[sentDate.getMonth()]}{' '}
-              {sentDate.getFullYear()} в {sentDate.getHours()}:{sentDate.getMinutes()}
-            </p>
-          </CardHeader>
-          <CardContent>
-            <CardDescription>{answer.section.content}</CardDescription>
-          </CardContent>
-          <CardContent>
-            <TextArea className='w-full resize-y' defaultValue={answer.answer} readOnly></TextArea>
-          </CardContent>
-          <CardContent>
-            <Input
-              icon='comment'
-              placeholder='Комментарий'
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-            />
-          </CardContent>
-          <CardFooter className='flex justify-end gap-4'>
-            <Input
-              wrapperClassName='w-64'
-              placeholder='Оценка'
-              value={score ?? ''}
-              onChange={handleScoreChange}
-              text={`/ ${answer.section.maxScore} баллов`}
-            />
-            <Button
-              onClick={handleReview}
-              variant='outline'
-              className='w-64 shrink-0 justify-start'
-            >
-              <Icon type={isLoading ? 'loading' : reviewed ? 'update' : 'submit'} />
-              <span className='ml-[calc(50%-18px)] -translate-x-1/2'>Оценить</span>
-            </Button>
-          </CardFooter>
+          <form onSubmit={handleSubmit(onSubmitHandler)}>
+            <CardHeader>
+              <div className='flex items-center gap-4'>
+                <Icon type='task' className='text-primary' />
+                <span className='font-NTSomic text-base font-medium leading-[normal] text-primary'>
+                  Задание
+                </span>
+              </div>
+              <p className='text-[0.625rem] leading-[normal] text-[#B3B3B3]'>
+                отправлено {sentDate.getDay()} {monthDictionary[sentDate.getMonth()]}{' '}
+                {sentDate.getFullYear()} в {sentDate.getHours()}:{sentDate.getMinutes()}
+              </p>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>{answer.section.content}</CardDescription>
+            </CardContent>
+            <CardContent>
+              <TextArea
+                className='w-full resize-y'
+                defaultValue={answer.answer}
+                readOnly
+              ></TextArea>
+            </CardContent>
+            <CardContent>
+              <Input
+                placeholder='Ответ'
+                {...register('comment', {
+                  onChange: () => errors.root && clearErrors('root'),
+                })}
+              />
+            </CardContent>
+            <CardFooter className='flex justify-end gap-4'>
+              <Input
+                wrapperClassName='w-64'
+                placeholder='Оценка'
+                {...register('score', {
+                  onChange: () => errors.root && clearErrors('root'),
+                })}
+                text={`/ ${answer.section.maxScore} баллов`}
+              />
+              <Button
+                type='submit'
+                disabled={!isValid || isSubmitting}
+                variant={
+                  (!isValid && isSubmitted && 'destructive') ||
+                  (!isSubmitSuccessful && 'outline') ||
+                  'default'
+                }
+                className='w-64 shrink-0 justify-start'
+              >
+                <Icon
+                  type={
+                    (isSubmitting && 'loading') ||
+                    (isSubmitSuccessful && 'success') ||
+                    ((errors.score?.message || errors.comment?.message || errors.root?.message) &&
+                      'alert') ||
+                    (answer.verdict === 'REVIEWED' && !isDirty && 'update') ||
+                    'submit'
+                  }
+                  className='text-inherit'
+                />
+                <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
+                  {(isSubmitting && 'Оцениваем...') ||
+                    (!isValid &&
+                      (errors.score?.message || errors.comment?.message || errors.root?.message)) ||
+                    (isSubmitSuccessful && 'Оценено!') ||
+                    (answer.verdict === 'REVIEWED' && !isDirty && 'Сменить оценку') ||
+                    'Оценить'}
+                </span>
+              </Button>
+            </CardFooter>
+          </form>
         </Card>
       </motion.div>
     </AnimatePresence>

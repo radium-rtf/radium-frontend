@@ -77,9 +77,8 @@ export const PermutationsSectionDisplay: FC<PermutationSectionDisplayProps> = ({
     if ('data' in response) {
       if (response.data.verdict === 'WA') {
         setError('permutation.answer', { message: 'Неправильно!' });
-      } else {
-        setTimeout(() => reset(undefined, { keepValues: true }), 2000);
       }
+      setTimeout(() => reset(undefined, { keepValues: true }), 5000);
     } else {
       setError('root', { message: 'Ошибка!' });
     }
@@ -129,7 +128,11 @@ export const PermutationsSectionDisplay: FC<PermutationSectionDisplayProps> = ({
           <CourseSectionFooter
             sectionData={sectionData}
             resetObject={DEFAULT_STATE}
-            errorMessage={errors.root?.message || errors.permutation?.answer?.message}
+            errorMessage={
+              errors.permutation?.message ||
+              errors.permutation?.answer?.message ||
+              errors.root?.message
+            }
           />
         </form>
       </Card>

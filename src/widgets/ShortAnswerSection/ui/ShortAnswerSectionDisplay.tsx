@@ -50,9 +50,8 @@ export const ShortAnswerSectionDisplay: FC<ShortAnswerSectionDisplayProps> = ({ 
     if ('data' in response) {
       if (response.data.verdict === 'WA') {
         setError('shortanswer.answer', { message: 'Неправильно!' });
-      } else {
-        setTimeout(() => reset(undefined, { keepValues: true }), 2000);
       }
+      setTimeout(() => reset(undefined, { keepValues: true }), 5000);
     } else {
       setError('root', { message: 'Ошибка!' });
     }
@@ -80,7 +79,7 @@ export const ShortAnswerSectionDisplay: FC<ShortAnswerSectionDisplayProps> = ({ 
           <CourseSectionFooter<answerSchemaType>
             sectionData={sectionData}
             resetObject={{ shortanswer: { answer: '' } }}
-            errorMessage={errors.root?.message || errors.shortanswer?.message}
+            errorMessage={errors.shortanswer?.answer?.message || errors.root?.message}
           />
         </form>
       </Card>
