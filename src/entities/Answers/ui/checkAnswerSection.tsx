@@ -78,7 +78,7 @@ export const CheckAnswerSection: FC<IProps> = ({ studentAnswer: answer }) => {
                 </span>
               </div>
               <p className='text-[0.625rem] leading-[normal] text-[#B3B3B3]'>
-                отправлено {sentDate.getDay()} {monthDictionary[sentDate.getMonth()]}{' '}
+                отправлено {sentDate.getDate()} {monthDictionary[sentDate.getMonth()]}{' '}
                 {sentDate.getFullYear()} в {sentDate.getHours()}:{sentDate.getMinutes()}
               </p>
             </CardHeader>
