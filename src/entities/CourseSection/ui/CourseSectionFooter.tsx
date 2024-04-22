@@ -19,9 +19,9 @@ export const CourseSectionFooter = <TFormState extends object>({
 }: CourseSectionFooterProps<TFormState>) => {
   const {
     reset,
-    formState: { isSubmitting, isValid, isSubmitSuccessful, isSubmitted },
-  } = useFormContext<TFormState>();
 
+    formState: { isSubmitting, isValid, isSubmitSuccessful, isSubmitted, isDirty },
+  } = useFormContext<TFormState>();
   return (
     <CardFooter
       className={cn('justify-end gap-4', 'review' in sectionData && !!sectionData.review && 'pb-4')}
@@ -68,13 +68,25 @@ export const CourseSectionFooter = <TFormState extends object>({
           }
           type='submit'
           className='w-64 justify-start'
-          variant={!isValid && isSubmitted ? 'destructive' : 'default'}
+          variant={
+            (!isValid && isSubmitted && 'destructive') ||
+            (sectionData.verdict && !isSubmitSuccessful && 'outline') ||
+            'default'
+          }
         >
-          <Icon type='send' className='text-inherit' />
+          <Icon
+            type={
+              (isSubmitting && 'loading') ||
+              (isSubmitSuccessful && 'success') ||
+              (errorMessage && 'alert') ||
+              'submit'
+            }
+            className='text-inherit'
+          />
           <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
-            {(isSubmitting && 'Отправляем...') ||
+            {(isSubmitting && 'Отвечаем...') ||
               (!isValid && errorMessage) ||
-              (isSubmitSuccessful && 'Верно!') ||
+              (isSubmitSuccessful && 'Правильно!') ||
               'Ответить'}
           </span>
         </Button>
@@ -87,21 +99,26 @@ export const CourseSectionFooter = <TFormState extends object>({
           type='submit'
           className='w-64 justify-start'
           variant={
-            isSubmitSuccessful
-              ? 'default'
-              : sectionData.verdict === 'WAIT'
-                ? 'outline'
-                : isValid
-                  ? 'outline'
-                  : 'default'
+            (!isValid && isSubmitted && 'destructive') ||
+            (sectionData.verdict === 'WAIT' && !isSubmitSuccessful && 'outline') ||
+            'default'
           }
         >
-          <Icon type='send' className='text-inherit' />
+          <Icon
+            type={
+              (isSubmitting && 'loading') ||
+              (isSubmitSuccessful && 'success') ||
+              (errorMessage && 'alert') ||
+              (sectionData.verdict === 'WAIT' && !isDirty && 'timer') ||
+              'send'
+            }
+            className='text-inherit'
+          />
           <span className='ml-[calc(50%-18px)] -translate-x-1/2'>
             {(isSubmitting && 'Отправляем...') ||
               (!isValid && errorMessage) ||
               (isSubmitSuccessful && 'Отправлено!') ||
-              (sectionData.verdict === 'WAIT' && 'Ждем оценки') ||
+              (sectionData.verdict === 'WAIT' && !isDirty && 'Ждем оценки') ||
               'Отправить'}
           </span>
         </Button>

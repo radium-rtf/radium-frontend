@@ -47,9 +47,8 @@ export const ChoiceSectionDisplay: FC<ChoiceSectionDisplayProps> = ({ sectionDat
     if ('data' in response) {
       if (response.data.verdict === 'WA') {
         setError('choice.answer', { message: 'Неправильно!' });
-      } else {
-        setTimeout(() => reset(undefined, { keepValues: true }), 2000);
       }
+      setTimeout(() => reset(undefined, { keepValues: true }), 5000);
     } else {
       setError('root', { message: 'Ошибка!' });
     }
@@ -95,7 +94,9 @@ export const ChoiceSectionDisplay: FC<ChoiceSectionDisplayProps> = ({ sectionDat
           <CourseSectionFooter<answerSchemaType>
             sectionData={sectionData}
             resetObject={{ choice: { answer: '' } }}
-            errorMessage={errors.root?.message || errors.choice?.message}
+            errorMessage={
+              errors.choice?.message || errors.choice?.answer?.message || errors.root?.message
+            }
           />
         </form>
       </Card>
