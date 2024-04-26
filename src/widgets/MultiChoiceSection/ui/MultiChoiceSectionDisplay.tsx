@@ -47,9 +47,8 @@ export const MultiChoiceSectionDisplay: FC<MultiChoiceSectionDisplayProps> = ({ 
     if ('data' in response) {
       if (response.data.verdict === 'WA') {
         setError('multiChoice.answer', { message: 'Неправильно!' });
-      } else {
-        setTimeout(() => reset(undefined, { keepValues: true }), 2000);
       }
+      setTimeout(() => reset(undefined, { keepValues: true }), 5000);
     } else {
       setError('root', { message: 'Ошибка!' });
     }
@@ -93,7 +92,11 @@ export const MultiChoiceSectionDisplay: FC<MultiChoiceSectionDisplayProps> = ({ 
           <CourseSectionFooter<answerSchemaType>
             sectionData={sectionData}
             resetObject={{ multiChoice: { answer: [] } }}
-            errorMessage={errors.root?.message || errors.multiChoice?.message}
+            errorMessage={
+              errors.multiChoice?.message ||
+              errors.multiChoice?.answer?.message ||
+              errors.root?.message
+            }
           />
         </form>
       </Card>

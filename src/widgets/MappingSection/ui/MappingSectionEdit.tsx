@@ -33,6 +33,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
 import { MappingEditDraggable } from './MappingEditDraggable';
+import { SECTION_MAX_ANSWERS_COUNT } from '@/entities/Course';
 
 interface MappingSectionEditProps {
   sectionData: MappingSectionResponseDto;
@@ -132,8 +133,8 @@ export const MappingSectionEdit: FC<MappingSectionEditProps> = ({ sectionData })
       ...data,
       mapping: {
         ...data.mapping,
-        answer: data.mapping.answer.map((item) => item.value).toSpliced(-1, 1),
-        keys: data.mapping.keys.map((item) => item.value).toSpliced(-1, 1),
+        answer: data.mapping.answer.map((item) => item.value),
+        keys: data.mapping.keys.map((item) => item.value),
       },
     };
     const response = await updateMappingSection({
@@ -270,8 +271,12 @@ export const MappingSectionEdit: FC<MappingSectionEditProps> = ({ sectionData })
                                     );
                                   }
 
-                                  // add new answer if key is not empty
-                                  if (e.target.value !== '' && index === keysFields.length - 1) {
+                                  // add new answer if key is not empty and not 10
+                                  if (
+                                    e.target.value !== '' &&
+                                    index === keysFields.length - 1 &&
+                                    keysFields.length < SECTION_MAX_ANSWERS_COUNT
+                                  ) {
                                     answerAppend({ value: '' }, { shouldFocus: false });
                                     keysAppend({ value: '' }, { shouldFocus: false });
                                   }
@@ -299,8 +304,12 @@ export const MappingSectionEdit: FC<MappingSectionEditProps> = ({ sectionData })
                                     );
                                   }
 
-                                  // add new answer if key is not empty
-                                  if (e.target.value !== '' && index === keysFields.length - 1) {
+                                  // add new answer if key is not empty and not 10
+                                  if (
+                                    e.target.value !== '' &&
+                                    index === keysFields.length - 1 &&
+                                    keysFields.length < SECTION_MAX_ANSWERS_COUNT
+                                  ) {
                                     answerAppend({ value: '' }, { shouldFocus: false });
                                     keysAppend({ value: '' }, { shouldFocus: false });
                                   }
@@ -317,6 +326,7 @@ export const MappingSectionEdit: FC<MappingSectionEditProps> = ({ sectionData })
             </>
           )}
           <CourseSectionFooterEdit
+            hasScore
             isEditing={isEditing}
             setIsEditing={setIsEditing}
             deleteButton={
@@ -326,7 +336,12 @@ export const MappingSectionEdit: FC<MappingSectionEditProps> = ({ sectionData })
               errors.root?.message ||
               errors.mapping?.question?.message ||
               errors.mapping?.keys?.root?.message ||
+              errors.mapping?.answer?.find?.((v) => v?.value?.message)?.value?.message ||
               errors.mapping?.answer?.root?.message ||
+              errors.mapping?.answer?.message ||
+              errors.mapping?.keys?.find?.((v) => v?.value?.message)?.value?.message ||
+              errors.mapping?.keys?.root?.message ||
+              errors.mapping?.keys?.message ||
               errors.maxAttempts?.message ||
               errors.maxScore?.message
             }

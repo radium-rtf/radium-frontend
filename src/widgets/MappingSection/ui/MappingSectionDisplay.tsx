@@ -77,9 +77,8 @@ export const MappingSectionDisplay: FC<MappingSectionDisplayProps> = ({ sectionD
     if ('data' in response) {
       if (response.data.verdict === 'WA') {
         setError('mapping.answer', { message: 'Неправильно!' });
-      } else {
-        setTimeout(() => reset(undefined, { keepValues: true }), 2000);
       }
+      setTimeout(() => reset(undefined, { keepValues: true }), 5000);
     } else {
       setError('root', { message: 'Ошибка!' });
     }
@@ -144,7 +143,9 @@ export const MappingSectionDisplay: FC<MappingSectionDisplayProps> = ({ sectionD
           <CourseSectionFooter
             sectionData={sectionData}
             resetObject={DEFAULT_STATE}
-            errorMessage={errors.root?.message || errors.mapping?.answer?.message}
+            errorMessage={
+              errors.mapping?.message || errors.mapping?.answer?.message || errors.root?.message
+            }
           />
         </form>
       </Card>

@@ -16,6 +16,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { SECTION_MAX_ANSWERS_COUNT } from '@/entities/Course';
 
 interface MultiChoiceSectionEditProps {
   sectionData: MultiChoiceSectionResponseDto;
@@ -49,11 +50,16 @@ export const MultiChoiceSectionEdit: FC<MultiChoiceSectionEditProps> = ({ sectio
       multichoice: {
         answer: [],
         question: sectionData.content,
-        variants: sectionData.variants
-          .map((v) => ({
-            value: v,
-          }))
-          .concat([{ value: '' }]),
+        variants:
+          sectionData.variants.length < SECTION_MAX_ANSWERS_COUNT
+            ? sectionData.variants
+                .map((v) => ({
+                  value: v,
+                }))
+                .concat([{ value: '' }])
+            : sectionData.variants.map((v) => ({
+                value: v,
+              })),
       },
     },
   });
@@ -82,7 +88,6 @@ export const MultiChoiceSectionEdit: FC<MultiChoiceSectionEditProps> = ({ sectio
         variants: data.multichoice.variants.map((o) => o.value),
       },
     };
-    body.multichoice.variants.pop();
     const response = await updateMultiChoiceSection({
       sectionId: sectionData.id,
       ...body,
@@ -219,7 +224,11 @@ export const MultiChoiceSectionEdit: FC<MultiChoiceSectionEditProps> = ({ sectio
                                           );
                                         }
                                       }
-                                      if (e.target.value !== '' && index === fields.length - 1) {
+                                      if (
+                                        e.target.value !== '' &&
+                                        index === fields.length - 1 &&
+                                        fields.length < SECTION_MAX_ANSWERS_COUNT
+                                      ) {
                                         append({ value: '' }, { shouldFocus: false });
                                       }
 
@@ -246,6 +255,7 @@ export const MultiChoiceSectionEdit: FC<MultiChoiceSectionEditProps> = ({ sectio
             </>
           )}
           <CourseSectionFooterEdit
+            hasScore
             isEditing={isEditing}
             setIsEditing={setIsEditing}
             deleteButton={
@@ -256,6 +266,9 @@ export const MultiChoiceSectionEdit: FC<MultiChoiceSectionEditProps> = ({ sectio
               errors.multichoice?.variants?.root?.message ||
               errors.multichoice?.question?.message ||
               errors.multichoice?.answer?.message ||
+              errors.multichoice?.variants?.find?.((v) => v?.value?.message)?.value?.message ||
+              errors.multichoice?.variants?.root?.message ||
+              errors.multichoice?.variants?.message ||
               errors.maxAttempts?.message ||
               errors.maxScore?.message
             }

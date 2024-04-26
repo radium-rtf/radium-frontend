@@ -1,6 +1,9 @@
-import { ButtonHTMLAttributes, FC, FormEvent, useEffect, useState } from 'react';
+import { ButtonHTMLAttributes, FC, useEffect, useState } from 'react';
 import { Icon, Input, cn } from '@/shared';
 import { useCreateCoursePageMutation } from '@/entities/CoursePage';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { createPageSchema, createPageSchemaType } from '../model/createPageSchema';
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   moduleId: string;
@@ -9,6 +12,13 @@ interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const NavigationCreatePage: FC<IProps> = ({ className, moduleId, ...props }) => {
   const [isCreating, setIsCreating] = useState(false);
   const [createPage] = useCreateCoursePageMutation();
+
+  const form = useForm<createPageSchemaType>({
+    defaultValues: {
+      name: '',
+    },
+    resolver: zodResolver(createPageSchema),
+  });
 
   useEffect(() => {
     const escapeHandler = (e: KeyboardEvent) => {
@@ -24,17 +34,22 @@ export const NavigationCreatePage: FC<IProps> = ({ className, moduleId, ...props
     };
   }, [isCreating]);
 
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const fd = new FormData(e.currentTarget);
-    createPage({ name: fd.get('newPage') as string, moduleId: moduleId });
+  const submitHandler: SubmitHandler<createPageSchemaType> = async ({ name }) => {
+    await createPage({ name, moduleId });
     setIsCreating(false);
+    form.reset();
   };
 
   if (isCreating) {
     return (
-      <form onSubmit={submitHandler} className='px-2 py-1.5'>
-        <Input name='newPage' placeholder='Страница' />
+      <form onSubmit={form.handleSubmit(submitHandler)} className='px-2 py-1.5'>
+        <Input
+          disabled={form.formState.isSubmitting}
+          placeholder={form.formState.errors.name?.message || 'Страница'}
+          actionIcon='success'
+          onActionClick={() => form.handleSubmit(submitHandler)()}
+          {...form.register('name')}
+        />
       </form>
     );
   }

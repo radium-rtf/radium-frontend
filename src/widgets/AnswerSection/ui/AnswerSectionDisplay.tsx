@@ -31,7 +31,13 @@ export const AnswerSectionDisplay: FC<AnswerSectionDisplayProps> = ({ sectionDat
     },
   });
 
-  const { register, handleSubmit, reset, setError } = form;
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setError,
+    formState: { errors },
+  } = form;
 
   const onSubmitHandler: SubmitHandler<answerSchemaType> = async (data) => {
     const response = await answerAnswerSection({
@@ -39,7 +45,7 @@ export const AnswerSectionDisplay: FC<AnswerSectionDisplayProps> = ({ sectionDat
       ...data,
     });
     if ('data' in response) {
-      setTimeout(() => reset(undefined, { keepValues: true }), 2000);
+      setTimeout(() => reset(undefined, { keepValues: true, keepDirty: false }), 5000);
     } else {
       setError('root', { message: 'Ошибка!' });
     }
@@ -64,6 +70,7 @@ export const AnswerSectionDisplay: FC<AnswerSectionDisplayProps> = ({ sectionDat
             }}
             isTask
             sectionData={sectionData}
+            errorMessage={errors.answer?.message || errors.root?.message}
           />
           {sectionData.review && (
             <CardFooter>
