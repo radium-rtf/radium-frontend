@@ -99,6 +99,7 @@ const smallIcons: Record<SmallIcon, ReactNode> = {
   'arrow-down': (
     <path
       d='M10.5 6.5L5.5 11.5M5.5 11.5L0.5 6.5M5.5 11.5L5.5 0.5'
+      className='stroke-current'
       strokeLinecap='round'
       strokeLinejoin='round'
     />

@@ -132,7 +132,7 @@ export const CodeSection: FC<CodeSectionProps> = ({ sectionData }) => {
               name='file'
               render={({ field: { onChange } }) => {
                 return (
-                  <InputFile onFileLoaded={(e) => onChange(e)} allowedFileTypes={[FileType.jpg]} />
+                  <InputFile onFileLoaded={(e) => onChange(e)} allowedFileTypes={['.jpg']} />
                 );
               }}
             />

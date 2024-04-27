@@ -8,7 +8,6 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
-  FileType,
   Icon,
   InputFile,
   Tab,
@@ -200,7 +199,7 @@ export const MediaSectionEdit: FC<MediaSectionEditProps> = ({ sectionData }) => 
                     onChange(files?.item(0));
                     errors.root && clearErrors('root');
                   }}
-                  allowedFileTypes={[FileType.gif, FileType.jpg, FileType.png, FileType.mp4]}
+                  allowedFileTypes={['.gif', '.jpg', '.png', '.mp4']}
                 />
               )}
             />

@@ -1,8 +1,7 @@
-import { FileType } from '@/shared';
 import { z } from 'zod';
 
 function refineTypes(elements: string[]): boolean {
-  return elements.every((el: string) => el.trim().slice(1) in FileType);
+  return elements.every((el: string) => el.trim().slice(1));
 }
 
 export const updateSchema = z.object({

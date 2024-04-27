@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle, FileType, Icon, InputFile } from '@/shared';
+import { Card, CardContent, CardHeader, CardTitle, Icon, InputFile } from '@/shared';
 import { FC } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
@@ -26,6 +26,7 @@ export const FileSectionDisplay: FC<FileSectionDisplayProps> = ({ sectionData })
     control,
     setError,
     clearErrors,
+    reset,
     handleSubmit,
     formState: { errors },
   } = form;
@@ -52,7 +53,9 @@ export const FileSectionDisplay: FC<FileSectionDisplayProps> = ({ sectionData })
         answer: fileUrl,
       },
     });
-    if (!('data' in response)) {
+    if ('data' in response) {
+      setTimeout(() => reset(undefined, { keepValues: true, keepDirty: false }), 5000);
+    } else {
       setError('root', { message: 'Ошибка!' });
     }
   };
@@ -74,7 +77,7 @@ export const FileSectionDisplay: FC<FileSectionDisplayProps> = ({ sectionData })
               name='file'
               render={({ field: { onChange } }) => (
                 <InputFile
-                  allowedFileTypes={sectionData.fileTypes as FileType[]}
+                  allowedFileTypes={sectionData.fileTypes}
                   onFileListChange={(files) => {
                     onChange(files?.item(0));
                     errors.root && clearErrors('root');

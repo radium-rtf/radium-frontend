@@ -8,6 +8,7 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
+  DownloadFile,
   Icon,
   Input,
   TextArea,
@@ -86,15 +87,24 @@ export const CheckAnswerSection: FC<IProps> = ({ studentAnswer: answer }) => {
               <CardDescription>{answer.section.content}</CardDescription>
             </CardContent>
             <CardContent>
-              <TextArea
-                className='w-full resize-y'
-                defaultValue={answer.answer}
-                readOnly
-              ></TextArea>
+              {answer.section.type === 'file' && (
+                <DownloadFile
+                  name={answer.section.file?.name || ''}
+                  sizeInKiB={answer.section.file?.sizeInKiB || 0}
+                  href={answer.section.file?.location || ''}
+                />
+              )}
+              {answer.section.type === 'answer' && (
+                <TextArea
+                  className='w-full resize-y'
+                  defaultValue={answer.answer}
+                  readOnly
+                ></TextArea>
+              )}
             </CardContent>
             <CardContent>
               <Input
-                placeholder='Ответ'
+                placeholder='Комментарий'
                 {...register('comment', {
                   onChange: () => errors.root && clearErrors('root'),
                 })}

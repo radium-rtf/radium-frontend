@@ -8,14 +8,13 @@ import {
   useRef,
   useState,
 } from 'react';
-import { FileType } from '../types/FileType';
 import { cn } from '../utils/cn';
 import { Icon } from './Icon';
 import { useDrop } from '../hooks/useDrop';
 import { SmallIcon } from './SmallIcon';
 
 type InputFileProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
-  allowedFileTypes?: FileType[];
+  allowedFileTypes?: string[];
   fileList?: FileList;
   onFileListChange?: (fileList: FileList | null) => void;
 };

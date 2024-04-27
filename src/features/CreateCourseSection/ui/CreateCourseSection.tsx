@@ -1,6 +1,6 @@
 'use client';
 import { CourseEditContext } from '@/features/CourseEditContext';
-import { FileType, List, ListContent, ListIcon, ListItem, ListTitle, cn } from '@/shared';
+import { List, ListContent, ListIcon, ListItem, ListTitle, cn } from '@/shared';
 import { useParams, useRouter } from 'next/navigation';
 import { FC, useContext } from 'react';
 import { useCreateSectionMutation } from '../api/createCourseSectionApi';
@@ -213,7 +213,7 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                   onClick={() =>
                     createSection({
                       pageId,
-                      file: { fileTypes: [FileType.zip], question: 'Задание?' },
+                      file: { fileTypes: ['.zip'], question: 'Задание?' },
                     })
                       .unwrap()
                       .then((res) => push(`#section-${res.id}`, { scroll: true }))

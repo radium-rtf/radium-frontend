@@ -65,6 +65,12 @@ export interface StudentAnswerDto {
     type: string;
     variants: string[];
     verdict: 'OK' | 'WAIT' | 'REVIEWED';
+    file?: {
+      location: string;
+      name: string;
+      sizeInKiB: number;
+      type: string;
+    };
   };
   type: string;
   verdict: 'OK' | 'WAIT' | 'REVIEWED';
