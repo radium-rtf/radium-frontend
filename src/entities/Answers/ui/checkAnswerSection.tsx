@@ -104,6 +104,7 @@ export const CheckAnswerSection: FC<IProps> = ({ studentAnswer: answer }) => {
             </CardContent>
             <CardContent>
               <Input
+                icon='comment'
                 placeholder='Комментарий'
                 {...register('comment', {
                   onChange: () => errors.root && clearErrors('root'),
