@@ -78,8 +78,6 @@ export type { Icon as IconType } from './ui/Icon';
 export type { IErrors } from './interfaces/IErrors';
 export type { AppDispatch, RootState } from './api/store';
 
-export { FileType } from './types/FileType';
-
 // Store & Api
 export { store } from './api/store';
 export { emptyApi } from './api/api';
@@ -102,3 +100,5 @@ export {
   SelectScrollUpButton,
   SelectScrollDownButton,
 } from './ui/Select';
+
+export { DownloadButton as DownloadFile } from './ui/DownloadFile/DownloadFile';

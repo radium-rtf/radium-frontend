@@ -211,6 +211,28 @@ export const CreateCourseSection: FC<CreateCourseSectionProps> = () => {
                 <button
                   className='group rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
                   onClick={() =>
+                    createSection({
+                      pageId,
+                      file: { fileTypes: ['.zip'], question: 'Задание?' },
+                    })
+                      .unwrap()
+                      .then((res) => push(`#section-${res.id}`, { scroll: true }))
+                  }
+                >
+                  <ListIcon icon='attach' className='text-primary' />
+                  <ListContent>
+                    <ListTitle>Файл</ListTitle>
+                  </ListContent>
+                  <ListIcon
+                    icon='add'
+                    className='h-3 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100'
+                  />
+                </button>
+              </ListItem>
+              <ListItem asChild>
+                <button
+                  className='group rounded-lg border border-transparent text-start transition-colors hover:border-white/10 hover:bg-white/5'
+                  onClick={() =>
                     createSection({ pageId, answer: { question: 'Вопрос?' } })
                       .unwrap()
                       .then((res) => push(`#section-${res.id}`, { scroll: true }))

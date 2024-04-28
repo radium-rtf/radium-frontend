@@ -7,6 +7,7 @@ import { PermutationSectionResponseDto } from './PermutationSectionResponseDto';
 import { CodeSectionResponseDto } from './CodeSectionResponseDto';
 import { MappingSectionResponseDto } from './MappingSectionResponseDto';
 import { MediaSectionResponseDto } from './MediaSectionResponceDto';
+import { FileSectionResponseDto } from './FileSectionResponseDto';
 
 export type AllSectionsResponseDto =
   | CourseTextSectionResponseDto
@@ -17,4 +18,5 @@ export type AllSectionsResponseDto =
   | PermutationSectionResponseDto
   | CodeSectionResponseDto
   | MappingSectionResponseDto
-  | MediaSectionResponseDto;
+  | MediaSectionResponseDto
+  | FileSectionResponseDto;

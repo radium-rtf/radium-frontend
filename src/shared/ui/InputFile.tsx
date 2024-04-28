@@ -8,14 +8,13 @@ import {
   useRef,
   useState,
 } from 'react';
-import { FileType } from '../types/FileType';
 import { cn } from '../utils/cn';
 import { Icon } from './Icon';
 import { useDrop } from '../hooks/useDrop';
 import { SmallIcon } from './SmallIcon';
 
 type InputFileProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
-  allowedFileTypes?: FileType[];
+  allowedFileTypes?: string[];
   fileList?: FileList;
   onFileListChange?: (fileList: FileList | null) => void;
 };
@@ -49,7 +48,7 @@ export const InputFile: FC<InputFileProps> = ({
     } else {
       const names: string[] = [];
       for (const file of files) {
-        if (!allowedFileTypes?.some((type) => type === file.name.split('.')[1])) {
+        if (!allowedFileTypes?.some((type) => type === `.${file.name.split('.')[1]}`)) {
           setIsError(true);
           return;
         }
@@ -118,7 +117,7 @@ export const InputFile: FC<InputFileProps> = ({
           inputChangeHandler(e);
         }}
         type='file'
-        accept={allowedFileTypes ? allowedFileTypes.map((type) => `.${type}`).join() : undefined}
+        accept={allowedFileTypes ? allowedFileTypes.join() : undefined}
         className='hidden'
         {...props}
       />

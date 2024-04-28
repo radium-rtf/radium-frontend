@@ -11,6 +11,8 @@ import { CourseEditContext } from '@/features/CourseEditContext';
 import { ShortAnswerSection } from '@/widgets/ShortAnswerSection';
 import { MultiChoiceSection } from '@/widgets/MultiChoiceSection';
 import { PermutationsSection } from '@/widgets/PermutationsSection';
+import { MediaSection } from '@/widgets/MediaSection';
+import { FileSection } from '@/widgets/FileSection';
 import { useContext, useEffect } from 'react';
 import {
   AllSectionsResponseDto,
@@ -32,7 +34,6 @@ import {
 import { restrictToParentElement, restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { Card, useUpdateTitle } from '@/shared';
 import Image from 'next/image';
-import { MediaSection } from '@/widgets/MediaSection';
 
 interface IProps {
   params: {
@@ -120,6 +121,8 @@ export default function CoursePage({ params }: IProps) {
         return <CodeSection key={section.id} sectionData={section} />;
       case 'media':
         return <MediaSection key={section.id} sectionData={section} />;
+      case 'file':
+        return <FileSection key={section.id} sectionData={section} />;
 
       default:
         return null;

@@ -27,6 +27,9 @@ import { coursePageApi } from '@/entities/CoursePage';
 import { AllSectionsResponseDto } from '../model/AllSectionsResponseDto';
 import { CourseSectionChangeOrderRequestDto } from '../model/CourseSectionChangeOrderRequestDto';
 import { arrayMove } from '@dnd-kit/sortable';
+import { FileSectionResponseDto } from '../model/FileSectionResponseDto';
+import { UpdateCourseFileSectionRequestDto } from '../model/UpdateCourseFileSectionRequestDto';
+import { AnswerCourseFileSectionRequestDto } from '../model/AnswerCourseFileSectionRequestDto';
 
 const sectionApi = emptyApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -58,6 +61,59 @@ const sectionApi = emptyApi.injectEndpoints({
           ? [{ type: 'pages', id: result.pageId }, { type: 'pages', id: 'LIST' }, 'courses']
           : [{ type: 'pages', id: 'LIST' }, 'pages'],
     }),
+    updateCourseFileSection: builder.mutation<
+      FileSectionResponseDto,
+      UpdateCourseFileSectionRequestDto
+    >({
+      query: ({ sectionId, ...body }) => ({
+        url: `/section/${sectionId}`,
+        method: 'PUT',
+        body: body,
+      }),
+      invalidatesTags: (result) =>
+        result
+          ? [{ type: 'pages', id: result.pageId }, { type: 'pages', id: 'LIST' }, 'courses']
+          : [{ type: 'pages', id: 'LIST' }, 'pages'],
+    }),
+    answerCourseFileSection: builder.mutation<AnswerResponseDto, AnswerCourseFileSectionRequestDto>(
+      {
+        query: (body) => ({
+          url: `/answer`,
+          body,
+          method: 'POST',
+        }),
+        invalidatesTags: ['courses'],
+        async onQueryStarted({ id }, { dispatch, queryFulfilled }) {
+          try {
+            const { data: updatedSection } = await queryFulfilled;
+            dispatch(
+              coursePageApi.util.updateQueryData('getPage', updatedSection.pageId, (draft) => {
+                const section = draft.sections.find((s) => s.id === id)!;
+
+                // Score change
+                if (updatedSection.verdict === 'OK') {
+                  if (section.score !== section.maxScore) {
+                    draft.score += section.maxScore;
+                    section.score += section.maxScore;
+                  }
+                } else if (updatedSection.verdict === 'WA') {
+                  if (section.score === section.maxScore) {
+                    draft.score -= section.maxScore;
+                    section.score -= section.maxScore;
+                  }
+                }
+                section.verdict = updatedSection.verdict;
+
+                // Attempts change
+                if (section.attempts) {
+                  section.attempts -= 1;
+                }
+              })
+            );
+          } catch {}
+        },
+      }
+    ),
     answerCourseChoiceSection: builder.mutation<
       AnswerResponseDto,
       AnswerCourseChoiceSectionRequestDto
@@ -457,6 +513,8 @@ const sectionApi = emptyApi.injectEndpoints({
 export const {
   useUpdateCourseTextSectionMutation,
   useUpdateCourseMediaSectionMutation,
+  useUpdateCourseFileSectionMutation,
+  useAnswerCourseFileSectionMutation,
   useAnswerCourseChoiceSectionMutation,
   useUpdateCourseChoiceSectionMutation,
   useAnswerCourseMultiChoiceSectionMutation,

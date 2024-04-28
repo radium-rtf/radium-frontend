@@ -8,7 +8,6 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
-  FileType,
   Icon,
   InputFile,
   Tab,
@@ -157,14 +156,14 @@ export const MediaSectionEdit: FC<MediaSectionEditProps> = ({ sectionData }) => 
             <Tabs>
               <Tab
                 isSelected={mediaItem === 'file'}
-                onClick={() => isEditing && setMediaItem('file')}
+                onClick={() => setMediaItem('file')}
                 icon='attach'
               >
                 Файл
               </Tab>
               <Tab
                 isSelected={mediaItem === 'link'}
-                onClick={() => isEditing && setMediaItem('link')}
+                onClick={() => setMediaItem('link')}
                 icon='link'
               >
                 Ссылка
@@ -200,7 +199,7 @@ export const MediaSectionEdit: FC<MediaSectionEditProps> = ({ sectionData }) => 
                     onChange(files?.item(0));
                     errors.root && clearErrors('root');
                   }}
-                  allowedFileTypes={[FileType.gif, FileType.jpg, FileType.png, FileType.mp4]}
+                  allowedFileTypes={['.gif', '.jpg', '.png', '.mp4']}
                 />
               )}
             />

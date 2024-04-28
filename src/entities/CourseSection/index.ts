@@ -10,6 +10,7 @@ export type { CodeSectionResponseDto } from './model/CodeSectionResponseDto';
 export type { PermutationSectionResponseDto } from './model/PermutationSectionResponseDto';
 export type { MappingSectionResponseDto } from './model/MappingSectionResponseDto';
 export type { MediaSectionResponseDto } from './model/MediaSectionResponceDto';
+export type { FileSectionResponseDto } from './model/FileSectionResponseDto';
 // types
 export type { AllSectionsResponseDto } from './model/AllSectionsResponseDto';
 
@@ -17,6 +18,7 @@ export type { AllSectionsResponseDto } from './model/AllSectionsResponseDto';
 export {
   useUpdateCourseTextSectionMutation,
   useUpdateCourseMediaSectionMutation,
+  useUpdateCourseFileSectionMutation,
   useAnswerCourseChoiceSectionMutation,
   useUpdateCourseChoiceSectionMutation,
   useAnswerCourseMultiChoiceSectionMutation,

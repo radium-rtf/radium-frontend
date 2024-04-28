@@ -38,4 +38,8 @@ export interface CreateSectionRequestDto {
   text?: {
     content: string;
   };
+  file?: {
+    fileTypes: string[];
+    question: string;
+  };
 }
