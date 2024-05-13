@@ -11,13 +11,13 @@ interface IProps {
 }
 
 export const AssignedCourseCard: FC<IProps> = ({ course }) => {
-  const { name, logo, id, score, maxScore } = course;
+  const { name, logo, id, slug, score, maxScore } = course;
 
   const { nextPageName } = useLastCoursePage(id);
 
   return (
     <Card className='relative flex flex-col transition-all hover:bg-card-hover'>
-      <Link className='absolute inset-0 z-0 rounded-lg' href={`courses/${id}`} scroll={false} />
+      <Link className='absolute inset-0 z-0 rounded-lg' href={`c/${slug}`} scroll={false} />
       <CardHeader className='flex-row items-center gap-4 space-y-0'>
         {logo ? (
           <Image
@@ -46,7 +46,7 @@ export const AssignedCourseCard: FC<IProps> = ({ course }) => {
             <Icon className='h-[1.125rem]' type='courses' />
             {nextPageName && <p>Далее: {nextPageName}</p>}
           </div>
-          <CourseContinue size='default' variant='outline' courseId={id} />
+          <CourseContinue size='default' variant='outline' courseSlug={slug} courseId={id} />
         </div>
       </CardFooter>
     </Card>

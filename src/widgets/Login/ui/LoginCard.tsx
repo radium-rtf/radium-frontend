@@ -100,7 +100,7 @@ export const LoginCard = () => {
           </CardContent>
           <CardFooter>
             <Button variant='outline' asChild className='w-64 justify-between gap-4'>
-              <Link href='/registration'>
+              <Link href='/signup'>
                 <Icon type='profile' className='shrink-0 text-inherit' />
                 <span className='ml-[calc(50%-34px)] -translate-x-1/2'>Зарегистрироваться</span>
               </Link>

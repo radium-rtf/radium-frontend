@@ -51,7 +51,7 @@ export const GroupMenu: FC<IProps> = ({ group, answers, courseId }) => {
               !selectedStudentId && 'border-outlineGeneral bg-whiteLight'
             )}
           >
-            <Link passHref={false} href={`/groups/${group.id}/courses/${courseId}`}>
+            <Link passHref={false} href={`/g/${group.id}/c/${courseId}`}>
               <ListIcon className='text-primary' icon='table' />
               <ListTitle>Ведомость</ListTitle>
             </Link>
@@ -70,9 +70,7 @@ export const GroupMenu: FC<IProps> = ({ group, answers, courseId }) => {
                 asChild
                 key={student.user.id}
               >
-                <Link
-                  href={`/groups/${group.id}/courses/${courseId}/student/${student.user.id}/answers`}
-                >
+                <Link href={`/g/${group.id}/c/${courseId}/student/${student.user.id}/answers`}>
                   <ListIcon asChild>
                     <Avatar className='h-[1.125rem] w-[1.125rem] shrink-0'>
                       <AvatarImage src={student.user.avatar} width={18} height={18} />

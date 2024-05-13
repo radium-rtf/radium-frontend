@@ -59,7 +59,7 @@ export const Header: FC<IProps> = ({ logoUrl, title, href }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent className='w-64' align='end'>
           <DropdownMenuItem asChild className='cursor-pointer'>
-            <Link href='/profile' scroll={false}>
+            <Link href='/u' scroll={false}>
               <Icon className='mr-4 text-primary' type='profile' />
               <span>Мой профиль</span>
             </Link>

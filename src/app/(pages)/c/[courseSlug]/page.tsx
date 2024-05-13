@@ -5,17 +5,17 @@ import { CourseBanner, CourseBannerSkeleton } from '@/widgets/CourseBanner';
 import { CourseContacts, CourseContactsSkeleton } from '@/widgets/CourseContacts';
 import { CourseDescription, CourseDescriptionSkeleton } from '@/widgets/CourseDescription';
 import { useParams } from 'next/navigation';
-import { useCourseRoles, useGetCourseQuery } from '@/entities/Course';
+import { useCourseRoles, useGetCourseBySlugQuery } from '@/entities/Course';
 import { CourseAuthors, CourseAuthorsSkeleton } from '@/widgets/CourseAuthors';
 import { useUpdateTitle } from '@/shared';
 import { CourseBrief, CourseBriefSkeleton } from '@/widgets/CourseBrief';
 
 export default function Page() {
   const params = useParams() as {
-    courseId: string;
+    courseSlug: string;
   };
 
-  const { data: course, isLoading } = useGetCourseQuery(params.courseId);
+  const { data: course, isLoading } = useGetCourseBySlugQuery(params.courseSlug);
 
   useUpdateTitle(course?.name || '<без названия>');
 
@@ -87,6 +87,7 @@ export default function Page() {
                 title={course.name}
                 logo={course.logo}
                 courseId={course.id}
+                courseSlug={course.slug}
                 isAssigned={course.isStudent}
                 modulesCount={course.modules.length}
                 shortDescription={course.shortDescription}

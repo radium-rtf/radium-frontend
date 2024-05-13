@@ -25,7 +25,7 @@ export default function GroupLayout({
 
   return (
     <>
-      {course && <Header href={`/courses/${course.id}`} title={course.name} />}
+      {course && <Header href={`/c/${course.slug}`} title={course.name} />}
       <div className='flex flex-grow items-start gap-8 p-12'>
         {course && group && answers && (
           <GroupMenu courseId={course.id} group={group} answers={answers} />

@@ -6,9 +6,9 @@ import { refreshAccessToken } from '../libs/refreshAccessToken';
 
 export const authOptions: NextAuthOptions = {
   pages: {
-    signIn: '/login',
-    newUser: '/registration',
-    verifyRequest: '/registration/verify',
+    signIn: '/signin',
+    newUser: '/signup',
+    verifyRequest: '/signup/verify',
   },
 
   providers: [

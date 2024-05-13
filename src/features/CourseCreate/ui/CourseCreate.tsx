@@ -11,7 +11,7 @@ export const CourseCreate = () => {
     createCourse()
       .unwrap()
       .then((course) => {
-        router.push(`/courses/${course.id}?initialEdit=true`);
+        router.push(`/c/${course.slug}?initialEdit=true`);
       });
   };
 

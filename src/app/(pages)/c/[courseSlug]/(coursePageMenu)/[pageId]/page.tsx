@@ -13,7 +13,7 @@ import { MultiChoiceSection } from '@/widgets/MultiChoiceSection';
 import { PermutationsSection } from '@/widgets/PermutationsSection';
 import { MediaSection } from '@/widgets/MediaSection';
 import { FileSection } from '@/widgets/FileSection';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import {
   AllSectionsResponseDto,
   useChangeCourseSectionOrderMutation,
@@ -34,6 +34,7 @@ import {
 import { restrictToParentElement, restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { Card, useUpdateTitle } from '@/shared';
 import Image from 'next/image';
+import { useLastCoursePage } from '@/entities/Course';
 
 interface IProps {
   params: {
@@ -53,28 +54,7 @@ export default function CoursePage({ params }: IProps) {
   const { isEditing } = useContext(CourseEditContext);
   const [updateOrder] = useChangeCourseSectionOrderMutation();
 
-  useEffect(() => {
-    const previousPages = JSON.parse(localStorage.getItem('previousPages') || '{}') as {
-      [courseId: string]:
-        | {
-            pageId: string;
-            pageName: string;
-          }
-        | undefined;
-    };
-
-    page &&
-      localStorage.setItem(
-        'previousPages',
-        JSON.stringify({
-          ...previousPages,
-          [params.courseId]: {
-            pageId: params.pageId,
-            pageName: page.name,
-          },
-        })
-      );
-  }, [params.courseId, params.pageId, page]);
+  useLastCoursePage(params.courseId);
 
   useUpdateTitle(page?.name || '<без названия>');
 

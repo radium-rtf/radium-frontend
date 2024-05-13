@@ -25,6 +25,7 @@ interface CourseBriefProps {
   percentage: number;
   isAssigned: boolean;
   courseId: string;
+  courseSlug: string;
   title: string;
   logo: string;
 }
@@ -36,6 +37,7 @@ export const CourseBrief: FC<CourseBriefProps> = ({
   percentage,
   isAssigned,
   courseId,
+  courseSlug,
   title,
   logo,
 }) => {
@@ -90,7 +92,7 @@ export const CourseBrief: FC<CourseBriefProps> = ({
         </span>
         {isEditAllowed && (
           <Link
-            href={`${courseId}/edit`}
+            href={`${courseSlug}/edit`}
             className={buttonVariants({ variant: 'outline' })}
             scroll={false}
           >
@@ -98,7 +100,7 @@ export const CourseBrief: FC<CourseBriefProps> = ({
           </Link>
         )}
         {!isAssigned && <CourseJoin courseId={courseId} />}
-        {isAssigned && <CourseContinue courseId={courseId} />}
+        {isAssigned && <CourseContinue courseSlug={courseSlug} courseId={courseId} />}
       </CardFooter>
     </Card>
   );

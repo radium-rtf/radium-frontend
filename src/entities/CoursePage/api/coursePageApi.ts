@@ -20,6 +20,18 @@ export const coursePageApi = emptyApi.injectEndpoints({
             ]
           : [{ type: 'pages', id: 'LIST' }],
     }),
+    getPageBySlug: builder.query<CoursePageResponseDto, string>({
+      query: (slug) => ({
+        url: `/page/slug/${slug}`,
+      }),
+      providesTags: (result) =>
+        result
+          ? [
+              { type: 'pages' as const, id: result.id },
+              { type: 'pages', id: 'LIST' },
+            ]
+          : [{ type: 'pages', id: 'LIST' }],
+    }),
     createCoursePage: builder.mutation<CoursePageResponseDto, CreateCoursePageRequestDto>({
       query: (body) => ({
         url: '/page',
@@ -85,6 +97,7 @@ export const coursePageApi = emptyApi.injectEndpoints({
 
 export const {
   useGetPageQuery,
+  useGetPageBySlugQuery,
   useCreateCoursePageMutation,
   useUpdateCoursePageNameMutation,
   useDeleteCoursePageMutation,
