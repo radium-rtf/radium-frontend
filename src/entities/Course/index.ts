@@ -10,6 +10,7 @@ export { getCourse } from './lib/getCourse';
 export {
   useGetCoursesQuery,
   useGetCourseQuery,
+  useGetCourseBySlugQuery,
   useGetAccountCoursesQuery,
   useCreateCourseMutation,
   useJoinCourseMutation,

@@ -17,7 +17,7 @@ export const VerifyRegistrationCard = () => {
   const email = searchParams.get('email');
 
   if (!email) {
-    router.push('/registration');
+    router.push('/signup');
   }
 
   const {

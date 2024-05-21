@@ -30,6 +30,12 @@ export const courseApi = emptyApi.injectEndpoints({
       }),
       providesTags: (result) => (result ? [{ type: 'courses' as const, id: result.id }] : []),
     }),
+    getCourseBySlug: builder.query<CourseResponseDto, string>({
+      query: (slug) => ({
+        url: `/course/slug/${slug}`,
+      }),
+      providesTags: (result) => (result ? [{ type: 'courses' as const, id: result.slug }] : []),
+    }),
     createCourse: builder.mutation<CourseResponseDto, void>({
       query: () => ({
         url: '/course',
@@ -254,6 +260,7 @@ export const courseApi = emptyApi.injectEndpoints({
 export const {
   useGetCoursesQuery,
   useGetCourseQuery,
+  useGetCourseBySlugQuery,
   useGetAccountCoursesQuery,
   useCreateCourseMutation,
   useJoinCourseMutation,

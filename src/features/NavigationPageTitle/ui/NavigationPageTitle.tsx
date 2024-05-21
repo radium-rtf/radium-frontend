@@ -34,7 +34,7 @@ interface IProps extends LiHTMLAttributes<HTMLLIElement> {
 
 export const NavigationPageTitle: FC<IProps> = ({ className, currentPage, page, ...props }) => {
   const formRef = useRef<HTMLFormElement>(null);
-  const params: { courseId?: string } = useParams();
+  const params: { courseSlug?: string } = useParams();
   const { isEditing: isEditMode } = useContext(CourseEditContext);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -124,7 +124,7 @@ export const NavigationPageTitle: FC<IProps> = ({ className, currentPage, page, 
 
       <ListContent asChild>
         <Link
-          href={`/courses/${params.courseId!}/${page.id}`}
+          href={`/c/${params.courseSlug!}/${page.id}`}
           scroll={false}
           className={cn(!isEditMode && 'after:absolute after:inset-0 after:rounded-lg')}
         >

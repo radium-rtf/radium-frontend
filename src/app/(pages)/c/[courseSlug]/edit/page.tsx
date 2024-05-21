@@ -1,5 +1,5 @@
 'use client';
-import { useCourseRoles, useGetCourseQuery } from '@/entities/Course';
+import { useCourseRoles, useGetCourseBySlugQuery } from '@/entities/Course';
 import { List, ListContent, ListIcon, ListItem, ListTitle, cn, useUpdateTitle } from '@/shared';
 import { CourseCoAuthorEdit } from '@/widgets/CourseCoAuthorsEdit';
 import { CourseContactsEdit } from '@/widgets/CourseContactsEdit';
@@ -13,17 +13,17 @@ export default function CourseEditPage({
   params,
   searchParams,
 }: {
-  params: { courseId: string };
+  params: { courseSlug: string };
   searchParams: { settings?: string };
 }) {
-  const { data: course, isLoading } = useGetCourseQuery(params.courseId);
+  const { data: course, isLoading } = useGetCourseBySlugQuery(params.courseSlug);
 
   useUpdateTitle(`Редактирование - ${course?.name || '<без названия>'}`);
   const { isAuthor } = useCourseRoles(course);
 
   return (
     <>
-      <Header href={`/courses/${params.courseId}`} />
+      <Header href={`/c/${params.courseSlug}`} />
       <div className='-ml-6 flex grow items-start gap-9 p-12'>
         <aside className='sticky top-28 flex w-64 flex-col'>
           <h3 className='px-6 pb-4 font-NTSomic text-lg leading-[26px] text-accent-secondary'>

@@ -43,7 +43,7 @@ export const RegistrationCard = () => {
       setError('email', { message: 'Ошибка' }, { shouldFocus: false });
       return;
     }
-    router.push(`/registration/verify?email=${response.email}`);
+    router.push(`/signup/verify?email=${response.email}`);
   };
 
   return (
@@ -125,7 +125,7 @@ export const RegistrationCard = () => {
           </CardContent>
           <CardFooter>
             <Button variant='outline' asChild className='w-64 justify-start'>
-              <Link href='/login'>
+              <Link href='/signin'>
                 <Icon type='profile' className='shrink-0 text-inherit' />
                 <span className='ml-[calc(50%-18px)] -translate-x-1/2 whitespace-nowrap'>
                   Войти

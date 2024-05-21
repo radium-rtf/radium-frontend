@@ -19,7 +19,7 @@ import { CourseEditToggle } from '@/features/CourseEditToggle';
 import { NavigationCreateModule } from '@/features/NavigationCreateModule';
 import { CourseModuleNavigation } from '@/widgets/CourseModuleNavigation';
 import { CreateCourseSection } from '@/features/CreateCourseSection';
-import { useCourseRoles, useGetCourseQuery } from '@/entities/Course';
+import { useCourseRoles, useGetCourseBySlugQuery } from '@/entities/Course';
 import { Footer } from '@/widgets/Footer';
 import {
   SortableContext,
@@ -48,8 +48,8 @@ interface CourseStudyLayoutProps {
 }
 
 export default function CoursePageLayout({ children }: CourseStudyLayoutProps) {
-  const params: { courseId: string; pageId: string } = useParams();
-  const { data: course, isLoading, error } = useGetCourseQuery(params.courseId!);
+  const params: { courseSlug: string; pageId: string } = useParams();
+  const { data: course, isLoading, error } = useGetCourseBySlugQuery(params.courseSlug);
 
   const [updateOrder] = useChangeCourseModuleOrderMutation();
   useUpdateTitle(course?.name);
@@ -82,7 +82,7 @@ export default function CoursePageLayout({ children }: CourseStudyLayoutProps) {
 
   return (
     <>
-      <Header title={course?.name} href={`/courses/${course?.id}`} logoUrl={course?.logo} />
+      <Header title={course?.name} href={`/c/${course?.slug}`} logoUrl={course?.logo} />
       {/* {isLoading && (
           <div className='flex items-center gap-6'>
             <div className='h-12 w-12 animate-pulse rounded-[0.5rem] bg-card' />
@@ -90,7 +90,7 @@ export default function CoursePageLayout({ children }: CourseStudyLayoutProps) {
           </div>
         )}
         {course && (
-          <Link href={`/courses/${course.id}`} className='flex items-center gap-6'>
+          <Link href={`/c/${course.id}`} className='flex items-center gap-6'>
             {course.logo ? (
               <Image
                 src={course.logo}
@@ -144,7 +144,7 @@ export default function CoursePageLayout({ children }: CourseStudyLayoutProps) {
             {course.groups?.map((group, index) => (
               <ListItem key={index} asChild>
                 <Link
-                  href={`/groups/${group.id}/courses/${course.id}`}
+                  href={`/g/${group.id}/c/${course.id}`}
                   className={cn(
                     'flex w-64 rounded-[0.5rem] border border-transparent px-6 py-2 transition-colors hover:border-white/10 hover:bg-white/5'
                   )}

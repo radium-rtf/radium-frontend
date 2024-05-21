@@ -16,7 +16,7 @@ export const CourseJoin: FC<CourseJoinProps> = ({ courseId }) => {
     joinCourse(courseId)
       .unwrap()
       .then((course) => {
-        router.push(`/courses/${course.id}/${course.modules[0]?.pages?.[0]?.id || '0'}`);
+        router.push(`/c/${course.slug}/${course.modules[0]?.pages?.[0]?.id || '0'}`);
       });
   };
 
