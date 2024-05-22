@@ -46,7 +46,7 @@ export const AssignedCourseCard: FC<IProps> = ({ course }) => {
             <Icon className='h-[1.125rem]' type='courses' />
             {nextPageName && <p>Далее: {nextPageName}</p>}
           </div>
-          <CourseContinue size='default' variant='outline' courseSlug={slug} courseId={id} />
+          <CourseContinue size='default' variant='outline' courseSlug={slug} />
         </div>
       </CardFooter>
     </Card>

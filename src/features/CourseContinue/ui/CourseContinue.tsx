@@ -4,19 +4,18 @@ import { Button, Icon, cn } from '@/shared';
 import { useLastCoursePage } from '@/entities/Course';
 
 interface CourseContinueProps {
-  courseId: string;
   courseSlug: string;
   size?: 'default' | 'wide';
   variant?: 'default' | 'outline';
 }
 
 export const CourseContinue: FC<CourseContinueProps> = ({
-  courseId,
   courseSlug,
   size = 'wide',
   variant = 'default',
 }) => {
-  const { nextPageId } = useLastCoursePage(courseId);
+  const { nextPageId } = useLastCoursePage(courseSlug);
+
   return (
     <Button
       className='z-10'
