@@ -1,8 +1,14 @@
 'use client';
 
+import { CoursePageResponseDto } from '@/entities/CoursePage';
 import { useEffect, useState } from 'react';
 
-export const useLastCoursePage = (courseId: string) => {
+export const useLastCoursePage = (
+  courseId: string,
+  pageId?: string,
+  page?: CoursePageResponseDto,
+  pageName?: string
+) => {
   const [nextPageId, setNextPageId] = useState<string>('');
   const [nextPageName, setNextPageName] = useState<string>('');
 
@@ -16,12 +22,24 @@ export const useLastCoursePage = (courseId: string) => {
         | undefined;
     };
 
+    page &&
+      localStorage.setItem(
+        'previousPages',
+        JSON.stringify({
+          ...previousPages,
+          [courseId]: {
+            pageId: pageId,
+            pageName: pageName,
+          },
+        })
+      );
+
     const nextPage = previousPages[courseId];
+
     if (nextPage) {
       setNextPageId(nextPage.pageId);
       setNextPageName(nextPage.pageName || '');
     }
-  }, [courseId]);
-
+  }, [courseId, page, pageId, pageName]);
   return { nextPageId, nextPageName };
 };

@@ -39,7 +39,7 @@ import { useLastCoursePage } from '@/entities/Course';
 interface IProps {
   params: {
     pageId: string;
-    courseId: string;
+    courseSlug: string;
   };
 }
 
@@ -54,7 +54,7 @@ export default function CoursePage({ params }: IProps) {
   const { isEditing } = useContext(CourseEditContext);
   const [updateOrder] = useChangeCourseSectionOrderMutation();
 
-  useLastCoursePage(params.courseId);
+  useLastCoursePage(params.courseSlug, params.pageId, page, page?.name);
 
   useUpdateTitle(page?.name || '<без названия>');
 

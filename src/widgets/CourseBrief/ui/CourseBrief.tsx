@@ -100,7 +100,7 @@ export const CourseBrief: FC<CourseBriefProps> = ({
           </Link>
         )}
         {!isAssigned && <CourseJoin courseId={courseId} />}
-        {isAssigned && <CourseContinue courseSlug={courseSlug} courseId={courseId} />}
+        {isAssigned && <CourseContinue courseSlug={courseSlug} />}
       </CardFooter>
     </Card>
   );
