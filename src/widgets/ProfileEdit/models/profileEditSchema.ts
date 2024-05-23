@@ -9,7 +9,7 @@ export const profileEditSchema = z.object({
     }
     return fd;
   }),
-  name: z.string().min(1, 'Некорректное имя!').min(48, 'Некорректное имя!'),
+  name: z.string().min(1, 'Некорректное имя!').max(48, 'Некорректное имя!'),
   password: z
     .object({
       currentPassword: z.string(),
