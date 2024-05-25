@@ -26,7 +26,7 @@ export const AuthorShipCourseCard: FC<IProps> = ({ course }) => {
     name !== '' && shortDescription !== '' && description !== '' && logo !== '' && banner !== '';
 
   return (
-    <Card className='relative flex flex-col transition-all hover:bg-card-hover'>
+    <Card className='relative ml-8 flex snap-start flex-col transition-all hover:bg-card-hover'>
       <Link className='absolute inset-0 rounded-lg' href={`c/${slug}`} scroll={false} />
       <CardHeader className='flex-row items-center gap-4 space-y-0'>
         {logo ? (

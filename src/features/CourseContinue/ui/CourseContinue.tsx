@@ -18,7 +18,7 @@ export const CourseContinue: FC<CourseContinueProps> = ({
 
   return (
     <Button
-      className='z-10'
+      className='z-10 ml-4'
       asChild
       type='button'
       variant={variant || 'default'}

@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
   Icon,
+  getNoun,
 } from '@/shared';
 import { CourseJoin } from '@/features/CourseJoin';
 import { CourseResponseDto } from '@/entities/Course';
@@ -43,6 +44,9 @@ export const CourseCard: FC<IProps> = ({ course }) => {
       <CardFooter>
         <div className='flex flex-grow items-center gap-2'>
           <Icon className='h-[1.125rem]' type='courses' />
+          <span className='flex-grow'>
+            {course.modules.length} {getNoun(course.modules.length, 'глава', 'главы', 'глав')}
+          </span>
         </div>
         <CourseJoin courseId={id} />
       </CardFooter>
