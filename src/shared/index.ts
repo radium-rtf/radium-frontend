@@ -68,6 +68,7 @@ export {
 export { Switch } from './ui/switch';
 export { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 export { RadioGroup, RadioGroupItem } from './ui/radio-group';
+export { DownloadButton as DownloadFile } from './ui/DownloadFile/DownloadFile';
 
 // Interfaces
 export type { ITab } from './ui/Tab/Tab';
@@ -87,6 +88,7 @@ export { useAppDispatch, useAppSelector } from './api/store';
 export { useDrop } from './hooks/useDrop';
 export { useScrollPosition } from './hooks/useScrollPosition';
 export { useUpdateTitle } from './hooks/useUpdateTitle';
+export { useGetTitleHello } from './hooks/useGetTitleHello';
 
 export {
   Select,
@@ -100,5 +102,3 @@ export {
   SelectScrollUpButton,
   SelectScrollDownButton,
 } from './ui/Select';
-
-export { DownloadButton as DownloadFile } from './ui/DownloadFile/DownloadFile';
