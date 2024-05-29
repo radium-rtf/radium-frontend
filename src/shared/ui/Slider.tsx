@@ -2,7 +2,7 @@
 import React, { FC, ReactNode, useRef, useState } from 'react';
 import { cn } from '../utils/cn';
 import { Icon } from './Icon';
-import { Button } from '@/shared';
+import { IconButton } from '@/shared';
 
 interface IProps {
   className?: string;
@@ -30,23 +30,47 @@ export const Slider: FC<IProps> = ({ className, children }) => {
 
   return (
     <section className={cn('relative', className)}>
-      <Button
-        variant='outline'
-        className={cn('absolute left-0 top-1/3 z-10', !buttonsIsVisible.left && 'hidden')}
+      <IconButton
+        className={cn(
+          'absolute left-0 top-1/2 z-10 -translate-y-1/2 border-whiteMedium bg-backgroundOverlay hover:bg-backgroundOverlay',
+          !buttonsIsVisible.left && 'hidden'
+        )}
         onClick={() => sliderScroll(-400)}
       >
         <Icon type='arrow-left' />
-      </Button>
-      <Button
+      </IconButton>
+      {/* <Button
         variant='outline'
-        className={cn('absolute right-0 top-1/3 z-10', !buttonsIsVisible.right && 'hidden')}
+        className={cn(
+          'absolute left-0 top-1/2 z-10 -translate-y-1/2',
+          !buttonsIsVisible.left && 'hidden'
+        )}
+        onClick={() => sliderScroll(-400)}
+      >
+        <Icon type='arrow-left' />
+      </Button> */}
+      <IconButton
+        className={cn(
+          'absolute right-0 top-1/2 z-10 -translate-y-1/2 border-whiteMedium bg-backgroundOverlay hover:bg-backgroundOverlay',
+          !buttonsIsVisible.right && 'hidden'
+        )}
         onClick={() => sliderScroll(400)}
       >
         <Icon type='arrow-right' />
-      </Button>
+      </IconButton>
+      {/* <Button
+        variant='outline'
+        className={cn(
+          'absolute right-0 top-1/2 z-10 -translate-y-1/2',
+          !buttonsIsVisible.right && 'hidden'
+        )}
+        onClick={() => sliderScroll(400)}
+      >
+        <Icon type='arrow-right' />
+      </Button> */}
       <div
         ref={sliderRef}
-        className='container mx-auto flex  snap-x snap-mandatory overflow-x-hidden scroll-smooth'
+        className='flex snap-x snap-mandatory justify-start gap-8 overflow-x-scroll scroll-smooth [&::-webkit-scrollbar]:hidden'
       >
         {children}
       </div>

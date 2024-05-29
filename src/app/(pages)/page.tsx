@@ -79,16 +79,16 @@ export default function AllCoursesPage() {
 
                 <Slider>
                   {courses?.authorship.length ? (
-                    courses?.authorship.map((course) => {
+                    courses.authorship.map((course) => {
                       return <AuthorShipCourseCard key={course.id} course={course} />;
                     })
                   ) : (
                     <>
-                      <Card className='ml-8 px-6 py-28 text-center'>
+                      <Card className='px-6 py-28 text-center'>
                         У вас ещё нет собственных курсов. <br />
                         Создайте свой первый!
                       </Card>
-                      <Card className=' ml-8 px-6 py-28 text-center'>
+                      <Card className='px-6 py-28 text-center'>
                         Нажмите кнопку “Создать курс” над этими карточками, чтобы создать курс.
                       </Card>
                     </>
@@ -105,7 +105,7 @@ export default function AllCoursesPage() {
                   {courses.my.map((course) => {
                     return <AssignedCourseCard key={course.id} course={course} />;
                   })}
-                  <Card className='p-auto ml-8 flex items-center px-6 text-center align-middle'>
+                  <Card className='p-auto flex items-center px-6 text-center align-middle'>
                     <CardContent className='w-96'>
                       Выглядит пусто. <br />
                       Пролистайте вниз и запишитесь на пару курсов!
