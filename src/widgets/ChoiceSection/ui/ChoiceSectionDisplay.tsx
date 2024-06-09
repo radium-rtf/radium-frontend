@@ -1,7 +1,7 @@
 'use client';
 import { FC } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { MarkdownDisplay } from '@radium-ui-kit/MarkdownDisplay';
 import { answerSchema, answerSchemaType } from '../model/answerSchema';
 import { Card, CardContent, RadioGroup, RadioGroupItem } from '@/shared';
 import { Controller, FormProvider, SubmitHandler, useForm } from 'react-hook-form';

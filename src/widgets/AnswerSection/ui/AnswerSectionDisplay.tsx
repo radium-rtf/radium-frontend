@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardContent, CardFooter, TextArea } from '@/shared';
+import { Card, CardContent, CardFooter, TextArea } from '@radium-ui-kit';
 import { FC } from 'react';
 import {
   AnswerSectionResponseDto,
@@ -10,7 +10,7 @@ import {
 } from '@/entities/CourseSection';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { answerSchema, answerSchemaType } from '../model/answerSchema';
-import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { MarkdownDisplay } from '@radium-ui-kit/MarkdownDisplay';
 import { Comment } from '@/widgets/Comment';
 import { zodResolver } from '@hookform/resolvers/zod';
 

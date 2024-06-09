@@ -3,16 +3,16 @@ export { cn } from './utils/cn';
 export { getNoun } from './utils/nouns';
 
 // Components
-export { Radio } from './ui/Radio';
-export { Button, buttonVariants } from './ui/Button';
-export { Toggle } from './ui/Toggle';
-export { Checkbox } from './ui/checkboxNew';
-export { TextArea } from './ui/TextArea';
-export { Input } from './ui/inputNew';
-export { Icon } from './ui/Icon';
-export { SmallIcon } from './ui/SmallIcon';
-export { IconButton } from './ui/IconButton';
-export { Progress } from './ui/Progress';
+export { Radio } from '@radium-ui-kit/Radio';
+export { Button, buttonVariants } from '@radium-ui-kit/Button';
+export { Toggle } from '@radium-ui-kit/Toggle';
+export { Checkbox } from '@radium-ui-kit/checkboxNew';
+export { TextArea } from '@radium-ui-kit/TextArea';
+export { Input } from '@radium-ui-kit/inputNew';
+export { Icon } from '@radium-ui-kit/Icon';
+export { SmallIcon } from '@radium-ui-kit/SmallIcon';
+export { IconButton } from '@radium-ui-kit/IconButton';
+export { Progress } from '@radium-ui-kit/Progress';
 export {
   Card,
   CardContent,
@@ -20,9 +20,9 @@ export {
   CardFooter,
   CardHeader,
   CardTitle,
-} from './ui/cardNew';
-export { Menu } from './ui/Menu';
-export { Tab } from './ui/Tab/Tab';
+} from '@radium-ui-kit/cardNew';
+export { Menu } from '@radium-ui-kit/Menu';
+export { Tab } from '@radium-ui-kit/Tab/Tab';
 export {
   List,
   ListContent,
@@ -31,12 +31,12 @@ export {
   ListTitle,
   ListItem,
   ListActionIcon,
-} from './ui/List';
-export { Tabs } from './ui/Tabs';
+} from '@radium-ui-kit/List';
+export { Tabs } from '@radium-ui-kit/Tabs';
 export { AuthSessionProvider } from './ui/AuthSessionProvider';
 export { ReduxStoreProvider } from './ui/ReduxStoreProvider';
-export { InputFile } from './ui/InputFile';
-export { CodeEditor } from './ui/CodeEditor';
+export { InputFile } from '@radium-ui-kit/InputFile';
+export { CodeEditor } from '@radium-ui-kit/CodeEditor';
 export {
   Table,
   TableHeader,
@@ -46,8 +46,8 @@ export {
   TableRow,
   TableCell,
   TableCaption,
-} from './ui/Table';
-export { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+} from '@radium-ui-kit/Table';
+export { Avatar, AvatarFallback, AvatarImage } from '@radium-ui-kit/avatar';
 export {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -64,17 +64,17 @@ export {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from './ui/dropdown-menu';
-export { Switch } from './ui/switch';
-export { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
-export { RadioGroup, RadioGroupItem } from './ui/radio-group';
+} from '@radium-ui-kit/dropdown-menu';
+export { Switch } from '@radium-ui-kit/switch';
+export { Popover, PopoverContent, PopoverTrigger } from '@radium-ui-kit/popover';
+export { RadioGroup, RadioGroupItem } from '@radium-ui-kit/radio-group';
 
 // Interfaces
-export type { ITab } from './ui/Tab/Tab';
+export type { ITab } from '@radium-ui-kit/Tab/Tab';
 export type { UploadFileResponseDto } from './model/uploadFileResponseDto';
 
 // Types
-export type { Icon as IconType } from './ui/Icon';
+export type { Icon as IconType } from '@radium-ui-kit/Icon';
 export type { IErrors } from './interfaces/IErrors';
 export type { AppDispatch, RootState } from './api/store';
 
@@ -99,6 +99,6 @@ export {
   SelectSeparator,
   SelectScrollUpButton,
   SelectScrollDownButton,
-} from './ui/Select';
+} from '@radium-ui-kit/Select';
 
 export { DownloadButton as DownloadFile } from './ui/DownloadFile/DownloadFile';

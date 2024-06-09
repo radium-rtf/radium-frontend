@@ -11,7 +11,7 @@ import { CSSProperties, FC, Fragment, useEffect, useState } from 'react';
 import { Controller, FormProvider, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { updateSchema, updateSchemaType } from '../model/updateSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { MarkdownDisplay } from '@radium-ui-kit/MarkdownDisplay';
 import {
   DndContext,
   DragEndEvent,
@@ -31,7 +31,7 @@ import {
 import { MappingDraggable } from './MappingDraggable';
 import { CSS } from '@dnd-kit/utilities';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
-import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
+import { MarkdownEditor } from '@radium-ui-kit/MarkdownEditor';
 import { MappingEditDraggable } from './MappingEditDraggable';
 import { SECTION_MAX_ANSWERS_COUNT } from '@/entities/Course';
 

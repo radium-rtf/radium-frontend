@@ -1,7 +1,7 @@
 'use client';
 import { CSSProperties, FC, useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
+import { MarkdownEditor } from '@radium-ui-kit/MarkdownEditor';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { Card, CardContent, CardHeader, CardTitle, Icon, Input, cn } from '@/shared';
 import { updateSchema, updateSchemaType } from '../model/updateSchema';
@@ -13,7 +13,7 @@ import {
 } from '@/entities/CourseSection';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { MarkdownDisplay } from '@radium-ui-kit/MarkdownDisplay';
 
 interface ShortAnswerSectionEditProps {
   sectionData: ShortAnswerSectionResponseDto;

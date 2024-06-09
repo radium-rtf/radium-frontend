@@ -11,7 +11,7 @@ import { FC, Fragment } from 'react';
 import { Controller, FormProvider, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { answerSchema, answerSchemaType } from '../model/answerSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { MarkdownDisplay } from '@radium-ui-kit/MarkdownDisplay';
 import {
   DndContext,
   DragEndEvent,

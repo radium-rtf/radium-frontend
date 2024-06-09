@@ -26,7 +26,7 @@ import {
 import { dragEndHandler } from '../model/dragEndHandler';
 import { restrictToParentElement, restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { PermutationItem } from './PermutationItem';
-import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { MarkdownDisplay } from '@radium-ui-kit/MarkdownDisplay';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 interface PermutationSectionDisplayProps {

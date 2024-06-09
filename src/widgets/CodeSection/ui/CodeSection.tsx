@@ -12,7 +12,13 @@ import { DevTool } from '@hookform/devtools';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { useSession } from 'next-auth/react';
 import { CourseEditContext } from '@/features/CourseEditContext';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/Select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@radium-ui-kit/Select';
 import { LanguageDisplay } from '../lib/languageDisplay';
 import { Comment } from '@/widgets/Comment';
 

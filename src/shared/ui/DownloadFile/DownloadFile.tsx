@@ -1,11 +1,11 @@
 'use client';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { cn } from '../../utils/cn';
-import { Icon } from '../Icon';
-
-import { SmallIcon } from '../SmallIcon';
+import { Icon } from '../../../radium-ui-kit/src/Icon';
+import { SmallIcon } from '../../../radium-ui-kit/src/SmallIcon';
 import Link, { LinkProps } from 'next/link';
 import './index.css';
+
 type DownloadFileProps = Omit<LinkProps, 'type'> & { name: string; sizeInKiB: number };
 
 export const DownloadButton: FC<DownloadFileProps> = ({ name, sizeInKiB, ...props }) => {

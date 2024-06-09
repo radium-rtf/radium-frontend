@@ -1,6 +1,6 @@
 'use client';
 import { FC } from 'react';
-import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { MarkdownDisplay } from '@radium-ui-kit/MarkdownDisplay';
 import { Card, CardContent, CardHeader, CardTitle, Icon } from '@/shared';
 
 interface CourseDescriptionDisplayProps {

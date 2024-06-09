@@ -2,7 +2,7 @@ import { CSSProperties, FC } from 'react';
 import { Card, CardHeader } from '@/shared';
 import { TextSectionResponseDto } from '@/entities/CourseSection';
 import { useSortable } from '@dnd-kit/sortable';
-import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { MarkdownDisplay } from '@radium-ui-kit/MarkdownDisplay';
 import { CSS } from '@dnd-kit/utilities';
 
 interface TextSectionDisplayProps {

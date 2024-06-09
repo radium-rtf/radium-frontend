@@ -1,8 +1,8 @@
 'use client';
 import { Button, Card, CardContent, CardFooter, CardHeader, CardTitle, Icon } from '@/shared';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
-import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { MarkdownEditor } from '@radium-ui-kit/MarkdownEditor';
+import { MarkdownDisplay } from '@radium-ui-kit/MarkdownDisplay';
 import { FC, useEffect, useState } from 'react';
 import { updateSchema, updateSchemaType } from '../model/updateSchema';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';

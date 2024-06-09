@@ -30,9 +30,9 @@ import {
 import { dragEndHandler } from '../model/dragEndHandler';
 import { restrictToParentElement, restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { PermutationsEditItem } from './PermutationsEditItem';
-import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { MarkdownDisplay } from '@radium-ui-kit/MarkdownDisplay';
 import { PermutationItem } from './PermutationItem';
-import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
+import { MarkdownEditor } from '@radium-ui-kit/MarkdownEditor';
 import { SECTION_MAX_ANSWERS_COUNT } from '@/entities/Course';
 
 interface PermutationsSectionEditProps {

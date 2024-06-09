@@ -22,8 +22,8 @@ import { Controller, FormProvider, SubmitHandler, useFieldArray, useForm } from 
 import { updateSchema, updateSchemaType } from '../model/updateSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
-import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
-import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
+import { MarkdownDisplay } from '@radium-ui-kit/MarkdownDisplay';
+import { MarkdownEditor } from '@radium-ui-kit/MarkdownEditor';
 import { SECTION_MAX_ANSWERS_COUNT } from '@/entities/Course';
 
 interface ChoiceSectionEditProps {

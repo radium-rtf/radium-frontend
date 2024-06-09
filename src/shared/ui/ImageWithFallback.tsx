@@ -1,4 +1,5 @@
 import Image, { ImageProps } from 'next/image';
+import React from 'react';
 import { FC, ReactNode, useEffect, useState } from 'react';
 
 type ImageWithFallbackProps = ImageProps & {

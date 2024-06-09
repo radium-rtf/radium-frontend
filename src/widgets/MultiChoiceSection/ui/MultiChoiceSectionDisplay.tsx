@@ -3,7 +3,7 @@
 import { FC } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Card, CardContent, Checkbox } from '@/shared';
-import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { MarkdownDisplay } from '@radium-ui-kit/MarkdownDisplay';
 import { answerSchema, answerSchemaType } from '../model/answerSchema';
 import { Controller, FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import {

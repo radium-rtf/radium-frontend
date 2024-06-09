@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
   Icon,
   IconButton,
-} from '@/shared';
+} from '@radium-ui-kit';
 import Link from 'next/link';
 import Image from 'next/image';
 

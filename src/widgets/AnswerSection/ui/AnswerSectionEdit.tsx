@@ -9,13 +9,13 @@ import {
 import { Card, CardContent, TextArea, cn } from '@/shared';
 import { CSSProperties, FC, useEffect, useState } from 'react';
 import { Controller, FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { MarkdownEditor } from '@/shared/ui/MarkdownEditor';
+import { MarkdownEditor } from '@radium-ui-kit/MarkdownEditor';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
 import { updateSchema, updateSchemaType } from '../model/updateSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { MarkdownDisplay } from '@radium-ui-kit/MarkdownDisplay';
 
 interface AnswerSectionEditProps {
   sectionData: AnswerSectionResponseDto;

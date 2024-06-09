@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle, Icon, InputFile } from '@/shared';
 import { FC } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { MarkdownDisplay } from '@/shared/ui/MarkdownDisplay';
+import { MarkdownDisplay } from '@radium-ui-kit/MarkdownDisplay';
 import { Controller, FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { answerSchema, answerSchemaType } from '../model/answerSchema';
 import { CourseSectionFooter, FileSectionResponseDto } from '@/entities/CourseSection';

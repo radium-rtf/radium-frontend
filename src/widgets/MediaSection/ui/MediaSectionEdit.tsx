@@ -21,7 +21,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { updateSchema, updateSchemaType } from '../model/updateSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CourseSectionDelete } from '@/features/CourseSectionDelete';
-import { Input } from '@/shared/ui/Input';
+import { Input } from '@radium-ui-kit/Input';
 import { MediaSelection } from './MediaSelection';
 import { uploadFile } from '@/shared/api/uploadFile';
 

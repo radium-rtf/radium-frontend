@@ -3,7 +3,8 @@ import { Header } from '@/widgets/Header';
 import { Footer } from '@/widgets/Footer';
 import { useSession } from 'next-auth/react';
 import { CourseCreate } from '@/features/CourseCreate';
-import { Card, useUpdateTitle } from '@/shared';
+import { Card } from '@radium-ui-kit/Card';
+import { useUpdateTitle } from '@/shared';
 import { useGetAccountCoursesQuery } from '@/entities/Course';
 import { AssignedCourseCard, AuthorShipCourseCard, CourseCard } from '@/widgets/CourseCard';
 
