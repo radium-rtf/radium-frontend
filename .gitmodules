@@ -1,3 +1,3 @@
-[submodule "radium-ui-kit"]
-	path = radium-ui-kit
+[submodule "src/radium-ui-kit"]
+	path = src/radium-ui-kit
 	url = https://github.com/radium-rtf/radium-ui-kit.git
